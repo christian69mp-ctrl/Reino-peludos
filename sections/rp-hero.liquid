@@ -1,5 +1,5 @@
 <section
-  class="rp-hero rp-hero--focal-{{ section.settings.focal_point }}{% if section.settings.mobile_image != blank %} rp-hero--has-mobile-image{% endif %}"
+  class="rp-hero rp-hero--focal-{{ section.settings.focal_point }} rp-hero--has-mobile-image"
   id="{{ section.id }}"
 >
   <div class="rp-hero__media rp-hero__media--desktop" data-rp-parallax>
@@ -25,8 +25,8 @@
     {%- endif -%}
   </div>
 
-  {%- if section.settings.mobile_image != blank -%}
-    <div class="rp-hero__media rp-hero__media--mobile">
+  <div class="rp-hero__media rp-hero__media--mobile">
+    {%- if section.settings.mobile_image != blank -%}
       {{
         section.settings.mobile_image
         | image_url: width: 1000
@@ -36,8 +36,17 @@
           sizes: '100vw',
           widths: '500, 750, 1000'
       }}
-    </div>
-  {%- endif -%}
+    {%- else -%}
+      <img
+        src="{{ 'rp-hero-mobile.jpg' | asset_url }}"
+        alt="{{ shop.name }}"
+        width="768"
+        height="1376"
+        loading="eager"
+        fetchpriority="high"
+      >
+    {%- endif -%}
+  </div>
 
   <span class="rp-paw-float rp-paw-float--1">{% render 'rp-icon', icon: 'paw' %}</span>
   <span class="rp-paw-float rp-paw-float--2">{% render 'rp-icon', icon: 'paw' %}</span>

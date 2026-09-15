@@ -133,10 +133,6 @@ body {
   display: none;
 }
 
-.rp-hero--has-mobile-image .rp-hero__media--desktop {
-  display: none;
-}
-
 .rp-hero__media img {
   width: 100%;
   height: 100%;
@@ -181,6 +177,10 @@ body {
 }
 
 @media screen and (max-width: 749px) {
+  .rp-hero--has-mobile-image .rp-hero__media--desktop {
+    display: none;
+  }
+
   .rp-hero--has-mobile-image .rp-hero__media--mobile {
     display: block;
   }
