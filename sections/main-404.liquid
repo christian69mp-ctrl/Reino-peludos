@@ -1,23 +1,22 @@
-<style type="text/css">
-  .template-404 .title + * {
-    margin-top: 1rem;
-  }
+<section class="rp-cband rp-cband--left rp-cband--light" style="min-height: clamp(320px, 46vw, 560px);">
+  <div class="rp-cband__media">
+    <img
+      src="{{ 'rp-banner-404.jpg' | asset_url }}"
+      alt=""
+      loading="eager"
+      width="1376"
+      height="768"
+    >
+  </div>
 
-  @media screen and (min-width: 750px) {
-    .template-404 .title + * {
-      margin-top: 2rem;
-    }
-  }
-</style>
-
-<div class="template-404 page-width page-margin center">
-  <p>
-    {{ 'templates.404.subtext' | t }}
-  </p>
-  <h1 class="title">
-    {{ 'templates.404.title' | t }}
-  </h1>
-  <a href="{{ routes.all_products_collection_url }}" class="button">
-    {{ 'general.continue_shopping' | t }}
-  </a>
-</div>
+  <div class="rp-cband__inner rp-reveal">
+    <p class="rp-cband__eyebrow">Error 404</p>
+    <h1 class="rp-cband__heading">¡Ups! Esta página se escapó</h1>
+    <p class="rp-cband__subheading">
+      Como un cachorro suelto en el parque. Pero no te preocupes, te ayudamos a volver al Reino.
+    </p>
+    <a href="{{ routes.all_products_collection_url }}" class="rp-btn rp-btn--primary">
+      {{ 'general.continue_shopping' | t }}
+    </a>
+  </div>
+</section>
