@@ -211,10 +211,11 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-1",
+        "use_sample_image": true,
         "full_width": true,
-        "padding_top": 52,
-        "padding_bottom": 52
+        "padding_top": 64,
+        "padding_bottom": 64
       },
       "blocks": {
         "heading": {

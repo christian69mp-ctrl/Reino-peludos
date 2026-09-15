@@ -15,8 +15,24 @@
   }
 {%- endstyle -%}
 
+{%- liquid
+  assign rp_newsletter_bg = section.settings.background_image
+  if rp_newsletter_bg == blank and section.settings.use_sample_image
+    assign rp_newsletter_use_asset = true
+  endif
+-%}
+
 <div class="newsletter center {% if section.settings.full_width == false %}newsletter--narrow page-width{% endif %}">
-  <div class="newsletter__wrapper color-{{ section.settings.color_scheme }} gradient content-container isolate{% if section.settings.full_width %} content-container--full-width{% endif %} section-{{ section.id }}-padding">
+  <div class="newsletter__wrapper color-{{ section.settings.color_scheme }} gradient content-container isolate{% if section.settings.full_width %} content-container--full-width{% endif %} section-{{ section.id }}-padding{% if rp_newsletter_bg != blank or rp_newsletter_use_asset %} rp-newsletter--has-bg{% endif %}">
+    {%- if rp_newsletter_bg != blank -%}
+      <div class="rp-newsletter__media">
+        {{ rp_newsletter_bg | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '100vw', widths: '600, 900, 1200, 1600' }}
+      </div>
+    {%- elsif rp_newsletter_use_asset -%}
+      <div class="rp-newsletter__media">
+        <img src="{{ 'rp-banner-newsletter.jpg' | asset_url }}" alt="{{ shop.name }}" loading="lazy" width="1376" height="768">
+      </div>
+    {%- endif -%}
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when '@app' -%}
@@ -138,6 +154,17 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Imagen de fondo (opcional)"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_sample_image",
+      "label": "Usar imagen de ejemplo si no subo una arriba",
+      "default": false
     },
     {
       "type": "checkbox",
