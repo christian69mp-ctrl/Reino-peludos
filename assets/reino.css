@@ -932,6 +932,23 @@ body {
 }
 
 /* --------------------------------------------------------------------- */
+/* Tira decorativa sobre el footer                                        */
+/* --------------------------------------------------------------------- */
+
+.rp-footer-peek {
+  overflow: hidden;
+  height: clamp(70px, 11vw, 150px);
+  background: var(--rp-cream);
+}
+
+.rp-footer-peek img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+/* --------------------------------------------------------------------- */
 /* Banner de colección                                                    */
 /* --------------------------------------------------------------------- */
 

@@ -27,6 +27,12 @@
   }
 {%- endstyle -%}
 
+{%- if section.settings.show_peek_image -%}
+  <div class="rp-footer-peek">
+    <img src="{{ 'rp-banner-footer.jpg' | asset_url }}" alt="" loading="lazy" width="1584" height="672">
+  </div>
+{%- endif -%}
+
 <footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   {%- liquid
     assign has_social_icons = true
@@ -429,6 +435,12 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_peek_image",
+      "label": "Mostrar tira decorativa de mascotas encima del pie de página",
+      "default": false
     },
     {
       "type": "header",

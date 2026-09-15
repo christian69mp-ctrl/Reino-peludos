@@ -8,6 +8,7 @@
       "block_order": [],
       "settings": {
         "color_scheme": "scheme-3",
+        "show_peek_image": true,
         "newsletter_enable": true,
         "newsletter_heading": "No te pierdas nada del Reino",
         "enable_follow_on_shop": true,
