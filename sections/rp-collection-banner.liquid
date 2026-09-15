@@ -1,4 +1,7 @@
-<section class="rp-cband" id="{{ section.id }}">
+<section
+  class="rp-cband rp-cband--{{ section.settings.content_position }} rp-cband--{{ section.settings.overlay }}"
+  id="{{ section.id }}"
+>
   <div class="rp-cband__media">
     {%- if section.settings.image != blank -%}
       {{
@@ -7,12 +10,18 @@
         | image_tag: loading: 'lazy', sizes: '100vw', widths: '600, 900, 1200, 1600'
       }}
     {%- else -%}
+      {%- liquid
+        assign rp_fallback = 'rp-banner-bestsellers.jpg'
+        if section.settings.fallback_image == 'oferta'
+          assign rp_fallback = 'rp-banner-oferta.jpg'
+        endif
+      -%}
       <img
-        src="{{ 'rp-banner-bestsellers.jpg' | asset_url }}"
+        src="{{ rp_fallback | asset_url }}"
         alt="{{ section.settings.heading | default: shop.name }}"
         loading="lazy"
-        width="1376"
-        height="768"
+        width="1500"
+        height="700"
       >
     {%- endif -%}
   </div>
@@ -45,6 +54,38 @@
       "type": "image_picker",
       "id": "image",
       "label": "Imagen de fondo"
+    },
+    {
+      "type": "select",
+      "id": "fallback_image",
+      "label": "Imagen de ejemplo (si no subes una arriba)",
+      "default": "bestsellers",
+      "options": [
+        { "value": "bestsellers", "label": "Mascotas sobre plataformas (best sellers)" },
+        { "value": "oferta", "label": "Bulldog con espacio para oferta" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Posición del texto",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "overlay",
+      "label": "Estilo",
+      "info": "Usa 'Claro' cuando la imagen ya tenga una zona clara para el texto (como la del Bulldog).",
+      "default": "dark",
+      "options": [
+        { "value": "dark", "label": "Oscuro (texto blanco sobre foto)" },
+        { "value": "light", "label": "Claro (texto oscuro, sin degradado)" }
+      ]
     },
     {
       "type": "text",

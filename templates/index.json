@@ -116,6 +116,9 @@
     "rp_collection_banner": {
       "type": "rp-collection-banner",
       "settings": {
+        "fallback_image": "bestsellers",
+        "content_position": "center",
+        "overlay": "dark",
         "eyebrow": "Best sellers",
         "heading": "Los favoritos de nuestra manada",
         "subheading": "Productos que no fallan, elegidos por miles de mascotas felices.",
@@ -192,6 +195,19 @@
       },
       "block_order": ["t1", "t2", "t3"]
     },
+    "rp_offer_banner": {
+      "type": "rp-collection-banner",
+      "settings": {
+        "fallback_image": "oferta",
+        "content_position": "left",
+        "overlay": "light",
+        "eyebrow": "Oferta por tiempo limitado",
+        "heading": "Ofertas especiales para tu mascota",
+        "subheading": "Descubre los descuentos activos esta semana.",
+        "button_label": "Ver ofertas",
+        "button_link": "shopify://collections/all"
+      }
+    },
     "newsletter": {
       "type": "newsletter",
       "settings": {
@@ -228,6 +244,7 @@
     "rp_collection_banner",
     "featured_collection",
     "rp_testimonials",
+    "rp_offer_banner",
     "newsletter"
   ]
 }
