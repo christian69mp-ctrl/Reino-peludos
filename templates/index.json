@@ -1,48 +1,78 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "rp_hero": {
+      "type": "rp-hero",
+      "settings": {
+        "eyebrow": "Reino Peludos",
+        "heading": "Accesorios con corazón para cada mascota de tu reino",
+        "subheading": "<p>Perros, gatos, conejos, aves, peces y más: productos pensados para el bienestar y la felicidad de cada integrante de tu familia.</p>",
+        "button_label_1": "Ver todos los productos",
+        "button_link_1": "shopify://collections/all",
+        "button_label_2": "Descubre por mascota",
+        "button_link_2": "#rp_categories"
+      }
+    },
+    "rp_categories": {
+      "type": "rp-categories",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "Compra por mascota",
+        "title": "Para cada miembro de tu familia peluda",
+        "subtitle": "Elige la especie y descubre productos pensados solo para ella."
+      },
       "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
-          }
+        "dogs": {
+          "type": "category",
+          "settings": { "icon": "dog", "label": "Perros", "link": "shopify://collections/all" }
         },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
+        "cats": {
+          "type": "category",
+          "settings": { "icon": "cat", "label": "Gatos", "link": "shopify://collections/all" }
+        },
+        "rabbits": {
+          "type": "category",
+          "settings": { "icon": "rabbit", "label": "Conejos", "link": "shopify://collections/all" }
+        },
+        "birds": {
+          "type": "category",
+          "settings": { "icon": "bird", "label": "Aves", "link": "shopify://collections/all" }
+        },
+        "fish": {
+          "type": "category",
+          "settings": { "icon": "fish", "label": "Peces", "link": "shopify://collections/all" }
+        },
+        "rodents": {
+          "type": "category",
+          "settings": { "icon": "rodent", "label": "Hámsters y roedores", "link": "shopify://collections/all" }
+        },
+        "other": {
+          "type": "category",
+          "settings": { "icon": "other", "label": "Otras mascotas", "link": "shopify://collections/all" }
         }
       },
-      "block_order": [
-        "heading",
-        "button"
-      ],
+      "block_order": ["dogs", "cats", "rabbits", "birds", "fish", "rodents", "other"]
+    },
+    "rp_story": {
+      "type": "rp-story",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
+        "image_position": "left",
+        "badge_text": "Favorito del Reino",
+        "eyebrow": "Producto estrella",
+        "description": "<p>Diseñado para acompañar el día a día de tu mascota, sea perro, gato o cualquier otro compañero: comodidad, materiales resistentes y un toque de estilo pensado con cariño.</p>",
+        "button_label": "Ver producto",
+        "button_link": "shopify://collections/all"
+      },
+      "blocks": {
+        "tag1": { "type": "tag", "settings": { "text": "Multi-mascota" } },
+        "tag2": { "type": "tag", "settings": { "text": "Materiales resistentes" } },
+        "tag3": { "type": "tag", "settings": { "text": "Ajuste cómodo" } }
+      },
+      "block_order": ["tag1", "tag2", "tag3"]
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products",
+        "title": "Los más queridos",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
@@ -50,26 +80,55 @@
         "collection": "all",
         "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
         "enable_desktop_slider": false,
         "swipe_on_mobile": false,
-        "image_ratio": "adapt",
+        "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "quick_add": "none",
+        "quick_add": "standard",
         "columns_mobile": "2",
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 52,
+        "padding_bottom": 52
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": { "heading": "Únete a la manada" }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "paragraph": "<p>Novedades, consejos y ofertas para todo tipo de mascotas, directo a tu correo.</p>"
+          }
+        },
+        "email_form": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": ["heading", "paragraph", "email_form"]
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "rp_hero",
+    "rp_categories",
+    "rp_story",
+    "featured_collection",
+    "newsletter"
   ]
 }

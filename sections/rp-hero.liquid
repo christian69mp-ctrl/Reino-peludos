@@ -1,0 +1,127 @@
+{{ 'reino.css' | asset_url | stylesheet_tag }}
+
+<section class="rp-hero" id="{{ section.id }}">
+  <div class="rp-hero__media" data-rp-parallax>
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 2000
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          sizes: '100vw',
+          widths: '750, 1100, 1500, 2000'
+      }}
+    {%- endif -%}
+  </div>
+
+  <span class="rp-paw-float rp-paw-float--1">{% render 'rp-icon', icon: 'paw' %}</span>
+  <span class="rp-paw-float rp-paw-float--2">{% render 'rp-icon', icon: 'paw' %}</span>
+  <span class="rp-paw-float rp-paw-float--3">{% render 'rp-icon', icon: 'paw' %}</span>
+  <span class="rp-paw-float rp-paw-float--4">{% render 'rp-icon', icon: 'paw' %}</span>
+
+  <div class="rp-hero__inner">
+    {%- if section.settings.logo != blank -%}
+      <img
+        class="rp-hero__crest rp-reveal rp-reveal--scale"
+        src="{{ section.settings.logo | image_url: width: 160 }}"
+        alt="{{ shop.name }}"
+        width="76"
+        height="76"
+        loading="eager"
+      >
+    {%- else -%}
+      <div class="rp-hero__crest rp-reveal rp-reveal--scale">{% render 'rp-icon', icon: 'crown' %}</div>
+    {%- endif -%}
+
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="rp-hero__eyebrow rp-reveal" data-rp-group="hero">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h1 class="rp-hero__heading rp-reveal" data-rp-group="hero">{{ section.settings.heading }}</h1>
+    {%- endif -%}
+
+    {%- if section.settings.subheading != blank -%}
+      <div class="rp-hero__subheading rp-reveal" data-rp-group="hero">{{ section.settings.subheading }}</div>
+    {%- endif -%}
+
+    <div class="rp-hero__actions rp-reveal" data-rp-group="hero">
+      {%- if section.settings.button_label_1 != blank -%}
+        <a href="{{ section.settings.button_link_1 | default: '#' }}" class="rp-btn rp-btn--primary">
+          {{ section.settings.button_label_1 }}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.button_label_2 != blank -%}
+        <a href="{{ section.settings.button_link_2 | default: '#' }}" class="rp-btn rp-btn--ghost">
+          {{ section.settings.button_label_2 }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RP · Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen de fondo (banner)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo / escudo (opcional, si no se usa el favicon del tema)"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto superior",
+      "default": "Reino Peludos"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titular",
+      "default": "Accesorios con corazón para cada mascota de tu reino"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "<p>Perros, gatos, conejos, aves, peces y más: productos pensados para el bienestar y la felicidad de cada integrante de tu familia.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Botón principal — texto",
+      "default": "Ver todos los productos"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Botón principal — enlace"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Botón secundario — texto",
+      "default": "Descubre por mascota"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Botón secundario — enlace"
+    }
+  ],
+  "presets": [
+    {
+      "name": "RP · Hero"
+    }
+  ]
+}
+{% endschema %}

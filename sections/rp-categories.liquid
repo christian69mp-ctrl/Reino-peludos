@@ -1,0 +1,123 @@
+{{ 'reino.css' | asset_url | stylesheet_tag }}
+
+<section class="rp-categories color-{{ section.settings.color_scheme }}" id="{{ section.id }}">
+  <div class="rp-categories__header rp-reveal">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="rp-categories__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="rp-categories__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="rp-categories__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="rp-categories__grid">
+    {%- for block in section.blocks -%}
+      <a
+        href="{{ block.settings.link | default: '#' }}"
+        class="rp-category-card rp-reveal rp-reveal--scale"
+        data-rp-group="categories"
+        {{ block.shopify_attributes }}
+      >
+        <span class="rp-category-card__icon">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 100 | image_tag: loading: 'lazy', widths: '50, 100' }}
+          {%- else -%}
+            {% render 'rp-icon', icon: block.settings.icon %}
+          {%- endif -%}
+        </span>
+        <span class="rp-category-card__label">{{ block.settings.label }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RP · Categorías",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto superior",
+      "default": "Compra por mascota"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Para cada miembro de tu familia peluda"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Elige la especie y descubre productos pensados solo para ella."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categoría",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icono",
+          "default": "dog",
+          "options": [
+            { "value": "dog", "label": "Perro" },
+            { "value": "cat", "label": "Gato" },
+            { "value": "rabbit", "label": "Conejo" },
+            { "value": "bird", "label": "Ave" },
+            { "value": "fish", "label": "Pez" },
+            { "value": "rodent", "label": "Roedor (hámster, cobaya...)" },
+            { "value": "reptile", "label": "Reptil" },
+            { "value": "other", "label": "Otras mascotas" }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen (opcional, sustituye al icono)"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Nombre de la categoría",
+          "default": "Perros"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace (colección)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RP · Categorías de mascotas",
+      "blocks": [
+        { "type": "category", "settings": { "icon": "dog", "label": "Perros" } },
+        { "type": "category", "settings": { "icon": "cat", "label": "Gatos" } },
+        { "type": "category", "settings": { "icon": "rabbit", "label": "Conejos" } },
+        { "type": "category", "settings": { "icon": "bird", "label": "Aves" } },
+        { "type": "category", "settings": { "icon": "fish", "label": "Peces" } },
+        { "type": "category", "settings": { "icon": "rodent", "label": "Hámsters y roedores" } },
+        { "type": "category", "settings": { "icon": "other", "label": "Otras mascotas" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

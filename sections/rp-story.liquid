@@ -1,0 +1,153 @@
+{{ 'reino.css' | asset_url | stylesheet_tag }}
+
+{%- assign rp_product = section.settings.product -%}
+{%- assign image_right = false -%}
+{%- if section.settings.image_position == 'right' -%}
+  {%- assign image_right = true -%}
+{%- endif -%}
+
+<section class="rp-story" id="{{ section.id }}">
+  <div class="rp-story__inner{% if image_right %} rp-story--image-right{% endif %}">
+    <div class="rp-story__media rp-reveal{% if image_right %} rp-reveal--right{% else %} rp-reveal--left{% endif %}">
+      {%- if section.settings.badge_text != blank -%}
+        <span class="rp-story__badge">{{ section.settings.badge_text }}</span>
+      {%- endif -%}
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400, 700, 1000, 1200' }}
+      {%- elsif rp_product != blank and rp_product.featured_image != blank -%}
+        {{ rp_product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400, 700, 1000, 1200' }}
+      {%- endif -%}
+    </div>
+
+    <div class="rp-story__content rp-reveal{% if image_right %} rp-reveal--left{% else %} rp-reveal--right{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="rp-story__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+
+      <h2 class="rp-story__title">
+        {{ section.settings.heading | default: rp_product.title | default: 'Nuestro producto estrella' }}
+      </h2>
+
+      <div class="rp-story__text">
+        {%- if section.settings.description != blank -%}
+          {{ section.settings.description }}
+        {%- else -%}
+          <p>Diseñado para acompañar el día a día de tu mascota, sea perro, gato o cualquier otro compañero: comodidad, materiales resistentes y un toque de estilo pensado con cariño.</p>
+        {%- endif -%}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="rp-story__tags">
+          {%- for block in section.blocks -%}
+            <span class="rp-story__tag" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if rp_product != blank -%}
+        <p class="rp-story__price">
+          {{ rp_product.price | money }}
+          {%- if rp_product.compare_at_price > rp_product.price -%}
+            <span class="rp-story__compare">{{ rp_product.compare_at_price | money }}</span>
+          {%- endif -%}
+        </p>
+        <a href="{{ rp_product.url }}" class="rp-btn rp-btn--primary">
+          {{ section.settings.button_label | default: 'Ver producto' }}
+        </a>
+      {%- elsif section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: '#' }}" class="rp-btn rp-btn--primary">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RP · Producto estrella",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Producto destacado",
+      "info": "Si lo eliges, el precio y el botón enlazarán a este producto automáticamente."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen (opcional, sustituye a la del producto)"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Posición de la imagen",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "right", "label": "Derecha" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Etiqueta sobre la imagen",
+      "default": "Favorito del Reino"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto superior",
+      "default": "Producto estrella"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título (si se deja vacío, usa el nombre del producto elegido)"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Descripción",
+      "default": "<p>Diseñado para acompañar el día a día de tu mascota, sea perro, gato o cualquier otro compañero: comodidad, materiales resistentes y un toque de estilo pensado con cariño.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto del botón",
+      "default": "Ver producto"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace del botón (solo si no eliges un producto)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tag",
+      "name": "Etiqueta destacada",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Multi-mascota"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RP · Producto estrella",
+      "blocks": [
+        { "type": "tag", "settings": { "text": "Multi-mascota" } },
+        { "type": "tag", "settings": { "text": "Materiales resistentes" } },
+        { "type": "tag", "settings": { "text": "Ajuste cómodo" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
