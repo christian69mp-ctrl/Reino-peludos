@@ -1,0 +1,159 @@
+<section class="rp-testimonials color-{{ section.settings.color_scheme }}" id="{{ section.id }}">
+  <div class="rp-testimonials__header rp-reveal">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="rp-testimonials__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="rp-testimonials__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+  </div>
+
+  <div class="rp-testimonials__grid">
+    {%- for block in section.blocks -%}
+      <div class="rp-testimonial-card rp-reveal rp-reveal--scale" data-rp-group="testimonials" {{ block.shopify_attributes }}>
+        <div class="rp-testimonial-card__stars">
+          {%- assign stars = block.settings.rating | times: 1 -%}
+          {%- for i in (1..5) -%}
+            {%- if i <= stars -%}
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L10 15l-5.6 3.1L5.8 11.8 1 7.5l6.4-.6L10 1Z"/></svg>
+            {%- else -%}
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L10 15l-5.6 3.1L5.8 11.8 1 7.5l6.4-.6L10 1Z"/></svg>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <p class="rp-testimonial-card__quote">&ldquo;{{ block.settings.quote }}&rdquo;</p>
+
+        <div class="rp-testimonial-card__footer">
+          <span class="rp-testimonial-card__avatar">
+            {%- if block.settings.avatar != blank -%}
+              <img src="{{ block.settings.avatar | image_url: width: 80 }}" alt="{{ block.settings.author }}" loading="lazy" width="38" height="38">
+            {%- else -%}
+              {% render 'rp-icon', icon: block.settings.pet_icon %}
+            {%- endif -%}
+          </span>
+          <span>
+            <span class="rp-testimonial-card__author">{{ block.settings.author }}</span><br>
+            <span class="rp-testimonial-card__pet">{{ block.settings.pet_name }}</span>
+          </span>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RP · Testimonios",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto superior",
+      "default": "Familias del Reino"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Lo que dicen nuestras familias peludas"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonio",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Estrellas",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Reseña",
+          "default": "Le encantó desde el primer día. Calidad increíble y llegó súper rápido."
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Foto (opcional)"
+        },
+        {
+          "type": "select",
+          "id": "pet_icon",
+          "label": "Icono de mascota (si no hay foto)",
+          "default": "dog",
+          "options": [
+            { "value": "dog", "label": "Perro" },
+            { "value": "cat", "label": "Gato" },
+            { "value": "rabbit", "label": "Conejo" },
+            { "value": "bird", "label": "Ave" },
+            { "value": "fish", "label": "Pez" },
+            { "value": "rodent", "label": "Roedor" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Nombre del cliente",
+          "default": "María G."
+        },
+        {
+          "type": "text",
+          "id": "pet_name",
+          "label": "Mascota",
+          "default": "Dueña de Toby (perro)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RP · Testimonios",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Le encantó desde el primer día. Calidad increíble y llegó súper rápido.",
+            "author": "María G.",
+            "pet_name": "Dueña de Toby (perro)",
+            "pet_icon": "dog"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Por fin encuentro accesorios bonitos también para mi conejo, no solo para perros y gatos.",
+            "author": "Laura P.",
+            "pet_name": "Dueña de Nube (conejo)",
+            "pet_icon": "rabbit"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Envío rapidísimo y el material es muy resistente. Repetiré seguro.",
+            "author": "Carlos M.",
+            "pet_name": "Dueño de Simba (gato)",
+            "pet_icon": "cat"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,7 +1,8 @@
-{{ 'reino.css' | asset_url | stylesheet_tag }}
-
-<section class="rp-hero" id="{{ section.id }}">
-  <div class="rp-hero__media" data-rp-parallax>
+<section
+  class="rp-hero rp-hero--focal-{{ section.settings.focal_point }}{% if section.settings.mobile_image != blank %} rp-hero--has-mobile-image{% endif %}"
+  id="{{ section.id }}"
+>
+  <div class="rp-hero__media rp-hero__media--desktop" data-rp-parallax>
     {%- if section.settings.image != blank -%}
       {{
         section.settings.image
@@ -23,6 +24,20 @@
       >
     {%- endif -%}
   </div>
+
+  {%- if section.settings.mobile_image != blank -%}
+    <div class="rp-hero__media rp-hero__media--mobile">
+      {{
+        section.settings.mobile_image
+        | image_url: width: 1000
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          sizes: '100vw',
+          widths: '500, 750, 1000'
+      }}
+    </div>
+  {%- endif -%}
 
   <span class="rp-paw-float rp-paw-float--1">{% render 'rp-icon', icon: 'paw' %}</span>
   <span class="rp-paw-float rp-paw-float--2">{% render 'rp-icon', icon: 'paw' %}</span>
@@ -89,7 +104,25 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Imagen de fondo (banner)"
+      "label": "Imagen de fondo (banner) — escritorio"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Imagen de fondo — móvil (opcional)",
+      "info": "Si tu banner es muy panorámico, sube aquí un recorte más vertical para que no se corte el contenido importante en el móvil."
+    },
+    {
+      "type": "select",
+      "id": "focal_point",
+      "label": "Punto focal de la imagen de escritorio",
+      "info": "Controla qué parte de la imagen se prioriza si hay que recortarla.",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ]
     },
     {
       "type": "checkbox",

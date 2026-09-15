@@ -1,0 +1,64 @@
+<section class="rp-trust color-{{ section.settings.color_scheme }}" id="{{ section.id }}">
+  <div class="rp-trust__grid">
+    {%- for block in section.blocks -%}
+      <div class="rp-trust__item rp-reveal rp-reveal--scale" data-rp-group="trust" {{ block.shopify_attributes }}>
+        <span class="rp-trust__icon">{% render 'rp-icon', icon: block.settings.icon %}</span>
+        <span class="rp-trust__text">{{ block.settings.text }}</span>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RP · Barra de confianza",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-4"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Elemento",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icono",
+          "default": "truck",
+          "options": [
+            { "value": "truck", "label": "Camión (envío)" },
+            { "value": "shield", "label": "Escudo (seguridad)" },
+            { "value": "return", "label": "Devolución" },
+            { "value": "heart", "label": "Corazón" },
+            { "value": "paw", "label": "Huella" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Envío rápido"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RP · Barra de confianza",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "truck", "text": "Envío en 24-48h" } },
+        { "type": "item", "settings": { "icon": "shield", "text": "Pago 100% seguro" } },
+        { "type": "item", "settings": { "icon": "return", "text": "Devolución gratis 30 días" } },
+        { "type": "item", "settings": { "icon": "heart", "text": "+2.000 mascotas felices" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

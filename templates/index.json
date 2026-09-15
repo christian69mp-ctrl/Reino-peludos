@@ -4,6 +4,7 @@
       "type": "rp-hero",
       "settings": {
         "show_overlay_text": false,
+        "focal_point": "left",
         "eyebrow": "Reino Peludos",
         "heading": "Accesorios con corazón para cada mascota de tu reino",
         "subheading": "<p>Perros, gatos, conejos, aves, peces y más: productos pensados para el bienestar y la felicidad de cada integrante de tu familia.</p>",
@@ -12,6 +13,19 @@
         "button_label_2": "Descubre por mascota",
         "button_link_2": "#rp_categories"
       }
+    },
+    "rp_trust_bar": {
+      "type": "rp-trust-bar",
+      "settings": {
+        "color_scheme": "scheme-4"
+      },
+      "blocks": {
+        "b1": { "type": "item", "settings": { "icon": "truck", "text": "Envío en 24-48h" } },
+        "b2": { "type": "item", "settings": { "icon": "shield", "text": "Pago 100% seguro" } },
+        "b3": { "type": "item", "settings": { "icon": "return", "text": "Devolución gratis 30 días" } },
+        "b4": { "type": "item", "settings": { "icon": "heart", "text": "+2.000 mascotas felices" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"]
     },
     "rp_categories": {
       "type": "rp-categories",
@@ -98,6 +112,47 @@
         "padding_bottom": 36
       }
     },
+    "rp_testimonials": {
+      "type": "rp-testimonials",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "Familias del Reino",
+        "title": "Lo que dicen nuestras familias peludas"
+      },
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Le encantó desde el primer día. Calidad increíble y llegó súper rápido.",
+            "pet_icon": "dog",
+            "author": "María G.",
+            "pet_name": "Dueña de Toby (perro)"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Por fin encuentro accesorios bonitos también para mi conejo, no solo para perros y gatos.",
+            "pet_icon": "rabbit",
+            "author": "Laura P.",
+            "pet_name": "Dueña de Nube (conejo)"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Envío rapidísimo y el material es muy resistente. Repetiré seguro.",
+            "pet_icon": "cat",
+            "author": "Carlos M.",
+            "pet_name": "Dueño de Simba (gato)"
+          }
+        }
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
     "newsletter": {
       "type": "newsletter",
       "settings": {
@@ -127,9 +182,11 @@
   },
   "order": [
     "rp_hero",
+    "rp_trust_bar",
     "rp_categories",
     "rp_story",
     "featured_collection",
+    "rp_testimonials",
     "newsletter"
   ]
 }

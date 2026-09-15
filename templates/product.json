@@ -33,13 +33,41 @@
             "show_gift_card_recipient": true
           }
         },
+        "trust_badges": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "horizontal",
+            "icon_1": "truck",
+            "heading_1": "Envío 24-48h",
+            "icon_2": "return",
+            "heading_2": "Devolución gratis 30 días",
+            "icon_3": "lock",
+            "heading_3": "Pago 100% seguro"
+          }
+        },
         "description": {
           "type": "description"
+        },
+        "shipping_tab": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Envíos y devoluciones",
+            "icon": "truck",
+            "content": "<p>Enviamos a todo el país en 24-48h laborables. Si tu mascota (o tú) no queda feliz, tienes 30 días para devolverlo sin coste.</p>"
+          }
+        },
+        "care_tab": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Cuidado del producto",
+            "icon": "heart",
+            "content": "<p>Revisa la ficha de cada producto para conocer materiales y recomendaciones de limpieza específicas.</p>"
+          }
         },
         "share": {
           "type": "share",
           "settings": {
-            "share_label": "Share"
+            "share_label": "Compartir"
           }
         }
       },
@@ -50,7 +78,10 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "trust_badges",
         "description",
+        "shipping_tab",
+        "care_tab",
         "share"
       ],
       "settings": {
@@ -79,19 +110,19 @@
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "You may also like",
+        "heading": "Combina también con",
         "heading_size": "h2",
         "products_to_show": 4,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
         "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 28
+        "padding_top": 44,
+        "padding_bottom": 44
       }
     }
   },
