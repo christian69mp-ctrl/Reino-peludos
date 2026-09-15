@@ -13,19 +13,56 @@
 
   <div class="rp-categories__grid">
     {%- for block in section.blocks -%}
+      {%- liquid
+        assign rp_fallback_asset = ''
+        case block.settings.icon
+          when 'dog'
+            assign rp_fallback_asset = 'rp-cat-dogs.jpg'
+          when 'cat'
+            assign rp_fallback_asset = 'rp-cat-cats.jpg'
+          when 'rabbit'
+            assign rp_fallback_asset = 'rp-cat-rabbits.jpg'
+          when 'bird'
+            assign rp_fallback_asset = 'rp-cat-birds.jpg'
+          when 'fish'
+            assign rp_fallback_asset = 'rp-cat-fish.jpg'
+          when 'rodent'
+            assign rp_fallback_asset = 'rp-cat-rodents.jpg'
+        endcase
+        assign rp_has_photo = false
+        if block.settings.image != blank or rp_fallback_asset != ''
+          assign rp_has_photo = true
+        endif
+      -%}
       <a
         href="{{ block.settings.link | default: '#' }}"
-        class="rp-category-card rp-reveal rp-reveal--scale"
+        class="rp-category-card rp-reveal rp-reveal--scale{% if rp_has_photo %} rp-category-card--photo{% endif %}"
         data-rp-group="categories"
         {{ block.shopify_attributes }}
       >
-        <span class="rp-category-card__icon">
-          {%- if block.settings.image != blank -%}
-            {{ block.settings.image | image_url: width: 100 | image_tag: loading: 'lazy', widths: '50, 100' }}
-          {%- else -%}
+        {%- if rp_has_photo -%}
+          <span class="rp-category-card__photo">
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 500
+                | image_tag: loading: 'lazy', widths: '260, 380, 500', sizes: '(min-width: 750px) 280px, 45vw'
+              }}
+            {%- else -%}
+              <img
+                src="{{ rp_fallback_asset | asset_url }}"
+                alt="{{ block.settings.label }}"
+                loading="lazy"
+                width="500"
+                height="500"
+              >
+            {%- endif -%}
+          </span>
+        {%- else -%}
+          <span class="rp-category-card__icon">
             {% render 'rp-icon', icon: block.settings.icon %}
-          {%- endif -%}
-        </span>
+          </span>
+        {%- endif -%}
         <span class="rp-category-card__label">{{ block.settings.label }}</span>
       </a>
     {%- endfor -%}

@@ -412,6 +412,68 @@ body {
   color: var(--rp-white);
 }
 
+/* Tarjetas de categoría con foto */
+
+.rp-categories__grid:has(.rp-category-card--photo) {
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
+.rp-category-card--photo {
+  padding: 0;
+  aspect-ratio: 3 / 4;
+  display: block;
+  background: var(--rp-brown);
+}
+
+.rp-category-card--photo::before {
+  display: none;
+}
+
+.rp-category-card__photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.rp-category-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--rp-ease);
+}
+
+.rp-category-card--photo:hover .rp-category-card__photo img {
+  transform: scale(1.08);
+}
+
+.rp-category-card--photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(59, 42, 28, 0) 40%,
+    rgba(59, 42, 28, 0.75) 100%
+  );
+}
+
+.rp-category-card--photo .rp-category-card__label {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 1.1rem;
+  color: var(--rp-white);
+  font-size: 1.05rem;
+  padding: 0 1rem;
+}
+
+.rp-category-card--photo:hover .rp-category-card__label {
+  color: var(--rp-white);
+  transform: translateY(-4px);
+}
+
 /* --------------------------------------------------------------------- */
 /* Producto estrella / historia                                          */
 /* --------------------------------------------------------------------- */
