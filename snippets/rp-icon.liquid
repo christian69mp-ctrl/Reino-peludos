@@ -93,6 +93,29 @@
     <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M32 52 12 34c-6-6-6-15 0-20 5-5 13-5 18 0l2 2 2-2c5-5 13-5 18 0 6 5 6 14 0 20L32 52Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
     </svg>
+  {%- when 'leash' -%}
+    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M8 12c10 0 8 10 18 10s8-10 18-10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M44 12c6 0 12 5 12 14s-8 14-14 14c-8 0-10-8-10-14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="30" cy="48" r="6" stroke="currentColor" stroke-width="3"/>
+      <path d="M34 44l6-6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  {%- when 'moon' -%}
+    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M40 10a22 22 0 1 0 14 14 17 17 0 0 1-14-14Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M46 12l2 4 4 2-4 2-2 4-2-4-4-2 4-2 2-4Z" fill="currentColor"/>
+    </svg>
+  {%- when 'toy' -%}
+    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="32" cy="32" r="18" stroke="currentColor" stroke-width="3"/>
+      <path d="M32 14v6M32 44v6M14 32h6M44 32h6M19 19l4 4M41 41l4 4M45 19l-4 4M23 41l-4 4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+    </svg>
+  {%- when 'bowl' -%}
+    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M8 30h48c0 10-8 20-24 20S8 40 8 30Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+      <ellipse cx="32" cy="30" rx="24" ry="6" stroke="currentColor" stroke-width="3"/>
+      <path d="M22 16c0-3 2-5 4-5M32 13c0-3 2-5 4-5M42 16c0-3 2-5 4-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+    </svg>
   {%- when 'other' -%}
     <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M32 8c3 6-1 10-1 10s10-2 13 5-3 11-3 11 9 2 9 10-9 8-9 8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>

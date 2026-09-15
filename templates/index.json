@@ -67,6 +67,34 @@
       },
       "block_order": ["dogs", "cats", "rabbits", "birds", "fish", "rodents", "other"]
     },
+    "rp_shop_by_type": {
+      "type": "rp-categories",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "eyebrow": "Compra por necesidad",
+        "title": "Todo lo que necesita, en un solo sitio",
+        "subtitle": "Paseo, descanso, juego y hora de comer."
+      },
+      "blocks": {
+        "walk": {
+          "type": "category",
+          "settings": { "icon": "leash", "label": "Paseo", "link": "shopify://collections/all" }
+        },
+        "rest": {
+          "type": "category",
+          "settings": { "icon": "moon", "label": "Descanso", "link": "shopify://collections/all" }
+        },
+        "toys": {
+          "type": "category",
+          "settings": { "icon": "toy", "label": "Juguetes", "link": "shopify://collections/all" }
+        },
+        "bowls": {
+          "type": "category",
+          "settings": { "icon": "bowl", "label": "Comederos", "link": "shopify://collections/all" }
+        }
+      },
+      "block_order": ["walk", "rest", "toys", "bowls"]
+    },
     "rp_story": {
       "type": "rp-story",
       "settings": {
@@ -185,6 +213,7 @@
     "rp_hero",
     "rp_trust_bar",
     "rp_categories",
+    "rp_shop_by_type",
     "rp_story",
     "featured_collection",
     "rp_testimonials",

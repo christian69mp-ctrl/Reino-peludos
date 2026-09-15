@@ -28,6 +28,14 @@
             assign rp_fallback_asset = 'rp-cat-fish.jpg'
           when 'rodent'
             assign rp_fallback_asset = 'rp-cat-rodents.jpg'
+          when 'leash'
+            assign rp_fallback_asset = 'rp-cat-paseo.jpg'
+          when 'moon'
+            assign rp_fallback_asset = 'rp-cat-descanso.jpg'
+          when 'toy'
+            assign rp_fallback_asset = 'rp-cat-juguetes.jpg'
+          when 'bowl'
+            assign rp_fallback_asset = 'rp-cat-comederos.jpg'
         endcase
         assign rp_has_photo = false
         if block.settings.image != blank or rp_fallback_asset != ''
@@ -118,7 +126,11 @@
             { "value": "fish", "label": "Pez" },
             { "value": "rodent", "label": "Roedor (hámster, cobaya...)" },
             { "value": "reptile", "label": "Reptil" },
-            { "value": "other", "label": "Otras mascotas" }
+            { "value": "other", "label": "Otras mascotas" },
+            { "value": "leash", "label": "Paseo" },
+            { "value": "moon", "label": "Descanso" },
+            { "value": "toy", "label": "Juguetes" },
+            { "value": "bowl", "label": "Comederos" }
           ]
         },
         {
