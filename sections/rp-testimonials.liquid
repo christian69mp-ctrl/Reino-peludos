@@ -10,6 +10,13 @@
 
   <div class="rp-testimonials__grid">
     {%- for block in section.blocks -%}
+      {%- liquid
+        assign rp_avatar_fallback = ''
+        case block.settings.pet_icon
+          when 'cat'
+            assign rp_avatar_fallback = 'rp-avatar-cat.jpg'
+        endcase
+      -%}
       <div class="rp-testimonial-card rp-reveal rp-reveal--scale" data-rp-group="testimonials" {{ block.shopify_attributes }}>
         <div class="rp-testimonial-card__stars">
           {%- assign stars = block.settings.rating | times: 1 -%}
@@ -28,6 +35,8 @@
           <span class="rp-testimonial-card__avatar">
             {%- if block.settings.avatar != blank -%}
               <img src="{{ block.settings.avatar | image_url: width: 80 }}" alt="{{ block.settings.author }}" loading="lazy" width="38" height="38">
+            {%- elsif rp_avatar_fallback != '' -%}
+              <img src="{{ rp_avatar_fallback | asset_url }}" alt="{{ block.settings.author }}" loading="lazy" width="38" height="38">
             {%- else -%}
               {% render 'rp-icon', icon: block.settings.pet_icon %}
             {%- endif -%}
