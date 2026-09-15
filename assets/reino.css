@@ -791,3 +791,76 @@ body {
     animation: none;
   }
 }
+
+/* --------------------------------------------------------------------- */
+/* Banner de colección                                                    */
+/* --------------------------------------------------------------------- */
+
+.rp-cband {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(260px, 34vw, 420px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+}
+
+.rp-cband__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.rp-cband__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rp-cband__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(59, 42, 28, 0.15) 0%,
+    rgba(59, 42, 28, 0.55) 100%
+  );
+}
+
+.rp-cband__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.rp-cband__eyebrow {
+  font-family: var(--font-body-family);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: var(--rp-gold-light);
+}
+
+.rp-cband__heading {
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  color: var(--rp-white);
+  margin: 0;
+}
+
+.rp-cband__subheading {
+  font-family: var(--font-body-family);
+  color: var(--rp-cream);
+  font-size: 1rem;
+  margin: 0 0 0.4rem;
+}

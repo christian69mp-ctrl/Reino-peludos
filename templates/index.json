@@ -113,6 +113,16 @@
       },
       "block_order": ["tag1", "tag2", "tag3"]
     },
+    "rp_collection_banner": {
+      "type": "rp-collection-banner",
+      "settings": {
+        "eyebrow": "Best sellers",
+        "heading": "Los favoritos de nuestra manada",
+        "subheading": "Productos que no fallan, elegidos por miles de mascotas felices.",
+        "button_label": "Ver todos",
+        "button_link": "shopify://collections/all"
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -215,6 +225,7 @@
     "rp_categories",
     "rp_shop_by_type",
     "rp_story",
+    "rp_collection_banner",
     "featured_collection",
     "rp_testimonials",
     "newsletter"
