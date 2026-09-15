@@ -703,6 +703,46 @@ body {
 
 .rp-testimonials {
   padding: clamp(3rem, 6vw, 5rem) 1.5rem;
+  position: relative;
+}
+
+.rp-testimonials--has-bg {
+  overflow: hidden;
+  isolation: isolate;
+  padding-top: clamp(4rem, 10vw, 6rem);
+}
+
+.rp-testimonials__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.rp-testimonials__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.rp-testimonials--has-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(246, 237, 220, 0.25) 0%,
+    rgba(246, 237, 220, 0.85) 42%,
+    var(--rp-cream) 62%,
+    var(--rp-cream) 100%
+  );
+}
+
+.rp-testimonials--has-bg .rp-testimonials__header,
+.rp-testimonials--has-bg .rp-testimonials__grid {
+  position: relative;
+  z-index: 2;
 }
 
 .rp-testimonials__header {

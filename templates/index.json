@@ -159,6 +159,7 @@
       "type": "rp-testimonials",
       "settings": {
         "color_scheme": "scheme-1",
+        "use_sample_image": true,
         "eyebrow": "Familias del Reino",
         "title": "Lo que dicen nuestras familias peludas"
       },

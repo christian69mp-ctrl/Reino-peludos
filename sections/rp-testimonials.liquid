@@ -1,4 +1,20 @@
-<section class="rp-testimonials color-{{ section.settings.color_scheme }}" id="{{ section.id }}">
+{%- liquid
+  assign rp_testi_has_bg = false
+  if section.settings.background_image != blank or section.settings.use_sample_image
+    assign rp_testi_has_bg = true
+  endif
+-%}
+
+<section class="rp-testimonials color-{{ section.settings.color_scheme }}{% if rp_testi_has_bg %} rp-testimonials--has-bg{% endif %}" id="{{ section.id }}">
+  {%- if rp_testi_has_bg -%}
+    <div class="rp-testimonials__media">
+      {%- if section.settings.background_image != blank -%}
+        {{ section.settings.background_image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '100vw', widths: '600, 900, 1200, 1600' }}
+      {%- else -%}
+        <img src="{{ 'rp-banner-garantia.jpg' | asset_url }}" alt="" loading="lazy" width="1376" height="768">
+      {%- endif -%}
+    </div>
+  {%- endif -%}
   <div class="rp-testimonials__header rp-reveal">
     {%- if section.settings.eyebrow != blank -%}
       <p class="rp-testimonials__eyebrow">{{ section.settings.eyebrow }}</p>
@@ -62,6 +78,17 @@
       "id": "color_scheme",
       "label": "Esquema de color",
       "default": "scheme-1"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Imagen de fondo del encabezado (opcional)"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_sample_image",
+      "label": "Usar imagen de ejemplo si no subo una arriba",
+      "default": false
     },
     {
       "type": "text",
