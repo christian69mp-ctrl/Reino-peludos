@@ -14,6 +14,8 @@
         assign rp_fallback = 'rp-banner-bestsellers.jpg'
         if section.settings.fallback_image == 'oferta'
           assign rp_fallback = 'rp-banner-oferta.jpg'
+        elsif section.settings.fallback_image == 'about'
+          assign rp_fallback = 'rp-banner-about.jpg'
         endif
       -%}
       <img
@@ -62,7 +64,8 @@
       "default": "bestsellers",
       "options": [
         { "value": "bestsellers", "label": "Mascotas sobre plataformas (best sellers)" },
-        { "value": "oferta", "label": "Bulldog con espacio para oferta" }
+        { "value": "oferta", "label": "Bulldog con espacio para oferta" },
+        { "value": "about", "label": "Dueño acariciando a su perro (sobre nosotros)" }
       ]
     },
     {

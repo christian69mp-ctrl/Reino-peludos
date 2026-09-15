@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "rp_about_banner": {
+      "type": "rp-collection-banner",
+      "settings": {
+        "fallback_image": "about",
+        "content_position": "left",
+        "overlay": "light",
+        "eyebrow": "Nuestra historia",
+        "heading": "Un reino hecho con cariño",
+        "subheading": "Creemos que cada mascota merece sentirse como de la realeza, sin importar su tamaño, especie o edad."
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "rp_about_banner",
+    "main"
+  ]
+}
