@@ -12,6 +12,15 @@
           sizes: '100vw',
           widths: '750, 1100, 1500, 2000'
       }}
+    {%- else -%}
+      <img
+        src="{{ 'reino-banner.jpg' | asset_url }}"
+        alt="{{ shop.name }}"
+        width="1584"
+        height="672"
+        loading="eager"
+        fetchpriority="high"
+      >
     {%- endif -%}
   </div>
 
@@ -21,29 +30,39 @@
   <span class="rp-paw-float rp-paw-float--4">{% render 'rp-icon', icon: 'paw' %}</span>
 
   <div class="rp-hero__inner">
-    {%- if section.settings.logo != blank -%}
-      <img
-        class="rp-hero__crest rp-reveal rp-reveal--scale"
-        src="{{ section.settings.logo | image_url: width: 160 }}"
-        alt="{{ shop.name }}"
-        width="76"
-        height="76"
-        loading="eager"
-      >
-    {%- else -%}
-      <div class="rp-hero__crest rp-reveal rp-reveal--scale">{% render 'rp-icon', icon: 'crown' %}</div>
-    {%- endif -%}
+    {%- if section.settings.show_overlay_text -%}
+      {%- if section.settings.logo != blank -%}
+        <img
+          class="rp-hero__crest rp-reveal rp-reveal--scale"
+          src="{{ section.settings.logo | image_url: width: 160 }}"
+          alt="{{ shop.name }}"
+          width="76"
+          height="76"
+          loading="eager"
+        >
+      {%- else -%}
+        <img
+          class="rp-hero__crest rp-reveal rp-reveal--scale"
+          src="{{ 'reino-logo.jpg' | asset_url }}"
+          alt="{{ shop.name }}"
+          width="76"
+          height="76"
+          loading="eager"
+          style="border-radius: 50%;"
+        >
+      {%- endif -%}
 
-    {%- if section.settings.eyebrow != blank -%}
-      <p class="rp-hero__eyebrow rp-reveal" data-rp-group="hero">{{ section.settings.eyebrow }}</p>
-    {%- endif -%}
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="rp-hero__eyebrow rp-reveal" data-rp-group="hero">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
 
-    {%- if section.settings.heading != blank -%}
-      <h1 class="rp-hero__heading rp-reveal" data-rp-group="hero">{{ section.settings.heading }}</h1>
-    {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h1 class="rp-hero__heading rp-reveal" data-rp-group="hero">{{ section.settings.heading }}</h1>
+      {%- endif -%}
 
-    {%- if section.settings.subheading != blank -%}
-      <div class="rp-hero__subheading rp-reveal" data-rp-group="hero">{{ section.settings.subheading }}</div>
+      {%- if section.settings.subheading != blank -%}
+        <div class="rp-hero__subheading rp-reveal" data-rp-group="hero">{{ section.settings.subheading }}</div>
+      {%- endif -%}
     {%- endif -%}
 
     <div class="rp-hero__actions rp-reveal" data-rp-group="hero">
@@ -71,6 +90,13 @@
       "type": "image_picker",
       "id": "image",
       "label": "Imagen de fondo (banner)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overlay_text",
+      "label": "Mostrar logo, titular y texto sobre la imagen",
+      "info": "Desactívalo si tu imagen de banner ya incluye texto o mensaje propio.",
+      "default": true
     },
     {
       "type": "image_picker",

@@ -3,6 +3,7 @@
     "rp_hero": {
       "type": "rp-hero",
       "settings": {
+        "show_overlay_text": false,
         "eyebrow": "Reino Peludos",
         "heading": "Accesorios con corazón para cada mascota de tu reino",
         "subheading": "<p>Perros, gatos, conejos, aves, peces y más: productos pensados para el bienestar y la felicidad de cada integrante de tu familia.</p>",

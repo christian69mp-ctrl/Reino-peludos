@@ -205,7 +205,17 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <div class="header__heading-logo-wrapper">
+            <img
+              src="{{ 'reino-logo.jpg' | asset_url }}"
+              class="header__heading-logo motion-reduce"
+              alt="{{ shop.name }}"
+              height="{{ settings.logo_width }}"
+              width="{{ settings.logo_width }}"
+              style="border-radius: 50%; object-fit: cover;"
+              loading="eager"
+            >
+          </div>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -248,7 +258,17 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <div class="header__heading-logo-wrapper">
+            <img
+              src="{{ 'reino-logo.jpg' | asset_url }}"
+              class="header__heading-logo"
+              alt="{{ shop.name }}"
+              height="{{ settings.logo_width }}"
+              width="{{ settings.logo_width }}"
+              style="border-radius: 50%; object-fit: cover;"
+              loading="eager"
+            >
+          </div>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}

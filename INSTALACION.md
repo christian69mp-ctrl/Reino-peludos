@@ -114,12 +114,25 @@ shopify theme push --store=tu-tienda.myshopify.com
 
 ## 5. Pendiente / lo que necesito que me confirmes o envíes
 
-1. **Logo y banner** (`IMG_3439.jpeg` / `IMG_3440.jpeg`): no llegaron
-   archivos a este entorno. Súbelos al chat o colócalos en `assets/` del
-   repo y los conecto al hero y al header.
-2. **Datos de la tienda**: ¿ya tienes una tienda de Shopify creada (de
-   prueba o real)? Si sí, pásame la URL `.myshopify.com` (no hace falta la
-   contraseña) para dejar todo listo para el `theme dev`.
+1. ~~**Logo y banner**~~ ✅ Recibidos e integrados como
+   `assets/reino-logo.jpg` y `assets/reino-banner.jpg`. Se usan como
+   imagen de fondo del hero, logo del header (izquierda y centrado) y
+   favicon, **mientras no subas los mismos archivos como Imágenes de
+   marca reales en el editor de temas** (Ajustes del tema → Logo, y en la
+   sección "RP · Hero" → Imagen de fondo). El banner que enviaste ya trae
+   su propio texto ("Bienvenido al Reino de los Peludos..."), así que
+   desactivé el texto superpuesto del hero (`show_overlay_text: false`)
+   para no duplicar el mensaje — puedes reactivarlo desde el editor si
+   más adelante subes una foto sin texto.
+2. **Tienda conectada**: tu URL es `6ixzz2-ht.myshopify.com`. Para que yo
+   pueda correr `theme dev`/`theme push` directamente desde aquí (sin que
+   tengas que hacerlo tú en tu máquina), instala la app gratuita
+   **Theme Access** en esa tienda y compárteme el token — así evitamos el
+   login interactivo por navegador que este entorno no puede hacer. Si
+   prefieres hacerlo tú mismo localmente, el comando ya queda listo:
+   ```bash
+   shopify theme dev --store=6ixzz2-ht.myshopify.com
+   ```
 3. **Menú de navegación y colecciones**: los enlaces de categorías apuntan
    a `/collections/all` de forma temporal. Cuando tengas creadas las
    colecciones por especie (Perros, Gatos, etc.) en el admin, cambio cada
