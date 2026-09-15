@@ -31,6 +31,8 @@
         case block.settings.pet_icon
           when 'cat'
             assign rp_avatar_fallback = 'rp-avatar-cat.jpg'
+          when 'dog'
+            assign rp_avatar_fallback = 'rp-avatar-dog.jpg'
         endcase
       -%}
       <div class="rp-testimonial-card rp-reveal rp-reveal--scale" data-rp-group="testimonials" {{ block.shopify_attributes }}>
