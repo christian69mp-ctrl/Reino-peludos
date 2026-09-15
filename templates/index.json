@@ -71,16 +71,17 @@
       "type": "rp-story",
       "settings": {
         "image_position": "left",
-        "badge_text": "Favorito del Reino",
+        "badge_text": "Favorito para paseos",
         "eyebrow": "Producto estrella",
-        "description": "<p>Diseñado para acompañar el día a día de tu mascota, sea perro, gato o cualquier otro compañero: comodidad, materiales resistentes y un toque de estilo pensado con cariño.</p>",
+        "heading": "Arnés y correa Reino Peludos",
+        "description": "<p>Comodidad premium para cada paseo: arnés acolchado con hebillas doradas y correa a juego, pensado para que camine feliz y seguro a tu lado. Disponible en varias tallas y colores.</p>",
         "button_label": "Ver producto",
         "button_link": "shopify://collections/all"
       },
       "blocks": {
-        "tag1": { "type": "tag", "settings": { "text": "Multi-mascota" } },
-        "tag2": { "type": "tag", "settings": { "text": "Materiales resistentes" } },
-        "tag3": { "type": "tag", "settings": { "text": "Ajuste cómodo" } }
+        "tag1": { "type": "tag", "settings": { "text": "Ajuste antiescape" } },
+        "tag2": { "type": "tag", "settings": { "text": "Acolchado premium" } },
+        "tag3": { "type": "tag", "settings": { "text": "Detalles dorados" } }
       },
       "block_order": ["tag1", "tag2", "tag3"]
     },
