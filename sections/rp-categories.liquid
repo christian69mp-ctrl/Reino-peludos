@@ -36,6 +36,8 @@
             assign rp_fallback_asset = 'rp-cat-juguetes.jpg'
           when 'bowl'
             assign rp_fallback_asset = 'rp-cat-comederos.jpg'
+          when 'other'
+            assign rp_fallback_asset = 'rp-cat-other.jpg'
         endcase
         assign rp_has_photo = false
         if block.settings.image != blank or rp_fallback_asset != ''
