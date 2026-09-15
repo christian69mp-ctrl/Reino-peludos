@@ -17,7 +17,8 @@
     "rp_trust_bar": {
       "type": "rp-trust-bar",
       "settings": {
-        "color_scheme": "scheme-4"
+        "color_scheme": "scheme-4",
+        "use_sample_image": true
       },
       "blocks": {
         "b1": { "type": "item", "settings": { "icon": "truck", "text": "Envío en 24-48h" } },
