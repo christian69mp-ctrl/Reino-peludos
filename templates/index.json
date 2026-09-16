@@ -61,12 +61,16 @@
           "type": "category",
           "settings": { "icon": "rodent", "label": "Hámsters y roedores", "link": "shopify://collections/all" }
         },
+        "amphibians": {
+          "type": "category",
+          "settings": { "icon": "frog", "label": "Anfibios", "link": "shopify://collections/all" }
+        },
         "other": {
           "type": "category",
           "settings": { "icon": "other", "label": "Otras mascotas", "link": "shopify://collections/all" }
         }
       },
-      "block_order": ["dogs", "cats", "rabbits", "birds", "fish", "rodents", "other"]
+      "block_order": ["dogs", "cats", "rabbits", "birds", "fish", "rodents", "amphibians", "other"]
     },
     "rp_shop_by_type": {
       "type": "rp-categories",
@@ -92,9 +96,21 @@
         "bowls": {
           "type": "category",
           "settings": { "icon": "bowl", "label": "Comederos", "link": "shopify://collections/all" }
+        },
+        "aquariums": {
+          "type": "category",
+          "settings": { "icon": "aquarium", "label": "Acuarios y decoración", "link": "shopify://collections/all" }
+        },
+        "terrariums": {
+          "type": "category",
+          "settings": { "icon": "terrarium", "label": "Terrarios y hábitats", "link": "shopify://collections/all" }
+        },
+        "health": {
+          "type": "category",
+          "settings": { "icon": "pill", "label": "Salud y suplementos", "link": "shopify://collections/all" }
         }
       },
-      "block_order": ["walk", "rest", "toys", "bowls"]
+      "block_order": ["walk", "rest", "toys", "bowls", "aquariums", "terrariums", "health"]
     },
     "rp_story": {
       "type": "rp-story",

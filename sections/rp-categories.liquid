@@ -38,6 +38,14 @@
             assign rp_fallback_asset = 'rp-cat-comederos.jpg'
           when 'other'
             assign rp_fallback_asset = 'rp-cat-other.jpg'
+          when 'frog'
+            assign rp_fallback_asset = 'rp-cat-amphibians.jpg'
+          when 'aquarium'
+            assign rp_fallback_asset = 'rp-cat-aquarios.jpg'
+          when 'terrarium'
+            assign rp_fallback_asset = 'rp-cat-terrarios.jpg'
+          when 'pill'
+            assign rp_fallback_asset = 'rp-cat-salud.jpg'
         endcase
         assign rp_has_photo = false
         if block.settings.image != blank or rp_fallback_asset != ''
@@ -132,7 +140,11 @@
             { "value": "leash", "label": "Paseo" },
             { "value": "moon", "label": "Descanso" },
             { "value": "toy", "label": "Juguetes" },
-            { "value": "bowl", "label": "Comederos" }
+            { "value": "bowl", "label": "Comederos" },
+            { "value": "frog", "label": "Anfibios" },
+            { "value": "aquarium", "label": "Acuarios y decoración" },
+            { "value": "terrarium", "label": "Terrarios y hábitats" },
+            { "value": "pill", "label": "Salud y suplementos" }
           ]
         },
         {
