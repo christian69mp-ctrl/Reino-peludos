@@ -1064,3 +1064,186 @@ body {
 .rp-cband--dark .rp-cband__subheading {
   color: var(--rp-cream);
 }
+
+/* --------------------------------------------------------------------- */
+/* Fondo pastel general de la tienda                                     */
+/* --------------------------------------------------------------------- */
+
+html,
+body {
+  background-color: var(--rp-cream);
+}
+
+/* --------------------------------------------------------------------- */
+/* Banner de cookies (Shopify) con estilo de marca                       */
+/* --------------------------------------------------------------------- */
+
+#shopify-pc__banner,
+#shopify-pc__banner__container {
+  font-family: var(--font-body-family) !important;
+}
+
+#shopify-pc__banner {
+  border-top: 3px solid var(--rp-coral) !important;
+  background: var(--rp-cream) !important;
+  box-shadow: var(--rp-shadow-lift) !important;
+}
+
+#shopify-pc__banner__title,
+#shopify-pc__banner h2,
+#shopify-pc__banner h3 {
+  font-family: var(--font-heading-family) !important;
+  color: var(--rp-brown) !important;
+}
+
+#shopify-pc__banner p,
+#shopify-pc__banner__text,
+#shopify-pc__banner span {
+  color: var(--rp-brown-light) !important;
+}
+
+#shopify-pc__banner__btn-accept {
+  background: var(--rp-coral) !important;
+  border: none !important;
+  border-radius: var(--rp-radius-pill) !important;
+  color: var(--rp-white) !important;
+  font-weight: 800 !important;
+  font-family: var(--font-body-family) !important;
+  padding: 0.7rem 1.6rem !important;
+  transition: transform 0.25s var(--rp-ease), background-color 0.25s var(--rp-ease);
+}
+
+#shopify-pc__banner__btn-accept:hover {
+  background: var(--rp-coral-dark) !important;
+  transform: translateY(-2px);
+}
+
+#shopify-pc__banner__btn-decline {
+  background: transparent !important;
+  border: 2px solid var(--rp-brown) !important;
+  border-radius: var(--rp-radius-pill) !important;
+  color: var(--rp-brown) !important;
+  font-weight: 700 !important;
+  font-family: var(--font-body-family) !important;
+  padding: 0.65rem 1.5rem !important;
+}
+
+#shopify-pc__prefs__dialog,
+#shopify-pc__prefs {
+  font-family: var(--font-body-family) !important;
+  border-radius: var(--rp-radius-md) !important;
+}
+
+#shopify-pc__prefs__header-title {
+  font-family: var(--font-heading-family) !important;
+  color: var(--rp-brown) !important;
+}
+
+#shopify-pc__prefs__header-accept,
+#shopify-pc__prefs__header-save {
+  background: var(--rp-coral) !important;
+  border: none !important;
+  border-radius: var(--rp-radius-pill) !important;
+  color: var(--rp-white) !important;
+  font-weight: 800 !important;
+}
+
+#shopify-pc__prefs__header-decline {
+  border: 2px solid var(--rp-brown) !important;
+  border-radius: var(--rp-radius-pill) !important;
+  color: var(--rp-brown) !important;
+  font-weight: 700 !important;
+}
+
+/* --------------------------------------------------------------------- */
+/* Titulos mas grandes y visibles                                        */
+/* --------------------------------------------------------------------- */
+
+.rp-categories__title,
+.rp-testimonials__title {
+  font-size: clamp(2.1rem, 4.5vw, 3.1rem) !important;
+}
+
+.rp-story__title {
+  font-size: clamp(2rem, 4vw, 2.9rem) !important;
+}
+
+.rp-cband__heading {
+  font-size: clamp(2.1rem, 4vw, 3rem) !important;
+}
+
+.rp-category-card__label {
+  font-size: 1.05rem !important;
+}
+
+.rp-categories__eyebrow,
+.rp-testimonials__eyebrow,
+.rp-story__eyebrow,
+.rp-cband__eyebrow {
+  font-size: 0.9rem !important;
+  letter-spacing: 0.14em !important;
+}
+
+/* --------------------------------------------------------------------- */
+/* Botones de compra mas visibles (add to cart / buy now)                */
+/* --------------------------------------------------------------------- */
+
+.product-form__submit.button,
+.shopify-payment-button__button--unbranded {
+  font-family: var(--font-body-family);
+  font-weight: 800 !important;
+  font-size: 1.05rem !important;
+  letter-spacing: 0.02em;
+  padding-top: 1.05rem !important;
+  padding-bottom: 1.05rem !important;
+  transition: transform 0.25s var(--rp-ease), box-shadow 0.25s var(--rp-ease);
+}
+
+.product-form__submit.button:hover,
+.shopify-payment-button__button--unbranded:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--rp-shadow-lift);
+}
+
+/* --------------------------------------------------------------------- */
+/* Categorias en scroll lateral en movil                                 */
+/* --------------------------------------------------------------------- */
+
+@media screen and (max-width: 749px) {
+  .rp-categories__grid {
+    display: flex;
+    grid-template-columns: unset;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.75rem;
+    margin: 0 -1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    scrollbar-width: none;
+  }
+
+  .rp-categories__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rp-category-card {
+    flex: 0 0 auto;
+    width: 128px;
+    scroll-snap-align: start;
+  }
+
+  .rp-category-card--photo {
+    width: 150px;
+    aspect-ratio: 3 / 3.6;
+  }
+
+  .rp-category-card:not(.rp-category-card--photo) {
+    padding: 1.3rem 0.6rem 1.1rem;
+  }
+
+  .rp-category-card__label {
+    font-size: 0.88rem !important;
+  }
+}

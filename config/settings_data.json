@@ -18,7 +18,7 @@
         },
         "scheme-2": {
           "settings": {
-            "background": "#FFFFFF",
+            "background": "#FFFBF4",
             "background_gradient": "",
             "text": "#3B2A1C",
             "button": "#D4A84B",
@@ -62,7 +62,7 @@
         }
       },
       "type_header_font": "fredoka_n6",
-      "heading_scale": 100,
+      "heading_scale": 115,
       "type_body_font": "nunito_n4",
       "body_scale": 100,
       "page_width": 1200,
