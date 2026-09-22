@@ -38,7 +38,7 @@
           "settings": {
             "layout": "horizontal",
             "icon_1": "truck",
-            "heading_1": "Envío 24-48h",
+            "heading_1": "Envío gratis 5-8 días",
             "icon_2": "return",
             "heading_2": "Devolución gratis 30 días",
             "icon_3": "lock",
@@ -53,7 +53,7 @@
           "settings": {
             "heading": "Envíos y devoluciones",
             "icon": "truck",
-            "content": "<p>Enviamos a todo el país en 24-48h laborables. Si tu mascota (o tú) no queda feliz, tienes 30 días para devolverlo sin coste.</p>"
+            "content": "<p>Envío gratuito a toda España, con entrega en 5-8 días laborables. Próximamente añadiremos una tarifa express para recibirlo más rápido. Si tu mascota (o tú) no queda feliz, tienes 30 días para devolverlo sin coste.</p>"
           }
         },
         "care_tab": {

@@ -21,7 +21,7 @@
         "use_sample_image": true
       },
       "blocks": {
-        "b1": { "type": "item", "settings": { "icon": "truck", "text": "Envío en 24-48h" } },
+        "b1": { "type": "item", "settings": { "icon": "truck", "text": "Envío gratis · 5-8 días" } },
         "b2": { "type": "item", "settings": { "icon": "shield", "text": "Pago 100% seguro" } },
         "b3": { "type": "item", "settings": { "icon": "return", "text": "Devolución gratis 30 días" } },
         "b4": { "type": "item", "settings": { "icon": "heart", "text": "+2.000 mascotas felices" } }
