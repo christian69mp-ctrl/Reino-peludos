@@ -46,6 +46,8 @@
             assign rp_fallback_asset = 'rp-cat-terrarios.jpg'
           when 'pill'
             assign rp_fallback_asset = 'rp-cat-salud.jpg'
+          when 'reptile'
+            assign rp_fallback_asset = 'rp-cat-reptiles.jpg'
         endcase
         assign rp_has_photo = false
         if block.settings.image != blank or rp_fallback_asset != ''

@@ -65,12 +65,16 @@
           "type": "category",
           "settings": { "icon": "frog", "label": "Anfibios", "link": "shopify://collections/all" }
         },
+        "reptiles": {
+          "type": "category",
+          "settings": { "icon": "reptile", "label": "Reptiles", "link": "shopify://collections/all" }
+        },
         "other": {
           "type": "category",
           "settings": { "icon": "other", "label": "Otras mascotas", "link": "shopify://collections/all" }
         }
       },
-      "block_order": ["dogs", "cats", "rabbits", "birds", "fish", "rodents", "amphibians", "other"]
+      "block_order": ["dogs", "cats", "rabbits", "birds", "fish", "rodents", "amphibians", "reptiles", "other"]
     },
     "rp_shop_by_type": {
       "type": "rp-categories",
