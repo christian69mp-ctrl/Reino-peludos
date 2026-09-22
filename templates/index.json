@@ -119,6 +119,7 @@
     "rp_story": {
       "type": "rp-story",
       "settings": {
+        "product": "gid://shopify/Product/11633498521941",
         "image_position": "left",
         "badge_text": "Seguridad en el agua",
         "eyebrow": "Producto estrella",
@@ -137,6 +138,7 @@
     "rp_story_2": {
       "type": "rp-story",
       "settings": {
+        "product": "gid://shopify/Product/11633498784085",
         "image_position": "right",
         "badge_text": "Para toda la familia",
         "eyebrow": "También nuevo",
