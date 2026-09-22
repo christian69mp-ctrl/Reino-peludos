@@ -120,17 +120,35 @@
       "type": "rp-story",
       "settings": {
         "image_position": "left",
-        "badge_text": "Favorito para paseos",
+        "badge_text": "Seguridad en el agua",
         "eyebrow": "Producto estrella",
-        "heading": "Arnés y correa Reino Peludos",
-        "description": "<p>Comodidad premium para cada paseo: arnés acolchado con hebillas doradas y correa a juego, pensado para que camine feliz y seguro a tu lado. Disponible en varias tallas y colores.</p>",
+        "heading": "Chaleco salvavidas para perros",
+        "description": "<p>Flota, sostiene la cabeza fuera del agua y da tranquilidad en cada baño, paseo en barco o día de playa. Pensado para que tu perro disfrute el agua sin riesgo.</p>",
         "button_label": "Ver producto",
         "button_link": "shopify://collections/all"
       },
       "blocks": {
-        "tag1": { "type": "tag", "settings": { "text": "Ajuste antiescape" } },
-        "tag2": { "type": "tag", "settings": { "text": "Acolchado premium" } },
-        "tag3": { "type": "tag", "settings": { "text": "Detalles dorados" } }
+        "tag1": { "type": "tag", "settings": { "text": "Flotación real" } },
+        "tag2": { "type": "tag", "settings": { "text": "Soporte de cabeza" } },
+        "tag3": { "type": "tag", "settings": { "text": "Asa de rescate" } }
+      },
+      "block_order": ["tag1", "tag2", "tag3"]
+    },
+    "rp_story_2": {
+      "type": "rp-story",
+      "settings": {
+        "image_position": "right",
+        "badge_text": "Para toda la familia",
+        "eyebrow": "También nuevo",
+        "heading": "Sudadera canguro para cachorros",
+        "description": "<p>Una sudadera para ti con un bolsillo tipo canguro en el pecho, perfecta para llevar a tu cachorro pegado a ti, calentito y seguro, con las manos libres.</p>",
+        "button_label": "Ver producto",
+        "button_link": "shopify://collections/all"
+      },
+      "blocks": {
+        "tag1": { "type": "tag", "settings": { "text": "Bolsillo canguro" } },
+        "tag2": { "type": "tag", "settings": { "text": "Manos libres" } },
+        "tag3": { "type": "tag", "settings": { "text": "Abrigado y suave" } }
       },
       "block_order": ["tag1", "tag2", "tag3"]
     },
@@ -180,42 +198,52 @@
       "settings": {
         "color_scheme": "scheme-1",
         "use_sample_image": true,
-        "eyebrow": "Familias del Reino",
-        "title": "Lo que dicen nuestras familias peludas"
+        "eyebrow": "Nuestros dos primeros productos",
+        "title": "Por qué los vas a amar"
       },
       "blocks": {
         "t1": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "quote": "Le encantó desde el primer día. Calidad increíble y llegó súper rápido.",
+            "quote": "El chaleco mantiene la cabeza de tu perro siempre por encima del agua, incluso en su primer chapuzón. Ideal para piscina, playa o barco.",
             "pet_icon": "dog",
-            "author": "María G.",
-            "pet_name": "Dueña de Toby (perro)"
+            "author": "Equipo Reino Peludos",
+            "pet_name": "Chaleco salvavidas para perros"
           }
         },
         "t2": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "quote": "Por fin encuentro accesorios bonitos también para mi conejo, no solo para perros y gatos.",
-            "pet_icon": "rabbit",
-            "author": "Laura P.",
-            "pet_name": "Dueña de Nube (conejo)"
+            "quote": "Tiene un asa en el lomo para sacarlo del agua en segundos si hace falta. Tranquilidad total mientras juega.",
+            "pet_icon": "dog",
+            "author": "Equipo Reino Peludos",
+            "pet_name": "Chaleco salvavidas para perros"
           }
         },
         "t3": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "quote": "Envío rapidísimo y el material es muy resistente. Repetiré seguro.",
-            "pet_icon": "cat",
-            "author": "Carlos M.",
-            "pet_name": "Dueño de Simba (gato)"
+            "quote": "El bolsillo canguro deja a tu cachorro pegadito a ti y calentito, con tus manos totalmente libres para el día a día.",
+            "pet_icon": "dog",
+            "author": "Equipo Reino Peludos",
+            "pet_name": "Sudadera canguro para cachorros"
+          }
+        },
+        "t4": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Tela suave y abrigada, cómoda para ti y segura para tu cachorro. Perfecta para pasear en casa en los días fríos.",
+            "pet_icon": "dog",
+            "author": "Equipo Reino Peludos",
+            "pet_name": "Sudadera canguro para cachorros"
           }
         }
       },
-      "block_order": ["t1", "t2", "t3"]
+      "block_order": ["t1", "t2", "t3", "t4"]
     },
     "newsletter": {
       "type": "newsletter",
@@ -251,6 +279,7 @@
     "rp_categories",
     "rp_shop_by_type",
     "rp_story",
+    "rp_story_2",
     "rp_collection_banner",
     "featured_collection",
     "rp_testimonials",

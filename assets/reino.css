@@ -524,6 +524,39 @@ body {
   transform: scale(1.06);
 }
 
+.rp-story__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  background: linear-gradient(135deg, var(--rp-cream), var(--rp-gold-light, #f3dfa9));
+  color: var(--rp-brown);
+}
+
+.rp-story__placeholder-icon {
+  width: 56px;
+  height: 56px;
+  color: var(--rp-gold);
+  opacity: 0.85;
+}
+
+.rp-story__placeholder-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.rp-story__placeholder-text {
+  font-family: var(--font-body-family);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
+  margin: 0;
+}
+
 .rp-story__badge {
   position: absolute;
   top: 1.1rem;

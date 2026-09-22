@@ -15,13 +15,12 @@
       {%- elsif rp_product != blank and rp_product.featured_image != blank -%}
         {{ rp_product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400, 700, 1000, 1200' }}
       {%- else -%}
-        <img
-          src="{{ 'rp-story-paseo.jpg' | asset_url }}"
-          alt="{{ section.settings.heading | default: shop.name }}"
-          loading="lazy"
-          width="1376"
-          height="768"
-        >
+        <div class="rp-story__placeholder">
+          <span class="rp-story__placeholder-icon">
+            {% render 'rp-icon', icon: 'crown' %}
+          </span>
+          <p class="rp-story__placeholder-text">Foto real muy pronto</p>
+        </div>
       {%- endif -%}
     </div>
 
