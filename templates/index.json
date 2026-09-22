@@ -140,24 +140,24 @@
         "fallback_image": "bestsellers",
         "content_position": "center",
         "overlay": "dark",
-        "eyebrow": "Best sellers",
-        "heading": "Los favoritos de nuestra manada",
-        "subheading": "Productos que no fallan, elegidos por miles de mascotas felices.",
-        "button_label": "Ver todos",
+        "eyebrow": "Recién llegados",
+        "heading": "Estamos empezando a crecer 🐾",
+        "subheading": "Arrancamos con nuestros primeros productos, y cada semana se suman más — para perros, gatos y toda la familia peluda.",
+        "button_label": "Ver catálogo",
         "button_link": "shopify://collections/all"
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Los más queridos",
+        "title": "Nuestros primeros productos",
         "heading_size": "h2",
-        "description": "",
-        "show_description": false,
+        "description": "Elegidos con cariño para abrir el Reino. Muy pronto habrá muchos más — ¡suscríbete abajo para enterarte primero!",
+        "show_description": true,
         "description_style": "body",
         "collection": "all",
         "products_to_show": 8,
-        "columns_desktop": 4,
+        "columns_desktop": 2,
         "color_scheme": "scheme-2",
         "full_width": false,
         "show_view_all": true,
@@ -217,19 +217,6 @@
       },
       "block_order": ["t1", "t2", "t3"]
     },
-    "rp_offer_banner": {
-      "type": "rp-collection-banner",
-      "settings": {
-        "fallback_image": "oferta",
-        "content_position": "left",
-        "overlay": "light",
-        "eyebrow": "Oferta por tiempo limitado",
-        "heading": "Ofertas especiales para tu mascota",
-        "subheading": "Descubre los descuentos activos esta semana.",
-        "button_label": "Ver ofertas",
-        "button_link": "shopify://collections/all"
-      }
-    },
     "newsletter": {
       "type": "newsletter",
       "settings": {
@@ -242,12 +229,12 @@
       "blocks": {
         "heading": {
           "type": "heading",
-          "settings": { "heading": "Únete a la manada" }
+          "settings": { "heading": "Sé el primero en enterarte" }
         },
         "paragraph": {
           "type": "paragraph",
           "settings": {
-            "paragraph": "<p>Novedades, consejos y ofertas para todo tipo de mascotas, directo a tu correo.</p>"
+            "paragraph": "<p>Vamos sumando productos nuevos cada semana. Déjanos tu correo y te avisamos apenas lleguen.</p>"
           }
         },
         "email_form": {
@@ -267,7 +254,6 @@
     "rp_collection_banner",
     "featured_collection",
     "rp_testimonials",
-    "rp_offer_banner",
     "newsletter"
   ]
 }
