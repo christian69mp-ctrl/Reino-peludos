@@ -152,7 +152,7 @@
       "settings": {
         "title": "Nuestros primeros productos",
         "heading_size": "h2",
-        "description": "Elegidos con cariño para abrir el Reino. Muy pronto habrá muchos más — ¡suscríbete abajo para enterarte primero!",
+        "description": "<p>Elegidos con cariño para abrir el Reino. Muy pronto habrá muchos más — ¡suscríbete abajo para enterarte primero!</p>",
         "show_description": true,
         "description_style": "body",
         "collection": "all",
