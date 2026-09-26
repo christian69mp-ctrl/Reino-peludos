@@ -1463,3 +1463,122 @@ body {
 
 .rp-spotlight--dark .rp-spotlight__subheading { color: var(--rp-cream); opacity: 0.92; }
 .rp-spotlight--light .rp-spotlight__subheading { color: var(--rp-brown-light); }
+
+/* --------------------------------------------------------------------- */
+/* Guía de tallas                                                        */
+/* --------------------------------------------------------------------- */
+
+.rp-sizeguide {
+  padding: clamp(2.5rem, 5vw, 4rem) 1.5rem;
+}
+
+.rp-sizeguide__header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.rp-sizeguide__eyebrow {
+  font-family: var(--font-body-family);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: var(--rp-coral);
+}
+
+.rp-sizeguide__title {
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  color: var(--rp-brown);
+  margin: 0.4rem 0 0.6rem;
+}
+
+.rp-sizeguide__subtitle {
+  font-family: var(--font-body-family);
+  color: var(--rp-brown-light);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.rp-sizeguide__table {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--rp-white);
+  border-radius: var(--rp-radius-md);
+  box-shadow: var(--rp-shadow-soft);
+  overflow: hidden;
+}
+
+.rp-sizeguide__row {
+  display: grid;
+  grid-template-columns: 0.7fr 1fr 1.6fr;
+  gap: 0.75rem;
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid rgba(59, 42, 28, 0.08);
+  align-items: center;
+}
+
+.rp-sizeguide__row:last-child {
+  border-bottom: none;
+}
+
+.rp-sizeguide__row--head {
+  background: var(--rp-cream);
+  font-family: var(--font-body-family);
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rp-brown-light);
+}
+
+.rp-sizeguide__row:not(.rp-sizeguide__row--head) {
+  font-family: var(--font-body-family);
+  font-size: 0.95rem;
+  color: var(--rp-brown);
+}
+
+.rp-sizeguide__size {
+  font-family: var(--font-heading-family);
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--rp-coral);
+}
+
+.rp-sizeguide__note {
+  max-width: 800px;
+  margin: 1rem auto 0;
+  font-family: var(--font-body-family);
+  font-size: 0.85rem;
+  color: var(--rp-brown-light);
+  text-align: center;
+}
+
+@media screen and (max-width: 749px) {
+  .rp-sizeguide__row {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+    padding: 1rem 1.1rem;
+  }
+
+  .rp-sizeguide__row--head {
+    display: none;
+  }
+
+  .rp-sizeguide__row:not(.rp-sizeguide__row--head) {
+    padding: 1rem 1.1rem;
+  }
+
+  .rp-sizeguide__row:not(.rp-sizeguide__row--head) span:nth-child(2)::before {
+    content: "Peso: ";
+    font-weight: 700;
+    color: var(--rp-brown-light);
+  }
+
+  .rp-sizeguide__row:not(.rp-sizeguide__row--head) span:nth-child(3)::before {
+    content: "Razas similares: ";
+    font-weight: 700;
+    color: var(--rp-brown-light);
+  }
+}

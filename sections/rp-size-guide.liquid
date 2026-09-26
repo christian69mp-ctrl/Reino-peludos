@@ -1,0 +1,108 @@
+<section class="rp-sizeguide color-{{ section.settings.color_scheme }}" id="{{ section.id }}">
+  <div class="rp-sizeguide__header rp-reveal">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="rp-sizeguide__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="rp-sizeguide__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="rp-sizeguide__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="rp-sizeguide__table rp-reveal" role="table">
+    <div class="rp-sizeguide__row rp-sizeguide__row--head" role="row">
+      <span role="columnheader">Talla</span>
+      <span role="columnheader">Peso del perro</span>
+      <span role="columnheader">Razas de referencia</span>
+    </div>
+    {%- for block in section.blocks -%}
+      <div class="rp-sizeguide__row" role="row" {{ block.shopify_attributes }}>
+        <span class="rp-sizeguide__size" role="cell">{{ block.settings.size }}</span>
+        <span role="cell">{{ block.settings.weight }}</span>
+        <span role="cell">{{ block.settings.breeds }}</span>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.note != blank -%}
+    <p class="rp-sizeguide__note rp-reveal">{{ section.settings.note }}</p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "RP · Guía de tallas",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto superior",
+      "default": "Antes de elegir"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "¿Qué talla necesita tu perro?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo"
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "Nota al pie"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "size_row",
+      "name": "Fila de talla",
+      "settings": [
+        {
+          "type": "text",
+          "id": "size",
+          "label": "Talla",
+          "default": "M"
+        },
+        {
+          "type": "text",
+          "id": "weight",
+          "label": "Peso del perro",
+          "default": "10 a 18 kg"
+        },
+        {
+          "type": "text",
+          "id": "breeds",
+          "label": "Razas de referencia"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RP · Guía de tallas",
+      "blocks": [
+        { "type": "size_row", "settings": { "size": "XS", "weight": "Hasta 5 kg", "breeds": "Chihuahua, Yorkshire Terrier" } },
+        { "type": "size_row", "settings": { "size": "S", "weight": "5 a 10 kg", "breeds": "Shih Tzu, Caniche toy" } },
+        { "type": "size_row", "settings": { "size": "M", "weight": "10 a 18 kg", "breeds": "Cocker Spaniel, Bulldog Francés" } },
+        { "type": "size_row", "settings": { "size": "L", "weight": "18 a 27 kg", "breeds": "Border Collie, Braco alemán" } },
+        { "type": "size_row", "settings": { "size": "XL", "weight": "27 a 34 kg", "breeds": "Labrador, Golden Retriever" } },
+        { "type": "size_row", "settings": { "size": "XXL", "weight": "Más de 34 kg", "breeds": "Rottweiler, Gran Danés" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

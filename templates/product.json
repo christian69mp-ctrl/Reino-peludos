@@ -118,6 +118,25 @@
         "padding_bottom": 12
       }
     },
+    "rp_size_guide": {
+      "type": "rp-size-guide",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "Antes de elegir",
+        "title": "¿Qué talla necesita tu perro?",
+        "subtitle": "Disponible en 6 tallas y 2 colores (azul y amarillo). Elige según el peso de tu perro; si tienes dudas, mira las razas de referencia.",
+        "note": "Los rangos son orientativos: la forma del pecho varía según la raza. Ante la duda, escríbenos con el peso y la raza de tu perro."
+      },
+      "blocks": {
+        "xs": { "type": "size_row", "settings": { "size": "XS", "weight": "Hasta 5 kg", "breeds": "Chihuahua, Yorkshire Terrier, Pomerania" } },
+        "s": { "type": "size_row", "settings": { "size": "S", "weight": "5 a 10 kg", "breeds": "Shih Tzu, Caniche toy, Beagle pequeño" } },
+        "m": { "type": "size_row", "settings": { "size": "M", "weight": "10 a 18 kg", "breeds": "Cocker Spaniel, Bulldog Francés, Border Collie" } },
+        "l": { "type": "size_row", "settings": { "size": "L", "weight": "18 a 27 kg", "breeds": "Braco alemán, Pastor Alemán joven" } },
+        "xl": { "type": "size_row", "settings": { "size": "XL", "weight": "27 a 34 kg", "breeds": "Labrador Retriever, Golden Retriever" } },
+        "xxl": { "type": "size_row", "settings": { "size": "XXL", "weight": "Más de 34 kg", "breeds": "Rottweiler, Gran Danés, San Bernardo" } }
+      },
+      "block_order": ["xs", "s", "m", "l", "xl", "xxl"]
+    },
     "rp_benefits": {
       "type": "rp-product-benefits",
       "settings": {
@@ -231,6 +250,7 @@
   },
   "order": [
     "main",
+    "rp_size_guide",
     "rp_benefits",
     "rp_spotlight",
     "rp_reviews",
