@@ -138,14 +138,13 @@
     "rp_story_2": {
       "type": "rp-story",
       "settings": {
-        "product": "gid://shopify/Product/11633498784085",
         "image_position": "right",
-        "badge_text": "Para toda la familia",
-        "eyebrow": "También nuevo",
+        "badge_text": "Próximamente",
+        "eyebrow": "Muy pronto en el Reino",
         "heading": "Sudadera canguro para cachorros",
-        "description": "<p>Una sudadera para ti con un bolsillo tipo canguro en el pecho, perfecta para llevar a tu cachorro pegado a ti, calentito y seguro, con las manos libres.</p>",
-        "button_label": "Ver producto",
-        "button_link": "shopify://collections/all"
+        "description": "<p>Una sudadera para ti con un bolsillo tipo canguro en el pecho, perfecta para llevar a tu cachorro pegado a ti, calentito y seguro, con las manos libres. Estamos ultimando los últimos detalles antes de ponerla a la venta.</p>",
+        "button_label": "Avísame cuando esté disponible",
+        "button_link": "#newsletter"
       },
       "blocks": {
         "tag1": { "type": "tag", "settings": { "text": "Bolsillo canguro" } },
@@ -162,7 +161,7 @@
         "overlay": "dark",
         "eyebrow": "Recién llegados",
         "heading": "Estamos empezando a crecer 🐾",
-        "subheading": "Arrancamos con nuestros primeros productos, y cada semana se suman más — para perros, gatos y toda la familia peluda.",
+        "subheading": "Arrancamos con nuestro primer producto, y cada semana se suman más — para perros, gatos y toda la familia peluda.",
         "button_label": "Ver catálogo",
         "button_link": "shopify://collections/all"
       }
@@ -170,14 +169,14 @@
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Nuestros primeros productos",
+        "title": "Nuestro primer producto",
         "heading_size": "h2",
-        "description": "<p>Elegidos con cariño para abrir el Reino. Muy pronto habrá muchos más — ¡suscríbete abajo para enterarte primero!</p>",
+        "description": "<p>Elegido con cariño para abrir el Reino. Muy pronto habrá muchos más — ¡suscríbete abajo para enterarte primero!</p>",
         "show_description": true,
         "description_style": "body",
         "collection": "all",
         "products_to_show": 8,
-        "columns_desktop": 2,
+        "columns_desktop": 1,
         "color_scheme": "scheme-2",
         "full_width": false,
         "show_view_all": true,
@@ -200,8 +199,8 @@
       "settings": {
         "color_scheme": "scheme-1",
         "use_sample_image": true,
-        "eyebrow": "Nuestros dos primeros productos",
-        "title": "Por qué los vas a amar"
+        "eyebrow": "Nuestro producto estrella",
+        "title": "Por qué lo vas a amar"
       },
       "blocks": {
         "t1": {
@@ -223,29 +222,9 @@
             "author": "Equipo Reino Peludos",
             "pet_name": "Chaleco salvavidas para perros"
           }
-        },
-        "t3": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "El bolsillo canguro deja a tu cachorro pegadito a ti y calentito, con tus manos totalmente libres para el día a día.",
-            "pet_icon": "dog",
-            "author": "Equipo Reino Peludos",
-            "pet_name": "Sudadera canguro para cachorros"
-          }
-        },
-        "t4": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "Tela suave y abrigada, cómoda para ti y segura para tu cachorro. Perfecta para pasear en casa en los días fríos.",
-            "pet_icon": "dog",
-            "author": "Equipo Reino Peludos",
-            "pet_name": "Sudadera canguro para cachorros"
-          }
         }
       },
-      "block_order": ["t1", "t2", "t3", "t4"]
+      "block_order": ["t1", "t2"]
     },
     "newsletter": {
       "type": "newsletter",
