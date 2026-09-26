@@ -1,0 +1,97 @@
+<section class="rp-benefits color-{{ section.settings.color_scheme }}" id="{{ section.id }}">
+  <div class="rp-benefits__header rp-reveal">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="rp-benefits__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="rp-benefits__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+  </div>
+
+  <div class="rp-benefits__grid">
+    {%- for block in section.blocks -%}
+      <div class="rp-benefit-card rp-reveal rp-reveal--scale" data-rp-group="benefits" {{ block.shopify_attributes }}>
+        <span class="rp-benefit-card__icon">
+          {% render 'rp-icon', icon: block.settings.icon %}
+        </span>
+        <h3 class="rp-benefit-card__title">{{ block.settings.title }}</h3>
+        {%- if block.settings.text != blank -%}
+          <p class="rp-benefit-card__text">{{ block.settings.text }}</p>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RP · Beneficios",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-2"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto superior",
+      "default": "Por qué elegirlo"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Pensado en cada detalle"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Beneficio",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icono",
+          "default": "wave",
+          "options": [
+            { "value": "wave", "label": "Olas (flotación)" },
+            { "value": "anchor", "label": "Ancla (rescate)" },
+            { "value": "shield", "label": "Escudo (seguridad)" },
+            { "value": "heart", "label": "Corazón (comodidad)" },
+            { "value": "ruler", "label": "Regla (ajuste/tallas)" },
+            { "value": "paw", "label": "Huella" },
+            { "value": "crown", "label": "Corona" },
+            { "value": "leash", "label": "Correa" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Beneficio"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Descripción breve"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RP · Beneficios",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "wave", "title": "Flotación real" } },
+        { "type": "benefit", "settings": { "icon": "anchor", "title": "Asa de rescate" } },
+        { "type": "benefit", "settings": { "icon": "shield", "title": "Cierres seguros" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,91 @@
+{%- liquid
+  assign rp_spot_image = section.settings.image
+  if rp_spot_image == blank and product != blank
+    assign rp_media_index = section.settings.media_index | minus: 1
+    assign rp_product_media = product.media
+    if rp_product_media.size > rp_media_index
+      assign rp_spot_media = rp_product_media[rp_media_index]
+      if rp_spot_media.media_type == 'image'
+        assign rp_spot_image = rp_spot_media.image
+      endif
+    endif
+    if rp_spot_image == blank and product.featured_image != blank
+      assign rp_spot_image = product.featured_image
+    endif
+  endif
+-%}
+
+<section class="rp-spotlight rp-spotlight--{{ section.settings.overlay }}" id="{{ section.id }}">
+  <div class="rp-spotlight__media">
+    {%- if rp_spot_image != blank -%}
+      {{ rp_spot_image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '100vw', widths: '600, 900, 1200, 1600, 1800' }}
+    {%- endif -%}
+  </div>
+  <div class="rp-spotlight__inner rp-reveal rp-reveal--scale">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="rp-spotlight__eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="rp-spotlight__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="rp-spotlight__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RP · Momento destacado",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen (opcional, si no se elige usa una foto del producto)"
+    },
+    {
+      "type": "range",
+      "id": "media_index",
+      "label": "Nº de foto del producto a usar (si no hay imagen elegida arriba)",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "overlay",
+      "label": "Estilo del texto",
+      "default": "dark",
+      "options": [
+        { "value": "dark", "label": "Oscuro (texto claro)" },
+        { "value": "light", "label": "Claro (texto oscuro)" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto superior",
+      "default": "Momento Reino Peludos"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Diversión segura, sin preocupaciones"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subtítulo"
+    }
+  ],
+  "presets": [
+    {
+      "name": "RP · Momento destacado"
+    }
+  ]
+}
+{% endschema %}

@@ -1280,3 +1280,186 @@ body {
     font-size: 0.88rem !important;
   }
 }
+
+/* --------------------------------------------------------------------- */
+/* Beneficios de producto                                                */
+/* --------------------------------------------------------------------- */
+
+.rp-benefits {
+  padding: clamp(2.5rem, 5vw, 4rem) 1.5rem;
+}
+
+.rp-benefits__header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+.rp-benefits__eyebrow {
+  font-family: var(--font-body-family);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: var(--rp-coral);
+}
+
+.rp-benefits__title {
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  color: var(--rp-brown);
+  margin: 0.4rem 0 0;
+}
+
+.rp-benefits__grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.rp-benefit-card {
+  background: var(--rp-white);
+  border-radius: var(--rp-radius-md);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--rp-shadow-soft);
+  text-align: center;
+  transition: transform 0.3s var(--rp-ease), box-shadow 0.3s var(--rp-ease);
+}
+
+.rp-benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--rp-shadow-lift);
+}
+
+.rp-benefit-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--rp-cream);
+  color: var(--rp-coral);
+  margin-bottom: 0.9rem;
+}
+
+.rp-benefit-card__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.rp-benefit-card__title {
+  font-family: var(--font-heading-family);
+  font-size: 1.1rem;
+  color: var(--rp-brown);
+  margin: 0 0 0.4rem;
+}
+
+.rp-benefit-card__text {
+  font-family: var(--font-body-family);
+  font-size: 0.92rem;
+  color: var(--rp-brown-light);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------- */
+/* Momento destacado (spotlight de producto)                             */
+/* --------------------------------------------------------------------- */
+
+.rp-spotlight {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(320px, 42vw, 520px);
+  display: flex;
+  align-items: flex-end;
+  isolation: isolate;
+  border-radius: var(--rp-radius-lg);
+  margin: 0 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .rp-spotlight {
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+}
+
+.rp-spotlight__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.rp-spotlight__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.rp-spotlight--dark .rp-spotlight__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(59, 42, 28, 0.05) 0%,
+    rgba(59, 42, 28, 0.35) 55%,
+    rgba(59, 42, 28, 0.82) 100%
+  );
+}
+
+.rp-spotlight--light .rp-spotlight__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.55) 70%,
+    rgba(255, 255, 255, 0.92) 100%
+  );
+}
+
+.rp-spotlight__inner {
+  position: relative;
+  z-index: 1;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  max-width: 560px;
+}
+
+.rp-spotlight__eyebrow {
+  font-family: var(--font-body-family);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.rp-spotlight--dark .rp-spotlight__eyebrow { color: var(--rp-gold-light); }
+.rp-spotlight--light .rp-spotlight__eyebrow { color: var(--rp-coral); }
+
+.rp-spotlight__heading {
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.7rem, 3.8vw, 2.6rem);
+  margin: 0 0 0.6rem;
+}
+
+.rp-spotlight--dark .rp-spotlight__heading { color: var(--rp-white); }
+.rp-spotlight--light .rp-spotlight__heading { color: var(--rp-brown); }
+
+.rp-spotlight__subheading {
+  font-family: var(--font-body-family);
+  font-size: 1rem;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 46ch;
+}
+
+.rp-spotlight--dark .rp-spotlight__subheading { color: var(--rp-cream); opacity: 0.92; }
+.rp-spotlight--light .rp-spotlight__subheading { color: var(--rp-brown-light); }
