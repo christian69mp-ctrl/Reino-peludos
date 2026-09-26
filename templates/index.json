@@ -120,6 +120,7 @@
       "type": "rp-story",
       "settings": {
         "product": "gid://shopify/Product/11633498521941",
+        "image": "shopify://shop_images/perro-piscina.jpg",
         "image_position": "left",
         "badge_text": "Seguridad en el agua",
         "eyebrow": "Producto estrella",
