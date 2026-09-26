@@ -30,6 +30,26 @@
 }
 
 /* --------------------------------------------------------------------- */
+/* Tipografia redondeada y moderna en toda la tienda                     */
+/* Fredoka (titulos, ya redondeada) + Quicksand (cuerpo del texto)       */
+/* --------------------------------------------------------------------- */
+
+:root {
+  --font-body-family: 'Quicksand', 'Nunito', sans-serif;
+  --font-body-style: normal;
+  --font-body-weight: 500;
+  --font-body-weight-bold: 700;
+}
+
+body,
+input,
+textarea,
+select,
+button {
+  font-family: var(--font-body-family);
+}
+
+/* --------------------------------------------------------------------- */
 /* Salvaguarda anti scroll-lateral en móvil                              */
 /* --------------------------------------------------------------------- */
 
