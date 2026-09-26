@@ -1582,3 +1582,88 @@ body {
     color: var(--rp-brown-light);
   }
 }
+
+/* --------------------------------------------------------------------- */
+/* Selector de tallas/color y precio mas visuales y profesionales        */
+/* --------------------------------------------------------------------- */
+
+.product-form__input legend.form__label,
+.product-form__input label.form__label {
+  font-family: var(--font-heading-family);
+  font-weight: 500;
+  font-size: 1.02rem;
+  color: var(--rp-brown);
+  margin-bottom: 0.6rem !important;
+}
+
+.product-form__input--pill {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  border: none;
+  padding: 0;
+  margin: 0 0 1.4rem;
+}
+
+.product-form__input--pill input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.product-form__input--pill label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3rem;
+  padding: 0.65rem 1.1rem !important;
+  border: 2px solid var(--rp-brown) !important;
+  border-radius: var(--rp-radius-md) !important;
+  background: var(--rp-white);
+  color: var(--rp-brown);
+  font-family: var(--font-body-family);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.2s var(--rp-ease), background-color 0.2s var(--rp-ease), color 0.2s var(--rp-ease), box-shadow 0.2s var(--rp-ease);
+  box-shadow: var(--rp-shadow-soft);
+}
+
+.product-form__input--pill label:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--rp-shadow-lift);
+}
+
+.product-form__input--pill input:checked + label {
+  background: var(--rp-coral) !important;
+  border-color: var(--rp-coral) !important;
+  color: var(--rp-white) !important;
+}
+
+.product-form__input--pill input.disabled + label {
+  opacity: 0.4;
+  box-shadow: none;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.product__info-container .price {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  background: var(--rp-cream);
+  border-radius: var(--rp-radius-md);
+  padding: 0.7rem 1.1rem;
+  margin-bottom: 0.9rem;
+}
+
+.product__info-container .price .price-item {
+  font-family: var(--font-heading-family);
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--rp-brown);
+}
+
+.product__info-container .price .price-item--regular {
+  color: var(--rp-brown-light);
+}
