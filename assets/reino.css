@@ -206,7 +206,7 @@ body {
   }
 
   .rp-hero--has-mobile-image .rp-hero__inner {
-    min-height: clamp(380px, 110vw, 620px);
+    min-height: clamp(500px, 149vw, 800px);
   }
 }
 
@@ -748,6 +748,48 @@ body {
   font-family: var(--font-body-family);
   font-weight: 700;
   font-size: 0.92rem;
+}
+
+@media screen and (max-width: 749px) {
+  .rp-trust__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem 0.75rem;
+  }
+
+  .rp-trust__item {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .rp-trust__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .rp-trust__text {
+    font-size: 0.78rem;
+    line-height: 1.2;
+  }
+}
+
+/* --------------------------------------------------------------------- */
+/* Fondo solido garantizado para el carrito y el menu movil              */
+/* --------------------------------------------------------------------- */
+
+cart-drawer .drawer__inner,
+cart-drawer .drawer__inner-empty {
+  background-color: #f6edda;
+  background-color: rgb(var(--color-background, 246 237 220));
+}
+
+.menu-drawer {
+  background-color: #f6edda;
+  background-color: rgb(var(--color-background, 246 237 220));
+}
+
+.drawer {
+  background-color: rgba(59, 42, 28, 0.5);
+  background-color: rgba(var(--color-foreground, 59 42 28), 0.5);
 }
 
 /* --------------------------------------------------------------------- */
