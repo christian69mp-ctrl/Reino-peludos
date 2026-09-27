@@ -1284,7 +1284,8 @@ body {
 /* --------------------------------------------------------------------- */
 
 .product-form__submit.button,
-.shopify-payment-button__button--unbranded {
+.shopify-payment-button__button--unbranded,
+.rp-buy-now {
   font-family: var(--font-body-family);
   font-weight: 800 !important;
   font-size: 1.05rem !important;
@@ -1292,6 +1293,7 @@ body {
   padding-top: 1.05rem !important;
   padding-bottom: 1.05rem !important;
   border-width: 0 !important;
+  text-decoration: none !important;
   transition: transform 0.25s var(--rp-ease), box-shadow 0.25s var(--rp-ease),
     background-color 0.25s var(--rp-ease);
 }
@@ -1307,19 +1309,32 @@ body {
   border-color: #1d4ed8 !important;
 }
 
-.shopify-payment-button__button--unbranded {
+.shopify-payment-button__button--unbranded,
+.rp-buy-now {
   background-color: #00c853 !important;
   border-color: #00c853 !important;
   color: #ffffff !important;
 }
 
-.shopify-payment-button__button--unbranded:hover {
+.shopify-payment-button__button--unbranded:hover,
+.rp-buy-now:hover {
   background-color: #00a344 !important;
   border-color: #00a344 !important;
 }
 
+.rp-buy-now {
+  margin-top: 0.85rem;
+}
+
+.rp-buy-now--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 .product-form__submit.button:hover,
-.shopify-payment-button__button--unbranded:hover {
+.shopify-payment-button__button--unbranded:hover,
+.rp-buy-now:hover {
   transform: translateY(-3px);
   box-shadow: var(--rp-shadow-lift);
 }
