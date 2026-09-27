@@ -139,6 +139,7 @@
     "rp_story_2": {
       "type": "rp-story",
       "settings": {
+        "image": "shopify://shop_images/sudadera-canguro-preview.jpg",
         "image_position": "right",
         "badge_text": "Próximamente",
         "eyebrow": "Muy pronto en el Reino",
