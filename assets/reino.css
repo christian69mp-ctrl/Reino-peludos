@@ -1291,7 +1291,31 @@ body {
   letter-spacing: 0.02em;
   padding-top: 1.05rem !important;
   padding-bottom: 1.05rem !important;
-  transition: transform 0.25s var(--rp-ease), box-shadow 0.25s var(--rp-ease);
+  border-width: 0 !important;
+  transition: transform 0.25s var(--rp-ease), box-shadow 0.25s var(--rp-ease),
+    background-color 0.25s var(--rp-ease);
+}
+
+.product-form__submit.button {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+.product-form__submit.button:hover {
+  background-color: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
+}
+
+.shopify-payment-button__button--unbranded {
+  background-color: #00c853 !important;
+  border-color: #00c853 !important;
+  color: #ffffff !important;
+}
+
+.shopify-payment-button__button--unbranded:hover {
+  background-color: #00a344 !important;
+  border-color: #00a344 !important;
 }
 
 .product-form__submit.button:hover,
