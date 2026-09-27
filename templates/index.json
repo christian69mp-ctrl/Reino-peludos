@@ -245,7 +245,7 @@
         "paragraph": {
           "type": "paragraph",
           "settings": {
-            "paragraph": "<p>Vamos sumando productos nuevos cada semana. Déjanos tu correo y te avisamos apenas lleguen.</p>"
+            "text": "<p>Vamos sumando productos nuevos cada semana. Déjanos tu correo y te avisamos apenas lleguen.</p>"
           }
         },
         "email_form": {
