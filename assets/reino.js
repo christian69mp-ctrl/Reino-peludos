@@ -80,7 +80,7 @@
     if (!containers.length) return;
 
     containers.forEach(function (container) {
-      if (container.querySelector('.rp-buy-now')) return;
+      if (container.querySelector('.rp-buy-now-form')) return;
 
       var form = container.closest('form');
       if (!form) return;
@@ -91,10 +91,34 @@
 
       var scope = container.closest('product-info') || document;
 
-      var link = document.createElement('a');
-      link.className = 'rp-buy-now button button--full-width';
-      link.textContent = 'Comprar ya';
-      submitButton.insertAdjacentElement('afterend', link);
+      var buyNowForm = document.createElement('form');
+      buyNowForm.className = 'rp-buy-now-form';
+      buyNowForm.method = 'post';
+      buyNowForm.action = '/cart/add';
+
+      var hiddenId = document.createElement('input');
+      hiddenId.type = 'hidden';
+      hiddenId.name = 'id';
+
+      var hiddenQty = document.createElement('input');
+      hiddenQty.type = 'hidden';
+      hiddenQty.name = 'quantity';
+
+      var hiddenReturnTo = document.createElement('input');
+      hiddenReturnTo.type = 'hidden';
+      hiddenReturnTo.name = 'return_to';
+      hiddenReturnTo.value = '/checkout';
+
+      var button = document.createElement('button');
+      button.type = 'submit';
+      button.className = 'rp-buy-now button button--full-width';
+      button.textContent = 'Comprar ya';
+
+      buyNowForm.appendChild(hiddenId);
+      buyNowForm.appendChild(hiddenQty);
+      buyNowForm.appendChild(hiddenReturnTo);
+      buyNowForm.appendChild(button);
+      submitButton.insertAdjacentElement('afterend', buyNowForm);
 
       function currentQuantity() {
         var qtyInput = scope.querySelector('.quantity__input');
@@ -104,16 +128,9 @@
 
       function update() {
         var variantId = idInput.value;
-        var disabled = !variantId || submitButton.disabled;
-        if (disabled) {
-          link.setAttribute('aria-disabled', 'true');
-          link.classList.add('rp-buy-now--disabled');
-          link.removeAttribute('href');
-        } else {
-          link.removeAttribute('aria-disabled');
-          link.classList.remove('rp-buy-now--disabled');
-          link.href = '/cart/' + variantId + ':' + currentQuantity();
-        }
+        hiddenId.value = variantId || '';
+        hiddenQty.value = currentQuantity();
+        button.disabled = !variantId || submitButton.disabled;
       }
 
       update();

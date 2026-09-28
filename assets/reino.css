@@ -776,20 +776,21 @@ body {
 /* Fondo solido garantizado para el carrito y el menu movil              */
 /* --------------------------------------------------------------------- */
 
-cart-drawer .drawer__inner,
-cart-drawer .drawer__inner-empty {
-  background-color: #f6edda;
-  background-color: rgb(var(--color-background, 246 237 220));
+#CartDrawer .drawer__inner,
+#CartDrawer .drawer__inner-empty {
+  background-color: #f6edda !important;
 }
 
-.menu-drawer {
-  background-color: #f6edda;
-  background-color: rgb(var(--color-background, 246 237 220));
+#menu-drawer.menu-drawer {
+  background-color: #f6edda !important;
 }
 
-.drawer {
-  background-color: rgba(59, 42, 28, 0.5);
-  background-color: rgba(var(--color-foreground, 59 42 28), 0.5);
+.menu-drawer__submenu {
+  background-color: #f6edda !important;
+}
+
+cart-drawer.drawer {
+  background-color: rgba(59, 42, 28, 0.5) !important;
 }
 
 /* --------------------------------------------------------------------- */
@@ -1326,7 +1327,7 @@ body {
   margin-top: 0.85rem;
 }
 
-.rp-buy-now--disabled {
+.rp-buy-now:disabled {
   opacity: 0.5;
   pointer-events: none;
   cursor: not-allowed;
