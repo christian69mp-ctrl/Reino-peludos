@@ -1,0 +1,149 @@
+<section class="rp-packs color-{{ section.settings.color_scheme }}" id="{{ section.id }}">
+  <div class="rp-packs__header">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="rp-packs__eyebrow rp-reveal" data-rp-group="packs">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="rp-packs__title rp-reveal" data-rp-group="packs">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="rp-packs__subtitle rp-reveal" data-rp-group="packs">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="rp-packs__grid">
+    {%- for block in section.blocks -%}
+      <a
+        href="{{ block.settings.button_link | default: '#' }}"
+        class="rp-packs__card rp-reveal rp-reveal--scale"
+        data-rp-group="packs"
+        {{ block.shopify_attributes }}
+      >
+        {%- if block.settings.badge_text != blank -%}
+          <span class="rp-packs__badge">{{ block.settings.badge_text }}</span>
+        {%- endif -%}
+        <div class="rp-packs__media">
+          {%- if block.settings.image != blank -%}
+            {{
+              block.settings.image
+              | image_url: width: 700
+              | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 25vw, 45vw', widths: '300, 450, 600, 700'
+            }}
+          {%- endif -%}
+        </div>
+        <div class="rp-packs__content">
+          <h3 class="rp-packs__card-title">{{ block.settings.title }}</h3>
+          {%- if block.settings.description != blank -%}
+            <p class="rp-packs__card-description">{{ block.settings.description }}</p>
+          {%- endif -%}
+          <div class="rp-packs__price-row">
+            {%- if block.settings.compare_price != blank -%}
+              <span class="rp-packs__compare-price">{{ block.settings.compare_price }}</span>
+            {%- endif -%}
+            <span class="rp-packs__price">{{ block.settings.price }}</span>
+          </div>
+          <span class="rp-btn rp-btn--primary rp-packs__button">
+            {{ block.settings.button_label | default: 'Ver pack' }}
+          </span>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RP · Packs",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-2"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto superior",
+      "default": "Ahorra comprando en pack"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Descubre nuestros packs"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Packs dobles, de regalo y kits combinados, pensados para ahorrar."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pack",
+      "name": "Pack",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Etiqueta (opcional)",
+          "default": "Más vendido"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título del pack",
+          "default": "Pack doble"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Descripción corta",
+          "default": "2 unidades"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Precio",
+          "default": "15,95 €"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Precio tachado (opcional)"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Texto del botón",
+          "default": "Ver pack"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Enlace"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RP · Packs",
+      "blocks": [
+        { "type": "pack" },
+        { "type": "pack" },
+        { "type": "pack" }
+      ]
+    }
+  ]
+}
+{% endschema %}

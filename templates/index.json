@@ -155,6 +155,55 @@
       },
       "block_order": ["tag1", "tag2", "tag3"]
     },
+    "rp_packs": {
+      "type": "rp-packs",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "eyebrow": "Ahorra comprando en pack",
+        "title": "Descubre nuestros packs",
+        "subtitle": "Empezamos con los packs de la botella de paseo — pronto llegarán kits combinando varios productos."
+      },
+      "blocks": {
+        "unidad": {
+          "type": "pack",
+          "settings": {
+            "image": "shopify://shop_images/turquesa-producto-solo.jpg",
+            "title": "Botella de paseo",
+            "description": "1 unidad",
+            "price": "9,95 €",
+            "button_label": "Ver producto",
+            "button_link": "/products/botella-de-paseo-para-perros?variant=55157482815829"
+          }
+        },
+        "pack_doble": {
+          "type": "pack",
+          "settings": {
+            "image": "shopify://shop_images/rosa-paseo-parque.jpg",
+            "badge_text": "Ahorra 3,95 €",
+            "title": "Pack doble",
+            "description": "2 unidades",
+            "price": "15,95 €",
+            "compare_price": "19,90 €",
+            "button_label": "Ver pack",
+            "button_link": "/products/botella-de-paseo-para-perros?variant=55157482848597"
+          }
+        },
+        "pack_regalo": {
+          "type": "pack",
+          "settings": {
+            "image": "shopify://shop_images/turquesa-perro-bebiendo.jpg",
+            "badge_text": "Ahorra 8,90 €",
+            "title": "Pack regalo",
+            "description": "3 unidades — ideal para regalar",
+            "price": "20,95 €",
+            "compare_price": "29,85 €",
+            "button_label": "Ver pack",
+            "button_link": "/products/botella-de-paseo-para-perros?variant=55157482881365"
+          }
+        }
+      },
+      "block_order": ["unidad", "pack_doble", "pack_regalo"]
+    },
     "rp_collection_banner": {
       "type": "rp-collection-banner",
       "settings": {
@@ -163,7 +212,7 @@
         "overlay": "dark",
         "eyebrow": "Recién llegados",
         "heading": "Estamos empezando a crecer 🐾",
-        "subheading": "Arrancamos con nuestro primer producto, y cada semana se suman más — para perros, gatos y toda la familia peluda.",
+        "subheading": "Cada semana se suman más productos — para perros, gatos y toda la familia peluda.",
         "button_label": "Ver catálogo",
         "button_link": "shopify://collections/all"
       }
@@ -171,14 +220,14 @@
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Nuestro primer producto",
+        "title": "Nuestros productos",
         "heading_size": "h2",
-        "description": "<p>Elegido con cariño para abrir el Reino. Muy pronto habrá muchos más — ¡suscríbete abajo para enterarte primero!</p>",
+        "description": "<p>Elegidos con cariño para el Reino. Muy pronto habrá muchos más — ¡suscríbete abajo para enterarte primero!</p>",
         "show_description": true,
         "description_style": "body",
         "collection": "all",
         "products_to_show": 8,
-        "columns_desktop": 1,
+        "columns_desktop": 2,
         "color_scheme": "scheme-2",
         "full_width": false,
         "show_view_all": true,
@@ -263,6 +312,7 @@
     "rp_shop_by_type",
     "rp_story",
     "rp_story_2",
+    "rp_packs",
     "rp_collection_banner",
     "featured_collection",
     "rp_testimonials",
