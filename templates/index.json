@@ -181,11 +181,11 @@
             "image": "shopify://shop_images/rosa-paseo-parque.jpg",
             "badge_text": "Ahorra 3,95 €",
             "title": "Pack doble",
-            "description": "2 unidades",
+            "description": "2 unidades — mismo color o mixto",
             "price": "15,95 €",
             "compare_price": "19,90 €",
             "button_label": "Ver pack",
-            "button_link": "/products/botella-de-paseo-para-perros?variant=55157482848597"
+            "button_link": "/products/botella-de-paseo-para-perros?variant=55160907301205"
           }
         },
         "pack_regalo": {
@@ -194,11 +194,11 @@
             "image": "shopify://shop_images/turquesa-perro-bebiendo.jpg",
             "badge_text": "Ahorra 8,90 €",
             "title": "Pack regalo",
-            "description": "3 unidades — ideal para regalar",
+            "description": "3 unidades — mismo color o mixto, ideal para regalar",
             "price": "20,95 €",
             "compare_price": "29,85 €",
             "button_label": "Ver pack",
-            "button_link": "/products/botella-de-paseo-para-perros?variant=55157482881365"
+            "button_link": "/products/botella-de-paseo-para-perros?variant=55160907333973"
           }
         }
       },
