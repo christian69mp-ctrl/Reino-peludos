@@ -159,6 +159,7 @@
       "type": "rp-countdown-offer",
       "settings": {
         "color_scheme": "scheme-4",
+        "image": "shopify://shop_images/uso-comedero-mascota.jpg",
         "badge_text": "Oferta Black Friday",
         "heading": "Pack de 3 luces LED con sensor de movimiento",
         "subheading": "El tamaño de 10 cm, en pack de 3, por tiempo limitado. Ideal para el comedero de tu mascota, armarios y cocina.",

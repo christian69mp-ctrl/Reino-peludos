@@ -1,0 +1,231 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title"
+        },
+        "price": {
+          "type": "price"
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector"
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "trust_badges": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "horizontal",
+            "icon_1": "truck",
+            "heading_1": "Envío gratis 5-8 días",
+            "icon_2": "return",
+            "heading_2": "Devolución gratis 30 días",
+            "icon_3": "lock",
+            "heading_3": "Pago 100% seguro"
+          }
+        },
+        "description": {
+          "type": "description"
+        },
+        "care_tab": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Cuidado del producto",
+            "icon": "heart",
+            "content": "<p>Límpiala con un paño seco o ligeramente húmedo. No la sumerjas en agua ni la expongas a lluvia directa.</p>"
+          }
+        },
+        "shipping_tab": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Envíos y devoluciones",
+            "icon": "truck",
+            "content": "<p>Envío gratuito a cualquier parte del mundo, con entrega en 5-8 días laborables. Si no queda feliz, tienes 30 días para devolverlo sin coste.</p>"
+          }
+        },
+        "faq_tab": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Preguntas frecuentes",
+            "icon": "chat",
+            "content": "<p><strong>¿Cómo se recarga?</strong><br>Por USB, con el cable incluido. Una carga completa dura varias semanas de uso normal.</p><p><strong>¿Puedo elegir el pack de 3?</strong><br>Sí, disponible en el tamaño de 10 cm como oferta por tiempo limitado.</p><p><strong>¿Se puede regular el brillo?</strong><br>Sí, además de los 3 tonos de luz (cálida, blanca y natural), el brillo es regulable.</p>"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Compartir"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "trust_badges",
+        "description",
+        "care_tab",
+        "shipping_tab",
+        "faq_tab",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_position": "left",
+        "gallery_layout": "stacked",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "image_zoom": "lightbox",
+        "mobile_thumbnails": "hide",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "rp_benefits": {
+      "type": "rp-product-benefits",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "eyebrow": "Pensada para el día a día",
+        "title": "Luz donde la necesitas, cuando la necesitas"
+      },
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "title": "Se enciende sola",
+            "text": "Sensor de movimiento y de luz: se enciende cuando te acercas y se apaga sola al alejarte."
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "moon",
+            "title": "3 tonos de luz",
+            "text": "Elige entre luz cálida, blanca o natural, con brillo regulable según el ambiente."
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "ruler",
+            "title": "3 tamaños disponibles",
+            "text": "10, 20 y 30 cm para adaptarse a cualquier mueble, armario o rincón de casa."
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "title": "Recargable por USB",
+            "text": "Inalámbrica y sin instalación complicada: se recarga y se coloca donde quieras."
+          }
+        }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"]
+    },
+    "rp_spotlight": {
+      "type": "rp-product-spotlight",
+      "settings": {
+        "media_index": 5,
+        "overlay": "dark",
+        "eyebrow": "Momento Reino Peludos",
+        "heading": "También ilumina su rincón favorito",
+        "subheading": "Perfecta para el comedero o el bebedero de tu mascota por la noche — y para cualquier otro rincón de casa."
+      }
+    },
+    "rp_reviews": {
+      "type": "rp-testimonials",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "use_sample_image": false,
+        "eyebrow": "Reino Peludos",
+        "title": "Por qué la vas a usar cada día"
+      },
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Se enciende sola en cuanto nos acercamos al comedero por la noche, y se apaga sola después. Muy práctica.",
+            "pet_icon": "dog",
+            "author": "Equipo Reino Peludos",
+            "pet_name": "Luz LED con sensor de movimiento"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "La hemos probado también en el armario — la luz blanca ayuda mucho a encontrar la ropa rápido.",
+            "pet_icon": "dog",
+            "author": "Equipo Reino Peludos",
+            "pet_name": "Luz LED con sensor de movimiento"
+          }
+        }
+      },
+      "block_order": ["t1", "t2"]
+    },
+    "disclosures": {
+      "type": "disclosures",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Combina también con",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-2",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 44,
+        "padding_bottom": 44
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rp_benefits",
+    "rp_spotlight",
+    "rp_reviews",
+    "disclosures",
+    "related-products"
+  ]
+}
