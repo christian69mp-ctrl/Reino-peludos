@@ -1900,3 +1900,123 @@ body {
   text-align: center;
   justify-content: center;
 }
+
+/* --------------------------------------------------------------------- */
+/* Oferta con cuenta atras                                               */
+/* --------------------------------------------------------------------- */
+
+.rp-countdown {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  padding: clamp(2.5rem, 5vw, 4rem) 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 750px) {
+  .rp-countdown {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.rp-countdown__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--rp-radius-lg);
+}
+
+.rp-countdown__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.rp-countdown__content--no-media {
+  align-items: center;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.rp-countdown__badge {
+  background: var(--rp-coral);
+  color: var(--rp-white);
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+  border-radius: var(--rp-radius-pill);
+}
+
+.rp-countdown__heading {
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  color: var(--rp-brown);
+  margin: 0;
+}
+
+.rp-countdown__subheading {
+  color: var(--rp-brown-light);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.rp-countdown__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.rp-countdown__compare-price {
+  text-decoration: line-through;
+  color: var(--rp-brown-light);
+  font-size: 1.1rem;
+}
+
+.rp-countdown__price {
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--rp-coral);
+}
+
+.rp-countdown__timer {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.rp-countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--rp-white);
+  border-radius: var(--rp-radius-md);
+  padding: 0.65rem 0.85rem;
+  min-width: 64px;
+  box-shadow: var(--rp-shadow-lift);
+}
+
+.rp-countdown__number {
+  font-family: var(--font-heading-family);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--rp-brown);
+  line-height: 1;
+}
+
+.rp-countdown__label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--rp-brown-light);
+  margin-top: 0.25rem;
+}
+
+.rp-countdown__expired-message {
+  font-weight: 700;
+  color: var(--rp-brown);
+}

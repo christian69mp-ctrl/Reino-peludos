@@ -1,0 +1,196 @@
+<section class="rp-countdown color-{{ section.settings.color_scheme }}" id="rp-countdown-{{ section.id }}" data-rp-countdown-section data-end="{{ section.settings.end_date }}">
+  {%- if section.settings.image != blank -%}
+    <div class="rp-countdown__media">
+      {{
+        section.settings.image
+        | image_url: width: 1000
+        | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 40vw, 100vw', widths: '400, 600, 800, 1000'
+      }}
+    </div>
+  {%- endif -%}
+
+  <div class="rp-countdown__content{% if section.settings.image == blank %} rp-countdown__content--no-media{% endif %}">
+    {%- if section.settings.badge_text != blank -%}
+      <span class="rp-countdown__badge">{{ section.settings.badge_text }}</span>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="rp-countdown__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.subheading != blank -%}
+      <p class="rp-countdown__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    <div class="rp-countdown__price-row">
+      {%- if section.settings.compare_price != blank -%}
+        <span class="rp-countdown__compare-price">{{ section.settings.compare_price }}</span>
+      {%- endif -%}
+      <span class="rp-countdown__price">{{ section.settings.price }}</span>
+    </div>
+
+    <div class="rp-countdown__timer" data-rp-countdown-timer>
+      <div class="rp-countdown__unit">
+        <span class="rp-countdown__number" data-rp-days>00</span>
+        <span class="rp-countdown__label">días</span>
+      </div>
+      <div class="rp-countdown__unit">
+        <span class="rp-countdown__number" data-rp-hours>00</span>
+        <span class="rp-countdown__label">horas</span>
+      </div>
+      <div class="rp-countdown__unit">
+        <span class="rp-countdown__number" data-rp-minutes>00</span>
+        <span class="rp-countdown__label">min</span>
+      </div>
+      <div class="rp-countdown__unit">
+        <span class="rp-countdown__number" data-rp-seconds>00</span>
+        <span class="rp-countdown__label">seg</span>
+      </div>
+    </div>
+
+    <p class="rp-countdown__expired-message" data-rp-countdown-expired hidden>
+      {{ section.settings.expired_message | default: 'Esta oferta ya ha terminado.' }}
+    </p>
+
+    {%- if section.settings.button_label != blank -%}
+      <a href="{{ section.settings.button_link | default: '#' }}" class="rp-btn rp-btn--primary" data-rp-countdown-cta>
+        {{ section.settings.button_label }}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    var section = document.getElementById('rp-countdown-{{ section.id }}');
+    if (!section) return;
+
+    var endAttr = section.getAttribute('data-end');
+    if (!endAttr) return;
+
+    var endDate = new Date(endAttr.replace(' ', 'T'));
+    if (isNaN(endDate.getTime())) return;
+
+    var timer = section.querySelector('[data-rp-countdown-timer]');
+    var expiredMessage = section.querySelector('[data-rp-countdown-expired]');
+    var cta = section.querySelector('[data-rp-countdown-cta]');
+    var daysEl = section.querySelector('[data-rp-days]');
+    var hoursEl = section.querySelector('[data-rp-hours]');
+    var minutesEl = section.querySelector('[data-rp-minutes]');
+    var secondsEl = section.querySelector('[data-rp-seconds]');
+
+    function pad(num) {
+      return String(num).padStart(2, '0');
+    }
+
+    function showExpired() {
+      if (timer) timer.hidden = true;
+      if (expiredMessage) expiredMessage.hidden = false;
+      if (cta) cta.hidden = true;
+    }
+
+    function update() {
+      var now = new Date().getTime();
+      var diff = endDate.getTime() - now;
+
+      if (diff <= 0) {
+        showExpired();
+        clearInterval(intervalId);
+        return;
+      }
+
+      var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      if (daysEl) daysEl.textContent = pad(days);
+      if (hoursEl) hoursEl.textContent = pad(hours);
+      if (minutesEl) minutesEl.textContent = pad(minutes);
+      if (secondsEl) secondsEl.textContent = pad(seconds);
+    }
+
+    update();
+    var intervalId = setInterval(update, 1000);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "RP · Oferta limitada",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen (opcional)"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Etiqueta",
+      "default": "Oferta Black Friday"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Pack de 3 luces LED por tiempo limitado"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "Solo hasta que termine Black Friday."
+    },
+    {
+      "type": "text",
+      "id": "price",
+      "label": "Precio de la oferta",
+      "default": "29,95 €"
+    },
+    {
+      "type": "text",
+      "id": "compare_price",
+      "label": "Precio tachado (opcional)",
+      "default": "44,85 €"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "Fecha y hora de fin (formato AAAA-MM-DDTHH:MM:SS, hora de España)",
+      "info": "Ejemplo: 2026-11-28T00:00:00 — la cuenta atrás y la oferta desaparecen automáticamente al llegar esta fecha.",
+      "default": "2026-11-28T00:00:00"
+    },
+    {
+      "type": "text",
+      "id": "expired_message",
+      "label": "Mensaje cuando termine la oferta",
+      "default": "Esta oferta ya ha terminado."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto del botón",
+      "default": "Comprar pack ahora"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace del botón"
+    }
+  ],
+  "presets": [
+    {
+      "name": "RP · Oferta limitada"
+    }
+  ]
+}
+{% endschema %}
