@@ -54,20 +54,20 @@
     var layers = [
       {
         el: hero.querySelector('[data-rp-parallax] img'),
-        speed: 0.18,
-        max: 80,
+        speed: 0.28,
+        max: 120,
         prefix: 'scale(1.08) '
       },
       {
         el: hero.querySelector('[data-rp-parallax-paws]'),
-        speed: 0.4,
-        max: 140,
+        speed: 0.65,
+        max: 220,
         prefix: ''
       },
       {
         el: hero.querySelector('[data-rp-parallax-content]'),
-        speed: -0.05,
-        max: 18,
+        speed: -0.12,
+        max: 36,
         prefix: ''
       }
     ].filter(function (layer) {
@@ -111,7 +111,7 @@
     );
     if (!cards.length) return;
 
-    var maxTilt = 7;
+    var maxTilt = 16;
 
     cards.forEach(function (card) {
       if (card.hasAttribute('data-rp-tilt-ready')) return;
@@ -130,11 +130,11 @@
         if (raf) return;
         raf = window.requestAnimationFrame(function () {
           card.style.transform =
-            'perspective(900px) rotateX(' +
+            'perspective(800px) rotateX(' +
             rotateX.toFixed(2) +
             'deg) rotateY(' +
             rotateY.toFixed(2) +
-            'deg) translateY(-6px) scale(1.025)';
+            'deg) translateY(-14px) scale(1.07)';
           raf = null;
         });
       }
@@ -155,11 +155,11 @@
 
       card.addEventListener('pointerleave', function (event) {
         if (event.pointerType !== 'mouse') return;
-        card.style.transition = 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
+        card.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
         card.style.transform = '';
         resetTimeout = window.setTimeout(function () {
           card.style.transition = '';
-        }, 500);
+        }, 600);
       });
     });
   }
