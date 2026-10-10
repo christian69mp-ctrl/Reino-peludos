@@ -78,7 +78,8 @@ body {
 
 .rp-reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: perspective(1200px) translateY(40px) rotateX(-14deg);
+  transform-origin: center bottom;
   transition: opacity var(--rp-duration) var(--rp-ease),
               transform var(--rp-duration) var(--rp-ease);
   will-change: opacity, transform;
@@ -86,28 +87,30 @@ body {
 
 .rp-reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: perspective(1200px) translateY(0) rotateX(0deg);
 }
 
 .rp-reveal--scale {
-  transform: translateY(20px) scale(0.94);
+  transform: perspective(1200px) translateY(20px) rotateX(-10deg) scale(0.94);
 }
 .rp-reveal--scale.is-visible {
-  transform: translateY(0) scale(1);
+  transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1);
 }
 
 .rp-reveal--left {
-  transform: translateX(-40px);
+  transform: perspective(1200px) translateX(-40px) rotateY(22deg);
+  transform-origin: center left;
 }
 .rp-reveal--left.is-visible {
-  transform: translateX(0);
+  transform: perspective(1200px) translateX(0) rotateY(0deg);
 }
 
 .rp-reveal--right {
-  transform: translateX(40px);
+  transform: perspective(1200px) translateX(40px) rotateY(-22deg);
+  transform-origin: center right;
 }
 .rp-reveal--right.is-visible {
-  transform: translateX(0);
+  transform: perspective(1200px) translateX(0) rotateY(0deg);
 }
 
 /* Stagger children of a group: JS assigns --rp-delay per child */
@@ -2034,4 +2037,54 @@ body {
 .rp-countdown__expired-message {
   font-weight: 700;
   color: var(--rp-brown);
+}
+
+/* --------------------------------------------------------------------- */
+/* Transiciones 3D entre páginas (View Transitions API nativa)           */
+/* Sin JS: el navegador la activa solo al navegar a otra URL del sitio.  */
+/* Donde no hay soporte (Firefox, Safari antiguo), navega normal.        */
+/* --------------------------------------------------------------------- */
+
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: rp-page-out 0.5s var(--rp-ease) both;
+  }
+
+  ::view-transition-new(root) {
+    animation: rp-page-in 0.5s var(--rp-ease) both;
+  }
+}
+
+@keyframes rp-page-out {
+  from {
+    opacity: 1;
+    transform: perspective(1400px) rotateY(0deg) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: perspective(1400px) rotateY(-10deg) scale(0.95);
+  }
+}
+
+@keyframes rp-page-in {
+  from {
+    opacity: 0;
+    transform: perspective(1400px) rotateY(10deg) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1400px) rotateY(0deg) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }
