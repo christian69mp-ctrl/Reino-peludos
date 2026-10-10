@@ -48,12 +48,14 @@
     {%- endif -%}
   </div>
 
-  <span class="rp-paw-float rp-paw-float--1">{% render 'rp-icon', icon: 'paw' %}</span>
-  <span class="rp-paw-float rp-paw-float--2">{% render 'rp-icon', icon: 'paw' %}</span>
-  <span class="rp-paw-float rp-paw-float--3">{% render 'rp-icon', icon: 'paw' %}</span>
-  <span class="rp-paw-float rp-paw-float--4">{% render 'rp-icon', icon: 'paw' %}</span>
+  <div class="rp-hero__paws" data-rp-parallax-paws>
+    <span class="rp-paw-float rp-paw-float--1">{% render 'rp-icon', icon: 'paw' %}</span>
+    <span class="rp-paw-float rp-paw-float--2">{% render 'rp-icon', icon: 'paw' %}</span>
+    <span class="rp-paw-float rp-paw-float--3">{% render 'rp-icon', icon: 'paw' %}</span>
+    <span class="rp-paw-float rp-paw-float--4">{% render 'rp-icon', icon: 'paw' %}</span>
+  </div>
 
-  <div class="rp-hero__inner">
+  <div class="rp-hero__inner" data-rp-parallax-content>
     {%- if section.settings.show_overlay_text -%}
       {%- if section.settings.logo != blank -%}
         <img

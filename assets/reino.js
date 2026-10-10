@@ -48,16 +48,43 @@
   function initHeroParallax() {
     if (prefersReducedMotion) return;
 
-    var media = document.querySelector('[data-rp-parallax] img');
-    if (!media) return;
+    var hero = document.querySelector('.rp-hero');
+    if (!hero) return;
+
+    var layers = [
+      {
+        el: hero.querySelector('[data-rp-parallax] img'),
+        speed: 0.18,
+        max: 80,
+        prefix: 'scale(1.08) '
+      },
+      {
+        el: hero.querySelector('[data-rp-parallax-paws]'),
+        speed: 0.4,
+        max: 140,
+        prefix: ''
+      },
+      {
+        el: hero.querySelector('[data-rp-parallax-content]'),
+        speed: -0.05,
+        max: 18,
+        prefix: ''
+      }
+    ].filter(function (layer) {
+      return !!layer.el;
+    });
+
+    if (!layers.length) return;
 
     var ticking = false;
 
     function update() {
       var scrollY = window.scrollY || window.pageYOffset;
-      var offset = Math.min(scrollY * 0.18, 80);
-      media.style.transform =
-        'scale(1.08) translateY(' + offset + 'px)';
+      layers.forEach(function (layer) {
+        var raw = scrollY * layer.speed;
+        var offset = Math.max(Math.min(raw, layer.max), -layer.max);
+        layer.el.style.transform = layer.prefix + 'translateY(' + offset + 'px)';
+      });
       ticking = false;
     }
 
@@ -73,6 +100,68 @@
     );
 
     update();
+  }
+
+  function initTilt3D() {
+    if (prefersReducedMotion) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    var cards = document.querySelectorAll(
+      '.rp-category-card, .rp-packs__card, .card-wrapper .card'
+    );
+    if (!cards.length) return;
+
+    var maxTilt = 7;
+
+    cards.forEach(function (card) {
+      if (card.hasAttribute('data-rp-tilt-ready')) return;
+      card.setAttribute('data-rp-tilt-ready', 'true');
+
+      var raf = null;
+      var resetTimeout = null;
+
+      function handleMove(event) {
+        var rect = card.getBoundingClientRect();
+        var x = (event.clientX - rect.left) / rect.width;
+        var y = (event.clientY - rect.top) / rect.height;
+        var rotateY = (x - 0.5) * (maxTilt * 2);
+        var rotateX = (0.5 - y) * (maxTilt * 2);
+
+        if (raf) return;
+        raf = window.requestAnimationFrame(function () {
+          card.style.transform =
+            'perspective(900px) rotateX(' +
+            rotateX.toFixed(2) +
+            'deg) rotateY(' +
+            rotateY.toFixed(2) +
+            'deg) translateY(-6px) scale(1.025)';
+          raf = null;
+        });
+      }
+
+      card.addEventListener('pointerenter', function (event) {
+        if (event.pointerType !== 'mouse') return;
+        if (resetTimeout) {
+          window.clearTimeout(resetTimeout);
+          resetTimeout = null;
+        }
+        card.style.transition = 'none';
+      });
+
+      card.addEventListener('pointermove', function (event) {
+        if (event.pointerType !== 'mouse') return;
+        handleMove(event);
+      });
+
+      card.addEventListener('pointerleave', function (event) {
+        if (event.pointerType !== 'mouse') return;
+        card.style.transition = 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
+        card.style.transform = '';
+        resetTimeout = window.setTimeout(function () {
+          card.style.transition = '';
+        }, 500);
+      });
+    });
   }
 
   function initBuyNow() {
@@ -154,16 +243,19 @@
       initScrollReveal();
       initHeroParallax();
       initBuyNow();
+      initTilt3D();
     });
   } else {
     initScrollReveal();
     initHeroParallax();
     initBuyNow();
+    initTilt3D();
   }
 
   document.addEventListener('shopify:section:load', function () {
     initScrollReveal();
     initHeroParallax();
     initBuyNow();
+    initTilt3D();
   });
 })();

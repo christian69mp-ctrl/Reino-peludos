@@ -296,6 +296,13 @@ body {
 }
 
 /* floating paw prints */
+.rp-hero__paws {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
 .rp-paw-float {
   position: absolute;
   z-index: 0;
@@ -371,7 +378,14 @@ body {
   background: var(--rp-white);
   box-shadow: var(--rp-shadow-soft);
   overflow: hidden;
+  transform-origin: center;
   transition: transform 0.35s var(--rp-ease), box-shadow 0.35s var(--rp-ease);
+}
+
+/* Tilt 3D interactivo en tarjetas (categorías, packs, productos) */
+[data-rp-tilt-ready] {
+  transform-origin: center;
+  will-change: transform;
 }
 
 .rp-category-card::before {
@@ -1822,6 +1836,7 @@ body {
   overflow: hidden;
   text-decoration: none;
   box-shadow: var(--rp-shadow-lift);
+  transform-origin: center;
   transition: transform 0.25s var(--rp-ease);
 }
 
