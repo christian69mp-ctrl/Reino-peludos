@@ -2096,3 +2096,108 @@ body {
     animation: none !important;
   }
 }
+
+/* --------------------------------------------------------------------- */
+/* Barra fija de compra en móvil (páginas de producto)                   */
+/* --------------------------------------------------------------------- */
+
+.rp-sticky-atc {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.9rem calc(0.65rem + env(safe-area-inset-bottom, 0px));
+  background: var(--rp-white);
+  box-shadow: 0 -8px 24px rgba(59, 42, 28, 0.18);
+  transform: translateY(110%);
+  transition: transform 0.35s var(--rp-ease);
+}
+
+@media screen and (max-width: 749px) {
+  .rp-sticky-atc {
+    display: flex;
+  }
+}
+
+.rp-sticky-atc.is-visible {
+  transform: translateY(0);
+}
+
+.rp-sticky-atc__media {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--rp-radius-sm);
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--rp-cream);
+}
+
+.rp-sticky-atc__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rp-sticky-atc__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.rp-sticky-atc__title {
+  font-family: var(--font-body-family);
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--rp-brown);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rp-sticky-atc__price {
+  font-family: var(--font-heading-family);
+  font-size: 1.05rem;
+  color: var(--rp-coral);
+}
+
+.rp-sticky-atc__actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.rp-sticky-atc__btn {
+  border: none;
+  border-radius: var(--rp-radius-pill);
+  padding: 0.6rem 1rem;
+  font-family: var(--font-body-family);
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--rp-white);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.rp-sticky-atc__btn--cart {
+  background: #2563eb;
+}
+
+.rp-sticky-atc__btn--buy {
+  background: #00c853;
+}
+
+.rp-sticky-atc__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rp-sticky-atc {
+    transition: none;
+  }
+}

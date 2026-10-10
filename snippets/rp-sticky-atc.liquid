@@ -1,0 +1,30 @@
+{%- comment -%}
+  Barra fija de "añadir al carrito" para móvil en páginas de producto.
+  Se sincroniza con el formulario real (precio, disponibilidad) vía JS;
+  solo se muestra una vez el usuario hace scroll más allá de los botones reales.
+{%- endcomment -%}
+{%- if product -%}
+  <div class="rp-sticky-atc" id="rp-sticky-atc">
+    <div class="rp-sticky-atc__media">
+      {%- if product.featured_media -%}
+        {{
+          product.featured_media
+          | image_url: width: 100
+          | image_tag: loading: 'lazy', widths: '50, 100', alt: product.title
+        }}
+      {%- endif -%}
+    </div>
+    <div class="rp-sticky-atc__info">
+      <span class="rp-sticky-atc__title">{{ product.title }}</span>
+      <span class="rp-sticky-atc__price" data-rp-sticky-price></span>
+    </div>
+    <div class="rp-sticky-atc__actions">
+      <button type="button" class="rp-sticky-atc__btn rp-sticky-atc__btn--cart" data-rp-sticky-add>
+        Añadir
+      </button>
+      <button type="button" class="rp-sticky-atc__btn rp-sticky-atc__btn--buy" data-rp-sticky-buy hidden>
+        Comprar ya
+      </button>
+    </div>
+  </div>
+{%- endif -%}
