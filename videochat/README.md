@@ -1,35 +1,68 @@
 # La Ruleta Caliente
 
-Videochat en vivo 1 a 1 con desconocidos, estilo Chatroulette / CooMeet.
+Videochat en vivo 1 a 1 con desconocidos, estilo Chatroulette / CooMeet. Solo para mayores de 18 años.
 
 ## Cómo arrancarlo
 
 ```bash
 cd videochat
 npm install
-npm start          # http://localhost:3000
+ADMIN_PASSWORD=una-clave-segura npm start      # http://localhost:3000
 ```
 
-Abre dos pestañas (o dos navegadores) y pulsa «Empezar» en ambas para probarlo.
+Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en cada uno y pulsa «Empezar».
 
 ## Qué incluye
 
-- Entrada con aviso de mayoría de edad (+18) y elección de lo que eres (mujer, hombre, transexual o pareja).
-- Emparejamiento aleatorio con cola de espera (sin repetir la última pareja al instante).
-- Vídeo y audio P2P con WebRTC; el servidor solo hace de señalización (Socket.IO).
-- Botones Empezar / Siguiente (o tecla Esc) / Parar.
-- Chat de texto con la pareja actual.
-- **Plan Premium 19,99 €/mes**: permite elegir a quién ver (mujeres, hombres, transexuales o parejas).
-  Sin suscripción el emparejamiento es siempre al azar; el servidor ignora el filtro
-  si el usuario no ha pagado.
-- Contador de usuarios conectados.
+- **Portada** profesional: presentación, cómo funciona, seguridad, Premium y pie con enlaces legales.
+- **Aviso de mayoría de edad** al entrar por primera vez.
+- **Cuentas de usuario**: registro con email, contraseña (guardada cifrada con scrypt) y si eres
+  mujer, hombre, transexual o pareja. Inicio de sesión en cualquier dispositivo.
+- **Videochat** 1 a 1 con WebRTC: Empezar, Siguiente (o tecla Esc), Parar y chat de texto.
+- **Premium 19,99 €** para elegir a quién ver (mujeres, hombres, transexuales o parejas). Va ligado
+  a la cuenta: funciona en todos los dispositivos del usuario. Sin Premium, siempre al azar.
+- **Denuncias** por burlas o insultos, acoso, homofobia o transfobia, menor de edad o contenido
+  ilegal, u otro motivo:
+  - Corta la conversación y las dos personas no vuelven a coincidir.
+  - Guarda los últimos 30 mensajes del chat como prueba.
+  - Suspensión automática de 24 h si 3 personas distintas denuncian a alguien en 24 h
+    (2 si es por menores o contenido ilegal).
+- **Panel de moderación** en `/admin` (con `ADMIN_PASSWORD`): denuncias pendientes (las urgentes
+  primero), conversación denunciada, y botones para descartar, suspender 1 o 7 días, expulsar o
+  readmitir. Al suspender o expulsar, la persona sale del chat al instante.
+- **Páginas legales**: `/normas`, `/terminos` y `/privacidad`.
 
 ## Estructura
 
-- `server.js` — Express + Socket.IO: cola, emparejamiento con filtros, reenvío de señales.
+- `server.js` — servidor web y Socket.IO: emparejamiento, señalización WebRTC, chat y denuncias.
+- `auth.js` — registro, inicio de sesión y sesiones.
 - `payments.js` — pagos Premium con Segpay (tarjeta, Google Pay, Apple Pay y cripto).
-- `store.js` — guarda los pedidos Premium en `data/store.json`.
-- `public/` — cliente (HTML, CSS, JS sin frameworks).
+- `moderation.js` — denuncias, suspensiones automáticas y API del panel de moderación.
+- `store.js` — guarda usuarios, pedidos y denuncias en `data/store.json`.
+- `tokens.js` — firma de las sesiones.
+- `public/` — la web: `index.html` (portada + chat), `app.js`, `style.css`, `admin.html`,
+  páginas legales y `logo.svg`.
+
+## Variables del servidor
+
+```bash
+ADMIN_PASSWORD=...            # contraseña del panel /admin (sin ella el panel está desactivado)
+SESSION_SECRET=...            # frase larga y secreta; mantiene las sesiones tras reiniciar
+BASE_URL=https://laruletacaliente.com
+
+# Pagos (sin ellas, modo demo)
+SEGPAY_ETICKET_CARD=123456:7890
+SEGPAY_ETICKET_CRYPTO=123456:7891
+SEGPAY_POSTBACK_KEY=...
+# SEGPAY_CANCEL_URL=https://cs.segpay.com
+
+# Vídeo en redes móviles
+TURN_URL=turn:turn.tudominio.com:3478
+TURN_USER=...
+TURN_PASS=...
+
+# DATA_FILE=/ruta/store.json  # por defecto videochat/data/store.json
+```
 
 ## Pagos (Segpay)
 
@@ -40,7 +73,7 @@ En la ventana Premium el usuario elige cómo pagar. Los dos métodos se cobran c
 | Tarjeta · Google Pay · Apple Pay | `SEGPAY_ETICKET_CARD` | 19,99 € cada 30 días, se renueva solo |
 | Criptomonedas | `SEGPAY_ETICKET_CRYPTO` | 19,99 € una vez = 30 días (Segpay no permite cripto recurrente) |
 
-Sin configurar nada funciona en **modo demo** (se activa Premium sin cobrar).
+Para pagar hay que tener la sesión iniciada; el Premium queda en la cuenta.
 
 ### Qué configurar en el Merchant Portal de Segpay
 
@@ -51,42 +84,21 @@ Sin configurar nada funciona en **modo demo** (se activa Premium sin cobrar).
    De cada paquete copia su `x-eticketid` (formato `paquete:precio`, p. ej. `123456:7890`).
 2. **Postbacks** (My Websites → Manage Postbacks), con "Use SSL" y respuesta esperada `OK`:
    - **Trans Post**:
-     `tudominio.com/api/segpay/postback?key=TU_CLAVE&action=<action>&stage=<stage>&approved=<approved>&trantype=<trantype>&purchaseid=<purchaseid>&orderid=<extra orderid>&iint=<iint>&rint=<rint>`
+     `laruletacaliente.com/api/segpay/postback?key=TU_CLAVE&action=<action>&stage=<stage>&approved=<approved>&trantype=<trantype>&purchaseid=<purchaseid>&orderid=<extra orderid>&iint=<iint>&rint=<rint>`
    - **Disable**:
-     `tudominio.com/api/segpay/postback?key=TU_CLAVE&type=disable&purchaseid=<purchaseid>`
+     `laruletacaliente.com/api/segpay/postback?key=TU_CLAVE&type=disable&purchaseid=<purchaseid>`
    - Activa "Retry postback" para que Segpay reintente si el servidor no responde.
 
-### Variables del servidor
+## Antes de abrir al público
 
-```bash
-SEGPAY_ETICKET_CARD=123456:7890     # paquete tarjeta / Google Pay / Apple Pay
-SEGPAY_ETICKET_CRYPTO=123456:7891   # paquete criptomonedas
-SEGPAY_POSTBACK_KEY=una-clave-larga-al-azar   # la misma que pones como key= en los postbacks
-SESSION_SECRET=otra-frase-larga-y-secreta
-BASE_URL=https://tudominio.com
-# SEGPAY_CANCEL_URL=https://cs.segpay.com   # web donde el cliente cancela su suscripción
-npm start
-```
-
-### Cómo funciona
-
-1. El usuario pulsa un método de pago → el servidor crea un pedido y le manda a la página de
-   Segpay con el número de pedido (`orderid`).
-2. Segpay avisa al servidor de cada cobro, renovación, reembolso, contracargo o baja, y el
-   servidor apunta hasta cuándo dura el Premium. Se guarda en `data/store.json`
-   (haz copia de seguridad de ese fichero).
-3. El usuario vuelve a la web, que espera la confirmación y activa Premium sola.
-4. Cada renovación mensual alarga 30 días más; un reembolso, contracargo o baja lo quita al momento.
-
-## Antes de ponerlo en producción
-
-- **HTTPS obligatorio**: los navegadores solo dan acceso a la cámara en HTTPS (o localhost).
-- **Servidor TURN** (p. ej. coturn o un servicio gestionado): sin él muchas conexiones
-  detrás de NAT/4G fallan. Configúralo con `TURN_URL`, `TURN_USER` y `TURN_PASS`.
-- **Cuentas de usuario**: ahora el Premium queda guardado en el navegador donde se pagó;
-  si el usuario cambia de móvil u ordenador no lo recupera.
-- **Moderación**: ya no hay botón de reportar, así que no hay forma de que los usuarios
-  avisen de abusos (menores, contenido ilegal). Conviene tener alguna alternativa.
-- **Moderación**: si la web es de contenido adulto, necesitas verificación de edad real
-  (no solo una casilla), moderación de vídeo, términos de uso, política de privacidad y
-  cumplir la normativa de tu país (en la UE: DSA y RGPD). Revísalo con un abogado.
+- **Completa las páginas legales**: en `/terminos` y `/privacidad` hay datos marcados en amarillo
+  (titular, NIF, dirección…). Revísalas con un abogado.
+- **Crea el buzón `soporte@laruletacaliente.com`** (aparece en la web).
+- **HTTPS obligatorio**: sin él el navegador no deja usar la cámara.
+- **Servidor TURN** (p. ej. coturn): sin él muchas conexiones en 4G fallan.
+- **Copia de seguridad** diaria de `data/store.json`.
+- **Verificación de edad real** con un proveedor externo (las leyes de la UE, Reino Unido y varios
+  estados de EE. UU. lo exigen para webs de adultos, y Segpay lo pedirá).
+- **Recuperar contraseña por email**: ahora se pide escribiendo a soporte; falta conectar un
+  servicio de envío de emails.
+- Con muchos usuarios, pasar de `data/store.json` a una base de datos (PostgreSQL, etc.).

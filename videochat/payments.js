@@ -6,18 +6,19 @@
 //   (Segpay no permite suscripciones recurrentes con cripto).
 //
 // Flujo:
-// 1. El servidor crea un pedido y manda al usuario a la página de pago de Segpay
-//    con el id del pedido como variable propia (orderid).
+// 1. El usuario (con sesión iniciada) elige método; el servidor crea un pedido a su
+//    nombre y le manda a la página de pago de Segpay con el id del pedido (orderid).
 // 2. Segpay avisa al servidor (postback) de cada cobro, renovación, reembolso o baja,
 //    y el servidor actualiza hasta cuándo dura el Premium de ese pedido.
-// 3. Al volver a la web, el navegador recoge un token firmado con el id del pedido.
-//    En cada conexión se comprueba que el pedido sigue activo.
+// 3. El Premium va ligado a la cuenta, así que funciona en cualquier dispositivo.
 //
 // Si falta la configuración de Segpay funciona en modo DEMO: el pago se simula.
 
 const crypto = require('crypto');
 const express = require('express');
 const store = require('./store');
+const { safeEqual } = require('./tokens');
+const { requireUser } = require('./auth');
 
 const PRICE = 19.99;
 const CURRENCY = 'eur';
@@ -34,51 +35,34 @@ const POSTBACK_KEY = process.env.SEGPAY_POSTBACK_KEY;
 const CANCEL_URL = process.env.SEGPAY_CANCEL_URL || 'https://cs.segpay.com';
 const DEMO = !ETICKETS.card && !ETICKETS.crypto;
 
-const SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex');
-if (!process.env.SESSION_SECRET) {
-  console.warn('[pagos] SESSION_SECRET no definido: los usuarios Premium tendrán que volver a entrar tras reiniciar el servidor.');
-}
 if (DEMO) console.warn('[pagos] Modo DEMO: los pagos se simulan. Configura SEGPAY_ETICKET_CARD / SEGPAY_ETICKET_CRYPTO para cobrar de verdad.');
 if (!DEMO && !POSTBACK_KEY) console.warn('[pagos] Falta SEGPAY_POSTBACK_KEY: no se aceptarán los avisos de Segpay.');
 
-function sign(payload) {
-  const body = Buffer.from(JSON.stringify(payload)).toString('base64url');
-  const mac = crypto.createHmac('sha256', SECRET).update(body).digest('base64url');
-  return `${body}.${mac}`;
+// Pedido Premium activo de un usuario (el que dura más), o null
+function activeOrder(userId) {
+  const now = Date.now();
+  return store.ordersForUser(userId)
+    .filter((o) => o.status === 'active' && o.expires > now)
+    .sort((a, b) => b.expires - a.expires)[0] || null;
 }
 
-function verify(token) {
-  if (typeof token !== 'string' || !token.includes('.')) return null;
-  const [body, mac] = token.split('.');
-  const expected = crypto.createHmac('sha256', SECRET).update(body).digest('base64url');
-  if (mac.length !== expected.length ||
-      !crypto.timingSafeEqual(Buffer.from(mac), Buffer.from(expected))) return null;
-  try { return JSON.parse(Buffer.from(body, 'base64url').toString()); } catch { return null; }
+function isPremium(userId) {
+  return !!activeOrder(userId);
 }
 
-function safeEqual(a, b) {
-  if (typeof a !== 'string' || typeof b !== 'string' || a.length !== b.length) return false;
-  return crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b));
-}
-
-function activeOrder(token) {
-  const data = verify(token);
-  const order = data?.oid && store.getOrder(data.oid);
-  if (!order || order.status !== 'active' || order.expires <= Date.now()) return null;
-  return order;
-}
-
-async function isPremium(token) {
-  return !!activeOrder(token);
+function premiumInfo(userId) {
+  const order = activeOrder(userId);
+  if (!order) return { premium: false };
+  return {
+    premium: true,
+    method: order.method,
+    expires: order.expires - (order.demo ? 0 : GRACE_MS),
+    cancelUrl: order.method === 'card' && !order.demo ? CANCEL_URL : null,
+  };
 }
 
 function originOf(req, baseUrl) {
   return baseUrl || `${req.protocol}://${req.get('host')}`;
-}
-
-// Segpay: variables propias de máx. 32 caracteres y sin empezar por número
-function newOrderId() {
-  return `o${crypto.randomBytes(12).toString('hex')}`;
 }
 
 // Aplica un aviso de Segpay. Los nombres y valores pueden venir en cualquier
@@ -136,22 +120,24 @@ function routes(app, baseUrl) {
   });
 
   // Empieza el pago: crea el pedido y devuelve la URL de Segpay
-  app.post('/api/checkout', (req, res) => {
+  app.post('/api/checkout', requireUser, (req, res) => {
     const method = req.body?.method === 'crypto' ? 'crypto' : 'card';
-    const orderId = newOrderId();
+    // Segpay: variables propias de máx. 32 caracteres y sin empezar por número
+    const orderId = `o${crypto.randomBytes(12).toString('hex')}`;
 
     if (DEMO) {
-      store.createOrder(orderId, { method, demo: true });
+      store.createOrder(orderId, { method, userId: req.user.id, demo: true });
       store.updateOrder(orderId, { status: 'active', expires: Date.now() + PERIOD_DAYS * DAY });
-      return res.json({ token: sign({ oid: orderId }) });
+      return res.json({ activated: true });
     }
     if (!ETICKETS[method]) return res.status(400).json({ error: 'Método de pago no disponible' });
 
-    store.createOrder(orderId, { method });
+    store.createOrder(orderId, { method, userId: req.user.id });
     const origin = originOf(req, baseUrl);
     const params = new URLSearchParams({
       'x-eticketid': ETICKETS[method],
       orderid: orderId,
+      'x-billemail': req.user.email,
       'x-auth-link': `${origin}/?order=${orderId}`,
       'x-auth-text': 'Volver y activar Premium',
       'x-decl-link': `${origin}/`,
@@ -160,8 +146,7 @@ function routes(app, baseUrl) {
     res.json({ url: `${PAY_URL}?${params}` });
   });
 
-  // Avisos de Segpay (configurados en el Merchant Portal → Manage Postbacks)
-  // Segpay puede enviar los avisos por GET o por POST (formulario)
+  // Avisos de Segpay (Merchant Portal → Manage Postbacks). Pueden llegar por GET o POST.
   app.all('/api/segpay/postback', express.urlencoded({ extended: false }), (req, res) => {
     const params = { ...req.query, ...(typeof req.body === 'object' ? req.body : {}) };
     if (!POSTBACK_KEY || !safeEqual(String(params.key || ''), POSTBACK_KEY)) {
@@ -174,24 +159,13 @@ function routes(app, baseUrl) {
   });
 
   // El usuario vuelve de Segpay: la web pregunta hasta que el pago se confirma
-  app.get('/api/checkout/confirm', (req, res) => {
-    const orderId = String(req.query.order || '');
-    const order = store.getOrder(orderId);
-    if (!order) return res.status(404).json({ error: 'Pedido no encontrado' });
+  app.get('/api/checkout/confirm', requireUser, (req, res) => {
+    const order = store.getOrder(String(req.query.order || ''));
+    if (!order || order.userId !== req.user.id) return res.status(404).json({ error: 'Pedido no encontrado' });
     if (order.status === 'pending') return res.json({ pending: true });
     if (order.status !== 'active') return res.status(402).json({ error: 'Pago no completado' });
-    res.json({ token: sign({ oid: orderId }) });
-  });
-
-  app.get('/api/me', (req, res) => {
-    const order = activeOrder(req.get('authorization')?.replace(/^Bearer /, ''));
-    res.json({
-      premium: !!order,
-      method: order?.method || null,
-      expires: order ? order.expires - (order.demo ? 0 : GRACE_MS) : null,
-      cancelUrl: order?.method === 'card' && !order.demo ? CANCEL_URL : null,
-    });
+    res.json({ activated: true });
   });
 }
 
-module.exports = { routes, isPremium, _test: { applyPostback } };
+module.exports = { routes, isPremium, premiumInfo, _test: { applyPostback } };

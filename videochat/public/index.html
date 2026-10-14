@@ -2,83 +2,201 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>La Ruleta Caliente · Videochat en vivo</title>
-  <meta name="description" content="La Ruleta Caliente: videochat en vivo con desconocidos. Solo para mayores de 18 años.">
-  <meta name="theme-color" content="#0f0f14">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>La Ruleta Caliente · Videochat en vivo con desconocidos</title>
+  <meta name="description" content="Videochat en vivo 1 a 1 con gente nueva. Gratis, sin descargas y con una comunidad moderada. Solo para mayores de 18 años.">
+  <meta name="theme-color" content="#0c0a0f">
+  <meta name="rating" content="adult">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="La Ruleta Caliente · Videochat en vivo">
+  <meta property="og:description" content="Conoce gente nueva en directo, a un clic. Solo mayores de 18 años.">
+  <meta property="og:image" content="/logo.svg">
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <!-- Entrada: mayoría de edad + género propio -->
-  <div id="gate" class="overlay">
-    <div class="box">
-      <h1>La Ruleta Caliente</h1>
-      <p class="tagline">Videochat en vivo con desconocidos</p>
-      <p>Este sitio es solo para <strong>mayores de 18 años</strong>.</p>
-      <p class="label">Soy:</p>
-      <div class="chips" id="myGender">
-        <button type="button" class="chip" data-g="mujer">Mujer</button>
-        <button type="button" class="chip" data-g="hombre">Hombre</button>
-        <button type="button" class="chip" data-g="trans">Transexual</button>
-        <button type="button" class="chip" data-g="pareja">Pareja</button>
-      </div>
-      <label class="check"><input type="checkbox" id="ageCheck"> Tengo 18 años o más y acepto las normas</label>
-      <button id="enterBtn" class="primary wide" disabled>Entrar</button>
-    </div>
-  </div>
+  <!-- Iconos -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></symbol>
+      <symbol id="i-skip" viewBox="0 0 24 24"><path d="M5 4l10 8-10 8z"/><path d="M19 5v14"/></symbol>
+      <symbol id="i-stop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 3l14 9-14 9z"/></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-video" viewBox="0 0 24 24"><path d="m16 13 5.2 3.5a.5.5 0 0 0 .8-.4V7.9a.5.5 0 0 0-.8-.4L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+      <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></symbol>
+      <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M9.9 4.2A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.7 2.7"/><path d="M6.6 6.6A13.5 13.5 0 0 0 2 12s3 8 10 8a9.7 9.7 0 0 0 5.4-1.6"/><path d="M14.1 14.1a3 3 0 1 1-4.2-4.2"/><path d="m2 2 20 20"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    </defs>
+  </svg>
 
-  <!-- Plan Premium -->
-  <div id="premiumModal" class="overlay hidden">
-    <div class="box">
-      <button class="close" id="closePremium" aria-label="Cerrar">✕</button>
-      <span class="badge">PREMIUM</span>
-      <h2>Elige a quién quieres ver</h2>
-      <p class="price"><span class="priceText">19,99 €</span><small>/mes</small></p>
-      <ul class="perks">
-        <li>Filtra por mujeres, hombres, transexuales o parejas</li>
-        <li>Sin filtro sigues teniendo el chat al azar gratis</li>
-        <li>Cancela cuando quieras</li>
-      </ul>
-      <p class="label">Elige cómo pagar:</p>
-      <div class="pay-methods">
-        <button id="payCard" class="pay primary">
-          <span class="pay-title">💳 Tarjeta ·  Google Pay ·  Apple Pay</span>
-          <span class="pay-sub"><span class="priceText">19,99 €</span>/mes · se renueva cada mes</span>
-        </button>
-        <button id="payCrypto" class="pay">
-          <span class="pay-title">₿ Criptomonedas</span>
-          <span class="pay-sub"><span class="priceText">19,99 €</span> por <span class="passDays">30</span> días · pago único · Bitcoin, Ethereum, USDT…</span>
-        </button>
+  <header class="site-header">
+    <a href="/" class="brand" id="homeLink" aria-label="La Ruleta Caliente, inicio">
+      <img src="/logo.svg" alt="" width="34" height="34">
+      <span>La Ruleta <b>Caliente</b></span>
+    </a>
+    <nav class="nav-links" aria-label="Secciones">
+      <a href="/#como-funciona">Cómo funciona</a>
+      <a href="/#seguridad">Seguridad</a>
+      <a href="/#premium">Premium</a>
+    </nav>
+    <div class="header-actions">
+      <span class="online-pill" id="onlinePill" hidden><span class="dot"></span><span id="onlineCount">0</span> en línea</span>
+      <div id="guestActions" class="row">
+        <button class="btn ghost sm" data-open-auth="login">Entrar</button>
+        <button class="btn primary sm" data-open-auth="register">Crear cuenta</button>
       </div>
-      <p id="payWait" class="small hidden">Esperando la confirmación del pago…</p>
-      <p id="demoNote" class="small hidden">Modo demo: el pago se simula, no se cobra nada.</p>
+      <div id="userActions" class="row" hidden>
+        <button class="btn gold sm" id="premiumBtn" data-premium><svg class="i"><use href="#i-star"/></svg><span>Hazte Premium</span></button>
+        <button class="btn gold-ghost sm" id="manageBtn" hidden><svg class="i"><use href="#i-star"/></svg><span>Premium</span></button>
+        <button class="btn ghost sm icon-only" id="logoutBtn" title="Cerrar sesión" aria-label="Cerrar sesión"><svg class="i"><use href="#i-logout"/></svg></button>
+      </div>
     </div>
-  </div>
-
-  <header class="top">
-    <span class="logo">La Ruleta <b>Caliente</b></span>
-    <span class="top-right">
-      <span id="online" class="online"></span>
-      <button id="premiumBtn" class="pill">⭐ Hazte Premium</button>
-      <button id="manageBtn" class="pill hidden">⭐ Premium</button>
-    </span>
   </header>
 
-  <main class="app">
-    <section class="videos">
-      <div class="video-wrap remote">
-        <video id="remoteVideo" autoplay playsinline></video>
-        <span id="partnerTag" class="tag hidden"></span>
-        <div id="status" class="status">Pulsa «Empezar» para conocer a alguien</div>
+  <!-- ================= PORTADA ================= -->
+  <main id="landing">
+    <section class="hero">
+      <div class="hero-text">
+        <span class="eyebrow"><span class="dot"></span>En directo ahora · Solo +18</span>
+        <h1>Conoce gente nueva <span class="grad">en directo</span>, a un clic.</h1>
+        <p class="lead">Videochat 1 a 1 con personas de todo el mundo. Gratis, sin descargas y en una comunidad donde el respeto es la norma.</p>
+        <div class="hero-cta">
+          <button class="btn primary lg" data-start><svg class="i"><use href="#i-video"/></svg>Empezar gratis</button>
+          <a class="btn ghost lg" href="#premium">Ver Premium</a>
+        </div>
+        <ul class="trust">
+          <li><svg class="i"><use href="#i-check"/></svg>Gratis</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Sin descargas</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Comunidad moderada</li>
+        </ul>
       </div>
-      <div class="video-wrap local">
-        <video id="localVideo" autoplay playsinline muted></video>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="mock">
+          <div class="mock-screen">
+            <span class="mock-tag">Mujer</span>
+            <span class="mock-live"><span class="dot"></span>Conectado</span>
+            <div class="mock-silhouette"></div>
+            <div class="mock-self"></div>
+          </div>
+          <div class="mock-bar">
+            <span class="mock-btn primary"><svg class="i"><use href="#i-skip"/></svg>Siguiente</span>
+            <span class="mock-btn"><svg class="i"><use href="#i-stop"/></svg></span>
+            <span class="mock-btn"><svg class="i"><use href="#i-flag"/></svg></span>
+          </div>
+          <div class="mock-bubble a">¡Hola! ¿De dónde eres? 👋</div>
+          <div class="mock-bubble b">De Madrid, ¿y tú? 😊</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="como-funciona">
+      <h2 class="section-title">Cómo funciona</h2>
+      <p class="section-sub">Tres pasos y estás hablando con alguien nuevo.</p>
+      <div class="cards three">
+        <article class="card">
+          <span class="card-num">1</span>
+          <h3>Crea tu cuenta</h3>
+          <p>Solo un email y una contraseña. Dinos si eres mujer, hombre, transexual o pareja.</p>
+        </article>
+        <article class="card">
+          <span class="card-num">2</span>
+          <h3>Pulsa «Empezar»</h3>
+          <p>Activa tu cámara y te conectamos al instante con otra persona en línea.</p>
+        </article>
+        <article class="card">
+          <span class="card-num">3</span>
+          <h3>¿No hay química? Siguiente</h3>
+          <p>Pasa a otra persona cuando quieras con un clic o con la tecla Esc.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="seguridad">
+      <h2 class="section-title">Un espacio para disfrutar con respeto</h2>
+      <p class="section-sub">Aquí no se toleran las burlas, el acoso ni la homofobia o la transfobia.</p>
+      <div class="cards three">
+        <article class="card feature">
+          <span class="feature-icon"><svg class="i"><use href="#i-flag"/></svg></span>
+          <h3>Denuncia en un clic</h3>
+          <p>Si alguien se burla de ti, te acosa o te falta al respeto, denúncialo y no volveréis a coincidir.</p>
+        </article>
+        <article class="card feature">
+          <span class="feature-icon"><svg class="i"><use href="#i-shield"/></svg></span>
+          <h3>Moderación real</h3>
+          <p>Revisamos las denuncias. Quien acumula denuncias queda suspendido o expulsado.</p>
+        </article>
+        <article class="card feature">
+          <span class="feature-icon"><svg class="i"><use href="#i-eye-off"/></svg></span>
+          <h3>Tu privacidad primero</h3>
+          <p>El vídeo va directo entre las dos personas: no lo grabamos ni lo guardamos.</p>
+        </article>
+      </div>
+      <p class="center-text"><a class="link" href="/normas">Lee las normas de la comunidad →</a></p>
+    </section>
+
+    <section class="section" id="premium">
+      <div class="premium-card">
+        <div>
+          <span class="badge-gold"><svg class="i"><use href="#i-star"/></svg>PREMIUM</span>
+          <h2>Elige a quién quieres ver</h2>
+          <p class="muted">Con Premium filtras por mujeres, hombres, transexuales o parejas. Sin Premium, el chat sigue siendo gratis y al azar.</p>
+          <ul class="checklist">
+            <li><svg class="i"><use href="#i-check"/></svg>Filtro por mujeres, hombres, transexuales o parejas</li>
+            <li><svg class="i"><use href="#i-check"/></svg>Válido en todos tus dispositivos</li>
+            <li><svg class="i"><use href="#i-check"/></svg>Cancela cuando quieras</li>
+          </ul>
+        </div>
+        <div class="price-box">
+          <p class="price"><span class="priceText">19,99 €</span><small>/mes</small></p>
+          <button class="btn gold lg wide" data-premium>Hazte Premium</button>
+          <p class="pay-logos">Tarjeta · Google Pay · Apple Pay · Cripto</p>
+          <p class="hint">Pago seguro con Segpay. El cargo aparecerá a nombre de Segpay.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-cta">
+      <h2>¿Te animas a conocer a alguien?</h2>
+      <button class="btn primary lg" data-start><svg class="i"><use href="#i-video"/></svg>Empezar ahora</button>
+    </section>
+  </main>
+
+  <!-- ================= CHAT ================= -->
+  <main id="chatView" class="chat" hidden>
+    <section class="stage">
+      <div class="remote">
+        <video id="remoteVideo" autoplay playsinline></video>
+        <span id="partnerTag" class="partner-tag" hidden></span>
+        <button id="reportBtn" class="report-btn" title="Denunciar" aria-label="Denunciar a esta persona" hidden>
+          <svg class="i"><use href="#i-flag"/></svg><span>Denunciar</span>
+        </button>
+        <div id="status" class="status">
+          <img src="/logo.svg" alt="" width="64" height="64" class="status-logo">
+          <p id="statusText">Pulsa «Empezar» para conocer a alguien</p>
+        </div>
+        <div class="self">
+          <video id="localVideo" autoplay playsinline muted></video>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="startBtn" class="btn primary lg"><svg class="i"><use href="#i-play"/></svg>Empezar</button>
+        <button id="nextBtn" class="btn primary lg" hidden><svg class="i"><use href="#i-skip"/></svg>Siguiente <kbd>Esc</kbd></button>
+        <button id="stopBtn" class="btn ghost lg" hidden><svg class="i"><use href="#i-stop"/></svg>Parar</button>
       </div>
     </section>
 
     <aside class="side">
-      <div class="filter">
-        <p class="label">Quiero ver: <span id="lockNote" class="lock">🔒 Premium</span></p>
+      <div class="filter" id="filter">
+        <div class="filter-head">
+          <span>Quiero ver</span>
+          <span id="lockNote" class="lock"><svg class="i"><use href="#i-lock"/></svg>Premium</span>
+        </div>
         <div class="chips" id="wantGender">
           <button type="button" class="chip active" data-g="">Todos</button>
           <button type="button" class="chip" data-g="mujer">Mujeres</button>
@@ -87,20 +205,144 @@
           <button type="button" class="chip" data-g="pareja">Parejas</button>
         </div>
       </div>
-      <div class="controls">
-        <button id="startBtn" class="primary">Empezar</button>
-        <button id="nextBtn" disabled>Siguiente</button>
-        <button id="stopBtn" disabled>Parar</button>
-      </div>
-      <div id="messages" class="messages"></div>
+      <div id="messages" class="messages" aria-live="polite"></div>
       <form id="chatForm" class="chat-form">
         <input id="chatInput" maxlength="500" placeholder="Escribe un mensaje…" autocomplete="off" disabled>
-        <button type="submit" disabled id="sendBtn">Enviar</button>
+        <button type="submit" class="btn primary icon-only" disabled id="sendBtn" aria-label="Enviar"><svg class="i"><use href="#i-send"/></svg></button>
       </form>
     </aside>
   </main>
 
+  <footer class="site-footer" id="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="brand"><img src="/logo.svg" alt="" width="28" height="28"><span>La Ruleta <b>Caliente</b></span></a>
+        <p>Videochat en vivo para mayores de 18 años.</p>
+      </div>
+      <nav class="footer-links" aria-label="Información legal">
+        <a href="/normas">Normas de la comunidad</a>
+        <a href="/terminos">Términos de uso</a>
+        <a href="/privacidad">Privacidad y cookies</a>
+        <a href="mailto:soporte@laruletacaliente.com">Contacto</a>
+      </nav>
+    </div>
+    <p class="footer-legal"><span class="age">18+</span> Sitio solo para adultos. © 2026 La Ruleta Caliente.</p>
+  </footer>
+
+  <!-- ================= VENTANAS ================= -->
+
+  <!-- Aviso de edad -->
+  <div id="ageGate" class="overlay" hidden>
+    <div class="modal center-text">
+      <img src="/logo.svg" alt="" width="64" height="64">
+      <h2>Contenido para adultos</h2>
+      <p class="muted">La Ruleta Caliente es un sitio solo para <strong>mayores de 18 años</strong> y puede mostrar desnudos y contenido sexual.</p>
+      <button class="btn primary lg wide" id="ageYes">Soy mayor de 18 años · Entrar</button>
+      <a class="btn ghost wide" href="https://www.google.com" rel="noopener">Salir</a>
+    </div>
+  </div>
+
+  <!-- Entrar / Crear cuenta -->
+  <div id="authModal" class="overlay" hidden>
+    <div class="modal">
+      <button class="close" data-close aria-label="Cerrar"><svg class="i"><use href="#i-x"/></svg></button>
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="register" role="tab" type="button">Crear cuenta</button>
+        <button class="tab" data-tab="login" role="tab" type="button">Entrar</button>
+      </div>
+      <form id="authForm" novalidate>
+        <label class="field">Email
+          <input type="email" id="authEmail" autocomplete="email" required>
+        </label>
+        <label class="field">Contraseña
+          <input type="password" id="authPassword" autocomplete="new-password" minlength="8" required>
+          <span class="hint register-only">Mínimo 8 caracteres</span>
+        </label>
+        <div class="register-only">
+          <p class="field-label">Soy</p>
+          <div class="chips" id="myGender">
+            <button type="button" class="chip" data-g="mujer">Mujer</button>
+            <button type="button" class="chip" data-g="hombre">Hombre</button>
+            <button type="button" class="chip" data-g="trans">Transexual</button>
+            <button type="button" class="chip" data-g="pareja">Pareja</button>
+          </div>
+          <label class="check">
+            <input type="checkbox" id="authTerms">
+            <span>Tengo 18 años o más y acepto los <a href="/terminos" target="_blank">Términos</a>, la <a href="/privacidad" target="_blank">Privacidad</a> y las <a href="/normas" target="_blank">Normas de la comunidad</a>.</span>
+          </label>
+        </div>
+        <p class="form-error" id="authError" hidden></p>
+        <button type="submit" class="btn primary lg wide" id="authSubmit">Crear cuenta gratis</button>
+        <p class="hint center-text login-only">¿Olvidaste tu contraseña? Escríbenos a <a href="mailto:soporte@laruletacaliente.com">soporte@laruletacaliente.com</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Premium -->
+  <div id="premiumModal" class="overlay" hidden>
+    <div class="modal center-text">
+      <button class="close" data-close aria-label="Cerrar"><svg class="i"><use href="#i-x"/></svg></button>
+      <span class="badge-gold"><svg class="i"><use href="#i-star"/></svg>PREMIUM</span>
+      <h2>Elige a quién quieres ver</h2>
+      <p class="price"><span class="priceText">19,99 €</span><small>/mes</small></p>
+      <ul class="checklist">
+        <li><svg class="i"><use href="#i-check"/></svg>Filtra por mujeres, hombres, transexuales o parejas</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Válido en todos tus dispositivos</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Cancela cuando quieras</li>
+      </ul>
+      <p class="field-label">Elige cómo pagar</p>
+      <div class="pay-methods">
+        <button id="payCard" class="pay primary" type="button">
+          <span class="pay-title">💳 Tarjeta · Google Pay · Apple Pay</span>
+          <span class="pay-sub"><span class="priceText">19,99 €</span>/mes · se renueva cada mes</span>
+        </button>
+        <button id="payCrypto" class="pay" type="button">
+          <span class="pay-title">₿ Criptomonedas</span>
+          <span class="pay-sub"><span class="priceText">19,99 €</span> por <span class="passDays">30</span> días · pago único</span>
+        </button>
+      </div>
+      <p id="payWait" class="hint" hidden>Esperando la confirmación del pago…</p>
+      <p id="demoNote" class="hint" hidden>Modo demo: el pago se simula, no se cobra nada.</p>
+    </div>
+  </div>
+
+  <!-- Denunciar -->
+  <div id="reportModal" class="overlay" hidden>
+    <div class="modal">
+      <button class="close" data-close aria-label="Cerrar"><svg class="i"><use href="#i-x"/></svg></button>
+      <h2 class="with-icon"><svg class="i accent"><use href="#i-flag"/></svg>Denunciar</h2>
+      <p class="muted">Cortaremos la conversación y no volveréis a coincidir. Nuestro equipo revisará la denuncia.</p>
+      <form id="reportForm">
+        <div class="reasons">
+          <label class="reason"><input type="radio" name="reason" value="burlas"><span>Burlas o insultos</span></label>
+          <label class="reason"><input type="radio" name="reason" value="acoso"><span>Acoso</span></label>
+          <label class="reason"><input type="radio" name="reason" value="homofobia"><span>Homofobia o transfobia</span></label>
+          <label class="reason"><input type="radio" name="reason" value="menor"><span>Menor de edad o contenido ilegal</span></label>
+          <label class="reason"><input type="radio" name="reason" value="otro"><span>Otro motivo</span></label>
+        </div>
+        <label class="field">Cuéntanos qué ha pasado (opcional)
+          <textarea id="reportComment" maxlength="500" rows="3"></textarea>
+        </label>
+        <p class="form-error" id="reportError" hidden></p>
+        <button type="submit" class="btn primary lg wide">Enviar denuncia</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cuenta restringida -->
+  <div id="restrictedModal" class="overlay" hidden>
+    <div class="modal center-text">
+      <svg class="i xl accent"><use href="#i-shield"/></svg>
+      <h2 id="restrictedTitle">Cuenta suspendida</h2>
+      <p class="muted" id="restrictedText"></p>
+      <p class="hint">Si crees que es un error, escríbenos a <a href="mailto:soporte@laruletacaliente.com">soporte@laruletacaliente.com</a>.</p>
+      <button class="btn ghost wide" data-close>Entendido</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
   <script src="/socket.io/socket.io.js"></script>
-  <script src="app.js"></script>
+  <script src="/app.js"></script>
 </body>
 </html>
