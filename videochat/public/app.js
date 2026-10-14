@@ -387,9 +387,9 @@ function renderWatermark() {
   const wm = $('watermark');
   if (!connected || !me?.watermark) { wm.hidden = true; return; }
   const stamp = new Date().toLocaleString(I18N.lang, { dateStyle: 'short', timeStyle: 'short' });
-  const text = `${me.watermark} · laruletacaliente.com · ${stamp}`;
+  const text = `${me.watermark} · ${stamp}`;
   wm.innerHTML = '';
-  for (let i = 0; i < 36; i++) {
+  for (let i = 0; i < 30; i++) {
     const span = document.createElement('span');
     span.textContent = text;
     wm.appendChild(span);
@@ -397,7 +397,8 @@ function renderWatermark() {
   wm.hidden = false;
 }
 
-// La marca de agua se mueve poco a poco para que no se pueda tapar o recortar
+// La marca de agua cambia de sitio cada 30 s para que no se pueda tapar o recortar
+// (entre medias está quieta: así, en una grabación, se puede promediar y leer mejor)
 function moveWatermark() {
   const wm = $('watermark');
   wm.style.setProperty('--wx', `${Math.round((Math.random() - 0.5) * 80)}px`);
@@ -407,7 +408,7 @@ function moveWatermark() {
 function startWatermark() {
   renderWatermark();
   clearInterval(watermarkTimer);
-  watermarkTimer = setInterval(() => { moveWatermark(); }, 6000);
+  watermarkTimer = setInterval(() => { moveWatermark(); }, 30000);
 }
 
 function stopWatermark() {
@@ -832,7 +833,7 @@ function connectSocket() {
     resetMessages();
     setStatus('');
     addMsg(t('msg.connected'), 'sys');
-    if (me?.watermark) addMsg(t('prot.notice', { code: me.watermark }), 'sys');
+    addMsg(t('prot.notice'), 'sys');
     renderPartner();
     if (initiator) {
       await pc.setLocalDescription(await pc.createOffer());

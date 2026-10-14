@@ -61,6 +61,7 @@
       <button class="tab active" data-view="reports-open">Pendientes</button>
       <button class="tab" data-view="reports-closed">Resueltas</button>
       <button class="tab" data-view="users">Usuarios</button>
+      <button class="tab" data-view="reveal">Revelar código</button>
     </div>
 
     <div class="toolbar" id="userSearch" hidden>
@@ -69,6 +70,17 @@
     </div>
 
     <div id="list"></div>
+
+    <section id="revealView" hidden>
+      <p class="muted">Sube una captura o una grabación filtrada. La web aumenta el contraste para que se lea la marca de agua invisible con el código de la cuenta que grabó (formato <b>XXXX-XXXX</b>). Después búscalo en «Usuarios».</p>
+      <div class="toolbar">
+        <input type="file" id="revealFile" accept="image/*,video/*">
+        <label class="muted">Intensidad <input type="range" id="revealGain" min="10" max="120" value="40"></label>
+      </div>
+      <video id="revealVideo" controls muted playsinline hidden style="max-width:100%;border-radius:12px"></video>
+      <p><button class="btn ghost sm" id="revealFrame" hidden>Analizar desde este momento (4 s)</button></p>
+      <canvas id="revealCanvas" style="max-width:100%;border-radius:12px;background:#000"></canvas>
+    </section>
   </main>
 
   <div id="toast" class="toast" role="status" hidden></div>

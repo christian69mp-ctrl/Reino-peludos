@@ -29,7 +29,7 @@ function securityHeaders(_req, res, next) {
       "default-src 'self'",
       "script-src 'self'",
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data:",
+      "img-src 'self' data: blob:",
       "media-src 'self' blob: mediastream:",
       "connect-src 'self' ws: wss:",
       "font-src 'self'",

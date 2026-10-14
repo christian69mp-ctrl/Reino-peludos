@@ -223,11 +223,13 @@ body.in-chat .site-footer { display: none; }
 .remote { user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
 .remote video { pointer-events: none; }
 .watermark {
+  /* Invisible: con "difference" cada píxel cambia solo --wm-level niveles de 255 (≈1 %). El ojo no
+     lo nota, pero en una captura o grabación se lee subiendo el contraste (panel /admin → Revelar). */
   position: absolute; inset: -20%; z-index: 1; pointer-events: none;
-  display: flex; flex-wrap: wrap; align-content: space-around; justify-content: space-around; gap: 40px 60px;
-  transform: rotate(-24deg) translate(var(--wx, 0px), var(--wy, 0px)); transition: transform 2s ease;
-  color: rgba(255, 255, 255, .16); font-weight: 800; font-size: clamp(12px, 1.6vw, 18px); letter-spacing: .06em;
-  text-shadow: 0 0 2px rgba(0, 0, 0, .35); white-space: nowrap;
+  display: flex; flex-wrap: wrap; align-content: space-around; justify-content: space-around; gap: 60px 80px;
+  transform: rotate(-24deg) translate(var(--wx, 0px), var(--wy, 0px)); transition: transform 4s ease;
+  color: rgb(var(--wm-level, 2), var(--wm-level, 2), var(--wm-level, 2)); mix-blend-mode: difference;
+  font-weight: 800; font-size: clamp(22px, 3vw, 36px); letter-spacing: .1em; white-space: nowrap;
 }
 .remote.shielded video { filter: blur(40px) brightness(.6); }
 .shield { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; text-align: center; padding: 20px; font-weight: 700; background: rgba(12, 10, 15, .4); }

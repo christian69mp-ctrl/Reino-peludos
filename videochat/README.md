@@ -37,8 +37,13 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   readmitir. Al suspender o expulsar, la persona sale del chat al instante.
 - **Protección de la imagen** (ningún navegador puede impedir grabar la pantalla; esto disuade y
   permite identificar a quien lo haga):
-  - Marca de agua sobre el vídeo con el **código de cuenta de quien mira** (p. ej. `7F3A-91C2`), la
-    web y la hora; se mueve sola. En `/admin` → Usuarios se busca una cuenta por ese código.
+  - **Marca de agua invisible** sobre el vídeo con el **código de cuenta de quien mira** (p. ej.
+    `7F3A-91C2`) y la hora. Cambia cada píxel solo 2 niveles de 255 (no se ve ni molesta) y se
+    mueve cada 30 s. Para leerla: `/admin` → **Revelar código** → subir la captura o la grabación
+    filtrada (en vídeo promedia 4 s de fotogramas). Luego se busca la cuenta en «Usuarios».
+    Probado: con capturas de pantalla se lee; en grabaciones de vídeo comprimidas, a nivel 2 **no**
+    se lee. Si se prefiere que sobreviva a grabaciones, subir `--wm-level` a 4 en `public/style.css`
+    (se nota muy levemente en fondos lisos). Nivel 3 es intermedio.
   - El vídeo se difumina si la persona sale de la ventana o pulsa Imprimir pantalla /
     Cmd+Shift+3/4/5 / Win+Shift+S. Eso avisa a la otra persona y suma un intento de captura en la
     cuenta (visible en `/admin`).
