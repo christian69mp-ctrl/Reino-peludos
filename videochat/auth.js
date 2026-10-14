@@ -94,6 +94,7 @@ function routes(app) {
     if (!GENDERS.includes(gender)) return res.status(400).json({ code: 'gender', error: 'Elige qué eres: mujer, hombre, transexual o pareja' });
     if (adult !== true || terms !== true) return res.status(400).json({ code: 'terms', error: 'Debes confirmar que eres mayor de edad y aceptar las normas' });
     if (store.getUserByEmail(email)) return res.status(409).json({ code: 'exists', error: 'Ya existe una cuenta con ese email' });
+    if (store.isEmailHashBanned(sha256(email))) return res.status(403).json({ code: 'bannedEmail' });
 
     const user = store.createUser({
       email,
@@ -161,4 +162,4 @@ function routes(app) {
   });
 }
 
-module.exports = { routes, requireUser, userFromToken, restriction, publicUser, likesOf, bearer, GENDERS };
+module.exports = { routes, requireUser, userFromToken, restriction, publicUser, likesOf, checkPassword, bearer, GENDERS };

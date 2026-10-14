@@ -33,6 +33,9 @@
       <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
       <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></symbol>
       <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M9.9 4.2A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.7 2.7"/><path d="M6.6 6.6A13.5 13.5 0 0 0 2 12s3 8 10 8a9.7 9.7 0 0 0 5.4-1.6"/><path d="M14.1 14.1a3 3 0 1 1-4.2-4.2"/><path d="m2 2 20 20"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
       <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
       <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></symbol>
       <symbol id="i-languages" viewBox="0 0 24 24"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></symbol>
@@ -58,6 +61,7 @@
       <div id="userActions" class="row" hidden>
         <button class="btn gold sm" id="premiumBtn" data-premium><svg class="i"><use href="#i-star"/></svg><span data-i18n="btn.getPremium">Go Premium</span></button>
         <button class="btn gold-ghost sm" id="manageBtn" hidden><svg class="i"><use href="#i-star"/></svg><span data-i18n="btn.premium">Premium</span></button>
+        <button class="btn ghost sm icon-only" id="accountBtn" data-i18n-aria="btn.account" aria-label="My account"><svg class="i"><use href="#i-user"/></svg></button>
         <button class="btn ghost sm icon-only" id="logoutBtn" data-i18n-aria="btn.logout" aria-label="Log out"><svg class="i"><use href="#i-logout"/></svg></button>
       </div>
     </div>
@@ -185,7 +189,9 @@
   <main id="chatView" class="chat" hidden>
     <section class="stage">
       <div class="remote" id="remote">
-        <video id="remoteVideo" autoplay playsinline></video>
+        <video id="remoteVideo" autoplay playsinline disablepictureinpicture disableremoteplayback controlslist="nodownload noremoteplayback noplaybackrate" draggable="false"></video>
+        <div class="watermark" id="watermark" aria-hidden="true" hidden></div>
+        <div class="shield" id="shield" hidden><span data-i18n="prot.hidden">🔒 Video hidden while you are not on this window</span></div>
         <div class="partner-info" id="partnerInfo" hidden>
           <span class="partner-tag" id="partnerTag"></span>
           <span class="partner-likes" id="partnerLikes"></span>
@@ -414,6 +420,7 @@
         <div class="reasons">
           <label class="reason"><input type="radio" name="reason" value="burlas"><span data-i18n="rep.burlas">Mockery or insults</span></label>
           <label class="reason"><input type="radio" name="reason" value="acoso"><span data-i18n="rep.acoso">Harassment</span></label>
+          <label class="reason"><input type="radio" name="reason" value="grabacion"><span data-i18n="rep.grabacion">Recording or screenshots without permission</span></label>
           <label class="reason"><input type="radio" name="reason" value="homofobia"><span data-i18n="rep.homofobia">Homophobia or transphobia</span></label>
           <label class="reason"><input type="radio" name="reason" value="menor"><span data-i18n="rep.menor">Minor or illegal content</span></label>
           <label class="reason"><input type="radio" name="reason" value="otro"><span data-i18n="rep.otro">Other reason</span></label>
@@ -423,6 +430,33 @@
         </label>
         <p class="form-error" id="reportError" hidden></p>
         <button type="submit" class="btn primary lg wide" data-i18n="rep.submit">Send report</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Mi cuenta -->
+  <div id="accountModal" class="overlay" hidden>
+    <div class="modal">
+      <button class="close" data-close data-i18n-aria="btn.close"><svg class="i"><use href="#i-x"/></svg></button>
+      <h2 data-i18n="btn.account">My account</h2>
+      <dl class="account-list">
+        <dt data-i18n="auth.email">Email</dt><dd id="accEmail"></dd>
+        <dt data-i18n="acc.premium">Premium</dt><dd id="accPremium"></dd>
+        <dt data-i18n="acc.age">Age</dt><dd id="accAge"></dd>
+        <dt data-i18n="acc.likes">Your likes</dt><dd id="accLikes"></dd>
+        <dt data-i18n="acc.code">Your protection code</dt><dd><b id="accCode" class="code"></b></dd>
+      </dl>
+      <p class="hint" data-i18n="acc.codeHelp">It appears over the videos you watch.</p>
+      <h3 class="acc-section" data-i18n="acc.data">Your data</h3>
+      <button class="btn ghost wide" id="exportBtn"><svg class="i"><use href="#i-download"/></svg><span data-i18n="acc.export">Download my data</span></button>
+      <button class="btn danger-ghost wide" id="deleteOpen"><svg class="i"><use href="#i-trash"/></svg><span data-i18n="acc.delete">Delete my account</span></button>
+      <form id="deleteForm" class="delete-box" hidden novalidate>
+        <p class="notice warn" data-i18n="acc.deleteText">Your account and your data will be deleted.</p>
+        <label class="field"><span data-i18n="acc.deletePassword">Enter your password to confirm</span>
+          <input type="password" id="deletePassword" autocomplete="current-password" required>
+        </label>
+        <p class="form-error" id="deleteError" hidden></p>
+        <button type="submit" class="btn danger wide" id="deleteSubmit" data-i18n="acc.deleteConfirm">Delete permanently</button>
       </form>
     </div>
   </div>

@@ -14,6 +14,7 @@ const REASONS = {
   burlas: 'Burlas o insultos',
   acoso: 'Acoso',
   homofobia: 'Homofobia o transfobia',
+  grabacion: 'Grabación o capturas sin permiso',
   menor: 'Menor de edad o contenido ilegal',
   otro: 'Otro motivo',
 };
@@ -79,6 +80,8 @@ function userSummary(user) {
     reportsReceived: reports.length,
     reportsOpen: reports.filter((r) => r.status === 'open').length,
     age: user.age?.status || 'none',
+    code: user.id.slice(1, 9).toUpperCase().replace(/^(.{4})/, '$1-'),
+    captureAttempts: user.captureAttempts || 0,
   };
 }
 
@@ -142,7 +145,8 @@ function routes(app) {
   app.get('/api/admin/users', requireAdmin, (req, res) => {
     const q = String(req.query.q || '').trim().toLowerCase();
     const list = store.listUsers()
-      .filter((u) => !q || u.email.includes(q) || u.id === q)
+      // también se busca por el código de marca de agua (p. ej. "7F3A-91C2") que sale en grabaciones filtradas
+      .filter((u) => !q || u.email.includes(q) || u.id === q || u.id.includes(q.replace(/[^a-f0-9]/g, '') || '¬'))
       .sort((a, b) => b.createdAt - a.createdAt)
       .slice(0, 100)
       .map(userSummary);

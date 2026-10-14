@@ -35,6 +35,22 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
 - **Panel de moderación** en `/admin` (con `ADMIN_PASSWORD`): denuncias pendientes (las urgentes
   primero), conversación denunciada, y botones para descartar, suspender 1 o 7 días, expulsar o
   readmitir. Al suspender o expulsar, la persona sale del chat al instante.
+- **Protección de la imagen** (ningún navegador puede impedir grabar la pantalla; esto disuade y
+  permite identificar a quien lo haga):
+  - Marca de agua sobre el vídeo con el **código de cuenta de quien mira** (p. ej. `7F3A-91C2`), la
+    web y la hora; se mueve sola. En `/admin` → Usuarios se busca una cuenta por ese código.
+  - El vídeo se difumina si la persona sale de la ventana o pulsa Imprimir pantalla /
+    Cmd+Shift+3/4/5 / Win+Shift+S. Eso avisa a la otra persona y suma un intento de captura en la
+    cuenta (visible en `/admin`).
+  - Sin imagen en imagen, sin descargar, sin menú contextual ni arrastrar sobre el vídeo.
+  - Nuevo motivo de denuncia: «Grabación o capturas sin permiso».
+- **Protección de datos (RGPD)**:
+  - «Mi cuenta»: ver datos, **descargar mis datos** (JSON) y **eliminar mi cuenta** (pide la
+    contraseña). Los pagos se conservan sin datos personales; si la cuenta estaba expulsada se
+    guarda solo un hash del email para que no pueda volver a registrarse.
+  - Limpieza automática diaria: chat de denuncias resueltas a los 180 días, IP de registro a los 90.
+  - Cabeceras de seguridad: CSP (solo código propio), HSTS con HTTPS, sin iframes, sin compartir
+    pantalla desde la web.
 - **Páginas legales** en los 6 idiomas: `/normas`, `/terminos` y `/privacidad`. Cada página lleva los
   6 textos (un `<article lang="…">` por idioma) y `public/legal.js` muestra el del idioma de la web.
   Las traducciones indican que, si hay diferencias, prevalece la versión en español.
@@ -62,6 +78,7 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
 - `translate.js` — traducción de mensajes del chat (DeepL o LibreTranslate).
 - `age.js` — verificación de edad con Veriff.
 - `mailer.js` — envío de emails (recuperar contraseña).
+- `privacy.js` — cabeceras de seguridad, descargar/borrar datos, limpieza automática y código de marca de agua.
 - `public/` — la web: `index.html` (portada + chat), `app.js`, `style.css`, `admin.html`,
   páginas legales y `logo.svg`.
 

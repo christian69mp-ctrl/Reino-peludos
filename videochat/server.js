@@ -8,22 +8,14 @@ const payments = require('./payments');
 const moderation = require('./moderation');
 const translate = require('./translate');
 const age = require('./age');
+const privacy = require('./privacy');
 
 const PORT = process.env.PORT || 3000;
 
 const app = express();
 app.set('trust proxy', true);
 app.disable('x-powered-by');
-app.use((_req, res, next) => {
-  res.set({
-    'X-Content-Type-Options': 'nosniff',
-    'Referrer-Policy': 'strict-origin-when-cross-origin',
-    'X-Frame-Options': 'DENY',
-    'Permissions-Policy': 'camera=(self), microphone=(self)',
-  });
-  next();
-});
-// rawBody: el webhook de Veriff se firma sobre el cuerpo exacto recibido
+app.use(privacy.securityHeaders);
 app.use(express.json({ limit: '50kb', verify: (req, _res, buf) => { req.rawBody = buf; } }));
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 // Tipografía servida desde el propio servidor (sin llamadas a Google)
@@ -37,6 +29,7 @@ payments.routes(app, process.env.BASE_URL);
 moderation.routes(app);
 translate.routes(app);
 age.routes(app, process.env.BASE_URL);
+privacy.routes(app);
 
 // Qué funciones opcionales están activas
 app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled }));
@@ -48,6 +41,7 @@ app.get('/api/me', auth.requireUser, (req, res) => {
     ...payments.premiumInfo(req.user.id),
     restriction: auth.restriction(req.user),
     age: age.publicAge(req.user),
+    watermark: privacy.watermarkCode(req.user),
   });
 });
 
@@ -152,6 +146,7 @@ function kick(userId, restriction) {
 }
 moderation.setOnRestrict(kick);
 age.setOnRestrict(kick);
+privacy.setOnDeleted((userId) => kick(userId, { type: 'deleted' }));
 
 io.use((socket, next) => {
   const user = auth.userFromToken(socket.handshake.auth?.token);
@@ -227,6 +222,18 @@ io.on('connection', (socket) => {
     }
     socket.emit('reaction', { type, from: 'me', partnerLikes: likes });
     partner.emit('reaction', { type, from: 'them', myLikes: likes });
+  });
+
+  // Intento de captura de pantalla detectado en el navegador (Imprimir pantalla,
+  // Cmd+Shift+3/4/5…): se apunta en la cuenta y se avisa a la otra persona
+  socket.on('capture-attempt', () => {
+    const now = Date.now();
+    if (now - (socket.data.lastCapture || 0) < 5000) return;
+    socket.data.lastCapture = now;
+    const user = store.getUser(socket.data.uid);
+    if (user) store.updateUser(user.id, { captureAttempts: (user.captureAttempts || 0) + 1, lastCaptureAt: now });
+    const partnerId = partners.get(socket.id);
+    if (partnerId) io.to(partnerId).emit('partner-capture');
   });
 
   // Denuncia a la persona actual: se guarda con el chat como prueba, se corta

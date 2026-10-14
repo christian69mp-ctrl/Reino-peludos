@@ -93,6 +93,8 @@ function renderDynamicTexts() {
   renderMyLikes();
   refreshOnline();
   if (!$('ageModal').hidden) renderAge();
+  if (!$('accountModal').hidden) renderAccount();
+  if (connected) renderWatermark();
 }
 
 document.addEventListener('langchange', () => {
@@ -312,7 +314,136 @@ async function pollAge() {
   agePolling = false;
   await refreshMe();
   if (!$('ageModal').hidden) renderAge();
+  if (!$('accountModal').hidden) renderAccount();
+  if (connected) renderWatermark();
 }
+
+// ---------- Mi cuenta y datos personales ----------
+function renderAccount() {
+  if (!me) return;
+  $('accEmail').textContent = me.user.email;
+  $('accPremium').textContent = me.premium ? t('acc.premiumUntil', { date: dateText(me.expires) }) : t('acc.premiumNo');
+  $('accAge').textContent = me.age?.status === 'approved' ? t('acc.ageOk') : t('acc.ageNo');
+  $('accLikes').textContent = `👍 ${me.user.likes?.like || 0}  ❤️ ${me.user.likes?.love || 0}`;
+  $('accCode').textContent = me.watermark || '';
+}
+
+$('accountBtn').addEventListener('click', async () => {
+  await refreshMe();
+  if (!me) return;
+  renderAccount();
+  $('deleteForm').hidden = true;
+  $('deleteOpen').hidden = false;
+  openModal('accountModal');
+});
+
+// Descarga un JSON con todos los datos de la cuenta (derecho de acceso y portabilidad)
+$('exportBtn').addEventListener('click', async () => {
+  try {
+    const r = await fetch('/api/me/export', { headers: { Authorization: `Bearer ${token}` } });
+    if (!r.ok) throw new Error();
+    const url = URL.createObjectURL(await r.blob());
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'la-ruleta-caliente-my-data.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } catch {
+    toast(t('err.generic'));
+  }
+});
+
+$('deleteOpen').addEventListener('click', () => {
+  $('deleteOpen').hidden = true;
+  $('deleteForm').hidden = false;
+  $('deleteError').hidden = true;
+  $('deletePassword').value = '';
+  setTimeout(() => $('deletePassword').focus(), 50);
+});
+
+$('deleteForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  $('deleteSubmit').disabled = true;
+  const res = await api('/api/me/delete', { method: 'POST', body: { password: $('deletePassword').value } });
+  $('deleteSubmit').disabled = false;
+  if (!res.ok) { $('deleteError').textContent = errorText(res); $('deleteError').hidden = false; return; }
+  closeModal('accountModal');
+  logout(false);
+  toast(t('acc.deleted'));
+});
+
+// ---------- Protección de la imagen ----------
+// Ningún navegador permite impedir que el sistema grabe la pantalla. Lo que sí
+// hacemos: marca de agua con el código de quien mira (si graba, se sabe quién
+// fue), difuminar el vídeo cuando no estás en la ventana y avisar al detectar
+// las teclas de captura.
+let windowBlurred = false;
+let captureFlashUntil = 0;
+let watermarkTimer = null;
+
+function renderWatermark() {
+  const wm = $('watermark');
+  if (!connected || !me?.watermark) { wm.hidden = true; return; }
+  const stamp = new Date().toLocaleString(I18N.lang, { dateStyle: 'short', timeStyle: 'short' });
+  const text = `${me.watermark} · laruletacaliente.com · ${stamp}`;
+  wm.innerHTML = '';
+  for (let i = 0; i < 36; i++) {
+    const span = document.createElement('span');
+    span.textContent = text;
+    wm.appendChild(span);
+  }
+  wm.hidden = false;
+}
+
+// La marca de agua se mueve poco a poco para que no se pueda tapar o recortar
+function moveWatermark() {
+  const wm = $('watermark');
+  wm.style.setProperty('--wx', `${Math.round((Math.random() - 0.5) * 80)}px`);
+  wm.style.setProperty('--wy', `${Math.round((Math.random() - 0.5) * 80)}px`);
+}
+
+function startWatermark() {
+  renderWatermark();
+  clearInterval(watermarkTimer);
+  watermarkTimer = setInterval(() => { moveWatermark(); }, 6000);
+}
+
+function stopWatermark() {
+  clearInterval(watermarkTimer);
+  $('watermark').hidden = true;
+}
+
+function updateShield() {
+  const shielded = connected && (document.hidden || windowBlurred || Date.now() < captureFlashUntil);
+  $('remote').classList.toggle('shielded', shielded);
+  $('shield').hidden = !shielded;
+}
+
+document.addEventListener('visibilitychange', updateShield);
+window.addEventListener('blur', () => { windowBlurred = true; updateShield(); });
+window.addEventListener('focus', () => { windowBlurred = false; updateShield(); });
+
+function onCaptureKey() {
+  if (!connected) return;
+  captureFlashUntil = Date.now() + 3000;
+  updateShield();
+  setTimeout(updateShield, 3100);
+  toast(t('prot.captureWarn'));
+  socket.emit('capture-attempt');
+}
+
+// Imprimir pantalla (Windows/Linux) y Cmd+Shift+3/4/5 (Mac), Win+Shift+S
+document.addEventListener('keyup', (e) => { if (e.key === 'PrintScreen') onCaptureKey(); });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'PrintScreen') { onCaptureKey(); return; }
+  if (e.shiftKey && (e.metaKey || e.ctrlKey) && ['3', '4', '5', 's', 'S'].includes(e.key)) onCaptureKey();
+});
+
+// Sin menú contextual ni arrastrar sobre el vídeo de la otra persona
+$('remote').addEventListener('contextmenu', (e) => e.preventDefault());
+$('remote').addEventListener('dragstart', (e) => e.preventDefault());
 
 // ---------- Vistas ----------
 function showLanding() {
@@ -610,6 +741,8 @@ function setConnected(value) {
   $('sendBtn').disabled = !value;
   $('reportBtn').hidden = !value;
   $('reactions').hidden = !value;
+  if (value) startWatermark(); else stopWatermark();
+  updateShield();
   if (!value) { partner = null; renderPartner(); }
 }
 
@@ -699,6 +832,7 @@ function connectSocket() {
     resetMessages();
     setStatus('');
     addMsg(t('msg.connected'), 'sys');
+    if (me?.watermark) addMsg(t('prot.notice', { code: me.watermark }), 'sys');
     renderPartner();
     if (initiator) {
       await pc.setLocalDescription(await pc.createOffer());
@@ -726,7 +860,12 @@ function connectSocket() {
     find();
   });
 
-  socket.on('restricted', (r) => showRestricted(r));
+  socket.on('restricted', (r) => { if (r.type !== 'deleted') showRestricted(r); });
+
+  socket.on('partner-capture', () => {
+    addMsg(t('prot.partnerCapture'), 'sys');
+    toast(t('prot.partnerCapture'));
+  });
 }
 
 // Cada «Parar» o cierre de sesión cancela un arranque que aún esté en marcha

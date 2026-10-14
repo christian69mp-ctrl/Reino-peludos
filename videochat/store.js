@@ -16,6 +16,7 @@ data.purchases ||= {};   // purchaseId de Segpay -> orderId
 data.users ||= {};       // userId -> usuario
 data.emails ||= {};      // email -> userId
 data.reports ||= {};     // reportId -> denuncia
+data.bannedEmails ||= [];// hash de emails de cuentas expulsadas que se borraron (evita volver a registrarse)
 
 let saveTimer = null;
 function save() {
@@ -81,6 +82,22 @@ module.exports = {
     return data.users[id];
   },
   listUsers: () => Object.values(data.users),
+  // Borra la cuenta. Los pedidos se conservan sin dato personal (obligación de
+  // facturación) y las denuncias se mantienen para la moderación.
+  deleteUser(id) {
+    const user = data.users[id];
+    if (!user) return false;
+    delete data.emails[user.email];
+    delete data.users[id];
+    for (const o of Object.values(data.orders)) if (o.userId === id) o.userId = null;
+    save();
+    return true;
+  },
+  banEmailHash(hash) {
+    if (!data.bannedEmails.includes(hash)) { data.bannedEmails.push(hash); save(); }
+  },
+  isEmailHashBanned: (hash) => data.bannedEmails.includes(hash),
+  save,
 
   // ---- Denuncias ----
   createReport(fields) {
