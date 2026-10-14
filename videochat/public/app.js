@@ -107,15 +107,18 @@ function openPremium() { $('premiumModal').classList.remove('hidden'); }
 $('premiumBtn').addEventListener('click', openPremium);
 $('closePremium').addEventListener('click', () => $('premiumModal').classList.add('hidden'));
 
+const money = (n) => `${n.toFixed(2).replace('.', ',')} €`;
 fetch('/api/plan').then((r) => r.json()).then((plan) => {
-  $('priceText').textContent = `${plan.price.toFixed(2).replace('.', ',')} €`;
-  $('demoNote').classList.toggle('hidden', !plan.demo);
+  document.querySelectorAll('.priceText').forEach((el) => { el.textContent = money(plan.price); });
+  document.querySelectorAll('.passDays').forEach((el) => { el.textContent = plan.passDays; });
+  $('demoNote').classList.toggle('hidden', !(plan.demo.card || plan.demo.crypto));
 }).catch(() => {});
 
 function activatePremium(token) {
   setToken(token);
   setPremium(true);
   $('premiumModal').classList.add('hidden');
+  $('payWait').classList.add('hidden');
   addMsg('⭐ ¡Ya eres Premium! Elige a quién quieres ver.', 'sys');
   // Reconecta para que el servidor reconozca la suscripción
   if (socket) {
@@ -125,36 +128,64 @@ function activatePremium(token) {
   }
 }
 
-$('subscribeBtn').addEventListener('click', async () => {
-  $('subscribeBtn').disabled = true;
+// method: 'card' (tarjeta, Google Pay, Apple Pay) o 'crypto'
+async function pay(method) {
+  const buttons = [$('payCard'), $('payCrypto')];
+  buttons.forEach((b) => { b.disabled = true; });
   try {
-    const res = await (await fetch('/api/checkout', { method: 'POST' })).json();
-    if (res.token) activatePremium(res.token);          // modo demo
-    else if (res.url) { location.href = res.url; return; } // Stripe Checkout
+    const res = await (await fetch(`/api/checkout/${method}`, { method: 'POST' })).json();
+    if (res.token) activatePremium(res.token);             // modo demo
+    else if (res.url) { location.href = res.url; return; } // página de pago
     else alert(res.error || 'No se pudo iniciar el pago');
   } catch {
     alert('No se pudo iniciar el pago');
   }
-  $('subscribeBtn').disabled = false;
-});
+  buttons.forEach((b) => { b.disabled = false; });
+}
+$('payCard').addEventListener('click', () => pay('card'));
+$('payCrypto').addEventListener('click', () => pay('crypto'));
 
 $('manageBtn').addEventListener('click', async () => {
+  const token = getToken();
+  const me = await (await fetch('/api/me', { headers: { Authorization: `Bearer ${token}` } })).json().catch(() => ({}));
+  if (me.type === 'pass') {
+    alert(`Tu Premium está activo hasta el ${new Date(me.expires).toLocaleDateString('es-ES')}.`);
+    return;
+  }
   const res = await (await fetch('/api/portal', {
-    method: 'POST', headers: { Authorization: `Bearer ${getToken()}` },
+    method: 'POST', headers: { Authorization: `Bearer ${token}` },
   })).json().catch(() => ({}));
   if (res.url) location.href = res.url;
   else alert('Tu suscripción Premium está activa.');
 });
 
-// Vuelta desde Stripe tras pagar, o comprobación de una suscripción guardada
+// Las cripto tardan en confirmarse: se consulta cada 5 s durante un máximo de 1 h
+async function waitCryptoPayment(orderId) {
+  openPremium();
+  $('payWait').classList.remove('hidden');
+  const until = Date.now() + 3600 * 1000;
+  while (Date.now() < until) {
+    const res = await (await fetch(`/api/checkout/crypto/confirm?order=${encodeURIComponent(orderId)}`)).json().catch(() => ({}));
+    if (res.token) { activatePremium(res.token); return; }
+    if (!res.pending) break;
+    await new Promise((r) => setTimeout(r, 5000));
+  }
+  $('payWait').classList.add('hidden');
+  alert('No se ha podido confirmar el pago en criptomonedas. Si has pagado, contacta con soporte.');
+}
+
+// Vuelta desde la página de pago, o comprobación de una suscripción guardada
 (async () => {
-  const sessionId = new URLSearchParams(location.search).get('session_id');
+  const params = new URLSearchParams(location.search);
+  const sessionId = params.get('session_id');
+  const cryptoOrder = params.get('crypto_order');
+  if (sessionId || cryptoOrder) history.replaceState(null, '', '/');
   if (sessionId) {
-    history.replaceState(null, '', '/');
-    const res = await (await fetch(`/api/checkout/confirm?session_id=${encodeURIComponent(sessionId)}`)).json().catch(() => ({}));
+    const res = await (await fetch(`/api/checkout/card/confirm?session_id=${encodeURIComponent(sessionId)}`)).json().catch(() => ({}));
     if (res.token) { activatePremium(res.token); return; }
     alert(res.error || 'No se pudo confirmar el pago');
   }
+  if (cryptoOrder) { waitCryptoPayment(cryptoOrder); }
   const token = getToken();
   if (!token) { setPremium(false); return; }
   const me = await (await fetch('/api/me', { headers: { Authorization: `Bearer ${token}` } })).json().catch(() => ({}));

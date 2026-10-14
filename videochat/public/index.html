@@ -30,13 +30,24 @@
       <button class="close" id="closePremium" aria-label="Cerrar">✕</button>
       <span class="badge">PREMIUM</span>
       <h2>Elige a quién quieres ver</h2>
-      <p class="price"><span id="priceText">19,99 €</span><small>/mes</small></p>
+      <p class="price"><span class="priceText">19,99 €</span><small>/mes</small></p>
       <ul class="perks">
         <li>Filtra por mujeres, hombres, transexuales o parejas</li>
         <li>Sin filtro sigues teniendo el chat al azar gratis</li>
         <li>Cancela cuando quieras</li>
       </ul>
-      <button id="subscribeBtn" class="primary wide">Suscribirme</button>
+      <p class="label">Elige cómo pagar:</p>
+      <div class="pay-methods">
+        <button id="payCard" class="pay primary">
+          <span class="pay-title">💳 Tarjeta ·  Google Pay ·  Apple Pay</span>
+          <span class="pay-sub"><span class="priceText">19,99 €</span>/mes · se renueva cada mes</span>
+        </button>
+        <button id="payCrypto" class="pay">
+          <span class="pay-title">₿ Criptomonedas</span>
+          <span class="pay-sub"><span class="priceText">19,99 €</span> por <span class="passDays">30</span> días · Bitcoin, Ethereum, USDT…</span>
+        </button>
+      </div>
+      <p id="payWait" class="small hidden">Esperando la confirmación del pago en criptomonedas…</p>
       <p id="demoNote" class="small hidden">Modo demo: el pago se simula, no se cobra nada.</p>
     </div>
   </div>

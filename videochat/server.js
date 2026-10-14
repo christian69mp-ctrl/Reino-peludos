@@ -9,6 +9,7 @@ const GENDERS = ['mujer', 'hombre', 'trans', 'pareja'];
 
 const app = express();
 app.set('trust proxy', true);
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 payments.routes(app, process.env.BASE_URL);
 

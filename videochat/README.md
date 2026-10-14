@@ -27,28 +27,49 @@ Abre dos pestañas (o dos navegadores) y pulsa «Empezar» en ambas para probarl
 ## Estructura
 
 - `server.js` — Express + Socket.IO: cola, emparejamiento con filtros, reenvío de señales.
-- `payments.js` — suscripción Premium con Stripe (o modo demo).
+- `payments.js` — pagos Premium: Stripe (tarjeta, Google Pay, Apple Pay) y NOWPayments (cripto).
 - `public/` — cliente (HTML, CSS, JS sin frameworks).
 
 ## Pagos
 
-Sin configurar nada funciona en **modo demo**: el botón «Suscribirme» activa Premium
-sin cobrar, para poder probarlo. Para cobrar de verdad con Stripe:
+En la ventana Premium el usuario elige cómo pagar:
+
+| Método | Proveedor | Cómo se cobra |
+|---|---|---|
+| Tarjeta, Google Pay, Apple Pay | Stripe Checkout | 19,99 €/mes, se renueva solo |
+| Criptomonedas (BTC, ETH, USDT…) | NOWPayments | 19,99 € de una vez = 30 días de Premium |
+
+Sin configurar nada todo funciona en **modo demo** (se activa Premium sin cobrar).
+Para cobrar de verdad:
 
 ```bash
-STRIPE_SECRET_KEY=sk_live_...   # o sk_test_... para pruebas
+# Tarjeta / Google Pay / Apple Pay
+STRIPE_SECRET_KEY=sk_live_...
+
+# Criptomonedas
+NOWPAYMENTS_API_KEY=...          # panel de NOWPayments → API keys
+NOWPAYMENTS_IPN_SECRET=...       # panel de NOWPayments → Store settings → IPN secret
+# NOWPAYMENTS_SANDBOX=1          # para probar con el entorno de pruebas
+
 SESSION_SECRET=una-frase-larga-y-secreta   # mantiene válidos los accesos tras reiniciar
-BASE_URL=https://tudominio.com
+BASE_URL=https://tudominio.com              # NOWPayments avisa de los pagos a BASE_URL/api/crypto/ipn
 npm start
 ```
 
-El usuario paga en la página de Stripe, vuelve a la web y queda como Premium en ese
-navegador. Con el botón «⭐ Premium» abre el portal de Stripe para cancelar.
-(Activa el *Customer portal* en el panel de Stripe.)
+- **Google Pay y Apple Pay** aparecen solos en la página de pago de Stripe cuando el
+  dispositivo los tiene. Hay que activarlos en el panel de Stripe (Ajustes → Métodos de
+  pago) y, para Apple Pay, verificar el dominio.
+- Para cancelar la suscripción con tarjeta, el usuario pulsa «⭐ Premium» y se abre el
+  portal de Stripe (actívalo en el panel: *Customer portal*). Con cripto, ese botón
+  muestra hasta qué día tiene Premium.
+- Los pagos cripto tardan unos minutos en confirmarse; al volver a la web, la página
+  espera la confirmación sola. Los pedidos pendientes se guardan en memoria: si el
+  servidor se reinicia en ese rato, el pago hay que activarlo a mano.
 
-**Importante:** Stripe no admite negocios de contenido adulto. Si la web es para adultos
-hay que usar una pasarela especializada (CCBill, Segpay, Verotel…); el cobro está
-aislado en `payments.js` para poder cambiarlo.
+**Importante:** Stripe no admite negocios de contenido adulto. Si la web es para adultos,
+la parte de tarjeta/Google Pay/Apple Pay hay que hacerla con una pasarela especializada
+(CCBill, Segpay, Verotel…). Confirma con ellas que ofrecen Google Pay y Apple Pay. El
+cobro está aislado en `payments.js` para poder cambiarlo.
 
 ## Antes de ponerlo en producción
 
