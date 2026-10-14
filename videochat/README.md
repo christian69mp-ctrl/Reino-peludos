@@ -27,57 +27,64 @@ Abre dos pestañas (o dos navegadores) y pulsa «Empezar» en ambas para probarl
 ## Estructura
 
 - `server.js` — Express + Socket.IO: cola, emparejamiento con filtros, reenvío de señales.
-- `payments.js` — pagos Premium: Stripe (tarjeta, Google Pay, Apple Pay) y NOWPayments (cripto).
+- `payments.js` — pagos Premium con Segpay (tarjeta, Google Pay, Apple Pay y cripto).
+- `store.js` — guarda los pedidos Premium en `data/store.json`.
 - `public/` — cliente (HTML, CSS, JS sin frameworks).
 
-## Pagos
+## Pagos (Segpay)
 
-En la ventana Premium el usuario elige cómo pagar:
+En la ventana Premium el usuario elige cómo pagar. Los dos métodos se cobran con Segpay:
 
-| Método | Proveedor | Cómo se cobra |
+| Botón | Paquete de Segpay | Cómo se cobra |
 |---|---|---|
-| Tarjeta, Google Pay, Apple Pay | Stripe Checkout | 19,99 €/mes, se renueva solo |
-| Criptomonedas (BTC, ETH, USDT…) | NOWPayments | 19,99 € de una vez = 30 días de Premium |
+| Tarjeta · Google Pay · Apple Pay | `SEGPAY_ETICKET_CARD` | 19,99 € cada 30 días, se renueva solo |
+| Criptomonedas | `SEGPAY_ETICKET_CRYPTO` | 19,99 € una vez = 30 días (Segpay no permite cripto recurrente) |
 
-Sin configurar nada todo funciona en **modo demo** (se activa Premium sin cobrar).
-Para cobrar de verdad:
+Sin configurar nada funciona en **modo demo** (se activa Premium sin cobrar).
+
+### Qué configurar en el Merchant Portal de Segpay
+
+1. **Dos payment packages** (o los que te prepare tu comercial de Segpay):
+   - Tarjeta: precio inicial 19,99 € por 30 días y renovación de 19,99 € cada 30 días.
+     Pide que activen **Google Pay y Apple Pay** en ese paquete.
+   - Cripto: 19,99 € por 30 días sin renovación. Pide que activen **cripto** en la cuenta y en el paquete.
+   De cada paquete copia su `x-eticketid` (formato `paquete:precio`, p. ej. `123456:7890`).
+2. **Postbacks** (My Websites → Manage Postbacks), con "Use SSL" y respuesta esperada `OK`:
+   - **Trans Post**:
+     `tudominio.com/api/segpay/postback?key=TU_CLAVE&action=<action>&stage=<stage>&approved=<approved>&trantype=<trantype>&purchaseid=<purchaseid>&orderid=<extra orderid>&iint=<iint>&rint=<rint>`
+   - **Disable**:
+     `tudominio.com/api/segpay/postback?key=TU_CLAVE&type=disable&purchaseid=<purchaseid>`
+   - Activa "Retry postback" para que Segpay reintente si el servidor no responde.
+
+### Variables del servidor
 
 ```bash
-# Tarjeta / Google Pay / Apple Pay
-STRIPE_SECRET_KEY=sk_live_...
-
-# Criptomonedas
-NOWPAYMENTS_API_KEY=...          # panel de NOWPayments → API keys
-NOWPAYMENTS_IPN_SECRET=...       # panel de NOWPayments → Store settings → IPN secret
-# NOWPAYMENTS_SANDBOX=1          # para probar con el entorno de pruebas
-
-SESSION_SECRET=una-frase-larga-y-secreta   # mantiene válidos los accesos tras reiniciar
-BASE_URL=https://tudominio.com              # NOWPayments avisa de los pagos a BASE_URL/api/crypto/ipn
+SEGPAY_ETICKET_CARD=123456:7890     # paquete tarjeta / Google Pay / Apple Pay
+SEGPAY_ETICKET_CRYPTO=123456:7891   # paquete criptomonedas
+SEGPAY_POSTBACK_KEY=una-clave-larga-al-azar   # la misma que pones como key= en los postbacks
+SESSION_SECRET=otra-frase-larga-y-secreta
+BASE_URL=https://tudominio.com
+# SEGPAY_CANCEL_URL=https://cs.segpay.com   # web donde el cliente cancela su suscripción
 npm start
 ```
 
-- **Google Pay y Apple Pay** aparecen solos en la página de pago de Stripe cuando el
-  dispositivo los tiene. Hay que activarlos en el panel de Stripe (Ajustes → Métodos de
-  pago) y, para Apple Pay, verificar el dominio.
-- Para cancelar la suscripción con tarjeta, el usuario pulsa «⭐ Premium» y se abre el
-  portal de Stripe (actívalo en el panel: *Customer portal*). Con cripto, ese botón
-  muestra hasta qué día tiene Premium.
-- Los pagos cripto tardan unos minutos en confirmarse; al volver a la web, la página
-  espera la confirmación sola. Los pedidos pendientes se guardan en memoria: si el
-  servidor se reinicia en ese rato, el pago hay que activarlo a mano.
+### Cómo funciona
 
-**Importante:** Stripe no admite negocios de contenido adulto. Si la web es para adultos,
-la parte de tarjeta/Google Pay/Apple Pay hay que hacerla con una pasarela especializada
-(CCBill, Segpay, Verotel…). Confirma con ellas que ofrecen Google Pay y Apple Pay. El
-cobro está aislado en `payments.js` para poder cambiarlo.
+1. El usuario pulsa un método de pago → el servidor crea un pedido y le manda a la página de
+   Segpay con el número de pedido (`orderid`).
+2. Segpay avisa al servidor de cada cobro, renovación, reembolso, contracargo o baja, y el
+   servidor apunta hasta cuándo dura el Premium. Se guarda en `data/store.json`
+   (haz copia de seguridad de ese fichero).
+3. El usuario vuelve a la web, que espera la confirmación y activa Premium sola.
+4. Cada renovación mensual alarga 30 días más; un reembolso, contracargo o baja lo quita al momento.
 
 ## Antes de ponerlo en producción
 
 - **HTTPS obligatorio**: los navegadores solo dan acceso a la cámara en HTTPS (o localhost).
 - **Servidor TURN** (p. ej. coturn o un servicio gestionado): sin él muchas conexiones
   detrás de NAT/4G fallan. Configúralo con `TURN_URL`, `TURN_USER` y `TURN_PASS`.
-- **Cuentas de usuario y base de datos**: ahora la suscripción queda guardada en el
-  navegador; si el usuario cambia de móvil u ordenador no la recupera.
+- **Cuentas de usuario**: ahora el Premium queda guardado en el navegador donde se pagó;
+  si el usuario cambia de móvil u ordenador no lo recupera.
 - **Moderación**: ya no hay botón de reportar, así que no hay forma de que los usuarios
   avisen de abusos (menores, contenido ilegal). Conviene tener alguna alternativa.
 - **Moderación**: si la web es de contenido adulto, necesitas verificación de edad real

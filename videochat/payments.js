@@ -1,41 +1,45 @@
-// Plan Premium (19,99 €) que permite elegir a quién ver.
+// Plan Premium (19,99 €) que permite elegir a quién ver. Cobro con Segpay.
 //
-// Métodos de pago:
-// - Tarjeta, Google Pay y Apple Pay → Stripe Checkout, suscripción mensual.
-//   Stripe muestra Google Pay / Apple Pay automáticamente en los dispositivos
-//   compatibles (actívalos en el panel de Stripe).
-// - Criptomonedas → NOWPayments, pago único que da 30 días de Premium
-//   (las cripto no permiten cobros automáticos cada mes).
+// Métodos (cada uno es un "payment package" de Segpay con su x-eticketid):
+// - Tarjeta / Google Pay / Apple Pay → SEGPAY_ETICKET_CARD: 19,99 € cada 30 días.
+// - Criptomonedas                    → SEGPAY_ETICKET_CRYPTO: 19,99 € una vez, 30 días
+//   (Segpay no permite suscripciones recurrentes con cripto).
 //
-// Si falta la clave de un proveedor, ese método funciona en modo DEMO: el pago
-// se simula para poder probar la web.
+// Flujo:
+// 1. El servidor crea un pedido y manda al usuario a la página de pago de Segpay
+//    con el id del pedido como variable propia (orderid).
+// 2. Segpay avisa al servidor (postback) de cada cobro, renovación, reembolso o baja,
+//    y el servidor actualiza hasta cuándo dura el Premium de ese pedido.
+// 3. Al volver a la web, el navegador recoge un token firmado con el id del pedido.
+//    En cada conexión se comprueba que el pedido sigue activo.
 //
-// No hay base de datos: tras pagar, el servidor entrega un token firmado.
-// - Tarjeta: el token lleva el id de cliente de Stripe y en cada conexión se
-//   comprueba en Stripe que la suscripción sigue activa.
-// - Cripto: el token lleva la fecha de caducidad (30 días).
+// Si falta la configuración de Segpay funciona en modo DEMO: el pago se simula.
 
 const crypto = require('crypto');
+const express = require('express');
+const store = require('./store');
 
 const PRICE = 19.99;
 const CURRENCY = 'eur';
-const PASS_DAYS = 30;
-const PASS_MS = PASS_DAYS * 24 * 3600 * 1000;
+const PERIOD_DAYS = 30;
+const DAY = 24 * 3600 * 1000;
+const GRACE_MS = DAY; // margen por si la renovación llega con retraso
 
-const CARD_DEMO = !process.env.STRIPE_SECRET_KEY;
-const stripe = CARD_DEMO ? null : require('stripe')(process.env.STRIPE_SECRET_KEY);
-
-const CRYPTO_DEMO = !process.env.NOWPAYMENTS_API_KEY;
-const NOWPAYMENTS_API = process.env.NOWPAYMENTS_SANDBOX
-  ? 'https://api-sandbox.nowpayments.io/v1'
-  : 'https://api.nowpayments.io/v1';
+const PAY_URL = 'https://secure2.segpay.com/billing/poset.cgi';
+const ETICKETS = {
+  card: process.env.SEGPAY_ETICKET_CARD,
+  crypto: process.env.SEGPAY_ETICKET_CRYPTO,
+};
+const POSTBACK_KEY = process.env.SEGPAY_POSTBACK_KEY;
+const CANCEL_URL = process.env.SEGPAY_CANCEL_URL || 'https://cs.segpay.com';
+const DEMO = !ETICKETS.card && !ETICKETS.crypto;
 
 const SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex');
 if (!process.env.SESSION_SECRET) {
-  console.warn('[pagos] SESSION_SECRET no definido: los suscriptores tendrán que volver a activar su acceso tras reiniciar el servidor.');
+  console.warn('[pagos] SESSION_SECRET no definido: los usuarios Premium tendrán que volver a entrar tras reiniciar el servidor.');
 }
-if (CARD_DEMO) console.warn('[pagos] Tarjeta/Google Pay/Apple Pay en modo DEMO. Define STRIPE_SECRET_KEY para cobrar de verdad.');
-if (CRYPTO_DEMO) console.warn('[pagos] Criptomonedas en modo DEMO. Define NOWPAYMENTS_API_KEY y NOWPAYMENTS_IPN_SECRET para cobrar de verdad.');
+if (DEMO) console.warn('[pagos] Modo DEMO: los pagos se simulan. Configura SEGPAY_ETICKET_CARD / SEGPAY_ETICKET_CRYPTO para cobrar de verdad.');
+if (!DEMO && !POSTBACK_KEY) console.warn('[pagos] Falta SEGPAY_POSTBACK_KEY: no se aceptarán los avisos de Segpay.');
 
 function sign(payload) {
   const body = Buffer.from(JSON.stringify(payload)).toString('base64url');
@@ -52,70 +56,72 @@ function verify(token) {
   try { return JSON.parse(Buffer.from(body, 'base64url').toString()); } catch { return null; }
 }
 
-function passToken(extra = {}) {
-  return sign({ pass: true, exp: Date.now() + PASS_MS, ...extra });
+function safeEqual(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string' || a.length !== b.length) return false;
+  return crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b));
+}
+
+function activeOrder(token) {
+  const data = verify(token);
+  const order = data?.oid && store.getOrder(data.oid);
+  if (!order || order.status !== 'active' || order.expires <= Date.now()) return null;
+  return order;
+}
+
+async function isPremium(token) {
+  return !!activeOrder(token);
 }
 
 function originOf(req, baseUrl) {
   return baseUrl || `${req.protocol}://${req.get('host')}`;
 }
 
-function bearer(req) {
-  return req.get('authorization')?.replace(/^Bearer /, '');
+// Segpay: variables propias de máx. 32 caracteres y sin empezar por número
+function newOrderId() {
+  return `o${crypto.randomBytes(12).toString('hex')}`;
 }
 
-// Caché del estado de suscripción para no consultar Stripe en cada conexión
-const cache = new Map(); // customerId -> { active, at }
-const CACHE_MS = 10 * 60 * 1000;
+// Aplica un aviso de Segpay. Los nombres y valores pueden venir en cualquier
+// combinación de mayúsculas/minúsculas.
+function applyPostback(raw) {
+  const p = {};
+  for (const [k, v] of Object.entries(raw)) p[k.toLowerCase()] = String(v ?? '').trim();
+  const lower = (k) => (p[k] || '').toLowerCase();
 
-async function isPremium(token) {
-  const data = verify(token);
-  if (!data) return false;
-  // Pase de 30 días (cripto o demo)
-  if (data.pass) {
-    if (data.demo && !(CARD_DEMO || CRYPTO_DEMO)) return false;
-    return data.exp > Date.now();
+  const purchaseId = p.purchaseid;
+  const orderId = p.orderid || store.orderIdForPurchase(purchaseId);
+  const order = orderId && store.getOrder(orderId);
+  if (!order) return 'unknown-order';
+
+  // Baja por fin de suscripción (postback "Disable")
+  if (lower('type') === 'disable') {
+    store.updateOrder(orderId, { status: 'revoked', revokedAt: Date.now() });
+    return 'revoked';
   }
-  // Suscripción de Stripe
-  if (CARD_DEMO || !data.cid) return false;
-  const hit = cache.get(data.cid);
-  if (hit && Date.now() - hit.at < CACHE_MS) return hit.active;
-  try {
-    const subs = await stripe.subscriptions.list({ customer: data.cid, status: 'active', limit: 1 });
-    const active = subs.data.length > 0;
-    cache.set(data.cid, { active, at: Date.now() });
-    return active;
-  } catch (err) {
-    console.error('[pagos] error consultando Stripe:', err.message);
-    return false;
+
+  const trantype = lower('trantype');
+  const action = lower('action');
+  const approved = lower('approved') === 'yes';
+
+  // Reembolso, contracargo o anulación: se quita el acceso
+  if (trantype === 'credit' || trantype === 'charge' || action === 'void') {
+    store.updateOrder(orderId, { status: 'revoked', revokedAt: Date.now() });
+    return 'revoked';
   }
-}
 
-// ---- Criptomonedas (NOWPayments) ----
-
-// Pedidos cripto: orderId -> { paid, at }. En memoria: tras pagar, el usuario
-// recoge su token al volver a la web. Los pedidos sin recoger caducan en 24 h.
-const cryptoOrders = new Map();
-setInterval(() => {
-  const limit = Date.now() - 24 * 3600 * 1000;
-  for (const [id, o] of cryptoOrders) if (o.at < limit) cryptoOrders.delete(id);
-}, 3600 * 1000).unref();
-
-// Firma de NOWPayments: HMAC-SHA512 del JSON con las claves ordenadas
-function sortKeys(value) {
-  if (Array.isArray(value)) return value.map(sortKeys);
-  if (value && typeof value === 'object') {
-    return Object.keys(value).sort().reduce((acc, k) => { acc[k] = sortKeys(value[k]); return acc; }, {});
+  // Cobro aprobado: alta inicial o renovación
+  if (trantype === 'sale' && action === 'auth' && approved) {
+    const stage = lower('stage');
+    const days = Number(stage === 'initial' ? (p.iint || p.rint) : p.rint) || PERIOD_DAYS;
+    store.updateOrder(orderId, {
+      status: 'active',
+      purchaseId: purchaseId || order.purchaseId,
+      expires: Date.now() + days * DAY + GRACE_MS,
+      lastPayment: Date.now(),
+    });
+    return 'active';
   }
-  return value;
-}
-
-function validIpn(body, signature) {
-  const secret = process.env.NOWPAYMENTS_IPN_SECRET;
-  if (!secret || typeof signature !== 'string') return false;
-  const expected = crypto.createHmac('sha512', secret).update(JSON.stringify(sortKeys(body))).digest('hex');
-  return signature.length === expected.length &&
-    crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
+  return 'ignored';
 }
 
 function routes(app, baseUrl) {
@@ -123,127 +129,69 @@ function routes(app, baseUrl) {
     res.json({
       price: PRICE,
       currency: CURRENCY,
-      passDays: PASS_DAYS,
-      demo: { card: CARD_DEMO, crypto: CRYPTO_DEMO },
+      passDays: PERIOD_DAYS,
+      demo: DEMO,
+      methods: { card: DEMO || !!ETICKETS.card, crypto: DEMO || !!ETICKETS.crypto },
     });
   });
 
-  // ---- Tarjeta / Google Pay / Apple Pay ----
-  app.post('/api/checkout/card', async (req, res) => {
-    if (CARD_DEMO) return res.json({ token: passToken({ demo: true }) });
-    try {
-      const origin = originOf(req, baseUrl);
-      const session = await stripe.checkout.sessions.create({
-        mode: 'subscription',
-        line_items: [{
-          quantity: 1,
-          price_data: {
-            currency: CURRENCY,
-            unit_amount: Math.round(PRICE * 100),
-            recurring: { interval: 'month' },
-            product_data: { name: 'Premium – Elige a quién ver' },
-          },
-        }],
-        success_url: `${origin}/?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${origin}/`,
-      });
-      res.json({ url: session.url });
-    } catch (err) {
-      console.error('[pagos] checkout tarjeta:', err.message);
-      res.status(500).json({ error: 'No se pudo iniciar el pago' });
-    }
-  });
+  // Empieza el pago: crea el pedido y devuelve la URL de Segpay
+  app.post('/api/checkout', (req, res) => {
+    const method = req.body?.method === 'crypto' ? 'crypto' : 'card';
+    const orderId = newOrderId();
 
-  // Vuelta desde Stripe: comprueba el pago y entrega el token Premium
-  app.get('/api/checkout/card/confirm', async (req, res) => {
-    if (CARD_DEMO) return res.status(400).json({ error: 'Modo demo' });
-    try {
-      const session = await stripe.checkout.sessions.retrieve(String(req.query.session_id || ''));
-      if (session.status !== 'complete' || !session.customer) {
-        return res.status(402).json({ error: 'Pago no completado' });
-      }
-      cache.delete(session.customer);
-      res.json({ token: sign({ cid: session.customer }) });
-    } catch {
-      res.status(400).json({ error: 'Sesión de pago no válida' });
+    if (DEMO) {
+      store.createOrder(orderId, { method, demo: true });
+      store.updateOrder(orderId, { status: 'active', expires: Date.now() + PERIOD_DAYS * DAY });
+      return res.json({ token: sign({ oid: orderId }) });
     }
-  });
+    if (!ETICKETS[method]) return res.status(400).json({ error: 'Método de pago no disponible' });
 
-  // Portal de Stripe para gestionar o cancelar la suscripción
-  app.post('/api/portal', async (req, res) => {
-    const data = verify(bearer(req));
-    if (CARD_DEMO || !data?.cid) return res.status(400).json({ error: 'No disponible' });
-    try {
-      const portal = await stripe.billingPortal.sessions.create({
-        customer: data.cid, return_url: `${originOf(req, baseUrl)}/`,
-      });
-      res.json({ url: portal.url });
-    } catch (err) {
-      console.error('[pagos] portal:', err.message);
-      res.status(500).json({ error: 'No se pudo abrir el portal' });
-    }
-  });
-
-  // ---- Criptomonedas ----
-  app.post('/api/checkout/crypto', async (req, res) => {
-    if (CRYPTO_DEMO) return res.json({ token: passToken({ demo: true }) });
-    const orderId = crypto.randomUUID();
+    store.createOrder(orderId, { method });
     const origin = originOf(req, baseUrl);
-    try {
-      const r = await fetch(`${NOWPAYMENTS_API}/invoice`, {
-        method: 'POST',
-        headers: { 'x-api-key': process.env.NOWPAYMENTS_API_KEY, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          price_amount: PRICE,
-          price_currency: CURRENCY,
-          order_id: orderId,
-          order_description: `Premium ${PASS_DAYS} días – Elige a quién ver`,
-          ipn_callback_url: `${origin}/api/crypto/ipn`,
-          success_url: `${origin}/?crypto_order=${orderId}`,
-          cancel_url: `${origin}/`,
-        }),
-      });
-      const invoice = await r.json();
-      if (!r.ok || !invoice.invoice_url) throw new Error(invoice.message || `HTTP ${r.status}`);
-      cryptoOrders.set(orderId, { paid: false, at: Date.now() });
-      res.json({ url: invoice.invoice_url });
-    } catch (err) {
-      console.error('[pagos] checkout cripto:', err.message);
-      res.status(500).json({ error: 'No se pudo iniciar el pago con criptomonedas' });
-    }
+    const params = new URLSearchParams({
+      'x-eticketid': ETICKETS[method],
+      orderid: orderId,
+      'x-auth-link': `${origin}/?order=${orderId}`,
+      'x-auth-text': 'Volver y activar Premium',
+      'x-decl-link': `${origin}/`,
+      'x-decl-text': 'Volver',
+    });
+    res.json({ url: `${PAY_URL}?${params}` });
   });
 
-  // Aviso de NOWPayments cuando cambia el estado de un pago
-  app.post('/api/crypto/ipn', (req, res) => {
-    if (!validIpn(req.body, req.get('x-nowpayments-sig'))) return res.status(401).end();
-    const { order_id: orderId, payment_status: status } = req.body;
-    const order = cryptoOrders.get(orderId);
-    if (order && status === 'finished') {
-      order.paid = true;
-      console.log(`[pagos] pago cripto completado: ${orderId}`);
+  // Avisos de Segpay (configurados en el Merchant Portal → Manage Postbacks)
+  // Segpay puede enviar los avisos por GET o por POST (formulario)
+  app.all('/api/segpay/postback', express.urlencoded({ extended: false }), (req, res) => {
+    const params = { ...req.query, ...(typeof req.body === 'object' ? req.body : {}) };
+    if (!POSTBACK_KEY || !safeEqual(String(params.key || ''), POSTBACK_KEY)) {
+      return res.status(403).type('text').send('FORBIDDEN');
     }
-    res.end();
+    delete params.key;
+    const result = applyPostback(params);
+    console.log(`[pagos] postback Segpay: ${result}`, params.purchaseid || params.purchaseID || '');
+    res.type('text').send('OK');
   });
 
-  // El usuario vuelve a la web y recoge su token (la web lo consulta hasta que se confirme)
-  app.get('/api/checkout/crypto/confirm', (req, res) => {
+  // El usuario vuelve de Segpay: la web pregunta hasta que el pago se confirma
+  app.get('/api/checkout/confirm', (req, res) => {
     const orderId = String(req.query.order || '');
-    const order = cryptoOrders.get(orderId);
+    const order = store.getOrder(orderId);
     if (!order) return res.status(404).json({ error: 'Pedido no encontrado' });
-    if (!order.paid) return res.json({ pending: true });
-    cryptoOrders.delete(orderId); // cada pedido entrega un solo token
-    res.json({ token: passToken() });
+    if (order.status === 'pending') return res.json({ pending: true });
+    if (order.status !== 'active') return res.status(402).json({ error: 'Pago no completado' });
+    res.json({ token: sign({ oid: orderId }) });
   });
 
-  app.get('/api/me', async (req, res) => {
-    const token = bearer(req);
-    const data = verify(token);
+  app.get('/api/me', (req, res) => {
+    const order = activeOrder(req.get('authorization')?.replace(/^Bearer /, ''));
     res.json({
-      premium: await isPremium(token),
-      type: data?.cid ? 'subscription' : data?.pass ? 'pass' : null,
-      expires: data?.pass ? data.exp : null,
+      premium: !!order,
+      method: order?.method || null,
+      expires: order ? order.expires - (order.demo ? 0 : GRACE_MS) : null,
+      cancelUrl: order?.method === 'card' && !order.demo ? CANCEL_URL : null,
     });
   });
 }
 
-module.exports = { routes, isPremium, _test: { validIpn, sortKeys } };
+module.exports = { routes, isPremium, _test: { applyPostback } };

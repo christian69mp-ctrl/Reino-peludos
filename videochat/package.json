@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "express": "^4.21.2",
-    "socket.io": "^4.8.1",
-    "stripe": "^23.0.0"
+    "socket.io": "^4.8.1"
   }
 }
