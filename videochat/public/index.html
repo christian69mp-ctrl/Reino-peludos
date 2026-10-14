@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Videochat Aleatorio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Verificación de edad -->
+  <div id="gate" class="gate">
+    <div class="gate-box">
+      <h1>Videochat Aleatorio</h1>
+      <p>Este sitio es solo para <strong>mayores de 18 años</strong>.</p>
+      <p class="small">Al entrar confirmas que eres mayor de edad, aceptas las normas de uso
+        y entiendes que los usuarios que infrinjan las normas serán bloqueados.</p>
+      <label class="check"><input type="checkbox" id="ageCheck"> Tengo 18 años o más y acepto las normas</label>
+      <button id="enterBtn" disabled>Entrar</button>
+    </div>
+  </div>
+
+  <header class="top">
+    <span class="logo">Videochat<b>Aleatorio</b></span>
+    <span id="online" class="online"></span>
+  </header>
+
+  <main class="app">
+    <section class="videos">
+      <div class="video-wrap remote">
+        <video id="remoteVideo" autoplay playsinline></video>
+        <div id="status" class="status">Pulsa «Empezar» para conocer a alguien</div>
+      </div>
+      <div class="video-wrap local">
+        <video id="localVideo" autoplay playsinline muted></video>
+      </div>
+    </section>
+
+    <aside class="side">
+      <div class="controls">
+        <button id="startBtn" class="primary">Empezar</button>
+        <button id="nextBtn" disabled>Siguiente ⏭</button>
+        <button id="stopBtn" disabled>Parar</button>
+        <button id="reportBtn" class="danger" disabled>Reportar</button>
+      </div>
+      <div id="messages" class="messages"></div>
+      <form id="chatForm" class="chat-form">
+        <input id="chatInput" maxlength="500" placeholder="Escribe un mensaje…" autocomplete="off" disabled>
+        <button type="submit" disabled id="sendBtn">Enviar</button>
+      </form>
+    </aside>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

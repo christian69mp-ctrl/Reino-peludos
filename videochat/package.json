@@ -1,0 +1,16 @@
+{
+  "name": "videochat-aleatorio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Videochat aleatorio 1 a 1 con WebRTC y Socket.IO",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
+}
