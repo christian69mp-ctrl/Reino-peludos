@@ -295,8 +295,64 @@
         </div>
         <p class="form-error" id="authError" hidden></p>
         <button type="submit" class="btn primary lg wide" id="authSubmit">Crear cuenta gratis</button>
-        <p class="hint center-text login-only" data-i18n-html="auth.forgot">¿Olvidaste tu contraseña? Escríbenos a <a href="mailto:soporte@laruletacaliente.com">soporte@laruletacaliente.com</a></p>
+        <p class="center-text login-only"><button type="button" class="link-btn" id="forgotLink" data-i18n="auth.forgotLink">¿Olvidaste tu contraseña?</button></p>
       </form>
+    </div>
+  </div>
+
+  <!-- Recuperar contraseña -->
+  <div id="forgotModal" class="overlay" hidden>
+    <div class="modal">
+      <button class="close" data-close data-i18n-aria="btn.close"><svg class="i"><use href="#i-x"/></svg></button>
+      <h2 data-i18n="fg.title">Recuperar contraseña</h2>
+      <form id="forgotForm" novalidate>
+        <p class="muted" data-i18n="fg.text">Escribe el email de tu cuenta y te enviaremos un enlace para crear una contraseña nueva.</p>
+        <label class="field"><span data-i18n="auth.email">Email</span>
+          <input type="email" id="forgotEmail" autocomplete="email" required>
+        </label>
+        <p class="form-error" id="forgotError" hidden></p>
+        <button type="submit" class="btn primary lg wide" id="forgotSubmit" data-i18n="fg.submit">Enviar enlace</button>
+      </form>
+      <div id="forgotSent" hidden>
+        <p class="notice ok" data-i18n="fg.sent">Si hay una cuenta con ese email, te hemos enviado un enlace. Mira también en la carpeta de spam.</p>
+      </div>
+      <p class="center-text"><button type="button" class="link-btn" id="backToLogin" data-i18n="fg.back">Volver a entrar</button></p>
+    </div>
+  </div>
+
+  <!-- Contraseña nueva (desde el enlace del email) -->
+  <div id="resetModal" class="overlay" hidden>
+    <div class="modal">
+      <button class="close" data-close data-i18n-aria="btn.close"><svg class="i"><use href="#i-x"/></svg></button>
+      <h2 data-i18n="rs.title">Crea una contraseña nueva</h2>
+      <form id="resetForm" novalidate>
+        <label class="field"><span data-i18n="rs.password">Contraseña nueva</span>
+          <input type="password" id="resetPassword" autocomplete="new-password" minlength="8" required>
+          <span class="hint" data-i18n="auth.min8">Mínimo 8 caracteres</span>
+        </label>
+        <p class="form-error" id="resetError" hidden></p>
+        <button type="submit" class="btn primary lg wide" id="resetSubmit" data-i18n="rs.submit">Guardar contraseña</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Verificación de edad -->
+  <div id="ageModal" class="overlay" hidden>
+    <div class="modal center-text">
+      <button class="close" data-close data-i18n-aria="btn.close"><svg class="i"><use href="#i-x"/></svg></button>
+      <svg class="i xl accent"><use href="#i-shield"/></svg>
+      <h2 data-i18n="age.vTitle">Verifica tu edad</h2>
+      <div id="ageIntro">
+        <p class="muted" data-i18n="age.vText">Para proteger a la comunidad, comprobamos que todas las personas son mayores de edad. Solo se hace una vez.</p>
+        <ul class="checklist">
+          <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="age.v1">Necesitas tu documento de identidad y un selfie</span></li>
+          <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="age.v2">Tarda 1–2 minutos y lo hace Veriff, una empresa especializada</span></li>
+          <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="age.v3">No guardamos tu documento ni tu fecha de nacimiento</span></li>
+        </ul>
+      </div>
+      <p class="notice" id="ageNotice" hidden></p>
+      <button class="btn primary lg wide" id="ageStart" data-i18n="age.vStart">Verificar mi edad</button>
+      <p class="hint" id="ageDemo" hidden data-i18n="age.vDemo">Modo demo: la verificación se simula.</p>
     </div>
   </div>
 

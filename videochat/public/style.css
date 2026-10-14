@@ -313,6 +313,13 @@ body.in-chat .site-footer { display: none; }
 .check { display: flex; gap: 10px; align-items: flex-start; font-size: .88rem; color: var(--muted); margin-bottom: 18px; cursor: pointer; }
 .check input { margin-top: 3px; accent-color: var(--accent); width: 16px; height: 16px; flex: none; }
 .check a { color: var(--text); }
+.link-btn { font: inherit; font-size: .9rem; font-weight: 600; color: var(--accent); background: none; border: 0; padding: 4px; cursor: pointer; }
+.link-btn:hover { text-decoration: underline; }
+.notice { padding: 14px 16px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border); text-align: left; }
+.notice.ok { border-color: rgba(61, 220, 151, .4); background: rgba(61, 220, 151, .08); }
+.notice.warn { border-color: rgba(255, 90, 95, .4); background: rgba(255, 90, 95, .08); }
+.notice.pending::before { content: ''; display: inline-block; width: 12px; height: 12px; margin-right: 8px; border-radius: 50%; border: 2px solid var(--accent-2); border-right-color: transparent; animation: spin .8s linear infinite; vertical-align: -1px; }
+#ageModal .checklist { margin-bottom: 20px; }
 .form-error { color: var(--danger); font-size: .9rem; font-weight: 600; margin: -4px 0 14px; }
 .reasons { display: grid; gap: 8px; margin: 18px 0; }
 .reason { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; font-weight: 500; }

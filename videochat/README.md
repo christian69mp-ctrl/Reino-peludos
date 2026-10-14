@@ -18,6 +18,11 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
 - **Aviso de mayoría de edad** al entrar por primera vez.
 - **Cuentas de usuario**: registro con email, contraseña (guardada cifrada con scrypt) y si eres
   mujer, hombre, transexual o pareja. Inicio de sesión en cualquier dispositivo.
+- **Recuperar contraseña por email**: «¿Olvidaste tu contraseña?» envía un enlace (válido 1 hora,
+  de un solo uso, en el idioma del usuario). Al cambiarla se cierran las demás sesiones.
+- **Verificación de edad con Veriff** (documento + selfie) antes de usar el videochat, una sola vez.
+  Si sale menor de edad, la cuenta queda expulsada. No se guarda el documento ni la fecha de
+  nacimiento, solo el resultado. El panel de moderación muestra el estado de cada usuario.
 - **Videochat** 1 a 1 con WebRTC: Empezar, Siguiente (o tecla Esc), Parar y chat de texto.
 - **Premium 19,99 €** para elegir a quién ver (mujeres, hombres, transexuales o parejas). Va ligado
   a la cuenta: funciona en todos los dispositivos del usuario. Sin Premium, siempre al azar.
@@ -51,6 +56,8 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
 - `store.js` — guarda usuarios, pedidos y denuncias en `data/store.json`.
 - `tokens.js` — firma de las sesiones.
 - `translate.js` — traducción de mensajes del chat (DeepL o LibreTranslate).
+- `age.js` — verificación de edad con Veriff.
+- `mailer.js` — envío de emails (recuperar contraseña).
 - `public/` — la web: `index.html` (portada + chat), `app.js`, `style.css`, `admin.html`,
   páginas legales y `logo.svg`.
 
@@ -66,6 +73,18 @@ SEGPAY_ETICKET_CARD=123456:7890
 SEGPAY_ETICKET_CRYPTO=123456:7891
 SEGPAY_POSTBACK_KEY=...
 # SEGPAY_CANCEL_URL=https://cs.segpay.com
+
+# Emails (recuperar contraseña). Sin SMTP_HOST el enlace sale en el registro del servidor.
+SMTP_HOST=smtp-relay.brevo.com   # o el de Mailgun, Amazon SES, Zoho, tu hosting…
+SMTP_PORT=587
+SMTP_USER=...
+SMTP_PASS=...
+MAIL_FROM="La Ruleta Caliente <no-reply@laruletacaliente.com>"
+
+# Verificación de edad (sin las dos claves, modo demo: se simula)
+VERIFF_API_KEY=...            # Veriff → Integrations → API key
+VERIFF_SECRET=...             # Veriff → Integrations → Shared secret key
+# AGE_VERIFICATION=off        # para desactivarla del todo
 
 # Traducción del chat (uno de los dos; sin ninguno, no aparece «Traducir»)
 DEEPL_API_KEY=...             # deepl.com/pro-api — la clave gratuita (500.000 caracteres/mes) termina en :fx
@@ -105,6 +124,16 @@ Para pagar hay que tener la sesión iniciada; el Premium queda en la cuenta.
      `laruletacaliente.com/api/segpay/postback?key=TU_CLAVE&type=disable&purchaseid=<purchaseid>`
    - Activa "Retry postback" para que Segpay reintente si el servidor no responde.
 
+## Verificación de edad (Veriff)
+
+1. Crea una cuenta en veriff.com y una integración. Copia la **API key** y la **Shared secret key**.
+2. En la integración pon como **Decision webhook URL**: `https://laruletacaliente.com/api/age/webhook`.
+3. Pon las dos claves en el servidor (`VERIFF_API_KEY`, `VERIFF_SECRET`).
+
+Al pulsar «Empezar», quien no esté verificado ve la ventana «Verifica tu edad», va a la página de
+Veriff y al volver la web espera el resultado. El servidor también rechaza la conexión al chat de
+cualquier cuenta sin verificar.
+
 ## Antes de abrir al público
 
 - **Traducir las páginas legales**: normas, términos y privacidad están solo en español.
@@ -114,8 +143,5 @@ Para pagar hay que tener la sesión iniciada; el Premium queda en la cuenta.
 - **HTTPS obligatorio**: sin él el navegador no deja usar la cámara.
 - **Servidor TURN** (p. ej. coturn): sin él muchas conexiones en 4G fallan.
 - **Copia de seguridad** diaria de `data/store.json`.
-- **Verificación de edad real** con un proveedor externo (las leyes de la UE, Reino Unido y varios
-  estados de EE. UU. lo exigen para webs de adultos, y Segpay lo pedirá).
-- **Recuperar contraseña por email**: ahora se pide escribiendo a soporte; falta conectar un
-  servicio de envío de emails.
+- **Contratar Veriff** y un servicio de envío de emails (Brevo tiene plan gratuito) y poner sus claves.
 - Con muchos usuarios, pasar de `data/store.json` a una base de datos (PostgreSQL, etc.).

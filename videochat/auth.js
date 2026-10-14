@@ -4,11 +4,17 @@ const crypto = require('crypto');
 const { promisify } = require('util');
 const store = require('./store');
 const tokens = require('./tokens');
+const mailer = require('./mailer');
 
 const scrypt = promisify(crypto.scrypt);
 const GENDERS = ['mujer', 'hombre', 'trans', 'pareja'];
 const SESSION_DAYS = 90;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const LANG_RE = /^[a-z]{2,3}$/;
+const RESET_MS = 3600 * 1000; // el enlace para cambiar la contraseña dura 1 hora
+
+const sha256 = (s) => crypto.createHash('sha256').update(s).digest('hex');
+const cleanLang = (l) => (LANG_RE.test(String(l || '')) ? String(l) : 'es');
 
 async function hashPassword(password) {
   const salt = crypto.randomBytes(16);
@@ -98,6 +104,7 @@ function routes(app) {
       acceptedTermsAt: Date.now(),
       registerIp: req.ip,
       likes: { like: 0, love: 0 },
+      lang: cleanLang(req.body?.lang),
     });
     res.json({ token: sessionToken(user), user: publicUser(user) });
   });
@@ -109,6 +116,42 @@ function routes(app) {
     const ok = user && await checkPassword(String(req.body?.password || ''), user.passHash);
     if (!ok) return res.status(401).json({ code: 'badLogin', error: 'Email o contraseña incorrectos' });
     res.json({ token: sessionToken(user), user: publicUser(user) });
+  });
+
+  // Recuperar contraseña: envía un enlace por email. Siempre responde lo mismo,
+  // exista o no la cuenta, para no revelar qué emails están registrados.
+  app.post('/api/password/forgot', async (req, res) => {
+    if (rateLimited(req.ip)) return res.status(429).json({ code: 'tooMany' });
+    const email = String(req.body?.email || '').trim().toLowerCase();
+    if (!EMAIL_RE.test(email)) return res.status(400).json({ code: 'email' });
+    const user = store.getUserByEmail(email);
+    const recent = user?.reset && user.reset.sentAt > Date.now() - 60000;
+    if (user && !recent) {
+      const token = crypto.randomBytes(32).toString('base64url');
+      const lang = cleanLang(req.body?.lang || user.lang);
+      store.updateUser(user.id, { reset: { hash: sha256(token), expires: Date.now() + RESET_MS, sentAt: Date.now() } });
+      const base = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+      mailer.sendPasswordReset(email, `${base}/?reset=${token}`, lang)
+        .catch((err) => console.error('[email] no se pudo enviar:', err.message));
+    }
+    res.json({ ok: true });
+  });
+
+  // Cambiar la contraseña con el enlace del email. Cierra las demás sesiones.
+  app.post('/api/password/reset', async (req, res) => {
+    if (rateLimited(req.ip)) return res.status(429).json({ code: 'tooMany' });
+    const token = String(req.body?.token || '');
+    const password = String(req.body?.password || '');
+    if (password.length < 8 || password.length > 200) return res.status(400).json({ code: 'password' });
+    const hash = sha256(token);
+    const user = token && store.listUsers().find((u) => u.reset?.hash === hash);
+    if (!user || user.reset.expires < Date.now()) return res.status(400).json({ code: 'resetInvalid' });
+    const updated = store.updateUser(user.id, {
+      passHash: await hashPassword(password),
+      tokenVersion: (user.tokenVersion || 0) + 1,
+      reset: null,
+    });
+    res.json({ token: sessionToken(updated), user: publicUser(updated) });
   });
 
   // Cierra la sesión en todos los dispositivos

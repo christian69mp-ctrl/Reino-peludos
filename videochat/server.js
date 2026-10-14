@@ -7,6 +7,7 @@ const auth = require('./auth');
 const payments = require('./payments');
 const moderation = require('./moderation');
 const translate = require('./translate');
+const age = require('./age');
 
 const PORT = process.env.PORT || 3000;
 
@@ -22,7 +23,8 @@ app.use((_req, res, next) => {
   });
   next();
 });
-app.use(express.json({ limit: '20kb' }));
+// rawBody: el webhook de Veriff se firma sobre el cuerpo exacto recibido
+app.use(express.json({ limit: '50kb', verify: (req, _res, buf) => { req.rawBody = buf; } }));
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 // Tipografía servida desde el propio servidor (sin llamadas a Google)
 app.get('/fonts/plus-jakarta-sans.woff2', (_req, res) => {
@@ -34,6 +36,7 @@ auth.routes(app);
 payments.routes(app, process.env.BASE_URL);
 moderation.routes(app);
 translate.routes(app);
+age.routes(app, process.env.BASE_URL);
 
 // Qué funciones opcionales están activas
 app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled }));
@@ -44,6 +47,7 @@ app.get('/api/me', auth.requireUser, (req, res) => {
     user: auth.publicUser(req.user),
     ...payments.premiumInfo(req.user.id),
     restriction: auth.restriction(req.user),
+    age: age.publicAge(req.user),
   });
 });
 
@@ -139,13 +143,15 @@ function partnerInfo(s) {
 }
 
 // Expulsa del chat a un usuario suspendido o expulsado
-moderation.setOnRestrict((userId, restriction) => {
+function kick(userId, restriction) {
   for (const s of io.of('/').sockets.values()) {
     if (s.data.uid !== userId) continue;
     s.emit('restricted', restriction);
     s.disconnect(true);
   }
-});
+}
+moderation.setOnRestrict(kick);
+age.setOnRestrict(kick);
 
 io.use((socket, next) => {
   const user = auth.userFromToken(socket.handshake.auth?.token);
@@ -156,6 +162,7 @@ io.use((socket, next) => {
     err.data = restriction;
     return next(err);
   }
+  if (age.needsVerification(user)) return next(new Error('age'));
   socket.data.uid = user.id;
   socket.data.gender = user.gender;
   socket.data.premium = payments.isPremium(user.id);

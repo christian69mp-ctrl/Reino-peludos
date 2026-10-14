@@ -95,6 +95,7 @@ function renderDynamicTexts() {
   renderPartner();
   renderMyLikes();
   refreshOnline();
+  if (!$('ageModal').hidden) renderAge();
 }
 
 document.addEventListener('langchange', () => {
@@ -148,7 +149,7 @@ $('authForm').addEventListener('submit', async (e) => {
     if (!myGender) return showError(t('err.gender'));
     if (!$('authTerms').checked) return showError(t('err.terms'));
     $('authSubmit').disabled = true;
-    res = await api('/api/register', { method: 'POST', body: { email, password, gender: myGender, adult: true, terms: true } });
+    res = await api('/api/register', { method: 'POST', body: { email, password, gender: myGender, adult: true, terms: true, lang: I18N.chatLang() } });
   } else {
     $('authSubmit').disabled = true;
     res = await api('/api/login', { method: 'POST', body: { email, password } });
@@ -204,6 +205,118 @@ function showRestricted(r) {
   openModal('restrictedModal');
 }
 
+// ---------- Recuperar contraseña ----------
+$('forgotLink').addEventListener('click', () => {
+  closeModal('authModal');
+  $('forgotEmail').value = $('authEmail').value.trim();
+  $('forgotForm').hidden = false;
+  $('forgotSent').hidden = true;
+  $('forgotError').hidden = true;
+  openModal('forgotModal');
+  setTimeout(() => $('forgotEmail').focus(), 50);
+});
+$('backToLogin').addEventListener('click', () => { closeModal('forgotModal'); openAuth('login'); });
+
+$('forgotForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = $('forgotEmail').value.trim();
+  if (!email) { $('forgotError').textContent = t('err.email'); $('forgotError').hidden = false; return; }
+  $('forgotSubmit').disabled = true;
+  const res = await api('/api/password/forgot', { method: 'POST', body: { email, lang: I18N.chatLang() } });
+  $('forgotSubmit').disabled = false;
+  if (!res.ok) { $('forgotError').textContent = errorText(res); $('forgotError').hidden = false; return; }
+  $('forgotForm').hidden = true;
+  $('forgotSent').hidden = false;
+});
+
+let resetToken = '';
+$('resetForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const showError = (msg) => { $('resetError').textContent = msg; $('resetError').hidden = false; };
+  const password = $('resetPassword').value;
+  if (password.length < 8) return showError(t('err.password'));
+  $('resetSubmit').disabled = true;
+  const res = await api('/api/password/reset', { method: 'POST', body: { token: resetToken, password } });
+  $('resetSubmit').disabled = false;
+  if (!res.token) return showError(errorText(res));
+  token = res.token;
+  save('session', token);
+  $('resetPassword').value = '';
+  closeModal('resetModal');
+  await refreshMe();
+  toast(t('rs.done'));
+});
+
+// ---------- Verificación de edad ----------
+let agePolling = false;
+
+function renderAge() {
+  const status = me?.age?.status || 'none';
+  const notice = $('ageNotice');
+  $('ageDemo').hidden = !me?.age?.demo;
+  $('ageIntro').hidden = status === 'pending';
+  notice.className = 'notice';
+  notice.hidden = true;
+  $('ageStart').hidden = false;
+  $('ageStart').textContent = t('age.vStart');
+  if (status === 'pending') {
+    notice.textContent = t('age.vPending');
+    notice.classList.add('pending');
+    notice.hidden = false;
+    $('ageStart').hidden = true;
+  } else if (status === 'declined' || status === 'retry') {
+    notice.textContent = t('age.vDeclined');
+    notice.classList.add('warn');
+    notice.hidden = false;
+    $('ageStart').textContent = t('age.vRetry');
+  }
+}
+
+function openAge() {
+  renderAge();
+  openModal('ageModal');
+  if (me?.age?.status === 'pending') pollAge();
+}
+
+function ageApproved() {
+  closeModal('ageModal');
+  toast(t('age.vDone'));
+  enterChat();
+}
+
+$('ageStart').addEventListener('click', async () => {
+  $('ageStart').disabled = true;
+  const res = await api('/api/age/start', { method: 'POST' });
+  $('ageStart').disabled = false;
+  if (res.url) { location.href = res.url; return; }          // página de Veriff
+  if (res.age) {
+    me.age = res.age;
+    if (res.age.status === 'approved') { ageApproved(); return; } // modo demo
+    renderAge();
+    return;
+  }
+  toast(errorText(res));
+});
+
+// Al volver de Veriff el resultado puede tardar: se consulta cada 4 s (máx. 15 min)
+async function pollAge() {
+  if (agePolling) return;
+  agePolling = true;
+  const until = Date.now() + 15 * 60000;
+  while (Date.now() < until && !$('ageModal').hidden) {
+    const res = await api('/api/age/status');
+    if (res.age && me) {
+      me.age = res.age;
+      if (res.age.status === 'approved') { agePolling = false; ageApproved(); return; }
+      if (res.age.status !== 'pending') break;
+    }
+    await new Promise((r) => setTimeout(r, 4000));
+  }
+  agePolling = false;
+  await refreshMe();
+  if (!$('ageModal').hidden) renderAge();
+}
+
 // ---------- Vistas ----------
 function showLanding() {
   document.body.classList.remove('in-chat');
@@ -214,6 +327,7 @@ function showLanding() {
 function enterChat() {
   if (!token) { openAuth('register', 'start'); return; }
   if (me?.restriction) { showRestricted(me.restriction); return; }
+  if (me?.age?.required && me.age.status !== 'approved') { openAge(); return; }
   document.body.classList.add('in-chat');
   $('landing').hidden = true;
   $('chatView').hidden = false;
@@ -536,13 +650,19 @@ function setSearching() {
 }
 
 function connectSocket() {
-  socket = io({ auth: (cb) => cb({ token, lang: I18N.chatLang() }) });
+  const s = io({ auth: (cb) => cb({ token, lang: I18N.chatLang() }) });
+  socket = s;
 
-  socket.on('connect', () => { refreshOnline(); if (running) find(); });
+  s.on('connect', () => { refreshOnline(); if (running) find(); });
 
-  socket.on('connect_error', (err) => {
-    if (err.message === 'auth') { socket.disconnect(); logout(false); openAuth('login'); }
-    if (err.message === 'restricted') { socket.disconnect(); showRestricted(err.data); }
+  s.on('connect_error', (err) => {
+    // Errores de red: socket.io reintenta solo. Estos tres no se arreglan reintentando.
+    if (!['auth', 'restricted', 'age'].includes(err.message)) return;
+    s.disconnect();
+    if (s !== socket) return; // conexión antigua (p. ej. tras cerrar sesión)
+    if (err.message === 'auth') { logout(false); openAuth('login'); }
+    if (err.message === 'restricted') showRestricted(err.data);
+    if (err.message === 'age') { stop(); refreshMe().then(openAge); }
   });
 
   socket.on('account', (acc) => { if (acc.premium !== premium) refreshMe(); });
@@ -586,18 +706,25 @@ function connectSocket() {
   socket.on('restricted', (r) => showRestricted(r));
 }
 
+// Cada «Parar» o cierre de sesión cancela un arranque que aún esté en marcha
+let startGen = 0;
+
 async function start() {
+  const gen = ++startGen;
   setStatus('msg.activatingCam');
+  let stream;
   try {
-    localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
   } catch {
-    setStatus('msg.camera');
+    if (gen === startGen) setStatus('msg.camera');
     return;
   }
-  localVideo.srcObject = localStream;
   try {
     iceConfig = await (await fetch('/ice')).json();
   } catch { /* se usa la configuración por defecto */ }
+  if (gen !== startGen || !token) { stream.getTracks().forEach((track) => track.stop()); return; }
+  localStream = stream;
+  localVideo.srcObject = localStream;
   setRunning(true);
   setSearching();
   if (!socket) connectSocket();   // al conectar emite 'find'
@@ -613,6 +740,7 @@ function next() {
 }
 
 function stop() {
+  startGen++;
   closePeer();
   if (socket?.connected) socket.emit('stop');
   if (localStream) localStream.getTracks().forEach((track) => track.stop());
@@ -685,9 +813,19 @@ fetch('/api/config').then((r) => r.json()).then((c) => { translateEnabled = !!c.
 
 (async () => {
   await refreshMe();
-  const order = new URLSearchParams(location.search).get('order');
-  if (order) {
-    history.replaceState(null, '', '/');
-    if (token) waitPayment(order);
+  const params = new URLSearchParams(location.search);
+  if (params.has('order') || params.has('reset') || params.has('age')) history.replaceState(null, '', '/');
+  const order = params.get('order');
+  if (order && token) waitPayment(order);
+  // Enlace del email para crear una contraseña nueva
+  if (params.get('reset')) {
+    resetToken = params.get('reset');
+    if (!load('age-ok')) { save('age-ok', '1'); closeModal('ageGate'); }
+    openModal('resetModal');
+  }
+  // Vuelta desde Veriff
+  if (params.get('age') === 'done' && token && me) {
+    if (me.age?.status === 'approved') ageApproved();
+    else openAge();
   }
 })();

@@ -78,6 +78,7 @@ function userSummary(user) {
     suspendedUntil: user.suspendedUntil && user.suspendedUntil > Date.now() ? user.suspendedUntil : null,
     reportsReceived: reports.length,
     reportsOpen: reports.filter((r) => r.status === 'open').length,
+    age: user.age?.status || 'none',
   };
 }
 
