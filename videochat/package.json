@@ -1,8 +1,8 @@
 {
-  "name": "la-tentacion",
+  "name": "la-ruleta-caliente",
   "version": "0.1.0",
   "private": true,
-  "description": "La Tentación: videochat en vivo 1 a 1 con WebRTC y Socket.IO",
+  "description": "La Ruleta Caliente: videochat en vivo 1 a 1 con WebRTC y Socket.IO",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
