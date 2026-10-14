@@ -1,6 +1,6 @@
-# Videochat Aleatorio (MVP)
+# La Tentación
 
-Videochat 1 a 1 con desconocidos al azar, estilo Chatroulette / CooMeet.
+Videochat en vivo 1 a 1 con desconocidos, estilo Chatroulette / CooMeet.
 
 ## Cómo arrancarlo
 
