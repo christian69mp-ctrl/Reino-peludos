@@ -169,7 +169,7 @@ io.use((socket, next) => {
   socket.data.blocked = new Set(user.blocked || []);
   socket.data.want = [];
   const lang = String(socket.handshake.auth?.lang || '').toLowerCase();
-  socket.data.lang = LANG_RE.test(lang) ? lang : 'es';
+  socket.data.lang = LANG_RE.test(lang) ? lang : 'en';
   next();
 });
 

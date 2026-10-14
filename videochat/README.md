@@ -36,8 +36,10 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   primero), conversación denunciada, y botones para descartar, suspender 1 o 7 días, expulsar o
   readmitir. Al suspender o expulsar, la persona sale del chat al instante.
 - **Páginas legales**: `/normas`, `/terminos` y `/privacidad`.
-- **Idiomas**: **español por defecto**. Si el navegador está en inglés, portugués, francés, alemán o
-  italiano, la web sale en ese idioma; con cualquier otro, en español. Se puede cambiar en el selector del
+- **Idiomas** (web internacional): **inglés por defecto**. Si el navegador está en español, portugués,
+  francés, alemán o italiano, la web sale en ese idioma; con cualquier otro (japonés, ruso…), en
+  inglés. El HTML base, el título y la vista previa al compartir el enlace están en inglés.
+  El panel de moderación, el README y el código siguen en español (son para el equipo). Se puede cambiar en el selector del
   pie de página y del aviso de edad. Los textos están en `public/i18n.js`.
 - **Traducción del chat**: si las dos personas hablan idiomas distintos, se muestra «Habla inglés»
   (o el que sea) junto a la otra persona y aparece «Traducir» bajo cada mensaje suyo. Necesita un

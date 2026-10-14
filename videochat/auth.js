@@ -14,7 +14,7 @@ const LANG_RE = /^[a-z]{2,3}$/;
 const RESET_MS = 3600 * 1000; // el enlace para cambiar la contraseña dura 1 hora
 
 const sha256 = (s) => crypto.createHash('sha256').update(s).digest('hex');
-const cleanLang = (l) => (LANG_RE.test(String(l || '')) ? String(l) : 'es');
+const cleanLang = (l) => (LANG_RE.test(String(l || '')) ? String(l) : 'en');
 
 async function hashPassword(password) {
   const salt = crypto.randomBytes(16);

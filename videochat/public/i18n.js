@@ -1,5 +1,6 @@
-// Traducciones de la web. Por defecto en español; si el navegador está en otro
-// idioma de la lista, se muestra en ese. Se puede cambiar en el selector. Para añadir un idioma: copia el bloque "en" y tradúcelo.
+// Traducciones de la web. Se muestra en el idioma del navegador si está en la
+// lista; si no, en inglés (idioma por defecto). Se puede cambiar en el selector.
+// Para añadir un idioma: copia el bloque "en" y tradúcelo.
 (function () {
   const STRINGS = {
     es: {
@@ -451,17 +452,17 @@
   const SUPPORTED = Object.keys(STRINGS);
 
   // Idioma del navegador (2 letras), aunque la web no lo tenga: se usa para traducir el chat
-  const browserLangs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'es'])
+  const browserLangs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en'])
     .map((l) => String(l).toLowerCase().split('-')[0]);
 
   function stored() { try { return localStorage.getItem('lang'); } catch { return null; } }
 
   let lang = stored();
-  // Idioma del navegador si la web lo tiene; si no, español (el idioma por defecto)
-  if (!SUPPORTED.includes(lang)) lang = browserLangs.find((l) => SUPPORTED.includes(l)) || 'es';
+  // Idioma del navegador si la web lo tiene; si no, inglés (la web es internacional)
+  if (!SUPPORTED.includes(lang)) lang = browserLangs.find((l) => SUPPORTED.includes(l)) || 'en';
 
   function t(key, vars) {
-    let s = STRINGS[lang][key] ?? STRINGS.es[key] ?? key;
+    let s = STRINGS[lang][key] ?? STRINGS.en[key] ?? key;
     if (vars) for (const [k, v] of Object.entries(vars)) s = s.split(`{${k}}`).join(v);
     return s;
   }
