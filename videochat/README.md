@@ -14,12 +14,12 @@ Abre dos pestañas (o dos navegadores) y pulsa «Empezar» en ambas para probarl
 
 ## Qué incluye
 
-- Entrada con aviso de mayoría de edad (+18) y elección de género propio (chica, chico o trans).
+- Entrada con aviso de mayoría de edad (+18) y elección de lo que eres (mujer, hombre, transexual o pareja).
 - Emparejamiento aleatorio con cola de espera (sin repetir la última pareja al instante).
 - Vídeo y audio P2P con WebRTC; el servidor solo hace de señalización (Socket.IO).
 - Botones Empezar / Siguiente (o tecla Esc) / Parar.
 - Chat de texto con la pareja actual.
-- **Plan Premium 19,99 €/mes**: permite elegir a quién ver (chicas, chicos o trans).
+- **Plan Premium 19,99 €/mes**: permite elegir a quién ver (mujeres, hombres, transexuales o parejas).
   Sin suscripción el emparejamiento es siempre al azar; el servidor ignora el filtro
   si el usuario no ha pagado.
 - Contador de usuarios conectados.

@@ -5,7 +5,7 @@ const { Server } = require('socket.io');
 const payments = require('./payments');
 
 const PORT = process.env.PORT || 3000;
-const GENDERS = ['chica', 'chico', 'trans'];
+const GENDERS = ['mujer', 'hombre', 'trans', 'pareja'];
 
 const app = express();
 app.set('trust proxy', true);

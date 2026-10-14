@@ -5,8 +5,8 @@ const statusEl = $('status');
 const messages = $('messages');
 const chatInput = $('chatInput');
 
-const LABELS = { chica: 'Chica', chico: 'Chico', trans: 'Trans' };
-const PLURALS = { chica: 'chicas', chico: 'chicos', trans: 'personas trans' };
+const LABELS = { mujer: 'Mujer', hombre: 'Hombre', trans: 'Transexual', pareja: 'Pareja' };
+const PLURALS = { mujer: 'mujeres', hombre: 'hombres', trans: 'transexuales', pareja: 'parejas' };
 
 let socket = null;
 let localStream = null;
