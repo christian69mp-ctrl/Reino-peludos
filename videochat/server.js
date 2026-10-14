@@ -2,12 +2,15 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const { Server } = require('socket.io');
+const payments = require('./payments');
 
 const PORT = process.env.PORT || 3000;
-const REPORTS_TO_BAN = 3;
+const GENDERS = ['chica', 'chico', 'trans'];
 
 const app = express();
+app.set('trust proxy', true);
 app.use(express.static(path.join(__dirname, 'public')));
+payments.routes(app, process.env.BASE_URL);
 
 // Configuración ICE para el cliente. En producción añade un servidor TURN
 // (p. ej. coturn) mediante variables de entorno, si no muchas conexiones fallan.
@@ -34,13 +37,6 @@ const io = new Server(server);
 let queue = [];               // ids de socket esperando pareja
 const partners = new Map();   // socketId -> socketId de su pareja
 const lastPartner = new Map();// evita volver a emparejar con el anterior al instante
-const reports = new Map();    // ip -> nº de reportes recibidos
-const banned = new Set();     // ips bloqueadas (en memoria)
-
-function ipOf(socket) {
-  return (socket.handshake.headers['x-forwarded-for'] || socket.handshake.address || '')
-    .split(',')[0].trim();
-}
 
 function removeFromQueue(id) {
   queue = queue.filter((q) => q !== id);
@@ -54,32 +50,49 @@ function unpair(socket, notify = true) {
   if (notify) io.to(partnerId).emit('partner-left');
 }
 
+// a quiere ver a b? (sin filtro = cualquiera)
+function wants(a, b) {
+  return a.data.want.length === 0 || a.data.want.includes(b.data.gender);
+}
+
 function findMatch(socket) {
   removeFromQueue(socket.id);
   const avoid = lastPartner.get(socket.id);
-  const idx = queue.findIndex((id) => id !== avoid && io.sockets.sockets.has(id));
+  const idx = queue.findIndex((id) => {
+    const other = io.sockets.sockets.get(id);
+    return other && id !== avoid && wants(socket, other) && wants(other, socket);
+  });
   if (idx === -1) {
     queue.push(socket.id);
     socket.emit('waiting');
     return;
   }
   const partnerId = queue.splice(idx, 1)[0];
+  const partner = io.sockets.sockets.get(partnerId);
   partners.set(socket.id, partnerId);
   partners.set(partnerId, socket.id);
   lastPartner.set(socket.id, partnerId);
   lastPartner.set(partnerId, socket.id);
   // El que acaba de llegar inicia la oferta WebRTC
-  socket.emit('matched', { initiator: true });
-  io.to(partnerId).emit('matched', { initiator: false });
+  socket.emit('matched', { initiator: true, gender: partner.data.gender });
+  partner.emit('matched', { initiator: false, gender: socket.data.gender });
 }
 
-io.use((socket, next) => {
-  if (banned.has(ipOf(socket))) return next(new Error('banned'));
+io.use(async (socket, next) => {
+  const { gender, token } = socket.handshake.auth || {};
+  socket.data.gender = GENDERS.includes(gender) ? gender : null;
+  socket.data.premium = await payments.isPremium(token);
+  socket.data.want = [];
   next();
 });
 
 io.on('connection', (socket) => {
-  socket.on('find', () => {
+  socket.emit('account', { premium: socket.data.premium });
+
+  socket.on('find', (opts = {}) => {
+    // El filtro solo se aplica a usuarios Premium; el resto, siempre al azar
+    const want = Array.isArray(opts.want) ? opts.want.filter((g) => GENDERS.includes(g)) : [];
+    socket.data.want = socket.data.premium ? want : [];
     unpair(socket);
     findMatch(socket);
   });
@@ -100,23 +113,6 @@ io.on('connection', (socket) => {
     if (!partnerId || typeof text !== 'string') return;
     const clean = text.trim().slice(0, 500);
     if (clean) io.to(partnerId).emit('chat', clean);
-  });
-
-  socket.on('report', () => {
-    const partnerId = partners.get(socket.id);
-    const partner = partnerId && io.sockets.sockets.get(partnerId);
-    if (!partner) return;
-    const ip = ipOf(partner);
-    const count = (reports.get(ip) || 0) + 1;
-    reports.set(ip, count);
-    console.log(`[report] ${ip} -> ${count}`);
-    unpair(socket);
-    if (count >= REPORTS_TO_BAN) {
-      banned.add(ip);
-      partner.emit('banned');
-      partner.disconnect(true);
-    }
-    findMatch(socket);
   });
 
   socket.on('disconnect', () => {

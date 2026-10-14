@@ -5,19 +5,45 @@ const statusEl = $('status');
 const messages = $('messages');
 const chatInput = $('chatInput');
 
+const LABELS = { chica: 'Chica', chico: 'Chico', trans: 'Trans' };
+const PLURALS = { chica: 'chicas', chico: 'chicos', trans: 'personas trans' };
+
 let socket = null;
 let localStream = null;
 let pc = null;
 let iceConfig = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
 let pendingCandidates = [];
+let running = false;
 
-// ---- Verificación de edad ----
-$('ageCheck').addEventListener('change', (e) => { $('enterBtn').disabled = !e.target.checked; });
+let myGender = sessionStorage.getItem('gender') || '';
+let want = '';           // '' = todos
+let premium = false;
+
+function getToken() {
+  try { return localStorage.getItem('premium-token') || ''; } catch { return ''; }
+}
+function setToken(t) {
+  try { localStorage.setItem('premium-token', t); } catch { /* sin almacenamiento */ }
+}
+
+// ---- Entrada: edad + género ----
+function updateEnter() {
+  $('enterBtn').disabled = !($('ageCheck').checked && myGender);
+}
+$('myGender').addEventListener('click', (e) => {
+  const g = e.target.dataset?.g;
+  if (!g) return;
+  myGender = g;
+  for (const c of $('myGender').children) c.classList.toggle('active', c.dataset.g === g);
+  updateEnter();
+});
+$('ageCheck').addEventListener('change', updateEnter);
 $('enterBtn').addEventListener('click', () => {
   sessionStorage.setItem('age-ok', '1');
+  sessionStorage.setItem('gender', myGender);
   $('gate').classList.add('hidden');
 });
-if (sessionStorage.getItem('age-ok')) $('gate').classList.add('hidden');
+if (sessionStorage.getItem('age-ok') && myGender) $('gate').classList.add('hidden');
 
 // ---- Utilidades de interfaz ----
 function setStatus(text) { statusEl.textContent = text; }
@@ -33,13 +59,14 @@ function addMsg(text, who) {
 function setConnected(connected) {
   chatInput.disabled = !connected;
   $('sendBtn').disabled = !connected;
-  $('reportBtn').disabled = !connected;
+  if (!connected) $('partnerTag').classList.add('hidden');
 }
 
-function setRunning(running) {
-  $('startBtn').disabled = running;
-  $('nextBtn').disabled = !running;
-  $('stopBtn').disabled = !running;
+function setRunning(on) {
+  running = on;
+  $('startBtn').disabled = on;
+  $('nextBtn').disabled = !on;
+  $('stopBtn').disabled = !on;
 }
 
 async function refreshOnline() {
@@ -51,6 +78,88 @@ async function refreshOnline() {
 }
 setInterval(refreshOnline, 10000);
 refreshOnline();
+
+// ---- Premium ----
+function setPremium(value) {
+  premium = value;
+  $('premiumBtn').classList.toggle('hidden', premium);
+  $('manageBtn').classList.toggle('hidden', !premium);
+  $('lockNote').classList.toggle('hidden', premium);
+  document.querySelector('.filter').classList.toggle('locked', !premium);
+  if (!premium) selectWant('');
+}
+
+function selectWant(g) {
+  want = g;
+  for (const c of $('wantGender').children) c.classList.toggle('active', c.dataset.g === g);
+}
+
+$('wantGender').addEventListener('click', (e) => {
+  const g = e.target.dataset?.g;
+  if (g === undefined) return;
+  if (g && !premium) { openPremium(); return; }
+  if (g === want) return;
+  selectWant(g);
+  if (running) next();
+});
+
+function openPremium() { $('premiumModal').classList.remove('hidden'); }
+$('premiumBtn').addEventListener('click', openPremium);
+$('closePremium').addEventListener('click', () => $('premiumModal').classList.add('hidden'));
+
+fetch('/api/plan').then((r) => r.json()).then((plan) => {
+  $('priceText').textContent = `${plan.price.toFixed(2).replace('.', ',')} €`;
+  $('demoNote').classList.toggle('hidden', !plan.demo);
+}).catch(() => {});
+
+function activatePremium(token) {
+  setToken(token);
+  setPremium(true);
+  $('premiumModal').classList.add('hidden');
+  addMsg('⭐ ¡Ya eres Premium! Elige a quién quieres ver.', 'sys');
+  // Reconecta para que el servidor reconozca la suscripción
+  if (socket) {
+    socket.auth.token = token;
+    socket.disconnect().connect();
+    if (running) { closePeer(); setStatus('Buscando a alguien…'); }
+  }
+}
+
+$('subscribeBtn').addEventListener('click', async () => {
+  $('subscribeBtn').disabled = true;
+  try {
+    const res = await (await fetch('/api/checkout', { method: 'POST' })).json();
+    if (res.token) activatePremium(res.token);          // modo demo
+    else if (res.url) { location.href = res.url; return; } // Stripe Checkout
+    else alert(res.error || 'No se pudo iniciar el pago');
+  } catch {
+    alert('No se pudo iniciar el pago');
+  }
+  $('subscribeBtn').disabled = false;
+});
+
+$('manageBtn').addEventListener('click', async () => {
+  const res = await (await fetch('/api/portal', {
+    method: 'POST', headers: { Authorization: `Bearer ${getToken()}` },
+  })).json().catch(() => ({}));
+  if (res.url) location.href = res.url;
+  else alert('Tu suscripción Premium está activa.');
+});
+
+// Vuelta desde Stripe tras pagar, o comprobación de una suscripción guardada
+(async () => {
+  const sessionId = new URLSearchParams(location.search).get('session_id');
+  if (sessionId) {
+    history.replaceState(null, '', '/');
+    const res = await (await fetch(`/api/checkout/confirm?session_id=${encodeURIComponent(sessionId)}`)).json().catch(() => ({}));
+    if (res.token) { activatePremium(res.token); return; }
+    alert(res.error || 'No se pudo confirmar el pago');
+  }
+  const token = getToken();
+  if (!token) { setPremium(false); return; }
+  const me = await (await fetch('/api/me', { headers: { Authorization: `Bearer ${token}` } })).json().catch(() => ({}));
+  setPremium(!!me.premium);
+})();
 
 // ---- WebRTC ----
 function closePeer() {
@@ -95,21 +204,32 @@ async function handleSignal(data) {
 }
 
 // ---- Socket / emparejamiento ----
+function find() {
+  // Si está reconectando, el evento 'connect' buscará con el filtro actual
+  if (socket.connected) socket.emit('find', { want: want ? [want] : [] });
+}
+
 function connectSocket() {
-  socket = io();
+  socket = io({ auth: { gender: myGender, token: getToken() } });
 
-  socket.on('connect_error', (err) => {
-    if (err.message === 'banned') setStatus('Tu acceso ha sido bloqueado por reportes de otros usuarios.');
-  });
+  // Tras (re)conectar, si estaba buscando vuelve a la cola
+  socket.on('connect', () => { refreshOnline(); if (running) find(); });
 
-  socket.on('waiting', () => setStatus('Buscando a alguien…'));
+  socket.on('account', (acc) => setPremium(acc.premium));
 
-  socket.on('matched', async ({ initiator }) => {
+  socket.on('waiting', () => setStatus(
+    want ? `Buscando ${PLURALS[want]}…` : 'Buscando a alguien…'));
+
+  socket.on('matched', async ({ initiator, gender }) => {
     messages.innerHTML = '';
     setStatus('');
     addMsg('¡Conectado! Saluda 👋', 'sys');
     createPeer();
     setConnected(true);
+    if (gender) {
+      $('partnerTag').textContent = LABELS[gender];
+      $('partnerTag').classList.remove('hidden');
+    }
     if (initiator) {
       await pc.setLocalDescription(await pc.createOffer());
       socket.emit('signal', { sdp: pc.localDescription });
@@ -122,12 +242,7 @@ function connectSocket() {
   socket.on('partner-left', () => {
     closePeer();
     addMsg('La otra persona se ha ido.', 'sys');
-    socket.emit('find');
-  });
-
-  socket.on('banned', () => {
-    stop();
-    setStatus('Tu acceso ha sido bloqueado por reportes de otros usuarios.');
+    find();
   });
 }
 
@@ -142,17 +257,18 @@ async function start() {
   try {
     iceConfig = await (await fetch('/ice')).json();
   } catch { /* se usa la configuración por defecto */ }
-  if (!socket) connectSocket();
   setRunning(true);
   refreshOnline();
-  socket.emit('find');
+  setStatus('Buscando a alguien…');
+  if (!socket) connectSocket();   // al conectar emite 'find'
+  else find();
 }
 
 function next() {
   closePeer();
   messages.innerHTML = '';
   setStatus('Buscando a alguien…');
-  socket.emit('find');
+  find();
 }
 
 function stop() {
@@ -168,13 +284,6 @@ function stop() {
 $('startBtn').addEventListener('click', start);
 $('nextBtn').addEventListener('click', next);
 $('stopBtn').addEventListener('click', stop);
-$('reportBtn').addEventListener('click', () => {
-  if (!confirm('¿Reportar a este usuario por comportamiento inadecuado?')) return;
-  closePeer();
-  addMsg('Usuario reportado. Buscando a otra persona…', 'sys');
-  setStatus('Buscando a alguien…');
-  socket.emit('report');
-});
 
 $('chatForm').addEventListener('submit', (e) => {
   e.preventDefault();

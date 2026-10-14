@@ -7,27 +7,53 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Verificación de edad -->
-  <div id="gate" class="gate">
-    <div class="gate-box">
+  <!-- Entrada: mayoría de edad + género propio -->
+  <div id="gate" class="overlay">
+    <div class="box">
       <h1>Videochat Aleatorio</h1>
       <p>Este sitio es solo para <strong>mayores de 18 años</strong>.</p>
-      <p class="small">Al entrar confirmas que eres mayor de edad, aceptas las normas de uso
-        y entiendes que los usuarios que infrinjan las normas serán bloqueados.</p>
+      <p class="label">Soy:</p>
+      <div class="chips" id="myGender">
+        <button type="button" class="chip" data-g="chica">Chica</button>
+        <button type="button" class="chip" data-g="chico">Chico</button>
+        <button type="button" class="chip" data-g="trans">Trans</button>
+      </div>
       <label class="check"><input type="checkbox" id="ageCheck"> Tengo 18 años o más y acepto las normas</label>
-      <button id="enterBtn" disabled>Entrar</button>
+      <button id="enterBtn" class="primary wide" disabled>Entrar</button>
+    </div>
+  </div>
+
+  <!-- Plan Premium -->
+  <div id="premiumModal" class="overlay hidden">
+    <div class="box">
+      <button class="close" id="closePremium" aria-label="Cerrar">✕</button>
+      <span class="badge">PREMIUM</span>
+      <h2>Elige a quién quieres ver</h2>
+      <p class="price"><span id="priceText">19,99 €</span><small>/mes</small></p>
+      <ul class="perks">
+        <li>Filtra por chicas, chicos o trans</li>
+        <li>Sin filtro sigues teniendo el chat al azar gratis</li>
+        <li>Cancela cuando quieras</li>
+      </ul>
+      <button id="subscribeBtn" class="primary wide">Suscribirme</button>
+      <p id="demoNote" class="small hidden">Modo demo: el pago se simula, no se cobra nada.</p>
     </div>
   </div>
 
   <header class="top">
     <span class="logo">Videochat<b>Aleatorio</b></span>
-    <span id="online" class="online"></span>
+    <span class="top-right">
+      <span id="online" class="online"></span>
+      <button id="premiumBtn" class="pill">⭐ Hazte Premium</button>
+      <button id="manageBtn" class="pill hidden">⭐ Premium</button>
+    </span>
   </header>
 
   <main class="app">
     <section class="videos">
       <div class="video-wrap remote">
         <video id="remoteVideo" autoplay playsinline></video>
+        <span id="partnerTag" class="tag hidden"></span>
         <div id="status" class="status">Pulsa «Empezar» para conocer a alguien</div>
       </div>
       <div class="video-wrap local">
@@ -36,11 +62,19 @@
     </section>
 
     <aside class="side">
+      <div class="filter">
+        <p class="label">Quiero ver: <span id="lockNote" class="lock">🔒 Premium</span></p>
+        <div class="chips" id="wantGender">
+          <button type="button" class="chip active" data-g="">Todos</button>
+          <button type="button" class="chip" data-g="chica">Chicas</button>
+          <button type="button" class="chip" data-g="chico">Chicos</button>
+          <button type="button" class="chip" data-g="trans">Trans</button>
+        </div>
+      </div>
       <div class="controls">
         <button id="startBtn" class="primary">Empezar</button>
-        <button id="nextBtn" disabled>Siguiente ⏭</button>
+        <button id="nextBtn" disabled>Siguiente</button>
         <button id="stopBtn" disabled>Parar</button>
-        <button id="reportBtn" class="danger" disabled>Reportar</button>
       </div>
       <div id="messages" class="messages"></div>
       <form id="chatForm" class="chat-form">
