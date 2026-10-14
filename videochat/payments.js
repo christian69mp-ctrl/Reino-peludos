@@ -130,7 +130,7 @@ function routes(app, baseUrl) {
       store.updateOrder(orderId, { status: 'active', expires: Date.now() + PERIOD_DAYS * DAY });
       return res.json({ activated: true });
     }
-    if (!ETICKETS[method]) return res.status(400).json({ error: 'Método de pago no disponible' });
+    if (!ETICKETS[method]) return res.status(400).json({ code: 'payUnavailable', error: 'Método de pago no disponible' });
 
     store.createOrder(orderId, { method, userId: req.user.id });
     const origin = originOf(req, baseUrl);
@@ -161,9 +161,9 @@ function routes(app, baseUrl) {
   // El usuario vuelve de Segpay: la web pregunta hasta que el pago se confirma
   app.get('/api/checkout/confirm', requireUser, (req, res) => {
     const order = store.getOrder(String(req.query.order || ''));
-    if (!order || order.userId !== req.user.id) return res.status(404).json({ error: 'Pedido no encontrado' });
+    if (!order || order.userId !== req.user.id) return res.status(404).json({ code: 'payFailed', error: 'Pedido no encontrado' });
     if (order.status === 'pending') return res.json({ pending: true });
-    if (order.status !== 'active') return res.status(402).json({ error: 'Pago no completado' });
+    if (order.status !== 'active') return res.status(402).json({ code: 'payFailed', error: 'Pago no completado' });
     res.json({ activated: true });
   });
 }

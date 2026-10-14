@@ -1,12 +1,10 @@
 const $ = (id) => document.getElementById(id);
 const $$ = (sel) => document.querySelectorAll(sel);
+const { t } = window.I18N;
 const localVideo = $('localVideo');
 const remoteVideo = $('remoteVideo');
 const messages = $('messages');
 const chatInput = $('chatInput');
-
-const LABELS = { mujer: 'Mujer', hombre: 'Hombre', trans: 'Transexual', pareja: 'Pareja' };
-const PLURALS = { mujer: 'mujeres', hombre: 'hombres', trans: 'transexuales', pareja: 'parejas' };
 
 let socket = null;
 let localStream = null;
@@ -17,10 +15,14 @@ let running = false;
 let connected = false;
 
 let token = load('session');
-let me = null;           // respuesta de /api/me
+let me = null;            // respuesta de /api/me
 let premium = false;
-let want = '';           // '' = todos
+let want = '';            // '' = todos
 let pendingAction = null; // lo que quería hacer antes de iniciar sesión
+let plan = null;
+let translateEnabled = false;
+let partner = null;       // { gender, lang, likes }
+let statusKey = { key: 'chat.pressStart' };
 
 // ---------- Utilidades ----------
 function load(key) { try { return localStorage.getItem(key) || ''; } catch { return ''; } }
@@ -37,8 +39,13 @@ async function api(path, { method = 'GET', body } = {}) {
     const data = await r.json().catch(() => ({}));
     return { status: r.status, ...data };
   } catch {
-    return { status: 0, error: 'Sin conexión. Inténtalo de nuevo.' };
+    return { status: 0, code: 'offline' };
   }
+}
+
+// Texto de error de una respuesta del servidor, en el idioma de la web
+function errorText(res) {
+  return res?.code ? t(`err.${res.code}`) : t('err.generic');
 }
 
 let toastTimer;
@@ -61,8 +68,40 @@ $$('.overlay').forEach((overlay) => {
   });
 });
 
-const money = (n) => `${n.toFixed(2).replace('.', ',')} €`;
-const dateEs = (ms) => new Date(ms).toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+const money = (n) => new Intl.NumberFormat(I18N.lang, { style: 'currency', currency: 'EUR' }).format(n);
+const dateText = (ms, withTime) => new Date(ms).toLocaleString(I18N.lang, withTime
+  ? { dateStyle: 'medium', timeStyle: 'short' }
+  : { day: 'numeric', month: 'long' });
+
+// ---------- Idioma ----------
+function fillLangSelects() {
+  $$('[data-lang-select]').forEach((sel) => {
+    sel.innerHTML = I18N.SUPPORTED.map((l) => `<option value="${l}">${I18N.NAMES[l]}</option>`).join('');
+    sel.value = I18N.lang;
+    sel.onchange = () => I18N.setLang(sel.value);
+  });
+}
+
+// Textos que dependen del estado y no se pueden marcar en el HTML
+function renderDynamicTexts() {
+  $$('[data-lang-select]').forEach((sel) => { sel.value = I18N.lang; });
+  $('authSubmit').textContent = t(authMode === 'login' ? 'auth.submitLogin' : 'auth.submitSignup');
+  $('statusText').textContent = t(statusKey.key, statusKey.vars);
+  if (plan) {
+    $$('.priceText').forEach((el) => { el.textContent = money(plan.price); });
+    $('payCardSub').textContent = t('pay.cardSub', { price: money(plan.price) });
+    $('payCryptoSub').textContent = t('pay.cryptoSub', { price: money(plan.price), days: plan.passDays });
+  }
+  renderPartner();
+  renderMyLikes();
+  refreshOnline();
+}
+
+document.addEventListener('langchange', () => {
+  renderDynamicTexts();
+  // El chat se traduce al idioma elegido: el servidor lo sabe al reconectar
+  if (socket?.connected && !connected) { socket.disconnect().connect(); }
+});
 
 // ---------- Aviso de edad ----------
 if (!load('age-ok')) openModal('ageGate');
@@ -74,9 +113,9 @@ let myGender = '';
 
 function setAuthMode(mode) {
   authMode = mode;
-  $$('.tab').forEach((t) => t.classList.toggle('active', t.dataset.tab === mode));
+  $$('.tab').forEach((tab) => tab.classList.toggle('active', tab.dataset.tab === mode));
   $('authForm').classList.toggle('login', mode === 'login');
-  $('authSubmit').textContent = mode === 'login' ? 'Entrar' : 'Crear cuenta gratis';
+  $('authSubmit').textContent = t(mode === 'login' ? 'auth.submitLogin' : 'auth.submitSignup');
   $('authPassword').autocomplete = mode === 'login' ? 'current-password' : 'new-password';
   $('authError').hidden = true;
 }
@@ -89,7 +128,7 @@ function openAuth(mode = 'register', action = null) {
 }
 
 $$('[data-open-auth]').forEach((b) => b.addEventListener('click', () => openAuth(b.dataset.openAuth)));
-$$('.tab').forEach((t) => t.addEventListener('click', () => setAuthMode(t.dataset.tab)));
+$$('.tab').forEach((tab) => tab.addEventListener('click', () => setAuthMode(tab.dataset.tab)));
 $('myGender').addEventListener('click', (e) => {
   const g = e.target.closest('[data-g]')?.dataset.g;
   if (!g) return;
@@ -102,12 +141,12 @@ $('authForm').addEventListener('submit', async (e) => {
   const showError = (msg) => { $('authError').textContent = msg; $('authError').hidden = false; };
   const email = $('authEmail').value.trim();
   const password = $('authPassword').value;
-  if (!email || !password) return showError('Escribe tu email y tu contraseña');
+  if (!email || !password) return showError(t('err.fill'));
 
   let res;
   if (authMode === 'register') {
-    if (!myGender) return showError('Elige qué eres: mujer, hombre, transexual o pareja');
-    if (!$('authTerms').checked) return showError('Debes confirmar que eres mayor de edad y aceptar las normas');
+    if (!myGender) return showError(t('err.gender'));
+    if (!$('authTerms').checked) return showError(t('err.terms'));
     $('authSubmit').disabled = true;
     res = await api('/api/register', { method: 'POST', body: { email, password, gender: myGender, adult: true, terms: true } });
   } else {
@@ -115,14 +154,14 @@ $('authForm').addEventListener('submit', async (e) => {
     res = await api('/api/login', { method: 'POST', body: { email, password } });
   }
   $('authSubmit').disabled = false;
-  if (!res.token) return showError(res.error || 'No se pudo completar. Inténtalo de nuevo.');
+  if (!res.token) return showError(errorText(res));
 
   token = res.token;
   save('session', token);
   $('authPassword').value = '';
   closeModal('authModal');
   await refreshMe();
-  toast(authMode === 'register' ? '¡Bienvenido/a a La Ruleta Caliente! 🔥' : '¡Hola de nuevo! 🔥');
+  toast(t(authMode === 'register' ? 'msg.welcome' : 'msg.welcomeBack'));
   const action = pendingAction;
   pendingAction = null;
   if (action === 'start') enterChat();
@@ -142,6 +181,7 @@ function applyMe(data) {
   $('guestActions').hidden = logged;
   $('userActions').hidden = !logged;
   setPremium(!!data?.premium);
+  renderMyLikes();
   if (data?.restriction) showRestricted(data.restriction);
 }
 
@@ -152,19 +192,15 @@ function logout(notify = true) {
   save('session', '');
   applyMe(null);
   showLanding();
-  if (notify) toast('Has cerrado sesión');
+  if (notify) toast(t('msg.loggedOut'));
 }
 $('logoutBtn').addEventListener('click', () => logout());
 
 function showRestricted(r) {
   stop();
-  if (r.type === 'banned') {
-    $('restrictedTitle').textContent = 'Cuenta expulsada';
-    $('restrictedText').textContent = 'Tu cuenta ha sido expulsada por no respetar las normas de la comunidad.';
-  } else {
-    $('restrictedTitle').textContent = 'Cuenta suspendida';
-    $('restrictedText').textContent = `Tu cuenta está suspendida hasta el ${new Date(r.until).toLocaleString('es-ES')} por denuncias de otros usuarios.`;
-  }
+  const banned = r.type === 'banned';
+  $('restrictedTitle').textContent = t(banned ? 'res.banned' : 'res.suspended');
+  $('restrictedText').textContent = banned ? t('res.bannedText') : t('res.suspendedText', { date: dateText(r.until, true) });
   openModal('restrictedModal');
 }
 
@@ -194,15 +230,15 @@ $('homeLink').addEventListener('click', (e) => {
 });
 
 // ---------- Estadísticas ----------
+let online = 0;
 async function refreshOnline() {
   try {
-    const { online } = await (await fetch('/stats')).json();
-    $('onlineCount').textContent = online;
-    $('onlinePill').hidden = online < 1;
+    ({ online } = await (await fetch('/stats')).json());
   } catch { /* sin estadísticas */ }
+  $('onlineText').textContent = t('header.online', { n: online });
+  $('onlinePill').hidden = online < 1;
 }
 setInterval(refreshOnline, 15000);
-refreshOnline();
 
 // ---------- Premium ----------
 function setPremium(value) {
@@ -236,23 +272,15 @@ function openPremium() {
 }
 $$('[data-premium]').forEach((b) => b.addEventListener('click', openPremium));
 
-fetch('/api/plan').then((r) => r.json()).then((plan) => {
-  $$('.priceText').forEach((el) => { el.textContent = money(plan.price); });
-  $$('.passDays').forEach((el) => { el.textContent = plan.passDays; });
-  $('payCard').hidden = !plan.methods.card;
-  $('payCrypto').hidden = !plan.methods.crypto;
-  $('demoNote').hidden = !plan.demo;
-}).catch(() => {});
-
 async function premiumActivated() {
   closeModal('premiumModal');
   $('payWait').hidden = true;
   await refreshMe();
-  toast('⭐ ¡Ya eres Premium! Elige a quién quieres ver.');
+  toast(t('msg.premiumOn'));
   // Reconecta para que el servidor reconozca la suscripción
   if (socket) {
     socket.disconnect().connect();
-    if (running) { closePeer(); setStatus('Buscando a alguien…', true); }
+    if (running) { closePeer(); setStatus('msg.searching', null, true); }
   }
 }
 
@@ -264,20 +292,18 @@ async function pay(method) {
   buttons.forEach((b) => { b.disabled = false; });
   if (res.activated) premiumActivated();              // modo demo
   else if (res.url) location.href = res.url;          // página de pago de Segpay
-  else toast(res.error || 'No se pudo iniciar el pago');
+  else toast(errorText(res));
 }
 $('payCard').addEventListener('click', () => pay('card'));
 $('payCrypto').addEventListener('click', () => pay('crypto'));
 
 function manage() {
   if (!me?.premium) return;
-  const until = dateEs(me.expires);
+  const date = dateText(me.expires);
   if (me.cancelUrl) {
-    if (confirm(`Tu Premium se renueva el ${until}.\n\n¿Quieres gestionar o cancelar la suscripción?`)) {
-      window.open(me.cancelUrl, '_blank', 'noopener');
-    }
+    if (confirm(t('msg.premiumRenews', { date }))) window.open(me.cancelUrl, '_blank', 'noopener');
   } else {
-    toast(`⭐ Tu Premium está activo hasta el ${until}`);
+    toast(t('msg.premiumUntil', { date }));
   }
 }
 $('manageBtn').addEventListener('click', manage);
@@ -295,36 +321,159 @@ async function waitPayment(orderId) {
     await new Promise((r) => setTimeout(r, 4000));
   }
   $('payWait').hidden = true;
-  toast('No se ha podido confirmar el pago. Si has pagado, escríbenos a soporte.');
+  toast(t('msg.payNotConfirmed'));
 }
 
-// ---------- WebRTC ----------
-function setStatus(text, searching = false) {
-  $('status').hidden = !text;
+// ---------- Mensajes ----------
+function setStatus(key, vars, searching = false) {
+  statusKey = { key, vars };
+  $('status').hidden = !key;
   $('status').classList.toggle('searching', searching);
-  $('statusText').textContent = text;
+  $('statusText').textContent = key ? t(key, vars) : '';
 }
 
 function addMsg(text, who) {
   const p = document.createElement('p');
   p.className = `msg ${who}`;
   p.textContent = text;
-  messages.appendChild(p);
+  if (who === 'them' && canTranslate()) {
+    const wrap = document.createElement('div');
+    wrap.className = 'msg-wrap';
+    wrap.append(p, translateButton(p, text));
+    messages.appendChild(wrap);
+  } else {
+    messages.appendChild(p);
+  }
   messages.scrollTop = messages.scrollHeight;
 }
 
 function resetMessages() {
   messages.innerHTML = '';
-  addMsg('Sé amable 💛 Las burlas, el acoso y la homofobia o transfobia están prohibidos.', 'sys');
+  addMsg(t('msg.beKind'), 'sys');
 }
-resetMessages();
 
+// ---------- Traducción del chat ----------
+function canTranslate() {
+  return translateEnabled && partner?.lang && partner.lang !== I18N.chatLang();
+}
+
+function translateButton(p, original) {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'tr-btn';
+  btn.innerHTML = '<svg class="i"><use href="#i-languages"/></svg><span></span>';
+  const label = btn.querySelector('span');
+  let translated = null;
+  let showing = false;
+  label.textContent = t('tr.translate');
+
+  btn.addEventListener('click', async () => {
+    if (showing) {
+      p.textContent = original;
+      p.classList.remove('translated');
+      label.textContent = t('tr.translate');
+      showing = false;
+      return;
+    }
+    if (!translated) {
+      btn.disabled = true;
+      label.textContent = t('tr.translating');
+      const res = await api('/api/translate', { method: 'POST', body: { text: original, target: I18N.chatLang() } });
+      btn.disabled = false;
+      if (!res.text) { label.textContent = t('tr.translate'); toast(errorText(res)); return; }
+      translated = res.text;
+    }
+    p.textContent = translated;
+    p.classList.add('translated');
+    label.textContent = t('tr.original');
+    showing = true;
+  });
+  return btn;
+}
+
+// ---------- Datos de la otra persona y likes ----------
+function likesText(likes) {
+  if (!likes || (!likes.like && !likes.love)) return '';
+  return `👍 ${likes.like}  ❤️ ${likes.love}`;
+}
+
+function renderPartner() {
+  if (!partner) { $('partnerInfo').hidden = true; return; }
+  $('partnerInfo').hidden = false;
+  $('partnerTag').textContent = t(`g.${partner.gender}`);
+  $('partnerLikes').textContent = likesText(partner.likes);
+  const showLang = partner.lang && partner.lang !== I18N.chatLang();
+  $('partnerLang').hidden = !showLang;
+  if (showLang) $('partnerLang').querySelector('span').textContent = t('msg.speaks', { lang: I18N.langName(partner.lang) });
+}
+
+function renderMyLikes() {
+  const text = likesText(me?.user?.likes);
+  $('myLikes').textContent = text;
+  $('myLikes').hidden = !text;
+}
+
+// ---------- Reacciones 👍 ❤️ ----------
+const EMOJI = { like: '👍', love: '❤️' };
+const BURST_EXTRAS = { like: ['👍', '👍', '👍', '✨', '🔥'], love: ['❤️', '❤️', '❤️', '💖', '😍', '✨'] };
+
+// Estallido de emojis sobre el vídeo (lo ven las dos personas)
+function burst(type, label) {
+  const layer = $('burstLayer');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const created = [];
+  const add = (el) => { layer.appendChild(el); created.push(el); };
+  const big = document.createElement('span');
+  big.className = 'burst-big';
+  big.textContent = EMOJI[type];
+  add(big);
+
+  const count = reduced ? 0 : 42;
+  const { width, height } = layer.getBoundingClientRect();
+  for (let i = 0; i < count; i++) {
+    const bit = document.createElement('span');
+    bit.className = 'burst-bit';
+    const extras = BURST_EXTRAS[type];
+    bit.textContent = extras[Math.floor(Math.random() * extras.length)];
+    const angle = Math.random() * Math.PI * 2;
+    const dist = (0.35 + Math.random() * 0.65) * Math.max(width, height) * 0.6;
+    bit.style.setProperty('--ox', `${50 + (Math.random() - 0.5) * 12}%`);
+    bit.style.setProperty('--oy', `${50 + (Math.random() - 0.5) * 12}%`);
+    bit.style.setProperty('--x', `${Math.cos(angle) * dist}px`);
+    bit.style.setProperty('--y', `${Math.sin(angle) * dist - 40}px`);
+    bit.style.setProperty('--rot', `${(Math.random() - 0.5) * 120}deg`);
+    bit.style.setProperty('--scale', (0.8 + Math.random() * 1.2).toFixed(2));
+    bit.style.setProperty('--size', `${22 + Math.random() * 30}px`);
+    bit.style.setProperty('--dur', `${1 + Math.random() * 0.8}s`);
+    bit.style.setProperty('--delay', `${Math.random() * 0.25}s`);
+    add(bit);
+  }
+  if (label) {
+    const tag = document.createElement('span');
+    tag.className = 'burst-label';
+    tag.textContent = `${label} ${EMOJI[type]}`;
+    add(tag);
+  }
+  setTimeout(() => created.forEach((el) => el.remove()), 2200);
+}
+
+$('reactions').addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-react]');
+  if (!btn || !connected) return;
+  btn.classList.remove('pulse');
+  void btn.offsetWidth;
+  btn.classList.add('pulse');
+  socket.emit('react', btn.dataset.react);
+});
+
+// ---------- WebRTC ----------
 function setConnected(value) {
   connected = value;
   chatInput.disabled = !value;
   $('sendBtn').disabled = !value;
   $('reportBtn').hidden = !value;
-  if (!value) $('partnerTag').hidden = true;
+  $('reactions').hidden = !value;
+  if (!value) { partner = null; renderPartner(); }
 }
 
 function setRunning(on) {
@@ -348,12 +497,12 @@ function closePeer() {
 function createPeer() {
   closePeer();
   pc = new RTCPeerConnection(iceConfig);
-  localStream.getTracks().forEach((t) => pc.addTrack(t, localStream));
+  localStream.getTracks().forEach((track) => pc.addTrack(track, localStream));
   pc.ontrack = (e) => { remoteVideo.srcObject = e.streams[0]; };
   pc.onicecandidate = (e) => { if (e.candidate) socket.emit('signal', { candidate: e.candidate }); };
   pc.onconnectionstatechange = () => {
     if (pc && pc.connectionState === 'failed') {
-      addMsg('No se pudo conectar. Buscando otra persona…', 'sys');
+      addMsg(t('msg.failed'), 'sys');
       next();
     }
   };
@@ -381,12 +530,13 @@ function find() {
   if (socket?.connected) socket.emit('find', { want: want ? [want] : [] });
 }
 
-function searchingText() {
-  return want ? `Buscando ${PLURALS[want]}…` : 'Buscando a alguien…';
+function setSearching() {
+  if (want) setStatus('msg.searchingFor', { who: t(`gs.${want}`) }, true);
+  else setStatus('msg.searching', null, true);
 }
 
 function connectSocket() {
-  socket = io({ auth: (cb) => cb({ token }) });
+  socket = io({ auth: (cb) => cb({ token, lang: I18N.chatLang() }) });
 
   socket.on('connect', () => { refreshOnline(); if (running) find(); });
 
@@ -397,18 +547,16 @@ function connectSocket() {
 
   socket.on('account', (acc) => { if (acc.premium !== premium) refreshMe(); });
 
-  socket.on('waiting', () => setStatus(searchingText(), true));
+  socket.on('waiting', setSearching);
 
-  socket.on('matched', async ({ initiator, gender }) => {
-    resetMessages();
-    setStatus('');
-    addMsg('¡Conectado! Saluda 👋', 'sys');
+  socket.on('matched', async ({ initiator, gender, lang, likes }) => {
     createPeer();
     setConnected(true);
-    if (gender) {
-      $('partnerTag').textContent = LABELS[gender];
-      $('partnerTag').hidden = false;
-    }
+    partner = { gender, lang, likes };
+    resetMessages();
+    setStatus('');
+    addMsg(t('msg.connected'), 'sys');
+    renderPartner();
     if (initiator) {
       await pc.setLocalDescription(await pc.createOffer());
       socket.emit('signal', { sdp: pc.localDescription });
@@ -418,10 +566,20 @@ function connectSocket() {
   socket.on('signal', (data) => handleSignal(data).catch(console.error));
   socket.on('chat', (text) => addMsg(text, 'them'));
 
+  socket.on('reaction', ({ type, from, partnerLikes, myLikes }) => {
+    if (from === 'me') {
+      if (partner) { partner.likes = partnerLikes; renderPartner(); }
+      burst(type);
+    } else {
+      if (me?.user) { me.user.likes = myLikes; renderMyLikes(); }
+      burst(type, t(type === 'love' ? 're.gotLove' : 're.gotLike'));
+    }
+  });
+
   socket.on('partner-left', () => {
     closePeer();
-    addMsg('La otra persona se ha ido.', 'sys');
-    setStatus(searchingText(), true);
+    addMsg(t('msg.left'), 'sys');
+    setSearching();
     find();
   });
 
@@ -429,11 +587,11 @@ function connectSocket() {
 }
 
 async function start() {
-  setStatus('Activando tu cámara…');
+  setStatus('msg.activatingCam');
   try {
     localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
   } catch {
-    setStatus('Necesitamos acceso a tu cámara y micrófono para empezar. Revisa los permisos del navegador.');
+    setStatus('msg.camera');
     return;
   }
   localVideo.srcObject = localStream;
@@ -441,7 +599,7 @@ async function start() {
     iceConfig = await (await fetch('/ice')).json();
   } catch { /* se usa la configuración por defecto */ }
   setRunning(true);
-  setStatus(searchingText(), true);
+  setSearching();
   if (!socket) connectSocket();   // al conectar emite 'find'
   else if (!socket.connected) socket.connect();
   else find();
@@ -450,18 +608,18 @@ async function start() {
 function next() {
   closePeer();
   resetMessages();
-  setStatus(searchingText(), true);
+  setSearching();
   find();
 }
 
 function stop() {
   closePeer();
   if (socket?.connected) socket.emit('stop');
-  if (localStream) localStream.getTracks().forEach((t) => t.stop());
+  if (localStream) localStream.getTracks().forEach((track) => track.stop());
   localStream = null;
   localVideo.srcObject = null;
   setRunning(false);
-  setStatus('Pulsa «Empezar» para conocer a alguien');
+  setStatus('chat.pressStart');
 }
 
 $('startBtn').addEventListener('click', start);
@@ -487,12 +645,12 @@ $('reportBtn').addEventListener('click', () => {
 $('reportForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const reason = new FormData($('reportForm')).get('reason');
-  if (!reason) { $('reportError').textContent = 'Elige un motivo'; $('reportError').hidden = false; return; }
-  if (!connected) { closeModal('reportModal'); toast('La conversación ya ha terminado.'); return; }
+  if (!reason) { $('reportError').textContent = t('err.reason'); $('reportError').hidden = false; return; }
+  if (!connected) { closeModal('reportModal'); toast(t('msg.convEnded')); return; }
   socket.emit('report', { reason, comment: $('reportComment').value }, (res) => {
-    if (res?.error) { $('reportError').textContent = res.error; $('reportError').hidden = false; return; }
+    if (res?.code) { $('reportError').textContent = errorText(res); $('reportError').hidden = false; return; }
     closeModal('reportModal');
-    toast('Gracias por avisar. Revisaremos la denuncia y no volveréis a coincidir.');
+    toast(t('msg.reportThanks'));
     next();
   });
 });
@@ -509,6 +667,22 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ---------- Arranque ----------
+I18N.apply();
+fillLangSelects();
+resetMessages();
+setStatus('chat.pressStart');
+refreshOnline();
+
+fetch('/api/plan').then((r) => r.json()).then((p) => {
+  plan = p;
+  $('payCard').hidden = !p.methods.card;
+  $('payCrypto').hidden = !p.methods.crypto;
+  $('demoNote').hidden = !p.demo;
+  renderDynamicTexts();
+}).catch(() => {});
+
+fetch('/api/config').then((r) => r.json()).then((c) => { translateEnabled = !!c.translate; }).catch(() => {});
+
 (async () => {
   await refreshMe();
   const order = new URLSearchParams(location.search).get('order');

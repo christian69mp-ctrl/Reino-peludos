@@ -31,6 +31,16 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   primero), conversación denunciada, y botones para descartar, suspender 1 o 7 días, expulsar o
   readmitir. Al suspender o expulsar, la persona sale del chat al instante.
 - **Páginas legales**: `/normas`, `/terminos` y `/privacidad`.
+- **Idiomas**: la web se muestra sola en el idioma del navegador (español, inglés, portugués,
+  francés, alemán o italiano; si no es ninguno, en inglés). Se puede cambiar en el selector del
+  pie de página y del aviso de edad. Los textos están en `public/i18n.js`.
+- **Traducción del chat**: si las dos personas hablan idiomas distintos, se muestra «Habla inglés»
+  (o el que sea) junto a la otra persona y aparece «Traducir» bajo cada mensaje suyo. Necesita un
+  proveedor de traducción (ver variables). Funciona con cualquier idioma, no solo los 6 de la web.
+- **Reacciones 👍 Me gusta y ❤️ Me encanta**: botones sobre el vídeo durante la conversación.
+  Al pulsar, las dos personas ven un estallido de emojis en pantalla y quien la recibe ve
+  «¡Le encantas!». Cada usuario acumula sus likes (se ven junto a su etiqueta y en su propia
+  cámara). Cada tipo cuenta una vez por conversación para que no se puedan inflar.
 
 ## Estructura
 
@@ -40,6 +50,7 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
 - `moderation.js` — denuncias, suspensiones automáticas y API del panel de moderación.
 - `store.js` — guarda usuarios, pedidos y denuncias en `data/store.json`.
 - `tokens.js` — firma de las sesiones.
+- `translate.js` — traducción de mensajes del chat (DeepL o LibreTranslate).
 - `public/` — la web: `index.html` (portada + chat), `app.js`, `style.css`, `admin.html`,
   páginas legales y `logo.svg`.
 
@@ -55,6 +66,11 @@ SEGPAY_ETICKET_CARD=123456:7890
 SEGPAY_ETICKET_CRYPTO=123456:7891
 SEGPAY_POSTBACK_KEY=...
 # SEGPAY_CANCEL_URL=https://cs.segpay.com
+
+# Traducción del chat (uno de los dos; sin ninguno, no aparece «Traducir»)
+DEEPL_API_KEY=...             # deepl.com/pro-api — la clave gratuita (500.000 caracteres/mes) termina en :fx
+# LIBRETRANSLATE_URL=https://tu-libretranslate.com   # alternativa gratuita que puedes instalar tú
+# LIBRETRANSLATE_API_KEY=...
 
 # Vídeo en redes móviles
 TURN_URL=turn:turn.tudominio.com:3478
@@ -91,6 +107,7 @@ Para pagar hay que tener la sesión iniciada; el Premium queda en la cuenta.
 
 ## Antes de abrir al público
 
+- **Traducir las páginas legales**: normas, términos y privacidad están solo en español.
 - **Completa las páginas legales**: en `/terminos` y `/privacidad` hay datos marcados en amarillo
   (titular, NIF, dirección…). Revísalas con un abogado.
 - **Crea el buzón `soporte@laruletacaliente.com`** (aparece en la web).

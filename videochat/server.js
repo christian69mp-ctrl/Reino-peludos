@@ -6,6 +6,7 @@ const store = require('./store');
 const auth = require('./auth');
 const payments = require('./payments');
 const moderation = require('./moderation');
+const translate = require('./translate');
 
 const PORT = process.env.PORT || 3000;
 
@@ -32,6 +33,10 @@ app.get('/fonts/plus-jakarta-sans.woff2', (_req, res) => {
 auth.routes(app);
 payments.routes(app, process.env.BASE_URL);
 moderation.routes(app);
+translate.routes(app);
+
+// Qué funciones opcionales están activas
+app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled }));
 
 // Sesión actual: datos de la cuenta, Premium y restricciones
 app.get('/api/me', auth.requireUser, (req, res) => {
@@ -68,6 +73,9 @@ let queue = [];               // ids de socket esperando pareja
 const partners = new Map();   // socketId -> socketId de su pareja
 const lastPartner = new Map();// evita volver a emparejar con el anterior al instante
 const chatLogs = new Map();   // socketId -> últimos mensajes de la conversación actual
+const reacted = new Map();    // socketId -> reacciones ya contadas en la conversación actual
+const REACTIONS = ['like', 'love'];
+const LANG_RE = /^[a-z]{2,3}$/;
 
 function removeFromQueue(id) {
   queue = queue.filter((q) => q !== id);
@@ -80,6 +88,8 @@ function unpair(socket, notify = true) {
   partners.delete(partnerId);
   chatLogs.delete(socket.id);
   chatLogs.delete(partnerId);
+  reacted.delete(socket.id);
+  reacted.delete(partnerId);
   if (notify) io.to(partnerId).emit('partner-left');
 }
 
@@ -116,9 +126,16 @@ function findMatch(socket) {
   const log = [];
   chatLogs.set(socket.id, log);
   chatLogs.set(partnerId, log);
+  reacted.set(socket.id, new Set());
+  reacted.set(partnerId, new Set());
   // El que acaba de llegar inicia la oferta WebRTC
-  socket.emit('matched', { initiator: true, gender: partner.data.gender });
-  partner.emit('matched', { initiator: false, gender: socket.data.gender });
+  socket.emit('matched', { initiator: true, ...partnerInfo(partner) });
+  partner.emit('matched', { initiator: false, ...partnerInfo(socket) });
+}
+
+// Lo que se enseña de la otra persona: qué es, su idioma y sus likes
+function partnerInfo(s) {
+  return { gender: s.data.gender, lang: s.data.lang, likes: auth.likesOf(store.getUser(s.data.uid) || {}) };
 }
 
 // Expulsa del chat a un usuario suspendido o expulsado
@@ -144,6 +161,8 @@ io.use((socket, next) => {
   socket.data.premium = payments.isPremium(user.id);
   socket.data.blocked = new Set(user.blocked || []);
   socket.data.want = [];
+  const lang = String(socket.handshake.auth?.lang || '').toLowerCase();
+  socket.data.lang = LANG_RE.test(lang) ? lang : 'es';
   next();
 });
 
@@ -182,14 +201,35 @@ io.on('connection', (socket) => {
     io.to(partnerId).emit('chat', clean);
   });
 
+  // Reacciones 👍 / ❤️: se animan en las dos pantallas y suman al perfil de la
+  // otra persona (cada tipo cuenta una vez por conversación)
+  socket.on('react', (type) => {
+    const partnerId = partners.get(socket.id);
+    const partner = partnerId && io.sockets.sockets.get(partnerId);
+    if (!partner || !REACTIONS.includes(type)) return;
+    const now = Date.now();
+    if (now - (socket.data.lastReaction || 0) < 600) return;
+    socket.data.lastReaction = now;
+
+    const counted = reacted.get(socket.id);
+    let likes = auth.likesOf(store.getUser(partner.data.uid) || {});
+    if (counted && !counted.has(type)) {
+      counted.add(type);
+      likes = { ...likes, [type]: likes[type] + 1 };
+      store.updateUser(partner.data.uid, { likes });
+    }
+    socket.emit('reaction', { type, from: 'me', partnerLikes: likes });
+    partner.emit('reaction', { type, from: 'them', myLikes: likes });
+  });
+
   // Denuncia a la persona actual: se guarda con el chat como prueba, se corta
   // la conversación y no vuelven a coincidir
   socket.on('report', ({ reason, comment } = {}, ack) => {
     const reply = typeof ack === 'function' ? ack : () => {};
     const partnerId = partners.get(socket.id);
     const partner = partnerId && io.sockets.sockets.get(partnerId);
-    if (!partner) return reply({ error: 'No hay nadie a quien denunciar' });
-    if (!moderation.REASONS[reason]) return reply({ error: 'Elige un motivo' });
+    if (!partner) return reply({ code: 'noPartner' });
+    if (!moderation.REASONS[reason]) return reply({ code: 'reason' });
 
     const reporter = store.getUser(socket.data.uid);
     const reported = store.getUser(partner.data.uid);

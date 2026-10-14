@@ -50,7 +50,7 @@ function restriction(user) {
 
 function requireUser(req, res, next) {
   const user = userFromToken(bearer(req));
-  if (!user) return res.status(401).json({ error: 'Inicia sesión para continuar' });
+  if (!user) return res.status(401).json({ code: 'auth', error: 'Inicia sesión para continuar' });
   req.user = user;
   next();
 }
@@ -69,21 +69,25 @@ setInterval(() => {
   for (const [ip, a] of attempts) if (a.reset < now) attempts.delete(ip);
 }, 15 * 60000).unref();
 
+function likesOf(user) {
+  return { like: user.likes?.like || 0, love: user.likes?.love || 0 };
+}
+
 function publicUser(user) {
-  return { id: user.id, email: user.email, gender: user.gender, createdAt: user.createdAt };
+  return { id: user.id, email: user.email, gender: user.gender, createdAt: user.createdAt, likes: likesOf(user) };
 }
 
 function routes(app) {
   app.post('/api/register', async (req, res) => {
-    if (rateLimited(req.ip)) return res.status(429).json({ error: 'Demasiados intentos. Prueba en unos minutos.' });
+    if (rateLimited(req.ip)) return res.status(429).json({ code: 'tooMany', error: 'Demasiados intentos. Prueba en unos minutos.' });
     const email = String(req.body?.email || '').trim().toLowerCase();
     const password = String(req.body?.password || '');
     const { gender, adult, terms } = req.body || {};
-    if (!EMAIL_RE.test(email) || email.length > 200) return res.status(400).json({ error: 'Escribe un email válido' });
-    if (password.length < 8 || password.length > 200) return res.status(400).json({ error: 'La contraseña debe tener al menos 8 caracteres' });
-    if (!GENDERS.includes(gender)) return res.status(400).json({ error: 'Elige qué eres: mujer, hombre, transexual o pareja' });
-    if (adult !== true || terms !== true) return res.status(400).json({ error: 'Debes confirmar que eres mayor de edad y aceptar las normas' });
-    if (store.getUserByEmail(email)) return res.status(409).json({ error: 'Ya existe una cuenta con ese email' });
+    if (!EMAIL_RE.test(email) || email.length > 200) return res.status(400).json({ code: 'email', error: 'Escribe un email válido' });
+    if (password.length < 8 || password.length > 200) return res.status(400).json({ code: 'password', error: 'La contraseña debe tener al menos 8 caracteres' });
+    if (!GENDERS.includes(gender)) return res.status(400).json({ code: 'gender', error: 'Elige qué eres: mujer, hombre, transexual o pareja' });
+    if (adult !== true || terms !== true) return res.status(400).json({ code: 'terms', error: 'Debes confirmar que eres mayor de edad y aceptar las normas' });
+    if (store.getUserByEmail(email)) return res.status(409).json({ code: 'exists', error: 'Ya existe una cuenta con ese email' });
 
     const user = store.createUser({
       email,
@@ -93,16 +97,17 @@ function routes(app) {
       tokenVersion: 0,
       acceptedTermsAt: Date.now(),
       registerIp: req.ip,
+      likes: { like: 0, love: 0 },
     });
     res.json({ token: sessionToken(user), user: publicUser(user) });
   });
 
   app.post('/api/login', async (req, res) => {
-    if (rateLimited(req.ip)) return res.status(429).json({ error: 'Demasiados intentos. Prueba en unos minutos.' });
+    if (rateLimited(req.ip)) return res.status(429).json({ code: 'tooMany', error: 'Demasiados intentos. Prueba en unos minutos.' });
     const email = String(req.body?.email || '').trim().toLowerCase();
     const user = store.getUserByEmail(email);
     const ok = user && await checkPassword(String(req.body?.password || ''), user.passHash);
-    if (!ok) return res.status(401).json({ error: 'Email o contraseña incorrectos' });
+    if (!ok) return res.status(401).json({ code: 'badLogin', error: 'Email o contraseña incorrectos' });
     res.json({ token: sessionToken(user), user: publicUser(user) });
   });
 
@@ -113,4 +118,4 @@ function routes(app) {
   });
 }
 
-module.exports = { routes, requireUser, userFromToken, restriction, publicUser, bearer, GENDERS };
+module.exports = { routes, requireUser, userFromToken, restriction, publicUser, likesOf, bearer, GENDERS };

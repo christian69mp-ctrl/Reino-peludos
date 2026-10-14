@@ -14,8 +14,9 @@
   <link rel="icon" href="/logo.svg" type="image/svg+xml">
   <link rel="preload" href="/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/style.css">
+  <script src="/i18n.js"></script>
 </head>
-<body>
+<body data-title-key="meta.title">
   <!-- Iconos -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
@@ -32,29 +33,31 @@
       <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></symbol>
       <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M9.9 4.2A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.7 2.7"/><path d="M6.6 6.6A13.5 13.5 0 0 0 2 12s3 8 10 8a9.7 9.7 0 0 0 5.4-1.6"/><path d="M14.1 14.1a3 3 0 1 1-4.2-4.2"/><path d="m2 2 20 20"/></symbol>
       <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></symbol>
+      <symbol id="i-languages" viewBox="0 0 24 24"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></symbol>
     </defs>
   </svg>
 
   <header class="site-header">
-    <a href="/" class="brand" id="homeLink" aria-label="La Ruleta Caliente, inicio">
+    <a href="/" class="brand" id="homeLink" aria-label="La Ruleta Caliente">
       <img src="/logo.svg" alt="" width="34" height="34">
       <span>La Ruleta <b>Caliente</b></span>
     </a>
-    <nav class="nav-links" aria-label="Secciones">
-      <a href="/#como-funciona">Cómo funciona</a>
-      <a href="/#seguridad">Seguridad</a>
-      <a href="/#premium">Premium</a>
+    <nav class="nav-links">
+      <a href="/#como-funciona" data-i18n="nav.how">Cómo funciona</a>
+      <a href="/#seguridad" data-i18n="nav.safety">Seguridad</a>
+      <a href="/#premium" data-i18n="nav.premium">Premium</a>
     </nav>
     <div class="header-actions">
-      <span class="online-pill" id="onlinePill" hidden><span class="dot"></span><span id="onlineCount">0</span> en línea</span>
+      <span class="online-pill" id="onlinePill" hidden><span class="dot"></span><span id="onlineText">0</span></span>
       <div id="guestActions" class="row">
-        <button class="btn ghost sm" data-open-auth="login">Entrar</button>
-        <button class="btn primary sm" data-open-auth="register">Crear cuenta</button>
+        <button class="btn ghost sm" data-open-auth="login" data-i18n="btn.login">Entrar</button>
+        <button class="btn primary sm" data-open-auth="register" data-i18n="btn.signup">Crear cuenta</button>
       </div>
       <div id="userActions" class="row" hidden>
-        <button class="btn gold sm" id="premiumBtn" data-premium><svg class="i"><use href="#i-star"/></svg><span>Hazte Premium</span></button>
-        <button class="btn gold-ghost sm" id="manageBtn" hidden><svg class="i"><use href="#i-star"/></svg><span>Premium</span></button>
-        <button class="btn ghost sm icon-only" id="logoutBtn" title="Cerrar sesión" aria-label="Cerrar sesión"><svg class="i"><use href="#i-logout"/></svg></button>
+        <button class="btn gold sm" id="premiumBtn" data-premium><svg class="i"><use href="#i-star"/></svg><span data-i18n="btn.getPremium">Hazte Premium</span></button>
+        <button class="btn gold-ghost sm" id="manageBtn" hidden><svg class="i"><use href="#i-star"/></svg><span data-i18n="btn.premium">Premium</span></button>
+        <button class="btn ghost sm icon-only" id="logoutBtn" data-i18n-aria="btn.logout"><svg class="i"><use href="#i-logout"/></svg></button>
       </div>
     </div>
   </header>
@@ -63,152 +66,165 @@
   <main id="landing">
     <section class="hero">
       <div class="hero-text">
-        <span class="eyebrow"><span class="dot"></span>En directo ahora · Solo +18</span>
-        <h1>Conoce gente nueva <span class="grad">en directo</span>, a un clic.</h1>
-        <p class="lead">Videochat 1 a 1 con personas de todo el mundo. Gratis, sin descargas y en una comunidad donde el respeto es la norma.</p>
+        <span class="eyebrow"><span class="dot"></span><span data-i18n="hero.eyebrow">En directo ahora · Solo +18</span></span>
+        <h1 data-i18n-html="hero.title">Conoce gente nueva <span class="grad">en directo</span>, a un clic.</h1>
+        <p class="lead" data-i18n="hero.lead">Videochat 1 a 1 con personas de todo el mundo. Gratis, sin descargas y en una comunidad donde el respeto es la norma.</p>
         <div class="hero-cta">
-          <button class="btn primary lg" data-start><svg class="i"><use href="#i-video"/></svg>Empezar gratis</button>
-          <a class="btn ghost lg" href="#premium">Ver Premium</a>
+          <button class="btn primary lg" data-start><svg class="i"><use href="#i-video"/></svg><span data-i18n="hero.start">Empezar gratis</span></button>
+          <a class="btn ghost lg" href="#premium" data-i18n="hero.seePremium">Ver Premium</a>
         </div>
         <ul class="trust">
-          <li><svg class="i"><use href="#i-check"/></svg>Gratis</li>
-          <li><svg class="i"><use href="#i-check"/></svg>Sin descargas</li>
-          <li><svg class="i"><use href="#i-check"/></svg>Comunidad moderada</li>
+          <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="trust.free">Gratis</span></li>
+          <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="trust.noDownload">Sin descargas</span></li>
+          <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="trust.moderated">Comunidad moderada</span></li>
+          <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="trust.languages">Chat traducido</span></li>
         </ul>
       </div>
       <div class="hero-visual" aria-hidden="true">
         <div class="mock">
           <div class="mock-screen">
-            <span class="mock-tag">Mujer</span>
-            <span class="mock-live"><span class="dot"></span>Conectado</span>
+            <span class="mock-tag" data-i18n="g.mujer">Mujer</span>
+            <span class="mock-live"><span class="dot"></span><span data-i18n="mock.connected">Conectado</span></span>
             <div class="mock-silhouette"></div>
             <div class="mock-self"></div>
+            <span class="mock-react">❤️</span>
           </div>
           <div class="mock-bar">
-            <span class="mock-btn primary"><svg class="i"><use href="#i-skip"/></svg>Siguiente</span>
-            <span class="mock-btn"><svg class="i"><use href="#i-stop"/></svg></span>
+            <span class="mock-btn primary"><svg class="i"><use href="#i-skip"/></svg><span data-i18n="chat.next">Siguiente</span></span>
+            <span class="mock-btn">👍</span>
+            <span class="mock-btn">❤️</span>
             <span class="mock-btn"><svg class="i"><use href="#i-flag"/></svg></span>
           </div>
-          <div class="mock-bubble a">¡Hola! ¿De dónde eres? 👋</div>
-          <div class="mock-bubble b">De Madrid, ¿y tú? 😊</div>
+          <div class="mock-bubble a" data-i18n="mock.hi">¡Hola! ¿De dónde eres? 👋</div>
+          <div class="mock-bubble b" data-i18n="mock.reply">De Madrid, ¿y tú? 😊</div>
         </div>
       </div>
     </section>
 
     <section class="section" id="como-funciona">
-      <h2 class="section-title">Cómo funciona</h2>
-      <p class="section-sub">Tres pasos y estás hablando con alguien nuevo.</p>
+      <h2 class="section-title" data-i18n="how.title">Cómo funciona</h2>
+      <p class="section-sub" data-i18n="how.sub">Tres pasos y estás hablando con alguien nuevo.</p>
       <div class="cards three">
         <article class="card">
           <span class="card-num">1</span>
-          <h3>Crea tu cuenta</h3>
-          <p>Solo un email y una contraseña. Dinos si eres mujer, hombre, transexual o pareja.</p>
+          <h3 data-i18n="how.s1t">Crea tu cuenta</h3>
+          <p data-i18n="how.s1">Solo un email y una contraseña. Dinos si eres mujer, hombre, transexual o pareja.</p>
         </article>
         <article class="card">
           <span class="card-num">2</span>
-          <h3>Pulsa «Empezar»</h3>
-          <p>Activa tu cámara y te conectamos al instante con otra persona en línea.</p>
+          <h3 data-i18n="how.s2t">Pulsa «Empezar»</h3>
+          <p data-i18n="how.s2">Activa tu cámara y te conectamos al instante con otra persona en línea.</p>
         </article>
         <article class="card">
           <span class="card-num">3</span>
-          <h3>¿No hay química? Siguiente</h3>
-          <p>Pasa a otra persona cuando quieras con un clic o con la tecla Esc.</p>
+          <h3 data-i18n="how.s3t">¿No hay química? Siguiente</h3>
+          <p data-i18n="how.s3">Pasa a otra persona cuando quieras con un clic o con la tecla Esc.</p>
         </article>
       </div>
     </section>
 
     <section class="section" id="seguridad">
-      <h2 class="section-title">Un espacio para disfrutar con respeto</h2>
-      <p class="section-sub">Aquí no se toleran las burlas, el acoso ni la homofobia o la transfobia.</p>
+      <h2 class="section-title" data-i18n="safe.title">Un espacio para disfrutar con respeto</h2>
+      <p class="section-sub" data-i18n="safe.sub">Aquí no se toleran las burlas, el acoso ni la homofobia o la transfobia.</p>
       <div class="cards three">
         <article class="card feature">
           <span class="feature-icon"><svg class="i"><use href="#i-flag"/></svg></span>
-          <h3>Denuncia en un clic</h3>
-          <p>Si alguien se burla de ti, te acosa o te falta al respeto, denúncialo y no volveréis a coincidir.</p>
+          <h3 data-i18n="safe.f1t">Denuncia en un clic</h3>
+          <p data-i18n="safe.f1">Si alguien se burla de ti, te acosa o te falta al respeto, denúncialo y no volveréis a coincidir.</p>
         </article>
         <article class="card feature">
           <span class="feature-icon"><svg class="i"><use href="#i-shield"/></svg></span>
-          <h3>Moderación real</h3>
-          <p>Revisamos las denuncias. Quien acumula denuncias queda suspendido o expulsado.</p>
+          <h3 data-i18n="safe.f2t">Moderación real</h3>
+          <p data-i18n="safe.f2">Revisamos las denuncias. Quien acumula denuncias queda suspendido o expulsado.</p>
         </article>
         <article class="card feature">
           <span class="feature-icon"><svg class="i"><use href="#i-eye-off"/></svg></span>
-          <h3>Tu privacidad primero</h3>
-          <p>El vídeo va directo entre las dos personas: no lo grabamos ni lo guardamos.</p>
+          <h3 data-i18n="safe.f3t">Tu privacidad primero</h3>
+          <p data-i18n="safe.f3">El vídeo va directo entre las dos personas: no lo grabamos ni lo guardamos.</p>
         </article>
       </div>
-      <p class="center-text"><a class="link" href="/normas">Lee las normas de la comunidad →</a></p>
+      <p class="center-text"><a class="link" href="/normas" data-i18n="safe.rules">Lee las normas de la comunidad →</a></p>
     </section>
 
     <section class="section" id="premium">
       <div class="premium-card">
         <div>
           <span class="badge-gold"><svg class="i"><use href="#i-star"/></svg>PREMIUM</span>
-          <h2>Elige a quién quieres ver</h2>
-          <p class="muted">Con Premium filtras por mujeres, hombres, transexuales o parejas. Sin Premium, el chat sigue siendo gratis y al azar.</p>
+          <h2 data-i18n="prem.title">Elige a quién quieres ver</h2>
+          <p class="muted" data-i18n="prem.text">Con Premium filtras por mujeres, hombres, transexuales o parejas. Sin Premium, el chat sigue siendo gratis y al azar.</p>
           <ul class="checklist">
-            <li><svg class="i"><use href="#i-check"/></svg>Filtro por mujeres, hombres, transexuales o parejas</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Válido en todos tus dispositivos</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Cancela cuando quieras</li>
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l1">Filtro por mujeres, hombres, transexuales o parejas</span></li>
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l2">Válido en todos tus dispositivos</span></li>
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l3">Cancela cuando quieras</span></li>
           </ul>
         </div>
         <div class="price-box">
-          <p class="price"><span class="priceText">19,99 €</span><small>/mes</small></p>
-          <button class="btn gold lg wide" data-premium>Hazte Premium</button>
-          <p class="pay-logos">Tarjeta · Google Pay · Apple Pay · Cripto</p>
-          <p class="hint">Pago seguro con Segpay. El cargo aparecerá a nombre de Segpay.</p>
+          <p class="price"><span class="priceText">19,99 €</span><small data-i18n="prem.perMonth">/mes</small></p>
+          <button class="btn gold lg wide" data-premium data-i18n="btn.getPremium">Hazte Premium</button>
+          <p class="pay-logos" data-i18n="prem.payLogos">Tarjeta · Google Pay · Apple Pay · Cripto</p>
+          <p class="hint" data-i18n="prem.segpay">Pago seguro con Segpay. El cargo aparecerá a nombre de Segpay.</p>
         </div>
       </div>
     </section>
 
     <section class="section final-cta">
-      <h2>¿Te animas a conocer a alguien?</h2>
-      <button class="btn primary lg" data-start><svg class="i"><use href="#i-video"/></svg>Empezar ahora</button>
+      <h2 data-i18n="final.title">¿Te animas a conocer a alguien?</h2>
+      <button class="btn primary lg" data-start><svg class="i"><use href="#i-video"/></svg><span data-i18n="final.start">Empezar ahora</span></button>
     </section>
   </main>
 
   <!-- ================= CHAT ================= -->
   <main id="chatView" class="chat" hidden>
     <section class="stage">
-      <div class="remote">
+      <div class="remote" id="remote">
         <video id="remoteVideo" autoplay playsinline></video>
-        <span id="partnerTag" class="partner-tag" hidden></span>
-        <button id="reportBtn" class="report-btn" title="Denunciar" aria-label="Denunciar a esta persona" hidden>
-          <svg class="i"><use href="#i-flag"/></svg><span>Denunciar</span>
+        <div class="partner-info" id="partnerInfo" hidden>
+          <span class="partner-tag" id="partnerTag"></span>
+          <span class="partner-likes" id="partnerLikes"></span>
+          <span class="partner-lang" id="partnerLang" hidden><svg class="i"><use href="#i-languages"/></svg><span></span></span>
+        </div>
+        <button id="reportBtn" class="report-btn" data-i18n-aria="chat.report" hidden>
+          <svg class="i"><use href="#i-flag"/></svg><span data-i18n="chat.report">Denunciar</span>
         </button>
+        <div class="reactions" id="reactions" hidden>
+          <button class="react-btn" data-react="like" data-i18n-aria="re.like">👍</button>
+          <button class="react-btn" data-react="love" data-i18n-aria="re.love">❤️</button>
+        </div>
         <div id="status" class="status">
           <img src="/logo.svg" alt="" width="64" height="64" class="status-logo">
-          <p id="statusText">Pulsa «Empezar» para conocer a alguien</p>
+          <p id="statusText" data-i18n="chat.pressStart">Pulsa «Empezar» para conocer a alguien</p>
         </div>
         <div class="self">
           <video id="localVideo" autoplay playsinline muted></video>
+          <span class="my-likes" id="myLikes" hidden></span>
         </div>
+        <div class="burst-layer" id="burstLayer" aria-hidden="true"></div>
       </div>
       <div class="controls">
-        <button id="startBtn" class="btn primary lg"><svg class="i"><use href="#i-play"/></svg>Empezar</button>
-        <button id="nextBtn" class="btn primary lg" hidden><svg class="i"><use href="#i-skip"/></svg>Siguiente <kbd>Esc</kbd></button>
-        <button id="stopBtn" class="btn ghost lg" hidden><svg class="i"><use href="#i-stop"/></svg>Parar</button>
+        <button id="startBtn" class="btn primary lg"><svg class="i"><use href="#i-play"/></svg><span data-i18n="chat.start">Empezar</span></button>
+        <button id="nextBtn" class="btn primary lg" hidden><svg class="i"><use href="#i-skip"/></svg><span data-i18n="chat.next">Siguiente</span> <kbd>Esc</kbd></button>
+        <button id="stopBtn" class="btn ghost lg" hidden><svg class="i"><use href="#i-stop"/></svg><span data-i18n="chat.stop">Parar</span></button>
       </div>
     </section>
 
     <aside class="side">
       <div class="filter" id="filter">
         <div class="filter-head">
-          <span>Quiero ver</span>
+          <span data-i18n="chat.wantToSee">Quiero ver</span>
           <span id="lockNote" class="lock"><svg class="i"><use href="#i-lock"/></svg>Premium</span>
         </div>
         <div class="chips" id="wantGender">
-          <button type="button" class="chip active" data-g="">Todos</button>
-          <button type="button" class="chip" data-g="mujer">Mujeres</button>
-          <button type="button" class="chip" data-g="hombre">Hombres</button>
-          <button type="button" class="chip" data-g="trans">Transexuales</button>
-          <button type="button" class="chip" data-g="pareja">Parejas</button>
+          <button type="button" class="chip active" data-g="" data-i18n="chat.all">Todos</button>
+          <button type="button" class="chip" data-g="mujer" data-i18n="gp.mujer">Mujeres</button>
+          <button type="button" class="chip" data-g="hombre" data-i18n="gp.hombre">Hombres</button>
+          <button type="button" class="chip" data-g="trans" data-i18n="gp.trans">Transexuales</button>
+          <button type="button" class="chip" data-g="pareja" data-i18n="gp.pareja">Parejas</button>
         </div>
       </div>
       <div id="messages" class="messages" aria-live="polite"></div>
       <form id="chatForm" class="chat-form">
-        <input id="chatInput" maxlength="500" placeholder="Escribe un mensaje…" autocomplete="off" disabled>
-        <button type="submit" class="btn primary icon-only" disabled id="sendBtn" aria-label="Enviar"><svg class="i"><use href="#i-send"/></svg></button>
+        <input id="chatInput" maxlength="500" data-i18n-ph="chat.placeholder" placeholder="Escribe un mensaje…" autocomplete="off" disabled>
+        <button type="submit" class="btn primary icon-only" disabled id="sendBtn" data-i18n-aria="chat.send"><svg class="i"><use href="#i-send"/></svg></button>
       </form>
     </aside>
   </main>
@@ -217,16 +233,19 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <a href="/" class="brand"><img src="/logo.svg" alt="" width="28" height="28"><span>La Ruleta <b>Caliente</b></span></a>
-        <p>Videochat en vivo para mayores de 18 años.</p>
+        <p data-i18n="footer.tagline">Videochat en vivo para mayores de 18 años.</p>
       </div>
-      <nav class="footer-links" aria-label="Información legal">
-        <a href="/normas">Normas de la comunidad</a>
-        <a href="/terminos">Términos de uso</a>
-        <a href="/privacidad">Privacidad y cookies</a>
-        <a href="mailto:soporte@laruletacaliente.com">Contacto</a>
+      <nav class="footer-links">
+        <a href="/normas" data-i18n="footer.rules">Normas de la comunidad</a>
+        <a href="/terminos" data-i18n="footer.terms">Términos de uso</a>
+        <a href="/privacidad" data-i18n="footer.privacy">Privacidad y cookies</a>
+        <a href="mailto:soporte@laruletacaliente.com" data-i18n="footer.contact">Contacto</a>
       </nav>
+      <label class="lang-select"><svg class="i"><use href="#i-globe"/></svg><span class="sr-only" data-i18n="footer.language">Idioma</span>
+        <select data-lang-select></select>
+      </label>
     </div>
-    <p class="footer-legal"><span class="age">18+</span> Sitio solo para adultos. © 2026 La Ruleta Caliente.</p>
+    <p class="footer-legal"><span class="age">18+</span><span data-i18n="footer.legal">Sitio solo para adultos. © 2026 La Ruleta Caliente.</span></p>
   </footer>
 
   <!-- ================= VENTANAS ================= -->
@@ -234,46 +253,49 @@
   <!-- Aviso de edad -->
   <div id="ageGate" class="overlay" hidden>
     <div class="modal center-text">
+      <label class="lang-select corner"><svg class="i"><use href="#i-globe"/></svg><span class="sr-only" data-i18n="footer.language">Idioma</span>
+        <select data-lang-select></select>
+      </label>
       <img src="/logo.svg" alt="" width="64" height="64">
-      <h2>Contenido para adultos</h2>
-      <p class="muted">La Ruleta Caliente es un sitio solo para <strong>mayores de 18 años</strong> y puede mostrar desnudos y contenido sexual.</p>
-      <button class="btn primary lg wide" id="ageYes">Soy mayor de 18 años · Entrar</button>
-      <a class="btn ghost wide" href="https://www.google.com" rel="noopener">Salir</a>
+      <h2 data-i18n="age.title">Contenido para adultos</h2>
+      <p class="muted" data-i18n-html="age.text">La Ruleta Caliente es un sitio solo para <strong>mayores de 18 años</strong> y puede mostrar desnudos y contenido sexual.</p>
+      <button class="btn primary lg wide" id="ageYes" data-i18n="age.enter">Soy mayor de 18 años · Entrar</button>
+      <a class="btn ghost wide" href="https://www.google.com" rel="noopener" data-i18n="age.exit">Salir</a>
     </div>
   </div>
 
   <!-- Entrar / Crear cuenta -->
   <div id="authModal" class="overlay" hidden>
     <div class="modal">
-      <button class="close" data-close aria-label="Cerrar"><svg class="i"><use href="#i-x"/></svg></button>
+      <button class="close" data-close data-i18n-aria="btn.close"><svg class="i"><use href="#i-x"/></svg></button>
       <div class="tabs" role="tablist">
-        <button class="tab active" data-tab="register" role="tab" type="button">Crear cuenta</button>
-        <button class="tab" data-tab="login" role="tab" type="button">Entrar</button>
+        <button class="tab active" data-tab="register" role="tab" type="button" data-i18n="auth.signupTab">Crear cuenta</button>
+        <button class="tab" data-tab="login" role="tab" type="button" data-i18n="auth.loginTab">Entrar</button>
       </div>
       <form id="authForm" novalidate>
-        <label class="field">Email
+        <label class="field"><span data-i18n="auth.email">Email</span>
           <input type="email" id="authEmail" autocomplete="email" required>
         </label>
-        <label class="field">Contraseña
+        <label class="field"><span data-i18n="auth.password">Contraseña</span>
           <input type="password" id="authPassword" autocomplete="new-password" minlength="8" required>
-          <span class="hint register-only">Mínimo 8 caracteres</span>
+          <span class="hint register-only" data-i18n="auth.min8">Mínimo 8 caracteres</span>
         </label>
         <div class="register-only">
-          <p class="field-label">Soy</p>
+          <p class="field-label" data-i18n="auth.iam">Soy</p>
           <div class="chips" id="myGender">
-            <button type="button" class="chip" data-g="mujer">Mujer</button>
-            <button type="button" class="chip" data-g="hombre">Hombre</button>
-            <button type="button" class="chip" data-g="trans">Transexual</button>
-            <button type="button" class="chip" data-g="pareja">Pareja</button>
+            <button type="button" class="chip" data-g="mujer" data-i18n="g.mujer">Mujer</button>
+            <button type="button" class="chip" data-g="hombre" data-i18n="g.hombre">Hombre</button>
+            <button type="button" class="chip" data-g="trans" data-i18n="g.trans">Transexual</button>
+            <button type="button" class="chip" data-g="pareja" data-i18n="g.pareja">Pareja</button>
           </div>
           <label class="check">
             <input type="checkbox" id="authTerms">
-            <span>Tengo 18 años o más y acepto los <a href="/terminos" target="_blank">Términos</a>, la <a href="/privacidad" target="_blank">Privacidad</a> y las <a href="/normas" target="_blank">Normas de la comunidad</a>.</span>
+            <span data-i18n-html="auth.terms">Tengo 18 años o más y acepto los <a href="/terminos" target="_blank">Términos</a>, la <a href="/privacidad" target="_blank">Privacidad</a> y las <a href="/normas" target="_blank">Normas de la comunidad</a>.</span>
           </label>
         </div>
         <p class="form-error" id="authError" hidden></p>
         <button type="submit" class="btn primary lg wide" id="authSubmit">Crear cuenta gratis</button>
-        <p class="hint center-text login-only">¿Olvidaste tu contraseña? Escríbenos a <a href="mailto:soporte@laruletacaliente.com">soporte@laruletacaliente.com</a></p>
+        <p class="hint center-text login-only" data-i18n-html="auth.forgot">¿Olvidaste tu contraseña? Escríbenos a <a href="mailto:soporte@laruletacaliente.com">soporte@laruletacaliente.com</a></p>
       </form>
     </div>
   </div>
@@ -281,50 +303,50 @@
   <!-- Premium -->
   <div id="premiumModal" class="overlay" hidden>
     <div class="modal center-text">
-      <button class="close" data-close aria-label="Cerrar"><svg class="i"><use href="#i-x"/></svg></button>
+      <button class="close" data-close data-i18n-aria="btn.close"><svg class="i"><use href="#i-x"/></svg></button>
       <span class="badge-gold"><svg class="i"><use href="#i-star"/></svg>PREMIUM</span>
-      <h2>Elige a quién quieres ver</h2>
-      <p class="price"><span class="priceText">19,99 €</span><small>/mes</small></p>
+      <h2 data-i18n="prem.title">Elige a quién quieres ver</h2>
+      <p class="price"><span class="priceText">19,99 €</span><small data-i18n="prem.perMonth">/mes</small></p>
       <ul class="checklist">
-        <li><svg class="i"><use href="#i-check"/></svg>Filtra por mujeres, hombres, transexuales o parejas</li>
-        <li><svg class="i"><use href="#i-check"/></svg>Válido en todos tus dispositivos</li>
-        <li><svg class="i"><use href="#i-check"/></svg>Cancela cuando quieras</li>
+        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l1">Filtra por mujeres, hombres, transexuales o parejas</span></li>
+        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l2">Válido en todos tus dispositivos</span></li>
+        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l3">Cancela cuando quieras</span></li>
       </ul>
-      <p class="field-label">Elige cómo pagar</p>
+      <p class="field-label" data-i18n="prem.choosePay">Elige cómo pagar</p>
       <div class="pay-methods">
         <button id="payCard" class="pay primary" type="button">
-          <span class="pay-title">💳 Tarjeta · Google Pay · Apple Pay</span>
-          <span class="pay-sub"><span class="priceText">19,99 €</span>/mes · se renueva cada mes</span>
+          <span class="pay-title" data-i18n="pay.card">💳 Tarjeta · Google Pay · Apple Pay</span>
+          <span class="pay-sub" id="payCardSub">19,99 €/mes · se renueva cada mes</span>
         </button>
         <button id="payCrypto" class="pay" type="button">
-          <span class="pay-title">₿ Criptomonedas</span>
-          <span class="pay-sub"><span class="priceText">19,99 €</span> por <span class="passDays">30</span> días · pago único</span>
+          <span class="pay-title" data-i18n="pay.crypto">₿ Criptomonedas</span>
+          <span class="pay-sub" id="payCryptoSub">19,99 € por 30 días · pago único</span>
         </button>
       </div>
-      <p id="payWait" class="hint" hidden>Esperando la confirmación del pago…</p>
-      <p id="demoNote" class="hint" hidden>Modo demo: el pago se simula, no se cobra nada.</p>
+      <p id="payWait" class="hint" hidden data-i18n="pay.wait">Esperando la confirmación del pago…</p>
+      <p id="demoNote" class="hint" hidden data-i18n="pay.demo">Modo demo: el pago se simula, no se cobra nada.</p>
     </div>
   </div>
 
   <!-- Denunciar -->
   <div id="reportModal" class="overlay" hidden>
     <div class="modal">
-      <button class="close" data-close aria-label="Cerrar"><svg class="i"><use href="#i-x"/></svg></button>
-      <h2 class="with-icon"><svg class="i accent"><use href="#i-flag"/></svg>Denunciar</h2>
-      <p class="muted">Cortaremos la conversación y no volveréis a coincidir. Nuestro equipo revisará la denuncia.</p>
+      <button class="close" data-close data-i18n-aria="btn.close"><svg class="i"><use href="#i-x"/></svg></button>
+      <h2 class="with-icon"><svg class="i accent"><use href="#i-flag"/></svg><span data-i18n="rep.title">Denunciar</span></h2>
+      <p class="muted" data-i18n="rep.text">Cortaremos la conversación y no volveréis a coincidir. Nuestro equipo revisará la denuncia.</p>
       <form id="reportForm">
         <div class="reasons">
-          <label class="reason"><input type="radio" name="reason" value="burlas"><span>Burlas o insultos</span></label>
-          <label class="reason"><input type="radio" name="reason" value="acoso"><span>Acoso</span></label>
-          <label class="reason"><input type="radio" name="reason" value="homofobia"><span>Homofobia o transfobia</span></label>
-          <label class="reason"><input type="radio" name="reason" value="menor"><span>Menor de edad o contenido ilegal</span></label>
-          <label class="reason"><input type="radio" name="reason" value="otro"><span>Otro motivo</span></label>
+          <label class="reason"><input type="radio" name="reason" value="burlas"><span data-i18n="rep.burlas">Burlas o insultos</span></label>
+          <label class="reason"><input type="radio" name="reason" value="acoso"><span data-i18n="rep.acoso">Acoso</span></label>
+          <label class="reason"><input type="radio" name="reason" value="homofobia"><span data-i18n="rep.homofobia">Homofobia o transfobia</span></label>
+          <label class="reason"><input type="radio" name="reason" value="menor"><span data-i18n="rep.menor">Menor de edad o contenido ilegal</span></label>
+          <label class="reason"><input type="radio" name="reason" value="otro"><span data-i18n="rep.otro">Otro motivo</span></label>
         </div>
-        <label class="field">Cuéntanos qué ha pasado (opcional)
+        <label class="field"><span data-i18n="rep.comment">Cuéntanos qué ha pasado (opcional)</span>
           <textarea id="reportComment" maxlength="500" rows="3"></textarea>
         </label>
         <p class="form-error" id="reportError" hidden></p>
-        <button type="submit" class="btn primary lg wide">Enviar denuncia</button>
+        <button type="submit" class="btn primary lg wide" data-i18n="rep.submit">Enviar denuncia</button>
       </form>
     </div>
   </div>
@@ -333,10 +355,10 @@
   <div id="restrictedModal" class="overlay" hidden>
     <div class="modal center-text">
       <svg class="i xl accent"><use href="#i-shield"/></svg>
-      <h2 id="restrictedTitle">Cuenta suspendida</h2>
+      <h2 id="restrictedTitle"></h2>
       <p class="muted" id="restrictedText"></p>
-      <p class="hint">Si crees que es un error, escríbenos a <a href="mailto:soporte@laruletacaliente.com">soporte@laruletacaliente.com</a>.</p>
-      <button class="btn ghost wide" data-close>Entendido</button>
+      <p class="hint" data-i18n-html="res.contact">Si crees que es un error, escríbenos a <a href="mailto:soporte@laruletacaliente.com">soporte@laruletacaliente.com</a>.</p>
+      <button class="btn ghost wide" data-close data-i18n="res.ok">Entendido</button>
     </div>
   </div>
 
