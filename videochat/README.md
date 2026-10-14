@@ -72,6 +72,17 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   «¡Le encantas!». Cada usuario acumula sus likes (se ven junto a su etiqueta y en su propia
   cámara). Cada tipo cuenta una vez por conversación para que no se puedan inflar.
 
+## Logo e iconos
+
+Diseño hecho con Gemini y redibujado en vector para que se vea nítido a cualquier tamaño:
+
+- `public/logo.svg` — icono (ruleta + llama) con fondo transparente: cabecera, pie y ventanas.
+- `public/logo-full.png` — logo original completo con el nombre (para redes, emails, etc.).
+- `public/favicon.svg` y `favicon.ico` — pestaña del navegador.
+- `public/icon-192.png`, `icon-512.png`, `icon-maskable-512.png`, `apple-touch-icon.png` — iconos
+  de la app instalable (Android, iPhone) declarados en `public/manifest.webmanifest`.
+- `public/og-image.png` (1200×630) — vista previa al compartir el enlace (WhatsApp, X, Telegram…).
+
 ## Estructura
 
 - `server.js` — servidor web y Socket.IO: emparejamiento, señalización WebRTC, chat y denuncias.

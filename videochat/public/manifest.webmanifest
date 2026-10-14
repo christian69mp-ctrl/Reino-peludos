@@ -1,0 +1,16 @@
+{
+  "name": "La Ruleta Caliente",
+  "short_name": "Ruleta Caliente",
+  "description": "Live 1-on-1 video chat. Adults 18+ only.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0C0A0F",
+  "theme_color": "#0C0A0F",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
