@@ -35,7 +35,9 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
 - **Panel de moderación** en `/admin` (con `ADMIN_PASSWORD`): denuncias pendientes (las urgentes
   primero), conversación denunciada, y botones para descartar, suspender 1 o 7 días, expulsar o
   readmitir. Al suspender o expulsar, la persona sale del chat al instante.
-- **Páginas legales**: `/normas`, `/terminos` y `/privacidad`.
+- **Páginas legales** en los 6 idiomas: `/normas`, `/terminos` y `/privacidad`. Cada página lleva los
+  6 textos (un `<article lang="…">` por idioma) y `public/legal.js` muestra el del idioma de la web.
+  Las traducciones indican que, si hay diferencias, prevalece la versión en español.
 - **Idiomas** (web internacional): **inglés por defecto**. Si el navegador está en español, portugués,
   francés, alemán o italiano, la web sale en ese idioma; con cualquier otro (japonés, ruso…), en
   inglés. El HTML base, el título y la vista previa al compartir el enlace están en inglés.
@@ -147,9 +149,9 @@ cualquier cuenta sin verificar.
 
 ## Antes de abrir al público
 
-- **Traducir las páginas legales**: normas, términos y privacidad están solo en español.
 - **Completa las páginas legales**: en `/terminos` y `/privacidad` hay datos marcados en amarillo
-  (titular, NIF, dirección…). Revísalas con un abogado.
+  (titular, NIF, dirección…) en cada uno de los 6 idiomas. Revísalas con un abogado; si cambias el
+  texto en español, cambia también las traducciones.
 - **Crea el buzón `soporte@laruletacaliente.com`** (aparece en la web).
 - **HTTPS obligatorio**: sin él el navegador no deja usar la cámara.
 - **Servidor TURN** (p. ej. coturn): sin él muchas conexiones en 4G fallan.
