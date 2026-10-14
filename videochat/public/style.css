@@ -169,6 +169,23 @@ body.in-chat .nav-links { display: none; }
 .price-box { text-align: center; padding: 28px; border-radius: 18px; background: var(--bg); border: 1px solid var(--border); }
 .price { font-size: 2.8rem; font-weight: 800; margin: 0 0 16px; letter-spacing: -.03em; }
 .price small { font-size: 1rem; color: var(--muted); font-weight: 500; }
+.plan-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 10px; text-align: left; }
+.plan-row.best { border-color: rgba(255, 197, 61, .5); background: rgba(255, 197, 61, .06); }
+.plan-row:last-of-type { margin-bottom: 18px; }
+.plan-name { font-weight: 700; display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.plan-price b { font-size: 1.35rem; font-weight: 800; letter-spacing: -.02em; }
+.plan-price small { color: var(--muted); font-weight: 500; }
+.save-tag { font-size: .72rem; font-weight: 800; padding: 3px 8px; border-radius: 999px; background: rgba(61, 220, 151, .15); color: var(--ok); white-space: nowrap; }
+.plan-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.plan-opt {
+  position: relative; font: inherit; color: var(--text); cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 18px 10px 14px; border-radius: 14px; border: 2px solid var(--border); background: var(--surface-2);
+  transition: border-color .15s, background .15s;
+}
+.plan-opt.active { border-color: var(--gold); background: rgba(255, 197, 61, .08); }
+.plan-opt .plan-price b { font-size: 1.5rem; }
+.plan-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); font-size: .68rem; font-weight: 800; letter-spacing: .04em; padding: 3px 10px; border-radius: 999px; background: var(--gold); color: #1d1400; white-space: nowrap; }
 .pay-logos { margin: 14px 0 4px; font-size: .88rem; color: var(--muted); font-weight: 600; }
 .hint { font-size: .84rem; color: var(--muted); margin: 6px 0 0; }
 .hint a { color: var(--accent); }

@@ -159,7 +159,14 @@
           </ul>
         </div>
         <div class="price-box">
-          <p class="price"><span class="priceText">19,99 €</span><small data-i18n="prem.perMonth">/mes</small></p>
+          <div class="plan-row">
+            <span class="plan-name" data-i18n="plan.week">Semanal</span>
+            <span class="plan-price"><b class="price-week">7,99 €</b><small data-i18n="prem.perWeek">/semana</small></span>
+          </div>
+          <div class="plan-row best">
+            <span class="plan-name"><span data-i18n="plan.month">Mensual</span> <span class="save-tag save-month">Ahorra 42%</span></span>
+            <span class="plan-price"><b class="price-month">19,99 €</b><small data-i18n="prem.perMonth">/mes</small></span>
+          </div>
           <button class="btn gold lg wide" data-premium data-i18n="btn.getPremium">Hazte Premium</button>
           <p class="pay-logos" data-i18n="prem.payLogos">Tarjeta · Google Pay · Apple Pay · Cripto</p>
           <p class="hint" data-i18n="prem.segpay">Pago seguro con Segpay. El cargo aparecerá a nombre de Segpay.</p>
@@ -362,7 +369,19 @@
       <button class="close" data-close data-i18n-aria="btn.close"><svg class="i"><use href="#i-x"/></svg></button>
       <span class="badge-gold"><svg class="i"><use href="#i-star"/></svg>PREMIUM</span>
       <h2 data-i18n="prem.title">Elige a quién quieres ver</h2>
-      <p class="price"><span class="priceText">19,99 €</span><small data-i18n="prem.perMonth">/mes</small></p>
+      <p class="field-label" data-i18n="plan.choose">Elige tu plan</p>
+      <div class="plan-picker" id="planPicker" role="radiogroup">
+        <button type="button" class="plan-opt" data-plan="week" role="radio">
+          <span class="plan-name" data-i18n="plan.week">Semanal</span>
+          <span class="plan-price"><b class="price-week">7,99 €</b><small data-i18n="prem.perWeek">/semana</small></span>
+        </button>
+        <button type="button" class="plan-opt active" data-plan="month" role="radio">
+          <span class="plan-badge" data-i18n="plan.popular">Más popular</span>
+          <span class="plan-name" data-i18n="plan.month">Mensual</span>
+          <span class="plan-price"><b class="price-month">19,99 €</b><small data-i18n="prem.perMonth">/mes</small></span>
+          <span class="save-tag save-month">Ahorra 42%</span>
+        </button>
+      </div>
       <ul class="checklist">
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l1">Filtra por mujeres, hombres, transexuales o parejas</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l2">Válido en todos tus dispositivos</span></li>

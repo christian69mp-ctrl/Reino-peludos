@@ -1,9 +1,13 @@
-// Plan Premium (19,99 €) que permite elegir a quién ver. Cobro con Segpay.
+// Premium: permite elegir a quién ver. Cobro con Segpay. Dos planes:
+// - Semanal: 7,99 € cada 7 días.
+// - Mensual: 19,99 € cada 30 días.
 //
-// Métodos (cada uno es un "payment package" de Segpay con su x-eticketid):
-// - Tarjeta / Google Pay / Apple Pay → SEGPAY_ETICKET_CARD: 19,99 € cada 30 días.
-// - Criptomonedas                    → SEGPAY_ETICKET_CRYPTO: 19,99 € una vez, 30 días
-//   (Segpay no permite suscripciones recurrentes con cripto).
+// Cada plan y método es un "payment package" de Segpay con su x-eticketid:
+//                          Semanal                       Mensual
+// Tarjeta/Google/Apple Pay SEGPAY_ETICKET_CARD_WEEK     SEGPAY_ETICKET_CARD
+// Criptomonedas            SEGPAY_ETICKET_CRYPTO_WEEK   SEGPAY_ETICKET_CRYPTO
+// Con tarjeta se renueva solo; con cripto es un pago único por el periodo
+// (Segpay no permite suscripciones recurrentes con cripto).
 //
 // Flujo:
 // 1. El usuario (con sesión iniciada) elige método; el servidor crea un pedido a su
@@ -20,22 +24,24 @@ const store = require('./store');
 const { safeEqual } = require('./tokens');
 const { requireUser } = require('./auth');
 
-const PRICE = 19.99;
 const CURRENCY = 'eur';
-const PERIOD_DAYS = 30;
+const PLANS = {
+  week: { price: 7.99, days: 7 },
+  month: { price: 19.99, days: 30 },
+};
 const DAY = 24 * 3600 * 1000;
 const GRACE_MS = DAY; // margen por si la renovación llega con retraso
 
 const PAY_URL = 'https://secure2.segpay.com/billing/poset.cgi';
 const ETICKETS = {
-  card: process.env.SEGPAY_ETICKET_CARD,
-  crypto: process.env.SEGPAY_ETICKET_CRYPTO,
+  week: { card: process.env.SEGPAY_ETICKET_CARD_WEEK, crypto: process.env.SEGPAY_ETICKET_CRYPTO_WEEK },
+  month: { card: process.env.SEGPAY_ETICKET_CARD, crypto: process.env.SEGPAY_ETICKET_CRYPTO },
 };
 const POSTBACK_KEY = process.env.SEGPAY_POSTBACK_KEY;
 const CANCEL_URL = process.env.SEGPAY_CANCEL_URL || 'https://cs.segpay.com';
-const DEMO = !ETICKETS.card && !ETICKETS.crypto;
+const DEMO = !Object.values(ETICKETS).some((m) => m.card || m.crypto);
 
-if (DEMO) console.warn('[pagos] Modo DEMO: los pagos se simulan. Configura SEGPAY_ETICKET_CARD / SEGPAY_ETICKET_CRYPTO para cobrar de verdad.');
+if (DEMO) console.warn('[pagos] Modo DEMO: los pagos se simulan. Configura los SEGPAY_ETICKET_* para cobrar de verdad.');
 if (!DEMO && !POSTBACK_KEY) console.warn('[pagos] Falta SEGPAY_POSTBACK_KEY: no se aceptarán los avisos de Segpay.');
 
 // Pedido Premium activo de un usuario (el que dura más), o null
@@ -56,6 +62,7 @@ function premiumInfo(userId) {
   return {
     premium: true,
     method: order.method,
+    plan: order.plan || 'month',
     expires: order.expires - (order.demo ? 0 : GRACE_MS),
     cancelUrl: order.method === 'card' && !order.demo ? CANCEL_URL : null,
   };
@@ -96,7 +103,7 @@ function applyPostback(raw) {
   // Cobro aprobado: alta inicial o renovación
   if (trantype === 'sale' && action === 'auth' && approved) {
     const stage = lower('stage');
-    const days = Number(stage === 'initial' ? (p.iint || p.rint) : p.rint) || PERIOD_DAYS;
+    const days = Number(stage === 'initial' ? (p.iint || p.rint) : p.rint) || PLANS[order.plan || 'month'].days;
     store.updateOrder(orderId, {
       status: 'active',
       purchaseId: purchaseId || order.purchaseId,
@@ -111,31 +118,33 @@ function applyPostback(raw) {
 function routes(app, baseUrl) {
   app.get('/api/plan', (_req, res) => {
     res.json({
-      price: PRICE,
       currency: CURRENCY,
-      passDays: PERIOD_DAYS,
       demo: DEMO,
-      methods: { card: DEMO || !!ETICKETS.card, crypto: DEMO || !!ETICKETS.crypto },
+      plans: Object.fromEntries(Object.entries(PLANS).map(([id, plan]) => [id, {
+        ...plan,
+        methods: { card: DEMO || !!ETICKETS[id].card, crypto: DEMO || !!ETICKETS[id].crypto },
+      }])),
     });
   });
 
   // Empieza el pago: crea el pedido y devuelve la URL de Segpay
   app.post('/api/checkout', requireUser, (req, res) => {
     const method = req.body?.method === 'crypto' ? 'crypto' : 'card';
+    const plan = PLANS[req.body?.plan] ? req.body.plan : 'month';
     // Segpay: variables propias de máx. 32 caracteres y sin empezar por número
     const orderId = `o${crypto.randomBytes(12).toString('hex')}`;
 
     if (DEMO) {
-      store.createOrder(orderId, { method, userId: req.user.id, demo: true });
-      store.updateOrder(orderId, { status: 'active', expires: Date.now() + PERIOD_DAYS * DAY });
+      store.createOrder(orderId, { method, plan, userId: req.user.id, demo: true });
+      store.updateOrder(orderId, { status: 'active', expires: Date.now() + PLANS[plan].days * DAY });
       return res.json({ activated: true });
     }
-    if (!ETICKETS[method]) return res.status(400).json({ code: 'payUnavailable', error: 'Método de pago no disponible' });
+    if (!ETICKETS[plan][method]) return res.status(400).json({ code: 'payUnavailable', error: 'Método de pago no disponible' });
 
-    store.createOrder(orderId, { method, userId: req.user.id });
+    store.createOrder(orderId, { method, plan, userId: req.user.id });
     const origin = originOf(req, baseUrl);
     const params = new URLSearchParams({
-      'x-eticketid': ETICKETS[method],
+      'x-eticketid': ETICKETS[plan][method],
       orderid: orderId,
       'x-billemail': req.user.email,
       'x-auth-link': `${origin}/?order=${orderId}`,

@@ -19,7 +19,8 @@ let me = null;            // respuesta de /api/me
 let premium = false;
 let want = '';            // '' = todos
 let pendingAction = null; // lo que quería hacer antes de iniciar sesión
-let plan = null;
+let plans = null;         // planes Premium del servidor: { week, month }
+let selectedPlan = 'month';
 let translateEnabled = false;
 let partner = null;       // { gender, lang, likes }
 let statusKey = { key: 'chat.pressStart' };
@@ -87,11 +88,7 @@ function renderDynamicTexts() {
   $$('[data-lang-select]').forEach((sel) => { sel.value = I18N.lang; });
   $('authSubmit').textContent = t(authMode === 'login' ? 'auth.submitLogin' : 'auth.submitSignup');
   $('statusText').textContent = t(statusKey.key, statusKey.vars);
-  if (plan) {
-    $$('.priceText').forEach((el) => { el.textContent = money(plan.price); });
-    $('payCardSub').textContent = t('pay.cardSub', { price: money(plan.price) });
-    $('payCryptoSub').textContent = t('pay.cryptoSub', { price: money(plan.price), days: plan.passDays });
-  }
+  renderPlans();
   renderPartner();
   renderMyLikes();
   refreshOnline();
@@ -398,11 +395,37 @@ async function premiumActivated() {
   }
 }
 
+// Precios, ahorro del plan mensual y textos de los métodos de pago según el plan elegido
+function renderPlans() {
+  if (!plans) return;
+  $$('.price-week').forEach((el) => { el.textContent = money(plans.week.price); });
+  $$('.price-month').forEach((el) => { el.textContent = money(plans.month.price); });
+  const perDay = (p) => p.price / p.days;
+  const pct = Math.round((1 - perDay(plans.month) / perDay(plans.week)) * 100);
+  $$('.save-month').forEach((el) => { el.textContent = t('plan.save', { pct }); el.hidden = pct <= 0; });
+  $$('#planPicker .plan-opt').forEach((b) => {
+    b.classList.toggle('active', b.dataset.plan === selectedPlan);
+    b.setAttribute('aria-checked', b.dataset.plan === selectedPlan);
+  });
+  const p = plans[selectedPlan];
+  $('payCard').hidden = !p.methods.card;
+  $('payCrypto').hidden = !p.methods.crypto;
+  $('payCardSub').textContent = t(selectedPlan === 'week' ? 'pay.cardSubWeek' : 'pay.cardSub', { price: money(p.price) });
+  $('payCryptoSub').textContent = t('pay.cryptoSub', { price: money(p.price), days: p.days });
+}
+
+$('planPicker').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-plan]');
+  if (!b) return;
+  selectedPlan = b.dataset.plan;
+  renderPlans();
+});
+
 // method: 'card' (tarjeta, Google Pay, Apple Pay) o 'crypto'
 async function pay(method) {
   const buttons = [$('payCard'), $('payCrypto')];
   buttons.forEach((b) => { b.disabled = true; });
-  const res = await api('/api/checkout', { method: 'POST', body: { method } });
+  const res = await api('/api/checkout', { method: 'POST', body: { method, plan: selectedPlan } });
   buttons.forEach((b) => { b.disabled = false; });
   if (res.activated) premiumActivated();              // modo demo
   else if (res.url) location.href = res.url;          // página de pago de Segpay
@@ -802,9 +825,7 @@ setStatus('chat.pressStart');
 refreshOnline();
 
 fetch('/api/plan').then((r) => r.json()).then((p) => {
-  plan = p;
-  $('payCard').hidden = !p.methods.card;
-  $('payCrypto').hidden = !p.methods.crypto;
+  plans = p.plans;
   $('demoNote').hidden = !p.demo;
   renderDynamicTexts();
 }).catch(() => {});

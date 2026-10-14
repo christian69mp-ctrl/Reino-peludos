@@ -24,7 +24,7 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   Si sale menor de edad, la cuenta queda expulsada. No se guarda el documento ni la fecha de
   nacimiento, solo el resultado. El panel de moderación muestra el estado de cada usuario.
 - **Videochat** 1 a 1 con WebRTC: Empezar, Siguiente (o tecla Esc), Parar y chat de texto.
-- **Premium 19,99 €** para elegir a quién ver (mujeres, hombres, transexuales o parejas). Va ligado
+- **Premium** en dos planes, **7,99 €/semana** o **19,99 €/mes** (el mensual sale un 42 % más barato), para elegir a quién ver (mujeres, hombres, transexuales o parejas). Va ligado
   a la cuenta: funciona en todos los dispositivos del usuario. Sin Premium, siempre al azar.
 - **Denuncias** por burlas o insultos, acoso, homofobia o transfobia, menor de edad o contenido
   ilegal, u otro motivo:
@@ -36,8 +36,8 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   primero), conversación denunciada, y botones para descartar, suspender 1 o 7 días, expulsar o
   readmitir. Al suspender o expulsar, la persona sale del chat al instante.
 - **Páginas legales**: `/normas`, `/terminos` y `/privacidad`.
-- **Idiomas**: la web se muestra sola en el idioma del navegador (español, inglés, portugués,
-  francés, alemán o italiano; si no es ninguno, en inglés). Se puede cambiar en el selector del
+- **Idiomas**: **español por defecto**. Si el navegador está en inglés, portugués, francés, alemán o
+  italiano, la web sale en ese idioma; con cualquier otro, en español. Se puede cambiar en el selector del
   pie de página y del aviso de edad. Los textos están en `public/i18n.js`.
 - **Traducción del chat**: si las dos personas hablan idiomas distintos, se muestra «Habla inglés»
   (o el que sea) junto a la otra persona y aparece «Traducir» bajo cada mensaje suyo. Necesita un
@@ -69,8 +69,10 @@ SESSION_SECRET=...            # frase larga y secreta; mantiene las sesiones tra
 BASE_URL=https://laruletacaliente.com
 
 # Pagos (sin ellas, modo demo)
-SEGPAY_ETICKET_CARD=123456:7890
-SEGPAY_ETICKET_CRYPTO=123456:7891
+SEGPAY_ETICKET_CARD_WEEK=123456:7888     # semanal con tarjeta
+SEGPAY_ETICKET_CRYPTO_WEEK=123456:7889   # semanal con cripto
+SEGPAY_ETICKET_CARD=123456:7890          # mensual con tarjeta
+SEGPAY_ETICKET_CRYPTO=123456:7891        # mensual con cripto
 SEGPAY_POSTBACK_KEY=...
 # SEGPAY_CANCEL_URL=https://cs.segpay.com
 
@@ -103,19 +105,26 @@ TURN_PASS=...
 
 En la ventana Premium el usuario elige cómo pagar. Los dos métodos se cobran con Segpay:
 
-| Botón | Paquete de Segpay | Cómo se cobra |
+| Plan · método | Paquete de Segpay | Cómo se cobra |
 |---|---|---|
-| Tarjeta · Google Pay · Apple Pay | `SEGPAY_ETICKET_CARD` | 19,99 € cada 30 días, se renueva solo |
-| Criptomonedas | `SEGPAY_ETICKET_CRYPTO` | 19,99 € una vez = 30 días (Segpay no permite cripto recurrente) |
+| Semanal · Tarjeta / Google Pay / Apple Pay | `SEGPAY_ETICKET_CARD_WEEK` | 7,99 € cada 7 días, se renueva solo |
+| Semanal · Criptomonedas | `SEGPAY_ETICKET_CRYPTO_WEEK` | 7,99 € una vez = 7 días |
+| Mensual · Tarjeta / Google Pay / Apple Pay | `SEGPAY_ETICKET_CARD` | 19,99 € cada 30 días, se renueva solo |
+| Mensual · Criptomonedas | `SEGPAY_ETICKET_CRYPTO` | 19,99 € una vez = 30 días |
+
+(Segpay no permite cripto recurrente, por eso con cripto es un pago único por el periodo.)
+Si falta el paquete de alguna combinación, ese botón no aparece para ese plan.
 
 Para pagar hay que tener la sesión iniciada; el Premium queda en la cuenta.
 
 ### Qué configurar en el Merchant Portal de Segpay
 
-1. **Dos payment packages** (o los que te prepare tu comercial de Segpay):
-   - Tarjeta: precio inicial 19,99 € por 30 días y renovación de 19,99 € cada 30 días.
-     Pide que activen **Google Pay y Apple Pay** en ese paquete.
-   - Cripto: 19,99 € por 30 días sin renovación. Pide que activen **cripto** en la cuenta y en el paquete.
+1. **Cuatro payment packages** (o los que te prepare tu comercial de Segpay):
+   - Tarjeta semanal: 7,99 € por 7 días y renovación de 7,99 € cada 7 días.
+   - Tarjeta mensual: 19,99 € por 30 días y renovación de 19,99 € cada 30 días.
+     Pide que activen **Google Pay y Apple Pay** en los paquetes de tarjeta.
+   - Cripto semanal: 7,99 € por 7 días sin renovación.
+   - Cripto mensual: 19,99 € por 30 días sin renovación. Pide que activen **cripto** en la cuenta y en estos paquetes.
    De cada paquete copia su `x-eticketid` (formato `paquete:precio`, p. ej. `123456:7890`).
 2. **Postbacks** (My Websites → Manage Postbacks), con "Use SSL" y respuesta esperada `OK`:
    - **Trans Post**:
