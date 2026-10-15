@@ -62,6 +62,7 @@ function exportData(user) {
     account: {
       email: user.email,
       nick: user.nick || '',
+      signInWith: [...(user.passHash ? ['password'] : []), ...Object.keys(user.oauth || {})],
       gender: user.gender,
       language: user.lang,
       createdAt: new Date(user.createdAt).toISOString(),
@@ -133,9 +134,12 @@ function routes(app) {
   // Borrar la cuenta: pide la contraseña para evitar borrados por error o ajenos
   app.post('/api/me/delete', requireUser, async (req, res) => {
     const user = req.user;
-    if (!(await checkPassword(String(req.body?.password || ''), user.passHash))) {
-      return res.status(401).json({ code: 'badPassword' });
-    }
+    // Cuentas creadas con Google/Apple/Facebook no tienen contraseña: se confirma escribiendo el email
+    const given = String(req.body?.password || '');
+    const ok = user.passHash
+      ? await checkPassword(given, user.passHash)
+      : given.trim().toLowerCase() === user.email;
+    if (!ok) return res.status(401).json({ code: user.passHash ? 'badPassword' : 'badConfirmEmail' });
     // Si estaba expulsada, se guarda solo un hash del email para que no pueda volver a registrarse
     if (user.status === 'banned') store.banEmailHash(sha256(user.email));
     store.deleteUser(user.id);

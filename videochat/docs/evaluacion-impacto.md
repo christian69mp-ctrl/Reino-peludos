@@ -36,7 +36,7 @@ Escala: probabilidad e impacto **B**ajo, **M**edio o **A**lto. "Residual" es el 
 
 | # | Riesgo para las personas | Prob. | Impacto | Medidas aplicadas | Residual |
 |---|---|---|---|---|---|
-| 1 | **Un menor entra** al videochat | M | A | Verificación con documento y selfie (Veriff) antes de la primera llamada; expulsión automática de menores y aviso al administrador; denuncia "Menor de edad o contenido ilegal" con aviso urgente por email; normas claras. | B–M |
+| 1 | **Un menor entra** al videochat | M | A | Declaración de mayoría de edad al registrarse (también con Google/Apple/Facebook, que **no** verifican la edad); denuncia "Parece menor de edad" que saca a la cuenta del chat al momento y le exige verificarse con documento y selfie (Veriff); el administrador puede pedir la verificación a cualquier cuenta; expulsión automática si sale menor y aviso urgente por email; normas claras. Para más protección: `AGE_VERIFICATION=all` (documento a todos). | M |
 | 2 | **Grabación o captura** del otro sin consentimiento, y difusión | A | A | Marca de agua invisible con código de cuenta para identificar al autor; detección de capturas y aviso a la otra persona; denuncia "me ha grabado"; prohibido en las normas con expulsión. *No se puede impedir del todo* (p. ej. grabar la pantalla con otro móvil): se explica en la web. | M |
 | 3 | **Revelar la IP** (y la ubicación aproximada) a un desconocido | A | M | El vídeo pasa por el servidor TURN propio (`RELAY_ONLY`), así nadie ve la IP del otro. | B |
 | 4 | **Acoso, insultos, homofobia o transfobia** | A | M | Denuncias con 6 motivos; bloqueo para no volver a coincidir; suspensión automática por varias denuncias; panel de moderación; avisos urgentes por email. | M |
@@ -72,9 +72,13 @@ Escala: probabilidad e impacto **B**ajo, **M**edio o **A**lto. "Residual" es el 
 
 ## 6. Conclusión provisional
 
-Con las medidas aplicadas, el riesgo residual se considera **medio-bajo**, siempre que la verificación
-de edad con Veriff esté activa en producción. **Sin verificación real (modo demo), el riesgo nº 1
-es alto y no se debe abrir al público.**
+Con las medidas aplicadas, el riesgo residual se considera **medio-bajo**, salvo el nº 1 (menores),
+que queda en **medio**: al no pedir documento a todo el mundo (decisión del responsable, como hacen
+otros videochats), un menor que mienta puede entrar hasta que alguien lo denuncie. Es imprescindible
+revisar las denuncias de menores en cuanto lleguen y tener Veriff activo en producción. **Revisar con
+un abogado si algún país al que se dirige la web exige verificación para todos** (p. ej. Reino Unido o
+Francia): en ese caso, usar `AGE_VERIFICATION=all` o bloquear ese país. Sin verificación real (modo
+demo) no se debe abrir al público.
 
 | | |
 |---|---|

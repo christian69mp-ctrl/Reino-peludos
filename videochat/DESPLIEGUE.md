@@ -115,11 +115,48 @@ Después de añadir claves al `.env`, aplica los cambios con `docker compose up 
 2. Copia *Site key* y *Secret key* → `TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET`.
 
 ### Verificación de edad con documento (imprescindible antes de abrir al público)
-Sin Veriff la verificación es **simulada**: sirve para probar, no para abrir al público.
+Al registrarse basta con marcar «Tengo 18 años o más». **Solo** quien sea denunciado como
+«Parece menor de edad» (o a quien se lo pidas desde `/admin`) tiene que verificarse con su
+documento para seguir. Por eso se usa poco y sale barato, pero hace falta tenerlo: sin Veriff esa
+verificación es **simulada** y no sirve para abrir al público.
+(Con `AGE_VERIFICATION=all` se pide a todo el mundo antes del primer videochat.)
 1. Contrata **Veriff** (veriff.com). Pide precio para "age verification" y cuéntales que es un
    videochat para adultos.
 2. Crea una integración; copia *API key* y *Shared secret key* → `VERIFF_API_KEY`, `VERIFF_SECRET`.
 3. *Decision webhook URL*: `https://tudominio.com/api/age/webhook`.
+
+### Entrar con Google, Apple o Facebook (recomendado)
+Cada botón aparece solo cuando pones sus claves. En los tres, la **URL de redirección** es
+`https://tudominio.com/auth/PROVEEDOR/callback` (cambia PROVEEDOR por `google`, `apple` o `facebook`).
+
+**Google** (gratis):
+1. Entra en console.cloud.google.com → crea un proyecto.
+2. *APIs y servicios → Pantalla de consentimiento de OAuth*: tipo **Externo**, nombre de la app,
+   tu email, logo, y los enlaces a `/privacidad` y `/terminos`. Ámbitos: solo `email` y `openid`.
+3. *Credenciales → Crear credenciales → ID de cliente de OAuth → Aplicación web*. En
+   "URI de redirección autorizados" pon `https://tudominio.com/auth/google/callback`.
+4. Copia el ID y el secreto → `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`.
+5. Pulsa **Publicar la app** (si no, solo pueden entrar las cuentas de prueba).
+
+**Apple** (requiere Apple Developer Program, 99 $/año; lo usan sobre todo en iPhone):
+1. developer.apple.com → *Certificates, Identifiers & Profiles*.
+2. Crea un **App ID** con "Sign in with Apple" activado.
+3. Crea un **Services ID** (p. ej. `com.laruletacaliente.web`) → activa Sign in with Apple →
+   dominio `tudominio.com` y Return URL `https://tudominio.com/auth/apple/callback`.
+   Este Services ID es `APPLE_CLIENT_ID`.
+4. *Keys* → crea una clave con Sign in with Apple → descarga el `.p8` (solo se puede una vez).
+   El "Key ID" es `APPLE_KEY_ID`; tu "Team ID" (arriba a la derecha) es `APPLE_TEAM_ID`.
+5. Copia el `.p8` al servidor (p. ej. `/opt/Reino-peludos/videochat/data/apple.p8`) y pon
+   `APPLE_PRIVATE_KEY_FILE=/app/data/apple.p8`, o pega su contenido en `APPLE_PRIVATE_KEY`
+   con los saltos de línea como `\n`.
+6. Si una persona elige "Ocultar mi email", Apple da un email de reenvío: para que lleguen los
+   emails, registra tu dominio de envío en *Services → Sign in with Apple for Email Communication*.
+
+**Facebook** (gratis, pero ojo): developers.facebook.com → crea una app de tipo *Consumidor* →
+añade *Inicio de sesión con Facebook* → URI de redirección `https://tudominio.com/auth/facebook/callback`
+→ copia App ID y clave secreta → `FACEBOOK_APP_ID`, `FACEBOOK_APP_SECRET`. **Las políticas de Meta
+no suelen permitir apps con contenido para adultos**: es posible que rechacen la revisión. Si pasa,
+deja sus claves vacías y el botón no aparecerá.
 
 ### Traducción del chat (opcional)
 **DeepL API Free** (500.000 caracteres/mes) → `DEEPL_API_KEY`.

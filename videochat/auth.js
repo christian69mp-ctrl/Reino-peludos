@@ -99,7 +99,7 @@ function likesOf(user) {
 }
 
 function publicUser(user) {
-  return { id: user.id, email: user.email, nick: user.nick || '', gender: user.gender, createdAt: user.createdAt, likes: likesOf(user), emailVerified: !!user.emailVerified };
+  return { id: user.id, email: user.email, nick: user.nick || '', hasPassword: !!user.passHash, gender: user.gender, createdAt: user.createdAt, likes: likesOf(user), emailVerified: !!user.emailVerified };
 }
 
 // true si la cuenta todavía tiene que confirmar su email
@@ -224,5 +224,5 @@ function routes(app) {
 
 module.exports = {
   routes, requireUser, userFromToken, restriction, publicUser, likesOf, checkPassword, bearer, needsEmail,
-  EMAIL_VERIFY, GENDERS,
+  sessionToken, cleanLang, rateLimited, sha256, EMAIL_RE, EMAIL_VERIFY, GENDERS,
 };

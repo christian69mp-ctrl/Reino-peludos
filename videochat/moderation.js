@@ -23,10 +23,11 @@ const REASONS = {
   acoso: 'Acoso',
   homofobia: 'Homofobia o transfobia',
   grabacion: 'Grabación o capturas sin permiso',
-  menor: 'Menor de edad o contenido ilegal',
+  menor: 'Parece menor de edad',
+  ilegal: 'Contenido ilegal',
   otro: 'Otro motivo',
 };
-const URGENT = new Set(['menor']);
+const URGENT = new Set(['menor', 'ilegal']);
 const WINDOW_MS = 24 * 3600 * 1000;
 const AUTO_SUSPEND_REPORTERS = 3;        // personas distintas en 24 h
 const AUTO_SUSPEND_REPORTERS_URGENT = 2; // para menores / contenido ilegal
@@ -54,6 +55,8 @@ function report({ reporter, reported, reason, comment, chat }) {
     comment: String(comment || '').trim().slice(0, 500),
     chat: (chat || []).slice(-30),
   });
+  // Si parece menor, tiene que verificar su edad con documento para seguir
+  if (reason === 'menor') require('./age').requireCheck(reported.id, 'report');
   if (created.urgent) {
     alertAdmin('⚠️ Denuncia URGENTE: menor o contenido ilegal',
       `Se ha denunciado a ${reported.email} por: ${REASONS[reason]}.\nComentario: ${created.comment || '(sin comentario)'}`);
@@ -94,6 +97,7 @@ function userSummary(user) {
     reportsReceived: reports.length,
     reportsOpen: reports.filter((r) => r.status === 'open').length,
     age: user.age?.status || 'none',
+    ageCheck: !!user.ageCheck,
     code: user.id.slice(1, 9).toUpperCase().replace(/^(.{4})/, '$1-'),
     captureAttempts: user.captureAttempts || 0,
   };
@@ -107,6 +111,10 @@ function applyUserAction(user, action, days) {
     const until = Date.now() + Math.min(Math.max(Number(days) || 1, 1), 365) * 86400000;
     store.updateUser(user.id, { suspendedUntil: until, suspendedReason: 'Moderación' });
     onRestrict(user.id, { type: 'suspended', until });
+  } else if (action === 'requireAge') {
+    require('./age').requireCheck(user.id, 'admin');
+  } else if (action === 'clearAge') {
+    store.updateUser(user.id, { ageCheck: null });
   } else if (action === 'clearNick') {
     store.updateUser(user.id, { nick: '' });
   } else if (action === 'restore') {

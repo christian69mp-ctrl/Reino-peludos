@@ -1,9 +1,13 @@
 // Verificación de edad con Veriff (documento de identidad + selfie).
 //
-// - Con VERIFF_API_KEY y VERIFF_SECRET: verificación real. Hay que verificarse una
-//   vez antes de usar el videochat.
-// - Sin ellas: modo DEMO, la verificación se simula al pulsar el botón.
-// - AGE_VERIFICATION=off la desactiva por completo.
+// Cuándo se pide (AGE_VERIFICATION):
+// - reports (por defecto): al registrarse basta con confirmar «Soy mayor de 18».
+//   Solo si alguien denuncia a una cuenta por «Menor de edad», o el administrador
+//   lo pide, esa cuenta tiene que verificarse con documento para seguir.
+// - all: todo el mundo se verifica una vez antes del primer videochat.
+// - off: nunca se pide.
+// Con VERIFF_API_KEY y VERIFF_SECRET la verificación es real; sin ellas, modo
+// DEMO (se simula al pulsar el botón).
 //
 // Flujo: el servidor crea una sesión en Veriff y manda al usuario a su página.
 // Veriff avisa del resultado por webhook (y, por si falla, la web también lo
@@ -18,15 +22,18 @@ const API_KEY = process.env.VERIFF_API_KEY;
 const SECRET = process.env.VERIFF_SECRET;
 const BASE = (process.env.VERIFF_BASE_URL || 'https://stationapi.veriff.com').replace(/\/$/, '');
 const DEMO = !API_KEY || !SECRET;
-const REQUIRED = process.env.AGE_VERIFICATION !== 'off';
+const MODE = ['off', 'all'].includes(process.env.AGE_VERIFICATION) ? process.env.AGE_VERIFICATION : 'reports';
+const REQUIRED = MODE !== 'off';
 const MIN_AGE = 18;
 
 if (!REQUIRED) console.warn('[edad] AGE_VERIFICATION=off: no se pide verificación de edad.');
+else if (MODE === 'reports') console.log('[edad] Verificación con documento solo para cuentas denunciadas por «menor de edad» (AGE_VERIFICATION=all para pedirla a todos).');
 else if (DEMO && (process.env.BASE_URL || '').startsWith('https://')) {
   console.warn('[edad] ⚠️  ATENCIÓN: la web está publicada pero la verificación de edad es SIMULADA. Define VERIFF_API_KEY y VERIFF_SECRET antes de abrir al público.');
 } else if (DEMO) console.warn('[edad] Modo DEMO: la verificación de edad se simula. Define VERIFF_API_KEY y VERIFF_SECRET para la real.');
 
 let onRestrict = () => {};
+let onRequire = () => {};
 
 const hmac = (data) => crypto.createHmac('sha256', SECRET).update(data).digest('hex');
 
@@ -39,9 +46,25 @@ function ageStatus(user) {
   return user?.age?.status || 'none';
 }
 
-// null si puede usar el chat; 'age' si tiene que verificarse
+// ¿Tiene que verificarse esta cuenta? (según el modo y si se le ha pedido)
+function mustVerify(user) {
+  if (MODE === 'off') return false;
+  return MODE === 'all' || !!user?.ageCheck;
+}
+
+// true si tiene que verificarse antes de usar el chat
 function needsVerification(user) {
-  return REQUIRED && ageStatus(user) !== 'approved';
+  return mustVerify(user) && ageStatus(user) !== 'approved';
+}
+
+// Pide la verificación a una cuenta (denuncia por menor o decisión del administrador)
+// y la saca del chat hasta que se verifique
+function requireCheck(userId, reason) {
+  const user = store.getUser(userId);
+  if (!user || MODE !== 'reports' || ageStatus(user) === 'approved') return false;
+  if (!user.ageCheck) store.updateUser(userId, { ageCheck: { reason, at: Date.now() } });
+  onRequire(userId);
+  return true;
 }
 
 function yearsSince(dateStr) {
@@ -99,7 +122,7 @@ async function pollDecision(user) {
 }
 
 function publicAge(user) {
-  return { required: REQUIRED, status: ageStatus(user), demo: DEMO };
+  return { required: mustVerify(user), mode: MODE, status: ageStatus(user), demo: DEMO };
 }
 
 function routes(app, baseUrl) {
@@ -107,7 +130,7 @@ function routes(app, baseUrl) {
   app.post('/api/age/start', requireUser, async (req, res) => {
     const user = req.user;
     if (needsEmail(user)) return res.status(403).json({ code: 'emailUnverified' });
-    if (!REQUIRED || ageStatus(user) === 'approved') return res.json({ age: publicAge(user) });
+    if (!mustVerify(user) || ageStatus(user) === 'approved') return res.json({ age: publicAge(user) });
     if (DEMO) {
       store.updateUser(user.id, { age: { status: 'approved', demo: true, verifiedAt: Date.now(), updatedAt: Date.now() } });
       return res.json({ age: publicAge(store.getUser(user.id)) });
@@ -161,6 +184,9 @@ module.exports = {
   routes,
   needsVerification,
   publicAge,
+  requireCheck,
+  MODE,
   setOnRestrict: (fn) => { onRestrict = fn; },
+  setOnRequire: (fn) => { onRequire = fn; },
   _test: { applyDecision, yearsSince },
 };

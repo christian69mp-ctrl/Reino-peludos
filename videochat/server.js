@@ -11,6 +11,7 @@ const age = require('./age');
 const privacy = require('./privacy');
 const captcha = require('./captcha');
 const friends = require('./friends');
+const oauth = require('./oauth');
 
 const PORT = process.env.PORT || 3000;
 
@@ -37,9 +38,10 @@ translate.routes(app);
 age.routes(app, process.env.BASE_URL);
 privacy.routes(app);
 friends.routes(app);
+oauth.routes(app);
 
 // Qué funciones opcionales están activas
-app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled, turnstile: captcha.SITE_KEY || null }));
+app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled, turnstile: captcha.SITE_KEY || null, providers: oauth.enabled }));
 
 // Sesión actual: datos de la cuenta, Premium y restricciones
 app.get('/api/me', auth.requireUser, (req, res) => {
@@ -214,7 +216,7 @@ function presenceChanged(uid) {
   if (lastStatus.get(uid) === status) return;
   if (status === 'offline') lastStatus.delete(uid); else lastStatus.set(uid, status);
   for (const f of friends.friendIds(uid)) {
-    if (userSockets.has(f)) notifyUser(f, 'friend-status', { handle: friends.handle(f, uid), status });
+    if (userSockets.has(f) && payments.isPremium(f)) notifyUser(f, 'friend-status', { handle: friends.handle(f, uid), status });
   }
 }
 
@@ -267,6 +269,14 @@ function kick(userId, restriction) {
 }
 moderation.setOnRestrict(kick);
 age.setOnRestrict(kick);
+// Le piden verificar la edad: sale del chat hasta que se verifique
+age.setOnRequire((userId) => {
+  for (const s of io.of('/').sockets.values()) {
+    if (s.data.uid !== userId) continue;
+    s.emit('age-required');
+    s.disconnect(true);
+  }
+});
 privacy.setOnDeleted((userId) => kick(userId, { type: 'deleted' }));
 
 io.use((socket, next) => {
@@ -407,6 +417,7 @@ io.on('connection', (socket) => {
     const reply = typeof ack === 'function' ? ack : () => {};
     const other = friends.resolve(uid, handle);
     if (!other || !friends.areFriends(uid, other)) return reply({ code: 'contact' });
+    if (!payments.isPremium(uid)) return reply({ code: 'premium' });
     const status = presence(other);
     if (status !== 'online') return reply({ code: status === 'busy' ? 'callBusy' : 'callOffline' });
     if ([...calls.values()].some((c) => c.calleeUid === other)) return reply({ code: 'callBusy' });

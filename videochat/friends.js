@@ -8,10 +8,16 @@
 //   quien lo mira, así no se exponen los ids internos ni se puede rastrear a
 //   alguien entre cuentas.
 // - Rechazar o bloquear no se le notifica a la otra persona.
+// - Es una función Premium: sin plan activo solo se pueden aceptar o rechazar
+//   las solicitudes que llegan (y contestar llamadas de amigos Premium). Ver el
+//   historial, la lista de amigos, quién está en línea, enviar solicitudes y
+//   llamar requieren Premium. El historial se guarda igualmente (30 días), así
+//   al hacerse Premium ya aparece.
 
 const store = require('./store');
 const { mac } = require('./tokens');
 const { requireUser } = require('./auth');
+const { isPremium } = require('./payments');
 
 const DAY = 24 * 3600 * 1000;
 const HISTORY_DAYS = 30;
@@ -79,6 +85,7 @@ function request(from, to) {
   if (f?.status === 'accepted') return { relation: 'friend' };
   if (f?.status === 'pending' && f.requester === to) return accept(from, to);
   if (f && f.requester === from) return { relation: 'sent' }; // pendiente o rechazada
+  if (!isPremium(from)) return { code: 'premium' };
   if (friendCount(from) >= MAX_FRIENDS || !underDailyLimit(from)) return { code: 'friendLimit' };
   store.setFriendship(from, to, 'pending', from);
   notify(to, 'friend-request', contactInfo(to, from));
@@ -138,6 +145,15 @@ function meetEnded(x, y, at) {
 }
 
 function contacts(uid) {
+  if (!isPremium(uid)) {
+    // Sin Premium: solo las solicitudes recibidas y cuántos contactos tendría
+    const all = fullContacts(uid);
+    return { locked: true, friends: [], history: [], requests: all.requests, counts: { friends: all.friends.length, history: all.history.length } };
+  }
+  return fullContacts(uid);
+}
+
+function fullContacts(uid) {
   const user = store.getUser(uid);
   const blocked = new Set(user?.blocked || []);
   const friends = [];
@@ -207,6 +223,7 @@ module.exports = {
   decline,
   areFriends,
   friendIds,
+  isPremium,
   meet,
   meetEnded,
   contacts,

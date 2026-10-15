@@ -21,11 +21,11 @@
 | **Finalidad** | Crear y mantener la cuenta, iniciar sesión, recuperar la contraseña, confirmar el email. |
 | **Base jurídica** | Ejecución del contrato (art. 6.1.b), es decir, las condiciones de uso aceptadas al registrarse. |
 | **Interesados** | Usuarios registrados (mayores de 18 años). |
-| **Datos** | Email; contraseña cifrada (scrypt, no se puede leer); "qué eres" (mujer, hombre, trans o pareja); idioma; fecha de alta y de aceptación de las condiciones; si el email está confirmado; contadores de 👍/❤️ recibidos; lista de personas bloqueadas. |
+| **Datos** | Email; contraseña cifrada (scrypt, no se puede leer), o el identificador de la cuenta de Google, Apple o Facebook si entra con ellas (solo recibimos email e identificador); "qué eres" (mujer, hombre, trans o pareja); idioma; fecha de alta y de aceptación de las condiciones; si el email está confirmado; contadores de 👍/❤️ recibidos; lista de personas bloqueadas. |
 | **Datos sensibles** | "Trans" y el propio uso de un videochat para adultos pueden revelar orientación sexual o vida sexual (art. 9 RGPD). **Pendiente:** consultar si hace falta un consentimiento explícito aparte al registrarse. |
 | **Plazo** | Mientras exista la cuenta. Se borra al eliminarla (botón "Borrar mi cuenta"). |
-| **Destinatarios** | Proveedor de email (Brevo) solo para enviar los mensajes. Proveedor del servidor (alojamiento). |
-| **Transferencias internacionales** | No, si el servidor y Brevo están en la UE. |
+| **Destinatarios** | Proveedor de email (Brevo) solo para enviar los mensajes. Proveedor del servidor (alojamiento). Google, Apple y Meta (Facebook) intervienen como responsables independientes cuando la persona elige entrar con ellos. |
+| **Transferencias internacionales** | No, si el servidor y Brevo están en la UE. Google, Apple y Meta: EE. UU. (Data Privacy Framework), solo si la persona elige ese método. |
 
 ## 2. Seguridad y prevención de abusos
 
@@ -42,7 +42,7 @@
 
 | | |
 |---|---|
-| **Finalidad** | Garantizar que solo usan el videochat personas mayores de 18 años. |
+| **Finalidad** | Garantizar que solo usan el videochat personas mayores de 18 años. Al registrarse, la persona declara su mayoría de edad; la verificación con documento solo se pide a cuentas denunciadas como posible menor o a las que el administrador se la pida (o a todas con `AGE_VERIFICATION=all`). |
 | **Base jurídica** | Obligación legal y de protección de menores, más interés legítimo (art. 6.1.c y 6.1.f). **Revisar con abogado** cuál aplica en cada país. |
 | **Datos que trata Veriff** | Foto del documento de identidad y selfie (biometría para comparar caras). **No llegan a nuestro servidor.** |
 | **Datos que guardamos** | Solo el estado (aprobado, pendiente, rechazado o menor de edad), el identificador de la sesión de Veriff y las fechas. **No guardamos el documento ni la fecha de nacimiento.** |

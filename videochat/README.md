@@ -20,11 +20,21 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   mujer, hombre, transexual o pareja. Inicio de sesión en cualquier dispositivo.
 - **Recuperar contraseña por email**: «¿Olvidaste tu contraseña?» envía un enlace (válido 1 hora,
   de un solo uso, en el idioma del usuario). Al cambiarla se cierran las demás sesiones.
-- **Verificación de edad con Veriff** (documento + selfie) antes de usar el videochat, una sola vez.
+- **Entrar con Google, Apple o Facebook** (además de email y contraseña). Si es la primera vez,
+  solo se pide qué eres y aceptar las normas (mayor de 18). Si ya había una cuenta con ese email,
+  se vinculan. El email queda confirmado. Las cuentas sin contraseña confirman el borrado
+  escribiendo su email (y pueden crear una contraseña con «¿Olvidaste tu contraseña?»).
+- **Verificación de edad** como en DirtyRoulette: al registrarse basta con confirmar «Tengo 18 años
+  o más». **Solo** si alguien denuncia a una cuenta por «Parece menor de edad», o el administrador
+  lo pide desde `/admin`, esa cuenta sale del chat y tiene que verificarse con Veriff (documento +
+  selfie) para seguir. Con `AGE_VERIFICATION=all` se pide a todo el mundo; con `off`, a nadie.
   Si sale menor de edad, la cuenta queda expulsada. No se guarda el documento ni la fecha de
   nacimiento, solo el resultado. El panel de moderación muestra el estado de cada usuario.
 - **Videochat** 1 a 1 con WebRTC: Empezar, Siguiente (o tecla Esc), Parar y chat de texto.
-- **Historial y amigos** (mezcla de CooMeet y DirtyRoulette), botón de personas en la cabecera:
+- **Historial y amigos** (mezcla de CooMeet y DirtyRoulette), **solo con Premium**. Sin Premium
+  se puede aceptar o rechazar las solicitudes que llegan y contestar llamadas de amigos Premium;
+  el panel muestra la oferta («Ya tienes 3 personas en tu historial») y permite borrar el historial.
+  Botón de personas en la cabecera:
   - **Historial**: con quién has hablado en los últimos 30 días (máx. 100), cuándo, cuánto duró y
     cuántas veces. Sin fotos: no se guarda ninguna imagen de nadie. Se puede borrar una entrada o todo.
   - **Amigos**: «Añadir amigo» sobre el vídeo durante la conversación o desde el historial. La otra
@@ -111,6 +121,7 @@ Diseño hecho con Gemini y redibujado en vector para que se vea nítido a cualqu
 - `translate.js` — traducción de mensajes del chat (DeepL o LibreTranslate).
 - `age.js` — verificación de edad con Veriff.
 - `mailer.js` — envío de emails (confirmar cuenta, recuperar contraseña, avisos al administrador).
+- `oauth.js` — entrar con Google, Apple o Facebook.
 - `friends.js` — historial de chats, amigos y solicitudes (las llamadas y el «en línea» están en `server.js`).
 - `privacy.js` — cabeceras de seguridad, descargar/borrar datos, limpieza automática y código de marca de agua.
 - `public/` — la web: `index.html` (portada + chat), `app.js`, `style.css`, `admin.html`,
@@ -144,7 +155,14 @@ MAIL_FROM="La Ruleta Caliente <no-reply@laruletacaliente.com>"
 # Verificación de edad (sin las dos claves, modo demo: se simula)
 VERIFF_API_KEY=...            # Veriff → Integrations → API key
 VERIFF_SECRET=...             # Veriff → Integrations → Shared secret key
-# AGE_VERIFICATION=off        # para desactivarla del todo
+# AGE_VERIFICATION=reports    # por defecto: documento solo si le denuncian como menor
+# AGE_VERIFICATION=all        # documento para todos antes del primer videochat
+# AGE_VERIFICATION=off        # nunca
+
+# Entrar con Google / Apple / Facebook (cada botón aparece si están sus claves)
+# GOOGLE_CLIENT_ID=... / GOOGLE_CLIENT_SECRET=...
+# APPLE_CLIENT_ID=... / APPLE_TEAM_ID=... / APPLE_KEY_ID=... / APPLE_PRIVATE_KEY_FILE=/ruta/clave.p8
+# FACEBOOK_APP_ID=... / FACEBOOK_APP_SECRET=...
 
 # Traducción del chat (uno de los dos; sin ninguno, no aparece «Traducir»)
 DEEPL_API_KEY=...             # deepl.com/pro-api — la clave gratuita (500.000 caracteres/mes) termina en :fx
@@ -212,9 +230,10 @@ Para pagar hay que tener la sesión iniciada; el Premium queda en la cuenta.
 2. En la integración pon como **Decision webhook URL**: `https://laruletacaliente.com/api/age/webhook`.
 3. Pon las dos claves en el servidor (`VERIFF_API_KEY`, `VERIFF_SECRET`).
 
-Al pulsar «Empezar», quien no esté verificado ve la ventana «Verifica tu edad», va a la página de
-Veriff y al volver la web espera el resultado. El servidor también rechaza la conexión al chat de
-cualquier cuenta sin verificar.
+Cuando a una cuenta se le pide verificarse (denuncia «Parece menor de edad», botón «Pedir
+verificación de edad» en `/admin`, o a todos con `AGE_VERIFICATION=all`), sale del chat, ve la
+ventana «Verifica tu edad», va a la página de Veriff y al volver la web espera el resultado. El
+servidor rechaza su conexión al chat hasta que esté verificada.
 
 ## Antes de abrir al público
 

@@ -212,16 +212,62 @@ $('authForm').addEventListener('submit', async (e) => {
   $('authSubmit').disabled = false;
   if (!res.token) return showError(errorText(res));
 
-  token = res.token;
-  save('session', token);
   $('authPassword').value = '';
   closeModal('authModal');
+  loggedIn(res.token, authMode === 'register', pendingAction);
+});
+
+// Sesión iniciada (con email o con Google/Apple/Facebook): sigue con lo que quería hacer
+async function loggedIn(newToken, isNew, action) {
+  token = newToken;
+  save('session', token);
   await refreshMe();
-  toast(t(authMode === 'register' ? 'msg.welcome' : 'msg.welcomeBack'));
-  const action = pendingAction;
+  toast(t(isNew ? 'msg.welcome' : 'msg.welcomeBack'));
   pendingAction = null;
   if (action === 'start') enterChat();
   if (action === 'premium') openPremium();
+}
+
+// ---------- Entrar con Google / Apple / Facebook ----------
+// Se va a la página del proveedor; al volver, ?social=… trae un código de un solo uso
+$$('.social-btn').forEach((a) => a.addEventListener('click', () => {
+  save('after-login', pendingAction || '');
+  a.href = `/auth/${a.dataset.provider}?lang=${encodeURIComponent(I18N.chatLang())}`;
+}));
+
+let socialCode = '';
+let socialGender = '';
+async function finishSocial(code) {
+  const res = await api('/api/social/finish', { method: 'POST', body: { code } });
+  const action = load('after-login');
+  if (res.token) { save('after-login', ''); loggedIn(res.token, false, action); return; }
+  if (!res.signup) { toast(errorText(res)); return; }
+  socialCode = code;
+  $('socialText').textContent = t('soc.text', { email: res.email });
+  $('socialError').hidden = true;
+  openModal('socialModal');
+}
+
+$('socialGender').addEventListener('click', (e) => {
+  const g = e.target.closest('[data-g]')?.dataset.g;
+  if (!g) return;
+  socialGender = g;
+  $('socialError').hidden = true;
+  $$('#socialGender .chip').forEach((c) => c.classList.toggle('active', c.dataset.g === g));
+});
+
+$('socialSubmit').addEventListener('click', async () => {
+  const showError = (msg) => { $('socialError').textContent = msg; $('socialError').hidden = false; };
+  if (!socialGender) return showError(t('err.gender'));
+  if (!$('socialTerms').checked) return showError(t('err.terms'));
+  $('socialSubmit').disabled = true;
+  const res = await api('/api/social/complete', { method: 'POST', body: { code: socialCode, gender: socialGender, adult: true, terms: true, lang: I18N.chatLang() } });
+  $('socialSubmit').disabled = false;
+  if (!res.token) return showError(errorText(res));
+  closeModal('socialModal');
+  const action = load('after-login');
+  save('after-login', '');
+  loggedIn(res.token, true, action);
 });
 
 async function refreshMe() {
@@ -334,6 +380,7 @@ function renderAge() {
   const status = me?.age?.status || 'none';
   const notice = $('ageNotice');
   $('ageDemo').hidden = !me?.age?.demo;
+  $('ageReported').hidden = me?.age?.mode !== 'reports';
   $('ageIntro').hidden = status === 'pending';
   notice.className = 'notice';
   notice.hidden = true;
@@ -444,6 +491,11 @@ $('deleteOpen').addEventListener('click', () => {
   $('deleteForm').hidden = false;
   $('deleteError').hidden = true;
   $('deletePassword').value = '';
+  // Cuentas creadas con Google/Apple/Facebook: se confirma escribiendo el email
+  const noPass = me?.user && !me.user.hasPassword;
+  $('deletePassword').type = noPass ? 'email' : 'password';
+  $('deletePassword').autocomplete = noPass ? 'off' : 'current-password';
+  $('deletePasswordLabel').textContent = t(noPass ? 'acc.deleteEmail' : 'acc.deletePassword');
   focusSoon('deletePassword');
 });
 
@@ -575,11 +627,14 @@ setInterval(refreshOnline, 15000);
 
 // ---------- Premium ----------
 function setPremium(value) {
+  const wasPremium = premium;
   premium = value;
   const logged = !!me;
   $('premiumBtn').hidden = !logged || premium;
   $('manageBtn').hidden = !logged || !premium || freeMode;
   $('lockNote').hidden = premium || freeMode;
+  if (partner) renderFriendBtn();
+  if (value !== wasPremium) loadContacts();
   $('filter').classList.toggle('locked', !premium);
   if (!premium) selectWant('');
 }
@@ -961,6 +1016,13 @@ function connectSocket() {
 
   socket.on('restricted', (r) => { if (r.type !== 'deleted') showRestricted(r); });
 
+  // Le han denunciado como posible menor: tiene que verificar su edad para seguir
+  socket.on('age-required', () => {
+    stop();
+    socket = null;
+    refreshMe().then(() => { showChat(); openAge(); });
+  });
+
   bindContactEvents(s);
 
   socket.on('partner-capture', () => {
@@ -1104,7 +1166,7 @@ async function loadContacts() {
   if (!token) return;
   const res = await api('/api/contacts');
   if (!res.friends) return;
-  contacts = { friends: res.friends, requests: res.requests, history: res.history };
+  contacts = { friends: res.friends, requests: res.requests, history: res.history, locked: !!res.locked, counts: res.counts };
   renderContacts();
 }
 
@@ -1161,6 +1223,20 @@ function relationTag(rel) {
 
 function renderContacts() {
   renderBadge();
+  // Sin Premium: solo se ven las solicitudes; amigos e historial muestran la oferta
+  const locked = !!contacts.locked;
+  $('ctLocked').hidden = !locked || ctTab === 'requests';
+  $$('.ct-panel').forEach((p) => { p.hidden = p.dataset.cpanel !== ctTab || (locked && ctTab !== 'requests'); });
+  if (locked) {
+    const h = contacts.counts?.history || 0;
+    const f = contacts.counts?.friends || 0;
+    const parts = [];
+    if (h) parts.push(h === 1 ? t('ct.teaserOne') : t('ct.teaser', { h }));
+    if (f) parts.push(f === 1 ? t('ct.friendsOne') : t('ct.friendsN', { f }));
+    $('ctTeaser').textContent = parts.join(' · ');
+    $('ctTeaser').hidden = !h && !f;
+    $('ctClearLocked').hidden = !h;
+  }
   const statusText = { online: t('ct.online'), busy: t('ct.busy'), offline: t('ct.offline') };
 
   $('ctFriends').replaceChildren(...contacts.friends.map((c) => contactItem(c, {
@@ -1205,8 +1281,10 @@ let ctTab = 'friends';
 function setCtTab(tab) {
   ctTab = tab;
   $$('.ct-tab').forEach((b) => b.classList.toggle('active', b.dataset.ctab === tab));
-  $$('.ct-panel').forEach((p) => { p.hidden = p.dataset.cpanel !== tab; });
+  renderContacts();
 }
+$('ctPremium').addEventListener('click', () => { closeModal('contactsModal'); openPremium(); });
+$('ctClearLocked').addEventListener('click', () => $('ctClear').click());
 $$('.ct-tab').forEach((b) => b.addEventListener('click', () => setCtTab(b.dataset.ctab)));
 
 function openContacts(tab) {
@@ -1228,6 +1306,7 @@ $('contactsModal').addEventListener('click', async (e) => {
   if (!c) return;
   const name = contactName(c);
   const post = (path) => api(path, { method: 'POST', body: { handle: h } });
+  if (['call', 'add'].includes(btn.dataset.act) && !premium) { closeModal('contactsModal'); openPremium(); return; }
   let res;
   switch (btn.dataset.act) {
     case 'call': callFriend(c); return;
@@ -1268,7 +1347,7 @@ function renderFriendBtn() {
   if (!partner || !connected) { btn.hidden = true; return; }
   const rel = partner.relation || 'none';
   const conf = {
-    none: ['user-plus', 'ct.add'],
+    none: [premium ? 'user-plus' : 'star', 'ct.add'],
     sent: ['user-plus', 'ct.sent'],
     received: ['user-check', 'ct.acceptFriend'],
     friend: ['user-check', 'ct.isFriend'],
@@ -1285,6 +1364,8 @@ function friendFromChat() {
   if (!partner || !connected) return;
   const rel = partner.relation || 'none';
   if (rel !== 'none' && rel !== 'received') return;
+  // Enviar solicitudes es Premium; aceptar las que llegan, no
+  if (rel === 'none' && !premium) { toast(t('ct.premiumOnly')); openPremium(); return; }
   const name = contactName(partner);
   socket.emit(rel === 'received' ? 'friend-accept' : 'friend-request', null, (res) => {
     if (res?.code) { toast(errorText(res)); return; }
@@ -1527,12 +1608,20 @@ fetch('/api/plan').then((r) => r.json()).then((p) => {
 fetch('/api/config').then((r) => r.json()).then((c) => {
   translateEnabled = !!c.translate;
   turnstileKey = c.turnstile || null;
+  const providers = c.providers || [];
+  $$('.social-btn').forEach((a) => { a.hidden = !providers.includes(a.dataset.provider); });
+  $('socialLogin').hidden = providers.length === 0;
 }).catch(() => {});
 
 (async () => {
   await refreshMe();
   const params = new URLSearchParams(location.search);
-  if (['order', 'reset', 'age', 'verify'].some((k) => params.has(k))) history.replaceState(null, '', '/');
+  if (['order', 'reset', 'age', 'verify', 'social', 'login_error'].some((k) => params.has(k))) history.replaceState(null, '', '/');
+  if (params.get('social')) {
+    if (!load('age-ok')) { save('age-ok', '1'); closeModal('ageGate'); }
+    finishSocial(params.get('social'));
+  }
+  if (params.get('login_error')) toast(t(`soc.e_${params.get('login_error')}`));
   // Enlace del email de confirmación
   if (params.get('verify')) {
     if (!load('age-ok')) { save('age-ok', '1'); closeModal('ageGate'); }

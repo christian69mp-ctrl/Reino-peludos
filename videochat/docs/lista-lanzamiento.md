@@ -20,6 +20,9 @@ la web no cobra nada y los filtros son gratis para todos.
 
 ## A. Antes de nada (gratis o casi)
 
+- ☐ (Recomendado) **Entrar con Google**: crear las claves en Google Cloud (gratis, ver DESPLIEGUE.md).
+- ☐ (Opcional) **Entrar con Apple** (99 $/año) y **Facebook** (Meta puede rechazar webs para adultos).
+
 - ☐ Comprar el dominio.
 - ☐ Crear el buzón `soporte@tudominio.com` (en la web aparece como contacto).
 - ☐ Cuenta de **Brevo** (emails) con SPF, DKIM y DMARC en el DNS.
@@ -51,6 +54,10 @@ la web no cobra nada y los filtros son gratis para todos.
 - ☐ Decidir si "trans", "pareja" y el uso de la web requieren consentimiento explícito (art. 9 RGPD).
 
 ## D. Verificación de edad (obligatorio para abrir)
+
+Al registrarse basta con marcar «Tengo 18 años o más»; el documento solo se pide a quien sea
+denunciado como posible menor (o a quien se lo pidas en `/admin`). Aun así Veriff tiene que estar
+contratado: sin él esa verificación es simulada.
 
 - ☐ Contratar **Veriff** y poner `VERIFF_API_KEY` y `VERIFF_SECRET`.
 - ☐ Configurar el webhook `https://tudominio.com/api/age/webhook`.
