@@ -26,6 +26,22 @@ db.exec(`
   CREATE TABLE IF NOT EXISTS reports   (id TEXT PRIMARY KEY, data TEXT NOT NULL);
   CREATE TABLE IF NOT EXISTS purchases (purchase_id TEXT PRIMARY KEY, order_id TEXT NOT NULL);
   CREATE TABLE IF NOT EXISTS banned_emails (hash TEXT PRIMARY KEY);
+  -- Historial: una fila por persona con la que se ha hablado (la última vez)
+  CREATE TABLE IF NOT EXISTS history (
+    owner TEXT NOT NULL, partner TEXT NOT NULL,
+    first_at INTEGER NOT NULL, last_at INTEGER NOT NULL,
+    duration INTEGER NOT NULL DEFAULT 0, times INTEGER NOT NULL DEFAULT 1,
+    PRIMARY KEY (owner, partner)
+  );
+  CREATE INDEX IF NOT EXISTS history_owner ON history (owner, last_at);
+  CREATE INDEX IF NOT EXISTS history_partner ON history (partner);
+  -- Amistades: a < b; status pending / accepted / declined
+  CREATE TABLE IF NOT EXISTS friends (
+    a TEXT NOT NULL, b TEXT NOT NULL, status TEXT NOT NULL, requester TEXT NOT NULL,
+    created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL,
+    PRIMARY KEY (a, b)
+  );
+  CREATE INDEX IF NOT EXISTS friends_b ON friends (b);
 `);
 
 const TABLES = ['users', 'orders', 'reports'];
@@ -79,6 +95,30 @@ function save() {
     throw err;
   }
 }
+
+// ---- Historial y amigos (consultas directas a la base de datos) ----
+const HISTORY_KEEP = 100; // máximo por persona
+const sql = {
+  histMeet: db.prepare(`INSERT INTO history (owner, partner, first_at, last_at) VALUES (?, ?, ?, ?)
+    ON CONFLICT(owner, partner) DO UPDATE SET last_at = excluded.last_at, duration = 0, times = times + 1`),
+  histEnd: db.prepare('UPDATE history SET duration = ? WHERE owner = ? AND partner = ? AND last_at = ?'),
+  histList: db.prepare('SELECT partner, first_at, last_at, duration, times FROM history WHERE owner = ? ORDER BY last_at DESC LIMIT ?'),
+  histTrim: db.prepare(`DELETE FROM history WHERE owner = ? AND partner NOT IN
+    (SELECT partner FROM history WHERE owner = ? ORDER BY last_at DESC LIMIT ${HISTORY_KEEP})`),
+  histDel: db.prepare('DELETE FROM history WHERE owner = ? AND partner = ?'),
+  histClear: db.prepare('DELETE FROM history WHERE owner = ?'),
+  histPrune: db.prepare('DELETE FROM history WHERE last_at < ?'),
+  histUser: db.prepare('DELETE FROM history WHERE owner = ? OR partner = ?'),
+  frGet: db.prepare('SELECT * FROM friends WHERE a = ? AND b = ?'),
+  frPut: db.prepare(`INSERT INTO friends (a, b, status, requester, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)
+    ON CONFLICT(a, b) DO UPDATE SET status = excluded.status, requester = excluded.requester, updated_at = excluded.updated_at`),
+  frDel: db.prepare('DELETE FROM friends WHERE a = ? AND b = ?'),
+  frList: db.prepare('SELECT * FROM friends WHERE a = ? OR b = ?'),
+  frUser: db.prepare('DELETE FROM friends WHERE a = ? OR b = ?'),
+  frPrune: db.prepare("DELETE FROM friends WHERE status != 'accepted' AND updated_at < ?"),
+};
+const pairKey = (x, y) => (x < y ? [x, y] : [y, x]);
+const friendRow = (r) => r && ({ a: r.a, b: r.b, status: r.status, requester: r.requester, createdAt: r.created_at, updatedAt: r.updated_at });
 
 const newId = (prefix) => `${prefix}${crypto.randomBytes(12).toString('hex')}`;
 
@@ -148,6 +188,8 @@ module.exports = {
       delete data.emails[user.email];
       delete data.users[id];
       del.users.run(id);
+      sql.histUser.run(id, id);
+      sql.frUser.run(id, id);
       for (const o of Object.values(data.orders)) if (o.userId === id) { o.userId = null; write('orders', o); }
       db.exec('COMMIT');
     } catch (err) {
@@ -160,6 +202,28 @@ module.exports = {
     if (!data.bannedEmails.has(hash)) { data.bannedEmails.add(hash); putBanned.run(hash); }
   },
   isEmailHashBanned: (hash) => data.bannedEmails.has(hash),
+
+  // ---- Historial ----
+  historyMeet(owner, partner, at) {
+    sql.histMeet.run(owner, partner, at, at);
+    sql.histTrim.run(owner, owner);
+  },
+  historyEnd: (owner, partner, startedAt, seconds) => { sql.histEnd.run(seconds, owner, partner, startedAt); },
+  listHistory: (owner, limit = HISTORY_KEEP) => sql.histList.all(owner, limit)
+    .map((r) => ({ partner: r.partner, firstAt: r.first_at, lastAt: r.last_at, duration: r.duration, times: r.times })),
+  removeHistory: (owner, partner) => { sql.histDel.run(owner, partner); },
+  clearHistory: (owner) => { sql.histClear.run(owner); },
+  pruneHistory: (before) => Number(sql.histPrune.run(before).changes),
+
+  // ---- Amigos ----
+  getFriendship: (x, y) => friendRow(sql.frGet.get(...pairKey(x, y))),
+  setFriendship(x, y, status, requester) {
+    const now = Date.now();
+    sql.frPut.run(...pairKey(x, y), status, requester, now, now);
+  },
+  deleteFriendship: (x, y) => { sql.frDel.run(...pairKey(x, y)); },
+  listFriendships: (uid) => sql.frList.all(uid, uid).map(friendRow),
+  pruneFriendRequests: (before) => Number(sql.frPrune.run(before).changes),
 
   // ---- Denuncias ----
   createReport(fields) {

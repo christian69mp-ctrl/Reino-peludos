@@ -86,6 +86,7 @@ function userSummary(user) {
   return {
     id: user.id,
     email: user.email,
+    nick: user.nick || '',
     gender: user.gender,
     createdAt: user.createdAt,
     status: user.status,
@@ -106,6 +107,8 @@ function applyUserAction(user, action, days) {
     const until = Date.now() + Math.min(Math.max(Number(days) || 1, 1), 365) * 86400000;
     store.updateUser(user.id, { suspendedUntil: until, suspendedReason: 'Moderación' });
     onRestrict(user.id, { type: 'suspended', until });
+  } else if (action === 'clearNick') {
+    store.updateUser(user.id, { nick: '' });
   } else if (action === 'restore') {
     store.updateUser(user.id, { status: 'active', suspendedUntil: null });
   } else {
@@ -159,7 +162,7 @@ function routes(app) {
     const q = String(req.query.q || '').trim().toLowerCase();
     const list = store.listUsers()
       // también se busca por el código de marca de agua (p. ej. "7F3A-91C2") que sale en grabaciones filtradas
-      .filter((u) => !q || u.email.includes(q) || u.id === q || u.id.includes(q.replace(/[^a-f0-9]/g, '') || '¬'))
+      .filter((u) => !q || u.email.includes(q) || (u.nick || '').toLowerCase().includes(q) || u.id === q || u.id.includes(q.replace(/[^a-f0-9]/g, '') || '¬'))
       .sort((a, b) => b.createdAt - a.createdAt)
       .slice(0, 100)
       .map(userSummary);

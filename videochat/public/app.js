@@ -23,7 +23,10 @@ let plans = null;         // planes Premium del servidor: { week, month }
 let freeMode = false;     // lanzamiento: filtros gratis para todos (PREMIUM_MODE=free)
 let selectedPlan = 'month';
 let translateEnabled = false;
-let partner = null;       // { gender, lang, likes }
+let partner = null;       // { gender, lang, likes, name, handle, relation }
+let contacts = { friends: [], requests: [], history: [] };
+let outgoingCall = null;  // llamada que estoy haciendo: { handle, name, gender, callId }
+let incomingCall = null;  // llamada que estoy recibiendo: { callId, handle, name, gender }
 let statusKey = { key: 'chat.pressStart' };
 
 // ---------- Utilidades ----------
@@ -77,7 +80,7 @@ function anyModalOpen() { return [...$$('.overlay')].some((o) => !o.hidden); }
 
 $$('.overlay').forEach((overlay) => {
   overlay.addEventListener('click', (e) => {
-    if (overlay.id === 'ageGate') return;
+    if (overlay.id === 'ageGate' || overlay.id === 'callModal') return;
     if (e.target === overlay || e.target.closest('[data-close]')) overlay.hidden = true;
   });
 });
@@ -108,6 +111,8 @@ function renderDynamicTexts() {
   if (!$('ageModal').hidden) renderAge();
   if (!$('accountModal').hidden) renderAccount();
   if (connected) renderWatermark();
+  renderContacts();
+  if (incomingCall) renderIncomingCall();
 }
 
 document.addEventListener('langchange', () => {
@@ -162,7 +167,7 @@ let myGender = '';
 
 function setAuthMode(mode) {
   authMode = mode;
-  $$('.tab').forEach((tab) => tab.classList.toggle('active', tab.dataset.tab === mode));
+  $$('#authModal .tab').forEach((tab) => tab.classList.toggle('active', tab.dataset.tab === mode));
   $('authForm').classList.toggle('login', mode === 'login');
   $('authSubmit').textContent = t(mode === 'login' ? 'auth.submitLogin' : 'auth.submitSignup');
   $('authPassword').autocomplete = mode === 'login' ? 'current-password' : 'new-password';
@@ -178,7 +183,7 @@ function openAuth(mode = 'register', action = null) {
 }
 
 $$('[data-open-auth]').forEach((b) => b.addEventListener('click', () => openAuth(b.dataset.openAuth)));
-$$('.tab').forEach((tab) => tab.addEventListener('click', () => setAuthMode(tab.dataset.tab)));
+$$('#authModal .tab').forEach((tab) => tab.addEventListener('click', () => setAuthMode(tab.dataset.tab)));
 $('myGender').addEventListener('click', (e) => {
   const g = e.target.closest('[data-g]')?.dataset.g;
   if (!g) return;
@@ -234,6 +239,8 @@ function applyMe(data) {
   setPremium(!!data?.premium);
   renderMyLikes();
   if (data?.restriction) showRestricted(data.restriction);
+  if (!data) { contacts = { friends: [], requests: [], history: [] }; renderBadge(); }
+  ensureSocket();
 }
 
 function logout(notify = true) {
@@ -401,6 +408,8 @@ function renderAccount() {
   $('accAge').textContent = me.age?.status === 'approved' ? t('acc.ageOk') : t('acc.ageNo');
   $('accLikes').textContent = `👍 ${me.user.likes?.like || 0}  ❤️ ${me.user.likes?.love || 0}`;
   $('accCode').textContent = me.watermark || '';
+  if (document.activeElement !== $('nickInput')) $('nickInput').value = me.user.nick || '';
+  $('nickError').hidden = true;
 }
 
 $('accountBtn').addEventListener('click', async () => {
@@ -533,11 +542,16 @@ function enterChat() {
   if (me?.restriction) { showRestricted(me.restriction); return; }
   if (me?.emailRequired && !me.user.emailVerified) { openEmail(); return; }
   if (me?.age?.required && me.age.status !== 'approved') { openAge(); return; }
+  showChat();
+  if (!running) start();
+}
+
+function showChat() {
+  if (document.body.classList.contains('in-chat')) return;
   document.body.classList.add('in-chat');
   $('landing').hidden = true;
   $('chatView').hidden = false;
   window.scrollTo(0, 0);
-  if (!running) start();
 }
 
 $$('[data-start]').forEach((b) => b.addEventListener('click', enterChat));
@@ -744,9 +758,10 @@ function likesText(likes) {
 }
 
 function renderPartner() {
-  if (!partner) { $('partnerInfo').hidden = true; return; }
+  if (!partner) { $('partnerInfo').hidden = true; $('friendBtn').hidden = true; return; }
   $('partnerInfo').hidden = false;
-  $('partnerTag').textContent = t(`g.${partner.gender}`);
+  $('partnerTag').textContent = partner.name ? `${partner.name} · ${t(`g.${partner.gender}`)}` : t(`g.${partner.gender}`);
+  renderFriendBtn();
   $('partnerLikes').textContent = likesText(partner.likes);
   const showLang = partner.lang && partner.lang !== I18N.chatLang();
   $('partnerLang').hidden = !showLang;
@@ -887,7 +902,11 @@ function connectSocket() {
   const s = io({ auth: (cb) => cb({ token, lang: I18N.chatLang() }) });
   socket = s;
 
-  s.on('connect', () => { refreshOnline(); if (running) find(); });
+  s.on('connect', () => {
+    refreshOnline();
+    loadContacts();
+    if (running && !outgoingCall) find();
+  });
 
   s.on('connect_error', (err) => {
     // Errores de red: socket.io reintenta solo. Estos tres no se arreglan reintentando.
@@ -896,21 +915,22 @@ function connectSocket() {
     if (s !== socket) return; // conexión antigua (p. ej. tras cerrar sesión)
     if (err.message === 'auth') { logout(false); openAuth('login'); }
     if (err.message === 'restricted') showRestricted(err.data);
-    if (err.message === 'age') { stop(); refreshMe().then(openAge); }
-    if (err.message === 'email') { stop(); refreshMe().then(() => openEmail()); }
+    if (err.message === 'age' && running) { stop(); refreshMe().then(openAge); }
+    if (err.message === 'email' && running) { stop(); refreshMe().then(() => openEmail()); }
   });
 
   socket.on('account', (acc) => { if (acc.premium !== premium) refreshMe(); });
 
   socket.on('waiting', setSearching);
 
-  socket.on('matched', async ({ initiator, gender, lang, likes }) => {
+  socket.on('matched', async ({ initiator, call, gender, lang, likes, name, handle, relation }) => {
+    clearOutgoingCall();
     createPeer();
     setConnected(true);
-    partner = { gender, lang, likes };
+    partner = { gender, lang, likes, name, handle, relation };
     resetMessages();
     setStatus('');
-    addMsg(t('msg.connected'), 'sys');
+    addMsg(call ? t('call.connected', { name: name || t(`g.${gender}`) }) : t('msg.connected'), 'sys');
     addMsg(t('prot.notice'), 'sys');
     renderPartner();
     if (initiator) {
@@ -941,6 +961,8 @@ function connectSocket() {
 
   socket.on('restricted', (r) => { if (r.type !== 'deleted') showRestricted(r); });
 
+  bindContactEvents(s);
+
   socket.on('partner-capture', () => {
     addMsg(t('prot.partnerCapture'), 'sys');
     toast(t('prot.partnerCapture'));
@@ -950,7 +972,12 @@ function connectSocket() {
 // Cada «Parar» o cierre de sesión cancela un arranque que aún esté en marcha
 let startGen = 0;
 
-async function start() {
+// Enciende la cámara (si no lo está ya). Devuelve false si no se pudo.
+async function startCamera() {
+  try {
+    iceConfig = await (await fetch('/ice')).json();
+  } catch { /* se usa la configuración por defecto */ }
+  if (localStream) return true;
   const gen = ++startGen;
   setStatus('msg.activatingCam');
   let stream;
@@ -958,14 +985,16 @@ async function start() {
     stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
   } catch {
     if (gen === startGen) setStatus('msg.camera');
-    return;
+    return false;
   }
-  try {
-    iceConfig = await (await fetch('/ice')).json();
-  } catch { /* se usa la configuración por defecto */ }
-  if (gen !== startGen || !token) { stream.getTracks().forEach((track) => track.stop()); return; }
+  if (gen !== startGen || !token) { stream.getTracks().forEach((track) => track.stop()); return false; }
   localStream = stream;
   localVideo.srcObject = localStream;
+  return true;
+}
+
+async function start() {
+  if (!(await startCamera())) return;
   setRunning(true);
   setSearching();
   if (!socket) connectSocket();   // al conectar emite 'find'
@@ -974,6 +1003,7 @@ async function start() {
 }
 
 function next() {
+  clearOutgoingCall();
   closePeer();
   resetMessages();
   setSearching();
@@ -982,6 +1012,7 @@ function next() {
 
 function stop() {
   startGen++;
+  clearOutgoingCall();
   closePeer();
   if (socket?.connected) socket.emit('stop');
   if (localStream) localStream.getTracks().forEach((track) => track.stop());
@@ -1024,12 +1055,420 @@ $('reportForm').addEventListener('submit', (e) => {
   });
 });
 
+// ---------- Amigos e historial ----------
+// La conexión en tiempo real se abre al entrar (sin cámara) para poder ver qué
+// amigos están en línea y recibir llamadas aunque no estés en el videochat.
+function ensureSocket() {
+  if (socket || !token || !me) return;
+  if (me.restriction) return;
+  if (me.emailRequired && !me.user.emailVerified) return;
+  if (me.age?.required && me.age.status !== 'approved') return;
+  connectSocket();
+}
+
+const contactName = (c) => c.name || t(`g.${c.gender}`);
+
+function avatarEl(c, status) {
+  const el = document.createElement('span');
+  el.className = 'avatar';
+  let h = 0;
+  for (const ch of c.handle || '') h = (h * 31 + ch.charCodeAt(0)) % 360;
+  el.style.setProperty('--h', h);
+  el.textContent = contactName(c).trim().charAt(0).toUpperCase();
+  if (status) {
+    const dot = document.createElement('span');
+    dot.className = `dot ${status}`;
+    el.appendChild(dot);
+  }
+  return el;
+}
+
+function agoText(ms) {
+  const rtf = new Intl.RelativeTimeFormat(I18N.lang, { numeric: 'auto' });
+  const secs = Math.round((ms - Date.now()) / 1000);
+  const steps = [[60, 'second'], [3600, 'minute'], [86400, 'hour'], [Infinity, 'day']];
+  let unit = 1;
+  for (const [limit, name] of steps) {
+    if (Math.abs(secs) < limit) return rtf.format(Math.round(secs / unit), name);
+    unit = limit;
+  }
+  return '';
+}
+
+function durationText(secs) {
+  if (!secs) return '';
+  return secs < 60 ? `${secs} s` : `${Math.round(secs / 60)} min`;
+}
+
+async function loadContacts() {
+  if (!token) return;
+  const res = await api('/api/contacts');
+  if (!res.friends) return;
+  contacts = { friends: res.friends, requests: res.requests, history: res.history };
+  renderContacts();
+}
+
+function renderBadge() {
+  const n = contacts.requests.length;
+  $('contactsBadge').textContent = n > 9 ? '9+' : String(n);
+  $('contactsBadge').hidden = !n;
+  $('ctRequestsCount').textContent = n ? String(n) : '';
+  const on = contacts.friends.filter((f) => f.status !== 'offline').length;
+  $('ctFriendsCount').textContent = contacts.friends.length ? `${on}/${contacts.friends.length}` : '';
+}
+
+// Crea un botón de acción de la lista
+function actBtn(act, handle, { label, icon, cls = 'btn ghost', title, disabled } = {}) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = cls;
+  b.dataset.act = act;
+  b.dataset.h = handle;
+  if (title) { b.title = title; b.setAttribute('aria-label', title); }
+  if (icon) b.insertAdjacentHTML('beforeend', `<svg class="i"><use href="#i-${icon}"/></svg>`);
+  if (label) { const sp = document.createElement('span'); sp.textContent = label; b.appendChild(sp); }
+  b.disabled = !!disabled;
+  return b;
+}
+const iconBtn = (act, handle, icon, title, danger) => actBtn(act, handle, { icon, title, cls: `icon-btn${danger ? ' danger' : ''}` });
+
+function contactItem(c, { status, sub, subClass, actions }) {
+  const li = document.createElement('li');
+  li.className = 'ct-item';
+  const main = document.createElement('div');
+  main.className = 'ct-main';
+  const name = document.createElement('div');
+  name.className = 'ct-name';
+  name.textContent = contactName(c);
+  const s = document.createElement('div');
+  s.className = `ct-sub ${subClass || ''}`;
+  s.textContent = sub;
+  main.append(name, s);
+  const acts = document.createElement('div');
+  acts.className = 'ct-actions';
+  acts.append(...actions);
+  li.append(avatarEl(c, status), main, acts);
+  return li;
+}
+
+function relationTag(rel) {
+  const tag = document.createElement('span');
+  tag.className = 'ct-tag';
+  if (rel === 'friend') tag.innerHTML = '<svg class="i"><use href="#i-user-check"/></svg>';
+  tag.append(document.createTextNode(t(rel === 'friend' ? 'ct.isFriend' : 'ct.sent')));
+  return tag;
+}
+
+function renderContacts() {
+  renderBadge();
+  const statusText = { online: t('ct.online'), busy: t('ct.busy'), offline: t('ct.offline') };
+
+  $('ctFriends').replaceChildren(...contacts.friends.map((c) => contactItem(c, {
+    status: c.status,
+    sub: statusText[c.status],
+    subClass: c.status,
+    actions: [
+      actBtn('call', c.handle, { label: t('ct.call'), icon: 'call', cls: 'btn primary', disabled: c.status !== 'online' }),
+      iconBtn('remove', c.handle, 'x', t('ct.remove')),
+      iconBtn('block', c.handle, 'ban', t('ct.block'), true),
+    ],
+  })));
+  $('ctFriendsEmpty').hidden = contacts.friends.length > 0;
+
+  $('ctRequests').replaceChildren(...contacts.requests.map((c) => contactItem(c, {
+    sub: t('ct.wantsYou', { ago: agoText(c.at) }),
+    actions: [
+      actBtn('accept', c.handle, { label: t('ct.accept'), icon: 'check', cls: 'btn primary' }),
+      actBtn('decline', c.handle, { label: t('ct.decline') }),
+      iconBtn('block', c.handle, 'ban', t('ct.block'), true),
+    ],
+  })));
+  $('ctRequestsEmpty').hidden = contacts.requests.length > 0;
+
+  $('ctHistory').replaceChildren(...contacts.history.map((c) => {
+    const parts = [agoText(c.lastAt), durationText(c.duration)];
+    if (c.times > 1) parts.push(t('ct.times', { n: c.times }));
+    let main;
+    if (c.relation === 'none') main = actBtn('add', c.handle, { label: t('ct.add'), icon: 'user-plus' });
+    else if (c.relation === 'received') main = actBtn('accept', c.handle, { label: t('ct.accept'), icon: 'check', cls: 'btn primary' });
+    else main = relationTag(c.relation);
+    return contactItem(c, {
+      sub: parts.filter(Boolean).join(' · '),
+      actions: [main, iconBtn('forget', c.handle, 'trash', t('ct.delete')), iconBtn('block', c.handle, 'ban', t('ct.block'), true)],
+    });
+  }));
+  $('ctHistoryEmpty').hidden = contacts.history.length > 0;
+  $('ctClear').hidden = contacts.history.length === 0;
+}
+
+let ctTab = 'friends';
+function setCtTab(tab) {
+  ctTab = tab;
+  $$('.ct-tab').forEach((b) => b.classList.toggle('active', b.dataset.ctab === tab));
+  $$('.ct-panel').forEach((p) => { p.hidden = p.dataset.cpanel !== tab; });
+}
+$$('.ct-tab').forEach((b) => b.addEventListener('click', () => setCtTab(b.dataset.ctab)));
+
+function openContacts(tab) {
+  if (!token) { openAuth('register'); return; }
+  setCtTab(tab || (contacts.requests.length ? 'requests' : ctTab));
+  renderContacts();
+  openModal('contactsModal');
+  loadContacts();
+}
+$('contactsBtn').addEventListener('click', () => openContacts());
+
+const findContact = (h) => [...contacts.friends, ...contacts.requests, ...contacts.history].find((c) => c.handle === h);
+
+$('contactsModal').addEventListener('click', async (e) => {
+  const btn = e.target.closest('[data-act]');
+  if (!btn) return;
+  const h = btn.dataset.h;
+  const c = findContact(h);
+  if (!c) return;
+  const name = contactName(c);
+  const post = (path) => api(path, { method: 'POST', body: { handle: h } });
+  let res;
+  switch (btn.dataset.act) {
+    case 'call': callFriend(c); return;
+    case 'add':
+      res = await post('/api/friends/request');
+      if (res.relation) toast(t(res.relation === 'friend' ? 'ct.nowFriends' : 'ct.requestSent', { name }));
+      break;
+    case 'accept':
+      res = await post('/api/friends/accept');
+      if (res.relation) toast(t('ct.nowFriends', { name }));
+      break;
+    case 'decline': res = await post('/api/friends/decline'); break;
+    case 'remove':
+      if (!confirm(t('ct.confirmRemove', { name }))) return;
+      res = await post('/api/friends/remove');
+      break;
+    case 'block':
+      if (!confirm(t('ct.confirmBlock', { name }))) return;
+      res = await post('/api/contacts/block');
+      if (res.ok) toast(t('ct.blocked', { name }));
+      break;
+    case 'forget': res = await post('/api/history/remove'); break;
+    default: return;
+  }
+  if (res?.code) toast(errorText(res));
+  loadContacts();
+});
+
+$('ctClear').addEventListener('click', async () => {
+  if (!confirm(t('ct.confirmClear'))) return;
+  await api('/api/history/clear', { method: 'POST' });
+  loadContacts();
+});
+
+// ----- Botón «Añadir amigo» durante el videochat -----
+function renderFriendBtn() {
+  const btn = $('friendBtn');
+  if (!partner || !connected) { btn.hidden = true; return; }
+  const rel = partner.relation || 'none';
+  const conf = {
+    none: ['user-plus', 'ct.add'],
+    sent: ['user-plus', 'ct.sent'],
+    received: ['user-check', 'ct.acceptFriend'],
+    friend: ['user-check', 'ct.isFriend'],
+  }[rel];
+  btn.className = `friend-btn ${rel}`;
+  btn.querySelector('use').setAttribute('href', `#i-${conf[0]}`);
+  btn.querySelector('span').textContent = t(conf[1]);
+  btn.setAttribute('aria-label', t(conf[1]));
+  btn.disabled = rel === 'sent' || rel === 'friend';
+  btn.hidden = false;
+}
+
+function friendFromChat() {
+  if (!partner || !connected) return;
+  const rel = partner.relation || 'none';
+  if (rel !== 'none' && rel !== 'received') return;
+  const name = contactName(partner);
+  socket.emit(rel === 'received' ? 'friend-accept' : 'friend-request', null, (res) => {
+    if (res?.code) { toast(errorText(res)); return; }
+    if (!partner) return;
+    partner.relation = res.relation;
+    renderFriendBtn();
+    toast(t(res.relation === 'friend' ? 'ct.nowFriends' : 'ct.requestSent', { name }));
+    loadContacts();
+  });
+}
+$('friendBtn').addEventListener('click', friendFromChat);
+
+// Mensaje del sistema con un botón (p. ej. «Aceptar» una solicitud)
+function addSysAction(text, label, fn) {
+  const p = document.createElement('p');
+  p.className = 'msg sys';
+  p.textContent = text;
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'inline-btn';
+  b.textContent = label;
+  b.addEventListener('click', () => { b.remove(); fn(); });
+  p.appendChild(b);
+  messages.appendChild(p);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// ----- Llamadas -----
+function clearOutgoingCall() {
+  if (outgoingCall && socket?.connected) socket.emit('call-cancel');
+  outgoingCall = null;
+  $('callCancel').hidden = true;
+}
+
+async function callFriend(c) {
+  if (!socket?.connected) { toast(t('err.offline')); return; }
+  closeModal('contactsModal');
+  showChat();
+  if (!(await startCamera())) return;
+  if (outgoingCall) clearOutgoingCall();
+  closePeer();
+  resetMessages();
+  setRunning(true);
+  outgoingCall = { ...c };
+  setStatus('call.calling', { name: contactName(c) }, true);
+  $('callCancel').hidden = false;
+  socket.emit('call', { handle: c.handle }, (res) => {
+    if (!outgoingCall || outgoingCall.handle !== c.handle) return;
+    if (res?.code) {
+      outgoingCall = null;
+      toast(errorText(res));
+      stop();
+      loadContacts();
+      return;
+    }
+    outgoingCall.callId = res.callId;
+  });
+}
+
+$('callCancel').addEventListener('click', () => { clearOutgoingCall(); stop(); });
+
+const baseTitle = document.title;
+function renderIncomingCall() {
+  const c = incomingCall;
+  const av = avatarEl(c);
+  av.id = 'callAvatar';
+  av.classList.add('xl', 'ringing');
+  $('callAvatar').replaceWith(av);
+  $('callTitle').textContent = t('call.incoming', { name: contactName(c) });
+}
+
+function closeIncomingCall() {
+  incomingCall = null;
+  closeModal('callModal');
+  document.title = baseTitle;
+  if (navigator.vibrate) navigator.vibrate(0);
+}
+
+$('callDecline').addEventListener('click', () => {
+  if (incomingCall) socket?.emit('call-answer', { callId: incomingCall.callId, accept: false });
+  closeIncomingCall();
+});
+
+$('callAccept').addEventListener('click', async () => {
+  const c = incomingCall;
+  if (!c) return;
+  closeIncomingCall();
+  const wasRunning = running;
+  showChat();
+  if (!(await startCamera())) {
+    socket.emit('call-answer', { callId: c.callId, accept: false });
+    return;
+  }
+  clearOutgoingCall();
+  closePeer();
+  resetMessages();
+  setRunning(true);
+  setStatus('call.connecting', null, true);
+  socket.emit('call-answer', { callId: c.callId, accept: true }, (res) => {
+    if (!res?.code) return;
+    toast(errorText(res));
+    if (wasRunning) { setSearching(); find(); } else stop();
+  });
+});
+
+const greeted = new Set(); // amigos de los que ya avisamos que están en línea
+function bindContactEvents(s) {
+  s.on('friend-request', (c) => {
+    const name = contactName(c);
+    if (partner && connected && partner.handle === c.handle) {
+      partner.relation = 'received';
+      renderFriendBtn();
+      addSysAction(t('ct.wantsFriend', { name }), t('ct.accept'), friendFromChat);
+    } else {
+      toast(t('ct.wantsFriend', { name }));
+    }
+    loadContacts();
+  });
+
+  s.on('friend-accepted', (c) => {
+    if (partner && partner.handle === c.handle) { partner.relation = 'friend'; renderFriendBtn(); }
+    if (!c.silent) toast(t('ct.nowFriends', { name: contactName(c) }));
+    loadContacts();
+  });
+
+  s.on('friend-removed', (c) => {
+    if (partner && partner.handle === c.handle) { partner.relation = 'none'; renderFriendBtn(); }
+    loadContacts();
+  });
+
+  s.on('friend-status', ({ handle, status }) => {
+    const f = contacts.friends.find((x) => x.handle === handle);
+    if (!f) { loadContacts(); return; }
+    const was = f.status;
+    f.status = status;
+    if (status === 'online' && was === 'offline' && !connected && !greeted.has(handle)) {
+      greeted.add(handle);
+      toast(t('ct.friendOnline', { name: contactName(f) }));
+    }
+    renderContacts();
+  });
+
+  s.on('incoming-call', (c) => {
+    incomingCall = c;
+    renderIncomingCall();
+    openModal('callModal');
+    document.title = `📞 ${t('call.incoming', { name: contactName(c) })}`;
+    if (navigator.vibrate) navigator.vibrate([400, 200, 400, 200, 400]);
+  });
+
+  s.on('call-closed', ({ callId, reason }) => {
+    if (incomingCall?.callId !== callId) return;
+    const name = contactName(incomingCall);
+    closeIncomingCall();
+    if (reason === 'timeout' || reason === 'cancelled') toast(t('call.missed', { name }));
+  });
+
+  s.on('call-ended', ({ reason, name, gender }) => {
+    if (!outgoingCall) return;
+    outgoingCall = null;
+    $('callCancel').hidden = true;
+    if (reason !== 'cancelled') toast(t(`call.${reason}`, { name: name || t(`g.${gender}`) }));
+    stop();
+    loadContacts();
+  });
+}
+
+// ----- Nombre en el chat -----
+$('nickForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  $('nickError').hidden = true;
+  const res = await api('/api/me/nick', { method: 'POST', body: { nick: $('nickInput').value } });
+  if (!res.ok) { $('nickError').textContent = errorText(res); $('nickError').hidden = false; return; }
+  if (me?.user) me.user.nick = res.nick;
+  $('nickInput').value = res.nick;
+  toast(t('acc.nickSaved'));
+});
+
 // ---------- Teclado ----------
 // Esc: cierra la ventana abierta o, si no hay ninguna, pasa a la siguiente persona
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
   if (anyModalOpen()) {
-    $$('.overlay').forEach((o) => { if (o.id !== 'ageGate') o.hidden = true; });
+    $$('.overlay').forEach((o) => { if (o.id !== 'ageGate' && o.id !== 'callModal') o.hidden = true; });
     return;
   }
   if (running) next();

@@ -62,6 +62,17 @@
 | **Traducción** | Solo si el usuario pulsa "Traducir": el texto de ese mensaje se envía a DeepL (Alemania, UE) como encargado. |
 | **Marca de agua** | Cada vídeo lleva un código invisible ligado a la cuenta (no contiene el email) para identificar a quien difunda capturas. |
 
+## 4 bis. Historial de chats, amigos y llamadas
+
+| | |
+|---|---|
+| **Finalidad** | Que cada usuario vea con quién ha hablado, añada amigos y los llame cuando estén en línea. |
+| **Base jurídica** | Ejecución del contrato (art. 6.1.b): son funciones del servicio que el usuario usa voluntariamente. |
+| **Datos** | Con quién se ha hablado, fecha, duración y número de veces (sin imágenes ni mensajes); amistades, solicitudes y bloqueos; nombre opcional en el chat; estado en línea (solo en memoria, no se guarda). |
+| **Quién lo ve** | El historial, solo su dueño. Los amigos ven el nombre, el género declarado y si está en línea. Cada persona se identifica con un código distinto para cada quien la mira (no se puede cruzar entre cuentas). |
+| **Plazo** | Historial: **30 días** (máx. 100 personas). Solicitudes sin responder o rechazadas: 30 días. Amistades: hasta que se quiten o se borre la cuenta. El usuario puede borrar su historial cuando quiera. |
+| **Destinatarios** | Ninguno externo. |
+
 ## 5. Denuncias y moderación
 
 | | |
@@ -89,7 +100,7 @@
 |---|---|
 | **Finalidad** | Poder recuperar la web si falla el servidor. |
 | **Base jurídica** | Interés legítimo (art. 6.1.f) y deber de seguridad (art. 32). |
-| **Datos** | Copia completa de la base de datos (apartados 1, 2, 3, 5 y 6). |
+| **Datos** | Copia completa de la base de datos (apartados 1, 2, 3, 4 bis, 5 y 6). |
 | **Plazo** | **14 días** en el servidor (rotación automática). Las copias que descargues a tu ordenador: guárdalas cifradas y borra las de más de 14 días. |
 
 ---

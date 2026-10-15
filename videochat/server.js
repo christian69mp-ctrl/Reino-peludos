@@ -10,6 +10,7 @@ const translate = require('./translate');
 const age = require('./age');
 const privacy = require('./privacy');
 const captcha = require('./captcha');
+const friends = require('./friends');
 
 const PORT = process.env.PORT || 3000;
 
@@ -35,6 +36,7 @@ moderation.routes(app);
 translate.routes(app);
 age.routes(app, process.env.BASE_URL);
 privacy.routes(app);
+friends.routes(app);
 
 // Qué funciones opcionales están activas
 app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled, turnstile: captcha.SITE_KEY || null }));
@@ -100,6 +102,7 @@ const partners = new Map();   // socketId -> socketId de su pareja
 const lastPartner = new Map();// evita volver a emparejar con el anterior al instante
 const chatLogs = new Map();   // socketId -> últimos mensajes de la conversación actual
 const reacted = new Map();    // socketId -> reacciones ya contadas en la conversación actual
+const meetings = new Map();   // socketId -> { x, y, at } de la conversación actual (para el historial)
 const REACTIONS = ['like', 'love'];
 const LANG_RE = /^[a-z]{2,3}$/;
 
@@ -116,7 +119,14 @@ function unpair(socket, notify = true) {
   chatLogs.delete(partnerId);
   reacted.delete(socket.id);
   reacted.delete(partnerId);
+  const meet = meetings.get(socket.id);
+  meetings.delete(socket.id);
+  meetings.delete(partnerId);
+  if (meet) friends.meetEnded(meet.x, meet.y, meet.at);
   if (notify) io.to(partnerId).emit('partner-left');
+  presenceChanged(socket.data.uid);
+  const other = io.sockets.sockets.get(partnerId);
+  if (other) presenceChanged(other.data.uid);
 }
 
 // a quiere ver a b? (sin filtro = cualquiera)
@@ -144,7 +154,12 @@ function findMatch(socket) {
     return;
   }
   const partnerId = queue.splice(idx, 1)[0];
-  const partner = io.sockets.sockets.get(partnerId);
+  pair(socket, io.sockets.sockets.get(partnerId));
+}
+
+// Une a dos personas. La primera inicia la oferta WebRTC.
+function pair(socket, partner, { call = false } = {}) {
+  const partnerId = partner.id;
   partners.set(socket.id, partnerId);
   partners.set(partnerId, socket.id);
   lastPartner.set(socket.id, partnerId);
@@ -154,14 +169,92 @@ function findMatch(socket) {
   chatLogs.set(partnerId, log);
   reacted.set(socket.id, new Set());
   reacted.set(partnerId, new Set());
-  // El que acaba de llegar inicia la oferta WebRTC
-  socket.emit('matched', { initiator: true, ...partnerInfo(partner) });
-  partner.emit('matched', { initiator: false, ...partnerInfo(socket) });
+  const meet = { x: socket.data.uid, y: partner.data.uid, at: Date.now() };
+  meetings.set(socket.id, meet);
+  meetings.set(partnerId, meet);
+  friends.meet(meet.x, meet.y, meet.at);
+  socket.emit('matched', { initiator: true, call, ...partnerInfo(socket, partner) });
+  partner.emit('matched', { initiator: false, call, ...partnerInfo(partner, socket) });
+  presenceChanged(meet.x);
+  presenceChanged(meet.y);
 }
 
-// Lo que se enseña de la otra persona: qué es, su idioma y sus likes
-function partnerInfo(s) {
-  return { gender: s.data.gender, lang: s.data.lang, likes: auth.likesOf(store.getUser(s.data.uid) || {}) };
+// Lo que se enseña de la otra persona: su nombre, qué es, su idioma, sus likes
+// y si ya sois amigos
+function partnerInfo(viewer, s) {
+  const user = store.getUser(s.data.uid) || {};
+  return {
+    gender: s.data.gender,
+    lang: s.data.lang,
+    likes: auth.likesOf(user),
+    name: user.nick || '',
+    handle: friends.handle(viewer.data.uid, s.data.uid),
+    relation: friends.relation(viewer.data.uid, s.data.uid),
+  };
+}
+
+// ---------- Presencia de amigos ----------
+const userSockets = new Map(); // uid -> Set de ids de socket
+const lastStatus = new Map();  // uid -> último estado avisado
+
+function presence(uid) {
+  const ids = userSockets.get(uid);
+  if (!ids?.size) return 'offline';
+  for (const id of ids) if (partners.has(id)) return 'busy';
+  return 'online';
+}
+
+function notifyUser(uid, event, data) {
+  for (const id of userSockets.get(uid) || []) io.to(id).emit(event, data);
+}
+
+// Avisa a los amigos conectados cuando alguien entra, sale o empieza/acaba una videollamada
+function presenceChanged(uid) {
+  const status = presence(uid);
+  if (lastStatus.get(uid) === status) return;
+  if (status === 'offline') lastStatus.delete(uid); else lastStatus.set(uid, status);
+  for (const f of friends.friendIds(uid)) {
+    if (userSockets.has(f)) notifyUser(f, 'friend-status', { handle: friends.handle(f, uid), status });
+  }
+}
+
+friends.setHooks({
+  presence,
+  notify: notifyUser,
+  // Al bloquear: no vuelven a coincidir y, si estaban hablando, se corta
+  onBlock(uid, other) {
+    for (const id of userSockets.get(uid) || []) {
+      const s = io.sockets.sockets.get(id);
+      if (!s) continue;
+      s.data.blocked.add(other);
+      const p = io.sockets.sockets.get(partners.get(id));
+      if (p?.data.uid === other) unpair(s);
+    }
+    for (const [callId, c] of calls) {
+      if ((c.callerUid === uid && c.calleeUid === other) || (c.callerUid === other && c.calleeUid === uid)) endCall(callId, 'declined');
+    }
+  },
+});
+
+// ---------- Llamadas entre amigos ----------
+const CALL_TIMEOUT = 30 * 1000;
+const calls = new Map(); // callId -> { callerSid, callerUid, calleeUid, timer }
+
+function endCall(callId, reason) {
+  const call = calls.get(callId);
+  if (!call) return;
+  clearTimeout(call.timer);
+  calls.delete(callId);
+  const caller = io.sockets.sockets.get(call.callerSid);
+  if (caller) {
+    caller.data.calling = null;
+    caller.emit('call-ended', { reason, ...friends.contactInfo(call.callerUid, call.calleeUid) });
+  }
+  notifyUser(call.calleeUid, 'call-closed', { callId, reason });
+}
+
+function cancelOutgoingCall(socket) {
+  if (socket.data.calling) endCall(socket.data.calling, 'cancelled');
 }
 
 // Expulsa del chat a un usuario suspendido o expulsado
@@ -199,16 +292,22 @@ io.use((socket, next) => {
 
 io.on('connection', (socket) => {
   socket.emit('account', { premium: socket.data.premium });
+  const uid = socket.data.uid;
+  if (!userSockets.has(uid)) userSockets.set(uid, new Set());
+  userSockets.get(uid).add(socket.id);
+  presenceChanged(uid);
 
   socket.on('find', (opts = {}) => {
     // El filtro solo se aplica a usuarios Premium; el resto, siempre al azar
     const want = Array.isArray(opts.want) ? opts.want.filter((g) => auth.GENDERS.includes(g)) : [];
     socket.data.want = socket.data.premium ? want : [];
+    cancelOutgoingCall(socket);
     unpair(socket);
     findMatch(socket);
   });
 
   socket.on('stop', () => {
+    cancelOutgoingCall(socket);
     removeFromQueue(socket.id);
     unpair(socket);
   });
@@ -287,10 +386,76 @@ io.on('connection', (socket) => {
     reply({ ok: true, duplicate: !!result?.duplicate });
   });
 
+  // ---- Amigos ----
+  // Solicitud de amistad a la persona con la que estás hablando
+  socket.on('friend-request', (_data, ack) => {
+    const reply = typeof ack === 'function' ? ack : () => {};
+    const partner = io.sockets.sockets.get(partners.get(socket.id));
+    if (!partner) return reply({ code: 'noPartner' });
+    reply(friends.request(socket.data.uid, partner.data.uid));
+  });
+
+  socket.on('friend-accept', (_data, ack) => {
+    const reply = typeof ack === 'function' ? ack : () => {};
+    const partner = io.sockets.sockets.get(partners.get(socket.id));
+    if (!partner) return reply({ code: 'noPartner' });
+    reply(friends.accept(socket.data.uid, partner.data.uid));
+  });
+
+  // Llamar a un amigo que está en línea
+  socket.on('call', ({ handle } = {}, ack) => {
+    const reply = typeof ack === 'function' ? ack : () => {};
+    const other = friends.resolve(uid, handle);
+    if (!other || !friends.areFriends(uid, other)) return reply({ code: 'contact' });
+    const status = presence(other);
+    if (status !== 'online') return reply({ code: status === 'busy' ? 'callBusy' : 'callOffline' });
+    if ([...calls.values()].some((c) => c.calleeUid === other)) return reply({ code: 'callBusy' });
+    cancelOutgoingCall(socket);
+    removeFromQueue(socket.id);
+    unpair(socket);
+    const callId = store.newId('c');
+    calls.set(callId, { callerSid: socket.id, callerUid: uid, calleeUid: other, timer: setTimeout(() => endCall(callId, 'timeout'), CALL_TIMEOUT) });
+    socket.data.calling = callId;
+    notifyUser(other, 'incoming-call', { callId, ...friends.contactInfo(other, uid) });
+    reply({ ok: true, callId });
+  });
+
+  socket.on('call-cancel', () => cancelOutgoingCall(socket));
+
+  socket.on('call-answer', ({ callId, accept } = {}, ack) => {
+    const reply = typeof ack === 'function' ? ack : () => {};
+    const call = calls.get(callId);
+    if (!call || call.calleeUid !== uid) return reply({ code: 'callGone' });
+    if (!accept) { endCall(callId, 'declined'); return reply({ ok: true }); }
+    const caller = io.sockets.sockets.get(call.callerSid);
+    if (!caller || partners.has(caller.id) || !friends.areFriends(uid, call.callerUid)) {
+      endCall(callId, 'cancelled');
+      return reply({ code: 'callGone' });
+    }
+    clearTimeout(call.timer);
+    calls.delete(callId);
+    caller.data.calling = null;
+    notifyUser(uid, 'call-closed', { callId, reason: 'answered' });
+    removeFromQueue(socket.id);
+    removeFromQueue(caller.id);
+    unpair(socket);
+    pair(caller, socket, { call: true });
+    reply({ ok: true });
+  });
+
   socket.on('disconnect', () => {
+    cancelOutgoingCall(socket);
+    // Si era su última pestaña abierta, las llamadas que recibía se cancelan
+    if (userSockets.get(uid)?.size === 1) {
+      for (const [callId, c] of calls) if (c.calleeUid === uid) endCall(callId, 'cancelled');
+    }
     removeFromQueue(socket.id);
     unpair(socket);
     lastPartner.delete(socket.id);
+    const set = userSockets.get(uid);
+    set?.delete(socket.id);
+    if (set && !set.size) userSockets.delete(uid);
+    presenceChanged(uid);
   });
 });
 

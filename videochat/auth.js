@@ -99,7 +99,7 @@ function likesOf(user) {
 }
 
 function publicUser(user) {
-  return { id: user.id, email: user.email, gender: user.gender, createdAt: user.createdAt, likes: likesOf(user), emailVerified: !!user.emailVerified };
+  return { id: user.id, email: user.email, nick: user.nick || '', gender: user.gender, createdAt: user.createdAt, likes: likesOf(user), emailVerified: !!user.emailVerified };
 }
 
 // true si la cuenta todavía tiene que confirmar su email

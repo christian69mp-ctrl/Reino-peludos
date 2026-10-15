@@ -61,6 +61,7 @@ function exportData(user) {
     exportedAt: new Date().toISOString(),
     account: {
       email: user.email,
+      nick: user.nick || '',
       gender: user.gender,
       language: user.lang,
       createdAt: new Date(user.createdAt).toISOString(),
@@ -88,6 +89,13 @@ function exportData(user) {
     reportsReceived: reports.filter((r) => r.reportedId === user.id)
       .map((r) => ({ reason: r.reason, status: r.status, createdAt: new Date(r.createdAt).toISOString() })),
     captureAttempts: user.captureAttempts || 0,
+    // Historial y amigos: fechas y duración, sin datos de las otras personas
+    chatHistory: store.listHistory(user.id).map((h) => ({
+      lastChat: new Date(h.lastAt).toISOString(), durationSeconds: h.duration, times: h.times,
+    })),
+    friends: store.listFriendships(user.id).filter((f) => f.status === 'accepted')
+      .map((f) => ({ since: new Date(f.updatedAt).toISOString() })),
+    blockedPeople: (user.blocked || []).length,
     notStored: 'Video, audio and chat messages are not stored, except the last messages of a reported conversation.',
   };
 }

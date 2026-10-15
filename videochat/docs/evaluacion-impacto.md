@@ -47,6 +47,8 @@ Escala: probabilidad e impacto **B**ajo, **M**edio o **A**lto. "Residual" es el 
 | 9 | **Robo de cuentas** | M | M | Límites de intentos por email y por IP; recuperación por email confirmado; al recuperar la contraseña se cierran todas las sesiones; botón "cerrar sesión en todos los dispositivos". | B |
 | 10 | **Proveedores fuera de la UE** (Cloudflare; Segpay en el futuro) | M | M | Elegir proveedores con garantías (Data Privacy Framework, cláusulas tipo); servidor, Veriff, Brevo y DeepL en la UE. | B |
 | 11 | **Mensajes traducidos** enviados a terceros | B | B | Solo al pulsar "Traducir"; DeepL en la UE; solo el texto, sin datos de la cuenta. | B |
+| 12 | **Acoso persistente** mediante amistades y llamadas (alguien que insiste) | M | M | Amistad solo si las dos personas aceptan; rechazar y bloquear son silenciosos; bloquear corta la llamada, borra la amistad y el historial y evita volver a coincidir; máx. 30 solicitudes al día; no se ve la IP ni ningún dato de contacto. | B |
+| 13 | **Nombre ofensivo** o que revele datos (nombre real, teléfono) | M | B | Nombre opcional y limitado a 2–20 letras o números (sin enlaces ni @); el administrador puede buscarlo y quitarlo. | B |
 
 ## 4. Derechos de las personas
 

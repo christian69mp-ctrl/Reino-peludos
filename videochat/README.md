@@ -24,6 +24,20 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   Si sale menor de edad, la cuenta queda expulsada. No se guarda el documento ni la fecha de
   nacimiento, solo el resultado. El panel de moderación muestra el estado de cada usuario.
 - **Videochat** 1 a 1 con WebRTC: Empezar, Siguiente (o tecla Esc), Parar y chat de texto.
+- **Historial y amigos** (mezcla de CooMeet y DirtyRoulette), botón de personas en la cabecera:
+  - **Historial**: con quién has hablado en los últimos 30 días (máx. 100), cuándo, cuánto duró y
+    cuántas veces. Sin fotos: no se guarda ninguna imagen de nadie. Se puede borrar una entrada o todo.
+  - **Amigos**: «Añadir amigo» sobre el vídeo durante la conversación o desde el historial. La otra
+    persona acepta o rechaza (rechazar y bloquear no se le notifica). Máx. 300 amigos y 30
+    solicitudes al día.
+  - **En línea y llamadas**: con la web abierta (aunque no estés en el videochat) tus amigos ven si
+    estás en línea, ocupado/a en una videollamada o desconectado/a, y pueden **llamarte**: te sale
+    «X te está llamando» con Contestar/Rechazar (30 s). Al contestar se enciende la cámara.
+  - **Nombre en el chat** opcional (en «Mi cuenta»); sin nombre se muestra «Mujer», «Hombre»…
+    En `/admin` se ve el nombre, se puede buscar por él y quitarlo si es ofensivo.
+  - **Bloquear**: desde amigos, solicitudes o historial. No volvéis a coincidir ni puede llamarte.
+  - Privacidad: a cada persona se la identifica con un código distinto para cada quien la mira, así
+    no se puede rastrear a nadie entre cuentas.
 - **Premium** en dos planes, **7,99 €/semana** o **19,99 €/mes** (el mensual sale un 42 % más barato), para elegir a quién ver (mujeres, hombres, transexuales o parejas). Va ligado
   a la cuenta: funciona en todos los dispositivos del usuario. Sin Premium, siempre al azar.
 - **Denuncias** por burlas o insultos, acoso, homofobia o transfobia, menor de edad o contenido
@@ -53,7 +67,8 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   - «Mi cuenta»: ver datos, **descargar mis datos** (JSON) y **eliminar mi cuenta** (pide la
     contraseña). Los pagos se conservan sin datos personales; si la cuenta estaba expulsada se
     guarda solo un hash del email para que no pueda volver a registrarse.
-  - Limpieza automática diaria: chat de denuncias resueltas a los 180 días, IP de registro a los 90.
+  - Limpieza automática diaria: chat de denuncias resueltas a los 180 días, IP de registro a los 90,
+    historial de chats y solicitudes de amistad sin responder a los 30.
   - Cabeceras de seguridad: CSP (solo código propio), HSTS con HTTPS, sin iframes, sin compartir
     pantalla desde la web.
 - **Páginas legales** en los 6 idiomas: `/normas`, `/terminos` y `/privacidad`. Cada página lleva los
@@ -96,6 +111,7 @@ Diseño hecho con Gemini y redibujado en vector para que se vea nítido a cualqu
 - `translate.js` — traducción de mensajes del chat (DeepL o LibreTranslate).
 - `age.js` — verificación de edad con Veriff.
 - `mailer.js` — envío de emails (confirmar cuenta, recuperar contraseña, avisos al administrador).
+- `friends.js` — historial de chats, amigos y solicitudes (las llamadas y el «en línea» están en `server.js`).
 - `privacy.js` — cabeceras de seguridad, descargar/borrar datos, limpieza automática y código de marca de agua.
 - `public/` — la web: `index.html` (portada + chat), `app.js`, `style.css`, `admin.html`,
   páginas legales y `logo.svg`.

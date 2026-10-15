@@ -31,4 +31,9 @@ function safeEqual(a, b) {
   return crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b));
 }
 
-module.exports = { sign, verify, safeEqual };
+// Código corto y estable derivado de un texto (no se puede invertir)
+function mac(text, length = 16) {
+  return crypto.createHmac('sha256', SECRET).update(String(text)).digest('base64url').slice(0, length);
+}
+
+module.exports = { sign, verify, safeEqual, mac };

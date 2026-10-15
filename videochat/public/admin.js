@@ -83,9 +83,10 @@ function userCard(u) {
   const restricted = u.status === 'banned' || u.suspendedUntil;
   return `
     <article class="item">
-      <div class="item-head"><b>${esc(u.email)}</b>${state}</div>
+      <div class="item-head"><b>${esc(u.email)}</b>${u.nick ? ` · «${esc(u.nick)}»` : ''}${state}</div>
       <p class="meta">Código <b>${esc(u.code)}</b> · ${genders[u.gender] || ''} · registrado el ${fmt(u.createdAt)} · ${u.reportsReceived} denuncias (${u.reportsOpen} pendientes) · Edad: ${ageLabels[u.age] || u.age}${u.captureAttempts ? ` · 📸 ${u.captureAttempts} intentos de captura` : ''}</p>
       <div class="actions">
+        ${u.nick ? `<button class="btn ghost sm" data-user="${u.id}" data-action="clearNick">Quitar nombre</button>` : ''}
         ${restricted ? `<button class="btn ghost sm" data-user="${u.id}" data-action="restore">Readmitir</button>` : `
         <button class="btn ghost sm" data-user="${u.id}" data-action="suspend" data-days="1">Suspender 1 día</button>
         <button class="btn ghost sm" data-user="${u.id}" data-action="suspend" data-days="7">Suspender 7 días</button>
