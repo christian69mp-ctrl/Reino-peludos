@@ -69,19 +69,30 @@ function requireUser(req, res, next) {
   next();
 }
 
-// Límite sencillo de intentos por IP (registro e inicio de sesión)
-const attempts = new Map();
-function rateLimited(ip) {
+// Límites de intentos (contra fuerza bruta y bots). Muchas personas pueden compartir
+// IP (redes móviles, universidades), así que el límite por IP es amplio y el
+// importante es el de contraseñas fallidas por cada email.
+const limits = new Map();
+function hit(key, max, windowMs) {
   const now = Date.now();
-  const a = attempts.get(ip);
-  if (!a || a.reset < now) { attempts.set(ip, { count: 1, reset: now + 15 * 60000 }); return false; }
+  const a = limits.get(key);
+  if (!a || a.reset < now) { limits.set(key, { count: 1, reset: now + windowMs }); return false; }
   a.count += 1;
-  return a.count > 20;
+  return a.count > max;
 }
+function peek(key, max) {
+  const a = limits.get(key);
+  return !!a && a.reset > Date.now() && a.count >= max;
+}
+const WINDOW = 15 * 60000;
+const rateLimited = (ip) => hit(`ip:${ip}`, 120, WINDOW);                 // registro, recuperar…
+const loginBlocked = (email) => peek(`login:${email}`, 10);                // 10 fallos por email
+const loginFailed = (ip, email) => { hit(`login:${email}`, 10, WINDOW); hit(`loginip:${ip}`, 100, WINDOW); };
+const loginIpBlocked = (ip) => peek(`loginip:${ip}`, 100);
 setInterval(() => {
   const now = Date.now();
-  for (const [ip, a] of attempts) if (a.reset < now) attempts.delete(ip);
-}, 15 * 60000).unref();
+  for (const [k, a] of limits) if (a.reset < now) limits.delete(k);
+}, WINDOW).unref();
 
 function likesOf(user) {
   return { like: user.likes?.like || 0, love: user.likes?.love || 0 };
@@ -139,11 +150,14 @@ function routes(app) {
   });
 
   app.post('/api/login', async (req, res) => {
-    if (rateLimited(req.ip)) return res.status(429).json({ code: 'tooMany', error: 'Demasiados intentos. Prueba en unos minutos.' });
     const email = String(req.body?.email || '').trim().toLowerCase();
+    if (loginBlocked(email) || loginIpBlocked(req.ip)) return res.status(429).json({ code: 'tooMany', error: 'Demasiados intentos. Prueba en unos minutos.' });
     const user = store.getUserByEmail(email);
     const ok = user && await checkPassword(String(req.body?.password || ''), user.passHash);
-    if (!ok) return res.status(401).json({ code: 'badLogin', error: 'Email o contraseña incorrectos' });
+    if (!ok) {
+      loginFailed(req.ip, email);
+      return res.status(401).json({ code: 'badLogin', error: 'Email o contraseña incorrectos' });
+    }
     res.json({ token: sessionToken(user), user: publicUser(user) });
   });
 

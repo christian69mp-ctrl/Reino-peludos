@@ -59,6 +59,18 @@ function toast(text) {
 }
 
 function openModal(id) { $(id).hidden = false; }
+
+// Pone el cursor en un campo al abrir una ventana, salvo que la persona ya haya
+// pulsado otro campo (si no, lo que escribe acabaría en el campo equivocado)
+function focusSoon(id) {
+  setTimeout(() => {
+    const el = $(id);
+    const modal = el.closest('.overlay');
+    const active = document.activeElement;
+    if (modal && active && active !== document.body && modal.contains(active)) return;
+    el.focus();
+  }, 50);
+}
 function closeModal(id) { $(id).hidden = true; }
 function anyModalOpen() { return [...$$('.overlay')].some((o) => !o.hidden); }
 
@@ -161,7 +173,7 @@ function openAuth(mode = 'register', action = null) {
   setAuthMode(mode);
   openModal('authModal');
   ensureCaptcha('captchaRegister');
-  setTimeout(() => $('authEmail').focus(), 50);
+  focusSoon('authEmail');
 }
 
 $$('[data-open-auth]').forEach((b) => b.addEventListener('click', () => openAuth(b.dataset.openAuth)));
@@ -251,7 +263,7 @@ $('forgotLink').addEventListener('click', () => {
   $('forgotError').hidden = true;
   openModal('forgotModal');
   ensureCaptcha('captchaForgot');
-  setTimeout(() => $('forgotEmail').focus(), 50);
+  focusSoon('forgotEmail');
 });
 $('backToLogin').addEventListener('click', () => { closeModal('forgotModal'); openAuth('login'); });
 
@@ -421,7 +433,7 @@ $('deleteOpen').addEventListener('click', () => {
   $('deleteForm').hidden = false;
   $('deleteError').hidden = true;
   $('deletePassword').value = '';
-  setTimeout(() => $('deletePassword').focus(), 50);
+  focusSoon('deletePassword');
 });
 
 $('deleteForm').addEventListener('submit', async (e) => {
