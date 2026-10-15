@@ -139,6 +139,8 @@ DEEPL_API_KEY=...             # deepl.com/pro-api — la clave gratuita (500.000
 TURN_URL=turn:turn.tudominio.com:3478?transport=udp,turn:turn.tudominio.com:3478?transport=tcp
 TURN_SECRET=...               # static-auth-secret de coturn: credenciales que caducan a las 12 h
 # TURN_USER=... / TURN_PASS=... # alternativa: usuario y contraseña fijos
+# STUN_URL=stun:tudominio.com:3478  # STUN propio (sin TURN se usa el de Google)
+# RELAY_ONLY=off              # con TURN, el vídeo pasa siempre por él para ocultar la IP de cada uno; off lo desactiva
 
 # Lanzamiento sin cobrar: filtros Premium gratis para todos
 # PREMIUM_MODE=free

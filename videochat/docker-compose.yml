@@ -5,9 +5,17 @@
 # Uso: copia .env.example a .env, rellénalo y ejecuta  docker compose up -d --build
 # Guía completa paso a paso: DESPLIEGUE.md
 
+# Los registros (logs) se limitan a 3 × 10 MB por servicio: pueden contener emails
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
   app:
     build: .
+    logging: *logging
     restart: unless-stopped
     env_file: .env
     environment:
@@ -17,6 +25,7 @@ services:
       TURN_SECRET: ${TURN_SECRET:?Falta TURN_SECRET en .env}
       BASE_URL: https://${DOMAIN:?Falta DOMAIN en .env}
       TURN_URL: turn:${DOMAIN}:3478?transport=udp,turn:${DOMAIN}:3478?transport=tcp
+      STUN_URL: stun:${DOMAIN}:3478
     volumes:
       - app_data:/app/data
     expose:
@@ -24,6 +33,7 @@ services:
 
   caddy:
     image: caddy:2
+    logging: *logging
     restart: unless-stopped
     depends_on:
       - app
@@ -41,6 +51,7 @@ services:
 
   turn:
     image: coturn/coturn:4.6
+    logging: *logging
     restart: unless-stopped
     # El TURN necesita muchos puertos UDP: se usa la red del servidor directamente
     network_mode: host

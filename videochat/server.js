@@ -57,9 +57,16 @@ app.get('/api/me', auth.requireUser, (req, res) => {
 // - TURN_SECRET: el static-auth-secret de coturn. Se generan credenciales que
 //   caducan a las 12 h, así nadie puede reutilizar el servidor TURN por su cuenta.
 // - O bien TURN_USER y TURN_PASS fijos.
+// - STUN_URL: servidor STUN propio (por defecto el de Google si no hay TURN).
+// Privacidad: con TURN, el vídeo pasa siempre por él (RELAY_ONLY, activado por
+// defecto) y así ninguna persona puede ver la IP de la otra. El vídeo sigue
+// cifrado de extremo a extremo: el servidor no puede verlo. RELAY_ONLY=off lo desactiva.
 const TURN_TTL = 12 * 3600;
+const RELAY_ONLY = !!process.env.TURN_URL && process.env.RELAY_ONLY !== 'off';
 app.get('/ice', (_req, res) => {
-  const iceServers = [{ urls: 'stun:stun.l.google.com:19302' }];
+  const iceServers = [];
+  const stun = process.env.STUN_URL || (process.env.TURN_URL ? '' : 'stun:stun.l.google.com:19302');
+  if (stun && !RELAY_ONLY) iceServers.push({ urls: stun.split(',').map((u) => u.trim()) });
   if (process.env.TURN_URL) {
     const urls = process.env.TURN_URL.split(',').map((u) => u.trim()).filter(Boolean);
     let username = process.env.TURN_USER;
@@ -71,7 +78,7 @@ app.get('/ice', (_req, res) => {
     iceServers.push({ urls, username, credential });
   }
   res.set('Cache-Control', 'no-store');
-  res.json({ iceServers });
+  res.json(RELAY_ONLY ? { iceServers, iceTransportPolicy: 'relay' } : { iceServers });
 });
 
 app.get('/stats', (_req, res) => {

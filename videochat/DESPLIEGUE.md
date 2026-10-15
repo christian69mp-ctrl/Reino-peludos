@@ -16,6 +16,9 @@ copias de seguridad automáticas. No hace falta saber programar: solo copiar y p
 - Sistema: **Ubuntu 24.04**. Tamaño: **2 CPU, 4 GB RAM** basta para empezar.
 - Que tenga **IP pública propia** (Hetzner, OVH, Contabo, DigitalOcean… la dan así).
 - Ubicación en la UE (por protección de datos).
+- **Tráfico mensual amplio** (p. ej. 20 TB incluidos). Por privacidad, el vídeo pasa por tu
+  servidor para que nadie vea la IP de la otra persona: cada videollamada gasta ~1,5 GB por hora.
+  Con 20 TB caben unas 13.000 horas de videollamada al mes.
 - **Antes de pagar, lee sus condiciones de uso** y confirma que permiten webs para adultos.
 
 Al crearlo te darán una **IP** (p. ej. `203.0.113.10`) y acceso por SSH.
@@ -174,4 +177,5 @@ Los datos no se pierden (están en un volumen aparte). La app instalada en los m
 | Se ven por wifi pero no con datos móviles | El TURN no es accesible: revisa los puertos 3478 y 49152–50151/udp (también en el panel del proveedor). `docker compose logs turn`. |
 | Servidores con IP privada (AWS, Google Cloud…) | Añade `- --external-ip=IP_PUBLICA/IP_PRIVADA` en `docker-compose.yml`, servicio `turn`. |
 | No llegan los emails | Revisa `SMTP_*`, los registros SPF/DKIM y `docker compose logs app`. |
+| Te quedas sin tráfico o el servidor va lento con muchas llamadas | Contrata más tráfico, o pon `RELAY_ONLY=off` en `.env` (el vídeo irá directo entre usuarios cuando se pueda, pero cada uno podrá ver la IP del otro). |
 | Ver qué está pasando | `docker compose ps` y `docker compose logs --tail=100 app` |
