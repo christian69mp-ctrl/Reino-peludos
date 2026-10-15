@@ -80,6 +80,7 @@
       "err.captcha": "Confirma que no eres un robot e inténtalo de nuevo.",
       "off.title": "Sin conexión", "off.text": "Necesitas conexión a internet para usar el videochat.", "off.retry": "Reintentar", "pwa.install": "Instalar app", "pwa.iosTitle": "Instala la app", "pwa.iosText": "En Safari, pulsa el botón Compartir (el cuadrado con una flecha hacia arriba) y elige «Añadir a pantalla de inicio».", "pwa.installed": "¡App instalada! Ya la tienes en tu pantalla de inicio. 🔥",
       "nf.title": "Página no encontrada", "nf.text": "La página que buscas no existe o ha cambiado de sitio.", "nf.home": "Ir al inicio",
+      'free.badge': "GRATIS EN EL LANZAMIENTO", 'free.title': "Filtros gratis durante el lanzamiento", 'free.text': "Por tiempo limitado, todas las cuentas pueden elegir a quién ver sin pagar nada. No hace falta tarjeta.", 'free.cta': "Empezar ahora", 'acc.premiumFree': "Filtros gratis durante el lanzamiento 🎉", 'msg.premiumFree': "🎉 Los filtros son gratis durante el lanzamiento. ¡Disfrútalo!",
       'err.auth': 'Inicia sesión para continuar', 'err.generic': 'No se pudo completar. Inténtalo de nuevo.',
     },
 
@@ -160,6 +161,7 @@
       "err.captcha": "Confirm you are not a robot and try again.",
       "off.title": "You are offline", "off.text": "You need an internet connection to use the video chat.", "off.retry": "Try again", "pwa.install": "Install app", "pwa.iosTitle": "Install the app", "pwa.iosText": "In Safari, tap the Share button (the square with an arrow pointing up) and choose “Add to Home Screen”.", "pwa.installed": "App installed! It is now on your home screen. 🔥",
       "nf.title": "Page not found", "nf.text": "The page you are looking for does not exist or has moved.", "nf.home": "Go to home page",
+      'free.badge': "FREE AT LAUNCH", 'free.title': "Filters are free during launch", 'free.text': "For a limited time, every account can choose who to see at no cost. No card needed.", 'free.cta': "Start now", 'acc.premiumFree': "Filters free during launch 🎉", 'msg.premiumFree': "🎉 Filters are free during launch. Enjoy!",
       'err.auth': 'Log in to continue', 'err.generic': 'Something went wrong. Please try again.',
     },
 
@@ -240,6 +242,7 @@
       "err.captcha": "Confirme que você não é um robô e tente de novo.",
       "off.title": "Sem conexão", "off.text": "Você precisa de conexão com a internet para usar o videochat.", "off.retry": "Tentar de novo", "pwa.install": "Instalar app", "pwa.iosTitle": "Instale o app", "pwa.iosText": "No Safari, toque no botão Compartilhar (o quadrado com uma seta para cima) e escolha «Adicionar à Tela de Início».", "pwa.installed": "App instalado! Já está na sua tela de início. 🔥",
       "nf.title": "Página não encontrada", "nf.text": "A página que você procura não existe ou mudou de lugar.", "nf.home": "Ir para o início",
+      'free.badge': "GRÁTIS NO LANÇAMENTO", 'free.title': "Filtros grátis durante o lançamento", 'free.text': "Por tempo limitado, todas as contas podem escolher quem ver sem pagar nada. Não precisa de cartão.", 'free.cta': "Começar agora", 'acc.premiumFree': "Filtros grátis durante o lançamento 🎉", 'msg.premiumFree': "🎉 Os filtros são grátis durante o lançamento. Aproveite!",
       'err.auth': 'Entre na sua conta para continuar', 'err.generic': 'Algo deu errado. Tente de novo.',
     },
 
@@ -320,6 +323,7 @@
       "err.captcha": "Confirmez que vous n’êtes pas un robot et réessayez.",
       "off.title": "Pas de connexion", "off.text": "Vous avez besoin d’une connexion internet pour utiliser le chat vidéo.", "off.retry": "Réessayer", "pwa.install": "Installer l’app", "pwa.iosTitle": "Installez l’app", "pwa.iosText": "Dans Safari, touchez le bouton Partager (le carré avec une flèche vers le haut) et choisissez « Sur l’écran d’accueil ».", "pwa.installed": "App installée ! Elle est sur votre écran d’accueil. 🔥",
       "nf.title": "Page introuvable", "nf.text": "La page que vous cherchez n’existe pas ou a été déplacée.", "nf.home": "Aller à l’accueil",
+      'free.badge': "GRATUIT AU LANCEMENT", 'free.title': "Filtres gratuits pendant le lancement", 'free.text': "Pour une durée limitée, tous les comptes peuvent choisir qui voir gratuitement. Aucune carte requise.", 'free.cta': "Commencer", 'acc.premiumFree': "Filtres gratuits pendant le lancement 🎉", 'msg.premiumFree': "🎉 Les filtres sont gratuits pendant le lancement. Profitez-en !",
       'err.auth': 'Connectez-vous pour continuer', 'err.generic': 'Une erreur est survenue. Réessayez.',
     },
 
@@ -400,6 +404,7 @@
       "err.captcha": "Bestätige, dass du kein Roboter bist, und versuch es erneut.",
       "off.title": "Keine Verbindung", "off.text": "Für den Videochat brauchst du eine Internetverbindung.", "off.retry": "Erneut versuchen", "pwa.install": "App installieren", "pwa.iosTitle": "App installieren", "pwa.iosText": "Tippe in Safari auf „Teilen“ (das Quadrat mit dem Pfeil nach oben) und wähle „Zum Home-Bildschirm“.", "pwa.installed": "App installiert! Sie ist jetzt auf deinem Home-Bildschirm. 🔥",
       "nf.title": "Seite nicht gefunden", "nf.text": "Die gesuchte Seite existiert nicht oder wurde verschoben.", "nf.home": "Zur Startseite",
+      'free.badge': "GRATIS ZUM START", 'free.title': "Filter zum Start kostenlos", 'free.text': "Für kurze Zeit kann jedes Konto kostenlos wählen, wen es sehen will. Keine Karte nötig.", 'free.cta': "Jetzt starten", 'acc.premiumFree': "Filter zum Start kostenlos 🎉", 'msg.premiumFree': "🎉 Die Filter sind zum Start kostenlos. Viel Spaß!",
       'err.auth': 'Melde dich an, um fortzufahren', 'err.generic': 'Etwas ist schiefgelaufen. Bitte erneut versuchen.',
     },
 
@@ -480,6 +485,7 @@
       "err.captcha": "Conferma di non essere un robot e riprova.",
       "off.title": "Nessuna connessione", "off.text": "Ti serve una connessione internet per usare la videochat.", "off.retry": "Riprova", "pwa.install": "Installa l’app", "pwa.iosTitle": "Installa l’app", "pwa.iosText": "In Safari, tocca il pulsante Condividi (il quadrato con la freccia in su) e scegli «Aggiungi alla schermata Home».", "pwa.installed": "App installata! Ora è nella tua schermata Home. 🔥",
       "nf.title": "Pagina non trovata", "nf.text": "La pagina che cerchi non esiste o è stata spostata.", "nf.home": "Vai alla home",
+      'free.badge': "GRATIS AL LANCIO", 'free.title': "Filtri gratis durante il lancio", 'free.text': "Per un periodo limitato, ogni account può scegliere chi vedere senza pagare. Nessuna carta richiesta.", 'free.cta': "Inizia ora", 'acc.premiumFree': "Filtri gratis durante il lancio 🎉", 'msg.premiumFree': "🎉 I filtri sono gratis durante il lancio. Divertiti!",
       'err.auth': 'Accedi per continuare', 'err.generic': 'Qualcosa è andato storto. Riprova.',
     },
   };

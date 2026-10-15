@@ -421,3 +421,5 @@ body.in-chat .site-footer { display: none; }
   .react-btn { width: 46px; height: 46px; font-size: 1.35rem; }
   .partner-info { max-width: calc(100% - 70px); }
 }
+.free-box h3 { margin: 14px 0 8px; font-size: 1.35rem; }
+.free-box .btn { margin-top: 10px; }

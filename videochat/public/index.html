@@ -173,7 +173,13 @@
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l3">Cancel anytime</span></li>
           </ul>
         </div>
-        <div class="price-box">
+        <div class="price-box free-box" id="freeBox" hidden>
+          <span class="badge-gold" data-i18n="free.badge">FREE AT LAUNCH</span>
+          <h3 data-i18n="free.title">Filters are free during launch</h3>
+          <p class="muted" data-i18n="free.text">For a limited time, every account can choose who to see at no cost. No card needed.</p>
+          <button class="btn gold lg wide" data-start data-i18n="free.cta">Start now</button>
+        </div>
+        <div class="price-box" id="paidBox">
           <div class="plan-row">
             <span class="plan-name" data-i18n="plan.week">Weekly</span>
             <span class="plan-price"><b class="price-week">€7.99</b><small data-i18n="prem.perWeek">/week</small></span>

@@ -20,6 +20,7 @@ let premium = false;
 let want = '';            // '' = todos
 let pendingAction = null; // lo que quería hacer antes de iniciar sesión
 let plans = null;         // planes Premium del servidor: { week, month }
+let freeMode = false;     // lanzamiento: filtros gratis para todos (PREMIUM_MODE=free)
 let selectedPlan = 'month';
 let translateEnabled = false;
 let partner = null;       // { gender, lang, likes }
@@ -395,7 +396,8 @@ async function pollAge() {
 function renderAccount() {
   if (!me) return;
   $('accEmail').textContent = me.user.email;
-  $('accPremium').textContent = me.premium ? t('acc.premiumUntil', { date: dateText(me.expires) }) : t('acc.premiumNo');
+  $('accPremium').textContent = me.free ? t('acc.premiumFree')
+    : me.premium ? t('acc.premiumUntil', { date: dateText(me.expires) }) : t('acc.premiumNo');
   $('accAge').textContent = me.age?.status === 'approved' ? t('acc.ageOk') : t('acc.ageNo');
   $('accLikes').textContent = `👍 ${me.user.likes?.like || 0}  ❤️ ${me.user.likes?.love || 0}`;
   $('accCode').textContent = me.watermark || '';
@@ -562,8 +564,8 @@ function setPremium(value) {
   premium = value;
   const logged = !!me;
   $('premiumBtn').hidden = !logged || premium;
-  $('manageBtn').hidden = !logged || !premium;
-  $('lockNote').hidden = premium;
+  $('manageBtn').hidden = !logged || !premium || freeMode;
+  $('lockNote').hidden = premium || freeMode;
   $('filter').classList.toggle('locked', !premium);
   if (!premium) selectWant('');
 }
@@ -642,6 +644,7 @@ $('payCrypto').addEventListener('click', () => pay('crypto'));
 
 function manage() {
   if (!me?.premium) return;
+  if (me.free) { toast(t('msg.premiumFree')); return; }
   const date = dateText(me.expires);
   if (me.cancelUrl) {
     if (confirm(t('msg.premiumRenews', { date }))) window.open(me.cancelUrl, '_blank', 'noopener');
@@ -1074,7 +1077,11 @@ refreshOnline();
 
 fetch('/api/plan').then((r) => r.json()).then((p) => {
   plans = p.plans;
-  $('demoNote').hidden = !p.demo;
+  freeMode = !!p.free;
+  $('demoNote').hidden = !p.demo || freeMode;
+  $('freeBox').hidden = !freeMode;
+  $('paidBox').hidden = freeMode;
+  setPremium(premium);
   renderDynamicTexts();
 }).catch(() => {});
 

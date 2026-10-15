@@ -1,0 +1,13 @@
+# Caddy: HTTPS automático (certificado gratuito de Let's Encrypt) delante de la web.
+{
+	email {$ACME_EMAIL}
+}
+
+{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy app:3000
+}
+
+www.{$DOMAIN} {
+	redir https://{$DOMAIN}{uri} permanent
+}

@@ -89,14 +89,18 @@ Diseño hecho con Gemini y redibujado en vector para que se vea nítido a cualqu
 - `auth.js` — registro, inicio de sesión y sesiones.
 - `payments.js` — pagos Premium con Segpay (tarjeta, Google Pay, Apple Pay y cripto).
 - `moderation.js` — denuncias, suspensiones automáticas y API del panel de moderación.
-- `store.js` — guarda usuarios, pedidos y denuncias en `data/store.json`.
+- `store.js` — guarda usuarios, pedidos y denuncias en la base de datos SQLite `data/la-ruleta.db`.
+- `backup.js` — copias de seguridad automáticas y manuales (`npm run backup`).
+- `captcha.js` — protección contra bots (Cloudflare Turnstile).
 - `tokens.js` — firma de las sesiones.
 - `translate.js` — traducción de mensajes del chat (DeepL o LibreTranslate).
 - `age.js` — verificación de edad con Veriff.
-- `mailer.js` — envío de emails (recuperar contraseña).
+- `mailer.js` — envío de emails (confirmar cuenta, recuperar contraseña, avisos al administrador).
 - `privacy.js` — cabeceras de seguridad, descargar/borrar datos, limpieza automática y código de marca de agua.
 - `public/` — la web: `index.html` (portada + chat), `app.js`, `style.css`, `admin.html`,
   páginas legales y `logo.svg`.
+- `Dockerfile`, `docker-compose.yml`, `Caddyfile`, `.env.example` — publicación en servidor (ver DESPLIEGUE.md).
+- `docs/` — documentos internos: registro de tratamientos, evaluación de impacto y lista de lanzamiento.
 
 ## Variables del servidor
 
@@ -131,13 +135,26 @@ DEEPL_API_KEY=...             # deepl.com/pro-api — la clave gratuita (500.000
 # LIBRETRANSLATE_URL=https://tu-libretranslate.com   # alternativa gratuita que puedes instalar tú
 # LIBRETRANSLATE_API_KEY=...
 
-# Vídeo en redes móviles
-TURN_URL=turn:turn.tudominio.com:3478
-TURN_USER=...
-TURN_PASS=...
+# Vídeo en redes móviles (servidor TURN, p. ej. coturn)
+TURN_URL=turn:turn.tudominio.com:3478?transport=udp,turn:turn.tudominio.com:3478?transport=tcp
+TURN_SECRET=...               # static-auth-secret de coturn: credenciales que caducan a las 12 h
+# TURN_USER=... / TURN_PASS=... # alternativa: usuario y contraseña fijos
 
-# DATA_FILE=/ruta/store.json  # por defecto videochat/data/store.json
+# Lanzamiento sin cobrar: filtros Premium gratis para todos
+# PREMIUM_MODE=free
+
+# Antibots (Cloudflare Turnstile)
+# TURNSTILE_SITE_KEY=... / TURNSTILE_SECRET=...
+
+# Datos
+# DB_FILE=/ruta/la-ruleta.db  # por defecto videochat/data/la-ruleta.db (SQLite)
+# BACKUP_KEEP=14              # copias automáticas en data/copias (al arrancar y cada 24 h)
+# BACKUP_DIR=off              # desactiva las copias automáticas
+# TRUST_PROXY=...             # de qué proxies se fía para la IP real (por defecto: red interna)
 ```
+
+Para publicarlo en un servidor con Docker, HTTPS automático y TURN: **[DESPLIEGUE.md](DESPLIEGUE.md)**.
+Copia de seguridad manual: `npm run backup`.
 
 ## Pagos (Segpay)
 
@@ -187,8 +204,8 @@ cualquier cuenta sin verificar.
   (titular, NIF, dirección…) en cada uno de los 6 idiomas. Revísalas con un abogado; si cambias el
   texto en español, cambia también las traducciones.
 - **Crea el buzón `soporte@laruletacaliente.com`** (aparece en la web).
-- **HTTPS obligatorio**: sin él el navegador no deja usar la cámara.
-- **Servidor TURN** (p. ej. coturn): sin él muchas conexiones en 4G fallan.
-- **Copia de seguridad** diaria de `data/store.json`.
+- **HTTPS y servidor TURN**: incluidos en `docker-compose.yml` (ver DESPLIEGUE.md).
+- **Copias de seguridad**: automáticas cada 24 h; descárgalas fuera del servidor cada semana.
 - **Contratar Veriff** y un servicio de envío de emails (Brevo tiene plan gratuito) y poner sus claves.
-- Con muchos usuarios, pasar de `data/store.json` a una base de datos (PostgreSQL, etc.).
+- Lista completa de lanzamiento y documentos internos de protección de datos: carpeta `docs/`.
+- Con muchos miles de usuarios a la vez, pasar de SQLite a PostgreSQL.

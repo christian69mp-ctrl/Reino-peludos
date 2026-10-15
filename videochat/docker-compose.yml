@@ -1,0 +1,80 @@
+# Todo lo necesario para publicar La Ruleta Caliente en un servidor:
+#   app   → la web (Node.js)
+#   caddy → HTTPS automático
+#   turn  → servidor TURN (coturn) para que el vídeo conecte también en 4G y redes estrictas
+# Uso: copia .env.example a .env, rellénalo y ejecuta  docker compose up -d --build
+# Guía completa paso a paso: DESPLIEGUE.md
+
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      PORT: "3000"
+      SESSION_SECRET: ${SESSION_SECRET:?Falta SESSION_SECRET en .env}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Falta ADMIN_PASSWORD en .env}
+      TURN_SECRET: ${TURN_SECRET:?Falta TURN_SECRET en .env}
+      BASE_URL: https://${DOMAIN:?Falta DOMAIN en .env}
+      TURN_URL: turn:${DOMAIN}:3478?transport=udp,turn:${DOMAIN}:3478?transport=tcp
+    volumes:
+      - app_data:/app/data
+    expose:
+      - "3000"
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL:?Falta ACME_EMAIL en .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+  turn:
+    image: coturn/coturn:4.6
+    restart: unless-stopped
+    # El TURN necesita muchos puertos UDP: se usa la red del servidor directamente
+    network_mode: host
+    command:
+      - -n
+      - --log-file=stdout
+      - --no-cli
+      - --fingerprint
+      - --use-auth-secret
+      - --static-auth-secret=${TURN_SECRET:?Falta TURN_SECRET en .env}
+      - --realm=${DOMAIN}
+      - --listening-port=3478
+      - --min-port=49152
+      - --max-port=50151
+      - --no-multicast-peers
+      - --no-tls
+      - --no-dtls
+      - --total-quota=300
+      - --user-quota=4
+      # Seguridad: impide usar el TURN para llegar a redes privadas del servidor
+      - --denied-peer-ip=0.0.0.0-0.255.255.255
+      - --denied-peer-ip=10.0.0.0-10.255.255.255
+      - --denied-peer-ip=100.64.0.0-100.127.255.255
+      - --denied-peer-ip=127.0.0.0-127.255.255.255
+      - --denied-peer-ip=169.254.0.0-169.254.255.255
+      - --denied-peer-ip=172.16.0.0-172.31.255.255
+      - --denied-peer-ip=192.0.0.0-192.0.0.255
+      - --denied-peer-ip=192.168.0.0-192.168.255.255
+      - --denied-peer-ip=198.18.0.0-198.19.255.255
+      - --denied-peer-ip=::1
+      - --denied-peer-ip=fc00::-fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+      - --denied-peer-ip=fe80::-febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+
+volumes:
+  app_data:
+  caddy_data:
+  caddy_config:

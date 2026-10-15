@@ -17,6 +17,8 @@
 // 3. El Premium va ligado a la cuenta, así que funciona en cualquier dispositivo.
 //
 // Si falta la configuración de Segpay funciona en modo DEMO: el pago se simula.
+// Con PREMIUM_MODE=free (lanzamiento, mientras no se puede cobrar) los filtros
+// son gratis para todas las cuentas y no se puede pagar.
 
 const crypto = require('crypto');
 const express = require('express');
@@ -40,8 +42,10 @@ const ETICKETS = {
 const POSTBACK_KEY = process.env.SEGPAY_POSTBACK_KEY;
 const CANCEL_URL = process.env.SEGPAY_CANCEL_URL || 'https://cs.segpay.com';
 const DEMO = !Object.values(ETICKETS).some((m) => m.card || m.crypto);
+const FREE = process.env.PREMIUM_MODE === 'free';
 
-if (DEMO) console.warn('[pagos] Modo DEMO: los pagos se simulan. Configura los SEGPAY_ETICKET_* para cobrar de verdad.');
+if (FREE) console.warn('[pagos] PREMIUM_MODE=free: los filtros son gratis para todos y no se cobra nada.');
+else if (DEMO) console.warn('[pagos] Modo DEMO: los pagos se simulan. Configura los SEGPAY_ETICKET_* para cobrar de verdad.');
 if (!DEMO && !POSTBACK_KEY) console.warn('[pagos] Falta SEGPAY_POSTBACK_KEY: no se aceptarán los avisos de Segpay.');
 
 // Pedido Premium activo de un usuario (el que dura más), o null
@@ -53,10 +57,11 @@ function activeOrder(userId) {
 }
 
 function isPremium(userId) {
-  return !!activeOrder(userId);
+  return FREE || !!activeOrder(userId);
 }
 
 function premiumInfo(userId) {
+  if (FREE) return { premium: true, free: true };
   const order = activeOrder(userId);
   if (!order) return { premium: false };
   return {
@@ -120,6 +125,7 @@ function routes(app, baseUrl) {
     res.json({
       currency: CURRENCY,
       demo: DEMO,
+      free: FREE,
       plans: Object.fromEntries(Object.entries(PLANS).map(([id, plan]) => [id, {
         ...plan,
         methods: { card: DEMO || !!ETICKETS[id].card, crypto: DEMO || !!ETICKETS[id].crypto },
@@ -129,6 +135,7 @@ function routes(app, baseUrl) {
 
   // Empieza el pago: crea el pedido y devuelve la URL de Segpay
   app.post('/api/checkout', requireUser, (req, res) => {
+    if (FREE) return res.status(409).json({ code: 'free' });
     if (needsEmail(req.user)) return res.status(403).json({ code: 'emailUnverified' });
     const method = req.body?.method === 'crypto' ? 'crypto' : 'card';
     const plan = PLANS[req.body?.plan] ? req.body.plan : 'month';

@@ -14,7 +14,9 @@ const captcha = require('./captcha');
 const PORT = process.env.PORT || 3000;
 
 const app = express();
-app.set('trust proxy', true);
+// Solo se fía de la cabecera X-Forwarded-For si llega desde la propia máquina o
+// la red interna (el proxy HTTPS); así nadie puede falsear su IP desde fuera.
+app.set('trust proxy', process.env.TRUST_PROXY || 'loopback, linklocal, uniquelocal');
 app.disable('x-powered-by');
 app.use(privacy.securityHeaders);
 app.use(express.json({ limit: '50kb', verify: (req, _res, buf) => { req.rawBody = buf; } }));
@@ -51,15 +53,24 @@ app.get('/api/me', auth.requireUser, (req, res) => {
 
 // Configuración ICE para el cliente. En producción añade un servidor TURN
 // (p. ej. coturn) mediante variables de entorno, si no muchas conexiones fallan.
+// - TURN_URL: una o varias URL separadas por comas (turn:dominio:3478?transport=udp,…)
+// - TURN_SECRET: el static-auth-secret de coturn. Se generan credenciales que
+//   caducan a las 12 h, así nadie puede reutilizar el servidor TURN por su cuenta.
+// - O bien TURN_USER y TURN_PASS fijos.
+const TURN_TTL = 12 * 3600;
 app.get('/ice', (_req, res) => {
   const iceServers = [{ urls: 'stun:stun.l.google.com:19302' }];
   if (process.env.TURN_URL) {
-    iceServers.push({
-      urls: process.env.TURN_URL,
-      username: process.env.TURN_USER,
-      credential: process.env.TURN_PASS,
-    });
+    const urls = process.env.TURN_URL.split(',').map((u) => u.trim()).filter(Boolean);
+    let username = process.env.TURN_USER;
+    let credential = process.env.TURN_PASS;
+    if (process.env.TURN_SECRET) {
+      username = `${Math.floor(Date.now() / 1000) + TURN_TTL}:lrc`;
+      credential = require('crypto').createHmac('sha1', process.env.TURN_SECRET).update(username).digest('base64');
+    }
+    iceServers.push({ urls, username, credential });
   }
+  res.set('Cache-Control', 'no-store');
   res.json({ iceServers });
 });
 
@@ -275,6 +286,8 @@ io.on('connection', (socket) => {
     lastPartner.delete(socket.id);
   });
 });
+
+require('./backup').schedule();
 
 server.listen(PORT, () => {
   console.log(`La Ruleta Caliente escuchando en http://localhost:${PORT}`);

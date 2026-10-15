@@ -22,7 +22,9 @@ const REQUIRED = process.env.AGE_VERIFICATION !== 'off';
 const MIN_AGE = 18;
 
 if (!REQUIRED) console.warn('[edad] AGE_VERIFICATION=off: no se pide verificación de edad.');
-else if (DEMO) console.warn('[edad] Modo DEMO: la verificación de edad se simula. Define VERIFF_API_KEY y VERIFF_SECRET para la real.');
+else if (DEMO && (process.env.BASE_URL || '').startsWith('https://')) {
+  console.warn('[edad] ⚠️  ATENCIÓN: la web está publicada pero la verificación de edad es SIMULADA. Define VERIFF_API_KEY y VERIFF_SECRET antes de abrir al público.');
+} else if (DEMO) console.warn('[edad] Modo DEMO: la verificación de edad se simula. Define VERIFF_API_KEY y VERIFF_SECRET para la real.');
 
 let onRestrict = () => {};
 
