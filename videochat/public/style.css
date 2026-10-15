@@ -353,6 +353,8 @@ body.in-chat .site-footer { display: none; }
 .btn.danger { background: var(--danger); color: #fff; }
 .btn.danger-ghost { background: transparent; color: var(--danger); border-color: rgba(255, 90, 95, .45); }
 .delete-box { margin-top: 14px; }
+.captcha:empty { display: none; }
+.captcha { display: flex; justify-content: center; margin: 0 0 14px; min-height: 65px; }
 .link-btn { font: inherit; font-size: .9rem; font-weight: 600; color: var(--accent); background: none; border: 0; padding: 4px; cursor: pointer; }
 .link-btn:hover { text-decoration: underline; }
 .notice { padding: 14px 16px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border); text-align: left; }

@@ -22,7 +22,7 @@ const crypto = require('crypto');
 const express = require('express');
 const store = require('./store');
 const { safeEqual } = require('./tokens');
-const { requireUser } = require('./auth');
+const { requireUser, needsEmail } = require('./auth');
 
 const CURRENCY = 'eur';
 const PLANS = {
@@ -129,6 +129,7 @@ function routes(app, baseUrl) {
 
   // Empieza el pago: crea el pedido y devuelve la URL de Segpay
   app.post('/api/checkout', requireUser, (req, res) => {
+    if (needsEmail(req.user)) return res.status(403).json({ code: 'emailUnverified' });
     const method = req.body?.method === 'crypto' ? 'crypto' : 'card';
     const plan = PLANS[req.body?.plan] ? req.body.plan : 'month';
     // Segpay: variables propias de máx. 32 caracteres y sin empezar por número

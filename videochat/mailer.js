@@ -63,10 +63,55 @@ const RESET = {
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-async function sendPasswordReset(to, link, lang) {
-  const s = RESET[lang] || RESET.en;
+const VERIFY = {
+  es: {
+    subject: 'Confirma tu email · La Ruleta Caliente',
+    hello: '¡Hola!',
+    body: 'Gracias por registrarte. Pulsa el botón para confirmar tu email y activar tu cuenta. El enlace caduca en 48 horas.',
+    button: 'Confirmar mi email',
+    ignore: 'Si no has creado una cuenta en La Ruleta Caliente, ignora este email.',
+  },
+  en: {
+    subject: 'Confirm your email · La Ruleta Caliente',
+    hello: 'Hi!',
+    body: 'Thanks for signing up. Press the button to confirm your email and activate your account. The link expires in 48 hours.',
+    button: 'Confirm my email',
+    ignore: 'If you did not create an account on La Ruleta Caliente, ignore this email.',
+  },
+  pt: {
+    subject: 'Confirme seu e-mail · La Ruleta Caliente',
+    hello: 'Olá!',
+    body: 'Obrigado por se cadastrar. Toque no botão para confirmar seu e-mail e ativar sua conta. O link expira em 48 horas.',
+    button: 'Confirmar meu e-mail',
+    ignore: 'Se você não criou uma conta na La Ruleta Caliente, ignore este e-mail.',
+  },
+  fr: {
+    subject: 'Confirmez votre e-mail · La Ruleta Caliente',
+    hello: 'Bonjour !',
+    body: 'Merci pour votre inscription. Appuyez sur le bouton pour confirmer votre e-mail et activer votre compte. Le lien expire dans 48 heures.',
+    button: 'Confirmer mon e-mail',
+    ignore: 'Si vous n’avez pas créé de compte sur La Ruleta Caliente, ignorez cet e-mail.',
+  },
+  de: {
+    subject: 'Bestätige deine E-Mail · La Ruleta Caliente',
+    hello: 'Hallo!',
+    body: 'Danke für deine Registrierung. Tippe auf den Button, um deine E-Mail zu bestätigen und dein Konto zu aktivieren. Der Link läuft in 48 Stunden ab.',
+    button: 'E-Mail bestätigen',
+    ignore: 'Wenn du kein Konto bei La Ruleta Caliente erstellt hast, ignoriere diese E-Mail.',
+  },
+  it: {
+    subject: 'Conferma la tua email · La Ruleta Caliente',
+    hello: 'Ciao!',
+    body: 'Grazie per esserti registrato/a. Premi il pulsante per confermare la tua email e attivare l’account. Il link scade tra 48 ore.',
+    button: 'Conferma la mia email',
+    ignore: 'Se non hai creato un account su La Ruleta Caliente, ignora questa email.',
+  },
+};
+
+// Email con un botón, con el diseño de la marca
+async function sendTemplate(to, s, link, label) {
   if (!transport) {
-    console.log(`[email] (sin SMTP) recuperar contraseña para ${to}: ${link}`);
+    console.log(`[email] (sin SMTP) ${label} para ${to}: ${link}`);
     return;
   }
   await transport.sendMail({
@@ -87,4 +132,23 @@ async function sendPasswordReset(to, link, lang) {
   });
 }
 
-module.exports = { sendPasswordReset };
+function sendPasswordReset(to, link, lang) {
+  return sendTemplate(to, RESET[lang] || RESET.en, link, 'recuperar contraseña');
+}
+
+function sendVerifyEmail(to, link, lang) {
+  return sendTemplate(to, VERIFY[lang] || VERIFY.en, link, 'confirmar email');
+}
+
+// Aviso interno al equipo (texto simple, en español)
+async function sendAdminAlert(subject, text) {
+  const to = process.env.ADMIN_EMAIL;
+  if (!to) return;
+  if (!transport) {
+    console.log(`[email] (sin SMTP) aviso al admin: ${subject}\n${text}`);
+    return;
+  }
+  await transport.sendMail({ from: FROM, to, subject: `[La Ruleta Caliente] ${subject}`, text });
+}
+
+module.exports = { sendPasswordReset, sendVerifyEmail, sendAdminAlert, enabled: !!transport };

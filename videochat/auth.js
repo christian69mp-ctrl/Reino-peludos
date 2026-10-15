@@ -5,6 +5,7 @@ const { promisify } = require('util');
 const store = require('./store');
 const tokens = require('./tokens');
 const mailer = require('./mailer');
+const captcha = require('./captcha');
 
 const scrypt = promisify(crypto.scrypt);
 const GENDERS = ['mujer', 'hombre', 'trans', 'pareja'];
@@ -12,6 +13,13 @@ const SESSION_DAYS = 90;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const LANG_RE = /^[a-z]{2,3}$/;
 const RESET_MS = 3600 * 1000; // el enlace para cambiar la contraseña dura 1 hora
+const VERIFY_MS = 48 * 3600 * 1000; // el enlace para confirmar el email dura 48 horas
+// Confirmar el email es obligatorio si hay envío de emails (SMTP). Se puede forzar
+// con EMAIL_VERIFICATION=required u off.
+const EMAIL_VERIFY = process.env.EMAIL_VERIFICATION
+  ? process.env.EMAIL_VERIFICATION !== 'off'
+  : mailer.enabled;
+if (!EMAIL_VERIFY) console.warn('[cuentas] Confirmación de email desactivada (sin SMTP o EMAIL_VERIFICATION=off).');
 
 const sha256 = (s) => crypto.createHash('sha256').update(s).digest('hex');
 const cleanLang = (l) => (LANG_RE.test(String(l || '')) ? String(l) : 'en');
@@ -80,7 +88,24 @@ function likesOf(user) {
 }
 
 function publicUser(user) {
-  return { id: user.id, email: user.email, gender: user.gender, createdAt: user.createdAt, likes: likesOf(user) };
+  return { id: user.id, email: user.email, gender: user.gender, createdAt: user.createdAt, likes: likesOf(user), emailVerified: !!user.emailVerified };
+}
+
+// true si la cuenta todavía tiene que confirmar su email
+function needsEmail(user) {
+  return EMAIL_VERIFY && !user.emailVerified;
+}
+
+function baseUrl(req) {
+  return process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+}
+
+// Envía (o reenvía) el enlace para confirmar el email
+function sendVerification(user, req) {
+  const token = crypto.randomBytes(32).toString('base64url');
+  store.updateUser(user.id, { verify: { hash: sha256(token), expires: Date.now() + VERIFY_MS, sentAt: Date.now() } });
+  mailer.sendVerifyEmail(user.email, `${baseUrl(req)}/?verify=${token}`, cleanLang(req.body?.lang || user.lang))
+    .catch((err) => console.error('[email] no se pudo enviar:', err.message));
 }
 
 function routes(app) {
@@ -95,6 +120,7 @@ function routes(app) {
     if (adult !== true || terms !== true) return res.status(400).json({ code: 'terms', error: 'Debes confirmar que eres mayor de edad y aceptar las normas' });
     if (store.getUserByEmail(email)) return res.status(409).json({ code: 'exists', error: 'Ya existe una cuenta con ese email' });
     if (store.isEmailHashBanned(sha256(email))) return res.status(403).json({ code: 'bannedEmail' });
+    if (!(await captcha.verifyHuman(req))) return res.status(400).json({ code: 'captcha' });
 
     const user = store.createUser({
       email,
@@ -106,7 +132,9 @@ function routes(app) {
       registerIp: req.ip,
       likes: { like: 0, love: 0 },
       lang: cleanLang(req.body?.lang),
+      emailVerified: false,
     });
+    if (EMAIL_VERIFY) sendVerification(user, req);
     res.json({ token: sessionToken(user), user: publicUser(user) });
   });
 
@@ -125,14 +153,14 @@ function routes(app) {
     if (rateLimited(req.ip)) return res.status(429).json({ code: 'tooMany' });
     const email = String(req.body?.email || '').trim().toLowerCase();
     if (!EMAIL_RE.test(email)) return res.status(400).json({ code: 'email' });
+    if (!(await captcha.verifyHuman(req))) return res.status(400).json({ code: 'captcha' });
     const user = store.getUserByEmail(email);
     const recent = user?.reset && user.reset.sentAt > Date.now() - 60000;
     if (user && !recent) {
       const token = crypto.randomBytes(32).toString('base64url');
       const lang = cleanLang(req.body?.lang || user.lang);
       store.updateUser(user.id, { reset: { hash: sha256(token), expires: Date.now() + RESET_MS, sentAt: Date.now() } });
-      const base = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
-      mailer.sendPasswordReset(email, `${base}/?reset=${token}`, lang)
+      mailer.sendPasswordReset(email, `${baseUrl(req)}/?reset=${token}`, lang)
         .catch((err) => console.error('[email] no se pudo enviar:', err.message));
     }
     res.json({ ok: true });
@@ -151,8 +179,26 @@ function routes(app) {
       passHash: await hashPassword(password),
       tokenVersion: (user.tokenVersion || 0) + 1,
       reset: null,
+      emailVerified: true, // ha abierto un enlace enviado a su email
     });
     res.json({ token: sessionToken(updated), user: publicUser(updated) });
+  });
+
+  // Confirmar el email con el enlace recibido
+  app.post('/api/email/verify', (req, res) => {
+    const hash = sha256(String(req.body?.token || ''));
+    const user = req.body?.token && store.listUsers().find((u) => u.verify?.hash === hash);
+    if (!user || user.verify.expires < Date.now()) return res.status(400).json({ code: 'verifyInvalid' });
+    store.updateUser(user.id, { emailVerified: true, emailVerifiedAt: Date.now(), verify: null });
+    res.json({ ok: true });
+  });
+
+  // Reenviar el email de confirmación (como mucho uno por minuto)
+  app.post('/api/email/resend', requireUser, (req, res) => {
+    if (req.user.emailVerified) return res.json({ ok: true, verified: true });
+    if (req.user.verify?.sentAt > Date.now() - 60000) return res.status(429).json({ code: 'tooMany' });
+    sendVerification(req.user, req);
+    res.json({ ok: true });
   });
 
   // Cierra la sesión en todos los dispositivos
@@ -162,4 +208,7 @@ function routes(app) {
   });
 }
 
-module.exports = { routes, requireUser, userFromToken, restriction, publicUser, likesOf, checkPassword, bearer, GENDERS };
+module.exports = {
+  routes, requireUser, userFromToken, restriction, publicUser, likesOf, checkPassword, bearer, needsEmail,
+  EMAIL_VERIFY, GENDERS,
+};

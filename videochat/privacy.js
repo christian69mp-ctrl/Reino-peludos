@@ -11,6 +11,10 @@
 const crypto = require('crypto');
 const store = require('./store');
 const { requireUser, checkPassword, likesOf } = require('./auth');
+const captcha = require('./captcha');
+
+// Turnstile (antibots) necesita cargar su script y su iframe desde Cloudflare
+const CF = captcha.ENABLED ? ' https://challenges.cloudflare.com' : '';
 
 const DAY = 24 * 3600 * 1000;
 const KEEP_REPORT_CHAT_DAYS = 180; // pruebas de denuncias resueltas
@@ -27,11 +31,12 @@ function securityHeaders(_req, res, next) {
   res.set({
     'Content-Security-Policy': [
       "default-src 'self'",
-      "script-src 'self'",
+      `script-src 'self'${CF}`,
+      `frame-src${CF || " 'none'"}`,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob:",
       "media-src 'self' blob: mediastream:",
-      "connect-src 'self' ws: wss:",
+      `connect-src 'self' ws: wss:${CF}`,
       "font-src 'self'",
       "object-src 'none'",
       "base-uri 'self'",

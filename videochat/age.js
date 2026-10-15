@@ -12,7 +12,7 @@
 
 const crypto = require('crypto');
 const store = require('./store');
-const { requireUser } = require('./auth');
+const { requireUser, needsEmail } = require('./auth');
 
 const API_KEY = process.env.VERIFF_API_KEY;
 const SECRET = process.env.VERIFF_SECRET;
@@ -103,6 +103,7 @@ function routes(app, baseUrl) {
   // Empieza la verificación: devuelve la URL de Veriff (o la aprueba en modo demo)
   app.post('/api/age/start', requireUser, async (req, res) => {
     const user = req.user;
+    if (needsEmail(user)) return res.status(403).json({ code: 'emailUnverified' });
     if (!REQUIRED || ageStatus(user) === 'approved') return res.json({ age: publicAge(user) });
     if (DEMO) {
       store.updateUser(user.id, { age: { status: 'approved', demo: true, verifiedAt: Date.now(), updatedAt: Date.now() } });

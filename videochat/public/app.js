@@ -107,6 +107,42 @@ document.addEventListener('langchange', () => {
 if (!load('age-ok')) openModal('ageGate');
 $('ageYes').addEventListener('click', () => { save('age-ok', '1'); closeModal('ageGate'); });
 
+// ---------- Antibots (Cloudflare Turnstile, solo si está configurado) ----------
+let turnstileKey = null;
+const captchaWidgets = {};
+const captchaTokens = {};
+let turnstileLoading = null;
+
+function loadTurnstile() {
+  turnstileLoading ||= new Promise((resolve) => {
+    const sc = document.createElement('script');
+    sc.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    sc.async = true;
+    sc.onload = resolve;
+    document.head.appendChild(sc);
+  });
+  return turnstileLoading;
+}
+
+async function ensureCaptcha(id) {
+  if (!turnstileKey || captchaWidgets[id] !== undefined) return;
+  captchaWidgets[id] = null;
+  await loadTurnstile();
+  captchaWidgets[id] = window.turnstile.render(`#${id}`, {
+    sitekey: turnstileKey,
+    theme: 'dark',
+    language: I18N.lang,
+    callback: (tok) => { captchaTokens[id] = tok; },
+    'expired-callback': () => { captchaTokens[id] = ''; },
+  });
+}
+
+// Los tokens solo valen una vez: tras cada envío se pide uno nuevo
+function resetCaptcha(id) {
+  captchaTokens[id] = '';
+  if (captchaWidgets[id] && window.turnstile) window.turnstile.reset(captchaWidgets[id]);
+}
+
 // ---------- Cuenta ----------
 let authMode = 'register';
 let myGender = '';
@@ -124,6 +160,7 @@ function openAuth(mode = 'register', action = null) {
   pendingAction = action;
   setAuthMode(mode);
   openModal('authModal');
+  ensureCaptcha('captchaRegister');
   setTimeout(() => $('authEmail').focus(), 50);
 }
 
@@ -148,7 +185,8 @@ $('authForm').addEventListener('submit', async (e) => {
     if (!myGender) return showError(t('err.gender'));
     if (!$('authTerms').checked) return showError(t('err.terms'));
     $('authSubmit').disabled = true;
-    res = await api('/api/register', { method: 'POST', body: { email, password, gender: myGender, adult: true, terms: true, lang: I18N.chatLang() } });
+    res = await api('/api/register', { method: 'POST', body: { email, password, gender: myGender, adult: true, terms: true, lang: I18N.chatLang(), captcha: captchaTokens.captchaRegister } });
+    resetCaptcha('captchaRegister');
   } else {
     $('authSubmit').disabled = true;
     res = await api('/api/login', { method: 'POST', body: { email, password } });
@@ -212,6 +250,7 @@ $('forgotLink').addEventListener('click', () => {
   $('forgotSent').hidden = true;
   $('forgotError').hidden = true;
   openModal('forgotModal');
+  ensureCaptcha('captchaForgot');
   setTimeout(() => $('forgotEmail').focus(), 50);
 });
 $('backToLogin').addEventListener('click', () => { closeModal('forgotModal'); openAuth('login'); });
@@ -221,7 +260,8 @@ $('forgotForm').addEventListener('submit', async (e) => {
   const email = $('forgotEmail').value.trim();
   if (!email) { $('forgotError').textContent = t('err.email'); $('forgotError').hidden = false; return; }
   $('forgotSubmit').disabled = true;
-  const res = await api('/api/password/forgot', { method: 'POST', body: { email, lang: I18N.chatLang() } });
+  const res = await api('/api/password/forgot', { method: 'POST', body: { email, lang: I18N.chatLang(), captcha: captchaTokens.captchaForgot } });
+  resetCaptcha('captchaForgot');
   $('forgotSubmit').disabled = false;
   if (!res.ok) { $('forgotError').textContent = errorText(res); $('forgotError').hidden = false; return; }
   $('forgotForm').hidden = true;
@@ -244,6 +284,27 @@ $('resetForm').addEventListener('submit', async (e) => {
   closeModal('resetModal');
   await refreshMe();
   toast(t('rs.done'));
+});
+
+// ---------- Confirmar email ----------
+function openEmail(notice) {
+  $('emailText').textContent = t('ev.text', { email: me?.user?.email || '' });
+  $('emailNotice').textContent = notice || '';
+  $('emailNotice').hidden = !notice;
+  openModal('emailModal');
+}
+
+$('emailCheck').addEventListener('click', async () => {
+  await refreshMe();
+  if (me?.user?.emailVerified) { closeModal('emailModal'); toast(t('ev.done')); enterChat(); }
+  else openEmail(t('ev.pending'));
+});
+
+$('emailResend').addEventListener('click', async () => {
+  $('emailResend').disabled = true;
+  const res = await api('/api/email/resend', { method: 'POST', body: { lang: I18N.chatLang() } });
+  setTimeout(() => { $('emailResend').disabled = false; }, 60000);
+  openEmail(res.ok ? t('ev.resent') : errorText(res));
 });
 
 // ---------- Verificación de edad ----------
@@ -456,6 +517,7 @@ function showLanding() {
 function enterChat() {
   if (!token) { openAuth('register', 'start'); return; }
   if (me?.restriction) { showRestricted(me.restriction); return; }
+  if (me?.emailRequired && !me.user.emailVerified) { openEmail(); return; }
   if (me?.age?.required && me.age.status !== 'approved') { openAge(); return; }
   document.body.classList.add('in-chat');
   $('landing').hidden = true;
@@ -814,12 +876,13 @@ function connectSocket() {
 
   s.on('connect_error', (err) => {
     // Errores de red: socket.io reintenta solo. Estos tres no se arreglan reintentando.
-    if (!['auth', 'restricted', 'age'].includes(err.message)) return;
+    if (!['auth', 'restricted', 'age', 'email'].includes(err.message)) return;
     s.disconnect();
     if (s !== socket) return; // conexión antigua (p. ej. tras cerrar sesión)
     if (err.message === 'auth') { logout(false); openAuth('login'); }
     if (err.message === 'restricted') showRestricted(err.data);
     if (err.message === 'age') { stop(); refreshMe().then(openAge); }
+    if (err.message === 'email') { stop(); refreshMe().then(() => openEmail()); }
   });
 
   socket.on('account', (acc) => { if (acc.premium !== premium) refreshMe(); });
@@ -970,12 +1033,21 @@ fetch('/api/plan').then((r) => r.json()).then((p) => {
   renderDynamicTexts();
 }).catch(() => {});
 
-fetch('/api/config').then((r) => r.json()).then((c) => { translateEnabled = !!c.translate; }).catch(() => {});
+fetch('/api/config').then((r) => r.json()).then((c) => {
+  translateEnabled = !!c.translate;
+  turnstileKey = c.turnstile || null;
+}).catch(() => {});
 
 (async () => {
   await refreshMe();
   const params = new URLSearchParams(location.search);
-  if (params.has('order') || params.has('reset') || params.has('age')) history.replaceState(null, '', '/');
+  if (['order', 'reset', 'age', 'verify'].some((k) => params.has(k))) history.replaceState(null, '', '/');
+  // Enlace del email de confirmación
+  if (params.get('verify')) {
+    if (!load('age-ok')) { save('age-ok', '1'); closeModal('ageGate'); }
+    const res = await api('/api/email/verify', { method: 'POST', body: { token: params.get('verify') } });
+    if (res.ok) { await refreshMe(); toast(t('ev.done')); } else toast(errorText(res));
+  }
   const order = params.get('order');
   if (order && token) waitPayment(order);
   // Enlace del email para crear una contraseña nueva

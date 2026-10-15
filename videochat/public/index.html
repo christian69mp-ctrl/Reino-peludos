@@ -315,6 +315,7 @@
             <span data-i18n-html="auth.terms">I am 18 or older and I accept the <a href="/terminos" target="_blank">Terms</a>, the <a href="/privacidad" target="_blank">Privacy policy</a> and the <a href="/normas" target="_blank">Community rules</a>.</span>
           </label>
         </div>
+        <div class="captcha register-only" id="captchaRegister"></div>
         <p class="form-error" id="authError" hidden></p>
         <button type="submit" class="btn primary lg wide" id="authSubmit">Crear cuenta gratis</button>
         <p class="center-text login-only"><button type="button" class="link-btn" id="forgotLink" data-i18n="auth.forgotLink">Forgot your password?</button></p>
@@ -332,6 +333,7 @@
         <label class="field"><span data-i18n="auth.email">Email</span>
           <input type="email" id="forgotEmail" autocomplete="email" required>
         </label>
+        <div class="captcha" id="captchaForgot"></div>
         <p class="form-error" id="forgotError" hidden></p>
         <button type="submit" class="btn primary lg wide" id="forgotSubmit" data-i18n="fg.submit">Send link</button>
       </form>
@@ -355,6 +357,19 @@
         <p class="form-error" id="resetError" hidden></p>
         <button type="submit" class="btn primary lg wide" id="resetSubmit" data-i18n="rs.submit">Save password</button>
       </form>
+    </div>
+  </div>
+
+  <!-- Confirmar email -->
+  <div id="emailModal" class="overlay" hidden>
+    <div class="modal center-text">
+      <button class="close" data-close data-i18n-aria="btn.close"><svg class="i"><use href="#i-x"/></svg></button>
+      <svg class="i xl accent"><use href="#i-send"/></svg>
+      <h2 data-i18n="ev.title">Confirm your email</h2>
+      <p class="muted" id="emailText"></p>
+      <p class="notice" id="emailNotice" hidden></p>
+      <button class="btn primary lg wide" id="emailCheck" data-i18n="ev.check">I have confirmed it</button>
+      <button class="btn ghost wide" id="emailResend" data-i18n="ev.resend">Resend the email</button>
     </div>
   </div>
 

@@ -9,6 +9,7 @@ const moderation = require('./moderation');
 const translate = require('./translate');
 const age = require('./age');
 const privacy = require('./privacy');
+const captcha = require('./captcha');
 
 const PORT = process.env.PORT || 3000;
 
@@ -32,7 +33,7 @@ age.routes(app, process.env.BASE_URL);
 privacy.routes(app);
 
 // Qué funciones opcionales están activas
-app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled }));
+app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled, turnstile: captcha.SITE_KEY || null }));
 
 // Sesión actual: datos de la cuenta, Premium y restricciones
 app.get('/api/me', auth.requireUser, (req, res) => {
@@ -41,6 +42,7 @@ app.get('/api/me', auth.requireUser, (req, res) => {
     ...payments.premiumInfo(req.user.id),
     restriction: auth.restriction(req.user),
     age: age.publicAge(req.user),
+    emailRequired: auth.EMAIL_VERIFY,
     watermark: privacy.watermarkCode(req.user),
   });
 });
@@ -157,6 +159,7 @@ io.use((socket, next) => {
     err.data = restriction;
     return next(err);
   }
+  if (auth.needsEmail(user)) return next(new Error('email'));
   if (age.needsVerification(user)) return next(new Error('age'));
   socket.data.uid = user.id;
   socket.data.gender = user.gender;
