@@ -113,7 +113,8 @@ SEGPAY_ETICKET_CRYPTO=123456:7891        # mensual con cripto
 SEGPAY_POSTBACK_KEY=...
 # SEGPAY_CANCEL_URL=https://cs.segpay.com
 
-# Emails (recuperar contraseña). Sin SMTP_HOST el enlace sale en el registro del servidor.
+# Emails (confirmar email, recuperar contraseña y avisos). Sin SMTP_HOST salen en el registro del servidor.
+ADMIN_EMAIL=tu@email.com         # recibe avisos: denuncias urgentes, suspensiones automáticas, menores
 SMTP_HOST=smtp-relay.brevo.com   # o el de Mailgun, Amazon SES, Zoho, tu hosting…
 SMTP_PORT=587
 SMTP_USER=...

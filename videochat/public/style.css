@@ -355,6 +355,10 @@ body.in-chat .site-footer { display: none; }
 .delete-box { margin-top: 14px; }
 .captcha:empty { display: none; }
 .captcha { display: flex; justify-content: center; margin: 0 0 14px; min-height: 65px; }
+.offline { margin: auto; padding: 40px 20px; text-align: center; max-width: 420px; display: grid; justify-items: center; gap: 6px; }
+.offline h1 { font-size: 1.8rem; margin-top: 14px; }
+.install-btn .i { width: 16px; height: 16px; }
+.ios-steps { font-size: 2.4rem; margin: 6px 0 12px; }
 .link-btn { font: inherit; font-size: .9rem; font-weight: 600; color: var(--accent); background: none; border: 0; padding: 4px; cursor: pointer; }
 .link-btn:hover { text-decoration: underline; }
 .notice { padding: 14px 16px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border); text-align: left; }
@@ -405,7 +409,8 @@ body.in-chat .site-footer { display: none; }
   .brand span { font-size: 1rem; }
   .brand img { width: 30px; height: 30px; }
   .online-pill { display: none !important; }
-  #premiumBtn span, #manageBtn span { display: none; }
+  #premiumBtn span, #manageBtn span, .install-btn span { display: none; }
+  .install-btn { padding-left: 10px; padding-right: 10px; }
   #premiumBtn, #manageBtn { padding-left: 10px; padding-right: 10px; }
   .header-actions { gap: 6px; }
   .btn.sm { padding: 7px 11px; }

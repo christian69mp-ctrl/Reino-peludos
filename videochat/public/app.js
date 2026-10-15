@@ -1020,6 +1020,39 @@ document.addEventListener('keydown', (e) => {
   if (running) next();
 });
 
+// ---------- App instalable ----------
+// Android/Chrome/Edge: el navegador avisa de que se puede instalar y mostramos el botón.
+// iPhone/iPad: no hay aviso, así que el botón abre las instrucciones de Safari.
+let installEvent = null;
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  installEvent = e;
+  $('installBtn').hidden = false;
+});
+window.addEventListener('appinstalled', () => {
+  $('installBtn').hidden = true;
+  toast(t('pwa.installed'));
+});
+if (isIOS && !isStandalone) $('installBtn').hidden = false;
+
+$('installBtn').addEventListener('click', async () => {
+  if (installEvent) {
+    installEvent.prompt();
+    await installEvent.userChoice.catch(() => {});
+    installEvent = null;
+    $('installBtn').hidden = true;
+  } else if (isIOS) {
+    openModal('iosModal');
+  }
+});
+
 // ---------- Arranque ----------
 I18N.apply();
 fillLangSelects();

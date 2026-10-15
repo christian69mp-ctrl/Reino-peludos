@@ -8,6 +8,14 @@
 // - El panel /admin.html permite revisar denuncias, suspender, expulsar o readmitir.
 
 const store = require('./store');
+const mailer = require('./mailer');
+
+// Avisos al equipo por email (ADMIN_EMAIL). No bloquean nunca la petición.
+function alertAdmin(subject, text) {
+  const panel = `${process.env.BASE_URL || ''}/admin`;
+  mailer.sendAdminAlert(subject, `${text}\n\nRevísalo en el panel de moderación: ${panel}`)
+    .catch((err) => console.error('[moderación] no se pudo avisar por email:', err.message));
+}
 const { safeEqual } = require('./tokens');
 
 const REASONS = {
@@ -46,6 +54,10 @@ function report({ reporter, reported, reason, comment, chat }) {
     comment: String(comment || '').trim().slice(0, 500),
     chat: (chat || []).slice(-30),
   });
+  if (created.urgent) {
+    alertAdmin('⚠️ Denuncia URGENTE: menor o contenido ilegal',
+      `Se ha denunciado a ${reported.email} por: ${REASONS[reason]}.\nComentario: ${created.comment || '(sin comentario)'}`);
+  }
 
   const all = [...recent, created];
   const reporters = new Set(all.map((r) => r.reporterId)).size;
@@ -56,6 +68,7 @@ function report({ reporter, reported, reason, comment, chat }) {
     store.updateUser(reported.id, { suspendedUntil: until, suspendedReason: 'Denuncias de varios usuarios' });
     onRestrict(reported.id, { type: 'suspended', until });
     console.log(`[moderación] suspensión automática de ${reported.email} hasta ${new Date(until).toISOString()}`);
+    alertAdmin('Suspensión automática', `La cuenta ${reported.email} se ha suspendido 24 h por denuncias de ${reporters} personas distintas.`);
   }
   return created;
 }
@@ -166,4 +179,5 @@ module.exports = {
   report,
   REASONS,
   setOnRestrict: (fn) => { onRestrict = fn; },
+  alertAdmin,
 };

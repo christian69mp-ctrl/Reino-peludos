@@ -44,6 +44,7 @@
       <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
       <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
       <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 18h.01"/></symbol>
       <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
       <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></symbol>
       <symbol id="i-languages" viewBox="0 0 24 24"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></symbol>
@@ -61,6 +62,7 @@
       <a href="/#premium" data-i18n="nav.premium">Premium</a>
     </nav>
     <div class="header-actions">
+      <button class="btn ghost sm install-btn" id="installBtn" hidden><svg class="i"><use href="#i-phone"/></svg><span data-i18n="pwa.install">Install app</span></button>
       <span class="online-pill" id="onlinePill" hidden><span class="dot"></span><span id="onlineText">0</span></span>
       <div id="guestActions" class="row">
         <button class="btn ghost sm" data-open-auth="login" data-i18n="btn.login">Log in</button>
@@ -481,6 +483,18 @@
         <p class="form-error" id="deleteError" hidden></p>
         <button type="submit" class="btn danger wide" id="deleteSubmit" data-i18n="acc.deleteConfirm">Delete permanently</button>
       </form>
+    </div>
+  </div>
+
+  <!-- Instalar en iPhone -->
+  <div id="iosModal" class="overlay" hidden>
+    <div class="modal center-text">
+      <button class="close" data-close data-i18n-aria="btn.close"><svg class="i"><use href="#i-x"/></svg></button>
+      <img src="/icon-192.png" alt="" width="72" height="72" style="border-radius:16px">
+      <h2 data-i18n="pwa.iosTitle">Install the app</h2>
+      <p class="ios-steps" aria-hidden="true">⬆️ ➜ ➕</p>
+      <p class="muted" data-i18n="pwa.iosText">In Safari, tap the Share button and choose “Add to Home Screen”.</p>
+      <button class="btn ghost wide" data-close data-i18n="res.ok">OK</button>
     </div>
   </div>
 

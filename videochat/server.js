@@ -18,6 +18,8 @@ app.set('trust proxy', true);
 app.disable('x-powered-by');
 app.use(privacy.securityHeaders);
 app.use(express.json({ limit: '50kb', verify: (req, _res, buf) => { req.rawBody = buf; } }));
+// El service worker no se guarda en caché para que las actualizaciones lleguen enseguida
+app.get('/sw.js', (_req, res, next) => { res.set('Cache-Control', 'no-cache'); next(); });
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 // Tipografía servida desde el propio servidor (sin llamadas a Google)
 app.get('/fonts/plus-jakarta-sans.woff2', (_req, res) => {
@@ -63,6 +65,12 @@ app.get('/ice', (_req, res) => {
 
 app.get('/stats', (_req, res) => {
   res.json({ online: io.of('/').sockets.size });
+});
+
+// Página 404 para direcciones que no existen
+app.use((req, res) => {
+  if (req.path.startsWith('/api/')) return res.status(404).json({ code: 'notFound' });
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
 const server = http.createServer(app);
