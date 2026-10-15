@@ -48,6 +48,17 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   - **Bloquear**: desde amigos, solicitudes o historial. No volvéis a coincidir ni puede llamarte.
   - Privacidad: a cada persona se la identifica con un código distinto para cada quien la mira, así
     no se puede rastrear a nadie entre cuentas.
+- **Más filtros Premium** («Más filtros», bajo «Quiero ver»):
+  - **De dónde**: todo el mundo, **mi país** o **cerca de mí** (a menos de 100 km; `NEAR_KM` lo cambia).
+    El país y la zona salen de la IP con la base de datos gratuita **DB-IP Lite** (CC BY 4.0: el
+    crédito está en el pie de la web). Es aproximado (con datos móviles puede salir la ciudad de la
+    operadora) y no se guarda: se calcula al conectar. La otra persona ve la bandera del país.
+  - **Edad**: 18–24, 25–34, 35–44 o 45+. Usa la **fecha de nacimiento**, que ahora se pide al
+    registrarse (también con Google/Apple/Facebook) en tres desplegables; si da menos de 18 años no
+    deja registrarse. No la ve nadie. Las cuentas antiguas pueden añadirla una vez en «Mi cuenta»
+    (después solo se cambia escribiendo a soporte); sin ella no salen en búsquedas por edad.
+  - Los filtros cuentan para los dos lados: solo coincidís si los dos encajáis en lo que busca el otro.
+    Si tras 25 s no aparece nadie, se sugiere ampliar los filtros. Sin Premium se ignoran.
 - **Premium** en dos planes, **7,99 €/semana** o **19,99 €/mes** (el mensual sale un 42 % más barato), para elegir a quién ver (mujeres, hombres, transexuales o parejas). Va ligado
   a la cuenta: funciona en todos los dispositivos del usuario. Sin Premium, siempre al azar.
 - **Denuncias** por burlas o insultos, acoso, homofobia o transfobia, menor de edad o contenido
@@ -121,6 +132,7 @@ Diseño hecho con Gemini y redibujado en vector para que se vea nítido a cualqu
 - `translate.js` — traducción de mensajes del chat (DeepL o LibreTranslate).
 - `age.js` — verificación de edad con Veriff.
 - `mailer.js` — envío de emails (confirmar cuenta, recuperar contraseña, avisos al administrador).
+- `geo.js` — país y zona aproximados por IP (filtros Premium).
 - `oauth.js` — entrar con Google, Apple o Facebook.
 - `friends.js` — historial de chats, amigos y solicitudes (las llamadas y el «en línea» están en `server.js`).
 - `privacy.js` — cabeceras de seguridad, descargar/borrar datos, limpieza automática y código de marca de agua.
@@ -181,6 +193,12 @@ TURN_SECRET=...               # static-auth-secret de coturn: credenciales que c
 
 # Antibots (Cloudflare Turnstile)
 # TURNSTILE_SITE_KEY=... / TURNSTILE_SECRET=...
+
+# Ubicación aproximada por IP (filtros «Mi país» y «Cerca de mí»)
+# Por defecto se descarga sola cada mes la base de datos gratuita de DB-IP en data/geoip/ (~130 MB)
+# GEOIP_AUTO_UPDATE=off       # no descargar (los filtros por país y cercanía no aparecen)
+# GEOIP_DB=/ruta/a.mmdb       # usar otro archivo .mmdb (o varios separados por comas)
+# NEAR_KM=100                 # distancia de «Cerca de mí»
 
 # Datos
 # DB_FILE=/ruta/la-ruleta.db  # por defecto videochat/data/la-ruleta.db (SQLite)

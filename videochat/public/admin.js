@@ -84,7 +84,7 @@ function userCard(u) {
   return `
     <article class="item">
       <div class="item-head"><b>${esc(u.email)}</b>${u.nick ? ` · «${esc(u.nick)}»` : ''}${state}</div>
-      <p class="meta">Código <b>${esc(u.code)}</b> · ${genders[u.gender] || ''} · registrado el ${fmt(u.createdAt)} · ${u.reportsReceived} denuncias (${u.reportsOpen} pendientes) · Edad: ${ageLabels[u.age] || u.age}${u.ageCheck && u.age !== 'approved' ? ' · <b>⚠️ debe verificar su edad</b>' : ''}${u.captureAttempts ? ` · 📸 ${u.captureAttempts} intentos de captura` : ''}</p>
+      <p class="meta">Código <b>${esc(u.code)}</b> · ${genders[u.gender] || ''} · registrado el ${fmt(u.createdAt)} · ${u.reportsReceived} denuncias (${u.reportsOpen} pendientes) ${u.declaredAge !== null ? ` · ${u.declaredAge} años` : ''} · Edad: ${ageLabels[u.age] || u.age}${u.ageCheck && u.age !== 'approved' ? ' · <b>⚠️ debe verificar su edad</b>' : ''}${u.captureAttempts ? ` · 📸 ${u.captureAttempts} intentos de captura` : ''}</p>
       <div class="actions">
         ${u.nick ? `<button class="btn ghost sm" data-user="${u.id}" data-action="clearNick">Quitar nombre</button>` : ''}
         ${u.age === 'approved' ? '' : u.ageCheck

@@ -486,6 +486,29 @@ body.in-chat .site-footer { display: none; }
 
 .nick-form { margin-top: 18px; }
 
+/* Más filtros (Premium) */
+.more-filters { margin-top: 12px; border-top: 1px solid var(--border); padding-top: 10px; }
+.more-filters summary { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: .88rem; font-weight: 600; color: var(--muted); list-style: none; }
+.more-filters summary::-webkit-details-marker { display: none; }
+.more-filters summary::after { content: '▾'; margin-left: auto; transition: transform .15s; }
+.more-filters[open] summary::after { transform: rotate(180deg); }
+.more-filters summary .i { width: 16px; height: 16px; }
+.f-count { min-width: 18px; padding: 0 6px; border-radius: 999px; background: var(--grad); color: #fff; font-size: .72rem; line-height: 18px; text-align: center; }
+.filter-row { margin-top: 12px; }
+.filter-label { display: block; font-size: .8rem; color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+.filter-row .hint { font-size: .76rem; margin-top: 6px; }
+.chip:disabled { opacity: .45; cursor: not-allowed; }
+.filter.locked .more-filters .chip:not(.active) { color: var(--muted); }
+
+/* Fecha de nacimiento: día, mes y año */
+.birth { display: grid; grid-template-columns: 1fr 1.6fr 1.2fr; gap: 8px; }
+.birth select { width: 100%; padding: 11px 10px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; }
+.birth select:focus { outline: none; border-color: var(--accent); }
+.birth-hint { margin: 6px 0 16px; }
+#birthForm .row { align-items: stretch; }
+#birthForm .birth { flex: 1; }
+.geo-credit { color: var(--muted); font-size: .75rem; margin-left: 8px; }
+
 /* Entrar con Google / Apple / Facebook */
 .social-login { display: grid; gap: 10px; margin-bottom: 4px; }
 .social-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 16px; border-radius: 12px; border: 1px solid transparent; font-weight: 600; text-decoration: none; transition: filter .15s; }

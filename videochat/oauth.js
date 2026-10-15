@@ -236,6 +236,8 @@ function routes(app) {
     const { gender, adult, terms } = req.body || {};
     if (!auth.GENDERS.includes(gender)) return res.status(400).json({ code: 'gender' });
     if (adult !== true || terms !== true) return res.status(400).json({ code: 'terms' });
+    const birthDate = req.body?.birthDate ? String(req.body.birthDate) : null;
+    if (birthDate && auth.birthError(birthDate)) return res.status(400).json({ code: auth.birthError(birthDate) });
     codes.delete(req.body.code);
     let user = store.getUserByEmail(c.email);
     if (user) {
@@ -246,6 +248,7 @@ function routes(app) {
         passHash: null,
         oauth: { [c.provider]: c.sub },
         gender,
+        birthDate,
         status: 'active',
         tokenVersion: 0,
         acceptedTermsAt: Date.now(),

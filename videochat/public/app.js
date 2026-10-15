@@ -18,6 +18,10 @@ let token = load('session');
 let me = null;            // respuesta de /api/me
 let premium = false;
 let want = '';            // '' = todos
+let wantScope = 'all';    // all | country | near (Premium)
+let wantAge = '';         // '' | '18-24' | '25-34' | '35-44' | '45+' (Premium)
+let myCountry = '';       // país aproximado según la IP (lo dice el servidor)
+let geoAvailable = false;
 let pendingAction = null; // lo que quería hacer antes de iniciar sesión
 let plans = null;         // planes Premium del servidor: { week, month }
 let freeMode = false;     // lanzamiento: filtros gratis para todos (PREMIUM_MODE=free)
@@ -113,6 +117,8 @@ function renderDynamicTexts() {
   if (connected) renderWatermark();
   renderContacts();
   if (incomingCall) renderIncomingCall();
+  birthEls.forEach((id) => buildBirth($(id)));
+  renderFilters();
 }
 
 document.addEventListener('langchange', () => {
@@ -201,9 +207,12 @@ $('authForm').addEventListener('submit', async (e) => {
   let res;
   if (authMode === 'register') {
     if (!myGender) return showError(t('err.gender'));
+    const birthDate = birthValue($('authBirth'));
+    const birthProblem = birthCheck(birthDate);
+    if (birthProblem) return showError(birthProblem);
     if (!$('authTerms').checked) return showError(t('err.terms'));
     $('authSubmit').disabled = true;
-    res = await api('/api/register', { method: 'POST', body: { email, password, gender: myGender, adult: true, terms: true, lang: I18N.chatLang(), captcha: captchaTokens.captchaRegister } });
+    res = await api('/api/register', { method: 'POST', body: { email, password, gender: myGender, birthDate, adult: true, terms: true, lang: I18N.chatLang(), captcha: captchaTokens.captchaRegister } });
     resetCaptcha('captchaRegister');
   } else {
     $('authSubmit').disabled = true;
@@ -259,9 +268,12 @@ $('socialGender').addEventListener('click', (e) => {
 $('socialSubmit').addEventListener('click', async () => {
   const showError = (msg) => { $('socialError').textContent = msg; $('socialError').hidden = false; };
   if (!socialGender) return showError(t('err.gender'));
+  const birthDate = birthValue($('socialBirth'));
+  const birthProblem = birthCheck(birthDate);
+  if (birthProblem) return showError(birthProblem);
   if (!$('socialTerms').checked) return showError(t('err.terms'));
   $('socialSubmit').disabled = true;
-  const res = await api('/api/social/complete', { method: 'POST', body: { code: socialCode, gender: socialGender, adult: true, terms: true, lang: I18N.chatLang() } });
+  const res = await api('/api/social/complete', { method: 'POST', body: { code: socialCode, gender: socialGender, birthDate, adult: true, terms: true, lang: I18N.chatLang() } });
   $('socialSubmit').disabled = false;
   if (!res.token) return showError(errorText(res));
   closeModal('socialModal');
@@ -450,6 +462,10 @@ async function pollAge() {
 function renderAccount() {
   if (!me) return;
   $('accEmail').textContent = me.user.email;
+  const bd = me.user.birthDate;
+  $('accBirth').textContent = bd ? new Date(`${bd}T12:00:00`).toLocaleDateString(I18N.lang, { dateStyle: 'long' }) : '—';
+  $('birthForm').hidden = !!bd;
+  $('birthError').hidden = true;
   $('accPremium').textContent = me.free ? t('acc.premiumFree')
     : me.premium ? t('acc.premiumUntil', { date: dateText(me.expires) }) : t('acc.premiumNo');
   $('accAge').textContent = me.age?.status === 'approved' ? t('acc.ageOk') : t('acc.ageNo');
@@ -636,7 +652,7 @@ function setPremium(value) {
   if (partner) renderFriendBtn();
   if (value !== wasPremium) loadContacts();
   $('filter').classList.toggle('locked', !premium);
-  if (!premium) selectWant('');
+  if (!premium) { selectWant(''); selectScope('all'); selectAge(''); }
 }
 
 function selectWant(g) {
@@ -651,6 +667,98 @@ $('wantGender').addEventListener('click', (e) => {
   if (g === want) return;
   selectWant(g);
   if (running) next();
+});
+
+// ----- Más filtros (Premium): de dónde y edad -----
+const flagOf = (cc) => String.fromCodePoint(...[...cc.toUpperCase()].map((c) => 0x1F1E6 + c.charCodeAt(0) - 65));
+function countryName(cc) {
+  try { return new Intl.DisplayNames([I18N.lang], { type: 'region' }).of(cc); } catch { return cc; }
+}
+
+function selectScope(s) {
+  wantScope = s;
+  $$('#wantScope .chip').forEach((c) => c.classList.toggle('active', c.dataset.s === s));
+  renderFilters();
+}
+function selectAge(a) {
+  wantAge = a;
+  $$('#wantAge .chip').forEach((c) => c.classList.toggle('active', c.dataset.a === a));
+  renderFilters();
+}
+
+function renderFilters() {
+  // Sin base de datos de IP no hay filtro por país ni cercanía
+  $('scopeRow').hidden = !geoAvailable;
+  $('myFlag').textContent = myCountry ? flagOf(myCountry) : '';
+  $$('#wantScope [data-s=country], #wantScope [data-s=near]').forEach((c) => {
+    c.disabled = !myCountry;
+    c.title = myCountry ? countryName(myCountry) : t('f.noGeo');
+  });
+  if (!myCountry && wantScope !== 'all') { wantScope = 'all'; $$('#wantScope .chip').forEach((c) => c.classList.toggle('active', c.dataset.s === 'all')); }
+  const n = (wantScope !== 'all' ? 1 : 0) + (wantAge ? 1 : 0);
+  $('fCount').textContent = String(n);
+  $('fCount').hidden = !n;
+}
+
+function filterClick(container, attr, select, current) {
+  $(container).addEventListener('click', (e) => {
+    const chip = e.target.closest(`[data-${attr}]`);
+    if (!chip || chip.disabled) return;
+    const v = chip.dataset[attr];
+    if (!premium) { if (v && v !== 'all') openPremium(); return; }
+    if (v === current()) return;
+    select(v);
+    if (running && !outgoingCall) next();
+  });
+}
+filterClick('wantScope', 's', selectScope, () => wantScope);
+filterClick('wantAge', 'a', selectAge, () => wantAge);
+
+// ----- Fecha de nacimiento: tres desplegables (día, mes, año) -----
+function buildBirth(el) {
+  const keep = birthValue(el, true);
+  const [d, m, y] = ['d', 'm', 'y'].map((p) => el.querySelector(`[data-part=${p}]`));
+  const opt = (value, text) => `<option value="${value}">${text}</option>`;
+  d.innerHTML = opt('', t('b.day')) + Array.from({ length: 31 }, (_, i) => opt(i + 1, i + 1)).join('');
+  const monthFmt = new Intl.DateTimeFormat(I18N.lang, { month: 'long' });
+  m.innerHTML = opt('', t('b.month')) + Array.from({ length: 12 }, (_, i) => opt(i + 1, monthFmt.format(new Date(2000, i, 1)))).join('');
+  const top = new Date().getFullYear() - 18;
+  y.innerHTML = opt('', t('b.year')) + Array.from({ length: 83 }, (_, i) => opt(top - i, top - i)).join('');
+  [d, m, y].forEach((s) => s.setAttribute('aria-label', t(`b.${{ d: 'day', m: 'month', y: 'year' }[s.dataset.part]}`)));
+  if (keep) [d.value, m.value, y.value] = keep;
+}
+// 'AAAA-MM-DD' (o '' si falta algo); con raw devuelve [día, mes, año] tal cual
+function birthValue(el, raw) {
+  const v = ['d', 'm', 'y'].map((p) => el.querySelector(`[data-part=${p}]`).value);
+  if (raw) return v.some(Boolean) ? v : null;
+  if (v.some((x) => !x)) return '';
+  return `${v[2]}-${String(v[1]).padStart(2, '0')}-${String(v[0]).padStart(2, '0')}`;
+}
+// Mayor de 18 según la fecha elegida (el servidor lo vuelve a comprobar)
+function birthCheck(value) {
+  if (!value) return t('err.birthMissing');
+  const [y, m, d] = value.split('-').map(Number);
+  const date = new Date(y, m - 1, d);
+  if (date.getMonth() !== m - 1) return t('err.birth');
+  const adult = new Date(y + 18, m - 1, d);
+  return adult > new Date() ? t('err.underage') : '';
+}
+const birthEls = ['authBirth', 'socialBirth', 'accBirthInput'];
+birthEls.forEach((id) => buildBirth($(id)));
+
+$('birthForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const value = birthValue($('accBirthInput'));
+  const problem = birthCheck(value);
+  const showError = (msg) => { $('birthError').textContent = msg; $('birthError').hidden = false; };
+  if (problem) return showError(problem);
+  const res = await api('/api/me/birth', { method: 'POST', body: { birthDate: value } });
+  if (!res.ok) return showError(errorText(res));
+  me.user.birthDate = res.birthDate;
+  renderAccount();
+  toast(t('acc.birthSaved'));
+  // El servidor calcula la edad al conectar: se reconecta si no está en una conversación
+  if (socket?.connected && !connected) socket.disconnect().connect();
 });
 
 function openPremium() {
@@ -818,6 +926,9 @@ function renderPartner() {
   $('partnerTag').textContent = partner.name ? `${partner.name} · ${t(`g.${partner.gender}`)}` : t(`g.${partner.gender}`);
   renderFriendBtn();
   $('partnerLikes').textContent = likesText(partner.likes);
+  const pc = $('partnerCountry');
+  pc.hidden = !partner.country;
+  if (partner.country) pc.textContent = `${flagOf(partner.country)} ${countryName(partner.country)}`;
   const showLang = partner.lang && partner.lang !== I18N.chatLang();
   $('partnerLang').hidden = !showLang;
   if (showLang) $('partnerLang').querySelector('span').textContent = t('msg.speaks', { lang: I18N.langName(partner.lang) });
@@ -945,12 +1056,25 @@ async function handleSignal(data) {
 // ---------- Emparejamiento ----------
 function find() {
   // Si está reconectando, el evento 'connect' buscará con el filtro actual
-  if (socket?.connected) socket.emit('find', { want: want ? [want] : [] });
+  if (socket?.connected) socket.emit('find', { want: want ? [want] : [], scope: wantScope, age: wantAge });
 }
 
+const filtersActive = () => !!want || wantScope !== 'all' || !!wantAge;
+
+// «Buscando mujeres de tu país de 25–34 años…»
+let fewTimer = null;
 function setSearching() {
-  if (want) setStatus('msg.searchingFor', { who: t(`gs.${want}`) }, true);
-  else setStatus('msg.searching', null, true);
+  const extra = [];
+  if (wantScope === 'country') extra.push(t('f.fromCountry'));
+  if (wantScope === 'near') extra.push(t('f.nearYou'));
+  if (wantAge) extra.push(t('f.aged', { range: wantAge.replace('-', '–') }));
+  if (!want && !extra.length) setStatus('msg.searching', null, true);
+  else setStatus('msg.searchingFor', { who: [want ? t(`gs.${want}`) : t('f.people'), ...extra].join(' ') }, true);
+  // Con filtros puede haber poca gente: tras un rato se sugiere ampliarlos
+  clearTimeout(fewTimer);
+  if (filtersActive()) {
+    fewTimer = setTimeout(() => { if (running && !connected && filtersActive()) addMsg(t('f.fewPeople'), 'sys'); }, 25000);
+  }
 }
 
 function connectSocket() {
@@ -974,15 +1098,21 @@ function connectSocket() {
     if (err.message === 'email' && running) { stop(); refreshMe().then(() => openEmail()); }
   });
 
-  socket.on('account', (acc) => { if (acc.premium !== premium) refreshMe(); });
+  socket.on('account', (acc) => {
+    if (acc.premium !== premium) refreshMe();
+    myCountry = acc.country || '';
+    geoAvailable = !!acc.geo;
+    renderFilters();
+  });
 
   socket.on('waiting', setSearching);
 
-  socket.on('matched', async ({ initiator, call, gender, lang, likes, name, handle, relation }) => {
+  socket.on('matched', async ({ initiator, call, gender, lang, likes, name, handle, relation, country }) => {
     clearOutgoingCall();
+    clearTimeout(fewTimer);
     createPeer();
     setConnected(true);
-    partner = { gender, lang, likes, name, handle, relation };
+    partner = { gender, lang, likes, name, handle, relation, country };
     resetMessages();
     setStatus('');
     addMsg(call ? t('call.connected', { name: name || t(`g.${gender}`) }) : t('msg.connected'), 'sys');

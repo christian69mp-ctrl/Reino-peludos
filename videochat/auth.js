@@ -94,12 +94,32 @@ setInterval(() => {
   for (const [k, a] of limits) if (a.reset < now) limits.delete(k);
 }, WINDOW).unref();
 
+// Fecha de nacimiento AAAA-MM-DD → edad en años (o null si no es válida)
+function ageFrom(birthDate) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(birthDate || ''));
+  if (!m) return null;
+  const d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+  if (d.getUTCMonth() !== +m[2] - 1 || d.getUTCDate() !== +m[3]) return null; // p. ej. 31 de febrero
+  const now = new Date();
+  let age = now.getUTCFullYear() - d.getUTCFullYear();
+  if (now.getUTCMonth() < d.getUTCMonth() || (now.getUTCMonth() === d.getUTCMonth() && now.getUTCDate() < d.getUTCDate())) age -= 1;
+  return age >= 0 && age <= 120 ? age : null;
+}
+
+// Comprueba la fecha de nacimiento declarada: código de error o null si vale
+function birthError(birthDate) {
+  const age = ageFrom(birthDate);
+  if (age === null || age > 100) return 'birth';
+  if (age < 18) return 'underage';
+  return null;
+}
+
 function likesOf(user) {
   return { like: user.likes?.like || 0, love: user.likes?.love || 0 };
 }
 
 function publicUser(user) {
-  return { id: user.id, email: user.email, nick: user.nick || '', hasPassword: !!user.passHash, gender: user.gender, createdAt: user.createdAt, likes: likesOf(user), emailVerified: !!user.emailVerified };
+  return { id: user.id, email: user.email, nick: user.nick || '', hasPassword: !!user.passHash, birthDate: user.birthDate || null, gender: user.gender, createdAt: user.createdAt, likes: likesOf(user), emailVerified: !!user.emailVerified };
 }
 
 // true si la cuenta todavía tiene que confirmar su email
@@ -129,6 +149,9 @@ function routes(app) {
     if (password.length < 8 || password.length > 200) return res.status(400).json({ code: 'password', error: 'La contraseña debe tener al menos 8 caracteres' });
     if (!GENDERS.includes(gender)) return res.status(400).json({ code: 'gender', error: 'Elige qué eres: mujer, hombre, transexual o pareja' });
     if (adult !== true || terms !== true) return res.status(400).json({ code: 'terms', error: 'Debes confirmar que eres mayor de edad y aceptar las normas' });
+    // La fecha de nacimiento la pide la web (las cuentas antiguas pueden no tenerla)
+    const birthDate = req.body?.birthDate ? String(req.body.birthDate) : null;
+    if (birthDate && birthError(birthDate)) return res.status(400).json({ code: birthError(birthDate) });
     if (store.getUserByEmail(email)) return res.status(409).json({ code: 'exists', error: 'Ya existe una cuenta con ese email' });
     if (store.isEmailHashBanned(sha256(email))) return res.status(403).json({ code: 'bannedEmail' });
     if (!(await captcha.verifyHuman(req))) return res.status(400).json({ code: 'captcha' });
@@ -137,6 +160,7 @@ function routes(app) {
       email,
       passHash: await hashPassword(password),
       gender,
+      birthDate,
       status: 'active',
       tokenVersion: 0,
       acceptedTermsAt: Date.now(),
@@ -159,6 +183,16 @@ function routes(app) {
       return res.status(401).json({ code: 'badLogin', error: 'Email o contraseña incorrectos' });
     }
     res.json({ token: sessionToken(user), user: publicUser(user) });
+  });
+
+  // Cuentas sin fecha de nacimiento: se puede añadir una vez (después, solo soporte)
+  app.post('/api/me/birth', requireUser, (req, res) => {
+    if (req.user.birthDate) return res.status(409).json({ code: 'birthSet' });
+    const birthDate = String(req.body?.birthDate || '');
+    const err = birthError(birthDate);
+    if (err) return res.status(400).json({ code: err });
+    store.updateUser(req.user.id, { birthDate });
+    res.json({ ok: true, birthDate });
   });
 
   // Recuperar contraseña: envía un enlace por email. Siempre responde lo mismo,
@@ -224,5 +258,5 @@ function routes(app) {
 
 module.exports = {
   routes, requireUser, userFromToken, restriction, publicUser, likesOf, checkPassword, bearer, needsEmail,
-  sessionToken, cleanLang, rateLimited, sha256, EMAIL_RE, EMAIL_VERIFY, GENDERS,
+  sessionToken, cleanLang, rateLimited, sha256, ageFrom, birthError, EMAIL_RE, EMAIL_VERIFY, GENDERS,
 };

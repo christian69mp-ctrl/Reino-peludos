@@ -41,6 +41,7 @@
       <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
       <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></symbol>
       <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M9.9 4.2A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.7 2.7"/><path d="M6.6 6.6A13.5 13.5 0 0 0 2 12s3 8 10 8a9.7 9.7 0 0 0 5.4-1.6"/><path d="M14.1 14.1a3 3 0 1 1-4.2-4.2"/><path d="m2 2 20 20"/></symbol>
+      <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
       <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
       <symbol id="i-user-plus" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></symbol>
       <symbol id="i-user-check" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m16 11 2 2 4-4"/></symbol>
@@ -176,6 +177,7 @@
           <p class="muted" data-i18n="prem.text">With Premium you can filter by women, men, trans people or couples. Without Premium, the chat is still free and random.</p>
           <ul class="checklist">
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l1">Filter by women, men, trans people or couples</span></li>
+        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l5">Filter by country, near you and age range</span></li>
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l4">Chat history, friends and calls: see who is online</span></li>
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l2">Works on all your devices</span></li>
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l3">Cancel anytime</span></li>
@@ -219,6 +221,7 @@
         <div class="partner-info" id="partnerInfo" hidden>
           <span class="partner-tag" id="partnerTag"></span>
           <span class="partner-likes" id="partnerLikes"></span>
+          <span class="partner-country" id="partnerCountry" hidden></span>
           <span class="partner-lang" id="partnerLang" hidden><svg class="i"><use href="#i-languages"/></svg><span></span></span>
           <button type="button" class="friend-btn" id="friendBtn" hidden><svg class="i"><use href="#i-user-plus"/></svg><span></span></button>
         </div>
@@ -260,6 +263,28 @@
           <button type="button" class="chip" data-g="trans" data-i18n="gp.trans">Trans</button>
           <button type="button" class="chip" data-g="pareja" data-i18n="gp.pareja">Couples</button>
         </div>
+        <details class="more-filters" id="moreFilters">
+          <summary><svg class="i"><use href="#i-sliders"/></svg><span data-i18n="f.more">More filters</span><span class="f-count" id="fCount" hidden></span></summary>
+          <div class="filter-row" id="scopeRow">
+            <span class="filter-label" data-i18n="f.from">From</span>
+            <div class="chips" id="wantScope">
+              <button type="button" class="chip active" data-s="all" data-i18n="f.anywhere">Anywhere</button>
+              <button type="button" class="chip" data-s="country"><span data-i18n="f.country">My country</span> <span class="flag" id="myFlag"></span></button>
+              <button type="button" class="chip" data-s="near" data-i18n="f.near">Near me</button>
+            </div>
+            <p class="hint" data-i18n="f.geoHint">Approximate, based on your connection.</p>
+          </div>
+          <div class="filter-row">
+            <span class="filter-label" data-i18n="f.age">Age</span>
+            <div class="chips" id="wantAge">
+              <button type="button" class="chip active" data-a="" data-i18n="f.allAges">All ages</button>
+              <button type="button" class="chip" data-a="18-24">18–24</button>
+              <button type="button" class="chip" data-a="25-34">25–34</button>
+              <button type="button" class="chip" data-a="35-44">35–44</button>
+              <button type="button" class="chip" data-a="45+">45+</button>
+            </div>
+          </div>
+        </details>
       </div>
       <div id="messages" class="messages" aria-live="polite"></div>
       <form id="chatForm" class="chat-form">
@@ -285,7 +310,7 @@
         <select data-lang-select></select>
       </label>
     </div>
-    <p class="footer-legal"><span class="age">18+</span><span data-i18n="footer.legal">Adults only. © 2026 La Ruleta Caliente.</span></p>
+    <p class="footer-legal"><span class="age">18+</span><span data-i18n="footer.legal">Adults only. © 2026 La Ruleta Caliente.</span> <a class="geo-credit" href="https://db-ip.com" target="_blank" rel="noopener">IP Geolocation by DB-IP</a></p>
   </footer>
 
   <!-- ================= VENTANAS ================= -->
@@ -334,6 +359,13 @@
             <button type="button" class="chip" data-g="trans" data-i18n="g.trans">Trans</button>
             <button type="button" class="chip" data-g="pareja" data-i18n="g.pareja">Couple</button>
           </div>
+          <p class="field-label" data-i18n="b.label">Date of birth</p>
+          <div class="birth" id="authBirth">
+            <select data-part="d" aria-label="Day"></select>
+            <select data-part="m" aria-label="Month"></select>
+            <select data-part="y" aria-label="Year"></select>
+          </div>
+          <p class="hint birth-hint" data-i18n="b.hint">Nobody sees it. It is used for the age filter.</p>
           <label class="check">
             <input type="checkbox" id="authTerms">
             <span data-i18n-html="auth.terms">I am 18 or older and I accept the <a href="/terminos" target="_blank">Terms</a>, the <a href="/privacidad" target="_blank">Privacy policy</a> and the <a href="/normas" target="_blank">Community rules</a>.</span>
@@ -439,6 +471,7 @@
       </div>
       <ul class="checklist">
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l1">Filter by women, men, trans people or couples</span></li>
+        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l5">Filter by country, near you and age range</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l4">Chat history, friends and calls: see who is online</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l2">Works on all your devices</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l3">Cancel anytime</span></li>
@@ -491,12 +524,25 @@
       <h2 data-i18n="btn.account">My account</h2>
       <dl class="account-list">
         <dt data-i18n="auth.email">Email</dt><dd id="accEmail"></dd>
+        <dt data-i18n="b.label">Date of birth</dt><dd id="accBirth"></dd>
         <dt data-i18n="acc.premium">Premium</dt><dd id="accPremium"></dd>
         <dt data-i18n="acc.age">Age</dt><dd id="accAge"></dd>
         <dt data-i18n="acc.likes">Your likes</dt><dd id="accLikes"></dd>
         <dt data-i18n="acc.code">Your protection code</dt><dd><b id="accCode" class="code"></b></dd>
       </dl>
       <p class="hint" data-i18n="acc.codeHelp">It appears over the videos you watch.</p>
+      <form id="birthForm" class="nick-form" novalidate hidden>
+        <p class="field-label" data-i18n="acc.birthAdd">Add your date of birth to appear in age searches</p>
+        <div class="row">
+          <div class="birth" id="accBirthInput">
+            <select data-part="d" aria-label="Day"></select>
+            <select data-part="m" aria-label="Month"></select>
+            <select data-part="y" aria-label="Year"></select>
+          </div>
+          <button type="submit" class="btn ghost" data-i18n="acc.nickSave">Save</button>
+        </div>
+        <p class="form-error" id="birthError" hidden></p>
+      </form>
       <form id="nickForm" class="nick-form" novalidate>
         <label class="field"><span data-i18n="acc.nick">Your name in the chat</span>
           <span class="row">
@@ -534,6 +580,13 @@
         <button type="button" class="chip" data-g="trans" data-i18n="g.trans">Trans</button>
         <button type="button" class="chip" data-g="pareja" data-i18n="g.pareja">Couple</button>
       </div>
+      <p class="field-label" data-i18n="b.label">Date of birth</p>
+      <div class="birth" id="socialBirth">
+            <select data-part="d" aria-label="Day"></select>
+            <select data-part="m" aria-label="Month"></select>
+            <select data-part="y" aria-label="Year"></select>
+          </div>
+      <p class="hint birth-hint" data-i18n="b.hint">Nobody sees it. It is used for the age filter.</p>
       <label class="check">
         <input type="checkbox" id="socialTerms">
         <span data-i18n-html="auth.terms">I am 18 or older and I accept the <a href="/terminos" target="_blank">Terms</a>, the <a href="/privacidad" target="_blank">Privacy policy</a> and the <a href="/normas" target="_blank">Community rules</a>.</span>

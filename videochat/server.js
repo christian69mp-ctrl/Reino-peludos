@@ -12,6 +12,8 @@ const privacy = require('./privacy');
 const captcha = require('./captcha');
 const friends = require('./friends');
 const oauth = require('./oauth');
+const geo = require('./geo');
+const proxyAddr = require('proxy-addr');
 
 const PORT = process.env.PORT || 3000;
 
@@ -131,9 +133,22 @@ function unpair(socket, notify = true) {
   if (other) presenceChanged(other.data.uid);
 }
 
-// a quiere ver a b? (sin filtro = cualquiera)
+// Filtros Premium: género, de dónde (todo el mundo / mi país / cerca de mí) y edad
+const SCOPES = ['all', 'country', 'near'];
+const AGE_RANGES = { '18-24': [18, 24], '25-34': [25, 34], '35-44': [35, 44], '45+': [45, 120] };
+const NO_FILTERS = { want: [], scope: 'all', age: null };
+
+// a quiere ver a b? (sin filtros = cualquiera)
 function wants(a, b) {
-  return a.data.want.length === 0 || a.data.want.includes(b.data.gender);
+  const f = a.data.filters;
+  if (f.want.length && !f.want.includes(b.data.gender)) return false;
+  if (f.scope === 'country' && (!a.data.geo || b.data.geo?.country !== a.data.geo.country)) return false;
+  if (f.scope === 'near' && !geo.near(a.data.geo, b.data.geo)) return false;
+  if (f.age) {
+    const [min, max] = AGE_RANGES[f.age];
+    if (!(b.data.age >= min && b.data.age <= max)) return false;
+  }
+  return true;
 }
 
 // Pueden coincidir? (no es la misma cuenta y ninguno ha denunciado al otro)
@@ -192,6 +207,7 @@ function partnerInfo(viewer, s) {
     name: user.nick || '',
     handle: friends.handle(viewer.data.uid, s.data.uid),
     relation: friends.relation(viewer.data.uid, s.data.uid),
+    country: s.data.geo?.country || '',
   };
 }
 
@@ -294,23 +310,28 @@ io.use((socket, next) => {
   socket.data.gender = user.gender;
   socket.data.premium = payments.isPremium(user.id);
   socket.data.blocked = new Set(user.blocked || []);
-  socket.data.want = [];
+  socket.data.filters = NO_FILTERS;
+  socket.data.age = auth.ageFrom(user.birthDate);
+  // IP real (detrás del proxy HTTPS) → país y zona aproximados, solo en memoria
+  socket.data.geo = geo.lookup(proxyAddr(socket.request, app.get('trust proxy fn')));
   const lang = String(socket.handshake.auth?.lang || '').toLowerCase();
   socket.data.lang = LANG_RE.test(lang) ? lang : 'en';
   next();
 });
 
 io.on('connection', (socket) => {
-  socket.emit('account', { premium: socket.data.premium });
+  socket.emit('account', { premium: socket.data.premium, country: socket.data.geo?.country || '', geo: geo.available() });
   const uid = socket.data.uid;
   if (!userSockets.has(uid)) userSockets.set(uid, new Set());
   userSockets.get(uid).add(socket.id);
   presenceChanged(uid);
 
   socket.on('find', (opts = {}) => {
-    // El filtro solo se aplica a usuarios Premium; el resto, siempre al azar
+    // Los filtros solo se aplican a usuarios Premium; el resto, siempre al azar
     const want = Array.isArray(opts.want) ? opts.want.filter((g) => auth.GENDERS.includes(g)) : [];
-    socket.data.want = socket.data.premium ? want : [];
+    const scope = SCOPES.includes(opts.scope) && socket.data.geo ? opts.scope : 'all';
+    const age = AGE_RANGES[opts.age] ? opts.age : null;
+    socket.data.filters = socket.data.premium ? { want, scope, age } : NO_FILTERS;
     cancelOutgoingCall(socket);
     unpair(socket);
     findMatch(socket);

@@ -98,6 +98,7 @@ function userSummary(user) {
     reportsOpen: reports.filter((r) => r.status === 'open').length,
     age: user.age?.status || 'none',
     ageCheck: !!user.ageCheck,
+    declaredAge: require('./auth').ageFrom(user.birthDate),
     code: user.id.slice(1, 9).toUpperCase().replace(/^(.{4})/, '$1-'),
     captureAttempts: user.captureAttempts || 0,
   };

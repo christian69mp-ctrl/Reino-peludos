@@ -62,6 +62,7 @@ function exportData(user) {
     account: {
       email: user.email,
       nick: user.nick || '',
+      birthDate: user.birthDate || null,
       signInWith: [...(user.passHash ? ['password'] : []), ...Object.keys(user.oauth || {})],
       gender: user.gender,
       language: user.lang,
