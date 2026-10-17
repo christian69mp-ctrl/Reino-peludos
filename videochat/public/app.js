@@ -866,7 +866,20 @@ function setStatus(key, vars, searching = false) {
   $('statusText').textContent = key ? t(key, vars) : '';
 }
 
+// En vista amplia el chat de texto no se ve: los mensajes salen un momento sobre el vídeo
+function overlayMsg(text, who) {
+  if (!document.body.classList.contains('wide-video') || (who !== 'them' && who !== 'me')) return;
+  const p = document.createElement('p');
+  p.className = who;
+  p.textContent = text;
+  const box = $('overlayMsgs');
+  box.appendChild(p);
+  while (box.children.length > 3) box.firstChild.remove();
+  setTimeout(() => p.remove(), 6200);
+}
+
 function addMsg(text, who) {
+  overlayMsg(text, who);
   const p = document.createElement('p');
   p.className = `msg ${who}`;
   p.textContent = text;
@@ -1242,6 +1255,55 @@ async function switchCamera() {
   switching = false;
 }
 $('switchCam').addEventListener('click', switchCamera);
+
+// ---------- Vista: tamaño del recuadro, intercambiar, vista amplia, pantalla completa ----------
+// Se recuerda en este navegador. Intercambiar solo mueve los vídeos con CSS: la marca de
+// agua y el difuminado de protección siguen cubriendo el vídeo de la otra persona.
+const PIP_SIZES = [['S', '16%'], ['M', '22%'], ['L', '32%'], ['XL', '44%']];
+const view = (() => {
+  try { return { pip: 1, swap: false, wide: false, ...JSON.parse(load('view') || '{}') }; } catch { return { pip: 1, swap: false, wide: false }; }
+})();
+function applyView() {
+  view.pip = Math.min(Math.max(Number(view.pip) || 0, 0), PIP_SIZES.length - 1);
+  $('remote').style.setProperty('--pip', PIP_SIZES[view.pip][1]);
+  $('pipSizeLabel').textContent = PIP_SIZES[view.pip][0];
+  $('pipSmaller').disabled = view.pip === 0;
+  $('pipBigger').disabled = view.pip === PIP_SIZES.length - 1;
+  $('remote').classList.toggle('swapped', view.swap);
+  $('swapBtn').setAttribute('aria-pressed', String(view.swap));
+  document.body.classList.toggle('wide-video', view.wide);
+  $('wideBtn').setAttribute('aria-pressed', String(view.wide));
+  const fs = !!document.fullscreenElement;
+  $('fullBtn').querySelector('span').textContent = t(fs ? 'view.exitFull' : 'view.full');
+  $('fullBtn').hidden = !document.fullscreenEnabled;
+  save('view', JSON.stringify({ pip: view.pip, swap: view.swap, wide: view.wide }));
+}
+function setView(changes) { Object.assign(view, changes); applyView(); }
+function toggleViewMenu(open = $('viewMenu').hidden) {
+  $('viewMenu').hidden = !open;
+  $('viewBtn').setAttribute('aria-expanded', String(open));
+  if (open) $('viewMenu').querySelector('button:not(:disabled)')?.focus();
+}
+$('viewBtn').addEventListener('click', (e) => { e.stopPropagation(); toggleViewMenu(); });
+$('pipSmaller').addEventListener('click', () => setView({ pip: view.pip - 1 }));
+$('pipBigger').addEventListener('click', () => setView({ pip: view.pip + 1 }));
+$('swapBtn').addEventListener('click', () => setView({ swap: !view.swap }));
+$('wideBtn').addEventListener('click', () => setView({ wide: !view.wide }));
+$('fullBtn').addEventListener('click', async () => {
+  try {
+    if (document.fullscreenElement) await document.exitFullscreen();
+    else await document.querySelector('.stage').requestFullscreen({ navigationUI: 'hide' });
+  } catch { /* el navegador no lo permite */ }
+  toggleViewMenu(false);
+});
+document.addEventListener('fullscreenchange', applyView);
+// Doble clic (o doble toque) en el recuadro pequeño: intercambiar
+document.querySelector('.self').addEventListener('dblclick', (e) => { if (!e.target.closest('button')) setView({ swap: !view.swap }); });
+$('remoteVideo').addEventListener('dblclick', () => { if (view.swap) setView({ swap: false }); });
+document.addEventListener('click', (e) => { if (!$('viewMenu').hidden && !e.target.closest('.view-wrap')) toggleViewMenu(false); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('viewMenu').hidden) { e.stopImmediatePropagation(); toggleViewMenu(false); $('viewBtn').focus(); } }, true);
+document.addEventListener('langchange', applyView);
+applyView();
 
 async function start() {
   if (!(await startCamera())) return;

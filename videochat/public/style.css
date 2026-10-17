@@ -246,7 +246,7 @@ body.in-chat .site-footer { display: none; }
 }
 .remote.shielded video { filter: blur(40px) brightness(.6); }
 .shield { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; text-align: center; padding: 20px; font-weight: 700; background: rgba(12, 10, 15, .4); }
-.self { position: absolute; right: 14px; bottom: 14px; width: clamp(110px, 22%, 240px); aspect-ratio: 4 / 3; border-radius: 14px; overflow: hidden; border: 2px solid rgba(255,255,255,.18); background: #000; box-shadow: var(--shadow); z-index: 2; }
+.self { position: absolute; right: 14px; bottom: 14px; width: clamp(90px, var(--pip, 22%), 520px); aspect-ratio: 4 / 3; border-radius: 14px; overflow: hidden; border: 2px solid rgba(255,255,255,.18); background: #000; box-shadow: var(--shadow); z-index: 2; }
 .self video { width: 100%; height: 100%; object-fit: cover; }
 .self.mirror video { transform: scaleX(-1); }
 .cam-switch { position: absolute; right: 6px; top: 6px; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 999px; border: 1px solid rgba(255,255,255,.25); background: rgba(0,0,0,.55); color: #fff; cursor: pointer; }
@@ -759,3 +759,51 @@ body.in-chat .guindilla-launcher, body.in-chat .guindilla.floating { display: no
 .ck-item dd { margin: 2px 0 0; font-size: .84rem; color: #d8d2df; }
 @media (max-width: 640px) { .ck-list { grid-template-columns: 1fr; } }
 .doc .callout + p { margin-top: 14px; }
+
+/* ----- Vista del videochat: tamaño del recuadro, intercambiar, vista amplia y pantalla completa ----- */
+.self { transition: width .2s ease; cursor: pointer; }
+.view-wrap { position: relative; }
+.view-menu {
+  position: absolute; z-index: 30; right: 0; bottom: calc(100% + 10px); width: 260px;
+  padding: 8px; border-radius: 16px; background: var(--surface-2); border: 1px solid var(--border); box-shadow: var(--shadow);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.view-menu[hidden] { display: none; }
+.vm-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 10px; font-size: .9rem; font-weight: 600; }
+.vm-size { display: flex; align-items: center; gap: 6px; }
+.vm-size button { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 1.15rem; font-weight: 700; cursor: pointer; }
+.vm-size button:hover:not(:disabled) { border-color: var(--accent); }
+.vm-size button:disabled { opacity: .4; cursor: default; }
+.vm-size span { min-width: 30px; text-align: center; font-variant-numeric: tabular-nums; color: var(--muted); }
+.vm-item { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px; border: 0; border-radius: 10px; background: transparent; color: var(--text); font: inherit; font-size: .92rem; text-align: left; cursor: pointer; }
+.vm-item:hover { background: var(--bg); }
+.vm-item[aria-pressed="true"] { color: var(--accent); }
+.vm-item[aria-pressed="true"]::after { content: "✓"; margin-left: auto; font-weight: 800; }
+.vm-item[hidden] { display: none; }
+
+/* Intercambiar: tu cámara ocupa la pantalla y la otra persona pasa al recuadro.
+   La marca de agua (z-index 1, después del vídeo) sigue encima del vídeo de la otra persona. */
+.remote.swapped .self { inset: 0; width: 100%; height: 100%; aspect-ratio: auto; border: 0; border-radius: 0; box-shadow: none; z-index: 0; cursor: default; }
+.remote.swapped #remoteVideo {
+  position: absolute; right: 14px; bottom: 14px; z-index: 1;
+  width: clamp(90px, var(--pip, 22%), 520px); height: auto; aspect-ratio: 4 / 3;
+  border-radius: 14px; border: 2px solid rgba(255,255,255,.18); box-shadow: var(--shadow); background: #000; object-fit: cover;
+}
+.remote.swapped .my-likes { display: none; }
+
+/* Vista amplia: el vídeo ocupa todo el ancho y el chat de texto se ve encima del vídeo */
+body.wide-video .chat { grid-template-columns: 1fr; }
+body.wide-video .chat > .side, body.wide-video .chat > .ad-side { display: none !important; }
+@media (max-width: 960px) { body.wide-video .remote { max-height: 82dvh; } }
+.overlay-msgs { position: absolute; z-index: 3; left: 50%; bottom: 74px; transform: translateX(-50%); width: min(560px, calc(100% - 40px)); display: flex; flex-direction: column; align-items: center; gap: 6px; pointer-events: none; }
+.overlay-msgs p { margin: 0; max-width: 100%; padding: 8px 14px; border-radius: 14px; background: rgba(0, 0, 0, .62); backdrop-filter: blur(8px); color: #fff; font-size: .92rem; animation: om-in .25s ease, om-out .4s ease 5.6s forwards; }
+.overlay-msgs p.me { background: rgba(255, 61, 110, .7); }
+@keyframes om-in { from { opacity: 0; transform: translateY(8px); } }
+@keyframes om-out { to { opacity: 0; } }
+
+/* Pantalla completa: vídeo y botones juntos */
+.stage:fullscreen { background: #000; padding: 14px; gap: 12px; }
+.stage:fullscreen .remote { border-radius: 14px; }
+@media (prefers-reduced-motion: reduce) { .self { transition: none; } .overlay-msgs p { animation: om-out .1s linear 6s forwards; } }
+
+.controls .btn.lg.icon-only { min-width: 0; flex: none; width: 54px; padding-left: 0; padding-right: 0; justify-content: center; }

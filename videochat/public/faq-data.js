@@ -1300,5 +1300,33 @@ window.FAQ = {
         it: ["pubblicita", "annunci", "togliere pubblicita", "senza pubblicita", "banner"],
       },
     },
+    {
+      id: "bigger-video",
+      cat: "chat",
+      q: {
+        es: "¿Puedo ver más grande a la otra persona o cambiar mi recuadro?",
+        en: "Can I make the other person bigger or change my own box?",
+        pt: "Posso ver a outra pessoa maior ou mudar a minha janela?",
+        fr: "Puis-je agrandir l’autre personne ou changer ma vignette ?",
+        de: "Kann ich die andere Person größer sehen oder mein Fenster ändern?",
+        it: "Posso vedere più grande l’altra persona o cambiare il mio riquadro?",
+      },
+      a: {
+        es: "Sí. Pulsa el botón de vista (el rectángulo junto a «Parar»): puedes hacer tu recuadro más pequeño o más grande, intercambiar los recuadros (verte en grande y a la otra persona en pequeño), usar la vista amplia, que oculta el chat de texto y muestra los mensajes sobre el vídeo, o poner la pantalla completa. Atajo: doble clic en el recuadro pequeño para intercambiar. Se recuerda para la próxima vez.",
+        en: "Yes. Tap the view button (the rectangle next to “Stop”): you can make your box smaller or bigger, swap the boxes (see yourself big and the other person small), use wide view, which hides the text chat and shows messages over the video, or go full screen. Shortcut: double-click the small box to swap. It is remembered for next time.",
+        pt: "Sim. Toque no botão de visualização (o retângulo ao lado de «Parar»): você pode deixar sua janela menor ou maior, trocar as janelas (ver você grande e a outra pessoa pequena), usar a visão ampla, que oculta o chat de texto e mostra as mensagens sobre o vídeo, ou ativar a tela cheia. Atalho: duplo clique na janela pequena para trocar. Fica salvo para a próxima vez.",
+        fr: "Oui. Touchez le bouton d’affichage (le rectangle à côté de « Arrêter ») : vous pouvez réduire ou agrandir votre vignette, inverser les vidéos (vous en grand et l’autre personne en petit), utiliser la vue large, qui masque le chat écrit et affiche les messages sur la vidéo, ou passer en plein écran. Raccourci : double-clic sur la petite vignette pour inverser. C’est mémorisé pour la prochaine fois.",
+        de: "Ja. Tippe auf die Ansichtstaste (das Rechteck neben „Stopp“): Du kannst dein Fenster kleiner oder größer machen, die Fenster tauschen (dich groß und die andere Person klein), die breite Ansicht nutzen, die den Textchat ausblendet und Nachrichten über dem Video zeigt, oder in den Vollbildmodus wechseln. Tipp: Doppelklick auf das kleine Fenster zum Tauschen. Es wird fürs nächste Mal gespeichert.",
+        it: "Sì. Tocca il pulsante di visualizzazione (il rettangolo accanto a «Ferma»): puoi rimpicciolire o ingrandire il tuo riquadro, scambiare i riquadri (te in grande e l’altra persona in piccolo), usare la vista ampia, che nasconde la chat scritta e mostra i messaggi sul video, o andare a schermo intero. Scorciatoia: doppio clic sul riquadro piccolo per scambiare. Viene ricordato per la prossima volta.",
+      },
+      k: {
+        es: ["mas grande", "agrandar", "pantalla completa", "recuadro", "intercambiar", "cambiar recuadro", "ampliar", "zoom", "tamaño"],
+        en: ["bigger", "enlarge", "full screen", "fullscreen", "swap", "box size", "zoom", "picture in picture"],
+        pt: ["maior", "aumentar", "tela cheia", "trocar janelas", "janela", "zoom", "tamanho"],
+        fr: ["plus grand", "agrandir", "plein ecran", "inverser", "vignette", "zoom", "taille"],
+        de: ["grosser", "vergrossern", "vollbild", "tauschen", "fenster", "zoom", "grosse"],
+        it: ["piu grande", "ingrandire", "schermo intero", "scambiare", "riquadro", "zoom", "dimensione"],
+      },
+    },
   ],
 };

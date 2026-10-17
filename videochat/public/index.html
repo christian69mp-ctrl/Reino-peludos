@@ -41,6 +41,10 @@
       <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
       <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></symbol>
       <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M9.9 4.2A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.7 2.7"/><path d="M6.6 6.6A13.5 13.5 0 0 0 2 12s3 8 10 8a9.7 9.7 0 0 0 5.4-1.6"/><path d="M14.1 14.1a3 3 0 1 1-4.2-4.2"/><path d="m2 2 20 20"/></symbol>
+      <symbol id="i-layout" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><rect x="12" y="11" width="7" height="6" rx="1"/></symbol>
+      <symbol id="i-swap" viewBox="0 0 24 24"><path d="M7 4 3 8l4 4"/><path d="M3 8h13a4 4 0 0 1 4 4"/><path d="m17 20 4-4-4-4"/><path d="M21 16H8a4 4 0 0 1-4-4"/></symbol>
+      <symbol id="i-wide" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m7 10-2 2 2 2"/><path d="m17 10 2 2-2 2"/></symbol>
+      <symbol id="i-fullscreen" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
       <symbol id="i-cam-switch" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><path d="M8.5 13.5a3.5 3.5 0 0 0 6.2 2.2M15.5 12.5a3.5 3.5 0 0 0-6.2-2.2"/><path d="M15 16v-1.8h-1.8M9 10v1.8h1.8"/></symbol>
       <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
       <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
@@ -258,12 +262,29 @@
           <button type="button" class="cam-switch" id="switchCam" hidden data-i18n-aria="cam.switch" aria-label="Switch camera"><svg class="i"><use href="#i-cam-switch"/></svg></button>
           <span class="my-likes" id="myLikes" hidden></span>
         </div>
+        <div class="overlay-msgs" id="overlayMsgs" aria-hidden="true"></div>
         <div class="burst-layer" id="burstLayer" aria-hidden="true"></div>
       </div>
       <div class="controls">
         <button id="startBtn" class="btn primary lg"><svg class="i"><use href="#i-play"/></svg><span data-i18n="chat.start">Start</span></button>
         <button id="nextBtn" class="btn primary lg" hidden><svg class="i"><use href="#i-skip"/></svg><span data-i18n="chat.next">Next</span> <kbd>Esc</kbd></button>
         <button id="stopBtn" class="btn ghost lg" hidden><svg class="i"><use href="#i-stop"/></svg><span data-i18n="chat.stop">Stop</span></button>
+        <div class="view-wrap">
+          <button id="viewBtn" class="btn ghost lg icon-only" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="viewMenu" data-i18n-aria="view.btn" aria-label="View options"><svg class="i"><use href="#i-layout"/></svg></button>
+          <div class="view-menu" id="viewMenu" hidden>
+            <div class="vm-row">
+              <span data-i18n="view.size">Your box</span>
+              <div class="vm-size">
+                <button type="button" id="pipSmaller" data-i18n-aria="view.smaller" aria-label="Smaller">−</button>
+                <span id="pipSizeLabel" aria-live="polite">M</span>
+                <button type="button" id="pipBigger" data-i18n-aria="view.bigger" aria-label="Bigger">+</button>
+              </div>
+            </div>
+            <button type="button" class="vm-item" id="swapBtn" aria-pressed="false"><svg class="i"><use href="#i-swap"/></svg><span data-i18n="view.swap">Swap boxes</span></button>
+            <button type="button" class="vm-item" id="wideBtn" aria-pressed="false"><svg class="i"><use href="#i-wide"/></svg><span data-i18n="view.wide">Wide view (hide chat)</span></button>
+            <button type="button" class="vm-item" id="fullBtn"><svg class="i"><use href="#i-fullscreen"/></svg><span data-i18n="view.full">Full screen</span></button>
+          </div>
+        </div>
       </div>
     </section>
 

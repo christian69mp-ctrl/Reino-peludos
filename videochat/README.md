@@ -112,6 +112,11 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
 - **Cambiar de cámara**: botón sobre tu propia imagen (frontal/trasera o cualquier webcam), también
   en mitad de una conversación sin cortarla. Tu imagen se ve en espejo solo con la cámara frontal;
   se puede quitar el espejo en Mi cuenta → Privacidad.
+- **Vista del videochat** (botón junto a «Parar»): cambiar el tamaño de tu recuadro (S, M, L, XL),
+  intercambiar recuadros (tú en grande y la otra persona en pequeño; también con doble clic en el
+  recuadro pequeño), vista amplia (oculta el chat de texto y los mensajes salen un momento sobre el
+  vídeo) y pantalla completa. Se recuerda en el navegador. Al intercambiar, la marca de agua y el
+  difuminado de protección siguen cubriendo el vídeo de la otra persona.
 - **Mi cuenta** con pestañas: Perfil (datos, fecha de nacimiento, nombre en el chat), Seguridad
   (cambiar contraseña, cambiar email con enlace de confirmación al nuevo, cerrar sesión en todos los
   dispositivos), Privacidad (personas bloqueadas y desbloquear, espejo, descargar mis datos, eliminar
@@ -140,7 +145,7 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   sesión) y **solo se carga si la persona acepta** el aviso de cookies de publicidad (Aceptar y
   Rechazar al mismo nivel; se puede cambiar en «Configurar cookies»). Con Premium de pago no hay
   anuncios. Cada hueco lleva la etiqueta «Publicidad» (art. 20 LSSI).
-- **Centro de ayuda** `/ayuda` con 44 preguntas frecuentes en 6 idiomas, buscador, categorías y
+- **Centro de ayuda** `/ayuda` con 45 preguntas frecuentes en 6 idiomas, buscador, categorías y
   **Guindilla 🌶️**, la asistente que responde al momento: una guindilla dibujada con cara que aparece con un rebote, saluda con la mano, parpadea y mueve la boca al responder (sin sonido; se queda quieta si el sistema pide reducir el movimiento) (sin IA: busca palabras clave en cualquier
   idioma). También hay un botón flotante de Guindilla en la portada (se oculta durante el videochat).
 - **Motivo de la sanción y recurso** (DSA art. 17 y 20): quien está suspendido o expulsado ve el
