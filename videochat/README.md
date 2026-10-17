@@ -174,7 +174,7 @@ Diseño hecho con Gemini y redibujado en vector para que se vea nítido a cualqu
 - `public/favicon.svg` y `favicon.ico` — pestaña del navegador.
 - `public/icon-192.png`, `icon-512.png`, `icon-maskable-512.png`, `apple-touch-icon.png` — iconos
   de la app instalable (Android, iPhone) declarados en `public/manifest.webmanifest`.
-- `public/og-image.png` (1200×630) — vista previa al compartir el enlace (WhatsApp, X, Telegram…).
+- `public/og-image.jpg` (1200×630) — vista previa al compartir el enlace (WhatsApp, X, Telegram…).
 
 ## Estructura
 

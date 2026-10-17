@@ -335,6 +335,7 @@
       'ck.settings': "Configurar cookies",
       'ck.title': "Cookies de publicidad",
       'ck.saved': "Preferencias de cookies guardadas",
+      'ck.fun': "Aquí no hay galletas, hay guindillas 🌶️",
       'err.auth': 'Inicia sesión para continuar', 'err.generic': 'No se pudo completar. Inténtalo de nuevo.',
     },
 
@@ -670,6 +671,7 @@
       'ck.settings': "Cookie settings",
       'ck.title': "Advertising cookies",
       'ck.saved': "Cookie preferences saved",
+      'ck.fun': "No cookies here, just chili peppers 🌶️",
       'err.auth': 'Log in to continue', 'err.generic': 'Something went wrong. Please try again.',
     },
 
@@ -1005,6 +1007,7 @@
       'ck.settings': "Configurar cookies",
       'ck.title': "Cookies de publicidade",
       'ck.saved': "Preferências de cookies salvas",
+      'ck.fun': "Aqui não tem biscoitos, tem pimentas 🌶️",
       'err.auth': 'Entre na sua conta para continuar', 'err.generic': 'Algo deu errado. Tente de novo.',
     },
 
@@ -1340,6 +1343,7 @@
       'ck.settings': "Gérer les cookies",
       'ck.title': "Cookies publicitaires",
       'ck.saved': "Préférences de cookies enregistrées",
+      'ck.fun': "Ici, pas de biscuits : des piments 🌶️",
       'err.auth': 'Connectez-vous pour continuer', 'err.generic': 'Une erreur est survenue. Réessayez.',
     },
 
@@ -1675,6 +1679,7 @@
       'ck.settings': "Cookie-Einstellungen",
       'ck.title': "Werbe-Cookies",
       'ck.saved': "Cookie-Einstellungen gespeichert",
+      'ck.fun': "Hier gibt’s keine Kekse, sondern Chilis 🌶️",
       'err.auth': 'Melde dich an, um fortzufahren', 'err.generic': 'Etwas ist schiefgelaufen. Bitte erneut versuchen.',
     },
 
@@ -2010,6 +2015,7 @@
       'ck.settings': "Impostazioni cookie",
       'ck.title': "Cookie pubblicitari",
       'ck.saved': "Preferenze dei cookie salvate",
+      'ck.fun': "Qui niente biscotti, solo peperoncini 🌶️",
       'err.auth': 'Accedi per continuare', 'err.generic': 'Qualcosa è andato storto. Riprova.',
     },
   };

@@ -215,6 +215,17 @@ function render(req, page, lang) {
   }
   html = html.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(desc)}">`);
   html = html.replace(/\s*<link rel="alternate" hreflang="[^"]*" href="[^"]*">/g, '');
+  // Vista previa al compartir el enlace (WhatsApp, Telegram, X…) en todas las páginas
+  if (!html.includes('og:image')) {
+    html = html.replace('</head>', [
+      '<meta property="og:type" content="website">',
+      `<meta property="og:title" content="${esc(title)}">`,
+      `<meta property="og:description" content="${esc(desc)}">`,
+      `<meta property="og:image" content="${base(req)}/og-image.jpg">`,
+      '<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">',
+      `<meta property="og:site_name" content="${SITE}">`, '<meta name="twitter:card" content="summary_large_image">',
+    ].map((m) => `  ${m}\n`).join('') + '</head>');
+  }
   html = html.replace('</head>', `  ${head(req, page, lang, title)}\n</head>`);
   cache.set(k, html);
   return html;

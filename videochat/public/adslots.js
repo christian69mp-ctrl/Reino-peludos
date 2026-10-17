@@ -25,15 +25,17 @@
   // ---- Aviso de cookies (Aceptar y Rechazar con el mismo peso) ----
   let bar = null;
   function openConsent() {
-    if (bar) { bar.hidden = false; return; }
+    if (bar) { bar.hidden = false; window.Mascot?.gesture(bar.querySelector('.consent-mascot'), 'wave', 2000); return; }
     bar = document.createElement('section');
     bar.className = 'consent';
     bar.setAttribute('role', 'dialog');
     bar.setAttribute('aria-labelledby', 'consentTitle');
-    bar.innerHTML = `<div class="consent-text"><b id="consentTitle"></b><p><span class="ck-text"></span> <a class="link" href="/cookies"></a></p></div>
+    bar.innerHTML = `<span class="consent-mascot" aria-hidden="true">${window.Mascot?.svg || '🌶️'}</span>
+      <div class="consent-text"><span class="consent-eyebrow"></span><b id="consentTitle"></b><p><span class="ck-text"></span> <a class="link" href="/cookies"></a></p></div>
       <div class="consent-actions"><button type="button" class="btn ghost" data-c="no"></button><button type="button" class="btn ghost" data-c="yes"></button></div>`;
     const texts = () => {
-      bar.querySelector('#consentTitle').textContent = t('ck.title');
+      bar.querySelector('.consent-eyebrow').textContent = t('ck.title');
+      bar.querySelector('#consentTitle').textContent = t('ck.fun');
       bar.querySelector('.ck-text').textContent = t('ck.text');
       const a = bar.querySelector('a');
       a.textContent = t('footer.cookies');
@@ -51,6 +53,10 @@
       render();
     });
     document.body.appendChild(bar);
+    // La guindilla saluda al aparecer el aviso (sin sonido)
+    const m = bar.querySelector('.consent-mascot');
+    window.Mascot?.gesture(m, 'pop', 700);
+    setTimeout(() => window.Mascot?.gesture(m, 'wave', 2400), 350);
   }
 
   // ---- Huecos ----
