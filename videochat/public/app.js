@@ -923,7 +923,8 @@ function likesText(likes) {
 function renderPartner() {
   if (!partner) { $('partnerInfo').hidden = true; $('friendBtn').hidden = true; return; }
   $('partnerInfo').hidden = false;
-  $('partnerTag').textContent = partner.name ? `${partner.name} · ${t(`g.${partner.gender}`)}` : t(`g.${partner.gender}`);
+  // «Ana · 27 · Mujer»
+  $('partnerTag').textContent = [partner.name, partner.age, t(`g.${partner.gender}`)].filter((x) => x || x === 0).join(' · ');
   renderFriendBtn();
   $('partnerLikes').textContent = likesText(partner.likes);
   const pc = $('partnerCountry');
@@ -1107,12 +1108,12 @@ function connectSocket() {
 
   socket.on('waiting', setSearching);
 
-  socket.on('matched', async ({ initiator, call, gender, lang, likes, name, handle, relation, country }) => {
+  socket.on('matched', async ({ initiator, call, gender, lang, likes, name, handle, relation, country, age }) => {
     clearOutgoingCall();
     clearTimeout(fewTimer);
     createPeer();
     setConnected(true);
-    partner = { gender, lang, likes, name, handle, relation, country };
+    partner = { gender, lang, likes, name, handle, relation, country, age };
     resetMessages();
     setStatus('');
     addMsg(call ? t('call.connected', { name: name || t(`g.${gender}`) }) : t('msg.connected'), 'sys');

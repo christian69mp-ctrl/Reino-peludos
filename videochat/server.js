@@ -208,6 +208,7 @@ function partnerInfo(viewer, s) {
     handle: friends.handle(viewer.data.uid, s.data.uid),
     relation: friends.relation(viewer.data.uid, s.data.uid),
     country: s.data.geo?.country || '',
+    age: s.data.age ?? null,
   };
 }
 

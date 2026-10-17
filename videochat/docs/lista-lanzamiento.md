@@ -25,7 +25,8 @@ la web no cobra nada y los filtros son gratis para todos.
 
 - ☐ Comprar el dominio.
 - ☐ Crear el buzón `soporte@tudominio.com` (en la web aparece como contacto).
-- ☐ Cuenta de **Brevo** (emails) con SPF, DKIM y DMARC en el DNS.
+- ☐ Preguntar por escrito a **Brevo** si acepta la web (ver docs/alojamiento-y-servicios.md); si sí, cuenta con SPF, DKIM y DMARC en el DNS.
+- ☐ Preguntar por escrito al **proveedor del servidor** si acepta la web (modelo de email en docs/alojamiento-y-servicios.md).
 - ☐ **Cloudflare Turnstile** (anti-bots): site key y secret.
 - ☐ (Opcional) **DeepL API Free** para traducir el chat.
 

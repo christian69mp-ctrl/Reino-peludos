@@ -14,7 +14,10 @@ copias de seguridad automáticas. No hace falta saber programar: solo copiar y p
 ## 1. Contratar un servidor (VPS)
 
 - Sistema: **Ubuntu 24.04**. Tamaño: **2 CPU, 4 GB RAM** basta para empezar.
-- Que tenga **IP pública propia** (Hetzner, OVH, Contabo, DigitalOcean… la dan así).
+- **Dónde:** recomendado **OVHcloud VPS** (Francia). Evita Hetzner y proveedores alemanes (prohíben
+  contenido adulto). Comparativa, modelo de email para preguntar y servicios gratuitos en
+  [docs/alojamiento-y-servicios.md](docs/alojamiento-y-servicios.md).
+- Que tenga **IP pública propia** (los VPS de OVH la dan así).
 - Ubicación en la UE (por protección de datos).
 - **Tráfico mensual amplio** (p. ej. 20 TB incluidos). Por privacidad, el vídeo pasa por tu
   servidor para que nadie vea la IP de la otra persona: cada videollamada gasta ~1,5 GB por hora.
@@ -104,7 +107,8 @@ Comprobaciones:
 Después de añadir claves al `.env`, aplica los cambios con `docker compose up -d`.
 
 ### Emails (imprescindible: confirmar cuenta y recuperar contraseña)
-1. Crea cuenta en **Brevo** (gratis, 300 emails/día).
+1. Crea cuenta en **Brevo** (gratis, 300 emails/día). Antes, pregúntales por escrito si aceptan una web
+   para adultos que solo envía emails de cuenta (alternativas en docs/alojamiento-y-servicios.md).
 2. Añade tu dominio y crea en el DNS los registros que te pida (**SPF, DKIM, DMARC**). Sin ellos
    los emails acaban en spam.
 3. En *SMTP & API* copia usuario y clave → `SMTP_USER`, `SMTP_PASS`.

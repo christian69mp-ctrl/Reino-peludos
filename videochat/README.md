@@ -55,7 +55,8 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
     operadora) y no se guarda: se calcula al conectar. La otra persona ve la bandera del país.
   - **Edad**: 18–24, 25–34, 35–44 o 45+. Usa la **fecha de nacimiento**, que ahora se pide al
     registrarse (también con Google/Apple/Facebook) en tres desplegables; si da menos de 18 años no
-    deja registrarse. No la ve nadie. Las cuentas antiguas pueden añadirla una vez en «Mi cuenta»
+    deja registrarse. La fecha no la ve nadie; en el chat se muestra la **edad** junto al nombre
+    («Ana · 27 · Mujer»). Las cuentas antiguas pueden añadirla una vez en «Mi cuenta»
     (después solo se cambia escribiendo a soporte); sin ella no salen en búsquedas por edad.
   - Los filtros cuentan para los dos lados: solo coincidís si los dos encajáis en lo que busca el otro.
     Si tras 25 s no aparece nadie, se sugiere ampliar los filtros. Sin Premium se ignoran.

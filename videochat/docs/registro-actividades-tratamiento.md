@@ -69,7 +69,7 @@
 | **Finalidad** | Confirmar la mayoría de edad declarada y permitir los filtros Premium por edad, país y cercanía; mostrar la bandera del país a la otra persona. |
 | **Base jurídica** | Ejecución del contrato (art. 6.1.b). |
 | **Datos** | Fecha de nacimiento (declarada, no verificada). País, región y coordenadas aproximadas de la ciudad, calculados a partir de la IP con la base de datos DB-IP Lite, que está en nuestro servidor (no se envía la IP a nadie). |
-| **Quién lo ve** | La fecha de nacimiento, nadie (el administrador ve la edad). La otra persona ve solo la bandera del país. |
+| **Quién lo ve** | La fecha de nacimiento, nadie. La otra persona ve la **edad** y la bandera del país (el administrador también ve la edad). |
 | **Plazo** | Fecha de nacimiento: mientras exista la cuenta. Ubicación: **no se guarda**, solo en memoria mientras dura la conexión. |
 | **Destinatarios** | Ninguno. |
 
