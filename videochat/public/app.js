@@ -42,6 +42,7 @@ window.App = {
   openPremium: () => openPremium(),
   toast: (text) => toast(text),
   savePrefs: (body) => savePrefs(body),
+  api: (path, opts) => api(path, opts),
 };
 
 // ---------- Utilidades ----------
@@ -305,6 +306,7 @@ async function refreshMe() {
 function applyMe(data) {
   me = data;
   window.Play?.sync();
+  window.Powers?.refresh();
   const logged = !!data;
   $('guestActions').hidden = logged;
   $('userActions').hidden = !logged;
@@ -966,6 +968,9 @@ function renderPartner() {
   const pp = window.Play?.badges(partner) || '';
   $('partnerPiropos').hidden = !pp;
   $('partnerPiropos').textContent = pp;
+  const bd = window.Powers?.partnerBadges(partner) || '';
+  $('partnerBadges').hidden = !bd;
+  $('partnerBadges').textContent = bd;
   const pc = $('partnerCountry');
   pc.hidden = !partner.country;
   if (partner.country) pc.textContent = `${flagOf(partner.country)} ${countryName(partner.country)}`;
@@ -1122,6 +1127,7 @@ function connectSocket() {
   const s = io({ auth: (cb) => cb({ token, lang: I18N.chatLang() }) });
   socket = s;
   window.Play?.attach(s);
+  window.Powers?.attach(s);
 
   s.on('connect', () => {
     refreshOnline();
@@ -1149,12 +1155,12 @@ function connectSocket() {
 
   socket.on('waiting', setSearching);
 
-  socket.on('matched', async ({ initiator, call, gender, lang, likes, name, handle, relation, country, age, spicy, piropos }) => {
+  socket.on('matched', async ({ initiator, call, gender, lang, likes, name, handle, relation, country, age, spicy, piropos, incognito, badges }) => {
     clearOutgoingCall();
     clearTimeout(fewTimer);
     createPeer();
     setConnected(true);
-    partner = { gender, lang, likes, name, handle, relation, country, age, spicy, piropos };
+    partner = { gender, lang, likes, name, handle, relation, country, age, spicy, piropos, incognito, badges };
     window.Play?.matched();
     resetMessages();
     setStatus('');
@@ -1182,6 +1188,7 @@ function connectSocket() {
 
   socket.on('partner-left', () => {
     window.Play?.left();
+    window.Powers?.offerRewind();
     closePeer();
     addMsg(t('msg.left'), 'sys');
     setSearching();
@@ -1334,11 +1341,13 @@ async function start() {
 }
 
 function next() {
+  const had = !!partner;
   clearOutgoingCall();
   closePeer();
   resetMessages();
   setSearching();
   find();
+  if (had) window.Powers?.offerRewind(); // ↩️ por si ha sido sin querer
 }
 
 function stop() {

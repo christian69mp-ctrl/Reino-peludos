@@ -108,6 +108,41 @@ app.get('/stats', (_req, res) => {
   res.json({ online: io.of('/').sockets.size });
 });
 
+// ---------- Guindillas y superpoderes ----------
+app.get('/api/game', auth.requireUser, (req, res) => res.json(rewards.summary(req.user.id)));
+app.post('/api/powers/:power', auth.requireUser, (req, res) => {
+  const uid = req.user.id;
+  const now = Date.now();
+  const power = req.params.power;
+  if (power === 'flame') {
+    if ((req.user.boostUntil || 0) > now) return res.status(409).json({ code: 'active' });
+    const paid = rewards.spend(uid, 'flame');
+    if (!paid.ok) return res.status(402).json(paid);
+    store.updateUser(uid, { boostUntil: now + 15 * 60 * 1000 });
+  } else if (power === 'incognito') {
+    if (req.body?.on === false) store.updateUser(uid, { incognitoUntil: null });
+    else {
+      const paid = rewards.spend(uid, 'incognito');
+      if (!paid.ok) return res.status(402).json(paid);
+      store.updateUser(uid, { incognitoUntil: Math.max(now, req.user.incognitoUntil || 0) + 3600 * 1000 });
+    }
+  } else if (power === 'super') {
+    const text = String(req.body?.text || '').replace(/\s+/g, ' ').trim().slice(0, 140);
+    if (text && !rewards.canSpend(uid, 'super')) return res.status(402).json({ code: 'points', need: rewards.PRICES.super });
+    store.updateUser(uid, { superMsg: text });
+  } else if (power === 'second') {
+    const paid = rewards.spend(uid, 'second');
+    if (!paid.ok) return res.status(402).json(paid);
+    const seen = new Set();
+    const people = (store.getUser(uid).lovedBy || []).filter((l) => l.at > now - 24 * 3600 * 1000).reverse()
+      .filter((l) => !seen.has(l.uid) && seen.add(l.uid))
+      .map((l) => ({ ...friends.contactInfo(uid, l.uid), at: l.at }))
+      .filter((c) => c.handle);
+    return res.json({ ok: true, people, game: rewards.summary(uid) });
+  } else return res.status(404).json({ code: 'invalid' });
+  res.json({ ok: true, game: rewards.summary(uid) });
+});
+
 // Página 404 para direcciones que no existen
 app.use((req, res) => {
   if (req.path.startsWith('/api/')) return res.status(404).json({ code: 'notFound' });
@@ -124,10 +159,13 @@ const lastPartner = new Map();// evita volver a emparejar con el anterior al ins
 const chatLogs = new Map();   // socketId -> últimos mensajes de la conversación actual
 const reacted = new Map();    // socketId -> reacciones ya contadas en la conversación actual
 const meetings = new Map();   // socketId -> { x, y, at } de la conversación actual (para el historial)
+const rewinds = new Map();    // socketId invitado a ↩️ Rebobinar -> { from, at }
 const REACTIONS = ['like', 'love'];
 const LANG_RE = /^[a-z]{2,3}$/;
 // Juegos, piropos y «¿Volverías a hablar?» (play.js)
-const play = require('./play')({ io, partners, store, payments });
+const rewards = require('./rewards')({ store, payments, notify: (uid, ev, data) => notifyUser(uid, ev, data) });
+const play = require('./play')({ io, partners, store, payments, rewards });
+const MIN_CONV_MS = 60 * 1000; // conversaciones que cuentan para guindillas, insignias y retos
 
 function removeFromQueue(id) {
   queue = queue.filter((q) => q !== id);
@@ -147,6 +185,14 @@ function unpair(socket, notify = true) {
   meetings.delete(partnerId);
   if (meet) { friends.meetEnded(meet.x, meet.y, meet.at); stats.conversation((Date.now() - meet.at) / 1000); }
   play.ended(socket.id, partnerId, meet);
+  const mate = io.sockets.sockets.get(partnerId);
+  if (meet && mate && Date.now() - meet.at >= MIN_CONV_MS) {
+    for (const [a, b] of [[socket, mate], [mate, socket]]) {
+      rewards.count(a.data.uid, 'convs');
+      rewards.award(a.data.uid, 1, 'conversation');
+      if (!isIncognito(b.data.uid)) rewards.count(a.data.uid, 'countries', b.data.geo?.country);
+    }
+  }
   if (notify) io.to(partnerId).emit('partner-left');
   presenceChanged(socket.data.uid);
   const other = io.sockets.sockets.get(partnerId);
@@ -185,8 +231,12 @@ function findMatch(socket) {
     const other = io.sockets.sockets.get(id);
     return other && id !== avoid && compatible(socket, other);
   };
-  // Primero quien no tiene muchas respuestas «no volvería a hablar»; si no hay, cualquiera
-  let idx = queue.findIndex((id) => ok(id) && !play.lowRated(io.sockets.sockets.get(id).data.uid));
+  // Primero quien tiene la 🔥 Llama caliente activa, después quien no tiene muchas respuestas
+  // «no volvería a hablar» y, si no hay, cualquiera
+  const uidOf = (id) => io.sockets.sockets.get(id).data.uid;
+  const boosted = (id) => (store.getUser(uidOf(id))?.boostUntil || 0) > Date.now();
+  let idx = queue.findIndex((id) => ok(id) && boosted(id) && !play.lowRated(uidOf(id)));
+  if (idx === -1) idx = queue.findIndex((id) => ok(id) && !play.lowRated(uidOf(id)));
   if (idx === -1) idx = queue.findIndex(ok);
   if (idx === -1) {
     queue.push(socket.id);
@@ -215,14 +265,24 @@ function pair(socket, partner, { call = false } = {}) {
   friends.meet(meet.x, meet.y, meet.at);
   socket.emit('matched', { initiator: true, call, ...partnerInfo(socket, partner) });
   partner.emit('matched', { initiator: false, call, ...partnerInfo(partner, socket) });
+  // 💌 Supersaludo preparado: la otra persona lo ve nada más conectar
+  for (const [from, to] of [[socket, partner], [partner, socket]]) {
+    const text = store.getUser(from.data.uid)?.superMsg;
+    if (!text) continue;
+    const paid = rewards.spend(from.data.uid, 'super');
+    store.updateUser(from.data.uid, { superMsg: '' });
+    if (paid.ok) { to.emit('super-msg', { text }); from.emit('super-sent'); } else from.emit('super-off', paid);
+  }
   presenceChanged(meet.x);
   presenceChanged(meet.y);
 }
 
 // Lo que se enseña de la otra persona: su nombre, qué es, su idioma, sus likes
 // y si ya sois amigos
+function isIncognito(uid) { return (store.getUser(uid)?.incognitoUntil || 0) > Date.now(); }
 function partnerInfo(viewer, s) {
   const user = store.getUser(s.data.uid) || {};
+  const hidden = isIncognito(s.data.uid); // 🕶️ Incógnito: sin edad ni país
   return {
     gender: s.data.gender,
     lang: s.data.lang,
@@ -230,8 +290,10 @@ function partnerInfo(viewer, s) {
     name: user.nick || '',
     handle: friends.handle(viewer.data.uid, s.data.uid),
     relation: friends.relation(viewer.data.uid, s.data.uid),
-    country: s.data.geo?.country || '',
-    age: s.data.age ?? null,
+    country: hidden ? '' : s.data.geo?.country || '',
+    age: hidden ? null : s.data.age ?? null,
+    incognito: hidden,
+    badges: rewards.badgesOf(user),
     ...play.info(s),
   };
 }
@@ -370,6 +432,7 @@ io.on('connection', (socket) => {
   userSockets.get(uid).add(socket.id);
   presenceChanged(uid);
   play.bind(socket);
+  rewards.dailyLogin(uid);
 
   socket.on('find', (opts = {}) => {
     // Los filtros solo se aplican a usuarios Premium; el resto, siempre al azar
@@ -422,7 +485,15 @@ io.on('connection', (socket) => {
     if (counted && !counted.has(type)) {
       counted.add(type);
       likes = { ...likes, [type]: likes[type] + 1 };
-      store.updateUser(partner.data.uid, { likes });
+      const fields = { likes };
+      // ❤️ queda apuntado 24 h para 👀 Segunda oportunidad
+      if (type === 'love') {
+        const lovedBy = (store.getUser(partner.data.uid)?.lovedBy || []).filter((l) => l.at > Date.now() - 24 * 3600 * 1000 && l.uid !== socket.data.uid);
+        fields.lovedBy = [...lovedBy, { uid: socket.data.uid, at: Date.now() }].slice(-30);
+      }
+      store.updateUser(partner.data.uid, fields);
+      rewards.count(partner.data.uid, 'likes');
+      rewards.award(partner.data.uid, 1, 'like');
     }
     socket.emit('reaction', { type, from: 'me', partnerLikes: likes });
     partner.emit('reaction', { type, from: 'them', myLikes: likes });
@@ -522,7 +593,38 @@ io.on('connection', (socket) => {
     reply({ ok: true });
   });
 
+  // ↩️ Rebobinar: volver a intentar con la persona anterior, si acepta
+  socket.on('power:rewind', (_d, ack = () => {}) => {
+    if (typeof ack !== 'function') return;
+    const last = play.lastMetOf(socket.id);
+    if (!last) return ack({ code: 'nobody' });
+    if (!rewards.canSpend(uid, 'rewind')) return ack({ code: 'points', need: rewards.PRICES.rewind });
+    const target = [...(userSockets.get(last.uid) || [])].map((id) => io.sockets.sockets.get(id))
+      .find((t) => t && !partners.has(t.id) && !t.data.calling && compatible(socket, t));
+    if (!target) return ack({ code: 'unavailable' });
+    rewinds.set(target.id, { from: socket.id, at: Date.now() });
+    const me = store.getUser(uid) || {};
+    target.emit('rewind-request', { name: me.nick || '', gender: socket.data.gender });
+    ack({ ok: true });
+  });
+  socket.on('rewind-reply', ({ accept } = {}) => {
+    const r = rewinds.get(socket.id);
+    rewinds.delete(socket.id);
+    const from = r && Date.now() - r.at < 20000 && io.sockets.sockets.get(r.from);
+    if (!from) return;
+    if (!accept || partners.has(socket.id)) { from.emit('rewind-result', { code: 'declined' }); return; }
+    const paid = rewards.spend(from.data.uid, 'rewind');
+    if (!paid.ok) { from.emit('rewind-result', paid); return; }
+    // Si quien rebobina ya estaba hablando con otra persona, esa conversación termina
+    if (partners.has(from.id)) { cancelOutgoingCall(from); unpair(from); }
+    removeFromQueue(socket.id); removeFromQueue(from.id);
+    lastPartner.delete(socket.id); lastPartner.delete(from.id);
+    pair(from, socket);
+    from.emit('rewind-result', { ok: true });
+  });
+
   socket.on('disconnect', () => {
+    rewinds.delete(socket.id);
     cancelOutgoingCall(socket);
     // Si era su última pestaña abierta, las llamadas que recibía se cancelan
     if (userSockets.get(uid)?.size === 1) {

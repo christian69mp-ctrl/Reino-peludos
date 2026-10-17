@@ -114,18 +114,45 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   se puede quitar el espejo en Mi cuenta → Privacidad.
 - **Modo picante, juegos y piropos** (`play.js` y `public/play.js`; contenido en `public/games-data.js`, 6 idiomas):
   - *Modo picante*: viene apagado; se activa en el panel del chat o en Mi cuenta → Privacidad.
-  - *Juegos* (botón 🎲 sobre el vídeo, siempre por invitación que la otra persona acepta):
+  - *Juegos* (botón 🎲 sobre el vídeo, siempre por invitación que la otra persona acepta; **invitar
+    requiere Premium**, sin Premium se puede aceptar y jugar). Se muestran en una franja debajo del
+    vídeo, nunca tapando a la otra persona:
     Verdad o reto (120 cartas: 😇 Suave, 🌶️ Picante y 🌶️🌶️ Muy picante), ¿Qué prefieres? y
     Piedra, papel o tijera (al mejor de 3). Cualquiera puede pasar una carta o terminar el juego.
     El servidor hace de árbitro (sortea las cartas y no revela una elección hasta que eligen los dos).
-    Picante y Muy picante solo si los dos tienen el modo picante; **Muy picante solo si quien invita
-    tiene Premium** (los demás lo ven con la etiqueta dorada y al tocarlo se abre Premium).
-  - *Piropos* (botón 🌶️): 12 mensajes ya hechos, solo positivos («Buen culo», «Buena corrida»…),
-    con animación sobre el vídeo. Solo si los dos tienen el modo picante. Se cuentan en la cuenta de
-    quien los recibe, que decide si los demás ven sus piropos.
+    Picante y Muy picante solo si los dos tienen el modo picante (sin Premium, el botón de invitar
+    lleva la etiqueta dorada y al tocarlo se abre Premium).
+  - *Piropos* (botón 🌶️): 12 mensajes ya hechos, solo positivos («Buen culo», «Buena corrida»…).
+    **Enviarlos requiere Premium**; recibirlos, no. Solo si los dos tienen el modo picante. Al
+    recibirlos salen un momento como emojis que suben por los bordes del vídeo y un aviso pequeño
+    debajo. Se cuentan en la cuenta de quien los recibe, que decide si los demás ven sus piropos.
   - *«¿Volverías a hablar con esa persona?»*: tras conversaciones de 20 s o más, 👍/👎 privado. Se
     guardan solo dos contadores; con 10 o más respuestas y más del 60 % de 👎, la cuenta se empareja
     al final de la cola. El porcentaje se ve en `/admin` → Usuarios.
+- **Guindillas 🌶️, racha, retos, insignias y superpoderes** (`rewards.js` y `public/powers.js`):
+  - *Guindillas*: puntos que se ganan gratis usando la web: entrar cada día (5 por día de racha,
+    máx. 30), jugar (+2 cada jugador), recibir un ❤️ (+1) o un piropo (+2), conversaciones de más de
+    1 min (+1) y retos semanales (+50). Máximo 120 al día sin contar retos ni la recompensa diaria.
+    **No se compran con dinero**, no tienen valor económico, no se transfieren y no hay premios al
+    azar ni de pago. Se ven en la pastilla 🌶️ de la cabecera, que abre el panel «Guindillas y poderes».
+  - *Racha* 🔥 (sube cada día que se entra; si se falla un día, vuelve a empezar), *3 retos
+    semanales* iguales para todos (lunes a domingo UTC) y *8 insignias* (🧊 🏆 💞 🌍 🗣️ 💘 🌶️ 🔥);
+    las 3 últimas se ven junto al nombre para la otra persona.
+  - *Superpoderes* (precio en guindillas): 🔥 Llama caliente 30 (15 min antes en la cola),
+    ↩️ Rebobinar 20 (botón ↩️ durante 15 s para pedir volver con la persona anterior, si acepta y
+    está buscando), 💌 Supersaludo 10 (saludo destacado de hasta 140 caracteres que ve la siguiente
+    persona; se cobra al entregarse), 🕶️ Incógnito 15 (1 h sin edad ni país) y 👀 Segunda
+    oportunidad 15 (quién te dio ❤️ en las últimas 24 h, para añadirlo como amigo). Premium de pago:
+    Rebobinar, Incógnito y Segunda oportunidad ilimitados, más 1 Llama y 3 Supersaludos gratis al día.
+  - API: `GET /api/game` devuelve el resumen (guindillas, racha, contadores, insignias, retos,
+    poderes activos y precios); `POST /api/powers/:power` (`flame`, `incognito` —`{ on: false }` lo
+    quita—, `super` —`{ text }`, vacío lo borra—, `second`) activa un poder: 402 si faltan
+    guindillas, 409 si la Llama ya está activa. Rebobinar va por Socket.IO (`power:rewind`).
+  - Con `PREMIUM_MODE=free` los juegos y piropos quedan abiertos para todos, pero los superpoderes
+    **se siguen pagando con guindillas**: los gratis diarios son solo para Premium de pago.
+  - Datos guardados: guindillas, racha, contadores, insignias, progreso semanal, quién te dio ❤️
+    (24 h, máx. 30), fin de Llama/Incógnito y el Supersaludo pendiente. Entran en «Descargar mis
+    datos» y se borran con la cuenta.
 - **Vista del videochat** (botón junto a «Parar»): cambiar el tamaño de tu recuadro (S, M, L, XL),
   intercambiar recuadros (tú en grande y la otra persona en pequeño; también con doble clic en el
   recuadro pequeño), vista amplia (oculta el chat de texto y los mensajes salen un momento sobre el
@@ -159,7 +186,7 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   sesión) y **solo se carga si la persona acepta** el aviso de cookies de publicidad (Aceptar y
   Rechazar al mismo nivel; se puede cambiar en «Configurar cookies»). Con Premium de pago no hay
   anuncios. Cada hueco lleva la etiqueta «Publicidad» (art. 20 LSSI).
-- **Centro de ayuda** `/ayuda` con 45 preguntas frecuentes en 6 idiomas, buscador, categorías y
+- **Centro de ayuda** `/ayuda` con 51 preguntas frecuentes en 6 idiomas, buscador, categorías y
   **Guindilla 🌶️**, la asistente que responde al momento: una guindilla dibujada con cara que aparece con un rebote, saluda con la mano, parpadea y mueve la boca al responder (sin sonido; se queda quieta si el sistema pide reducir el movimiento) (sin IA: busca palabras clave en cualquier
   idioma). También hay un botón flotante de Guindilla en la portada (se oculta durante el videochat).
 - **Motivo de la sanción y recurso** (DSA art. 17 y 20): quien está suspendido o expulsado ve el
@@ -210,6 +237,7 @@ Diseño hecho con Gemini y redibujado en vector para que se vea nítido a cualqu
 - `mailer.js` — envío de emails (confirmar cuenta, recuperar contraseña, avisos al administrador).
 - `geo.js` — país y zona aproximados por IP (filtros Premium).
 - `oauth.js` — entrar con Google, Apple o Facebook.
+- `rewards.js` — guindillas, racha, insignias, retos semanales y superpoderes (precios y gratis de Premium).
 - `friends.js` — historial de chats, amigos y solicitudes (las llamadas y el «en línea» están en `server.js`).
 - `privacy.js` — cabeceras de seguridad, descargar/borrar datos, limpieza automática y código de marca de agua.
 - `public/` — la web: `index.html` (portada + chat), `app.js`, `style.css`, `admin.html`,
@@ -264,7 +292,7 @@ TURN_SECRET=...               # static-auth-secret de coturn: credenciales que c
 # STUN_URL=stun:tudominio.com:3478  # STUN propio (sin TURN se usa el de Google)
 # RELAY_ONLY=off              # con TURN, el vídeo pasa siempre por él para ocultar la IP de cada uno; off lo desactiva
 
-# Lanzamiento sin cobrar: filtros Premium gratis para todos
+# Lanzamiento sin cobrar: filtros Premium y juegos gratis para todos (los superpoderes se siguen pagando con guindillas)
 # PREMIUM_MODE=free
 
 # Antibots (Cloudflare Turnstile)

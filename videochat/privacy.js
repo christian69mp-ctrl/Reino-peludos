@@ -74,6 +74,13 @@ function exportData(user) {
       complimentsReceived: user.piropos || {},
       wouldTalkAgain: { yes: user.rep?.up || 0, no: user.rep?.down || 0 },
       preferences: user.prefs || {},
+      guindillas: user.game || {},
+      superpowers: {
+        boostUntil: user.boostUntil ? new Date(user.boostUntil).toISOString() : null,
+        incognitoUntil: user.incognitoUntil ? new Date(user.incognitoUntil).toISOString() : null,
+        pendingSuperGreeting: user.superMsg || '',
+        heartsLast24h: (user.lovedBy || []).filter((l) => l.at > Date.now() - 24 * 3600 * 1000).length,
+      },
       status: user.status,
       suspendedUntil: user.suspendedUntil ? new Date(user.suspendedUntil).toISOString() : null,
     },

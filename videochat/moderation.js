@@ -86,6 +86,8 @@ function userSummary(user) {
     nick: user.nick || '',
     rep: { up: user.rep?.up || 0, down: user.rep?.down || 0 },
     piropos: Object.values(user.piropos || {}).reduce((a, b) => a + b, 0),
+    points: user.game?.points || 0,
+    badges: (user.game?.badges || []).length,
     spicy: !!user.prefs?.spicy,
     gender: user.gender,
     createdAt: user.createdAt,

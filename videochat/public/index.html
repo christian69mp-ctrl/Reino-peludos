@@ -84,6 +84,7 @@
       <div id="userActions" class="row" hidden>
         <button class="btn gold sm" id="premiumBtn" data-premium><svg class="i"><use href="#i-star"/></svg><span data-i18n="btn.getPremium">Go Premium</span></button>
         <button class="btn gold-ghost sm" id="manageBtn" hidden><svg class="i"><use href="#i-star"/></svg><span data-i18n="btn.premium">Premium</span></button>
+        <button class="points-pill" id="pointsPill" type="button" data-i18n-aria="pw.title" aria-label="Guindillas and powers"><span class="pp-chili">🌶️</span><b id="pointsNum">0</b><span class="pp-streak" id="streakBox" hidden>🔥<b id="streakNum">0</b></span></button>
         <button class="btn ghost sm icon-only contacts-btn" id="contactsBtn" data-i18n-aria="ct.title" aria-label="Contacts"><svg class="i"><use href="#i-users"/></svg><span class="badge" id="contactsBadge" hidden></span></button>
         <button class="btn ghost sm icon-only" id="accountBtn" data-i18n-aria="btn.account" aria-label="My account"><svg class="i"><use href="#i-user"/></svg></button>
         <button class="btn ghost sm icon-only" id="logoutBtn" data-i18n-aria="btn.logout" aria-label="Log out"><svg class="i"><use href="#i-logout"/></svg></button>
@@ -198,7 +199,8 @@
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l1">Filter by women, men, trans people or couples</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l5">Filter by country, near you and age range</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l6">No ads</span></li>
-        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l7">🌶️🌶️ Extra spicy level in the games</span></li>
+        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l7">Spicy games and compliments</span></li>
+        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l8">Free superpowers every day</span></li>
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l4">Chat history, friends and calls: see who is online</span></li>
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l2">Works on all your devices</span></li>
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l3">Cancel anytime</span></li>
@@ -243,6 +245,7 @@
           <span class="partner-tag" id="partnerTag"></span>
           <span class="partner-likes" id="partnerLikes"></span>
           <span class="partner-piropos" id="partnerPiropos" hidden></span>
+          <span class="partner-badges" id="partnerBadges" hidden></span>
           <span class="partner-country" id="partnerCountry" hidden></span>
           <span class="partner-lang" id="partnerLang" hidden><svg class="i"><use href="#i-languages"/></svg><span></span></span>
           <button type="button" class="friend-btn" id="friendBtn" hidden><svg class="i"><use href="#i-user-plus"/></svg><span></span></button>
@@ -256,7 +259,7 @@
           <button class="react-btn play-btn" type="button" id="piropoBtn" data-i18n-aria="pl.piropos" aria-label="Compliments">🌶️</button>
           <button class="react-btn play-btn" type="button" id="gamesBtn" data-i18n-aria="pl.games" aria-label="Games">🎲</button>
         </div>
-        <div class="play-layer" id="playLayer"></div>
+        <div class="edge-fx" id="edgeFx" aria-hidden="true"></div>
         <div id="status" class="status">
           <img src="/logo.svg" alt="" width="64" height="64" class="status-logo">
           <p id="statusText" data-i18n="chat.pressStart">Press “Start” to meet someone</p>
@@ -270,7 +273,10 @@
         <div class="overlay-msgs" id="overlayMsgs" aria-hidden="true"></div>
         <div class="burst-layer" id="burstLayer" aria-hidden="true"></div>
       </div>
+      <div class="play-toast" id="playToast" aria-live="polite"></div>
+      <section class="play-dock" id="playDock" hidden aria-live="polite"></section>
       <div class="controls">
+        <button id="rewindBtn" class="btn ghost lg icon-only rewind-btn" type="button" hidden data-i18n-aria="pw.rewind" aria-label="Rewind">↩️</button>
         <button id="startBtn" class="btn primary lg"><svg class="i"><use href="#i-play"/></svg><span data-i18n="chat.start">Start</span></button>
         <button id="nextBtn" class="btn primary lg" hidden><svg class="i"><use href="#i-skip"/></svg><span data-i18n="chat.next">Next</span> <kbd>Esc</kbd></button>
         <button id="stopBtn" class="btn ghost lg" hidden><svg class="i"><use href="#i-stop"/></svg><span data-i18n="chat.stop">Stop</span></button>
@@ -533,7 +539,8 @@
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l1">Filter by women, men, trans people or couples</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l5">Filter by country, near you and age range</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l6">No ads</span></li>
-        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l7">🌶️🌶️ Extra spicy level in the games</span></li>
+        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l7">Spicy games and compliments</span></li>
+        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l8">Free superpowers every day</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l4">Chat history, friends and calls: see who is online</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l2">Works on all your devices</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l3">Cancel anytime</span></li>
@@ -819,5 +826,6 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="/app.js"></script>
   <script src="/play.js"></script>
+  <script src="/powers.js"></script>
 </body>
 </html>

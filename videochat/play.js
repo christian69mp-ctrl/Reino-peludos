@@ -5,7 +5,9 @@
 // - Juegos entre las dos personas de la conversación, siempre con invitación aceptada:
 //   Verdad o reto (Suave / Picante / Muy picante), ¿Qué prefieres? y Piedra, papel o tijera.
 //   El servidor hace de árbitro (sortea las cartas y guarda las elecciones hasta que
-//   eligen los dos) para que nadie haga trampas. Muy picante: quien invita necesita Premium.
+//   eligen los dos) para que nadie haga trampas.
+// - Invitar a jugar y enviar piropos es de Premium; quien no lo tiene puede aceptar
+//   invitaciones y recibir piropos (y ve lo que se pierde).
 // - Piropos: mensajes ya hechos, solo positivos. Suman al perfil de quien los recibe, que
 //   decide si los demás los ven.
 // - «¿Volverías a hablar con esa persona?»: respuesta privada que nadie ve; las personas
@@ -33,7 +35,7 @@ function content() {
   return data;
 }
 
-module.exports = function createPlay({ io, partners, store, payments }) {
+module.exports = function createPlay({ io, partners, store, rewards }) {
   const rooms = new Map();    // socketId -> estado compartido de la conversación
   const lastMet = new Map();  // socketId -> { uid, at, rated } de la conversación anterior
 
@@ -56,10 +58,10 @@ module.exports = function createPlay({ io, partners, store, payments }) {
 
   // Nivel permitido para quien invita
   function levelError(socket, partner, level) {
+    if (!socket.data.premium) return 'premium';
     if (level === 'soft') return null;
     if (!socket.data.spicy) return 'spicyMe';
     if (!partner.data.spicy) return 'spicyThem';
-    if (level === 'xxx' && !socket.data.premium) return 'premium';
     return null;
   }
 
@@ -114,6 +116,8 @@ module.exports = function createPlay({ io, partners, store, payments }) {
     else if (game === 'wyr') r.game = { game, level, players, phase: 'pick', q: question(r, level), picks: {}, matches: 0, round: 1 };
     else r.game = { game, level: 'soft', players, phase: 'pick', picks: {}, last: {}, score: { [inviter.id]: 0, [invitee.id]: 0 }, round: 1, winner: null, roundWinner: null };
     send(r);
+    // Cada partida suma 2 guindillas y cuenta para insignias y retos
+    for (const s of [inviter, invitee]) { rewards.count(s.data.uid, 'games'); rewards.award(s.data.uid, 2, 'game'); }
   }
 
   function endGame(r, by, reason = 'ended') {
@@ -147,6 +151,7 @@ module.exports = function createPlay({ io, partners, store, payments }) {
       const partner = partnerOf(socket);
       if (!partner || typeof ack !== 'function') return;
       if (!content().piropos.some((p) => p.id === id)) return ack({ code: 'invalid' });
+      if (!socket.data.premium) return ack({ code: 'premium' });
       if (!socket.data.spicy) return ack({ code: 'spicyMe' });
       if (!partner.data.spicy) return ack({ code: 'spicyThem' });
       if (throttled(socket, 800)) return ack({ code: 'slow' });
@@ -157,7 +162,11 @@ module.exports = function createPlay({ io, partners, store, payments }) {
       if (!sent.has(id)) {
         sent.add(id);
         const user = store.getUser(partner.data.uid);
-        if (user) store.updateUser(user.id, { piropos: { ...(user.piropos || {}), [id]: ((user.piropos || {})[id] || 0) + 1 } });
+        if (user) {
+          store.updateUser(user.id, { piropos: { ...(user.piropos || {}), [id]: ((user.piropos || {})[id] || 0) + 1 } });
+          rewards.count(user.id, 'piropos');
+          rewards.award(user.id, 2, 'piropo');
+        }
       }
       partner.emit('piropo', { id });
       ack({ ok: true });
@@ -209,7 +218,10 @@ module.exports = function createPlay({ io, partners, store, payments }) {
         if (Object.keys(g.picks).length === 2) {
           g.phase = 'reveal';
           const [x, y] = g.players.map((p) => g.picks[p]);
-          if (x === y) g.matches += 1;
+          if (x === y) {
+            g.matches += 1;
+            for (const id of g.players) { const p = io.sockets.sockets.get(id); if (p) { rewards.count(p.data.uid, 'wyrMatches'); rewards.award(p.data.uid, 1, 'match'); } }
+          }
         }
         send(r);
       } else if (g.game === 'rps' && RPS.includes(option)) {
@@ -221,7 +233,11 @@ module.exports = function createPlay({ io, partners, store, payments }) {
           if (g.roundWinner !== 'draw') g.score[g.roundWinner] += 1;
           g.last = { ...g.picks };
           g.phase = Object.values(g.score).some((s) => s >= 2) ? 'done' : 'reveal';
-          if (g.phase === 'done') g.winner = g.roundWinner;
+          if (g.phase === 'done') {
+            g.winner = g.roundWinner;
+            const w = io.sockets.sockets.get(g.winner);
+            if (w) { rewards.count(w.data.uid, 'rpsWins'); rewards.award(w.data.uid, 3, 'win'); }
+          }
         }
         send(r);
       }
@@ -301,5 +317,10 @@ module.exports = function createPlay({ io, partners, store, payments }) {
     return total >= 10 && rep.down / total > 0.6;
   }
 
-  return { bind, ended, forget, info, lowRated, content };
+  const lastMetOf = (socketId) => {
+    const m = lastMet.get(socketId);
+    return m && Date.now() - m.at < RATE_WINDOW_MS ? m : null;
+  };
+
+  return { bind, ended, forget, info, lowRated, content, lastMetOf };
 };
