@@ -112,6 +112,20 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
 - **Cambiar de cámara**: botón sobre tu propia imagen (frontal/trasera o cualquier webcam), también
   en mitad de una conversación sin cortarla. Tu imagen se ve en espejo solo con la cámara frontal;
   se puede quitar el espejo en Mi cuenta → Privacidad.
+- **Modo picante, juegos y piropos** (`play.js` y `public/play.js`; contenido en `public/games-data.js`, 6 idiomas):
+  - *Modo picante*: viene apagado; se activa en el panel del chat o en Mi cuenta → Privacidad.
+  - *Juegos* (botón 🎲 sobre el vídeo, siempre por invitación que la otra persona acepta):
+    Verdad o reto (120 cartas: 😇 Suave, 🌶️ Picante y 🌶️🌶️ Muy picante), ¿Qué prefieres? y
+    Piedra, papel o tijera (al mejor de 3). Cualquiera puede pasar una carta o terminar el juego.
+    El servidor hace de árbitro (sortea las cartas y no revela una elección hasta que eligen los dos).
+    Picante y Muy picante solo si los dos tienen el modo picante; **Muy picante solo si quien invita
+    tiene Premium** (los demás lo ven con la etiqueta dorada y al tocarlo se abre Premium).
+  - *Piropos* (botón 🌶️): 12 mensajes ya hechos, solo positivos («Buen culo», «Buena corrida»…),
+    con animación sobre el vídeo. Solo si los dos tienen el modo picante. Se cuentan en la cuenta de
+    quien los recibe, que decide si los demás ven sus piropos.
+  - *«¿Volverías a hablar con esa persona?»*: tras conversaciones de 20 s o más, 👍/👎 privado. Se
+    guardan solo dos contadores; con 10 o más respuestas y más del 60 % de 👎, la cuenta se empareja
+    al final de la cola. El porcentaje se ve en `/admin` → Usuarios.
 - **Vista del videochat** (botón junto a «Parar»): cambiar el tamaño de tu recuadro (S, M, L, XL),
   intercambiar recuadros (tú en grande y la otra persona en pequeño; también con doble clic en el
   recuadro pequeño), vista amplia (oculta el chat de texto y los mensajes salen un momento sobre el

@@ -33,6 +33,17 @@ let outgoingCall = null;  // llamada que estoy haciendo: { handle, name, gender,
 let incomingCall = null;  // llamada que estoy recibiendo: { callId, handle, name, gender }
 let statusKey = { key: 'chat.pressStart' };
 
+// Lo que necesitan los juegos y piropos (play.js)
+window.App = {
+  get socket() { return socket; },
+  get partner() { return partner; },
+  get premium() { return premium; },
+  get me() { return me; },
+  openPremium: () => openPremium(),
+  toast: (text) => toast(text),
+  savePrefs: (body) => savePrefs(body),
+};
+
 // ---------- Utilidades ----------
 function load(key) { try { return localStorage.getItem(key) || ''; } catch { return ''; } }
 function save(key, value) {
@@ -293,6 +304,7 @@ async function refreshMe() {
 
 function applyMe(data) {
   me = data;
+  window.Play?.sync();
   const logged = !!data;
   $('guestActions').hidden = logged;
   $('userActions').hidden = !logged;
@@ -951,6 +963,9 @@ function renderPartner() {
   $('partnerTag').textContent = [partner.name, partner.age, t(`g.${partner.gender}`)].filter((x) => x || x === 0).join(' · ');
   renderFriendBtn();
   $('partnerLikes').textContent = likesText(partner.likes);
+  const pp = window.Play?.badges(partner) || '';
+  $('partnerPiropos').hidden = !pp;
+  $('partnerPiropos').textContent = pp;
   const pc = $('partnerCountry');
   pc.hidden = !partner.country;
   if (partner.country) pc.textContent = `${flagOf(partner.country)} ${countryName(partner.country)}`;
@@ -1046,6 +1061,7 @@ function closePeer() {
   pendingCandidates = [];
   remoteVideo.srcObject = null;
   setConnected(false);
+  window.Play?.left();
 }
 
 function createPeer() {
@@ -1105,6 +1121,7 @@ function setSearching() {
 function connectSocket() {
   const s = io({ auth: (cb) => cb({ token, lang: I18N.chatLang() }) });
   socket = s;
+  window.Play?.attach(s);
 
   s.on('connect', () => {
     refreshOnline();
@@ -1132,12 +1149,13 @@ function connectSocket() {
 
   socket.on('waiting', setSearching);
 
-  socket.on('matched', async ({ initiator, call, gender, lang, likes, name, handle, relation, country, age }) => {
+  socket.on('matched', async ({ initiator, call, gender, lang, likes, name, handle, relation, country, age, spicy, piropos }) => {
     clearOutgoingCall();
     clearTimeout(fewTimer);
     createPeer();
     setConnected(true);
-    partner = { gender, lang, likes, name, handle, relation, country, age };
+    partner = { gender, lang, likes, name, handle, relation, country, age, spicy, piropos };
+    window.Play?.matched();
     resetMessages();
     setStatus('');
     addMsg(call ? t('call.connected', { name: name || t(`g.${gender}`) }) : t('msg.connected'), 'sys');
@@ -1163,6 +1181,7 @@ function connectSocket() {
   });
 
   socket.on('partner-left', () => {
+    window.Play?.left();
     closePeer();
     addMsg(t('msg.left'), 'sys');
     setSearching();
@@ -1816,6 +1835,7 @@ function renderSettings() {
   $('emailPending').hidden = !me.user.pendingEmail;
   if (me.user.pendingEmail) $('emailPending').textContent = t('set.emailPending', { email: me.user.pendingEmail });
   $('prefMirror').checked = me.user.prefs?.mirror !== false;
+  window.Play?.sync();
   const n = me.user.prefs?.notify || {};
   $('prefCalls').checked = n.calls !== false;
   $('prefRequests').checked = n.requests !== false;

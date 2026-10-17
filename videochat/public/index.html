@@ -198,6 +198,7 @@
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l1">Filter by women, men, trans people or couples</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l5">Filter by country, near you and age range</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l6">No ads</span></li>
+        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l7">🌶️🌶️ Extra spicy level in the games</span></li>
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l4">Chat history, friends and calls: see who is online</span></li>
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l2">Works on all your devices</span></li>
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l3">Cancel anytime</span></li>
@@ -241,6 +242,7 @@
         <div class="partner-info" id="partnerInfo" hidden>
           <span class="partner-tag" id="partnerTag"></span>
           <span class="partner-likes" id="partnerLikes"></span>
+          <span class="partner-piropos" id="partnerPiropos" hidden></span>
           <span class="partner-country" id="partnerCountry" hidden></span>
           <span class="partner-lang" id="partnerLang" hidden><svg class="i"><use href="#i-languages"/></svg><span></span></span>
           <button type="button" class="friend-btn" id="friendBtn" hidden><svg class="i"><use href="#i-user-plus"/></svg><span></span></button>
@@ -251,7 +253,10 @@
         <div class="reactions" id="reactions" hidden>
           <button class="react-btn" data-react="like" data-i18n-aria="re.like" aria-label="Like">👍</button>
           <button class="react-btn" data-react="love" data-i18n-aria="re.love" aria-label="Love">❤️</button>
+          <button class="react-btn play-btn" type="button" id="piropoBtn" data-i18n-aria="pl.piropos" aria-label="Compliments">🌶️</button>
+          <button class="react-btn play-btn" type="button" id="gamesBtn" data-i18n-aria="pl.games" aria-label="Games">🎲</button>
         </div>
+        <div class="play-layer" id="playLayer"></div>
         <div id="status" class="status">
           <img src="/logo.svg" alt="" width="64" height="64" class="status-logo">
           <p id="statusText" data-i18n="chat.pressStart">Press “Start” to meet someone</p>
@@ -289,6 +294,11 @@
     </section>
 
     <aside class="side">
+      <label class="spicy-row" title="">
+        <span class="spicy-ico" aria-hidden="true">🌶️</span>
+        <span class="spicy-text"><b data-i18n="pl.spicy">Spicy mode</b><small data-i18n="pl.spicyHint">Hot games and compliments, only with people who also have it on.</small></span>
+        <input type="checkbox" id="spicyToggle" class="toggle">
+      </label>
       <div class="filter" id="filter">
         <div class="filter-head">
           <span data-i18n="chat.wantToSee">I want to see</span>
@@ -523,6 +533,7 @@
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l1">Filter by women, men, trans people or couples</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l5">Filter by country, near you and age range</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l6">No ads</span></li>
+        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l7">🌶️🌶️ Extra spicy level in the games</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l4">Chat history, friends and calls: see who is online</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l2">Works on all your devices</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l3">Cancel anytime</span></li>
@@ -648,6 +659,10 @@
         <h3 class="acc-section" data-i18n="set.blockedTitle">Blocked people</h3>
         <ul class="ct-list" id="blockedList"></ul>
         <p class="ct-empty" id="blockedEmpty" data-i18n="set.blockedEmpty">You haven’t blocked anyone.</p>
+        <h3 class="acc-section" data-i18n="pl.spicySection">Spicy mode 🌶️</h3>
+        <label class="check switch-row"><input type="checkbox" id="prefSpicy"><span data-i18n="pl.spicyLong">Turn on spicy mode: explicit games and compliments, only with people who also have it on.</span></label>
+        <label class="check switch-row"><input type="checkbox" id="prefShowPiropos"><span data-i18n="pl.showPiropos">Show the compliments I receive to the people I talk to</span></label>
+        <p class="hint" id="myPiropos"></p>
         <h3 class="acc-section" data-i18n="set.cameraTitle">Camera</h3>
         <label class="check switch-row"><input type="checkbox" id="prefMirror"><span data-i18n="set.mirror">Show my camera mirrored (like a mirror). The other person always sees you the right way round.</span></label>
         <h3 class="acc-section" data-i18n="acc.data">Your data</h3>
@@ -803,5 +818,6 @@
   <script src="/guindilla.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/app.js"></script>
+  <script src="/play.js"></script>
 </body>
 </html>

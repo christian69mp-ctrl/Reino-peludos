@@ -126,6 +126,8 @@ const reacted = new Map();    // socketId -> reacciones ya contadas en la conver
 const meetings = new Map();   // socketId -> { x, y, at } de la conversación actual (para el historial)
 const REACTIONS = ['like', 'love'];
 const LANG_RE = /^[a-z]{2,3}$/;
+// Juegos, piropos y «¿Volverías a hablar?» (play.js)
+const play = require('./play')({ io, partners, store, payments });
 
 function removeFromQueue(id) {
   queue = queue.filter((q) => q !== id);
@@ -144,6 +146,7 @@ function unpair(socket, notify = true) {
   meetings.delete(socket.id);
   meetings.delete(partnerId);
   if (meet) { friends.meetEnded(meet.x, meet.y, meet.at); stats.conversation((Date.now() - meet.at) / 1000); }
+  play.ended(socket.id, partnerId, meet);
   if (notify) io.to(partnerId).emit('partner-left');
   presenceChanged(socket.data.uid);
   const other = io.sockets.sockets.get(partnerId);
@@ -178,10 +181,13 @@ function compatible(a, b) {
 function findMatch(socket) {
   removeFromQueue(socket.id);
   const avoid = lastPartner.get(socket.id);
-  const idx = queue.findIndex((id) => {
+  const ok = (id) => {
     const other = io.sockets.sockets.get(id);
     return other && id !== avoid && compatible(socket, other);
-  });
+  };
+  // Primero quien no tiene muchas respuestas «no volvería a hablar»; si no hay, cualquiera
+  let idx = queue.findIndex((id) => ok(id) && !play.lowRated(io.sockets.sockets.get(id).data.uid));
+  if (idx === -1) idx = queue.findIndex(ok);
   if (idx === -1) {
     queue.push(socket.id);
     socket.emit('waiting');
@@ -226,6 +232,7 @@ function partnerInfo(viewer, s) {
     relation: friends.relation(viewer.data.uid, s.data.uid),
     country: s.data.geo?.country || '',
     age: s.data.age ?? null,
+    ...play.info(s),
   };
 }
 
@@ -362,6 +369,7 @@ io.on('connection', (socket) => {
   if (!userSockets.has(uid)) userSockets.set(uid, new Set());
   userSockets.get(uid).add(socket.id);
   presenceChanged(uid);
+  play.bind(socket);
 
   socket.on('find', (opts = {}) => {
     // Los filtros solo se aplican a usuarios Premium; el resto, siempre al azar
@@ -522,6 +530,7 @@ io.on('connection', (socket) => {
     }
     removeFromQueue(socket.id);
     unpair(socket);
+    play.forget(socket.id);
     lastPartner.delete(socket.id);
     const set = userSockets.get(uid);
     set?.delete(socket.id);

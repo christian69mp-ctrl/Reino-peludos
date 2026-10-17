@@ -827,3 +827,95 @@ body.wide-video .chat > .side, body.wide-video .chat > .ad-side { display: none 
 @media (prefers-reduced-motion: reduce) { .self { transition: none; } .overlay-msgs p { animation: om-out .1s linear 6s forwards; } }
 
 .controls .btn.lg.icon-only { min-width: 0; flex: none; width: 54px; padding-left: 0; padding-right: 0; justify-content: center; }
+
+/* ----- Modo picante, juegos y piropos ----- */
+.spicy-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 12px; border-radius: 14px; background: rgba(232, 40, 63, .08); border: 1px solid rgba(232, 40, 63, .28); cursor: pointer; }
+.spicy-ico { font-size: 1.35rem; }
+.spicy-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.spicy-text b { font-size: .92rem; }
+.spicy-text small { font-size: .74rem; color: var(--muted); line-height: 1.35; }
+body.spicy-on .spicy-row { background: linear-gradient(120deg, rgba(232, 40, 63, .25), rgba(255, 138, 61, .15)); border-color: rgba(255, 90, 95, .6); }
+input.toggle { appearance: none; -webkit-appearance: none; flex: none; width: 44px; height: 26px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); position: relative; cursor: pointer; transition: background .2s; }
+input.toggle::after { content: ""; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform .2s; }
+input.toggle:checked { background: linear-gradient(120deg, #e8283f, #ff8a3d); border-color: transparent; }
+input.toggle:checked::after { transform: translateX(18px); }
+input.toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.react-btn.play-btn.active { outline: 2px solid #ff8a3d; }
+.partner-piropos { padding: 4px 10px; border-radius: 999px; background: rgba(232, 40, 63, .55); backdrop-filter: blur(6px); font-size: .8rem; font-weight: 600; }
+.play-layer { position: absolute; z-index: 6; left: 50%; bottom: 74px; transform: translateX(-50%); width: min(420px, calc(100% - 24px)); pointer-events: none; }
+.play-layer > * { pointer-events: auto; }
+.play-card {
+  max-height: min(70vh, 460px); overflow-y: auto;
+  padding: 12px 14px 14px; border-radius: 18px; color: var(--text);
+  background: rgba(22, 16, 26, .9); backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 90, 95, .35); box-shadow: 0 18px 50px -12px rgba(0, 0, 0, .7), 0 0 0 1px rgba(255, 255, 255, .04) inset;
+  animation: play-in .28s cubic-bezier(.2, 1.2, .4, 1);
+}
+@keyframes play-in { from { opacity: 0; transform: translateY(14px) scale(.97); } }
+.play-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.play-head b { flex: 1; font-size: .95rem; }
+.play-host { width: 34px; height: 40px; flex: none; display: block; margin: -6px 0 -4px; }
+.play-x { width: 30px; height: 30px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; }
+.play-x:hover { background: var(--bg); color: var(--text); }
+.play-game { padding: 8px 0; border-top: 1px solid var(--border); }
+.play-game-name { display: block; font-weight: 700; margin-bottom: 6px; }
+.play-levels { display: flex; flex-wrap: wrap; gap: 6px; }
+.play-levels .chip { display: inline-flex; align-items: center; gap: 6px; }
+.play-levels .chip.locked { opacity: .55; }
+.play-levels .chip.lvl-xxx { border-color: rgba(255, 90, 95, .6); }
+.lvl-gold { font-size: .68rem; font-weight: 800; color: #2a1a00; background: linear-gradient(135deg, #ffe08a, #ffc53d 45%, #f0a20f); padding: 1px 6px; border-radius: 999px; }
+.play-levels .chip.locked:has(.lvl-gold) { opacity: 1; }
+.play-note { margin: 8px 0 0; font-size: .8rem; color: var(--muted); }
+.play-upsell { width: 100%; margin-top: 10px; }
+.play-q { margin: 4px 0 10px; font-weight: 700; font-size: 1rem; text-align: center; }
+.play-level { margin: -4px 0 10px; text-align: center; font-weight: 700; color: #ffb37a; }
+.play-kind { margin: 0; text-align: center; font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #ff8a3d; }
+.play-text { margin: 6px 0 12px; text-align: center; font-size: 1.12rem; font-weight: 700; line-height: 1.4; }
+.play-actions { display: flex; gap: 8px; margin-top: 10px; }
+.play-actions .btn { flex: 1; justify-content: center; }
+.wyr-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.wyr-opt { min-height: 64px; padding: 10px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; font-weight: 700; cursor: pointer; }
+.wyr-opt:hover:not(:disabled) { border-color: var(--accent); }
+.wyr-opt.picked { border-color: #ff8a3d; background: rgba(255, 138, 61, .15); }
+.wyr-opt.theirs { box-shadow: inset 0 0 0 2px #ff3d6e; }
+.wyr-opt:disabled { cursor: default; }
+.play-result { margin: 10px 0 0; text-align: center; font-weight: 800; font-size: 1.05rem; color: var(--muted); }
+.play-result.win { color: #ffb37a; }
+.play-score { margin: 0 0 4px; text-align: center; font-size: .82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rps-opts { display: flex; justify-content: center; gap: 12px; }
+.rps-opt { width: 64px; height: 64px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); font-size: 1.9rem; cursor: pointer; }
+.rps-opt.picked { border-color: #ff8a3d; background: rgba(255, 138, 61, .15); }
+.rps-vs { margin: 4px 0 0; text-align: center; font-size: 2.2rem; }
+.piropo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.piropo { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 4px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; cursor: pointer; }
+.piropo:hover:not(:disabled) { border-color: #ff5a5f; background: rgba(232, 40, 63, .12); }
+.piropo:disabled { opacity: .4; cursor: default; }
+.piropo-e { font-size: 1.5rem; line-height: 1; }
+.piropo-t { font-size: .72rem; font-weight: 600; text-align: center; line-height: 1.2; }
+.piropo-pop { position: absolute; inset: 0; z-index: 7; pointer-events: none; display: grid; place-items: center; align-content: center; gap: 4px; overflow: hidden; }
+.pp-e { font-size: 5rem; line-height: 1; animation: pp-in .5s cubic-bezier(.2, 1.5, .4, 1), pp-out .5s ease 2.6s forwards; filter: drop-shadow(0 8px 24px rgba(232, 40, 63, .6)); }
+.pp-t { padding: 6px 16px; border-radius: 999px; background: linear-gradient(120deg, #e8283f, #ff8a3d); font-weight: 800; font-size: 1.1rem; animation: pp-in .5s .1s both, pp-out .5s ease 2.6s forwards; }
+.piropo-pop.mine .pp-e { font-size: 3.2rem; }
+.piropo-pop.mine .pp-t { font-size: .9rem; }
+.pp-rain { position: absolute; top: -10%; animation: pp-rain 2.6s ease-in forwards; }
+@keyframes pp-in { from { opacity: 0; transform: scale(.3); } }
+@keyframes pp-out { to { opacity: 0; transform: translateY(-20px); } }
+@keyframes pp-rain { to { transform: translateY(130vh) rotate(40deg); opacity: .2; } }
+.rate-ask { position: absolute; z-index: 6; top: 60px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 8px 10px 8px 16px; border-radius: 999px; background: rgba(22, 16, 26, .92); border: 1px solid var(--border); box-shadow: var(--shadow); font-size: .88rem; font-weight: 600; white-space: nowrap; max-width: calc(100% - 24px); }
+.rate-ask span { overflow: hidden; text-overflow: ellipsis; }
+.rate-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); font-size: 1.15rem; cursor: pointer; flex: none; }
+.rate-btn:hover { border-color: #ff8a3d; }
+@media (max-width: 560px) {
+  .play-layer { bottom: 64px; }
+  .play-card { max-height: 56dvh; }
+  .rate-ask { top: 50px; font-size: .8rem; white-space: normal; border-radius: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .play-card, .pp-e, .pp-t, .pp-rain { animation: none; } }
+/* El vídeo nunca se desplaza dentro de su marco (al enfocar botones de las tarjetas, la marca
+   de agua que sobresale podía hacer que el navegador moviera el contenido) */
+.remote { overflow: clip; }
+.play-card.still { animation: none; }
+/* Las tarjetas de juego caben siempre dentro del vídeo (en el móvil el vídeo es más bajo) */
+.play-layer { top: 12px; display: flex; flex-direction: column; justify-content: flex-end; }
+.play-layer .play-card { max-height: 100%; }

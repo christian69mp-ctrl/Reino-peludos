@@ -95,6 +95,8 @@ function routes(app) {
     const n = b.notify || {};
     const prefs = {
       mirror: typeof b.mirror === 'boolean' ? b.mirror : cur.mirror,
+      spicy: typeof b.spicy === 'boolean' ? b.spicy : cur.spicy,
+      showPiropos: typeof b.showPiropos === 'boolean' ? b.showPiropos : cur.showPiropos,
       notify: {
         calls: typeof n.calls === 'boolean' ? n.calls : cur.notify.calls,
         requests: typeof n.requests === 'boolean' ? n.requests : cur.notify.requests,

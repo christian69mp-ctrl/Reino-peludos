@@ -120,7 +120,7 @@ function birthError(birthDate) {
 function prefsOf(user) {
   const p = user.prefs || {};
   const n = p.notify || {};
-  return { mirror: p.mirror !== false, notify: { calls: n.calls !== false, requests: n.requests !== false, online: !!n.online } };
+  return { mirror: p.mirror !== false, spicy: !!p.spicy, showPiropos: !!p.showPiropos, notify: { calls: n.calls !== false, requests: n.requests !== false, online: !!n.online } };
 }
 
 function likesOf(user) {
@@ -128,7 +128,7 @@ function likesOf(user) {
 }
 
 function publicUser(user) {
-  return { id: user.id, email: user.email, nick: user.nick || '', hasPassword: !!user.passHash, birthDate: user.birthDate || null, prefs: prefsOf(user), pendingEmail: user.emailChange?.email || null, gender: user.gender, createdAt: user.createdAt, likes: likesOf(user), emailVerified: !!user.emailVerified };
+  return { id: user.id, email: user.email, nick: user.nick || '', hasPassword: !!user.passHash, birthDate: user.birthDate || null, prefs: prefsOf(user), pendingEmail: user.emailChange?.email || null, gender: user.gender, createdAt: user.createdAt, likes: likesOf(user), piropos: user.piropos || {}, emailVerified: !!user.emailVerified };
 }
 
 // true si la cuenta todavía tiene que confirmar su email
