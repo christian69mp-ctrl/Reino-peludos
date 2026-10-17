@@ -201,6 +201,20 @@ La web ya genera `https://tudominio.com/sitemap.xml` con todas las páginas en l
 3. Ojo: Google trata las webs para adultos con SafeSearch; es normal que no salgas en búsquedas
    con SafeSearch activado.
 
+## 8 ter. Ganar dinero con publicidad (opcional)
+
+En `/admin` → **Publicidad** tienes tres huecos (portada en ordenador, portada en móvil y lateral del
+videochat en pantallas anchas). Dos formas de llenarlos:
+
+1. **Vender tú los banners** a anunciantes (tiendas eróticas, otras webs para adultos…): subes su
+   imagen, el enlace y las fechas, y el panel te da impresiones, clics y CTR para enseñárselos.
+   No usa cookies. Cobras como quieras (factura, cuando seas autónomo).
+2. **Red publicitaria para adultos**: date de alta como *publisher* en **ExoClick**, **TrafficStars**
+   o **JuicyAds** (Google AdSense no admite webs para adultos). Crea una zona de cada tamaño
+   (160×600, 728×90 y 320×100), copia su código y pégalo en el hueco con el modo «Red publicitaria».
+   La web pedirá entonces el consentimiento de cookies antes de cargarla. Antes de darte de alta,
+   lee sus condiciones (pagos, datos fiscales que piden y contenido permitido).
+
 ## 9. Actualizar la web
 
 Cuando haya cambios nuevos en GitHub:

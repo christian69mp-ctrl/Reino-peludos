@@ -661,7 +661,7 @@ function setPremium(value) {
   $('manageBtn').hidden = !logged || !premium || freeMode;
   $('lockNote').hidden = premium || freeMode;
   if (partner) renderFriendBtn();
-  if (value !== wasPremium) loadContacts();
+  if (value !== wasPremium) { loadContacts(); window.AdSlots?.refresh(); }
   $('filter').classList.toggle('locked', !premium);
   if (!premium) { selectWant(''); selectScope('all'); selectAge(''); }
 }
@@ -2059,5 +2059,5 @@ fetch('/api/config').then((r) => r.json()).then((c) => {
   }
 })();
 
-// Guindi, el asistente, como botón flotante en la portada (no sale durante el videochat)
-if (window.Guindi) window.Guindi.launcher();
+// Guindilla, el asistente, como botón flotante en la portada (no sale durante el videochat)
+if (window.Guindilla) window.Guindilla.launcher();

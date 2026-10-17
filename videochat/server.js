@@ -29,11 +29,15 @@ const app = express();
 app.set('trust proxy', process.env.TRUST_PROXY || 'loopback, linklocal, uniquelocal');
 app.disable('x-powered-by');
 app.use(privacy.securityHeaders);
-app.use(express.json({ limit: '50kb', verify: (req, _res, buf) => { req.rawBody = buf; } }));
+const keepRaw = (req, _res, buf) => { req.rawBody = buf; };
+const jsonSmall = express.json({ limit: '50kb', verify: keepRaw });
+const jsonUpload = express.json({ limit: '700kb' }); // imágenes de banners subidas desde el panel
+app.use((req, res, next) => (req.path === '/api/admin/ads/banners' ? jsonUpload : jsonSmall)(req, res, next));
 // El service worker no se guarda en caché para que las actualizaciones lleguen enseguida
 app.get('/sw.js', (_req, res, next) => { res.set('Cache-Control', 'no-cache'); next(); });
 // Páginas por idioma (/es/ayuda, /en/help…), sitemap y robots.txt
 require('./seo').register(app);
+require('./ads').routes(app, { requireAdmin: adminauth.requireAdmin, audit: adminauth.audit });
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 // Tipografía servida desde el propio servidor (sin llamadas a Google)
 app.get('/fonts/plus-jakarta-sans.woff2', (_req, res) => {

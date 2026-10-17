@@ -64,6 +64,9 @@
     .bd-row .fill { height: 100%; border-radius: 999px; background: var(--accent); }
     .bd-row .v { font-variant-numeric: tabular-nums; color: var(--muted); }
     .table-wrap { overflow-x: auto; }
+    .small { font-size: .82rem; }
+    .ad-row { padding: 6px 0 2px; border-bottom: 1px solid var(--border); }
+    .ad-code-text { font-family: ui-monospace, monospace; font-size: .8rem; }
     table.data { width: 100%; border-collapse: collapse; font-size: .85rem; }
     table.data th, table.data td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); white-space: nowrap; }
     table.data th { color: var(--muted); font-weight: 600; }
@@ -106,6 +109,7 @@
       <button class="tab" data-view="contact">Mensajes <span class="count" id="cContact"></span></button>
       <button class="tab" data-view="users">Usuarios</button>
       <button class="tab" data-view="announce">Anuncio</button>
+      <button class="tab" data-view="ads">Publicidad</button>
       <button class="tab" data-view="security">Seguridad</button>
       <button class="tab" data-view="reveal">Revelar código</button>
     </nav>
@@ -155,6 +159,36 @@
         </div>
         <p class="meta" id="annCurrent"></p>
       </form>
+    </section>
+
+    <section id="adsView" hidden>
+      <p class="muted">Tres huecos que nunca tapan el vídeo: <b>lateral</b> (160×600, a la derecha del videochat en pantallas anchas) y <b>horizontal</b> en la portada (728×90 en ordenador y 320×100 en móvil). Con Premium de pago no se ven anuncios. Cada hueco lleva la etiqueta «Publicidad», como exige la ley.</p>
+      <form id="adSlotsForm" class="card-form">
+        <h2 class="ov-h" style="margin-top:0">Huecos</h2>
+        <div id="adSlots"></div>
+        <p class="muted small">«Mis anunciantes»: banners que vendes tú directamente (abajo); no usan cookies. «Red publicitaria»: pega el código que te dé una red para adultos (ExoClick, TrafficStars, JuicyAds…; Google AdSense no admite webs para adultos). La red solo se carga a quien acepta las cookies de publicidad; a quien las rechaza se le muestran tus banners, si hay. Se ejecuta aislada: no puede leer la sesión ni datos de la web.</p>
+        <div class="actions"><button class="btn primary" type="submit">Guardar huecos</button></div>
+      </form>
+      <form id="adBannerForm" class="card-form">
+        <h2 class="ov-h" style="margin-top:0">Añadir banner de un anunciante</h2>
+        <div class="two">
+          <label class="field">Hueco<select id="adSlot"></select></label>
+          <label class="field">Anunciante<input id="adAdvertiser" maxlength="80" placeholder="Nombre de la empresa"></label>
+        </div>
+        <label class="field">Dirección a la que lleva (https://…)<input id="adUrl" type="url" maxlength="500" placeholder="https://"></label>
+        <div class="two">
+          <label class="field">Desde (opcional)<input id="adStart" type="date"></label>
+          <label class="field">Hasta (opcional, incluido)<input id="adEnd" type="date"></label>
+        </div>
+        <div class="two">
+          <label class="field">Imagen (PNG, JPG, WEBP o GIF, máx. 400 KB, del tamaño del hueco)<input id="adImage" type="file" accept="image/png,image/jpeg,image/webp,image/gif"></label>
+          <label class="field">Peso (1–10: más alto, sale más a menudo)<input id="adWeight" type="number" min="1" max="10" value="1"></label>
+        </div>
+        <p class="error" id="adError" hidden></p>
+        <div class="actions"><button class="btn primary" type="submit">Añadir banner</button></div>
+      </form>
+      <h2 class="ov-h">Banners</h2>
+      <div class="table-wrap"><table class="data"><thead><tr><th>Banner</th><th>Anunciante</th><th>Hueco</th><th>Fechas</th><th>Impresiones</th><th>Clics</th><th>CTR</th><th></th></tr></thead><tbody id="adList"></tbody></table></div>
     </section>
 
     <section id="securityView" hidden>

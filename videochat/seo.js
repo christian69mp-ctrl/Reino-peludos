@@ -22,12 +22,12 @@ const DESCRIPTIONS = {
     it: 'Videochat dal vivo 1 a 1 con persone nuove da tutto il mondo. Gratis, senza download, chat tradotta e community moderata. Solo maggiorenni.',
   },
   help: {
-    es: 'Centro de ayuda de La Ruleta Caliente: preguntas frecuentes sobre cámara, Premium, pagos, seguridad y cuenta, y Guindi, el asistente que responde al momento.',
-    en: 'La Ruleta Caliente help center: frequent questions about camera, Premium, payments, safety and your account, plus Guindi, the assistant that answers at once.',
-    pt: 'Central de ajuda da La Ruleta Caliente: perguntas frequentes sobre câmera, Premium, pagamentos, segurança e conta, e o Guindi, o assistente que responde na hora.',
-    fr: 'Centre d’aide de La Ruleta Caliente : questions fréquentes sur la caméra, Premium, les paiements, la sécurité et le compte, et Guindi, l’assistant qui répond tout de suite.',
-    de: 'Hilfe-Center von La Ruleta Caliente: häufige Fragen zu Kamera, Premium, Zahlungen, Sicherheit und Konto, dazu Guindi, der Assistent, der sofort antwortet.',
-    it: 'Centro assistenza di La Ruleta Caliente: domande frequenti su videocamera, Premium, pagamenti, sicurezza e account, e Guindi, l’assistente che risponde subito.',
+    es: 'Centro de ayuda de La Ruleta Caliente: preguntas frecuentes sobre cámara, Premium, pagos, seguridad y cuenta, y Guindilla, el asistente que responde al momento.',
+    en: 'La Ruleta Caliente help center: frequent questions about camera, Premium, payments, safety and your account, plus Guindilla, the assistant that answers at once.',
+    pt: 'Central de ajuda da La Ruleta Caliente: perguntas frequentes sobre câmera, Premium, pagamentos, segurança e conta, e o Guindilla, o assistente que responde na hora.',
+    fr: 'Centre d’aide de La Ruleta Caliente : questions fréquentes sur la caméra, Premium, les paiements, la sécurité et le compte, et Guindilla, l’assistant qui répond tout de suite.',
+    de: 'Hilfe-Center von La Ruleta Caliente: häufige Fragen zu Kamera, Premium, Zahlungen, Sicherheit und Konto, dazu Guindilla, der Assistent, der sofort antwortet.',
+    it: 'Centro assistenza di La Ruleta Caliente: domande frequenti su videocamera, Premium, pagamenti, sicurezza e account, e Guindilla, l’assistente che risponde subito.',
   },
   contact: {
     es: 'Escribe al equipo de La Ruleta Caliente: soporte, cuenta, pagos, privacidad, prensa o autoridades. Respondemos en unas 48 horas laborables.',
@@ -84,6 +84,14 @@ const DESCRIPTIONS = {
     fr: 'Signalez un contenu illicite sur La Ruleta Caliente, même sans compte. Nous examinons chaque signalement et vous informons de la décision.',
     de: 'Melde rechtswidrige Inhalte auf La Ruleta Caliente, auch ohne Konto. Wir prüfen jede Meldung und teilen dir die Entscheidung mit.',
     it: 'Segnala contenuti illegali su La Ruleta Caliente, anche senza account. Esaminiamo ogni segnalazione e ti comunichiamo la decisione.',
+  },
+  cookies: {
+    es: 'Política de cookies de La Ruleta Caliente: solo usamos cookies y almacenamiento imprescindibles, sin publicidad ni rastreo. Lista completa y cómo borrarlos.',
+    en: 'La Ruleta Caliente cookie policy: we only use strictly necessary cookies and storage, no ads or tracking. Full list and how to delete them.',
+    pt: 'Política de cookies da La Ruleta Caliente: usamos apenas cookies e armazenamento indispensáveis, sem publicidade nem rastreamento. Lista completa e como apagá-los.',
+    fr: 'Politique de cookies de La Ruleta Caliente : uniquement des cookies et du stockage indispensables, sans publicité ni pistage. Liste complète et suppression.',
+    de: 'Cookie-Richtlinie von La Ruleta Caliente: nur unbedingt notwendige Cookies und Speicher, keine Werbung, kein Tracking. Vollständige Liste und Löschen.',
+    it: 'Cookie policy di La Ruleta Caliente: solo cookie e memoria indispensabili, niente pubblicità né tracciamento. Elenco completo e come cancellarli.',
   },
   about: {
     es: 'Quiénes somos y cómo funciona La Ruleta Caliente: un videochat para adultos pensado para la privacidad, la seguridad y el respeto.',
@@ -213,7 +221,7 @@ function render(req, page, lang) {
 }
 
 function preferred(req) {
-  return req.acceptsLanguages(...SUPPORTED) || 'en';
+  return (req.get('accept-language') && req.acceptsLanguages(...SUPPORTED)) || 'en';
 }
 
 function send(req, res, page, lang) {

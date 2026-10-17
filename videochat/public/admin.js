@@ -103,7 +103,7 @@ function breakdown(title, entries, format = int) {
 
 const countryName = (cc) => { try { return cc === '??' ? 'Desconocido' : new Intl.DisplayNames(['es'], { type: 'region' }).of(cc); } catch { return cc; } };
 const langNames = { es: 'Español', en: 'Inglés', pt: 'Portugués', fr: 'Francés', de: 'Alemán', it: 'Italiano' };
-const pageNames = { home: 'Portada', help: 'Ayuda', contact: 'Contacto', rules: 'Normas', terms: 'Condiciones', privacy: 'Privacidad', legal: 'Aviso legal', refunds: 'Reembolsos', report: 'Denunciar contenido', about: 'Sobre nosotros' };
+const pageNames = { home: 'Portada', help: 'Ayuda', contact: 'Contacto', rules: 'Normas', terms: 'Condiciones', privacy: 'Privacidad', legal: 'Aviso legal', refunds: 'Reembolsos', report: 'Denunciar contenido', about: 'Sobre nosotros', cookies: 'Cookies' };
 const methodNames = { email: 'Email', google: 'Google', apple: 'Apple', facebook: 'Facebook' };
 
 async function renderOverview() {
@@ -278,6 +278,64 @@ $('annRemove').addEventListener('click', async () => {
   toast('Anuncio quitado'); renderAnnounce();
 });
 
+// ---------- Publicidad ----------
+const MODE_NAMES = { off: 'Desactivado', own: 'Mis anunciantes', network: 'Red publicitaria' };
+const day = (ts) => (ts ? new Date(ts).toLocaleDateString('es-ES') : '');
+async function renderAds() {
+  const { slots, banners } = await api('/api/admin/ads');
+  $('adSlots').innerHTML = Object.entries(slots).map(([k, v]) => `
+    <div class="ad-row" data-slot="${k}">
+      <label class="field">${esc(v.name)}
+        <select class="ad-mode">${Object.entries(MODE_NAMES).map(([m, n]) => `<option value="${m}" ${v.mode === m ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+      <label class="field ad-code" ${v.mode === 'network' ? '' : 'hidden'}>Código de la red para este hueco (${v.w}×${v.h})
+        <textarea class="ad-code-text" rows="4" spellcheck="false" placeholder="&lt;script …&gt;&lt;/script&gt; &lt;ins …&gt;&lt;/ins&gt;">${esc(v.code)}</textarea></label>
+    </div>`).join('');
+  $('adSlot').innerHTML = Object.entries(slots).map(([k, v]) => `<option value="${k}">${esc(v.name)}</option>`).join('');
+  $('adList').innerHTML = banners.map((b) => `<tr>
+      <td><img src="/ads/img/${b.id}?v=${b.updatedAt || b.createdAt}" alt="" style="max-width:120px;max-height:60px;display:block;border-radius:4px"></td>
+      <td><b>${esc(b.advertiser)}</b><br><a class="link" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">${esc(b.url.replace(/^https?:\/\//, '').slice(0, 40))}</a></td>
+      <td>${esc(slots[b.slot]?.name.split(' (')[0] || b.slot)}</td>
+      <td>${b.startsAt || b.endsAt ? `${day(b.startsAt) || '…'} – ${day(b.endsAt) || '…'}` : 'Siempre'}</td>
+      <td class="num">${int(b.impressions || 0)}</td><td class="num">${int(b.clicks || 0)}</td>
+      <td class="num">${b.impressions ? ((100 * (b.clicks || 0)) / b.impressions).toFixed(2) : '0.00'} %</td>
+      <td><button class="btn ghost sm" data-ad="${b.id}" data-active="${b.active ? 0 : 1}">${b.active ? 'Pausar' : 'Activar'}</button>
+        <button class="btn ghost sm" data-ad="${b.id}" data-del="1">Borrar</button></td></tr>`).join('')
+    || '<tr><td colspan="8" class="muted">Todavía no hay banners.</td></tr>';
+}
+$('adSlots').addEventListener('change', (e) => {
+  const row = e.target.closest('.ad-row');
+  if (row && e.target.matches('.ad-mode')) row.querySelector('.ad-code').hidden = e.target.value !== 'network';
+});
+$('adSlotsForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const slots = {};
+  document.querySelectorAll('.ad-row').forEach((r) => { slots[r.dataset.slot] = { mode: r.querySelector('.ad-mode').value, code: r.querySelector('.ad-code-text').value }; });
+  await api('/api/admin/ads/slots', { slots });
+  toast('Huecos guardados'); renderAds();
+});
+$('adBannerForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const showErr = (m) => { $('adError').textContent = m; $('adError').hidden = !m; };
+  showErr('');
+  const file = $('adImage').files[0];
+  if (!file) return showErr('Elige la imagen del banner');
+  if (file.size > 400 * 1024) return showErr('La imagen pesa demasiado (máx. 400 KB)');
+  const image = await new Promise((ok) => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(file); });
+  const res = await api('/api/admin/ads/banners', {
+    slot: $('adSlot').value, advertiser: $('adAdvertiser').value, url: $('adUrl').value.trim(),
+    start: $('adStart').value, end: $('adEnd').value, weight: Number($('adWeight').value), image,
+  });
+  if (!res.ok) return showErr(res.error || 'No se pudo guardar');
+  e.target.reset(); toast('Banner añadido'); renderAds();
+});
+$('adList').addEventListener('click', async (e) => {
+  const b = e.target.closest('button[data-ad]');
+  if (!b) return;
+  if (b.dataset.del && !confirm('¿Borrar este banner? Se pierden sus estadísticas.')) return;
+  await api(`/api/admin/ads/banners/${b.dataset.ad}`, b.dataset.del ? { action: 'delete' } : { active: b.dataset.active === '1' });
+  renderAds();
+});
+
 async function renderSecurity() {
   const s = await api('/api/admin/security');
   $('tfaState').textContent = s.twoFactor
@@ -336,12 +394,13 @@ async function renderList() {
 async function show(v) {
   view = v;
   document.querySelectorAll('[data-view]').forEach((x) => x.classList.toggle('active', x.dataset.view === v));
-  const sections = { overview: 'overviewView', announce: 'announceView', security: 'securityView', reveal: 'revealView' };
-  for (const id of ['overviewView', 'listView', 'announceView', 'securityView', 'revealView']) $(id).hidden = true;
+  const sections = { overview: 'overviewView', announce: 'announceView', ads: 'adsView', security: 'securityView', reveal: 'revealView' };
+  for (const id of ['overviewView', 'listView', 'announceView', 'adsView', 'securityView', 'revealView']) $(id).hidden = true;
   $(sections[v] || 'listView').hidden = false;
   try {
     if (v === 'overview') await renderOverview();
     else if (v === 'announce') await renderAnnounce();
+    else if (v === 'ads') await renderAds();
     else if (v === 'security') await renderSecurity();
     else if (v !== 'reveal') await renderList();
   } catch { /* sin sesión: se muestra el acceso */ }

@@ -91,6 +91,7 @@
   <!-- ================= PORTADA ================= -->
   <main id="landing">
     <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
       <div class="hero-text">
         <span class="eyebrow"><span class="dot"></span><span data-i18n="hero.eyebrow">Live now · 18+ only</span></span>
         <h1 data-i18n-html="hero.title">Meet new people <span class="grad">live</span>, in one click.</h1>
@@ -111,8 +112,14 @@
           <div class="mock-screen">
             <span class="mock-tag" data-i18n="g.mujer">Woman</span>
             <span class="mock-live"><span class="dot"></span><span data-i18n="mock.connected">Connected</span></span>
-            <div class="mock-silhouette"></div>
-            <div class="mock-self"></div>
+            <picture class="mock-partner">
+              <source type="image/webp" srcset="/img/hero-partner-640.webp 640w, /img/hero-partner-960.webp 960w" sizes="(max-width: 960px) 90vw, 520px">
+              <img src="/img/hero-partner-640.jpg" srcset="/img/hero-partner-640.jpg 640w, /img/hero-partner-960.jpg 960w" sizes="(max-width: 960px) 90vw, 520px" width="640" height="480" alt="" fetchpriority="high">
+            </picture>
+            <picture class="mock-self">
+              <source type="image/webp" srcset="/img/hero-self-400.webp">
+              <img src="/img/hero-self-400.jpg" width="400" height="300" alt="" loading="lazy">
+            </picture>
             <span class="mock-react">❤️</span>
           </div>
           <div class="mock-bar">
@@ -149,6 +156,11 @@
       </div>
     </section>
 
+    <aside class="ad-slot ad-top" data-ad="top" hidden>
+      <span class="ad-label" data-i18n="ad.label">Advertisement</span>
+      <div class="ad-box"></div>
+    </aside>
+
     <section class="section" id="seguridad">
       <h2 class="section-title" data-i18n="safe.title">A place to have fun with respect</h2>
       <p class="section-sub" data-i18n="safe.sub">Mockery, harassment, homophobia and transphobia are not tolerated here.</p>
@@ -181,6 +193,7 @@
           <ul class="checklist">
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l1">Filter by women, men, trans people or couples</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l5">Filter by country, near you and age range</span></li>
+        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l6">No ads</span></li>
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l4">Chat history, friends and calls: see who is online</span></li>
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l2">Works on all your devices</span></li>
             <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l3">Cancel anytime</span></li>
@@ -296,6 +309,10 @@
         <button type="submit" class="btn primary icon-only" disabled id="sendBtn" data-i18n-aria="chat.send" aria-label="Send"><svg class="i"><use href="#i-send"/></svg></button>
       </form>
     </aside>
+    <aside class="ad-slot ad-side" data-ad="side" hidden>
+      <span class="ad-label" data-i18n="ad.label">Advertisement</span>
+      <div class="ad-box"></div>
+    </aside>
   </main>
 
   <footer class="site-footer" id="footer">
@@ -309,7 +326,9 @@
         <a href="/contacto" data-i18n="footer.contact">Contact</a>
         <a href="/normas" data-i18n="footer.rules">Community rules</a>
         <a href="/terminos" data-i18n="footer.terms">Terms of use</a>
-        <a href="/privacidad" data-i18n="footer.privacy">Privacy &amp; cookies</a>
+        <a href="/privacidad" data-i18n="footer.privacy">Privacy</a>
+        <a href="/cookies" data-i18n="footer.cookies">Cookie policy</a>
+        <a href="#cookie-settings" data-cookie-settings data-i18n="ck.settings">Cookie settings</a>
         <a href="/aviso-legal" data-i18n="footer.legalNotice">Legal notice</a>
         <a href="/reembolsos" data-i18n="footer.refunds">Cancellation &amp; refunds</a>
         <a href="/denunciar-contenido" data-i18n="footer.reportContent">Report content</a>
@@ -335,6 +354,7 @@
       <p class="muted" data-i18n-html="age.text">La Ruleta Caliente is for <strong>adults 18+ only</strong> and may show nudity and sexual content.</p>
       <button class="btn primary lg wide" id="ageYes" data-i18n="age.enter">I am 18 or older · Enter</button>
       <a class="btn ghost wide" href="https://www.google.com" rel="noopener" data-i18n="age.exit">Leave</a>
+      <p class="hint age-cookies" data-i18n-html="age.cookies">We only use the cookies and storage the site needs to work: no ads, no tracking. <a href="/cookies">Cookie policy</a></p>
     </div>
   </div>
 
@@ -481,6 +501,7 @@
       <ul class="checklist">
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l1">Filter by women, men, trans people or couples</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l5">Filter by country, near you and age range</span></li>
+        <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l6">No ads</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l4">Chat history, friends and calls: see who is online</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l2">Works on all your devices</span></li>
         <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="prem.l3">Cancel anytime</span></li>
@@ -756,7 +777,8 @@
 
   <div id="toast" class="toast" role="status" hidden></div>
 
-  <script src="/guindi.js"></script>
+  <script src="/adslots.js"></script>
+  <script src="/guindilla.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/app.js"></script>
 </body>

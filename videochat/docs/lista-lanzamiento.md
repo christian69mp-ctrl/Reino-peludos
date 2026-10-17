@@ -97,3 +97,4 @@ contratado: sin él esa verificación es simulada.
 - ☐ En `.env`: quitar `PREMIUM_MODE=free` y poner los `SEGPAY_*`; `docker compose up -d`.
 - ☐ Hacer una compra real de prueba y cancelarla.
 - ☐ Avisar a los usuarios con antelación de que los filtros pasan a ser de pago.
+- ☐ **Cookies:** la red publicitaria solo se pega en `/admin` → Publicidad (la web ya pide el consentimiento). No añadir por otro lado Google Analytics, píxeles de Meta/TikTok ni vídeos o mapas incrustados de terceros: necesitarían también consentimiento y figurar en `/cookies`.

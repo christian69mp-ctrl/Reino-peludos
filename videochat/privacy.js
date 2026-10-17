@@ -32,7 +32,7 @@ function securityHeaders(_req, res, next) {
     'Content-Security-Policy': [
       "default-src 'self'",
       `script-src 'self'${CF}`,
-      `frame-src${CF || " 'none'"}`,
+      `frame-src 'self'${CF}`, // 'self': huecos de publicidad de redes externas (aislados, ver ads.js)
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob:",
       "media-src 'self' blob: mediastream:",

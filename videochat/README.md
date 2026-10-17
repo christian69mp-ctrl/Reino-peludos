@@ -124,9 +124,25 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   y reembolsos, Sobre nosotros, Contacto (formulario con categorías y referencia C-XXXXXX) y
   Denunciar contenido (formulario público del DSA, sin cuenta; referencia N-XXXXXX, acuse de recibo y
   decisión por email).
-- **Centro de ayuda** `/ayuda` con 42 preguntas frecuentes en 6 idiomas, buscador, categorías y
-  **Guindi 🌶️**, el asistente que responde al momento (sin IA: busca palabras clave en cualquier
-  idioma). También hay un botón flotante de Guindi en la portada (se oculta durante el videochat).
+- **Política de cookies** `/cookies` (6 idiomas) con la lista completa de lo que se guarda en el
+  navegador. Todo es imprescindible o lo pide la persona (sesión, idioma, mayoría de edad, cámara
+  elegida, cookie de seguridad de 10 min al entrar con Google/Apple/Facebook, caché de la app y
+  avisos push con permiso), así que según el art. 22.2 de la LSSI **no hace falta banner de
+  consentimiento**: se informa en el aviso de edad y en el pie. **Si algún día añades analítica
+  (Google Analytics…), publicidad o píxeles, hace falta un banner con «Aceptar» y «Rechazar» al
+  mismo nivel antes de cargarlos**, y actualizar la política.
+- **Publicidad** sin molestar las llamadas: un hueco horizontal en la portada (728×90 en ordenador,
+  320×100 en móvil) y uno vertical (160×600) a la derecha del videochat **solo en pantallas
+  anchas** (≥1400 px), nunca encima del vídeo. Se gestiona en `/admin` → Publicidad: cada hueco
+  puede estar desactivado, mostrar banners que vendes tú (subes la imagen, enlace y fechas; cuenta
+  impresiones, clics y CTR sin cookies) o el código de una **red publicitaria para adultos**
+  (ExoClick, TrafficStars, JuicyAds…). El código de la red va en un iframe aislado (sin acceso a la
+  sesión) y **solo se carga si la persona acepta** el aviso de cookies de publicidad (Aceptar y
+  Rechazar al mismo nivel; se puede cambiar en «Configurar cookies»). Con Premium de pago no hay
+  anuncios. Cada hueco lleva la etiqueta «Publicidad» (art. 20 LSSI).
+- **Centro de ayuda** `/ayuda` con 44 preguntas frecuentes en 6 idiomas, buscador, categorías y
+  **Guindilla 🌶️**, la asistente que responde al momento: una guindilla dibujada con cara que aparece con un rebote, saluda con la mano, parpadea y mueve la boca al responder (sin sonido; se queda quieta si el sistema pide reducir el movimiento) (sin IA: busca palabras clave en cualquier
+  idioma). También hay un botón flotante de Guindilla en la portada (se oculta durante el videochat).
 - **Motivo de la sanción y recurso** (DSA art. 17 y 20): quien está suspendido o expulsado ve el
   motivo y puede recurrir una vez desde la propia ventana; el equipo responde desde el panel y, si
   acepta, la cuenta se readmite sola.

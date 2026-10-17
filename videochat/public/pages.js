@@ -93,7 +93,7 @@
     });
   }
 
-  // ---- Centro de ayuda: preguntas por categorías, buscador y Guindi ----
+  // ---- Centro de ayuda: preguntas por categorías, buscador y Guindilla ----
   const list = $('faqList');
   if (list && window.FAQ) {
     const F = window.FAQ;
@@ -151,6 +151,6 @@
     // Enlace directo a una pregunta (/ayuda#cancel-subscription)
     const target = location.hash && document.getElementById(location.hash.slice(1));
     if (target?.tagName === 'DETAILS') { target.open = true; target.scrollIntoView(); }
-    if (window.Guindi && $('guindiEmbed')) window.Guindi.mount($('guindiEmbed'));
+    if (window.Guindilla && $('guindillaEmbed')) window.Guindilla.mount($('guindillaEmbed'));
   }
 })();
