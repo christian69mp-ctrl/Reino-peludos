@@ -103,7 +103,7 @@ function breakdown(title, entries, format = int) {
 
 const countryName = (cc) => { try { return cc === '??' ? 'Desconocido' : new Intl.DisplayNames(['es'], { type: 'region' }).of(cc); } catch { return cc; } };
 const langNames = { es: 'Español', en: 'Inglés', pt: 'Portugués', fr: 'Francés', de: 'Alemán', it: 'Italiano' };
-const pageNames = { home: 'Portada', help: 'Ayuda', contact: 'Contacto', rules: 'Normas', terms: 'Condiciones', privacy: 'Privacidad', legal: 'Aviso legal', refunds: 'Reembolsos', report: 'Denunciar contenido', about: 'Sobre nosotros', cookies: 'Cookies' };
+const pageNames = { home: 'Portada', help: 'Ayuda', contact: 'Contacto', rules: 'Normas', terms: 'Condiciones', privacy: 'Privacidad', legal: 'Aviso legal', refunds: 'Reembolsos', report: 'Denunciar contenido', about: 'Sobre nosotros', games: 'Juegos', cookies: 'Cookies' };
 const methodNames = { email: 'Email', google: 'Google', apple: 'Apple', facebook: 'Facebook' };
 
 async function renderOverview() {

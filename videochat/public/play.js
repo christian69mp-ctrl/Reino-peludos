@@ -4,6 +4,7 @@
 // los emojis de un piropo.
 // Invitar a jugar y enviar piropos es de Premium; sin Premium se puede aceptar y recibir.
 // Los niveles Picante y Muy picante y los piropos necesitan el modo picante en las dos personas.
+// Termómetro de química: una barra fina entre el vídeo y la franja que se calienta sola.
 (function () {
   const { t } = window.I18N;
   const A = window.App;
@@ -11,7 +12,9 @@
   const tx = (o) => o?.[window.I18N.lang] ?? o?.en ?? '';
   const dock = $('playDock');
   const LEVEL_ICON = { soft: '😇', hot: '🌶️', xxx: '🌶️🌶️' };
-  const GAME_ICON = { truth: '🔥', wyr: '🤔', rps: '✊' };
+  const GAME_ICON = { truth: '🔥', wyr: '🤔', rps: '✊', draw: '🎨' };
+  const INK = ['#1b1420', '#e8283f', '#ff8a3d', '#f2b705', '#2bb673', '#2f80ed', '#9b51e0', '#ff5fa2'];
+  const DRAW_MS = 80 * 1000;
   const RPS_ICON = { r: '✊', p: '✋', s: '✌️' };
   const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -36,6 +39,8 @@
   let streak = 0;         // coincidencias seguidas en ¿Qué prefieres?
   let rateTimer = null;
   let rpsAnim = 0;        // cuenta atrás de piedra, papel o tijera en curso
+  let board = null;       // pizarra de Dibujo y adivina (se conserva entre repintados)
+  let tick = 0;           // reloj del dibujo
 
   const mySpicy = () => !!A.me?.user?.prefs?.spicy;
   const partnerSpicy = () => !!A.partner?.spicy;
@@ -149,7 +154,7 @@
     const { c, host, body } = frame(t('pl.games'));
     gesture(host, 'wave', 1800);
     const grid = el('div', 'game-tiles');
-    for (const g of ['truth', 'wyr', 'rps']) {
+    for (const g of ['truth', 'wyr', 'rps', 'draw']) {
       const tile = el('div', `game-tile t-${g}`);
       tile.appendChild(el('span', 'gt-icon', GAME_ICON[g]));
       tile.appendChild(el('span', 'gt-name', gameName(g)));
@@ -219,7 +224,7 @@
   function gameView() {
     const g = game;
     const p = prev && prev.game === g.game ? prev : null;
-    const { c, host, body } = frame(`${GAME_ICON[g.game]} ${gameName(g.game)}${g.game !== 'rps' ? ` · ${levelName(g.level)}` : ''}`, { tone: g.level === 'soft' ? '' : 'hot' });
+    const { c, host, body } = frame(`${GAME_ICON[g.game]} ${gameName(g.game)}${g.game !== 'rps' ? ` · ${levelName(g.level)}` : ''}`, { tone: `${g.level === 'soft' ? '' : 'hot'}${g.game === 'draw' ? ' draw' : ''}` });
     const actions = el('div', 'dock-actions');
     if (g.game === 'truth') {
       if (g.phase === 'choose') {
@@ -245,6 +250,8 @@
         else actions.append(btn('btn primary sm', t('pl.nextCard'), () => socket.emit('game:next')));
       }
       body.appendChild(el('span', 'dock-round', `#${g.round}`));
+    } else if (g.game === 'draw') {
+      drawView(g, p, body, host, c, actions);
     } else if (g.game === 'wyr') {
       const q = G?.wyr[g.level]?.[g.q];
       body.appendChild(el('p', 'dock-q', t('pl.wyrQ')));
@@ -308,9 +315,191 @@
         } else actions.append(btn('btn primary sm', `${t('pl.next')} →`, () => socket.emit('game:next')));
       }
     }
-    if (actions.children.length) body.appendChild(actions);
+    if (actions.children.length && !actions.parentNode) body.appendChild(actions);
     return c;
   }
+
+  // ---------- Dibujo y adivina ----------
+  const wordOf = (g) => { const w = G?.draw?.[g.level]?.[g.word]; return (w?.[window.I18N.lang] || w?.en || [''])[0]; };
+  function makeBoard(round) {
+    const canvas = el('canvas', 'board');
+    const b = { round, canvas, strokes: [], ink: 0, size: 2, drawing: false, buf: [], fresh: false };
+    const ctx = canvas.getContext('2d');
+    b.fit = () => {
+      const r = canvas.getBoundingClientRect();
+      if (!r.width) return;
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      if (canvas.width !== Math.round(r.width * dpr)) { canvas.width = Math.round(r.width * dpr); canvas.height = Math.round(r.height * dpr); b.redraw(); }
+    };
+    b.line = (st, from) => {
+      const W = canvas.width; const H = canvas.height;
+      ctx.strokeStyle = INK[st.c] || INK[0];
+      ctx.lineWidth = (st.w * 2 + 1) * (W / 400);
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.beginPath();
+      const pts = st.p.slice(Math.max(0, from - 1));
+      ctx.moveTo(pts[0][0] * W, pts[0][1] * H);
+      if (pts.length === 1) ctx.lineTo(pts[0][0] * W + 0.1, pts[0][1] * H);
+      for (const [x, y] of pts.slice(1)) ctx.lineTo(x * W, y * H);
+      ctx.stroke();
+    };
+    b.redraw = () => { ctx.clearRect(0, 0, canvas.width, canvas.height); for (const st of b.strokes) b.line(st, 0); };
+    b.add = ({ p: pts, c, w, n }) => {
+      let st = b.strokes[b.strokes.length - 1];
+      if (n || !st) { st = { c, w, p: [] }; b.strokes.push(st); }
+      const from = st.p.length;
+      st.p.push(...pts);
+      b.fit(); b.line(st, from);
+    };
+    b.clear = () => { b.strokes = []; ctx.clearRect(0, 0, canvas.width, canvas.height); };
+    // Quien dibuja: se pinta al momento y se envía en trocitos cada 40 ms
+    const pos = (e) => { const r = canvas.getBoundingClientRect(); return [Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)), Math.min(1, Math.max(0, (e.clientY - r.top) / r.height))]; };
+    const flush = () => {
+      if (!b.buf.length) return;
+      socket?.emit('game:stroke', { p: b.buf, c: b.ink, w: b.size, n: b.fresh });
+      b.buf = []; b.fresh = false;
+    };
+    canvas.addEventListener('pointerdown', (e) => {
+      if (!game || game.game !== 'draw' || !game.myTurn || game.phase !== 'draw') return;
+      e.preventDefault();
+      canvas.setPointerCapture(e.pointerId);
+      b.drawing = true; b.fresh = true;
+      const pt = pos(e);
+      b.add({ p: [pt], c: b.ink, w: b.size, n: true });
+      b.buf.push(pt);
+      b.timer = setInterval(flush, 40);
+    });
+    canvas.addEventListener('pointermove', (e) => {
+      if (!b.drawing) return;
+      const pt = pos(e);
+      b.add({ p: [pt], c: b.ink, w: b.size, n: false });
+      b.buf.push(pt);
+      if (b.buf.length >= 60) flush();
+    });
+    const up = () => { if (!b.drawing) return; b.drawing = false; flush(); clearInterval(b.timer); };
+    canvas.addEventListener('pointerup', up);
+    canvas.addEventListener('pointercancel', up);
+    return b;
+  }
+
+  function drawView(g, p, body, host, c, actions) {
+    if (!board || board.round !== g.round) board = makeBoard(g.round);
+    const fresh = !p || p.round !== g.round || p.phase !== g.phase;
+    // Pizarra a la izquierda y controles a la derecha (en el móvil, uno debajo del otro)
+    const grid = el('div', 'draw-grid');
+    const side = el('div', 'draw-side');
+    const outer = body;
+    body = side;
+    body.appendChild(el('p', 'dock-score', t('pl.score', { a: g.me, b: g.them })));
+    if (g.phase === 'draw') {
+      if (g.myTurn) {
+        const q = el('p', 'dock-q draw-word');
+        q.append(`✏️ ${t('pl.drawThis')} `, el('b', 'word-chip', wordOf(g)));
+        body.appendChild(q);
+        if (fresh) gesture(host, 'talk', 1400);
+      } else {
+        body.appendChild(el('p', 'dock-q', `🤔 ${t('pl.whatIsIt')}`));
+        const hint = el('p', 'draw-hint');
+        for (const ch of g.hint || '') hint.appendChild(el('span', ch === ' ' ? 'gap' : ch === '_' ? 'slot' : 'slot on', ch === '_' ? '' : ch));
+        body.appendChild(hint);
+      }
+    }
+    const wrap = el('div', `board-wrap${g.myTurn && g.phase === 'draw' ? ' can-draw' : ''}`);
+    wrap.appendChild(board.canvas);
+    if (g.phase === 'draw') {
+      const bar = el('div', 'dock-timer draw-timer');
+      const fill = el('span');
+      fill.style.animationDuration = `${DRAW_MS / 1000}s`;
+      fill.style.animationDelay = `-${(DRAW_MS - Math.max(0, g.deadline - Date.now())) / 1000}s`;
+      bar.appendChild(fill);
+      const secs = el('b', 'draw-secs');
+      const upd = () => { const left = Math.max(0, Math.ceil((g.deadline - Date.now()) / 1000)); secs.textContent = `${left}s`; secs.classList.toggle('hurry', left <= 10); };
+      upd(); clearInterval(tick); tick = setInterval(upd, 500);
+      wrap.append(bar, secs);
+    } else clearInterval(tick);
+    grid.append(wrap, side);
+    outer.appendChild(grid);
+    requestAnimationFrame(() => board?.fit());
+    if (g.phase === 'draw' && g.myTurn) {
+      const tools = el('div', 'draw-tools');
+      INK.forEach((col, i) => {
+        const sw = btn(`ink${board.ink === i ? ' on' : ''}`, '', () => { board.ink = i; tools.querySelectorAll('.ink').forEach((x, k) => x.classList.toggle('on', k === i)); });
+        sw.style.setProperty('--ink', col);
+        sw.setAttribute('aria-label', col);
+        tools.appendChild(sw);
+      });
+      [1, 2, 3].forEach((w) => {
+        const b = btn(`pen${board.size === w ? ' on' : ''}`, '', () => { board.size = w; tools.querySelectorAll('.pen').forEach((x, k) => x.classList.toggle('on', k === w - 1)); });
+        b.appendChild(el('i', '', ''));
+        b.style.setProperty('--pen', `${w * 4 + 2}px`);
+        b.setAttribute('aria-label', `${w}`);
+        tools.appendChild(b);
+      });
+      const clr = btn('pen clear', '🗑️', () => { board.clear(); socket?.emit('game:clear'); });
+      clr.setAttribute('aria-label', t('pl.clear'));
+      tools.appendChild(clr);
+      body.appendChild(tools);
+    } else if (g.phase === 'draw') {
+      const form = el('form', 'guess-form');
+      const input = el('input');
+      input.type = 'text'; input.maxLength = 40; input.autocomplete = 'off';
+      input.placeholder = t('pl.guessPh');
+      input.setAttribute('aria-label', t('pl.guessPh'));
+      form.append(input, el('button', 'btn primary sm', t('pl.guessBtn')));
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const text = input.value.trim();
+        if (!text) return;
+        socket.emit('game:guess', { text }, (res) => {
+          if (res?.ok) return;
+          input.value = '';
+          form.classList.remove('nope'); void form.offsetWidth; form.classList.add('nope');
+          if (res?.close) playToast(`🔥 ${t('pl.close')}`, { cls: 'got', ms: 1600 });
+        });
+      });
+      body.appendChild(form);
+      if (fresh) setTimeout(() => input.focus({ preventScroll: true }), 50);
+    } else {
+      const res = el('p', `dock-result ${g.solved ? 'win' : ''}`);
+      res.append(g.solved ? `${t('pl.solved')} ` : `${t('pl.timeUp')} `, el('b', 'word-chip pop', wordOf(g)));
+      body.appendChild(res);
+      if (g.solved && fresh) { gesture(host, 'jump', 700); confetti(c, ['🎨', '✨', '🔥', '🎉']); }
+      actions.append(btn('btn primary sm', `🔄 ${t('pl.swap')}`, () => socket.emit('game:next')));
+      side.appendChild(actions);
+    }
+  }
+  // Lo que se va escribiendo, para quien dibuja (burbujas que suben y se van)
+  function guessSeen(text) {
+    const wrap = dock.querySelector('.board-wrap');
+    if (!wrap) return;
+    const b = el('span', 'guess-bubble', text);
+    b.style.left = `${10 + Math.random() * 60}%`;
+    wrap.appendChild(b);
+    setTimeout(() => b.remove(), 2600);
+  }
+
+  // ---------- Termómetro de química ----------
+  let chemTop = 0;
+  function chem(v) {
+    const bar = $('chemBar');
+    if (!bar) return;
+    bar.hidden = v < 3;
+    $('chemFill').style.width = `${v}%`;
+    $('chemNum').textContent = `${v}°`;
+    bar.setAttribute('aria-valuenow', v);
+    bar.classList.toggle('warm', v >= 50);
+    bar.classList.toggle('hot', v >= 80);
+    bar.classList.toggle('max', v >= 100);
+    for (const [step, key] of [[50, 'pl.chem50'], [80, 'pl.chem80'], [100, 'pl.chem100']]) {
+      if (v >= step && chemTop < step) {
+        $('chemLabel').textContent = t(key);
+        bar.classList.remove('bump'); void bar.offsetWidth; bar.classList.add('bump');
+        if (step === 100) { confetti(bar, ['🔥', '🌡️', '💥', '❤️', '✨']); playToast([el('span', 'pt-e big', '💥'), el('span', 'pt-text', t('pl.chemBoom'))], { cls: 'got', ms: 3600 }); }
+      }
+    }
+    chemTop = Math.max(chemTop, v);
+  }
+  function chemReset() { chemTop = 0; $('chemLabel').textContent = ''; chem(0); }
 
   // ---------- Modo picante ----------
   async function setSpicy(on) {
@@ -375,22 +564,27 @@
     s.on('game:declined', () => playToast(t('pl.declined')));
     s.on('game', (state) => {
       if (state?.ended) {
-        prev = null; game = null; streak = 0;
+        prev = null; game = null; streak = 0; board = null; clearInterval(tick);
         if (state.ended === 'ended' && state.by === 'them') playToast(t('pl.endedByThem'));
         if (state.ended === 'spicyOff') playToast(t('pl.endedSpicy'));
       } else {
         prev = game; game = state; invite = null; open = null;
+        if (state.game === 'draw') state.deadline = Date.now() + (state.left || 0);
         if (!prev) { $('playToast').replaceChildren(); streak = 0; }
       }
       loadGames().then(rerender);
     });
+    s.on('game:stroke', (d) => { if (game?.game === 'draw' && board) board.add(d); });
+    s.on('game:clear', () => board?.clear());
+    s.on('game:guess-seen', ({ text }) => guessSeen(text));
+    s.on('chem', ({ v }) => { if (A.partner) chem(v); });
     s.on('partner-flags', ({ spicy }) => { if (A.partner) { A.partner.spicy = spicy; rerender(); } });
     s.on('rate-ask', askRate);
   }
 
   // Al conectar con alguien nuevo / al irse
-  function matched() { game = null; prev = null; invite = null; open = null; streak = 0; loadGames().then(() => { rerender(); sync(); }); }
-  function left() { game = null; prev = null; invite = null; open = null; streak = 0; rerender(); }
+  function matched() { game = null; prev = null; invite = null; open = null; streak = 0; board = null; chemReset(); loadGames().then(() => { rerender(); sync(); }); }
+  function left() { game = null; prev = null; invite = null; open = null; streak = 0; board = null; clearInterval(tick); chemReset(); rerender(); }
 
   // Piropos que la otra persona ha decidido mostrar: «🍑 23 · 🔥 41»
   function badges(p) {

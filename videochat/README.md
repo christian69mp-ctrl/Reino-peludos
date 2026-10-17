@@ -118,10 +118,23 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
     requiere Premium**, sin Premium se puede aceptar y jugar). Se muestran en una franja debajo del
     vídeo, nunca tapando a la otra persona:
     Verdad o reto (120 cartas: 😇 Suave, 🌶️ Picante y 🌶️🌶️ Muy picante), ¿Qué prefieres? y
-    Piedra, papel o tijera (al mejor de 3). Cualquiera puede pasar una carta o terminar el juego.
+    Piedra, papel o tijera (al mejor de 3) y Dibujo y adivina. Cualquiera puede pasar una carta o terminar el juego.
     El servidor hace de árbitro (sortea las cartas y no revela una elección hasta que eligen los dos).
     Picante y Muy picante solo si los dos tienen el modo picante (sin Premium, el botón de invitar
     lleva la etiqueta dorada y al tocarlo se abre Premium).
+  - *Dibujo y adivina* (Suave / Picante / Muy picante): uno dibuja una palabra secreta en una
+    pizarra de papel en la franja bajo el vídeo (8 colores, 3 grosores, borrar) y el otro escribe;
+    80 s por ronda, primera letra a mitad de tiempo, valen respuestas en los 6 idiomas (sin tildes
+    ni mayúsculas) y aviso «¡Casi!»; quien dibuja ve subir los fallos. Al acertar: +1 punto en el
+    marcador y +2 guindillas a cada uno, y «Cambiar turno». Socket.IO: `game:stroke`, `game:clear`,
+    `game:guess` y `game:guess-seen`. Los dibujos y respuestas no se guardan.
+  - *Termómetro de química* 🌡️ (para todos, gratis): barra fina entre el vídeo y la franja de juegos
+    que se calienta en cada conversación con el tiempo hablando (hasta 4 min), ❤️ y 👍, piropos,
+    juegos, coincidencias en ¿Qué prefieres?, dibujos acertados y mensajes del chat (evento `chem`).
+    Mensajes a 50°, 80° y 100°; a 100° («explosión de química») +5 guindillas a cada uno, una vez por
+    conversación. Empieza en 0 con cada persona; solo se guarda el contador de explosiones (insignia 🌡️).
+  - Guía de juegos y poderes: `public/juegos.html` (`/es/juegos`, `/en/games`, `/pt/jogos`,
+    `/fr/jeux`, `/de/spiele`, `/it/giochi`).
   - *Piropos* (botón 🌶️): 12 mensajes ya hechos, solo positivos («Buen culo», «Buena corrida»…).
     **Enviarlos requiere Premium**; recibirlos, no. Solo si los dos tienen el modo picante. Al
     recibirlos salen un momento como emojis que suben por los bordes del vídeo y un aviso pequeño
@@ -136,7 +149,7 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
     **No se compran con dinero**, no tienen valor económico, no se transfieren y no hay premios al
     azar ni de pago. Se ven en la pastilla 🌶️ de la cabecera, que abre el panel «Guindillas y poderes».
   - *Racha* 🔥 (sube cada día que se entra; si se falla un día, vuelve a empezar), *3 retos
-    semanales* iguales para todos (lunes a domingo UTC) y *8 insignias* (🧊 🏆 💞 🌍 🗣️ 💘 🌶️ 🔥);
+    semanales* iguales para todos (lunes a domingo UTC) y *9 insignias* (🧊 🏆 💞 🌍 🗣️ 💘 🌶️ 🔥 🌡️, esta con 5 explosiones de química);
     las 3 últimas se ven junto al nombre para la otra persona.
   - *Superpoderes* (precio en guindillas): 🔥 Llama caliente 30 (15 min antes en la cola),
     ↩️ Rebobinar 20 (botón ↩️ durante 15 s para pedir volver con la persona anterior, si acepta y
@@ -241,7 +254,7 @@ Diseño hecho con Gemini y redibujado en vector para que se vea nítido a cualqu
 - `friends.js` — historial de chats, amigos y solicitudes (las llamadas y el «en línea» están en `server.js`).
 - `privacy.js` — cabeceras de seguridad, descargar/borrar datos, limpieza automática y código de marca de agua.
 - `public/` — la web: `index.html` (portada + chat), `app.js`, `style.css`, `admin.html`,
-  páginas legales y `logo.svg`.
+  `juegos.html` (guía de juegos y poderes), páginas legales y `logo.svg`.
 - `Dockerfile`, `docker-compose.yml`, `Caddyfile`, `.env.example` — publicación en servidor (ver DESPLIEGUE.md).
 - `docs/` — documentos internos: registro de tratamientos, evaluación de impacto y lista de lanzamiento.
 

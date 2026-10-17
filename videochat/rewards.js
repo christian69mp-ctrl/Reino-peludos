@@ -24,6 +24,7 @@ const BADGES = [
   { id: 'heartbreaker', e: '💘', key: 'likes', goal: 50 },
   { id: 'spicy', e: '🌶️', key: 'piropos', goal: 25 },
   { id: 'onfire', e: '🔥', key: 'bestStreak', goal: 7 },
+  { id: 'chem', e: '🌡️', key: 'hotChem', goal: 5 },
 ];
 const CHALLENGES = [
   { id: 'countries3', key: 'countries', goal: 3, reward: 50 },

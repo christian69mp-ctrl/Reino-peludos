@@ -959,7 +959,7 @@ input.toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2
 .dots { display: inline-block; letter-spacing: .3em; color: #ff8a3d; animation: turn-pulse 1s infinite; }
 @keyframes pop-in { from { transform: scale(.6); opacity: 0; } }
 
-.game-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.game-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
 .game-tile { padding: 8px; border-radius: 14px; background: var(--bg); border: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; animation: pop-in .35s cubic-bezier(.2, 1.4, .4, 1) both; }
 .game-tile:nth-child(2) { animation-delay: .06s; }
 .game-tile:nth-child(3) { animation-delay: .12s; }
@@ -1134,6 +1134,72 @@ input.toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2
   .points-pill { padding: 6px 9px; }
   .pp-chili { display: none; }
 }
+/* Dibujo y adivina: pizarra de papel dentro de la franja */
+.dock-card.draw { max-height: min(52vh, 320px); }
+.draw-grid { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 12px; align-items: start; }
+.draw-side .dock-actions { margin-top: 10px; }
+.draw-side .dock-actions .btn { min-width: 0; }
+.draw-side .guess-form { flex-direction: column; }
+.board-wrap, .draw-tools { user-select: none; -webkit-user-select: none; }
+.draw-word { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.word-chip { display: inline-block; padding: 2px 10px; border-radius: 999px; background: linear-gradient(120deg, #e8283f, #ff8a3d); color: #fff; font-weight: 800; }
+.word-chip.pop { animation: pop-in .5s cubic-bezier(.2, 1.6, .4, 1) both; }
+.draw-hint { display: flex; flex-wrap: wrap; gap: 5px; margin: 4px 0 6px; }
+.draw-hint .slot { width: 18px; height: 24px; border-bottom: 3px solid #ff8a3d; text-align: center; font-weight: 800; text-transform: uppercase; }
+.draw-hint .slot.on { color: #ffb37a; animation: pop-in .4s cubic-bezier(.2, 1.6, .4, 1) both; }
+.draw-hint .gap { width: 10px; }
+.board-wrap { position: relative; margin-top: 6px; }
+.board { display: block; width: 100%; aspect-ratio: 2.3 / 1; border-radius: 12px; background: #fff8f0 repeating-linear-gradient(0deg, transparent 0 23px, rgba(47, 128, 237, .08) 23px 24px); touch-action: none; }
+.board-wrap.can-draw .board { cursor: crosshair; box-shadow: 0 0 0 2px #ff8a3d; }
+.draw-timer { position: absolute; left: 8px; right: 52px; bottom: 8px; margin: 0; background: rgba(27, 20, 32, .15); }
+.draw-secs { position: absolute; right: 8px; bottom: 2px; font-size: .78rem; color: #1b1420; }
+.draw-secs.hurry { color: #e8283f; animation: turn-pulse .5s infinite; }
+.draw-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; }
+.draw-tools .ink { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--border); background: var(--ink); cursor: pointer; transition: transform .15s; }
+.draw-tools .ink.on { transform: scale(1.2); border-color: #fff; box-shadow: 0 0 0 2px #ff8a3d; }
+.draw-tools .pen { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); display: grid; place-items: center; cursor: pointer; color: var(--text); }
+.draw-tools .pen i { display: block; width: var(--pen); height: var(--pen); border-radius: 50%; background: currentColor; }
+.draw-tools .pen.on { border-color: #ff8a3d; color: #ff8a3d; }
+.draw-tools .pen.clear { margin-left: auto; width: auto; padding: 0 10px; border-radius: 999px; }
+.guess-form { display: flex; gap: 8px; margin-top: 8px; }
+.guess-form input { flex: 1; min-width: 0; padding: 9px 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; }
+.guess-form.nope { animation: nope .35s; }
+@keyframes nope { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+.guess-bubble { position: absolute; bottom: 30%; padding: 3px 10px; border-radius: 999px; background: #1b1420; color: #fff; font-size: .8rem; white-space: nowrap; pointer-events: none; animation: bubble-up 2.6s ease-out forwards; }
+@keyframes bubble-up { from { opacity: 0; transform: translateY(10px); } 15% { opacity: 1; } to { opacity: 0; transform: translateY(-60px); } }
+
+/* Termómetro de química: barra fina entre el vídeo y la franja */
+.chem { flex: none; position: relative; display: flex; align-items: center; gap: 8px; padding: 0 6px; font-size: .78rem; animation: dock-in .35s ease-out; }
+.chem[hidden] { display: none; }
+.chem-ico { font-size: 1rem; transition: transform .3s; }
+.chem-track { flex: 1; height: 8px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.chem-fill { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, #4da3ff, #ff8a3d 55%, #e8283f); background-size: 100vw 100%; transition: width 1.2s cubic-bezier(.2, 1.2, .4, 1); }
+.chem-num { min-width: 34px; text-align: right; color: var(--muted); }
+.chem-label { color: #ffb37a; font-weight: 700; white-space: nowrap; }
+.chem.warm .chem-num { color: #ff8a3d; }
+.chem.hot .chem-fill { animation: chem-glow 1.2s ease-in-out infinite; }
+.chem.hot .chem-ico { animation: chem-wobble 1s ease-in-out infinite; }
+.chem.max .chem-num { color: #e8283f; }
+.chem.bump .chem-label { animation: pop-in .5s cubic-bezier(.2, 1.6, .4, 1); }
+@keyframes chem-glow { 50% { box-shadow: 0 0 12px rgba(255, 61, 110, .8); filter: brightness(1.25); } }
+@keyframes chem-wobble { 25% { transform: rotate(-12deg) scale(1.1); } 75% { transform: rotate(12deg) scale(1.1); } }
+@media (max-width: 720px) {
+  .game-tiles { grid-template-columns: 1fr; }
+  .draw-grid { grid-template-columns: 1fr; gap: 6px; }
+  .draw-side { display: flex; flex-direction: column; }
+  .draw-side .dock-score { order: -1; }
+  .draw-side .guess-form { flex-direction: row; }
+  .dock-card.draw { max-height: 58dvh; }
+  /* Mientras se dibuja, el vídeo se encoge un poco para que la pizarra quepa sin desplazar la página */
+  .stage:has(.dock-card.draw) .remote { max-height: 38dvh; }
+  .board { aspect-ratio: 1.8 / 1; }
+  .chem-label { display: none; }
+}
+@media (max-width: 1100px) and (min-width: 721px) { .game-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (prefers-reduced-motion: reduce) {
+  .chem, .chem.hot .chem-fill, .chem.hot .chem-ico, .guess-bubble, .guess-form.nope, .word-chip.pop, .draw-hint .slot.on { animation: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .play-dock.dock-in, .dock-card.invite, .dock-q.my-turn, .btn.pulse, .tcard.flip, .tdeck-card, .game-tile, .pw-card, .pw-dot.on, .pw-bar span, .pw-badge.have .pw-badge-e, .pt, .pt-e.big, .super-msg { animation: none; }
 }

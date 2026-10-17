@@ -93,6 +93,14 @@ const DESCRIPTIONS = {
     de: 'Cookie-Richtlinie von La Ruleta Caliente: nur unbedingt notwendige Cookies und Speicher, keine Werbung, kein Tracking. Vollständige Liste und Löschen.',
     it: 'Cookie policy di La Ruleta Caliente: solo cookie e memoria indispensabili, niente pubblicità né tracciamento. Elenco completo e come cancellarli.',
   },
+  games: {
+    es: 'Guía de juegos de La Ruleta Caliente: Verdad o reto, Dibujo y adivina, piropos, termómetro de química, guindillas, insignias y superpoderes.',
+    en: 'La Ruleta Caliente games guide: Truth or dare, Draw & guess, compliments, chemistry meter, chilis, badges and superpowers.',
+    pt: 'Guia de jogos da La Ruleta Caliente: Verdade ou desafio, Desenhe e adivinhe, cantadas, termômetro de química, pimentas, insígnias e superpoderes.',
+    fr: 'Guide des jeux de La Ruleta Caliente : Action ou vérité, Dessine et devine, mots doux, thermomètre, piments, badges et superpouvoirs.',
+    de: 'Spiele-Guide von La Ruleta Caliente: Wahrheit oder Pflicht, Zeichnen & Raten, Komplimente, Chemie-Thermometer, Chilis, Abzeichen und Superkräfte.',
+    it: 'Guida ai giochi di La Ruleta Caliente: Obbligo o verità, Disegna e indovina, complimenti, termometro dell’intesa, peperoncini, badge e superpoteri.',
+  },
   about: {
     es: 'Quiénes somos y cómo funciona La Ruleta Caliente: un videochat para adultos pensado para la privacidad, la seguridad y el respeto.',
     en: 'Who we are and how La Ruleta Caliente works: an adult video chat built around privacy, safety and respect.',

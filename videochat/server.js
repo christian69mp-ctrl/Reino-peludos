@@ -261,6 +261,7 @@ function pair(socket, partner, { call = false } = {}) {
   reacted.set(partnerId, new Set());
   const meet = { x: socket.data.uid, y: partner.data.uid, at: Date.now() };
   meetings.set(socket.id, meet);
+  play.paired(socket, partner);
   meetings.set(partnerId, meet);
   friends.meet(meet.x, meet.y, meet.at);
   socket.emit('matched', { initiator: true, call, ...partnerInfo(socket, partner) });
@@ -468,6 +469,7 @@ io.on('connection', (socket) => {
       if (log.length > 30) log.shift();
     }
     io.to(partnerId).emit('chat', clean);
+    play.heat(socket, 'msg');
   });
 
   // Reacciones 👍 / ❤️: se animan en las dos pantallas y suman al perfil de la
@@ -494,6 +496,7 @@ io.on('connection', (socket) => {
       store.updateUser(partner.data.uid, fields);
       rewards.count(partner.data.uid, 'likes');
       rewards.award(partner.data.uid, 1, 'like');
+      play.heat(socket, type === 'love' ? 'love' : 'like');
     }
     socket.emit('reaction', { type, from: 'me', partnerLikes: likes });
     partner.emit('reaction', { type, from: 'them', myLikes: likes });

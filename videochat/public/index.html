@@ -273,6 +273,12 @@
         <div class="overlay-msgs" id="overlayMsgs" aria-hidden="true"></div>
         <div class="burst-layer" id="burstLayer" aria-hidden="true"></div>
       </div>
+      <div class="chem" id="chemBar" hidden role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-i18n-aria="pl.chem" aria-label="Chemistry">
+        <span class="chem-ico" aria-hidden="true">🌡️</span>
+        <span class="chem-track"><span class="chem-fill" id="chemFill"></span></span>
+        <b class="chem-num" id="chemNum">0°</b>
+        <span class="chem-label" id="chemLabel"></span>
+      </div>
       <div class="play-toast" id="playToast" aria-live="polite"></div>
       <section class="play-dock" id="playDock" hidden aria-live="polite"></section>
       <div class="controls">
@@ -360,6 +366,7 @@
       </div>
       <nav class="footer-links">
         <a href="/ayuda" data-i18n="footer.help">Help</a>
+        <a href="/juegos" data-i18n="footer.games">Games &amp; powers</a>
         <a href="/contacto" data-i18n="footer.contact">Contact</a>
         <a href="/normas" data-i18n="footer.rules">Community rules</a>
         <a href="/terminos" data-i18n="footer.terms">Terms of use</a>
