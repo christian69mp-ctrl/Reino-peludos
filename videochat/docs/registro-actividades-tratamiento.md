@@ -111,8 +111,76 @@
 |---|---|
 | **Finalidad** | Poder recuperar la web si falla el servidor. |
 | **Base jurídica** | Interés legítimo (art. 6.1.f) y deber de seguridad (art. 32). |
-| **Datos** | Copia completa de la base de datos (apartados 1, 2, 3, 4 bis, 5 y 6). |
+| **Datos** | Copia completa de la base de datos (apartados 1, 2, 3, 4 bis, 5, 6, 8, 9, 10, 11, 12 y 13). |
 | **Plazo** | **14 días** en el servidor (rotación automática). Las copias que descargues a tu ordenador: guárdalas cifradas y borra las de más de 14 días. |
+
+## 8. Formulario de contacto (`/contacto`)
+
+| | |
+|---|---|
+| **Finalidad** | Atender las consultas que llegan por el formulario de contacto y responderlas por email. |
+| **Base jurídica** | **Pendiente de confirmar con abogado:** ejecución del contrato (art. 6.1.b) si escribe un usuario sobre su cuenta, o interés legítimo (art. 6.1.f) en atender a quien nos escribe. |
+| **Interesados** | Cualquier persona que use el formulario (con o sin cuenta). |
+| **Datos** | Nombre (opcional), email, categoría, mensaje e identificador de la cuenta si ha iniciado sesión. La IP solo se usa para limitar el número de envíos; **no se guarda con la consulta**. |
+| **Plazo** | **2 años** (730 días) desde que se cierra la consulta; después se borra. |
+| **Destinatarios** | Proveedor de email (Brevo) para enviar la respuesta. Proveedor del servidor (alojamiento). |
+
+## 9. Notificaciones de contenido ilegal (`/denunciar-contenido`, art. 16 DSA)
+
+| | |
+|---|---|
+| **Finalidad** | Recibir y resolver los avisos públicos de contenido presuntamente ilegal, con acuse de recibo y comunicación de la decisión. |
+| **Base jurídica** | Obligación legal (art. 6.1.c): Reglamento de Servicios Digitales (DSA), art. 16. |
+| **Interesados** | Quien notifica (con o sin cuenta) y las personas o cuentas señaladas en el aviso. |
+| **Datos** | Categoría; explicación; URL o código de cuenta; nombre y email de quien notifica (opcionales **solo** en avisos de material de abuso sexual infantil); declaración de buena fe. |
+| **Datos sensibles** | La explicación es texto libre y puede incluir datos del art. 9 RGPD o relativos a posibles delitos (art. 10). |
+| **Plazo** | **2 años** desde que se cierra el aviso; después se borra. |
+| **Destinatarios** | Proveedor de email (Brevo) para el acuse de recibo y la decisión. Autoridades si hay delito (p. ej. menores). |
+
+## 10. Declaración de motivos y recursos contra sanciones (arts. 17 y 20 DSA)
+
+| | |
+|---|---|
+| **Finalidad** | Informar a la persona del motivo cuando se restringe su cuenta (art. 17) y tramitar los recursos contra sanciones (art. 20). |
+| **Base jurídica** | Obligación legal (art. 6.1.c): Reglamento de Servicios Digitales (DSA). |
+| **Interesados** | Usuarios con la cuenta restringida. |
+| **Datos** | Código del motivo de la restricción, guardado con la cuenta. En los recursos: identificador de la cuenta, texto del recurso y decisión. |
+| **Plazo** | Motivo de la restricción: con la cuenta. Recursos: **2 años** desde que se cierran; después se borran. |
+| **Destinatarios** | Ninguno externo. |
+
+## 11. Notificaciones push
+
+| | |
+|---|---|
+| **Finalidad** | Avisar al usuario de llamadas, solicitudes de amistad y amigos en línea aunque tenga la web cerrada. |
+| **Base jurídica** | Consentimiento (art. 6.1.a): solo si el usuario las activa y el navegador le pide permiso. Se puede retirar en cualquier momento en "Mi cuenta → Notificaciones" o en el navegador. |
+| **Interesados** | Usuarios registrados que activan las notificaciones. |
+| **Datos** | Suscripción push del navegador (URL del servicio push del fabricante del navegador y claves de cifrado), vinculada a la cuenta; preferencias de notificación (llamadas, solicitudes de amistad, amigos en línea). |
+| **Plazo** | Hasta que el usuario las desactive, el navegador indique que la suscripción ha caducado o se borre la cuenta. |
+| **Destinatarios** | El servicio push del fabricante del navegador (p. ej. Google, Mozilla o Apple), por el que pasa cifrado el contenido de cada notificación. |
+| **Transferencias internacionales** | Posibles, según el navegador que use la persona (p. ej. Google, Mozilla o Apple, en EE. UU.). **Revisar con abogado** las garantías aplicables. |
+
+## 12. Estadísticas de uso anónimas
+
+| | |
+|---|---|
+| **Finalidad** | Conocer cómo se usa la web para mejorarla. |
+| **Base jurídica** | Interés legítimo (art. 6.1.f). |
+| **Interesados** | Visitantes y usuarios de la web. |
+| **Datos** | Solo recuentos diarios: páginas vistas, páginas, idiomas, tipo de dispositivo (móvil u ordenador), país (calculado a partir de la IP con la base de datos local; la IP no se guarda), registros por método, conversaciones y su duración, usuarios activos. |
+| **Cómo se trata** | Los visitantes únicos se cuentan con un hash de IP + navegador + una sal aleatoria que cambia cada día y se descarta, de modo que no se puede identificar a nadie ni seguirle entre días. **Sin cookies.** |
+| **Destinatarios** | Ninguno. |
+
+## 13. Registro de auditoría de la administración
+
+| | |
+|---|---|
+| **Finalidad** | Dejar constancia de las acciones de moderadores y administradores para detectar abusos o accesos indebidos al panel. |
+| **Base jurídica** | Interés legítimo (art. 6.1.f) y deber de seguridad (art. 32). |
+| **Interesados** | Moderadores y administradores. |
+| **Datos** | Acción realizada, fecha y hora, e IP del administrador. |
+| **Plazo** | Solo se conservan las **últimas 500 entradas**; las anteriores se borran. |
+| **Destinatarios** | Ninguno externo. |
 
 ---
 
@@ -125,6 +193,7 @@
 - Vídeo cifrado de extremo a extremo y sin grabar; IP oculta entre usuarios (relay TURN).
 - Servidor TURN que no permite llegar a redes internas; credenciales que caducan a las 12 h.
 - Panel de administración con contraseña; avisos por email de denuncias urgentes.
+- Registro de auditoría de las acciones de moderadores y administradores (últimas 500: acción, hora e IP).
 - Borrado automático de datos antiguos (IP 90 días, pruebas 180 días); copias rotadas a 14 días.
 - Contenedor sin privilegios de administrador; cortafuegos con solo los puertos necesarios.
 - Los usuarios pueden descargar sus datos y borrar su cuenta desde la web.
@@ -139,6 +208,7 @@
 | Cloudflare | Anti-bots (Turnstile) | ☐ |
 | DeepL | Traducción (si se activa) | ☐ |
 | Segpay | Pagos (cuando se active) | ☐ |
+| Google / Mozilla / Apple | Servicio push del navegador (solo si el usuario activa las notificaciones) | ☐ Revisar si aplica |
 
 La mayoría lo incluyen en sus condiciones (busca "Data Processing Agreement" o "DPA" en su web);
 descarga una copia en PDF y guárdala con este documento.

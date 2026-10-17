@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Report illegal content · La Ruleta Caliente</title>
+  <meta name="description" content="Report illegal content on La Ruleta Caliente, with or without an account.">
+  <meta name="theme-color" content="#0c0a0f">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preload" href="/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/i18n.js"></script>
+</head>
+<body data-title-key="nf2.metaTitle">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></symbol>
+  </defs></svg>
+  <header class="site-header">
+    <a href="/" class="brand"><img src="/logo.svg" alt="" width="34" height="34"><span>La Ruleta <b>Caliente</b></span></a>
+    <a href="/" class="btn ghost sm" data-i18n="btn.back">← Back</a>
+  </header>
+  <main class="doc page-form">
+    <h1 data-i18n="nf2.title">Report illegal content</h1>
+    <p class="lead-text" data-i18n="nf2.intro">Anyone can tell us about illegal content on La Ruleta Caliente, even without an account. A person reviews every notice and we will tell you what we decided.</p>
+    <p class="notice warn" data-i18n="nf2.danger">If someone is in immediate danger, call the emergency number 112 first.</p>
+    <p class="hint" data-i18n="nf2.inChat">If you are in a video chat right now, it is faster to use the Report button above the video.</p>
+    <form id="noticeForm" class="card-form" novalidate>
+      <label class="field"><span data-i18n="nf2.category">What kind of content is it?</span>
+        <select id="nfCategory">
+          <option value="" data-i18n="nf2.choose">Choose an option</option>
+          <option value="minors" data-i18n="nf2.c.minors">A minor or sexual content involving minors</option>
+          <option value="nonconsensual" data-i18n="nf2.c.nonconsensual">Images or recordings shared without consent</option>
+          <option value="violence" data-i18n="nf2.c.violence">Threats, violence or incitement to violence</option>
+          <option value="hate" data-i18n="nf2.c.hate">Hate speech or discrimination</option>
+          <option value="harassment" data-i18n="nf2.c.harassment">Harassment or stalking</option>
+          <option value="ip" data-i18n="nf2.c.ip">Infringement of my copyright or image rights</option>
+          <option value="fraud" data-i18n="nf2.c.fraud">Scams, fraud or impersonation</option>
+          <option value="other" data-i18n="nf2.c.other">Other illegal content</option>
+        </select>
+      </label>
+      <label class="field"><span data-i18n="nf2.account">Who? Chat name or protection code (e.g. 7F3A-91C2), if you know it</span><input id="nfAccount" maxlength="60"></label>
+      <label class="field"><span data-i18n="nf2.where">Where and when did you see it? (date, time, link…)</span><input id="nfLocation" maxlength="500"></label>
+      <label class="field"><span data-i18n="nf2.explanation">Explain why you think it is illegal</span><textarea id="nfExplanation" rows="6" maxlength="5000" required></textarea></label>
+      <div class="two">
+        <label class="field"><span data-i18n="nf2.name">Your name</span><input id="nfName" maxlength="100" autocomplete="name"></label>
+        <label class="field"><span data-i18n="auth.email">Email</span><input id="nfEmail" type="email" maxlength="200" autocomplete="email"></label>
+      </div>
+      <p class="hint" data-i18n="nf2.anon">Name and email are required, except for content involving minors, which you can report anonymously.</p>
+      <label class="check"><input type="checkbox" id="nfGoodFaith"><span data-i18n="nf2.goodFaith">I declare in good faith that the information in this notice is accurate and complete.</span></label>
+      <div class="captcha" id="captchaPage"></div>
+      <p class="form-error" id="formError" hidden></p>
+      <button type="submit" class="btn primary lg wide" id="formSubmit" data-i18n="nf2.send">Send notice</button>
+    </form>
+    <div class="sent-box" id="sentBox" hidden>
+      <h2 data-i18n="nf2.sentTitle">Notice received</h2>
+      <p data-i18n="nf2.sentText">Thank you. We will review it as soon as possible. If you gave us your email, we have sent you an acknowledgement and will tell you our decision.</p>
+      <p class="ref"><span data-i18n="cf.ref">Reference</span>: <b id="sentRef"></b></p>
+    </div>
+    <p class="hint"><span data-i18n="nf2.more">More about how we handle notices and appeals in the</span> <a class="link" href="/aviso-legal" data-i18n="footer.legalNotice">Legal notice</a>.</p>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="brand"><img src="/logo.svg" alt="" width="28" height="28"><span>La Ruleta <b>Caliente</b></span></a>
+        <p data-i18n="footer.tagline">Live video chat for adults 18+.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="/ayuda" data-i18n="footer.help">Help</a>
+        <a href="/contacto" data-i18n="footer.contact">Contact</a>
+        <a href="/normas" data-i18n="footer.rules">Community rules</a>
+        <a href="/terminos" data-i18n="footer.terms">Terms of use</a>
+        <a href="/privacidad" data-i18n="footer.privacy">Privacy &amp; cookies</a>
+        <a href="/aviso-legal" data-i18n="footer.legalNotice">Legal notice</a>
+        <a href="/reembolsos" data-i18n="footer.refunds">Cancellation &amp; refunds</a>
+        <a href="/denunciar-contenido" data-i18n="footer.reportContent">Report content</a>
+        <a href="/sobre-nosotros" data-i18n="footer.about">About us</a>
+      </nav>
+      <label class="lang-select"><svg class="i"><use href="#i-globe"/></svg><span class="sr-only" data-i18n="footer.language">Language</span>
+        <select data-lang-select></select>
+      </label>
+    </div>
+    <p class="footer-legal"><span class="age">18+</span><span data-i18n="footer.legal">Adults only. © 2026 La Ruleta Caliente.</span></p>
+  </footer>
+  <script src="/pages.js"></script>
+</body>
+</html>

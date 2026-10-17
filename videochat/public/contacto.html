@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact · La Ruleta Caliente</title>
+  <meta name="description" content="Contact La Ruleta Caliente: support, privacy, payments, press and authorities.">
+  <meta name="theme-color" content="#0c0a0f">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preload" href="/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/i18n.js"></script>
+</head>
+<body data-title-key="cf.metaTitle">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></symbol>
+  </defs></svg>
+  <header class="site-header">
+    <a href="/" class="brand"><img src="/logo.svg" alt="" width="34" height="34"><span>La Ruleta <b>Caliente</b></span></a>
+    <a href="/" class="btn ghost sm" data-i18n="btn.back">← Back</a>
+  </header>
+  <main class="doc page-form">
+    <h1 data-i18n="cf.title">Contact</h1>
+    <p class="lead-text" data-i18n="cf.intro">Write to us and a person from the team will answer by email, usually within 48 working hours.</p>
+    <div class="quick-links">
+      <a class="quick" href="/ayuda"><b data-i18n="cf.qHelp">Help center</b><span data-i18n="cf.qHelpText">Frequent questions and Guindi, our assistant, answer at once.</span></a>
+      <a class="quick" href="/denunciar-contenido"><b data-i18n="cf.qReport">Report illegal content</b><span data-i18n="cf.qReportText">For content involving minors, non-consensual images or other illegal content.</span></a>
+      <a class="quick" href="/reembolsos"><b data-i18n="cf.qRefunds">Cancellation and refunds</b><span data-i18n="cf.qRefundsText">How to cancel Premium and when we refund.</span></a>
+    </div>
+    <form id="contactForm" class="card-form" novalidate>
+      <div class="two">
+        <label class="field"><span data-i18n="cf.name">Name (optional)</span><input id="cfName" maxlength="100" autocomplete="name"></label>
+        <label class="field"><span data-i18n="auth.email">Email</span><input id="cfEmail" type="email" maxlength="200" autocomplete="email" required></label>
+      </div>
+      <label class="field"><span data-i18n="cf.category">Topic</span>
+        <select id="cfCategory">
+          <option value="support" data-i18n="cf.c.support">Help using the website</option>
+          <option value="account" data-i18n="cf.c.account">My account</option>
+          <option value="billing" data-i18n="cf.c.billing">Payments and Premium</option>
+          <option value="privacy" data-i18n="cf.c.privacy">Privacy and my data</option>
+          <option value="report" data-i18n="cf.c.report">A problem with another user</option>
+          <option value="press" data-i18n="cf.c.press">Press and partnerships</option>
+          <option value="authorities" data-i18n="cf.c.authorities">Authorities</option>
+          <option value="other" data-i18n="cf.c.other">Other</option>
+        </select>
+      </label>
+      <label class="field"><span data-i18n="cf.message">Message</span><textarea id="cfMessage" rows="6" maxlength="5000" required></textarea></label>
+      <div class="captcha" id="captchaPage"></div>
+      <p class="form-error" id="formError" hidden></p>
+      <button type="submit" class="btn primary lg wide" id="formSubmit" data-i18n="cf.send">Send message</button>
+    </form>
+    <div class="sent-box" id="sentBox" hidden>
+      <h2 data-i18n="cf.sentTitle">Message sent</h2>
+      <p data-i18n="cf.sentText">We have received your message. We will answer by email.</p>
+      <p class="ref"><span data-i18n="cf.ref">Reference</span>: <b id="sentRef"></b></p>
+    </div>
+    <div class="contact-emails">
+      <p><span data-i18n="cf.emailUsers">Users</span>: <b>soporte@laruletacaliente.com</b></p>
+      <p><span data-i18n="cf.emailAuthorities">Authorities and legal notices (DSA)</span>: <b>legal@laruletacaliente.com</b> · <span data-i18n="cf.langs">Spanish or English</span></p>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="brand"><img src="/logo.svg" alt="" width="28" height="28"><span>La Ruleta <b>Caliente</b></span></a>
+        <p data-i18n="footer.tagline">Live video chat for adults 18+.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="/ayuda" data-i18n="footer.help">Help</a>
+        <a href="/contacto" data-i18n="footer.contact">Contact</a>
+        <a href="/normas" data-i18n="footer.rules">Community rules</a>
+        <a href="/terminos" data-i18n="footer.terms">Terms of use</a>
+        <a href="/privacidad" data-i18n="footer.privacy">Privacy &amp; cookies</a>
+        <a href="/aviso-legal" data-i18n="footer.legalNotice">Legal notice</a>
+        <a href="/reembolsos" data-i18n="footer.refunds">Cancellation &amp; refunds</a>
+        <a href="/denunciar-contenido" data-i18n="footer.reportContent">Report content</a>
+        <a href="/sobre-nosotros" data-i18n="footer.about">About us</a>
+      </nav>
+      <label class="lang-select"><svg class="i"><use href="#i-globe"/></svg><span class="sr-only" data-i18n="footer.language">Language</span>
+        <select data-lang-select></select>
+      </label>
+    </div>
+    <p class="footer-legal"><span class="age">18+</span><span data-i18n="footer.legal">Adults only. © 2026 La Ruleta Caliente.</span></p>
+  </footer>
+  <script src="/pages.js"></script>
+</body>
+</html>

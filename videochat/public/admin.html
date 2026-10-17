@@ -33,7 +33,49 @@
     .log .who.reported { color: var(--danger); }
     .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
     .empty { text-align: center; color: var(--muted); padding: 40px 0; }
-    @media (max-width: 560px) { .stats { grid-template-columns: 1fr; } }
+    .admin { max-width: 1180px; }
+    .admin-nav { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 20px; border-bottom: 1px solid var(--border); scrollbar-width: thin; }
+    .admin-nav .tab { flex: none; white-space: nowrap; }
+    .count { display: inline-block; min-width: 18px; padding: 0 6px; border-radius: 999px; background: var(--accent); color: #fff; font-size: .72rem; line-height: 18px; text-align: center; }
+    .count:empty { display: none; }
+    .ov-h { font-size: 1.05rem; margin: 26px 0 10px; }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; }
+    .tile { padding: 14px 16px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); }
+    .tile b { display: block; font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+    .tile span { color: var(--muted); font-size: .82rem; }
+    .tile small { display: block; color: var(--muted); font-size: .75rem; margin-top: 2px; }
+    .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 14px; margin-top: 22px; }
+    .chart { padding: 14px 16px 10px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); min-width: 0; }
+    .chart h3 { margin: 0 0 2px; font-size: .95rem; }
+    .chart .total { color: var(--muted); font-size: .82rem; margin: 0 0 8px; }
+    .chart svg { display: block; width: 100%; height: 150px; overflow: visible; }
+    .chart .axis { fill: var(--muted); font-size: 10px; font-family: inherit; }
+    .chart .grid { stroke: var(--border); stroke-width: 1; }
+    .chart .bar { fill: var(--accent); }
+    .chart .hit { fill: transparent; cursor: crosshair; }
+    .chart .hit:hover + .bar, .chart g:hover .bar { opacity: .8; }
+    .chart details { margin-top: 6px; font-size: .8rem; color: var(--muted); }
+    .chart-tip { position: fixed; z-index: 90; pointer-events: none; padding: 6px 10px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border); font-size: .82rem; box-shadow: var(--shadow); }
+    .breakdowns { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 14px; margin-top: 14px; }
+    .bd { padding: 14px 16px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); }
+    .bd h3 { margin: 0 0 10px; font-size: .95rem; }
+    .bd-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; font-size: .85rem; margin-bottom: 7px; }
+    .bd-row .track { grid-column: 1 / -1; height: 6px; border-radius: 999px; background: var(--bg); overflow: hidden; }
+    .bd-row .fill { height: 100%; border-radius: 999px; background: var(--accent); }
+    .bd-row .v { font-variant-numeric: tabular-nums; color: var(--muted); }
+    .table-wrap { overflow-x: auto; }
+    table.data { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    table.data th, table.data td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+    table.data th { color: var(--muted); font-weight: 600; }
+    table.data td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .card-form { margin: 0 0 14px; padding: 18px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); }
+    .card-form textarea, .card-form select, .item textarea { display: block; width: 100%; margin-top: 6px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; }
+    .toolbar select, .toolbar input { padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; }
+    .qr { width: 220px; background: #fff; border-radius: 12px; padding: 8px; margin: 10px 0; }
+    .qr svg { display: block; width: 100%; height: auto; }
+    .code { font-family: ui-monospace, monospace; letter-spacing: .05em; }
+    .statusbar-active { border-color: var(--accent) !important; color: var(--text) !important; }
+    @media (max-width: 560px) { .stats { grid-template-columns: 1fr; } .tiles { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
 <body>
@@ -44,35 +86,105 @@
 
   <div id="login" class="overlay">
     <form class="modal" id="loginForm">
-      <h2>Panel de moderación</h2>
+      <h2>Panel de administración</h2>
       <label class="field">Contraseña de administración
         <input type="password" id="adminKey" autocomplete="current-password" required>
       </label>
-      <p class="form-error" id="loginError" hidden>Contraseña incorrecta</p>
+      <label class="field" id="codeField" hidden>Código de 6 cifras de tu app de autenticación
+        <input id="adminCode" inputmode="numeric" autocomplete="one-time-code" maxlength="7">
+      </label>
+      <p class="form-error" id="loginError" hidden></p>
       <button class="btn primary lg wide">Entrar</button>
     </form>
   </div>
-
   <main class="admin" id="panel" hidden>
-    <div class="stats">
-      <div class="stat urgent"><b id="sUrgent">0</b><span>Denuncias urgentes</span></div>
-      <div class="stat"><b id="sOpen">0</b><span>Denuncias pendientes</span></div>
-      <div class="stat"><b id="sUsers">0</b><span>Usuarios registrados</span></div>
-    </div>
-
-    <div class="tabs" style="max-width:560px; white-space:nowrap">
-      <button class="tab active" data-view="reports-open">Pendientes</button>
-      <button class="tab" data-view="reports-closed">Resueltas</button>
+    <nav class="admin-nav" id="adminNav">
+      <button class="tab active" data-view="overview">Resumen</button>
+      <button class="tab" data-view="reports">Denuncias <span class="count" id="cReports"></span></button>
+      <button class="tab" data-view="notice">Avisos DSA <span class="count" id="cNotice"></span></button>
+      <button class="tab" data-view="appeal">Recursos <span class="count" id="cAppeal"></span></button>
+      <button class="tab" data-view="contact">Mensajes <span class="count" id="cContact"></span></button>
       <button class="tab" data-view="users">Usuarios</button>
+      <button class="tab" data-view="announce">Anuncio</button>
+      <button class="tab" data-view="security">Seguridad</button>
       <button class="tab" data-view="reveal">Revelar código</button>
-    </div>
+    </nav>
 
-    <div class="toolbar" id="userSearch" hidden>
-      <input id="q" placeholder="Buscar por email, nombre o código de marca de agua (p. ej. 7F3A-91C2)…">
-      <button class="btn ghost" id="qBtn">Buscar</button>
-    </div>
+    <section id="overviewView">
+      <div class="toolbar">
+        <label class="muted">Periodo
+          <select id="period"><option value="7">7 días</option><option value="30" selected>30 días</option><option value="90">90 días</option><option value="365">1 año</option></select>
+        </label>
+        <button class="btn ghost sm" id="reload">Actualizar</button>
+      </div>
+      <p class="notice" id="modeNote" hidden></p>
+      <h2 class="ov-h">Ahora mismo</h2>
+      <div class="tiles" id="tilesNow"></div>
+      <h2 class="ov-h">Dinero</h2>
+      <div class="tiles" id="tilesMoney"></div>
+      <div class="charts" id="charts"></div>
+      <div class="breakdowns" id="breakdowns"></div>
+      <h2 class="ov-h">Últimos pagos</h2>
+      <div class="table-wrap"><table class="data" id="payments"></table></div>
+    </section>
 
-    <div id="list"></div>
+    <section id="listView" hidden>
+      <div class="toolbar" id="statusBar">
+        <button class="btn ghost sm" data-status="open">Pendientes</button>
+        <button class="btn ghost sm" data-status="closed">Cerrados</button>
+      </div>
+      <div class="toolbar" id="userSearch" hidden>
+        <input id="q" placeholder="Buscar por email, nombre o código de marca de agua (p. ej. 7F3A-91C2)…">
+        <button class="btn ghost" id="qBtn">Buscar</button>
+      </div>
+      <div id="list"></div>
+    </section>
+
+    <section id="announceView" hidden>
+      <p class="muted">Un aviso que ven todos arriba de la web (por ejemplo «Mantenimiento esta noche de 2:00 a 3:00»). Escríbelo en español; en inglés es opcional (se muestra a quien usa la web en otros idiomas).</p>
+      <form id="announceForm" class="card-form">
+        <label class="field">Texto en español<textarea id="annEs" rows="2" maxlength="300"></textarea></label>
+        <label class="field">Texto en inglés (opcional)<textarea id="annEn" rows="2" maxlength="300"></textarea></label>
+        <div class="toolbar">
+          <label class="muted">Tipo <select id="annLevel"><option value="info">Información</option><option value="warning">Importante</option></select></label>
+          <label class="muted">Quitar automáticamente a los <select id="annDays"><option value="0">no quitar</option><option value="1">1 día</option><option value="3">3 días</option><option value="7">7 días</option><option value="30">30 días</option></select></label>
+        </div>
+        <div class="actions">
+          <button class="btn primary" type="submit">Publicar</button>
+          <button class="btn ghost" type="button" id="annRemove">Quitar el anuncio</button>
+        </div>
+        <p class="meta" id="annCurrent"></p>
+      </form>
+    </section>
+
+    <section id="securityView" hidden>
+      <div class="card-form">
+        <h2 class="ov-h" style="margin-top:0">Verificación en dos pasos</h2>
+        <p class="muted" id="tfaState"></p>
+        <div id="tfaSetup" hidden>
+          <ol class="muted">
+            <li>Instala en tu móvil una app de autenticación (Google Authenticator, Microsoft Authenticator, Authy o 1Password).</li>
+            <li>Escanea este código QR (o escribe la clave a mano).</li>
+            <li>Escribe el código de 6 cifras que te muestra la app.</li>
+          </ol>
+          <div class="qr" id="tfaQr"></div>
+          <p class="meta">Clave: <b id="tfaSecret" class="code"></b></p>
+        </div>
+        <div class="toolbar">
+          <input id="tfaCode" inputmode="numeric" maxlength="7" placeholder="Código de 6 cifras" hidden>
+          <button class="btn primary" id="tfaStart">Activar</button>
+          <button class="btn primary" id="tfaConfirm" hidden>Confirmar y activar</button>
+          <button class="btn ghost" id="tfaDisable" hidden>Desactivar</button>
+        </div>
+      </div>
+      <div class="card-form">
+        <h2 class="ov-h" style="margin-top:0">Sesiones</h2>
+        <p class="muted">Las sesiones del panel duran 12 horas. Si crees que alguien ha entrado, ciérralas todas y cambia ADMIN_PASSWORD en el servidor.</p>
+        <button class="btn ghost" id="logoutAllAdmin">Cerrar todas las sesiones del panel</button>
+      </div>
+      <h2 class="ov-h">Registro de actividad</h2>
+      <div class="table-wrap"><table class="data" id="auditLog"></table></div>
+    </section>
 
     <section id="revealView" hidden>
       <p class="muted">Sube una captura o una grabación filtrada. La web aumenta el contraste para que se lea la marca de agua invisible con el código de la cuenta que grabó (formato <b>XXXX-XXXX</b>). Después búscalo en «Usuarios».</p>
@@ -85,7 +197,7 @@
       <canvas id="revealCanvas" style="max-width:100%;border-radius:12px;background:#000"></canvas>
     </section>
   </main>
-
+  <div class="chart-tip" id="chartTip" hidden></div>
   <div id="toast" class="toast" role="status" hidden></div>
 
   <script src="/admin.js"></script>

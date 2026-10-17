@@ -77,6 +77,15 @@ function originOf(req, baseUrl) {
   return baseUrl || `${req.protocol}://${req.get('host')}`;
 }
 
+// Libro de cobros para los ingresos del panel. Cada aviso de Segpay se apunta una
+// sola vez (Segpay puede repetirlos). Importe: el que manda Segpay (macro <price>)
+// o, si no viene, el precio del plan.
+function ledger(entry, uniqueKey) {
+  const id = `l${crypto.createHash('sha256').update(String(uniqueKey)).digest('hex').slice(0, 24)}`;
+  if (store.get('ledger', id)) return;
+  store.put('ledger', { id, at: Date.now(), currency: 'EUR', ...entry });
+}
+
 // Aplica un aviso de Segpay. Los nombres y valores pueden venir en cualquier
 // combinación de mayúsculas/minúsculas.
 function applyPostback(raw) {
@@ -89,9 +98,14 @@ function applyPostback(raw) {
   const order = orderId && store.getOrder(orderId);
   if (!order) return 'unknown-order';
 
+  const base = { orderId, userId: order.userId, plan: order.plan || 'month', method: order.method };
+  const amount = Number(String(p.price || p.amount || '').replace(',', '.')) || PLANS[base.plan].price;
+  const key = p.tranid || p.transid || JSON.stringify(p);
+
   // Baja por fin de suscripción (postback "Disable")
   if (lower('type') === 'disable') {
     store.updateOrder(orderId, { status: 'revoked', revokedAt: Date.now() });
+    ledger({ ...base, type: 'cancel', amount: 0 }, `disable:${purchaseId || orderId}`);
     return 'revoked';
   }
 
@@ -102,6 +116,8 @@ function applyPostback(raw) {
   // Reembolso, contracargo o anulación: se quita el acceso
   if (trantype === 'credit' || trantype === 'charge' || action === 'void') {
     store.updateOrder(orderId, { status: 'revoked', revokedAt: Date.now() });
+    const type = trantype === 'charge' ? 'chargeback' : action === 'void' ? 'void' : 'refund';
+    ledger({ ...base, type, amount: -Math.abs(amount) }, key);
     return 'revoked';
   }
 
@@ -115,6 +131,7 @@ function applyPostback(raw) {
       expires: Date.now() + days * DAY + GRACE_MS,
       lastPayment: Date.now(),
     });
+    ledger({ ...base, type: stage === 'initial' ? 'new' : 'renewal', amount }, key);
     return 'active';
   }
   return 'ignored';
@@ -145,6 +162,7 @@ function routes(app, baseUrl) {
     if (DEMO) {
       store.createOrder(orderId, { method, plan, userId: req.user.id, demo: true });
       store.updateOrder(orderId, { status: 'active', expires: Date.now() + PLANS[plan].days * DAY });
+      ledger({ orderId, userId: req.user.id, plan, method, type: 'new', amount: PLANS[plan].price, demo: true }, orderId);
       return res.json({ activated: true });
     }
     if (!ETICKETS[plan][method]) return res.status(400).json({ code: 'payUnavailable', error: 'Método de pago no disponible' });
@@ -185,4 +203,4 @@ function routes(app, baseUrl) {
   });
 }
 
-module.exports = { routes, isPremium, premiumInfo, _test: { applyPostback } };
+module.exports = { routes, isPremium, premiumInfo, activeOrder, PLANS, FREE, DEMO, _test: { applyPostback } };

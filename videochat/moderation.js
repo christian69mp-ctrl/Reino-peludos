@@ -16,7 +16,6 @@ function alertAdmin(subject, text) {
   mailer.sendAdminAlert(subject, `${text}\n\nRevísalo en el panel de moderación: ${panel}`)
     .catch((err) => console.error('[moderación] no se pudo avisar por email:', err.message));
 }
-const { safeEqual } = require('./tokens');
 
 const REASONS = {
   burlas: 'Burlas o insultos',
@@ -68,20 +67,15 @@ function report({ reporter, reported, reason, comment, chat }) {
   if (reported.status !== 'banned' &&
       (reporters >= AUTO_SUSPEND_REPORTERS || urgentReporters >= AUTO_SUSPEND_REPORTERS_URGENT)) {
     const until = Date.now() + AUTO_SUSPEND_MS;
-    store.updateUser(reported.id, { suspendedUntil: until, suspendedReason: 'Denuncias de varios usuarios' });
-    onRestrict(reported.id, { type: 'suspended', until });
+    store.updateUser(reported.id, { suspendedUntil: until, suspendedReason: 'Denuncias de varios usuarios', restrictionCode: 'multipleReports' });
+    onRestrict(reported.id, { type: 'suspended', until, reason: 'multipleReports' });
     console.log(`[moderación] suspensión automática de ${reported.email} hasta ${new Date(until).toISOString()}`);
     alertAdmin('Suspensión automática', `La cuenta ${reported.email} se ha suspendido 24 h por denuncias de ${reporters} personas distintas.`);
   }
   return created;
 }
 
-function requireAdmin(req, res, next) {
-  if (!ADMIN_PASSWORD || !safeEqual(String(req.get('x-admin-key') || ''), ADMIN_PASSWORD)) {
-    return res.status(403).json({ error: 'Acceso no autorizado' });
-  }
-  next();
-}
+const { requireAdmin, audit } = require('./adminauth');
 
 function userSummary(user) {
   if (!user) return null;
@@ -104,14 +98,16 @@ function userSummary(user) {
   };
 }
 
-function applyUserAction(user, action, days) {
+// code: motivo que se le explica a la persona (un motivo de denuncia o 'moderation')
+function applyUserAction(user, action, days, code) {
+  const reason = (REASONS[code] || ['moderation', 'chargeback', 'fraud'].includes(code)) ? code : 'moderation';
   if (action === 'ban') {
-    store.updateUser(user.id, { status: 'banned', bannedAt: Date.now() });
-    onRestrict(user.id, { type: 'banned' });
+    store.updateUser(user.id, { status: 'banned', bannedAt: Date.now(), restrictionCode: reason });
+    onRestrict(user.id, { type: 'banned', reason });
   } else if (action === 'suspend') {
     const until = Date.now() + Math.min(Math.max(Number(days) || 1, 1), 365) * 86400000;
-    store.updateUser(user.id, { suspendedUntil: until, suspendedReason: 'Moderación' });
-    onRestrict(user.id, { type: 'suspended', until });
+    store.updateUser(user.id, { suspendedUntil: until, suspendedReason: 'Moderación', restrictionCode: reason });
+    onRestrict(user.id, { type: 'suspended', until, reason });
   } else if (action === 'requireAge') {
     require('./age').requireCheck(user.id, 'admin');
   } else if (action === 'clearAge') {
@@ -119,7 +115,7 @@ function applyUserAction(user, action, days) {
   } else if (action === 'clearNick') {
     store.updateUser(user.id, { nick: '' });
   } else if (action === 'restore') {
-    store.updateUser(user.id, { status: 'active', suspendedUntil: null });
+    store.updateUser(user.id, { status: 'active', suspendedUntil: null, restrictionCode: null });
   } else {
     return false;
   }
@@ -161,9 +157,10 @@ function routes(app) {
     const { action, days } = req.body || {};
     if (action !== 'dismiss') {
       const user = store.getUser(r.reportedId);
-      if (!user || !applyUserAction(user, action, days)) return res.status(400).json({ error: 'Acción no válida' });
+      if (!user || !applyUserAction(user, action, days, r.reason)) return res.status(400).json({ error: 'Acción no válida' });
     }
     store.updateReport(r.id, { status: action === 'dismiss' ? 'dismissed' : 'actioned', action, resolvedAt: Date.now() });
+    audit(req, 'Denuncia resuelta', `${action} · ${store.getUser(r.reportedId)?.email || ''}`);
     res.json({ ok: true });
   });
 
@@ -181,7 +178,8 @@ function routes(app) {
   app.post('/api/admin/users/:id', requireAdmin, (req, res) => {
     const user = store.getUser(req.params.id);
     if (!user) return res.status(404).json({ error: 'Usuario no encontrado' });
-    if (!applyUserAction(user, req.body?.action, req.body?.days)) return res.status(400).json({ error: 'Acción no válida' });
+    if (!applyUserAction(user, req.body?.action, req.body?.days, req.body?.reason)) return res.status(400).json({ error: 'Acción no válida' });
+    audit(req, 'Acción sobre usuario', `${req.body.action} · ${user.email}`);
     res.json({ ok: true, user: userSummary(store.getUser(user.id)) });
   });
 }

@@ -119,6 +119,8 @@ function renderDynamicTexts() {
   if (incomingCall) renderIncomingCall();
   birthEls.forEach((id) => buildBirth($(id)));
   renderFilters();
+  renderSettings();
+  renderAnnouncement();
 }
 
 document.addEventListener('langchange', () => {
@@ -317,8 +319,10 @@ function showRestricted(r) {
   stop();
   const banned = r.type === 'banned';
   $('restrictedTitle').textContent = t(banned ? 'res.banned' : 'res.suspended');
-  $('restrictedText').textContent = banned ? t('res.bannedText') : t('res.suspendedText', { date: dateText(r.until, true) });
+  $('restrictedText').textContent = banned ? t('res.bannedText2') : t('res.suspendedText2', { date: dateText(r.until, true) });
+  $('restrictedReason').textContent = t('ap.reason', { reason: reasonText(r.reason) });
   openModal('restrictedModal');
+  renderAppeal();
 }
 
 // ---------- Recuperar contraseña ----------
@@ -486,6 +490,8 @@ $('accountBtn').addEventListener('click', async () => {
   renderAccount();
   $('deleteForm').hidden = true;
   $('deleteOpen').hidden = false;
+  renderSettings();
+  setAccTab('profile');
   openModal('accountModal');
 });
 
@@ -1180,7 +1186,8 @@ async function startCamera() {
   setStatus('msg.activatingCam');
   let stream;
   try {
-    stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    const camId = load('camId');
+    stream = await navigator.mediaDevices.getUserMedia({ video: camId ? { deviceId: { ideal: camId } } : true, audio: true });
   } catch {
     if (gen === startGen) setStatus('msg.camera');
     return false;
@@ -1188,8 +1195,53 @@ async function startCamera() {
   if (gen !== startGen || !token) { stream.getTracks().forEach((track) => track.stop()); return false; }
   localStream = stream;
   localVideo.srcObject = localStream;
+  applyMirror();
+  refreshCams();
   return true;
 }
+
+// ---------- Cambiar de cámara ----------
+// Tu imagen se ve en espejo (como en cualquier videollamada) salvo con la cámara
+// trasera; la otra persona siempre te ve al derecho.
+let camDevices = [];
+async function refreshCams() {
+  try { camDevices = (await navigator.mediaDevices.enumerateDevices()).filter((d) => d.kind === 'videoinput'); } catch { camDevices = []; }
+  $('switchCam').hidden = camDevices.length < 2 || !localStream;
+}
+function applyMirror() {
+  const track = localStream?.getVideoTracks()[0];
+  const facing = track?.getSettings?.().facingMode;
+  const wantMirror = me?.user?.prefs?.mirror !== false;
+  $('localVideo').parentElement.classList.toggle('mirror', facing === 'environment' ? false : wantMirror);
+}
+let switching = false;
+async function switchCamera() {
+  if (!localStream || camDevices.length < 2 || switching) return;
+  switching = true;
+  const old = localStream.getVideoTracks()[0];
+  const oldId = old?.getSettings().deviceId;
+  const i = camDevices.findIndex((d) => d.deviceId === oldId);
+  const next = camDevices[(i + 1) % camDevices.length];
+  // Muchos móviles no pueden tener dos cámaras abiertas: se cierra antes la actual
+  old?.stop();
+  let track;
+  try {
+    track = (await navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: next.deviceId } } })).getVideoTracks()[0];
+    save('camId', next.deviceId);
+  } catch {
+    toast(t('cam.switchFail'));
+    try { track = (await navigator.mediaDevices.getUserMedia({ video: oldId ? { deviceId: { exact: oldId } } : true })).getVideoTracks()[0]; } catch { switching = false; return; }
+  }
+  if (!localStream) { track.stop(); switching = false; return; }
+  if (old) localStream.removeTrack(old);
+  localStream.addTrack(track);
+  const sender = pc?.getSenders().find((x) => x.track?.kind === 'video');
+  if (sender) await sender.replaceTrack(track).catch(() => {});
+  localVideo.srcObject = localStream;
+  applyMirror();
+  switching = false;
+}
+$('switchCam').addEventListener('click', switchCamera);
 
 async function start() {
   if (!(await startCamera())) return;
@@ -1216,6 +1268,7 @@ function stop() {
   if (localStream) localStream.getTracks().forEach((track) => track.stop());
   localStream = null;
   localVideo.srcObject = null;
+  $('switchCam').hidden = true;
   setRunning(false);
   setStatus('chat.pressStart');
 }
@@ -1359,6 +1412,7 @@ function relationTag(rel) {
 
 function renderContacts() {
   renderBadge();
+  if (typeof renderPushHint === 'function') renderPushHint();
   // Sin Premium: solo se ven las solicitudes; amigos e historial muestran la oferta
   const locked = !!contacts.locked;
   $('ctLocked').hidden = !locked || ctTab === 'requests';
@@ -1649,6 +1703,7 @@ function bindContactEvents(s) {
     renderIncomingCall();
     openModal('callModal');
     document.title = `📞 ${t('call.incoming', { name: contactName(c) })}`;
+    localNotify(t('call.incoming', { name: contactName(c) }), t('call.hint'), `call-${c.callId}`);
     if (navigator.vibrate) navigator.vibrate([400, 200, 400, 200, 400]);
   });
 
@@ -1679,6 +1734,224 @@ $('nickForm').addEventListener('submit', async (e) => {
   $('nickInput').value = res.nick;
   toast(t('acc.nickSaved'));
 });
+
+// ---------- Mi cuenta: pestañas y ajustes ----------
+function setAccTab(tab) {
+  $$('.acc-tab').forEach((b) => b.classList.toggle('active', b.dataset.atab === tab));
+  $$('.acc-panel').forEach((p) => { p.hidden = p.dataset.apanel !== tab; });
+  if (tab === 'privacy') loadBlocked();
+  if (tab === 'notify') renderPush();
+}
+$$('.acc-tab').forEach((b) => b.addEventListener('click', () => setAccTab(b.dataset.atab)));
+
+function renderSettings() {
+  if (!me?.user) return;
+  const hasPass = me.user.hasPassword;
+  $('passCurrentField').hidden = !hasPass;
+  $('passTitle').textContent = t(hasPass ? 'set.passTitle' : 'set.passCreate');
+  $('emailConfirmLabel').textContent = t(hasPass ? 'set.confirmPass' : 'set.confirmEmail');
+  $('emailConfirm').type = hasPass ? 'password' : 'email';
+  $('emailPending').hidden = !me.user.pendingEmail;
+  if (me.user.pendingEmail) $('emailPending').textContent = t('set.emailPending', { email: me.user.pendingEmail });
+  $('prefMirror').checked = me.user.prefs?.mirror !== false;
+  const n = me.user.prefs?.notify || {};
+  $('prefCalls').checked = n.calls !== false;
+  $('prefRequests').checked = n.requests !== false;
+  $('prefOnline').checked = !!n.online;
+}
+
+const formError = (id, msg) => { $(id).textContent = msg; $(id).hidden = !msg; };
+
+$('passForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  formError('passError', '');
+  const password = $('passNew').value;
+  if (password.length < 8) return formError('passError', t('err.password'));
+  const res = await api('/api/me/password', { method: 'POST', body: { current: $('passCurrent').value, password } });
+  if (!res.token) return formError('passError', errorText(res));
+  token = res.token;
+  save('session', token);
+  $('passCurrent').value = ''; $('passNew').value = '';
+  await refreshMe();
+  renderSettings();
+  toast(t('set.passSaved'));
+});
+
+$('emailForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  formError('emailError', '');
+  const res = await api('/api/me/email', { method: 'POST', body: { email: $('emailNew').value.trim(), password: $('emailConfirm').value } });
+  if (!res.ok) return formError('emailError', errorText(res));
+  $('emailNew').value = ''; $('emailConfirm').value = '';
+  await refreshMe();
+  renderAccount();
+  toast(res.changed ? t('set.emailChanged') : t('set.emailSent', { email: res.email }));
+});
+
+$('logoutAll').addEventListener('click', async () => {
+  if (!confirm(t('set.logoutAllConfirm'))) return;
+  await api('/api/logout-all', { method: 'POST' });
+  closeModal('accountModal');
+  logout(false);
+  toast(t('set.loggedOutAll'));
+});
+
+async function loadBlocked() {
+  const res = await api('/api/me/blocked');
+  const list = res.blocked || [];
+  $('blockedList').replaceChildren(...list.map((c) => contactItem(c, {
+    sub: t(`g.${c.gender}`),
+    actions: [actBtn('unblock', c.handle, { label: t('set.unblock') })],
+  })));
+  $('blockedEmpty').hidden = list.length > 0;
+}
+$('blockedList').addEventListener('click', async (e) => {
+  const b = e.target.closest('[data-act=unblock]');
+  if (!b) return;
+  const name = b.closest('.ct-item').querySelector('.ct-name').textContent;
+  const res = await api('/api/me/unblock', { method: 'POST', body: { handle: b.dataset.h } });
+  if (res.ok) toast(t('set.unblocked', { name })); else toast(errorText(res));
+  loadBlocked();
+});
+
+async function savePrefs(body) {
+  const res = await api('/api/me/prefs', { method: 'POST', body });
+  if (res.prefs && me?.user) me.user.prefs = res.prefs;
+}
+$('prefMirror').addEventListener('change', async () => { await savePrefs({ mirror: $('prefMirror').checked }); applyMirror(); });
+['prefCalls', 'prefRequests', 'prefOnline'].forEach((id) => $(id).addEventListener('change', () => savePrefs({
+  notify: { calls: $('prefCalls').checked, requests: $('prefRequests').checked, online: $('prefOnline').checked },
+})));
+
+// ---------- Notificaciones (con permiso del navegador) ----------
+const pushSupported = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
+const b64ToBytes = (s) => {
+  const b = atob((s + '='.repeat((4 - (s.length % 4)) % 4)).replace(/-/g, '+').replace(/_/g, '/'));
+  return Uint8Array.from(b, (c) => c.charCodeAt(0));
+};
+async function pushSubscription() {
+  if (!pushSupported) return null;
+  try { return await (await navigator.serviceWorker.ready).pushManager.getSubscription(); } catch { return null; }
+}
+async function renderPush() {
+  $('pushUnsupported').hidden = pushSupported;
+  if (!pushSupported) { ['pushOn', 'pushOff', 'pushTest'].forEach((id) => { $(id).hidden = true; }); return; }
+  const denied = Notification.permission === 'denied';
+  const sub = await pushSubscription();
+  $('pushDenied').hidden = !denied;
+  $('pushOn').hidden = !!sub || denied;
+  $('pushOff').hidden = !sub;
+  $('pushTest').hidden = !sub;
+  $('pushPrefs').classList.toggle('off', !sub);
+  renderPushHint();
+}
+async function enablePush() {
+  if (!pushSupported || !token) return;
+  const perm = await Notification.requestPermission();
+  if (perm !== 'granted') { renderPush(); return; }
+  try {
+    const { key } = await (await fetch('/api/push/key')).json();
+    const reg = await navigator.serviceWorker.ready;
+    const sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToBytes(key) });
+    const res = await api('/api/push/subscribe', { method: 'POST', body: { subscription: sub.toJSON() } });
+    if (!res.ok) throw new Error();
+    toast(t('push.on'));
+  } catch {
+    toast(t('push.failed'));
+  }
+  renderPush();
+}
+async function disablePush() {
+  const sub = await pushSubscription();
+  if (sub) {
+    await api('/api/push/unsubscribe', { method: 'POST', body: { endpoint: sub.endpoint } });
+    await sub.unsubscribe().catch(() => {});
+  }
+  toast(t('push.off'));
+  renderPush();
+}
+$('pushOn').addEventListener('click', enablePush);
+$('pushOff').addEventListener('click', disablePush);
+$('pushTest').addEventListener('click', async () => {
+  const res = await api('/api/push/test', { method: 'POST' });
+  toast(res.ok ? t('push.testSent') : t('push.failed'));
+});
+// Sugerencia en el panel de amigos para activar los avisos
+async function renderPushHint() {
+  const show = pushSupported && token && Notification.permission === 'default' && contacts.friends.length > 0 && !(await pushSubscription());
+  $('pushHint').hidden = !show;
+}
+$('pushHintBtn').addEventListener('click', enablePush);
+// Notificación tocada con la web ya abierta: se abre el panel correspondiente
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.addEventListener('message', (e) => {
+    if (e.data?.type !== 'open' || !token) return;
+    const which = new URL(e.data.url, location.origin).searchParams.get('contacts');
+    if (which) openContacts(which === 'requests' ? 'requests' : 'friends');
+  });
+}
+
+// Aviso del sistema cuando llaman y la pestaña no está a la vista
+function localNotify(title, body, tag) {
+  if (!pushSupported || Notification.permission !== 'granted' || !document.hidden) return;
+  navigator.serviceWorker.ready.then((reg) => reg.showNotification(title, { body, tag, icon: '/icon-192.png', badge: '/icon-192.png', requireInteraction: true })).catch(() => {});
+}
+
+// ---------- Sanciones: motivo y recurso ----------
+function reasonText(code) {
+  const key = ['moderation', 'multipleReports', 'underage', 'chargeback', 'fraud'].includes(code) ? `rr.${code}` : `rep.${code}`;
+  const text = t(key);
+  return text === key ? t('rr.moderation') : text;
+}
+async function renderAppeal() {
+  $('appealForm').hidden = true;
+  $('appealOpen').hidden = true;
+  $('appealStatus').hidden = true;
+  if (!token) return;
+  const res = await api('/api/appeals/mine');
+  const a = res.appeal;
+  if (a && a.status === 'open') {
+    $('appealStatus').textContent = t('ap.pending', { ref: a.reference });
+    $('appealStatus').hidden = false;
+    return;
+  }
+  if (a && a.decision === 'reject') {
+    $('appealStatus').textContent = [t('ap.rejected', { ref: a.reference }), a.response].filter(Boolean).join(' ');
+    $('appealStatus').hidden = false;
+  }
+  $('appealOpen').hidden = false;
+}
+$('appealOpen').addEventListener('click', () => {
+  $('appealOpen').hidden = true;
+  $('appealForm').hidden = false;
+  formError('appealError', '');
+  focusSoon('appealText');
+});
+$('appealForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const res = await api('/api/appeals', { method: 'POST', body: { message: $('appealText').value } });
+  if (!res.ok) return formError('appealError', errorText(res));
+  $('appealText').value = '';
+  toast(t('ap.sent'));
+  renderAppeal();
+});
+
+// ---------- Anuncio general ----------
+let announcement = null;
+function renderAnnouncement() {
+  const a = announcement;
+  let dismissed = '';
+  try { dismissed = localStorage.getItem('ann-dismissed') || ''; } catch { /* sin almacenamiento */ }
+  if (!a || String(a.id) === dismissed) { $('announce').hidden = true; return; }
+  $('announceText').textContent = a.text[I18N.lang] || (I18N.lang === 'es' ? a.text.es : a.text.en || a.text.es);
+  $('announce').className = `announce ${a.level}`;
+  $('announce').hidden = false;
+}
+$('announceClose').addEventListener('click', () => {
+  try { localStorage.setItem('ann-dismissed', String(announcement?.id || '')); } catch { /* sin almacenamiento */ }
+  $('announce').hidden = true;
+});
+fetch('/api/announcement').then((r) => r.json()).then((r) => { announcement = r.announcement; renderAnnouncement(); }).catch(() => {});
 
 // ---------- Teclado ----------
 // Esc: cierra la ventana abierta o, si no hay ninguna, pasa a la siguiente persona
@@ -1752,7 +2025,14 @@ fetch('/api/config').then((r) => r.json()).then((c) => {
 (async () => {
   await refreshMe();
   const params = new URLSearchParams(location.search);
-  if (['order', 'reset', 'age', 'verify', 'social', 'login_error'].some((k) => params.has(k))) history.replaceState(null, '', '/');
+  if (['order', 'reset', 'age', 'verify', 'social', 'login_error', 'emailchange', 'contacts'].some((k) => params.has(k))) history.replaceState(null, '', location.pathname);
+  // Enlace del email para confirmar el cambio de email
+  if (params.get('emailchange')) {
+    const res = await api('/api/email/change', { method: 'POST', body: { token: params.get('emailchange') } });
+    if (res.ok) { await refreshMe(); toast(t('set.emailChanged')); } else toast(errorText(res));
+  }
+  // Desde una notificación: abre amigos o solicitudes
+  if (params.get('contacts') && token) openContacts(params.get('contacts') === 'requests' ? 'requests' : 'friends');
   if (params.get('social')) {
     if (!load('age-ok')) { save('age-ok', '1'); closeModal('ageGate'); }
     finishSocial(params.get('social'));
@@ -1778,3 +2058,6 @@ fetch('/api/config').then((r) => r.json()).then((c) => {
     else openAge();
   }
 })();
+
+// Guindi, el asistente, como botón flotante en la portada (no sale durante el videochat)
+if (window.Guindi) window.Guindi.launcher();

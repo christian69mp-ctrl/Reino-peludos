@@ -14,6 +14,12 @@ const friends = require('./friends');
 const oauth = require('./oauth');
 const geo = require('./geo');
 const proxyAddr = require('proxy-addr');
+const support = require('./support');
+const account = require('./account');
+const push = require('./push');
+const stats = require('./stats');
+const adminauth = require('./adminauth');
+const adminapi = require('./adminapi');
 
 const PORT = process.env.PORT || 3000;
 
@@ -26,6 +32,8 @@ app.use(privacy.securityHeaders);
 app.use(express.json({ limit: '50kb', verify: (req, _res, buf) => { req.rawBody = buf; } }));
 // El service worker no se guarda en caché para que las actualizaciones lleguen enseguida
 app.get('/sw.js', (_req, res, next) => { res.set('Cache-Control', 'no-cache'); next(); });
+// Páginas por idioma (/es/ayuda, /en/help…), sitemap y robots.txt
+require('./seo').register(app);
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 // Tipografía servida desde el propio servidor (sin llamadas a Google)
 app.get('/fonts/plus-jakarta-sans.woff2', (_req, res) => {
@@ -41,6 +49,11 @@ age.routes(app, process.env.BASE_URL);
 privacy.routes(app);
 friends.routes(app);
 oauth.routes(app);
+support.routes(app);
+account.routes(app);
+push.routes(app);
+adminauth.routes(app);
+adminapi.routes(app);
 
 // Qué funciones opcionales están activas
 app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled, turnstile: captcha.SITE_KEY || null, providers: oauth.enabled }));
@@ -126,7 +139,7 @@ function unpair(socket, notify = true) {
   const meet = meetings.get(socket.id);
   meetings.delete(socket.id);
   meetings.delete(partnerId);
-  if (meet) friends.meetEnded(meet.x, meet.y, meet.at);
+  if (meet) { friends.meetEnded(meet.x, meet.y, meet.at); stats.conversation((Date.now() - meet.at) / 1000); }
   if (notify) io.to(partnerId).emit('partner-left');
   presenceChanged(socket.data.uid);
   const other = io.sockets.sockets.get(partnerId);
@@ -230,7 +243,12 @@ function notifyUser(uid, event, data) {
 // Avisa a los amigos conectados cuando alguien entra, sale o empieza/acaba una videollamada
 function presenceChanged(uid) {
   const status = presence(uid);
-  if (lastStatus.get(uid) === status) return;
+  const before = lastStatus.get(uid);
+  if (before === status) return;
+  // Se acaba de conectar: aviso al móvil a los amigos Premium que no están en la web
+  if (!before && status === 'online') {
+    for (const f of friends.friendIds(uid)) if (!userSockets.has(f) && payments.isPremium(f)) push.notifyOnline(f, uid);
+  }
   if (status === 'offline') lastStatus.delete(uid); else lastStatus.set(uid, status);
   for (const f of friends.friendIds(uid)) {
     if (userSockets.has(f) && payments.isPremium(f)) notifyUser(f, 'friend-status', { handle: friends.handle(f, uid), status });
@@ -254,6 +272,19 @@ friends.setHooks({
     }
   },
 });
+
+// Avisos al móvil de solicitudes de amistad si no está en la web
+friends.setHooks({ onRequest: (to, from) => { if (!userSockets.has(to)) push.notify(to, 'request', from); } });
+// Al desbloquear, vuelven a poder coincidir
+account.setHooks({
+  onUnblock(uid, other) {
+    for (const id of userSockets.get(uid) || []) io.sockets.sockets.get(id)?.data.blocked.delete(other);
+  },
+});
+support.setHooks({ alertAdmin: moderation.alertAdmin });
+// Gente conectada ahora y en una videollamada (para el panel y las estadísticas)
+adminapi.setLive(() => ({ connected: userSockets.size, inChat: partners.size / 2 }));
+setInterval(() => stats.online(userSockets.size, partners.size / 2), 60000).unref();
 
 // ---------- Llamadas entre amigos ----------
 const CALL_TIMEOUT = 30 * 1000;
@@ -323,6 +354,7 @@ io.use((socket, next) => {
 io.on('connection', (socket) => {
   socket.emit('account', { premium: socket.data.premium, country: socket.data.geo?.country || '', geo: geo.available() });
   const uid = socket.data.uid;
+  stats.activeUser(uid);
   if (!userSockets.has(uid)) userSockets.set(uid, new Set());
   userSockets.get(uid).add(socket.id);
   presenceChanged(uid);
@@ -441,7 +473,9 @@ io.on('connection', (socket) => {
     if (!other || !friends.areFriends(uid, other)) return reply({ code: 'contact' });
     if (!payments.isPremium(uid)) return reply({ code: 'premium' });
     const status = presence(other);
-    if (status !== 'online') return reply({ code: status === 'busy' ? 'callBusy' : 'callOffline' });
+    if (status === 'busy') return reply({ code: 'callBusy' });
+    // No está en la web: si tiene los avisos activados, le llega «X quiere hablar contigo»
+    if (status !== 'online') return reply({ code: push.notify(other, 'call', uid) ? 'callOfflineNotified' : 'callOffline' });
     if ([...calls.values()].some((c) => c.calleeUid === other)) return reply({ code: 'callBusy' });
     cancelOutgoingCall(socket);
     removeFromQueue(socket.id);

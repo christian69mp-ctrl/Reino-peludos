@@ -109,6 +109,46 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   «¡Le encantas!». Cada usuario acumula sus likes (se ven junto a su etiqueta y en su propia
   cámara). Cada tipo cuenta una vez por conversación para que no se puedan inflar.
 
+- **Cambiar de cámara**: botón sobre tu propia imagen (frontal/trasera o cualquier webcam), también
+  en mitad de una conversación sin cortarla. Tu imagen se ve en espejo solo con la cámara frontal;
+  se puede quitar el espejo en Mi cuenta → Privacidad.
+- **Mi cuenta** con pestañas: Perfil (datos, fecha de nacimiento, nombre en el chat), Seguridad
+  (cambiar contraseña, cambiar email con enlace de confirmación al nuevo, cerrar sesión en todos los
+  dispositivos), Privacidad (personas bloqueadas y desbloquear, espejo, descargar mis datos, eliminar
+  la cuenta) y Notificaciones.
+- **Notificaciones push** (aunque la web esté cerrada), **solo si la persona las activa** y el
+  navegador da permiso: un amigo te llama, solicitud de amistad o un amigo se conecta (cada tipo se
+  puede apagar). Al tocar el aviso se abre la web (o la pestaña que ya estaba abierta, sin cortar la
+  videollamada). Claves VAPID generadas solas y guardadas en la base de datos.
+- **Páginas propias**: Aviso legal (con el punto de contacto para autoridades del DSA), Cancelación
+  y reembolsos, Sobre nosotros, Contacto (formulario con categorías y referencia C-XXXXXX) y
+  Denunciar contenido (formulario público del DSA, sin cuenta; referencia N-XXXXXX, acuse de recibo y
+  decisión por email).
+- **Centro de ayuda** `/ayuda` con 42 preguntas frecuentes en 6 idiomas, buscador, categorías y
+  **Guindi 🌶️**, el asistente que responde al momento (sin IA: busca palabras clave en cualquier
+  idioma). También hay un botón flotante de Guindi en la portada (se oculta durante el videochat).
+- **Motivo de la sanción y recurso** (DSA art. 17 y 20): quien está suspendido o expulsado ve el
+  motivo y puede recurrir una vez desde la propia ventana; el equipo responde desde el panel y, si
+  acepta, la cuenta se readmite sola.
+- **Anuncio general**: un aviso para todos (información o importante, en español e inglés, con
+  caducidad) que se publica desde el panel y sale arriba en la web.
+- **Panel del dueño** en `/admin`: resumen con conectados ahora, ingresos del periodo, neto,
+  ingreso mensual recurrente, suscripciones nuevas, renovaciones, bajas, reembolsos y contracargos,
+  conversión, gráficos por día (ingresos, visitantes, registros, conversaciones, suscripciones,
+  máximo de conectados), países, idiomas, páginas, dispositivos, edades, tipos, motivos de denuncia,
+  transparencia DSA y últimos pagos. Bandejas de denuncias, avisos DSA, recursos y mensajes de
+  contacto (responder y cerrar con email automático), usuarios, anuncio y seguridad.
+  Estadísticas **anónimas**: sin cookies ni IPs guardadas (visitantes únicos con un resumen que
+  cambia cada día).
+- **Seguridad del panel**: verificación en dos pasos (Google Authenticator, Authy…), sesiones de
+  12 h que se pueden cerrar todas, bloqueo tras 5 contraseñas fallidas (con email al dueño) y
+  registro de actividad. Ver [docs/seguridad-dueno.md](docs/seguridad-dueno.md).
+- **Posicionamiento (SEO)**: cada página tiene su dirección en cada idioma (`/es/ayuda`,
+  `/en/help`, `/fr/aide`, `/de/hilfe`, `/it/aiuto`, `/pt/ajuda`…) y el servidor la entrega ya
+  traducida, con título y descripción propios, `canonical`, `hreflang` y datos estructurados
+  (WebSite, Organization, FAQPage). `sitemap.xml` y `robots.txt` automáticos. Las direcciones
+  antiguas sin idioma (`/ayuda`) llevan a la del idioma del navegador.
+
 ## Logo e iconos
 
 Diseño hecho con Gemini y redibujado en vector para que se vea nítido a cualquier tamaño:
@@ -200,6 +240,10 @@ TURN_SECRET=...               # static-auth-secret de coturn: credenciales que c
 # GEOIP_AUTO_UPDATE=off       # no descargar (los filtros por país y cercanía no aparecen)
 # GEOIP_DB=/ruta/a.mmdb       # usar otro archivo .mmdb (o varios separados por comas)
 # NEAR_KM=100                 # distancia de «Cerca de mí»
+
+# Notificaciones push (opcional: si no se ponen, se generan solas y se guardan en la base de datos)
+# VAPID_PUBLIC_KEY=... / VAPID_PRIVATE_KEY=...   # npx web-push generate-vapid-keys
+# VAPID_SUBJECT=mailto:soporte@laruletacaliente.com
 
 # Datos
 # DB_FILE=/ruta/la-ruleta.db  # por defecto videochat/data/la-ruleta.db (SQLite)

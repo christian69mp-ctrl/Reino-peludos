@@ -24,6 +24,16 @@ db.exec(`
   CREATE TABLE IF NOT EXISTS users     (id TEXT PRIMARY KEY, data TEXT NOT NULL);
   CREATE TABLE IF NOT EXISTS orders    (id TEXT PRIMARY KEY, data TEXT NOT NULL);
   CREATE TABLE IF NOT EXISTS reports   (id TEXT PRIMARY KEY, data TEXT NOT NULL);
+  -- Mensajes de contacto, avisos de contenido ilegal (DSA) y recursos de sanciones
+  CREATE TABLE IF NOT EXISTS tickets   (id TEXT PRIMARY KEY, data TEXT NOT NULL);
+  -- Cobros, renovaciones, reembolsos y contracargos (para los ingresos del panel)
+  CREATE TABLE IF NOT EXISTS ledger    (id TEXT PRIMARY KEY, data TEXT NOT NULL);
+  -- Estadísticas por día (id = AAAA-MM-DD), sin datos personales
+  CREATE TABLE IF NOT EXISTS stats     (id TEXT PRIMARY KEY, data TEXT NOT NULL);
+  -- Ajustes del sitio (anuncio general, seguridad del panel…)
+  CREATE TABLE IF NOT EXISTS settings  (id TEXT PRIMARY KEY, data TEXT NOT NULL);
+  -- Suscripciones a notificaciones del navegador
+  CREATE TABLE IF NOT EXISTS pushsubs  (id TEXT PRIMARY KEY, data TEXT NOT NULL);
   CREATE TABLE IF NOT EXISTS purchases (purchase_id TEXT PRIMARY KEY, order_id TEXT NOT NULL);
   CREATE TABLE IF NOT EXISTS banned_emails (hash TEXT PRIMARY KEY);
   -- Historial: una fila por persona con la que se ha hablado (la última vez)
@@ -44,7 +54,7 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS friends_b ON friends (b);
 `);
 
-const TABLES = ['users', 'orders', 'reports'];
+const TABLES = ['users', 'orders', 'reports', 'tickets', 'ledger', 'stats', 'settings', 'pushsubs'];
 const put = Object.fromEntries(TABLES.map((t) => [t, db.prepare(`INSERT INTO ${t} (id, data) VALUES (?, ?) ON CONFLICT(id) DO UPDATE SET data = excluded.data`)]));
 const del = Object.fromEntries(TABLES.map((t) => [t, db.prepare(`DELETE FROM ${t} WHERE id = ?`)]));
 const putPurchase = db.prepare('INSERT OR REPLACE INTO purchases (purchase_id, order_id) VALUES (?, ?)');
@@ -52,6 +62,7 @@ const putBanned = db.prepare('INSERT OR IGNORE INTO banned_emails (hash) VALUES 
 
 // ---- Carga en memoria ----
 const data = { users: {}, orders: {}, reports: {}, purchases: {}, emails: {}, bannedEmails: new Set() };
+for (const t of TABLES) data[t] ||= {};
 for (const t of TABLES) {
   for (const row of db.prepare(`SELECT id, data FROM ${t}`).all()) data[t][row.id] = JSON.parse(row.data);
 }
@@ -178,6 +189,16 @@ module.exports = {
     return user;
   },
   listUsers: () => Object.values(data.users),
+  // Cambia el email manteniendo el índice de búsqueda por email
+  changeEmail(id, email) {
+    const user = data.users[id];
+    if (!user || data.emails[email]) return null;
+    delete data.emails[user.email];
+    user.email = email;
+    data.emails[email] = id;
+    write('users', user);
+    return user;
+  },
   // Borra la cuenta. Los pedidos se conservan sin dato personal (obligación de
   // facturación) y las denuncias se mantienen para la moderación.
   deleteUser(id) {
@@ -190,6 +211,7 @@ module.exports = {
       del.users.run(id);
       sql.histUser.run(id, id);
       sql.frUser.run(id, id);
+      for (const [sid, sub] of Object.entries(data.pushsubs)) if (sub.userId === id) { delete data.pushsubs[sid]; del.pushsubs.run(sid); }
       for (const o of Object.values(data.orders)) if (o.userId === id) { o.userId = null; write('orders', o); }
       db.exec('COMMIT');
     } catch (err) {
@@ -202,6 +224,28 @@ module.exports = {
     if (!data.bannedEmails.has(hash)) { data.bannedEmails.add(hash); putBanned.run(hash); }
   },
   isEmailHashBanned: (hash) => data.bannedEmails.has(hash),
+
+  // ---- Tablas genéricas (tickets, ledger, stats, settings, pushsubs) ----
+  get: (table, id) => data[table][id],
+  list: (table) => Object.values(data[table]),
+  put(table, obj) {
+    data[table][obj.id] = obj;
+    write(table, obj);
+    return obj;
+  },
+  patch(table, id, fields) {
+    const obj = data[table][id];
+    if (!obj) return null;
+    Object.assign(obj, fields);
+    write(table, obj);
+    return obj;
+  },
+  remove(table, id) {
+    if (!data[table][id]) return false;
+    delete data[table][id];
+    del[table].run(id);
+    return true;
+  },
 
   // ---- Historial ----
   historyMeet(owner, partner, at) {

@@ -99,7 +99,9 @@ docker compose logs -f app     # para ver qué pasa (sal con Ctrl+C)
 Abre `https://tudominio.com`. El certificado HTTPS se crea solo en el primer minuto.
 
 Comprobaciones:
-- `https://tudominio.com/admin` → entra con tu `ADMIN_PASSWORD`.
+- `https://tudominio.com/admin` → entra con tu `ADMIN_PASSWORD` y **activa enseguida la
+  verificación en dos pasos** (Seguridad → Activar, con Google Authenticator o Authy en el móvil).
+- Lee [docs/seguridad-dueno.md](docs/seguridad-dueno.md): lista de seguridad para ti como dueño.
 - Haz una prueba con dos móviles, uno con wifi y otro con datos 4G: si se ven, el TURN funciona.
 
 ## 7. Servicios externos (cuentas gratuitas o de pago)
@@ -189,6 +191,15 @@ docker compose stop app
 docker compose run --rm -T --no-deps app sh -c 'rm -f /app/data/la-ruleta.db-wal /app/data/la-ruleta.db-shm && cat > /app/data/la-ruleta.db' < /root/copias/la-ruleta-202610151528.db
 docker compose start app
 ```
+
+## 8 bis. Darte de alta en Google y Bing (posicionamiento)
+
+La web ya genera `https://tudominio.com/sitemap.xml` con todas las páginas en los 6 idiomas.
+1. **Google Search Console** (gratis): añade la propiedad de *Dominio* `tudominio.com`, verifica
+   con el registro TXT que te dé en el DNS y en *Sitemaps* envía `sitemap.xml`.
+2. **Bing Webmaster Tools** (gratis): puedes importar el sitio desde Search Console.
+3. Ojo: Google trata las webs para adultos con SafeSearch; es normal que no salgas en búsquedas
+   con SafeSearch activado.
 
 ## 9. Actualizar la web
 

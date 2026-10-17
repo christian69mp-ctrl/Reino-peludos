@@ -29,6 +29,7 @@ const NICK_RE = /^[\p{L}\p{N}][\p{L}\p{N} ._-]{1,19}$/u;
 let presence = () => 'offline';     // uid -> 'offline' | 'online' | 'busy'
 let notify = () => {};              // (uid, evento, datos)
 let onBlock = () => {};             // (uid, bloqueadoUid)
+let onRequest = () => {};           // (para, de): aviso al móvil si no está conectado
 
 const handle = (viewer, other) => mac(`contact:${viewer}:${other}`);
 
@@ -89,6 +90,7 @@ function request(from, to) {
   if (friendCount(from) >= MAX_FRIENDS || !underDailyLimit(from)) return { code: 'friendLimit' };
   store.setFriendship(from, to, 'pending', from);
   notify(to, 'friend-request', contactInfo(to, from));
+  onRequest(to, from);
   return { relation: 'sent' };
 }
 
@@ -227,5 +229,5 @@ module.exports = {
   meet,
   meetEnded,
   contacts,
-  setHooks: (h) => { ({ presence = presence, notify = notify, onBlock = onBlock } = h); },
+  setHooks: (h) => { ({ presence = presence, notify = notify, onBlock = onBlock, onRequest = onRequest } = h); },
 };

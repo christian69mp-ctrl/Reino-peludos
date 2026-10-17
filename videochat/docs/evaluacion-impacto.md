@@ -49,6 +49,9 @@ Escala: probabilidad e impacto **B**ajo, **M**edio o **A**lto. "Residual" es el 
 | 11 | **Mensajes traducidos** enviados a terceros | B | B | Solo al pulsar "Traducir"; DeepL en la UE; solo el texto, sin datos de la cuenta. | B |
 | 12 | **Acoso persistente** mediante amistades y llamadas (alguien que insiste) | M | M | Amistad solo si las dos personas aceptan; rechazar y bloquear son silenciosos; bloquear corta la llamada, borra la amistad y el historial y evita volver a coincidir; máx. 30 solicitudes al día; no se ve la IP ni ningún dato de contacto. | B |
 | 13 | **Nombre ofensivo** o que revele datos (nombre real, teléfono) | M | B | Nombre opcional y limitado a 2–20 letras o números (sin enlaces ni @); el administrador puede buscarlo y quitarlo. | B |
+| 14 | **Notificaciones push** que pasan por servicios de terceros (Google, Mozilla, Apple, según el navegador), posiblemente fuera de la UE | M | B | Solo con consentimiento (activarlas y aceptar el permiso del navegador); el contenido viaja cifrado por el servicio push; se puede retirar en "Mi cuenta → Notificaciones" o en el navegador; la suscripción se borra al desactivarlas, cuando caduca o al borrar la cuenta. | B |
+| 15 | **Avisos de contenido ilegal, recursos o consultas** con datos sensibles (texto libre: vida sexual, posibles delitos, menores) | M | A | Nombre y email opcionales en avisos de abuso sexual infantil; la IP del formulario de contacto no se guarda con la consulta; borrado a los 2 años del cierre; acciones del panel en un registro de auditoría (últimas 500). | B–M |
+| 16 | **Reidentificación** a partir de las estadísticas de uso | B | B | Solo recuentos diarios; país calculado en local y la IP no se guarda; visitantes únicos con hash de IP + navegador + sal aleatoria diaria que se descarta (no se puede seguir a nadie entre días); sin cookies. | B |
 
 ## 4. Derechos de las personas
 

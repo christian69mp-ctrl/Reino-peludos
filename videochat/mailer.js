@@ -151,4 +151,14 @@ async function sendAdminAlert(subject, text) {
   await transport.sendMail({ from: FROM, to, subject: `[La Ruleta Caliente] ${subject}`, text });
 }
 
-module.exports = { sendPasswordReset, sendVerifyEmail, sendAdminAlert, enabled: !!transport };
+// Email de texto a un usuario (respuestas del equipo, acuses de recibo…)
+async function sendText(to, subject, text, replyTo) {
+  if (!to) return;
+  if (!transport) {
+    console.log(`[email] (sin SMTP) para ${to}: ${subject}\n${text}`);
+    return;
+  }
+  await transport.sendMail({ from: FROM, to, subject: `${subject} · La Ruleta Caliente`, text, ...(replyTo ? { replyTo } : {}) });
+}
+
+module.exports = { sendPasswordReset, sendVerifyEmail, sendAdminAlert, sendText, enabled: !!transport };

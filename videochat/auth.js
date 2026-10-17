@@ -54,10 +54,12 @@ function bearer(req) {
 }
 
 // Estado de acceso: null si puede usar el chat, o el motivo si no
+// Incluye el motivo (código) para explicárselo a la persona (art. 17 DSA)
 function restriction(user) {
-  if (user.status === 'banned') return { type: 'banned' };
+  const reason = user.restrictionCode || 'moderation';
+  if (user.status === 'banned') return { type: 'banned', reason };
   if (user.suspendedUntil && user.suspendedUntil > Date.now()) {
-    return { type: 'suspended', until: user.suspendedUntil };
+    return { type: 'suspended', until: user.suspendedUntil, reason };
   }
   return null;
 }
@@ -114,12 +116,19 @@ function birthError(birthDate) {
   return null;
 }
 
+// Preferencias: espejo de la cámara y qué notificaciones recibir
+function prefsOf(user) {
+  const p = user.prefs || {};
+  const n = p.notify || {};
+  return { mirror: p.mirror !== false, notify: { calls: n.calls !== false, requests: n.requests !== false, online: !!n.online } };
+}
+
 function likesOf(user) {
   return { like: user.likes?.like || 0, love: user.likes?.love || 0 };
 }
 
 function publicUser(user) {
-  return { id: user.id, email: user.email, nick: user.nick || '', hasPassword: !!user.passHash, birthDate: user.birthDate || null, gender: user.gender, createdAt: user.createdAt, likes: likesOf(user), emailVerified: !!user.emailVerified };
+  return { id: user.id, email: user.email, nick: user.nick || '', hasPassword: !!user.passHash, birthDate: user.birthDate || null, prefs: prefsOf(user), pendingEmail: user.emailChange?.email || null, gender: user.gender, createdAt: user.createdAt, likes: likesOf(user), emailVerified: !!user.emailVerified };
 }
 
 // true si la cuenta todavía tiene que confirmar su email
@@ -170,6 +179,7 @@ function routes(app) {
       emailVerified: false,
     });
     if (EMAIL_VERIFY) sendVerification(user, req);
+    require('./stats').signup('email');
     res.json({ token: sessionToken(user), user: publicUser(user) });
   });
 
@@ -257,6 +267,6 @@ function routes(app) {
 }
 
 module.exports = {
-  routes, requireUser, userFromToken, restriction, publicUser, likesOf, checkPassword, bearer, needsEmail,
-  sessionToken, cleanLang, rateLimited, sha256, ageFrom, birthError, EMAIL_RE, EMAIL_VERIFY, GENDERS,
+  routes, requireUser, userFromToken, prefsOf, restriction, publicUser, likesOf, checkPassword, bearer, needsEmail,
+  sessionToken, cleanLang, rateLimited, sha256, ageFrom, birthError, hashPassword, baseUrl, EMAIL_RE, EMAIL_VERIFY, GENDERS,
 };

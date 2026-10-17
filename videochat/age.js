@@ -89,8 +89,8 @@ function applyDecision(verification) {
   if (status === 'approved') {
     const years = yearsSince(verification.person?.dateOfBirth);
     if (years !== null && years < MIN_AGE) {
-      store.updateUser(user.id, { age: { ...user.age, status: 'underage', updatedAt: now }, status: 'banned', bannedAt: now, bannedReason: 'Menor de edad (verificación)' });
-      onRestrict(user.id, { type: 'banned' });
+      store.updateUser(user.id, { age: { ...user.age, status: 'underage', updatedAt: now }, status: 'banned', bannedAt: now, bannedReason: 'Menor de edad (verificación)', restrictionCode: 'underage' });
+      onRestrict(user.id, { type: 'banned', reason: 'underage' });
       console.warn(`[edad] cuenta ${user.email} expulsada: menor de edad según la verificación`);
       require('./moderation').alertAdmin('⛔ Menor de edad detectado', `La verificación de edad indica que ${user.email} es menor. La cuenta se ha expulsado automáticamente.`);
       return 'underage';

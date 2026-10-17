@@ -258,6 +258,7 @@ function routes(app) {
         emailVerified: true,
         emailVerifiedAt: Date.now(),
       });
+      require('./stats').signup(c.provider);
     }
     res.json({ token: auth.sessionToken(user), user: auth.publicUser(user) });
   });
