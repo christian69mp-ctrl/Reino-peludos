@@ -186,6 +186,7 @@
       'err.birthMissing': "Elige tu fecha de nacimiento.",
       'err.birthSet': "Tu fecha de nacimiento ya está guardada. Para cambiarla, escribe a soporte.",
       'prem.l5': "Filtra por país, cercanía y rango de edad",
+      'acc.ageDeclared': "{n} años (declarada)",
       'err.auth': 'Inicia sesión para continuar', 'err.generic': 'No se pudo completar. Inténtalo de nuevo.',
     },
 
@@ -372,6 +373,7 @@
       'err.birthMissing': "Choose your date of birth.",
       'err.birthSet': "Your date of birth is already saved. To change it, contact support.",
       'prem.l5': "Filter by country, near you and age range",
+      'acc.ageDeclared': "{n} (self-declared)",
       'err.auth': 'Log in to continue', 'err.generic': 'Something went wrong. Please try again.',
     },
 
@@ -558,6 +560,7 @@
       'err.birthMissing': "Escolha sua data de nascimento.",
       'err.birthSet': "Sua data de nascimento já está salva. Para mudar, fale com o suporte.",
       'prem.l5': "Filtre por país, proximidade e faixa de idade",
+      'acc.ageDeclared': "{n} anos (declarada)",
       'err.auth': 'Entre na sua conta para continuar', 'err.generic': 'Algo deu errado. Tente de novo.',
     },
 
@@ -744,6 +747,7 @@
       'err.birthMissing': "Choisissez votre date de naissance.",
       'err.birthSet': "Votre date de naissance est déjà enregistrée. Pour la modifier, contactez le support.",
       'prem.l5': "Filtrez par pays, proximité et tranche d’âge",
+      'acc.ageDeclared': "{n} ans (déclaré)",
       'err.auth': 'Connectez-vous pour continuer', 'err.generic': 'Une erreur est survenue. Réessayez.',
     },
 
@@ -930,6 +934,7 @@
       'err.birthMissing': "Wähle dein Geburtsdatum.",
       'err.birthSet': "Dein Geburtsdatum ist bereits gespeichert. Um es zu ändern, kontaktiere den Support.",
       'prem.l5': "Filtere nach Land, Nähe und Altersgruppe",
+      'acc.ageDeclared': "{n} Jahre (angegeben)",
       'err.auth': 'Melde dich an, um fortzufahren', 'err.generic': 'Etwas ist schiefgelaufen. Bitte erneut versuchen.',
     },
 
@@ -1116,6 +1121,7 @@
       'err.birthMissing': "Scegli la tua data di nascita.",
       'err.birthSet': "La tua data di nascita è già salvata. Per cambiarla, contatta il supporto.",
       'prem.l5': "Filtra per paese, vicinanza e fascia d’età",
+      'acc.ageDeclared': "{n} anni (dichiarata)",
       'err.auth': 'Accedi per continuare', 'err.generic': 'Qualcosa è andato storto. Riprova.',
     },
   };

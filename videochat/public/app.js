@@ -311,6 +311,7 @@ function logout(notify = true) {
   if (notify) toast(t('msg.loggedOut'));
 }
 $('logoutBtn').addEventListener('click', () => logout());
+$('accLogout').addEventListener('click', () => { closeModal('accountModal'); logout(); });
 
 function showRestricted(r) {
   stop();
@@ -468,7 +469,11 @@ function renderAccount() {
   $('birthError').hidden = true;
   $('accPremium').textContent = me.free ? t('acc.premiumFree')
     : me.premium ? t('acc.premiumUntil', { date: dateText(me.expires) }) : t('acc.premiumNo');
-  $('accAge').textContent = me.age?.status === 'approved' ? t('acc.ageOk') : t('acc.ageNo');
+  // Verificada, pendiente de verificar (si se la han pedido) o la edad declarada
+  const declared = bd ? Math.floor((Date.now() - new Date(`${bd}T00:00:00`)) / (365.2425 * 864e5)) : null;
+  $('accAge').textContent = me.age?.status === 'approved' ? t('acc.ageOk')
+    : me.age?.required ? t('acc.ageNo')
+      : declared !== null ? t('acc.ageDeclared', { n: declared }) : '—';
   $('accLikes').textContent = `👍 ${me.user.likes?.like || 0}  ❤️ ${me.user.likes?.love || 0}`;
   $('accCode').textContent = me.watermark || '';
   if (document.activeElement !== $('nickInput')) $('nickInput').value = me.user.nick || '';

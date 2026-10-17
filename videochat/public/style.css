@@ -346,7 +346,7 @@ body.in-chat .site-footer { display: none; }
 .check a { color: var(--text); }
 .account-list { display: grid; grid-template-columns: auto 1fr; gap: 10px 16px; margin: 0 0 8px; }
 .account-list dt { color: var(--muted); font-size: .9rem; }
-.account-list dd { margin: 0; font-weight: 600; text-align: right; word-break: break-all; }
+.account-list dd { margin: 0; font-weight: 600; text-align: right; overflow-wrap: anywhere; }
 .code { font-family: ui-monospace, monospace; letter-spacing: .08em; color: var(--accent-2); }
 .acc-section { font-size: 1rem; margin: 22px 0 10px; }
 #accountModal .btn.wide + .btn.wide { margin-top: 10px; }
@@ -420,6 +420,12 @@ body.in-chat .site-footer { display: none; }
   .report-btn span { display: none; }
   .react-btn { width: 46px; height: 46px; font-size: 1.35rem; }
   .partner-info { max-width: calc(100% - 70px); }
+}
+/* En móviles estrechos «Cerrar sesión» está dentro de «Mi cuenta» para que quepa la cabecera */
+#accLogout { display: none; }
+@media (max-width: 480px) {
+  #logoutBtn { display: none; }
+  #accLogout { display: flex; }
 }
 .free-box h3 { margin: 14px 0 8px; font-size: 1.35rem; }
 .free-box .btn { margin-top: 10px; }
