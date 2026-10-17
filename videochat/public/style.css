@@ -84,8 +84,28 @@ kbd { font: inherit; font-size: .72em; padding: 1px 6px; border-radius: 6px; bac
 .btn.primary { background: var(--grad); color: #fff; box-shadow: 0 8px 24px -10px rgba(255, 61, 110, .7); }
 .btn.ghost { background: transparent; border-color: var(--border); }
 .btn.ghost:hover { background: var(--surface-2); }
-.btn.gold { background: var(--gold); color: #1d1400; }
-.btn.gold-ghost { background: rgba(255, 197, 61, .1); color: var(--gold); border-color: rgba(255, 197, 61, .35); }
+/* Premium: dorado para que destaque */
+.btn.gold {
+  position: relative; overflow: hidden; isolation: isolate;
+  background: linear-gradient(135deg, #ffe08a 0%, #ffc53d 38%, #f0a20f 72%, #ffd66b 100%);
+  color: #2a1a00; border-color: rgba(255, 214, 107, .9); font-weight: 700;
+  box-shadow: 0 6px 22px -6px rgba(255, 184, 0, .65), inset 0 1px 0 rgba(255, 255, 255, .55);
+  text-shadow: 0 1px 0 rgba(255, 240, 200, .5);
+}
+.btn.gold .i { fill: currentColor; }
+.btn.gold::after {
+  content: ""; position: absolute; z-index: -1; inset: 0; transform: translateX(-120%);
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .55) 50%, transparent 65%);
+  animation: gold-shine 4.5s ease-in-out infinite;
+}
+.btn.gold:hover { filter: brightness(1.06); box-shadow: 0 8px 28px -6px rgba(255, 184, 0, .85), inset 0 1px 0 rgba(255, 255, 255, .6); }
+@keyframes gold-shine { 0%, 60% { transform: translateX(-120%); } 85%, 100% { transform: translateX(120%); } }
+@media (prefers-reduced-motion: reduce) { .btn.gold::after { animation: none; } }
+.btn.gold-ghost { background: rgba(255, 197, 61, .14); color: var(--gold); border-color: rgba(255, 197, 61, .55); font-weight: 700; }
+.btn.gold-ghost .i { fill: currentColor; }
+.nav-links a.nav-premium { display: inline-flex; align-items: center; gap: 6px; color: var(--gold); font-weight: 700; }
+.nav-links a.nav-premium:hover { color: #ffe08a; }
+.nav-links a.nav-premium .i { width: 15px; height: 15px; fill: currentColor; }
 .btn.sm { padding: 8px 14px; font-size: .88rem; }
 .btn.lg { padding: 14px 24px; font-size: 1rem; border-radius: 14px; }
 .btn.wide { width: 100%; }
