@@ -195,9 +195,19 @@ docker compose start app
 ## 8 bis. Darte de alta en Google y Bing (posicionamiento)
 
 La web ya genera `https://tudominio.com/sitemap.xml` con todas las páginas en los 6 idiomas.
-1. **Google Search Console** (gratis): añade la propiedad de *Dominio* `tudominio.com`, verifica
-   con el registro TXT que te dé en el DNS y en *Sitemaps* envía `sitemap.xml`.
-2. **Bing Webmaster Tools** (gratis): puedes importar el sitio desde Search Console.
+1. **Google Search Console** (gratis, https://search.google.com/search-console):
+   - *Añadir propiedad* → **Dominio** → escribe `tudominio.com` (sin https ni www).
+   - Google te da un registro **TXT** (`google-site-verification=…`): añádelo en el DNS de tu
+     dominio (en el panel donde lo compraste o en Cloudflare) y pulsa *Verificar*. Puede tardar
+     unos minutos.
+   - Si prefieres la propiedad *Prefijo de URL* con «Etiqueta HTML», copia solo el valor de
+     `content="…"` en `GOOGLE_SITE_VERIFICATION` del `.env` y reinicia (`docker compose up -d`).
+   - Menú **Sitemaps** → escribe `sitemap.xml` → *Enviar*. Debe salir «Correcto» con 72 páginas
+     (12 páginas × 6 idiomas).
+   - En **Inspección de URLs** pide la indexación de la portada `https://tudominio.com/es/` y
+     `https://tudominio.com/en/`.
+2. **Bing Webmaster Tools** (gratis): puedes importar el sitio desde Search Console (o usar la
+   etiqueta en `BING_SITE_VERIFICATION`). Bing también da servicio a DuckDuckGo y Yahoo.
 3. Ojo: Google trata las webs para adultos con SafeSearch; es normal que no salgas en búsquedas
    con SafeSearch activado.
 

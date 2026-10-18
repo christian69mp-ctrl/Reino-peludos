@@ -234,6 +234,12 @@ function render(req, page, lang) {
       `<meta property="og:site_name" content="${SITE}">`, '<meta name="twitter:card" content="summary_large_image">',
     ].map((m) => `  ${m}\n`).join('') + '</head>');
   }
+  // Aviso a Google (SafeSearch) de que es una web para adultos, y verificación de Search Console / Bing
+  const extra = [];
+  if (!html.includes('name="rating"')) extra.push('<meta name="rating" content="adult">');
+  if (process.env.GOOGLE_SITE_VERIFICATION) extra.push(`<meta name="google-site-verification" content="${esc(process.env.GOOGLE_SITE_VERIFICATION)}">`);
+  if (process.env.BING_SITE_VERIFICATION) extra.push(`<meta name="msvalidate.01" content="${esc(process.env.BING_SITE_VERIFICATION)}">`);
+  if (extra.length) html = html.replace('</head>', `  ${extra.join('\n  ')}\n</head>`);
   html = html.replace('</head>', `  ${head(req, page, lang, title)}\n</head>`);
   cache.set(k, html);
   return html;

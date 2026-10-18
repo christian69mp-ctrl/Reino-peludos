@@ -84,7 +84,8 @@ contratado: sin él esa verificación es simulada.
 
 ## G. Abrir al público
 
-- ☐ Publicar los posts de Instagram y reels.
+- ☐ **Google Search Console**: verificar el dominio y enviar `sitemap.xml` (DESPLIEGUE.md, paso 8 bis). Lo mismo en Bing Webmaster Tools.
+- ☐ Publicar los posts de Instagram (16, prompts en `docs/marca/`) y los 3 anuncios de vídeo.
 - ☐ Vigilar los primeros días: `docker compose logs -f app`, denuncias, tráfico del servidor.
 - ☐ Revisar el tráfico mensual del servidor la primera semana (el vídeo pasa por él).
 
@@ -96,5 +97,7 @@ contratado: sin él esa verificación es simulada.
 - ☐ Actualizar los datos del titular en las páginas legales y el RAT (apartado 6, pagos).
 - ☐ En `.env`: quitar `PREMIUM_MODE=free` y poner los `SEGPAY_*`; `docker compose up -d`.
 - ☐ Hacer una compra real de prueba y cancelarla.
-- ☐ Avisar a los usuarios con antelación de que los filtros pasan a ser de pago.
+- ☐ Avisar a los usuarios con antelación de lo que pasa a ser de pago: filtros, amigos e historial,
+  invitar a jugar y enviar piropos, y los superpoderes gratis de cada día (las guindillas siguen
+  siendo gratis para todos).
 - ☐ **Cookies:** la red publicitaria solo se pega en `/admin` → Publicidad (la web ya pide el consentimiento). No añadir por otro lado Google Analytics, píxeles de Meta/TikTok ni vídeos o mapas incrustados de terceros: necesitarían también consentimiento y figurar en `/cookies`.
