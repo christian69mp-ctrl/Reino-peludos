@@ -110,6 +110,7 @@ app.get('/stats', (_req, res) => {
 
 // ---------- Guindillas y superpoderes ----------
 app.get('/api/game', auth.requireUser, (req, res) => res.json(rewards.summary(req.user.id)));
+app.get('/api/ranking', auth.requireUser, (req, res) => res.json(rewards.ranking(req.user.id)));
 app.post('/api/powers/:power', auth.requireUser, (req, res) => {
   const uid = req.user.id;
   const now = Date.now();
@@ -164,6 +165,13 @@ const REACTIONS = ['like', 'love'];
 const LANG_RE = /^[a-z]{2,3}$/;
 // Juegos, piropos y «¿Volverías a hablar?» (play.js)
 const rewards = require('./rewards')({ store, payments, notify: (uid, ev, data) => notifyUser(uid, ev, data) });
+
+// 🔥 Hora caliente: se avisa a todo el mundo conectado cuando empieza y cuando acaba
+let hotWas = rewards.hotHour().active;
+setInterval(() => {
+  const hot = rewards.hotHour();
+  if (hot.active !== hotWas) { hotWas = hot.active; io.emit('hot-hour', hot); }
+}, 30 * 1000).unref();
 const play = require('./play')({ io, partners, store, payments, rewards });
 const MIN_CONV_MS = 60 * 1000; // conversaciones que cuentan para guindillas, insignias y retos
 

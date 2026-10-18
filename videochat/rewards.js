@@ -8,6 +8,10 @@
 //   la persona anterior (si acepta). 💌 Supersaludo: un saludo destacado que la siguiente
 //   persona ve nada más conectar. 🕶️ Incógnito: 1 h sin mostrar edad ni país. 👀 Segunda
 //   oportunidad: ver quién te ha dado ❤️ en las últimas 24 h.
+// - 🔥 Hora caliente: una hora al día (por defecto 22:00-23:00, hora de España) en la que las
+//   guindillas que se ganan valen el doble.
+// - 🏆 Ranking semanal: las 10 personas que más guindillas han ganado esta semana (solo con su
+//   nombre del chat; quien no quiera salir puede ocultarse en Privacidad).
 const DAY = 24 * 3600 * 1000;
 const DAY_CAP = 120;              // guindillas máximas por día (sin contar retos)
 
@@ -34,6 +38,23 @@ const CHALLENGES = [
   { id: 'rps3', key: 'rpsWins', goal: 3, reward: 50 },
   { id: 'wyr5', key: 'wyrMatches', goal: 5, reward: 50 },
 ];
+
+const HOT_OFF = process.env.HOT_HOUR === 'off';
+const HOT_HOUR = Math.min(23, Math.max(0, Number(process.env.HOT_HOUR ?? 22) || 0));
+const HOT_TZ = process.env.HOT_TZ || 'Europe/Madrid';
+// ¿Es ahora la Hora caliente? Devuelve también cuándo empieza o acaba (en ms)
+function hotHour(now = Date.now()) {
+  if (HOT_OFF) return { active: false, off: true };
+  const parts = Object.fromEntries(new Intl.DateTimeFormat('en-GB', { timeZone: HOT_TZ, hourCycle: 'h23', hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    .formatToParts(new Date(now)).filter((x) => x.type !== 'literal').map((x) => [x.type, Number(x.value)]));
+  const intoHour = (parts.minute * 60 + parts.second) * 1000 + (now % 1000);
+  const hourStart = now - intoHour;
+  const active = parts.hour === HOT_HOUR;
+  const hoursUntil = (HOT_HOUR - parts.hour + 24) % 24;
+  return active
+    ? { active: true, endsAt: hourStart + 3600 * 1000 }
+    : { active: false, startsAt: hourStart + hoursUntil * 3600 * 1000 };
+}
 
 const dayKey = (t = Date.now()) => new Date(t).toISOString().slice(0, 10);
 function weekKey(t = Date.now()) {
@@ -64,7 +85,7 @@ module.exports = function createRewards({ store, payments, notify }) {
       counters: g.counters || {},
       countries: g.countries || [],
       badges: g.badges || [],
-      weekly: g.weekly?.week === week ? g.weekly : { week, prog: {}, countries: [], done: [] },
+      weekly: g.weekly?.week === week ? g.weekly : { week, prog: {}, countries: [], done: [], earned: 0 },
       daily: g.daily?.day === today ? g.daily : { day: today, earned: 0, used: {} },
     };
   }
@@ -74,12 +95,16 @@ module.exports = function createRewards({ store, payments, notify }) {
     const user = store.getUser(uid);
     if (!user || amount <= 0) return 0;
     const s = state(user);
+    const hot = hotHour().active;
+    if (hot) amount *= 2;
     const add = uncapped ? amount : Math.max(0, Math.min(amount, DAY_CAP - s.daily.earned));
     if (!add) return 0;
     s.points += add;
+    s.weekly.earned = (s.weekly.earned || 0) + add;
     if (!uncapped) s.daily.earned += add;
     save(uid, s);
-    notify(uid, 'points', { points: s.points, added: add, reason });
+    rankCache = null;
+    notify(uid, 'points', { points: s.points, added: add, reason, hot });
     return add;
   }
 
@@ -107,6 +132,8 @@ module.exports = function createRewards({ store, payments, notify }) {
       if (!s.weekly.done.includes(c.id) && (s.weekly.prog[c.key] || 0) >= c.goal) {
         s.weekly.done = [...s.weekly.done, c.id];
         s.points += c.reward; bonus += c.reward;
+        s.weekly.earned = (s.weekly.earned || 0) + c.reward;
+        rankCache = null;
         events.push(['challenge', { id: c.id, reward: c.reward }]);
       }
     }
@@ -127,7 +154,9 @@ module.exports = function createRewards({ store, payments, notify }) {
     s.counters.bestStreak = Math.max(s.counters.bestStreak || 0, s.streak.n);
     const reward = Math.min(5 * s.streak.n, 30);
     s.points += reward;
+    s.weekly.earned = (s.weekly.earned || 0) + reward;
     save(uid, s);
+    rankCache = null;
     notify(uid, 'daily', { streak: s.streak.n, reward, points: s.points });
     count(uid, 'login');
   }
@@ -176,11 +205,38 @@ module.exports = function createRewards({ store, payments, notify }) {
       superMsg: user.superMsg || '',
       badges: BADGES.map((b) => ({ ...b, have: s.badges.includes(b.id), progress: Math.min(s.counters[b.key] || 0, b.goal) })),
       challenges: weekChallenges(s.weekly.week).map((c) => ({ ...c, progress: Math.min(s.weekly.prog[c.key] || 0, c.goal), done: s.weekly.done.includes(c.id) })),
+      hot: hotHour(),
       weekEnds: (() => { const d = new Date(); const day = (d.getUTCDay() + 6) % 7; return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 7 - day); })(),
+    };
+  }
+
+  // 🏆 Ranking de la semana (se recalcula como mucho cada 30 s)
+  let rankCache = null;
+  function ranking(uid) {
+    const week = weekKey();
+    if (!rankCache || rankCache.week !== week || Date.now() - rankCache.at > 30000) {
+      const rows = store.listUsers()
+        .filter((u) => u.game?.weekly?.week === week && u.game.weekly.earned > 0 && u.status !== 'banned' && u.status !== 'deleted')
+        .map((u) => ({ id: u.id, earned: u.game.weekly.earned }))
+        .sort((a, b) => b.earned - a.earned);
+      rankCache = { week, at: Date.now(), rows };
+    }
+    // Nombre, insignias y «no aparecer» se leen al momento (pueden cambiar sin ganar guindillas)
+    const rows = rankCache.rows.map((r) => {
+      const u = store.getUser(r.id) || {};
+      return { ...r, hidden: !!u.prefs?.hideRanking, name: u.nick || '', badges: badgesOf(u) };
+    });
+    const visible = rows.filter((r) => !r.hidden);
+    const mine = rows.findIndex((r) => r.id === uid);
+    return {
+      week,
+      top: visible.slice(0, 10).map((r) => ({ name: r.name, earned: r.earned, badges: r.badges, me: r.id === uid })),
+      me: mine >= 0 ? { pos: mine + 1, earned: rows[mine].earned, hidden: rows[mine].hidden } : null,
+      players: rows.length,
     };
   }
 
   const badgesOf = (user) => (user?.game?.badges || []).map((id) => BADGES.find((b) => b.id === id)?.e).filter(Boolean).slice(-3);
 
-  return { award, count, dailyLogin, spend, canSpend, summary, badgesOf, PRICES, _test: { weekKey, weekChallenges } };
+  return { award, count, dailyLogin, spend, canSpend, summary, badgesOf, ranking, hotHour, PRICES, _test: { weekKey, weekChallenges, hotHour } };
 };

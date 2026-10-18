@@ -501,6 +501,37 @@
   }
   function chemReset() { chemTop = 0; $('chemLabel').textContent = ''; chem(0); }
 
+  // ---------- 💡 Temas para romper el hielo (encima del chat) ----------
+  let topicIdx = -1;
+  let topicLevel = 'soft';
+  function topic(shuffle) {
+    const box = $('icebreaker');
+    if (!box) return;
+    const list = () => G?.topics?.[topicLevel] || [];
+    if (!A.partner || !G?.topics) { box.hidden = true; return; }
+    // Si los dos tienen el modo picante, la mitad de las veces sale uno picante
+    topicLevel = mySpicy() && partnerSpicy() && Math.random() < 0.5 ? 'hot' : 'soft';
+    let i = Math.floor(Math.random() * list().length);
+    if (list().length > 1 && i === topicIdx) i = (i + 1) % list().length;
+    topicIdx = i;
+    $('ibText').textContent = tx(list()[i]);
+    $('ibText').title = t('tp.send');
+    box.classList.toggle('hot', topicLevel === 'hot');
+    box.hidden = false;
+    if (shuffle) { box.classList.remove('flip'); void box.offsetWidth; box.classList.add('flip'); }
+  }
+  $('ibShuffle')?.addEventListener('click', () => topic(true));
+  document.addEventListener('langchange', () => { if (!$('icebreaker').hidden && topicIdx >= 0) $('ibText').textContent = tx(G?.topics?.[topicLevel]?.[topicIdx]); });
+  $('ibText')?.addEventListener('click', () => {
+    const input = $('chatInput');
+    if (!input || input.disabled) return;
+    input.value = $('ibText').textContent;
+    $('chatForm').requestSubmit();
+    $('icebreaker').hidden = true;
+  });
+  // Cuando ya se están escribiendo, el tema sobra
+  $('chatForm')?.addEventListener('submit', () => { $('icebreaker').hidden = true; });
+
   // ---------- Modo picante ----------
   async function setSpicy(on) {
     if (!A.me?.user) return;
@@ -583,8 +614,8 @@
   }
 
   // Al conectar con alguien nuevo / al irse
-  function matched() { game = null; prev = null; invite = null; open = null; streak = 0; board = null; chemReset(); loadGames().then(() => { rerender(); sync(); }); }
-  function left() { game = null; prev = null; invite = null; open = null; streak = 0; board = null; clearInterval(tick); chemReset(); rerender(); }
+  function matched() { game = null; prev = null; invite = null; open = null; streak = 0; board = null; chemReset(); loadGames().then(() => { rerender(); sync(); topic(); }); }
+  function left() { game = null; prev = null; invite = null; open = null; streak = 0; board = null; clearInterval(tick); chemReset(); rerender(); if ($('icebreaker')) $('icebreaker').hidden = true; }
 
   // Piropos que la otra persona ha decidido mostrar: «🍑 23 · 🔥 41»
   function badges(p) {

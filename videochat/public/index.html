@@ -347,6 +347,11 @@
         </details>
       </div>
       <div id="messages" class="messages" aria-live="polite"></div>
+      <div class="icebreaker" id="icebreaker" hidden>
+        <span class="ib-tag" aria-hidden="true">💡</span>
+        <button type="button" class="ib-text" id="ibText"></button>
+        <button type="button" class="ib-shuffle" id="ibShuffle" data-i18n-aria="tp.shuffle" aria-label="Another topic">🔀</button>
+      </div>
       <form id="chatForm" class="chat-form">
         <input id="chatInput" maxlength="500" data-i18n-ph="chat.placeholder" placeholder="Type a message…" autocomplete="off" disabled>
         <button type="submit" class="btn primary icon-only" disabled id="sendBtn" data-i18n-aria="chat.send" aria-label="Send"><svg class="i"><use href="#i-send"/></svg></button>

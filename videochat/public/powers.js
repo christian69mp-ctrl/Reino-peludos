@@ -1,6 +1,7 @@
 // Guindillas, racha diaria, retos de la semana, insignias y superpoderes (servidor: rewards.js).
 // La pastilla «🌶️ 120 🔥3» de la cabecera abre el panel; al entrar cada día se celebra la
 // racha, y los poderes se usan desde el panel (↩️ Rebobinar aparece al pulsar Siguiente).
+// 🔥 Hora caliente (guindillas ×2) y 🏆 ranking de la semana también viven aquí.
 (function () {
   const { t } = window.I18N;
   const A = window.App;
@@ -14,6 +15,8 @@
   let tab = 'powers';
   let second = null;       // lista de 👀 Segunda oportunidad
   let rewindTimer = null;
+  let rank = null;         // ranking de la semana (/api/ranking)
+  let hotTimer = null;
 
   // ---------- Pastilla de la cabecera ----------
   async function refresh() {
@@ -29,10 +32,19 @@
     $('pointsNum').textContent = G?.points ?? 0;
     $('streakBox').hidden = !G?.streak;
     $('streakNum').textContent = G?.streak || 0;
+    // Hora caliente: la pastilla arde y lleva «×2»
+    const hot = !!G?.hot?.active;
+    $('pointsPill').classList.toggle('hot', hot);
+    let x2 = $('hotX2');
+    if (hot && !x2) { x2 = el('span', 'pp-hot', '×2'); x2.id = 'hotX2'; $('pointsPill').appendChild(x2); } else if (!hot && x2) x2.remove();
+    // Se vuelve a pedir el resumen justo cuando empieza o acaba
+    clearTimeout(hotTimer);
+    const next = G?.hot?.active ? G.hot.endsAt : G?.hot?.startsAt;
+    if (next && next - Date.now() < 6 * 3600 * 1000) hotTimer = setTimeout(refresh, Math.max(1000, next - Date.now() + 1500));
   }
-  function floatPoints(n) {
+  function floatPoints(n, hot) {
     if (!n || reduced()) return;
-    const f = el('span', `pts-float${n < 0 ? ' neg' : ''}`, `${n > 0 ? '+' : ''}${n} 🌶️`);
+    const f = el('span', `pts-float${n < 0 ? ' neg' : ''}${hot ? ' hot' : ''}`, `${n > 0 ? '+' : ''}${n} 🌶️${hot && n > 0 ? ' ×2' : ''}`);
     $('pointsPill').appendChild(f);
     $('pointsPill').classList.remove('bump'); void $('pointsPill').offsetWidth; $('pointsPill').classList.add('bump');
     setTimeout(() => f.remove(), 1400);
@@ -48,7 +60,11 @@
   modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) { e.stopImmediatePropagation(); close(); } }, true);
 
-  function openPanel(which = 'powers') { tab = which; modal.hidden = false; render(); refresh(); }
+  function openPanel(which = 'powers') { tab = which; modal.hidden = false; render(); refresh(); if (which === 'ranking') loadRank(); }
+  async function loadRank() {
+    const r = await A.api('/api/ranking');
+    if (r?.top) { rank = r; if (!modal.hidden && tab === 'ranking') render(); }
+  }
   $('pointsPill').addEventListener('click', () => openPanel());
 
   function price(p) {
@@ -74,14 +90,15 @@
     head.append(m, title, x);
     box.appendChild(head);
     window.Mascot?.gesture(m, 'wave', 1600);
+    if (G?.hot && !G.hot.off) box.appendChild(hotBanner());
     const tabs = el('div', 'tabs pw-tabs');
-    for (const [id, key] of [['powers', 'pw.tabPowers'], ['challenges', 'pw.tabChallenges'], ['badges', 'pw.tabBadges']]) {
-      const b = btn(`tab${tab === id ? ' active' : ''}`, t(key), () => { tab = id; render(); });
+    for (const [id, key] of [['powers', 'pw.tabPowers'], ['challenges', 'pw.tabChallenges'], ['badges', 'pw.tabBadges'], ['ranking', 'pw.tabRanking']]) {
+      const b = btn(`tab${tab === id ? ' active' : ''}`, t(key), () => { tab = id; render(); if (id === 'ranking') loadRank(); });
       tabs.appendChild(b);
     }
     box.appendChild(tabs);
     if (!G) { box.appendChild(el('p', 'muted', '…')); return; }
-    if (tab === 'powers') renderPowers(); else if (tab === 'challenges') renderChallenges(); else renderBadges();
+    if (tab === 'powers') renderPowers(); else if (tab === 'challenges') renderChallenges(); else if (tab === 'ranking') renderRanking(); else renderBadges();
     box.appendChild(el('p', 'pw-earn', t('pw.howEarn')));
     if (!G.premium) box.appendChild(btn('btn gold wide', t('pw.premiumPitch'), () => { close(); A.openPremium(); }));
   }
@@ -193,6 +210,41 @@
     box.appendChild(grid);
   }
 
+  // 🔥 Hora caliente: activa (con los minutos que quedan) o cuándo es la próxima
+  function hotBanner() {
+    const h = G.hot;
+    const b = el('div', `pw-hot${h.active ? ' on' : ''}`);
+    if (h.active) b.textContent = t('pw.hotOn', { m: Math.max(1, Math.ceil((h.endsAt - Date.now()) / 60000)) });
+    else b.textContent = t('pw.hotNext', { time: new Date(h.startsAt).toLocaleTimeString(window.I18N.lang, { hour: '2-digit', minute: '2-digit' }) });
+    return b;
+  }
+
+  // 🏆 Ranking de la semana
+  function renderRanking() {
+    const sec = el('section', 'pw-rank');
+    sec.append(el('h3', '', `🏆 ${t('pw.rankTitle')}`), el('p', 'pw-hint', t('pw.rankHint')));
+    if (!rank) { sec.appendChild(el('p', 'muted', '…')); box.appendChild(sec); return; }
+    const ol = el('ol', 'pw-rank-list');
+    if (!rank.top.length) ol.appendChild(el('li', 'muted', t('pw.rankEmpty')));
+    rank.top.forEach((r, i) => {
+      const li = el('li', `${r.me ? 'me' : ''}${i < 3 ? ` top${i + 1}` : ''}`);
+      li.style.animationDelay = `${i * 60}ms`;
+      li.append(el('span', 'pw-rank-pos', ['🥇', '🥈', '🥉'][i] || `${i + 1}`), el('span', 'pw-rank-name', `${r.name || t('pw.anon')} ${(r.badges || []).join('')}`), el('b', 'pw-rank-pts', `${r.earned} 🌶️`));
+      ol.appendChild(li);
+    });
+    sec.appendChild(ol);
+    sec.appendChild(el('p', 'pw-rank-me', rank.me ? t('pw.rankMe', { pos: rank.me.pos, total: rank.players, n: rank.me.earned }) : t('pw.rankNone')));
+    // Quien no quiera salir, se oculta (sigue viendo su posición)
+    const lab = el('label', 'pw-rank-hide');
+    const cb = el('input');
+    cb.type = 'checkbox';
+    cb.checked = !!A.me?.user?.prefs?.hideRanking;
+    cb.addEventListener('change', async () => { await A.savePrefs({ hideRanking: cb.checked }); rank = null; loadRank(); });
+    lab.append(cb, el('span', '', t('pw.rankHide')));
+    sec.appendChild(lab);
+    box.appendChild(sec);
+  }
+
   function burstIn(target) { window.Play?.confetti(target, ['🔥', '✨', '🌶️']); }
 
   // ---------- Celebraciones ----------
@@ -249,7 +301,14 @@
 
   // ---------- Conexión con el servidor ----------
   function attach(s) {
-    s.on('points', ({ points, added }) => { if (G) G.points = points; else G = { points }; paintPill(); floatPoints(added); });
+    s.on('points', ({ points, added, hot }) => { if (G) G.points = points; else G = { points }; paintPill(); floatPoints(added, hot); });
+    s.on('hot-hour', (h) => {
+      if (G) G.hot = h;
+      paintPill();
+      if (!modal.hidden) render();
+      if (h.active) celebrate({ icon: '🔥×2', title: t('pw.hotTitle'), text: t('pw.hotStart'), button: t('pw.dailyBtn'), emojis: ['🔥', '🌶️', '✨'] });
+      else A.toast(t('pw.hotEnd'));
+    });
     s.on('daily', ({ streak, reward, points }) => {
       if (G) { G.points = points; G.streak = streak; } else G = { points, streak };
       paintPill();

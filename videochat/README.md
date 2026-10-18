@@ -133,6 +133,9 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
     juegos, coincidencias en ¿Qué prefieres?, dibujos acertados y mensajes del chat (evento `chem`).
     Mensajes a 50°, 80° y 100°; a 100° («explosión de química») +5 guindillas a cada uno, una vez por
     conversación. Empieza en 0 con cada persona; solo se guarda el contador de explosiones (insignia 🌡️).
+  - *Temas para romper el hielo* 💡 (`public/play.js`, preguntas en `public/games-data.js`): al conectar,
+    Guindilla sugiere una pregunta encima de la caja del chat (50 en los 6 idiomas; las atrevidas solo
+    si los dos tienen el modo picante). 🔀 da otra; tocarla la envía como mensaje propio. Desaparece al escribir.
   - Guía de juegos y poderes: `public/juegos.html` (`/es/juegos`, `/en/games`, `/pt/jogos`,
     `/fr/jeux`, `/de/spiele`, `/it/giochi`).
   - *Piropos* (botón 🌶️): 12 mensajes ya hechos, solo positivos («Buen culo», «Buena corrida»…).
@@ -151,6 +154,14 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   - *Racha* 🔥 (sube cada día que se entra; si se falla un día, vuelve a empezar), *3 retos
     semanales* iguales para todos (lunes a domingo UTC) y *9 insignias* (🧊 🏆 💞 🌍 🗣️ 💘 🌶️ 🔥 🌡️, esta con 5 explosiones de química);
     las 3 últimas se ven junto al nombre para la otra persona.
+  - *Hora caliente* 🔥: cada día de 22:00 a 23:00 (hora de España) las guindillas ganadas cuentan ×2
+    (sigue el máximo de 120 al día; la recompensa diaria no se duplica). La pastilla 🌶️ brilla con «×2»,
+    el panel muestra los minutos que quedan o a qué hora local empieza la siguiente y se avisa a todos
+    los conectados al empezar. Se cambia con `HOT_HOUR` (hora de inicio, 0–23; `off` la desactiva) y `HOT_TZ`.
+  - *Ranking semanal* 🏆 (pestaña «Ranking» del panel): top 10 de guindillas ganadas desde el lunes
+    (lunes a domingo UTC) con nombre en el chat (o «Anónimo»), últimas insignias y guindillas; 🥇🥈🥉 y
+    la posición propia «#n de total». «No aparecer en el ranking» (pref `hideRanking`) oculta a la persona
+    para los demás, pero sigue viendo su posición. API: `GET /api/ranking` (`{ week, top, me, players }`).
   - *Superpoderes* (precio en guindillas): 🔥 Llama caliente 30 (15 min antes en la cola),
     ↩️ Rebobinar 20 (botón ↩️ durante 15 s para pedir volver con la persona anterior, si acepta y
     está buscando), 💌 Supersaludo 10 (saludo destacado de hasta 140 caracteres que ve la siguiente
@@ -307,6 +318,10 @@ TURN_SECRET=...               # static-auth-secret de coturn: credenciales que c
 
 # Lanzamiento sin cobrar: filtros Premium y juegos gratis para todos (los superpoderes se siguen pagando con guindillas)
 # PREMIUM_MODE=free
+
+# Hora caliente (guindillas ×2 durante una hora al día)
+# HOT_HOUR=22                 # hora de inicio (0–23, por defecto 22: de 22:00 a 23:00); off la desactiva
+# HOT_TZ=Europe/Madrid        # zona horaria de esa hora
 
 # Antibots (Cloudflare Turnstile)
 # TURNSTILE_SITE_KEY=... / TURNSTILE_SECRET=...

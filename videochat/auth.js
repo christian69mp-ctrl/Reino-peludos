@@ -120,7 +120,7 @@ function birthError(birthDate) {
 function prefsOf(user) {
   const p = user.prefs || {};
   const n = p.notify || {};
-  return { mirror: p.mirror !== false, spicy: !!p.spicy, showPiropos: !!p.showPiropos, notify: { calls: n.calls !== false, requests: n.requests !== false, online: !!n.online } };
+  return { mirror: p.mirror !== false, spicy: !!p.spicy, showPiropos: !!p.showPiropos, hideRanking: !!p.hideRanking, notify: { calls: n.calls !== false, requests: n.requests !== false, online: !!n.online } };
 }
 
 function likesOf(user) {

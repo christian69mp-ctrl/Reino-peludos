@@ -84,6 +84,17 @@
 | **Plazo** | Historial: **30 días** (máx. 100 personas). Solicitudes sin responder o rechazadas: 30 días. Amistades: hasta que se quiten o se borre la cuenta. El usuario puede borrar su historial cuando quiera. |
 | **Destinatarios** | Ninguno externo. |
 
+## 4 quater. Guindillas, insignias y ranking semanal (gamificación)
+
+| | |
+|---|---|
+| **Finalidad** | Gestionar los puntos de la web (guindillas), la racha, los retos, las insignias, los superpoderes y el ranking semanal. |
+| **Base jurídica** | Ejecución del contrato (art. 6.1.b) para guindillas, racha, retos, insignias y superpoderes. Ranking semanal: interés legítimo en la gamificación del servicio (art. 6.1.f), con derecho de oposición mediante «No aparecer en el ranking». |
+| **Datos** | Saldo de guindillas, racha, contadores de actividad, insignias, progreso y guindillas ganadas en la semana, fin de los superpoderes activos y la preferencia `hideRanking`. |
+| **Quién lo ve** | Las 3 últimas insignias, la otra persona del chat. Si aparece en el top 10 del ranking semanal, **los demás usuarios ven su nombre en el chat** (o «Anónimo» si no tiene), sus últimas insignias y las guindillas ganadas esa semana. Quien marca «No aparecer en el ranking» deja de mostrarse a los demás en cualquier momento (sigue viendo su propia posición). |
+| **Plazo** | Mientras exista la cuenta; se borra con ella y se incluye en «Descargar mis datos». El ranking se reinicia cada semana (lunes a domingo, UTC). |
+| **Destinatarios** | Ninguno. |
+
 ## 5. Denuncias y moderación
 
 | | |
