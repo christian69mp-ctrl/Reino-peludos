@@ -101,6 +101,22 @@ const DESCRIPTIONS = {
     de: 'Spiele-Guide von La Ruleta Caliente: Wahrheit oder Pflicht, Zeichnen & Raten, Komplimente, Chemie-Thermometer, Chilis, Abzeichen und Superkräfte.',
     it: 'Guida ai giochi di La Ruleta Caliente: Obbligo o verità, Disegna e indovina, complimenti, termometro dell’intesa, peperoncini, badge e superpoteri.',
   },
+  how: {
+    es: 'Cómo funciona La Ruleta Caliente: empieza gratis en 3 pasos, chat traducido, juegos, guindillas, superpoderes, Gratis o Premium y seguridad.',
+    en: 'How La Ruleta Caliente works: start free in 3 steps, translated chat, games, chilis, superpowers, Free vs Premium and safety.',
+    pt: 'Como funciona a La Ruleta Caliente: comece grátis em 3 passos, chat traduzido, jogos, pimentas, superpoderes, Grátis ou Premium e segurança.',
+    fr: 'Comment marche La Ruleta Caliente : commence gratuitement en 3 étapes, chat traduit, jeux, piments, superpouvoirs, Gratuit ou Premium et sécurité.',
+    de: 'So funktioniert La Ruleta Caliente: kostenlos starten in 3 Schritten, übersetzter Chat, Spiele, Chilis, Superkräfte, Kostenlos vs. Premium, Sicherheit.',
+    it: 'Come funziona La Ruleta Caliente: inizia gratis in 3 passi, chat tradotta, giochi, peperoncini, superpoteri, Gratis o Premium e sicurezza.',
+  },
+  safety: {
+    es: 'Consejos de seguridad en La Ruleta Caliente: protege tu identidad, evita la sextorsión y las estafas, denuncia a menores y usa tus herramientas.',
+    en: 'Safety tips for La Ruleta Caliente: protect your identity, avoid sextortion and scams, report minors and use your safety tools.',
+    pt: 'Dicas de segurança na La Ruleta Caliente: proteja sua identidade, evite sextorsão e golpes, denuncie menores e use suas ferramentas.',
+    fr: 'Conseils de sécurité sur La Ruleta Caliente : protège ton identité, évite la sextorsion et les arnaques, signale les mineurs et utilise tes outils.',
+    de: 'Sicherheitstipps für La Ruleta Caliente: schütze deine Identität, erkenne Sextortion und Betrug, melde Minderjährige und nutze deine Werkzeuge.',
+    it: 'Consigli di sicurezza su La Ruleta Caliente: proteggi la tua identità, evita sextortion e truffe, segnala i minori e usa i tuoi strumenti.',
+  },
   about: {
     es: 'Quiénes somos y cómo funciona La Ruleta Caliente: un videochat para adultos pensado para la privacidad, la seguridad y el respeto.',
     en: 'Who we are and how La Ruleta Caliente works: an adult video chat built around privacy, safety and respect.',
@@ -234,9 +250,11 @@ function render(req, page, lang) {
       `<meta property="og:site_name" content="${SITE}">`, '<meta name="twitter:card" content="summary_large_image">',
     ].map((m) => `  ${m}\n`).join('') + '</head>');
   }
-  // Aviso a Google (SafeSearch) de que es una web para adultos, y verificación de Search Console / Bing
+  // Aviso a Google (SafeSearch) y a los filtros parentales de que es una web para adultos, y verificación de Search Console / Bing
   const extra = [];
   if (!html.includes('name="rating"')) extra.push('<meta name="rating" content="adult">');
+  // Etiqueta RTA («Restricted To Adults»): la reconocen los filtros parentales
+  if (!html.includes('RTA-5042')) extra.push('<meta name="RATING" content="RTA-5042-1996-1400-1577-RTA">');
   if (process.env.GOOGLE_SITE_VERIFICATION) extra.push(`<meta name="google-site-verification" content="${esc(process.env.GOOGLE_SITE_VERIFICATION)}">`);
   if (process.env.BING_SITE_VERIFICATION) extra.push(`<meta name="msvalidate.01" content="${esc(process.env.BING_SITE_VERIFICATION)}">`);
   if (extra.length) html = html.replace('</head>', `  ${extra.join('\n  ')}\n</head>`);

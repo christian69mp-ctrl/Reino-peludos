@@ -202,8 +202,8 @@ La web ya genera `https://tudominio.com/sitemap.xml` con todas las páginas en l
      unos minutos.
    - Si prefieres la propiedad *Prefijo de URL* con «Etiqueta HTML», copia solo el valor de
      `content="…"` en `GOOGLE_SITE_VERIFICATION` del `.env` y reinicia (`docker compose up -d`).
-   - Menú **Sitemaps** → escribe `sitemap.xml` → *Enviar*. Debe salir «Correcto» con 72 páginas
-     (12 páginas × 6 idiomas).
+   - Menú **Sitemaps** → escribe `sitemap.xml` → *Enviar*. Debe salir «Correcto» con 84 páginas
+     (14 páginas × 6 idiomas).
    - En **Inspección de URLs** pide la indexación de la portada `https://tudominio.com/es/` y
      `https://tudominio.com/en/`.
 2. **Bing Webmaster Tools** (gratis): puedes importar el sitio desde Search Console (o usar la

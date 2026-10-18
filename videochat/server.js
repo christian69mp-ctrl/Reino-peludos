@@ -28,6 +28,8 @@ const app = express();
 // la red interna (el proxy HTTPS); así nadie puede falsear su IP desde fuera.
 app.set('trust proxy', process.env.TRUST_PROXY || 'loopback, linklocal, uniquelocal');
 app.disable('x-powered-by');
+// Etiqueta RTA también como cabecera, para filtros parentales que no leen el HTML
+app.use((req, res, next) => { res.setHeader('Rating', 'RTA-5042-1996-1400-1577-RTA'); next(); });
 app.use(privacy.securityHeaders);
 const keepRaw = (req, _res, buf) => { req.rawBody = buf; };
 const jsonSmall = express.json({ limit: '50kb', verify: keepRaw });
