@@ -4,8 +4,9 @@ Marca cada casilla al terminarla. Está en el orden recomendado.
 
 ## Tu situación ahora: sin ser autónomo ni empresa
 
-Puedes **preparar y probar todo**, y abrir en **modo lanzamiento** (`PREMIUM_MODE=free`):
-la web no cobra nada y los filtros son gratis para todos.
+Puedes **preparar y probar todo** (los pagos, en modo DEMO, que los simula). Como Premium será de
+pago desde el primer día, **antes de abrir** tienes que darte de alta (autónomo o, si el gestor lo
+ve posible, solo en Hacienda) y contratar Segpay (apartado G).
 
 - Mientras no haya ingresos, en general no hace falta darse de alta. **En cuanto cobres** (Premium,
   publicidad, afiliados…), sí. **Consulta a un gestor antes de abrir al público**, también por
@@ -82,22 +83,21 @@ contratado: sin él esa verificación es simulada.
 - ☐ **Probar a restaurar** una copia una vez (ver DESPLIEGUE.md), para saber hacerlo con calma.
 - ☐ Recordatorio semanal para descargar copias.
 
-## G. Abrir al público
-
-- ☐ **Google Search Console**: verificar el dominio y enviar `sitemap.xml` (DESPLIEGUE.md, paso 8 bis). Lo mismo en Bing Webmaster Tools.
-- ☐ Publicar los posts de Instagram (16, prompts en `docs/marca/`) y los 3 anuncios de vídeo.
-- ☐ Vigilar los primeros días: `docker compose logs -f app`, denuncias, tráfico del servidor.
-- ☐ Revisar el tráfico mensual del servidor la primera semana (el vídeo pasa por él).
-
-## H. Cuando empiece a funcionar: activar los pagos
+## G. Activar los pagos (antes de abrir: Premium de pago desde el primer día)
 
 - ☐ Alta como autónomo o empresa (gestor: IAE, IVA de servicios digitales con ventanilla OSS si
   vendes a otros países de la UE, facturación).
 - ☐ Contratar **Segpay**; configurar los 4 paquetes y los postbacks (ver README.md).
 - ☐ Actualizar los datos del titular en las páginas legales y el RAT (apartado 6, pagos).
-- ☐ En `.env`: quitar `PREMIUM_MODE=free` y poner los `SEGPAY_*`; `docker compose up -d`.
+- ☐ En `.env`: sin `PREMIUM_MODE=free` y con los `SEGPAY_*`; `docker compose up -d`.
 - ☐ Hacer una compra real de prueba y cancelarla.
-- ☐ Avisar a los usuarios con antelación de lo que pasa a ser de pago: filtros, amigos e historial,
-  invitar a jugar y enviar piropos, y los superpoderes gratis de cada día (las guindillas siguen
-  siendo gratis para todos).
+- ☐ Mientras no esté Segpay, para probar se puede usar el modo DEMO (sin `SEGPAY_*` ni
+  `PREMIUM_MODE=free`): el pago se simula. **No abras al público en modo DEMO.**
 - ☐ **Cookies:** la red publicitaria solo se pega en `/admin` → Publicidad (la web ya pide el consentimiento). No añadir por otro lado Google Analytics, píxeles de Meta/TikTok ni vídeos o mapas incrustados de terceros: necesitarían también consentimiento y figurar en `/cookies`.
+
+## H. Abrir al público
+
+- ☐ **Google Search Console**: verificar el dominio y enviar `sitemap.xml` (DESPLIEGUE.md, paso 8 bis). Lo mismo en Bing Webmaster Tools.
+- ☐ Publicar los posts de Instagram (16, prompts en `docs/marca/`) y los 3 anuncios de vídeo.
+- ☐ Vigilar los primeros días: `docker compose logs -f app`, denuncias, tráfico del servidor.
+- ☐ Revisar el tráfico mensual del servidor la primera semana (el vídeo pasa por él).

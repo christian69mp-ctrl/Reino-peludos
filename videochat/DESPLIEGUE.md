@@ -5,9 +5,10 @@ copias de seguridad automáticas. No hace falta saber programar: solo copiar y p
 
 **Tiempo:** 1–2 horas la primera vez. **Coste mínimo:** servidor (~5–10 €/mes) + dominio (~10 €/año).
 
-> Mientras no seas autónomo o empresa, la web funciona en **modo lanzamiento**: los filtros
-> Premium son gratis para todos y no se cobra nada (`PREMIUM_MODE=free`). Cuando puedas
-> contratar Segpay, se activa el cobro sin tocar el código (paso 10).
+> Premium es **de pago desde el primer día**: antes de abrir hace falta el alta (autónomo o empresa)
+> y Segpay (paso 10). Mientras tanto puedes instalar y probarlo todo en **modo DEMO** (sin claves
+> de Segpay el pago se simula). No abras al público en modo DEMO. Si algún día quisieras dar
+> Premium gratis a todos, existe `PREMIUM_MODE=free`.
 
 ---
 
@@ -237,11 +238,11 @@ docker compose up -d --build
 
 Los datos no se pierden (están en un volumen aparte). La app instalada en los móviles se actualiza sola.
 
-## 10. Activar los pagos (cuando seas autónomo o empresa)
+## 10. Activar los pagos (antes de abrir al público)
 
 1. Date de alta (consulta a un gestor: autónomo, epígrafe del IAE, IVA de servicios digitales/OSS).
 2. Contrata **Segpay** y configura los paquetes y postbacks como explica el `README.md`.
-3. En `.env`: borra `PREMIUM_MODE=free` y rellena los `SEGPAY_*`.
+3. En `.env`: rellena los `SEGPAY_*` (y que no esté `PREMIUM_MODE=free`).
 4. Completa en `/terminos` y `/privacidad` tus datos de titular (NIF, dirección…).
 5. `docker compose up -d`.
 
