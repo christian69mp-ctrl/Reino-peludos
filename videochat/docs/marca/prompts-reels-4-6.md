@@ -31,8 +31,11 @@ FORMA DE TRABAJAR
 - Si escribo "repite", vuelve a generar el mismo vídeo corrigiendo lo que te diga.
 
 ESTILO DE LA WEB (obligatorio en los 3)
-- Vídeo vertical 9:16. Duración máxima que permitas (unos 8 s). Ritmo rápido: algo llamativo
-  en el primer segundo para que nadie deslice.
+- Vídeo vertical 9:16. Duración máxima que permitas (unos 8 s).
+- GANCHO DESDE EL SEGUNDO 0: el vídeo empieza ya en plena acción, sin introducción, sin fundido
+  desde negro y sin plano de presentación. El primer fotograma tiene que ser lo más llamativo de
+  todo el vídeo (algo sorprendente, gracioso o espectacular) y el sonido arranca a la vez con un
+  golpe fuerte (efecto o frase). Si alguien lo ve un segundo, tiene que querer ver el resto.
 - Ambiente nocturno: fondos casi negros (#0C0A0F) con brillos suaves rosa y naranja y luces
   bokeh desenfocadas.
 - Color de marca: degradado de rosa intenso #FF3D6E a naranja #FF8A3D en luces, botones,
@@ -57,19 +60,26 @@ LOS 3 VÍDEOS
 4) "¿QUÉ ESTÁ DIBUJANDO?" — escena realista y divertida, estilo POV de TikTok
 Estilo: vídeo realista, luz cálida de noche con neones rosa-naranja, cámara cercana y dinámica.
 Plano a plano:
-- 0-1 s: primer plano de un hombre adulto (unos 30 años) en su habitación, mirando el móvil con
-  cara de concentración total, entrecerrando los ojos.
+- 0-1 s (GANCHO): el vídeo arranca con un zoom brusco directo a la pantalla del móvil, donde ya
+  se ve un dibujo rojo absurdo y graciosísimo (un gato con cuerpo de patata y patas de palillo),
+  y en el mismo instante corte a la cara del hombre adulto (unos 30 años), a un palmo de la
+  cámara, con los ojos como platos y la boca abierta, totalmente desconcertado. Sonido: un
+  frenazo de disco ("record scratch") justo en el fotograma 0 y el hombre grita: "¿¡Eso es un
+  gato!?".
 - 1-4 s: plano de la pantalla del móvil: arriba, la videollamada con una mujer adulta que se
-  aguanta la risa; debajo del vídeo, una franja con una pizarra blanca de papel donde aparece,
-  trazo a trazo en rojo, un dibujo muy torpe y gracioso (un gato con cuerpo de patata). Al lado
-  de la pizarra, Guindilla pequeña se rasca la cabeza, confundida.
-- 4-6 s: vuelta al hombre, que abre mucho los ojos de golpe, como si lo hubiera entendido, y
-  teclea a toda velocidad.
+  aguanta la risa tapándose la boca; debajo del vídeo, la franja con la pizarra blanca de papel
+  donde ella sigue añadiendo trazos rojos cada vez más absurdos al dibujo. Al lado de la
+  pizarra, Guindilla pequeña se rasca la cabeza, confundida.
+- 4-6 s: vuelta al hombre, que de repente lo entiende: chasquea los dedos y teclea a toda
+  velocidad.
 - 6-8 s: plano de la pantalla: estalla confeti rosa, naranja y dorado sobre la franja de la
   pizarra; Guindilla salta de alegría; los dos se ríen a carcajadas en la videollamada.
 Efectos: sonido de rotulador sobre papel durante el dibujo, un "¡ding!" brillante y confeti al
 acertar.
-Voz en off: "Dibuja, adivina… y si no lo pillas, al menos os reís."
+Voz en off (después del grito del principio): "Dibuja, adivina… y si no lo pillas, al menos os
+reís."
+Rótulo-gancho para añadir al editar (segundo 0): "El peor dibujo que me han hecho en una
+videollamada 💀"
 Texto para publicar: "El peor dibujo de la noche 😂🎨 En La Ruleta Caliente puedes jugar a Dibujo
 y adivina con la persona con la que hablas: uno dibuja, el otro tiene 80 segundos para
 adivinarlo… ¡en cualquier idioma! ¿Qué crees que era? 👇 laruletacaliente.com (+18)"
@@ -79,10 +89,14 @@ Hashtags: #dibujayadivina #videochat #juegos #humor #laruletacaliente
 Estilo: animación 3D tipo película de animación moderna, colores vivos, mucho movimiento de
 cámara.
 Plano a plano:
-- 0-2 s: un móvil gigante flotando en un espacio oscuro con bokeh rosa-naranja. En la pantalla,
-  una videollamada con una persona adulta encantadora que saluda. Un dedo enorme pulsa sin
-  querer el botón redondo de pasar a la siguiente persona (un botón con una flecha) y la
-  persona desaparece con un barrido de luz.
+- 0-1 s (GANCHO): el vídeo empieza en mitad del desastre, en cámara superlenta: un dedo enorme
+  está a punto de aplastar el botón redondo de pasar a la siguiente persona (un botón con una
+  flecha) en un móvil gigante, mientras en la pantalla una persona adulta encantadora sonríe y
+  saluda. Guindilla entra volando de lado hacia el dedo, estirando los bracitos, con cara de
+  pánico total. Sonido desde el fotograma 0: Guindilla grita un larguísimo "¡¡NOOOOO!!" a cámara
+  lenta, muy exagerado y gracioso.
+- 1-2 s: el dedo pulsa igualmente, la persona desaparece con un barrido de luz y Guindilla se
+  queda congelada en el aire, con la boca abierta y un pequeño tic en el ojo.
 - 2-4 s: Guindilla aparece de un salto con una capa de superhéroe rosa-naranja ondeando, mira a
   cámara con cara de "¡tranquilo!" y levanta un gran botón redondo dorado con un icono de flecha
   curva hacia atrás.
@@ -92,7 +106,8 @@ Plano a plano:
 - 6-8 s: la persona vuelve a saludar y sonríe; Guindilla guiña un ojo a cámara con los brazos en
   jarra mientras su capa ondea y salen chispas doradas.
 Efectos: sonido de "whoosh" al pasar, sonido de rebobinado de cinta VHS, un "¡ta-chán!" al final.
-Voz en off: "¿Le diste a Siguiente sin querer? Tranquilo… rebobina."
+Voz en off (después del grito): "¿Le diste a Siguiente sin querer? Tranquilo… rebobina."
+Rótulo-gancho para añadir al editar (segundo 0): "Cuando le das a Siguiente sin querer 😭"
 Texto para publicar: "A todos nos ha pasado 😅 Por eso existe el superpoder ↩️ Rebobinar: vuelve
 con la persona anterior si ella también quiere. Se activa con guindillas 🌶️, los puntos que ganas
 gratis usando la web 👉 laruletacaliente.com (+18)"
@@ -102,12 +117,14 @@ Hashtags: #superpoderes #videochat #guindilla #chatenvivo #laruletacaliente
 Estilo: vídeo muy cinematográfico y con ritmo, mezcla de imágenes realistas de ciudad con
 gráficos brillantes, cortes al compás de la música.
 Plano a plano:
-- 0-2 s: vista aérea nocturna de una ciudad europea con luces cálidas; en el centro del cielo,
-  un gran reloj redondo de neón rosa-naranja SIN números (solo marcas y dos agujas) cuyas agujas
-  avanzan rápido hasta casi la hora en punto.
-- 2-4 s: las agujas llegan arriba y el neón estalla en un destello: por toda la ciudad se
-  encienden ventanas una tras otra con un brillo rosa-naranja, como si miles de pantallas se
-  encendieran a la vez.
+- 0-1 s (GANCHO): el primer fotograma ya es el clímax: primerísimo plano de la aguja de un gran
+  reloj de neón rosa-naranja SIN números que encaja de golpe en la posición de arriba, y en ese
+  mismo instante una onda expansiva de luz rosa-naranja sale del reloj y barre la pantalla.
+  Sonido desde el fotograma 0: una campanada grave y enorme ("DONG") mezclada con un golpe de
+  bajo profundo.
+- 1-4 s: la cámara se aleja a toda velocidad y se ve que el reloj flota en el cielo de una
+  ciudad europea de noche: la onda de luz recorre la ciudad y las ventanas se encienden una tras
+  otra con un brillo rosa-naranja, como si miles de pantallas se encendieran a la vez.
 - 4-6 s: cortes rápidos de tres pantallas de móvil en distintas casas: en cada una, una
   videollamada con personas adultas sonrientes y, debajo del vídeo, pequeñas guindillas rojas
   que se duplican y rebotan, como monedas de un videojuego.
@@ -115,7 +132,9 @@ Plano a plano:
   a su alrededor como un remolino, y lanza un beso a cámara. Gran destello final.
 Efectos: tic-tac acelerado al principio, golpe de bajo en el destello, sonidos de monedas de
 videojuego cuando se duplican las guindillas.
-Voz en off: "Cada noche, durante una hora… todo vale el doble."
+Voz en off (susurrada justo después de la campanada): "Son las diez… Cada noche, durante una
+hora, todo vale el doble."
+Rótulo-gancho para añadir al editar (segundo 0): "A las 22:00 pasa esto 👀"
 Texto para publicar: "🔥 La Hora caliente: cada noche de 22:00 a 23:00 (hora de España) todas las
 guindillas que ganas valen el doble 🌶️×2. Juega, recibe ❤️, completa retos… y sube en el ranking
 de la semana 🏆 ¿Nos vemos esta noche? 👉 laruletacaliente.com (+18)"
@@ -132,6 +151,7 @@ Empieza ahora con el vídeo 4.
 - **Personas claramente adultas y vestidas**, sin poses provocativas.
 - **En el vídeo 4, la pizarra debajo del vídeo** de la persona, no encima. Es como funciona la web de verdad.
 - **Al editar:**
-  - Rótulos cortos que funcionan bien, uno por vídeo: «¿Qué está dibujando? 🤔» (4), «¿Le diste a Siguiente sin
-    querer?» (5), «22:00 · Hora caliente 🔥» (6).
+  - Pon el rótulo-gancho de cada vídeo **desde el segundo 0**, grande y en la mitad superior (donde no lo tapan
+    los botones de TikTok/Instagram), y déjalo 2-3 segundos. Corta cualquier fotograma lento del principio: el
+    vídeo tiene que empezar ya en el golpe.
   - Cierre de 2 s con el logo y «laruletacaliente.com · +18».
