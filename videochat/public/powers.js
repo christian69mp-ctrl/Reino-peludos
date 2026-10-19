@@ -223,6 +223,7 @@
   function renderRanking() {
     const sec = el('section', 'pw-rank');
     sec.append(el('h3', '', `🏆 ${t('pw.rankTitle')}`), el('p', 'pw-hint', t('pw.rankHint')));
+    if (rank?.prizes && !A.me?.free) sec.appendChild(el('p', 'pw-rank-prizes', t('gf.rankPrizes', { a: rank.prizes[0], b: rank.prizes[1], c: rank.prizes[2] })));
     if (!rank) { sec.appendChild(el('p', 'muted', '…')); box.appendChild(sec); return; }
     const ol = el('ol', 'pw-rank-list');
     if (!rank.top.length) ol.appendChild(el('li', 'muted', t('pw.rankEmpty')));
@@ -302,6 +303,11 @@
   // ---------- Conexión con el servidor ----------
   function attach(s) {
     s.on('points', ({ points, added, hot }) => { if (G) G.points = points; else G = { points }; paintPill(); floatPoints(added, hot); });
+    // 🎁 Premium de regalo: prueba, invitación o premio del ranking
+    s.on('gift', ({ days, reason }) => {
+      const icon = { trial: '🎁', invited: '🤝', inviter: '🤝', rank1: '🥇', rank2: '🥈', rank3: '🥉' }[reason] || '🎁';
+      celebrate({ icon, title: t('gf.title', { n: days }), text: t(`gf.msg_${reason}`, { n: days }), button: t('gf.cta'), emojis: [icon, '⭐', '✨', '🌶️'] });
+    });
     s.on('hot-hour', (h) => {
       if (G) G.hot = h;
       paintPill();

@@ -1216,6 +1216,17 @@ input.toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2
 @media (max-width: 640px) { .cards.four { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .extra-icon, .home-faq summary::after { transition: none; } }
 
+/* 🎁 Premium de regalo: aviso de prueba, invitar a amigos y premios del ranking */
+.gift-note { margin: 12px 0 0; padding: 10px 14px; border-radius: 12px; background: linear-gradient(120deg, rgba(255, 197, 61, .14), rgba(255, 138, 61, .08)); border: 1px solid rgba(255, 197, 61, .45); font-size: .88rem; font-weight: 600; }
+.gift-note[hidden] { display: none; }
+.gift-note .link-btn { color: #ffc53d; font-weight: 700; }
+.invite-box { margin: 16px 0; padding: 14px 16px; border-radius: 16px; background: var(--surface-2); border: 1px solid rgba(255, 197, 61, .4); }
+.invite-box[hidden] { display: none; }
+.invite-box h3 { margin: 0 0 4px; font-size: 1rem; }
+.invite-link { display: flex; gap: 8px; margin-top: 10px; }
+.invite-link input { flex: 1; min-width: 0; padding: 9px 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; font-size: .85rem; }
+.pw-rank-prizes { margin: 6px 0 0; padding: 8px 12px; border-radius: 12px; background: rgba(255, 197, 61, .12); border: 1px solid rgba(255, 197, 61, .4); font-size: .85rem; font-weight: 700; color: #ffd27a; text-align: center; }
+
 /* El botón dorado del panel puede ocupar dos líneas */
 .powers-modal .btn.gold.wide { white-space: normal; height: auto; min-height: 44px; line-height: 1.25; padding-top: 10px; padding-bottom: 10px; text-align: center; }
 

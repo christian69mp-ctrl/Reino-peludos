@@ -56,13 +56,24 @@ function activeOrder(userId) {
     .sort((a, b) => b.expires - a.expires)[0] || null;
 }
 
+// Días de Premium regalados (prueba, invitaciones, premios del ranking: ver gifts.js)
+function giftUntil(userId) {
+  const until = store.getUser(userId)?.giftUntil || 0;
+  return until > Date.now() ? until : 0;
+}
+
 function isPremium(userId) {
-  return FREE || !!activeOrder(userId);
+  return FREE || !!activeOrder(userId) || !!giftUntil(userId);
 }
 
 function premiumInfo(userId) {
   if (FREE) return { premium: true, free: true };
   const order = activeOrder(userId);
+  const gift = giftUntil(userId);
+  if (!order && gift) {
+    const last = (store.getUser(userId)?.gifts || []).slice(-1)[0];
+    return { premium: true, gift: true, giftReason: last?.reason || 'trial', expires: gift };
+  }
   if (!order) return { premium: false };
   return {
     premium: true,

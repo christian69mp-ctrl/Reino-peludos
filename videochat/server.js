@@ -62,7 +62,7 @@ adminauth.routes(app);
 adminapi.routes(app);
 
 // Qué funciones opcionales están activas
-app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled, turnstile: captcha.SITE_KEY || null, providers: oauth.enabled }));
+app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled, turnstile: captcha.SITE_KEY || null, providers: oauth.enabled, trialDays: gifts.TRIAL_DAYS }));
 
 // Sesión actual: datos de la cuenta, Premium y restricciones
 app.get('/api/me', auth.requireUser, (req, res) => {
@@ -112,7 +112,13 @@ app.get('/stats', (_req, res) => {
 
 // ---------- Guindillas y superpoderes ----------
 app.get('/api/game', auth.requireUser, (req, res) => res.json(rewards.summary(req.user.id)));
-app.get('/api/ranking', auth.requireUser, (req, res) => res.json(rewards.ranking(req.user.id)));
+app.get('/api/ranking', auth.requireUser, (req, res) => res.json({ ...rewards.ranking(req.user.id), prizes: gifts.RANK_PRIZES }));
+// 🤝 Invita a un amigo: tu enlace y cuántas invitaciones te han dado Premium
+app.get('/api/invite', auth.requireUser, (req, res) => res.json(gifts.inviteInfo(req.user.id, auth.baseUrl(req))));
+app.post('/api/invite/claim', auth.requireUser, (req, res) => {
+  const r = gifts.claim(req.user, String(req.body?.code || '').slice(0, 20));
+  res.status(r.ok ? 200 : 400).json(r);
+});
 app.post('/api/powers/:power', auth.requireUser, (req, res) => {
   const uid = req.user.id;
   const now = Date.now();
@@ -175,6 +181,17 @@ setInterval(() => {
   if (hot.active !== hotWas) { hotWas = hot.active; io.emit('hot-hour', hot); }
 }, 30 * 1000).unref();
 const play = require('./play')({ io, partners, store, payments, rewards });
+// 🎁 Premium de regalo: prueba de 3 días, invitaciones y premios del ranking (gifts.js)
+const gifts = require('./gifts')({
+  store, payments, rewards,
+  notify: (uid, ev, data) => notifyUser(uid, ev, data),
+  online: (uid) => (userSockets.get(uid)?.size || 0) > 0,
+  onPremium: (uid) => refreshPremium(uid),
+});
+auth.onSignup((user) => gifts.welcome(user));
+// Premios del ranking: se comprueba al arrancar y cada hora (el lunes se reparten una vez)
+setTimeout(() => gifts.weeklyPrizes(), 5000).unref();
+setInterval(() => gifts.weeklyPrizes(), 3600 * 1000).unref();
 const MIN_CONV_MS = 60 * 1000; // conversaciones que cuentan para guindillas, insignias y retos
 
 function removeFromQueue(id) {
@@ -200,6 +217,7 @@ function unpair(socket, notify = true) {
     for (const [a, b] of [[socket, mate], [mate, socket]]) {
       rewards.count(a.data.uid, 'convs');
       rewards.award(a.data.uid, 1, 'conversation');
+      gifts.conversation(a.data.uid);
       if (!isIncognito(b.data.uid)) rewards.count(a.data.uid, 'countries', b.data.geo?.country);
     }
   }
@@ -318,6 +336,16 @@ function presence(uid) {
   if (!ids?.size) return 'offline';
   for (const id of ids) if (partners.has(id)) return 'busy';
   return 'online';
+}
+
+// Cuando alguien pasa a ser Premium sin pagar (regalo), sus pestañas abiertas se enteran al momento
+function refreshPremium(uid) {
+  for (const id of userSockets.get(uid) || []) {
+    const s = io.sockets.sockets.get(id);
+    if (!s) continue;
+    s.data.premium = payments.isPremium(uid);
+    s.emit('account', { premium: s.data.premium, country: s.data.geo?.country || '', geo: geo.available() });
+  }
 }
 
 function notifyUser(uid, event, data) {
@@ -444,6 +472,7 @@ io.on('connection', (socket) => {
   presenceChanged(uid);
   play.bind(socket);
   rewards.dailyLogin(uid);
+  gifts.deliver(uid);
 
   socket.on('find', (opts = {}) => {
     // Los filtros solo se aplican a usuarios Premium; el resto, siempre al azar

@@ -86,6 +86,8 @@ module.exports = function createRewards({ store, payments, notify }) {
       countries: g.countries || [],
       badges: g.badges || [],
       weekly: g.weekly?.week === week ? g.weekly : { week, prog: {}, countries: [], done: [], earned: 0 },
+      // La semana anterior se guarda para dar los premios del ranking el lunes
+      lastWeek: g.weekly && g.weekly.week !== week ? { week: g.weekly.week, earned: g.weekly.earned || 0 } : g.lastWeek || null,
       daily: g.daily?.day === today ? g.daily : { day: today, earned: 0, used: {} },
     };
   }
@@ -236,7 +238,22 @@ module.exports = function createRewards({ store, payments, notify }) {
     };
   }
 
+  // Semana anterior (para los premios) y sus ganadores (sin cuentas expulsadas ni borradas)
+  function previousWeek() { return weekKey(Date.now() - 7 * DAY); }
+  function weekWinners(week, n) {
+    return store.listUsers()
+      .filter((u) => u.status !== 'banned' && u.status !== 'deleted')
+      .map((u) => {
+        const g = u.game || {};
+        const earned = g.weekly?.week === week ? g.weekly.earned || 0 : g.lastWeek?.week === week ? g.lastWeek.earned || 0 : 0;
+        return { id: u.id, earned };
+      })
+      .filter((r) => r.earned > 0)
+      .sort((a, b) => b.earned - a.earned)
+      .slice(0, n);
+  }
+
   const badgesOf = (user) => (user?.game?.badges || []).map((id) => BADGES.find((b) => b.id === id)?.e).filter(Boolean).slice(-3);
 
-  return { award, count, dailyLogin, spend, canSpend, summary, badgesOf, ranking, hotHour, PRICES, _test: { weekKey, weekChallenges, hotHour } };
+  return { award, count, dailyLogin, spend, canSpend, summary, badgesOf, ranking, hotHour, previousWeek, weekWinners, PRICES, _test: { weekKey, weekChallenges, hotHour } };
 };

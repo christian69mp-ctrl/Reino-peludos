@@ -259,6 +259,7 @@ function routes(app) {
         emailVerifiedAt: Date.now(),
       });
       require('./stats').signup(c.provider);
+      auth.signedUp(user);
     }
     res.json({ token: auth.sessionToken(user), user: auth.publicUser(user) });
   });

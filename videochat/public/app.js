@@ -303,8 +303,52 @@ async function refreshMe() {
   if (res.user) applyMe(res);
 }
 
+let trialOff = false; // el dueño puede quitar la prueba gratis (TRIAL_DAYS=0)
+
+// ---------- 🤝 Invita a un amigo ----------
+// Quien llega con ?ref=CÓDIGO lo guarda; al crear la cuenta (en las primeras 24 h) se apunta
+try {
+  const ref = new URLSearchParams(location.search).get('ref');
+  if (ref && /^[A-Z0-9]{4,20}$/i.test(ref)) {
+    save('ref', JSON.stringify({ code: ref.toUpperCase(), at: Date.now() }));
+    const url = new URL(location.href);
+    url.searchParams.delete('ref');
+    history.replaceState(null, '', url.pathname + url.search + url.hash);
+  }
+} catch { /* sin almacenamiento */ }
+async function claimInvite() {
+  let ref = null;
+  try { ref = JSON.parse(load('ref') || 'null'); } catch { ref = null; }
+  if (!ref || Date.now() - ref.at > 30 * 864e5) { save('ref', ''); return; }
+  const res = await api('/api/invite/claim', { method: 'POST', body: { code: ref.code } });
+  if (res?.ok) toast(t('gf.claimed'));
+  if (res && res.status !== 0) save('ref', '');
+}
+async function loadInvite() {
+  const info = await api('/api/invite');
+  $('inviteBox').hidden = !info?.link || !info.enabled;
+  if ($('inviteBox').hidden) return;
+  $('inviteLink').value = info.link;
+  $('inviteStats').textContent = t('gf.inviteStats', { n: info.rewarded, p: info.pending, left: info.monthLeft });
+}
+$('inviteShare').addEventListener('click', async () => {
+  const link = $('inviteLink').value;
+  const text = t('gf.shareText');
+  try {
+    if (navigator.share) { await navigator.share({ title: 'La Ruleta Caliente', text, url: link }); return; }
+  } catch { /* cancelado: se copia */ }
+  try { await navigator.clipboard.writeText(link); toast(t('gf.copied')); } catch { $('inviteLink').select(); }
+});
+document.querySelectorAll('[data-open-invite]').forEach((b) => b.addEventListener('click', async () => {
+  document.querySelectorAll('.overlay:not([hidden])').forEach((o) => { o.hidden = true; });
+  if (!me) { openAuth('register'); return; }
+  $('accountBtn').click();
+  setTimeout(() => $('inviteBox').scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
+}));
+
 function applyMe(data) {
   me = data;
+  if (data?.user) claimInvite();
   window.Play?.sync();
   window.Powers?.refresh();
   const logged = !!data;
@@ -486,7 +530,9 @@ function renderAccount() {
   $('birthForm').hidden = !!bd;
   $('birthError').hidden = true;
   $('accPremium').textContent = me.free ? t('acc.premiumFree')
-    : me.premium ? t('acc.premiumUntil', { date: dateText(me.expires) }) : t('acc.premiumNo');
+    : me.gift ? t('gf.accUntil', { date: dateText(me.expires), why: t(`gf.why_${me.giftReason}`) })
+      : me.premium ? t('acc.premiumUntil', { date: dateText(me.expires) }) : t('acc.premiumNo');
+  loadInvite();
   // Verificada, pendiente de verificar (si se la han pedido) o la edad declarada
   const declared = bd ? Math.floor((Date.now() - new Date(`${bd}T00:00:00`)) / (365.2425 * 864e5)) : null;
   $('accAge').textContent = me.age?.status === 'approved' ? t('acc.ageOk')
@@ -2100,6 +2146,7 @@ fetch('/api/plan').then((r) => r.json()).then((p) => {
   freeMode = !!p.free;
   $('demoNote').hidden = !p.demo || freeMode;
   $('freeBox').hidden = !freeMode;
+  document.querySelectorAll('.trial-note').forEach((n) => { n.hidden = freeMode || trialOff; });
   $('paidBox').hidden = freeMode;
   setPremium(premium);
   renderDynamicTexts();
@@ -2107,6 +2154,8 @@ fetch('/api/plan').then((r) => r.json()).then((p) => {
 
 fetch('/api/config').then((r) => r.json()).then((c) => {
   translateEnabled = !!c.translate;
+  trialOff = !c.trialDays;
+  document.querySelectorAll('.trial-note').forEach((n) => { n.hidden = freeMode || trialOff; });
   turnstileKey = c.turnstile || null;
   const providers = c.providers || [];
   $$('.social-btn').forEach((a) => { a.hidden = !providers.includes(a.dataset.provider); });

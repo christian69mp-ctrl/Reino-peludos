@@ -148,6 +148,11 @@ function sendVerification(user, req) {
     .catch((err) => console.error('[email] no se pudo enviar:', err.message));
 }
 
+// Quien quiera enterarse de las cuentas nuevas (p. ej. la prueba de Premium de gifts.js)
+const signupHooks = [];
+const onSignup = (fn) => signupHooks.push(fn);
+function signedUp(user) { for (const fn of signupHooks) { try { fn(user); } catch (err) { console.error('[alta]', err.message); } } }
+
 function routes(app) {
   app.post('/api/register', async (req, res) => {
     if (rateLimited(req.ip)) return res.status(429).json({ code: 'tooMany', error: 'Demasiados intentos. Prueba en unos minutos.' });
@@ -180,6 +185,7 @@ function routes(app) {
     });
     if (EMAIL_VERIFY) sendVerification(user, req);
     require('./stats').signup('email');
+    signedUp(user);
     res.json({ token: sessionToken(user), user: publicUser(user) });
   });
 
@@ -267,6 +273,6 @@ function routes(app) {
 }
 
 module.exports = {
-  routes, requireUser, userFromToken, prefsOf, restriction, publicUser, likesOf, checkPassword, bearer, needsEmail,
+  routes, onSignup, signedUp, requireUser, userFromToken, prefsOf, restriction, publicUser, likesOf, checkPassword, bearer, needsEmail,
   sessionToken, cleanLang, rateLimited, sha256, ageFrom, birthError, hashPassword, baseUrl, EMAIL_RE, EMAIL_VERIFY, GENDERS,
 };
