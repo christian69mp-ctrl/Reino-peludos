@@ -49,8 +49,8 @@ ESTILO DE LA WEB (obligatorio en los 3)
   DEBAJO del vídeo (nunca encima de la persona).
 - Personas: solo adultas, que se vea claramente que tienen entre 25 y 65 años (variedad real de
   edades, cuerpos, estilos y orígenes: mujeres, hombres y alguna pareja), vestidas, naturales,
-  divertidas y sonrientes. Nadie que pueda parecer menor de edad. Nada de desnudos, ropa interior, poses provocativas ni contenido sexual: tiene
-  que poder publicarse en Instagram y TikTok.
+  divertidas y sonrientes. Nadie que pueda parecer menor de edad. Nada de desnudos, ropa
+  interior, poses provocativas ni contenido sexual: tiene que poder publicarse en Instagram y TikTok.
 - SIN NINGÚN TEXTO EN EL VÍDEO: ni subtítulos, ni rótulos, ni títulos, ni números, ni letras en
   botones, carteles, relojes, tarjetas o pantallas. Los botones y tarjetas llevan solo iconos o
   formas. Yo añadiré los textos después al editar.
