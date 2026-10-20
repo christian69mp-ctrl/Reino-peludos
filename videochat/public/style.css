@@ -445,7 +445,11 @@ body.in-chat .site-footer { display: none; }
   .premium-card { grid-template-columns: 1fr; }
   .chat { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; height: auto; min-height: calc(100dvh - var(--header-h)); }
   .remote { aspect-ratio: 3 / 4; flex: none; max-height: 62dvh; width: 100%; }
-  .side { min-height: 340px; }
+  .side { min-height: 0; }
+  /* En el móvil el chat va justo debajo de los botones (Siguiente…) y después el modo picante y los filtros */
+  .side .messages, .side .icebreaker, .side .chat-form { order: -1; }
+  .side .messages { flex: none; min-height: 120px; max-height: 38dvh; border-top: 0; padding-top: 4px; }
+  .side .chat-form { padding-bottom: 14px; border-bottom: 1px solid var(--border); }
 }
 @media (max-width: 560px) {
   :root { --header-h: 60px; }
