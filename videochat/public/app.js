@@ -303,7 +303,7 @@ async function refreshMe() {
   if (res.user) applyMe(res);
 }
 
-let trialOff = false; // el dueño puede quitar la prueba gratis (TRIAL_DAYS=0)
+let trialOff = true; // prueba gratis al registrarse: solo si el dueño la activa (TRIAL_DAYS)
 
 // ---------- 🤝 Invita a un amigo ----------
 // Quien llega con ?ref=CÓDIGO lo guarda; al crear la cuenta (en las primeras 24 h) se apunta
@@ -2147,6 +2147,7 @@ fetch('/api/plan').then((r) => r.json()).then((p) => {
   $('demoNote').hidden = !p.demo || freeMode;
   $('freeBox').hidden = !freeMode;
   document.querySelectorAll('.trial-note').forEach((n) => { n.hidden = freeMode || trialOff; });
+  document.querySelectorAll('.invite-note').forEach((n) => { n.hidden = freeMode; });
   $('paidBox').hidden = freeMode;
   setPremium(premium);
   renderDynamicTexts();

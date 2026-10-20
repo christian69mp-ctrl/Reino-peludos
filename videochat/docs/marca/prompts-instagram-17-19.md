@@ -1,7 +1,8 @@
-# Prompts de Gemini · Instagram 17 a 19 (Premium gratis: prueba, invitaciones y podio)
+# Prompts de Gemini · Instagram 17 a 19 (todo gratis para empezar, invitaciones y podio)
 
-Continúan los 16 posts anteriores, con el mismo estilo. Anuncian las 3 formas de tener Premium gratis (iguales para
-todo el mundo). Adjunta en Gemini el logo y `docs/marca/guindilla.png`, pega el bloque y escribe «siguiente».
+Continúan los 16 posts anteriores, con el mismo estilo. El 17 presenta lo que se puede hacer gratis; el 18 y el 19
+anuncian las 2 formas de ganar Premium gratis (iguales para todo el mundo): invitar a un amigo (1 día para cada uno)
+y el podio semanal del ranking (7 / 3 / 1 días). No hay prueba gratis al registrarse: no la anuncies. Adjunta en Gemini el logo y `docs/marca/guindilla.png`, pega el bloque y escribe «siguiente».
 
 ````
 Eres el diseñador gráfico y community manager de "La Ruleta Caliente" (laruletacaliente.com),
@@ -46,25 +47,27 @@ REGLAS DE TEXTO
 
 LAS 3 PUBLICACIONES
 
-17) 1 DÍA DE PREMIUM GRATIS
-Composición: una caja de regalo grande en el centro, abierta, con lazo rosa-naranja, de la que
-sale un brillo dorado y una estrella dorada de Premium flotando. Guindilla está asomada dentro
-de la caja, saludando con los brazos arriba y muy contenta. Alrededor, confeti dorado y pequeñas
-guindillas. Debajo, una lista de 3 líneas con un check dorado y, al final, un botón grande
-redondeado con el degradado rosa-naranja.
+17) TODO GRATIS PARA EMPEZAR
+Composición: una maqueta de móvil grande en el centro con la interfaz de videochat (una persona
+adulta sonriendo en la pantalla, ilustración, vestida) y, alrededor del móvil, 5 iconos de línea
+flotando en burbujas redondeadas rosa-naranja: una cámara de vídeo, un bocadillo de chat con
+un pequeño globo terráqueo, una guindilla, un reloj con una llama y un trofeo. Guindilla está de pie junto al móvil,
+señalándolo con una mano y guiñando un ojo. Debajo, una lista de 5 líneas con un check rosa-naranja
+y, al final, un botón grande redondeado con el degradado rosa-naranja.
 Texto en la imagen:
-  Título: "1 día de Premium gratis"
-  Subtítulo: "Al crear tu cuenta"
-  "✓ Elige a quién ver"
-  "✓ Juegos y piropos"
-  "✓ Superpoderes cada día"
-  Botón: "Crea tu cuenta"
+  Título: "Todo gratis para empezar"
+  "✓ Videochat 1 a 1 al azar"
+  "✓ Chat traducido a tu idioma"
+  "✓ Gana guindillas cada día"
+  "✓ Hora caliente: guindillas x2"
+  "✓ Ranking semanal con premios"
+  Botón: "Entra gratis"
   Pie: "Sin tarjeta · Sin compromiso"
-Caption: "🎁 ¿Quieres probar Premium sin pagar nada? Al crear tu cuenta en La Ruleta Caliente
-tienes 1 día de Premium gratis: elige a quién ver, invita a jugar, envía piropos y usa tus
-superpoderes. Sin tarjeta y sin renovaciones: cuando acaba, sigues gratis como siempre. Guindilla
-🌶️ te espera 👉 laruletacaliente.com (+18)"
-Hashtags: #premium #gratis #videochat #conocergente #laruletacaliente
+Caption: "🌶️ En La Ruleta Caliente puedes empezar sin pagar nada: videochat 1 a 1 con gente nueva
+al azar, chat de texto traducido a tu idioma, guindillas que ganas cada día (¡el doble en la Hora
+caliente, de 22:00 a 23:00!) y el ranking semanal, donde el podio se lleva Premium de regalo.
+Guindilla te espera 👉 laruletacaliente.com (+18)"
+Hashtags: #gratis #videochat #conocergente #chatenvivo #laruletacaliente
 
 18) INVITA A UN AMIGO
 Composición: dos móviles grandes inclinados uno hacia el otro, cada uno con la interfaz de
@@ -74,11 +77,11 @@ corazón. Encima de cada móvil, una etiqueta dorada redondeada. Guindilla está
 los cinco con las dos manos a la vez, una hacia cada móvil.
 Texto en la imagen:
   Título: "Invita a un amigo"
-  Etiquetas doradas: "+3 días" · "+3 días"
+  Etiquetas doradas: "+1 día" · "+1 día"
   Subtítulo: "Premium gratis para los dos"
   Pie: "Tu enlace está en «Mi cuenta»"
 Caption: "🤝 Comparte tu enlace de invitación (lo tienes en «Mi cuenta») y, cuando tu amigo o amiga
-se registre y tenga su primera conversación de más de un minuto, los dos ganáis 3 días de Premium
+se registre y tenga su primera conversación de más de un minuto, los dos ganáis 1 día de Premium
 gratis. Hasta 10 invitaciones premiadas al mes. ¿A quién vas a invitar? 👉 laruletacaliente.com
 (+18)"
 Hashtags: #invitaaunamigo #premium #videochat #chatenvivo #laruletacaliente
@@ -106,7 +109,9 @@ Empieza ahora con la publicación 17.
 ## Al revisar cada imagen
 
 - **Guindilla igual que la de la web.** Si cambia: «repite y dibuja a Guindilla exactamente como en la imagen adjunta».
-- **Cifras exactas:** «1 día», «+3 días», «7 / 3 / 1 día». Gemini a veces cambia números: revísalos bien.
+- **Cifras exactas:** «+1 día» (en el 18) y «7 / 3 / 1 día» (en el 19). Gemini a veces cambia números: revísalos bien.
+- **En el 17, nada de «prueba gratis» ni «Premium gratis al registrarte»:** si Gemini lo añade, «repite sin añadir texto».
+- **En el 17, la persona del móvil adulta y vestida**, sin poses provocativas.
 - **En el 18, las dos personas adultas y vestidas**, sin poses provocativas.
-- **Orden recomendado:** publica el 17 el día del lanzamiento (o justo después), el 18 a los 2-3 días y el 19 el
-  primer lunes, cuando se repartan los primeros premios.
+- **Orden recomendado:** publica el 17 el día del lanzamiento (o justo después), el 18 (invita a un amigo) a los 2-3
+  días y el 19 (podio) el primer lunes, cuando se repartan los primeros premios.

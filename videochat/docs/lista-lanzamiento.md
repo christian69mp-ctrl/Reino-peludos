@@ -100,6 +100,6 @@ contratado: sin él esa verificación es simulada.
 - ☐ **Quitar la contraseña de la web**: borrar `SITE_PASSWORD` de `.env` y `docker compose up -d` (DESPLIEGUE.md).
 - ☐ **Google Search Console**: verificar el dominio y enviar `sitemap.xml` (DESPLIEGUE.md, paso 8 bis). Lo mismo en Bing Webmaster Tools.
 - ☐ Publicar los posts de Instagram (16, prompts en `docs/marca/`) y los 3 anuncios de vídeo.
-- ☐ Anunciar en redes las 3 promociones de Premium gratis (prueba de 1 día, invita a un amigo y premios del ranking): posts 17-19, prompts en `docs/marca/prompts-instagram-17-19.md`.
+- ☐ Anunciar en redes las 2 promociones de Premium gratis (invita a un amigo: 1 día para cada uno; premios del ranking: 7 / 3 / 1 días): posts 18-19, prompts en `docs/marca/prompts-instagram-17-19.md` (el post 17, «Todo gratis para empezar», presenta lo que se puede hacer sin pagar; no hay prueba gratis al registrarse).
 - ☐ Vigilar los primeros días: `docker compose logs -f app`, denuncias, tráfico del servidor.
 - ☐ Revisar el tráfico mensual del servidor la primera semana (el vídeo pasa por él).
