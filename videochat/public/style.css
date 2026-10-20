@@ -1349,3 +1349,33 @@ html, body { overflow-x: clip; }
 @media (max-width: 960px) {
   input:not([type=checkbox]):not([type=radio]):not([type=range]), select, textarea { font-size: 16px !important; }
 }
+
+/* ----- Páginas de aterrizaje (SEO) ----- */
+.landing h1 { margin-top: 10px; }
+.lp-crumbs ol { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 4px; font-size: .86rem; color: var(--muted); }
+.lp-crumbs li + li::before { content: "›"; margin-right: 4px; }
+.lp-crumbs a { color: var(--muted); text-decoration: none; }
+.lp-crumbs a:hover { color: var(--text); }
+.lp-intro p { font-size: 1.06rem; }
+.lp-cta { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 18px; align-items: center; margin: 26px 0; padding: 18px 20px; border-radius: 18px; background: linear-gradient(120deg, rgba(255, 61, 110, .16), rgba(255, 138, 61, .1)); border: 1px solid rgba(255, 90, 95, .35); }
+.lp-cta p { margin: 4px 0 0; color: #d8d2df; }
+.lp-cta small { grid-column: 1 / -1; color: var(--muted); }
+.lp-cta.end { margin-top: 36px; }
+@media (max-width: 560px) { .lp-cta { grid-template-columns: minmax(0, 1fr); } .lp-cta .btn { justify-content: center; } }
+.landing table { width: 100%; min-width: 0; border-collapse: collapse; margin: 12px 0; font-size: .92rem; overflow-wrap: break-word; hyphens: auto; }
+.landing th, .landing td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.landing th { color: var(--text); }
+.lp-links { list-style: none; padding: 0; margin: 10px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+.lp-links li { margin: 0; }
+.lp-links a { display: block; padding: 10px 14px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); color: var(--text); text-decoration: none; font-weight: 600; }
+.lp-links a:hover { border-color: var(--accent); }
+.lp-faq details { border-bottom: 1px solid var(--border); padding: 12px 0; }
+.lp-faq summary { cursor: pointer; font-weight: 700; }
+.lp-faq p { margin: 8px 0 0; }
+.lp-related { margin-top: 32px; }
+.lp-disclaimer { margin-top: 28px; font-size: .8rem; color: var(--muted); }
+.footer-seo { max-width: 1180px; margin: 22px auto 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.06); display: grid; gap: 8px; }
+.footer-seo-title { margin: 0; font-size: .85rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.footer-seo div { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.footer-seo a { color: var(--muted); text-decoration: none; font-size: .86rem; }
+.footer-seo a:hover { color: var(--text); }

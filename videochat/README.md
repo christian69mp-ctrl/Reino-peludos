@@ -263,6 +263,26 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   (WebSite, Organization, FAQPage). `sitemap.xml` y `robots.txt` automáticos. Las direcciones
   antiguas sin idioma (`/ayuda`) llevan a la del idioma del navegador.
 
+## Posicionamiento: páginas de aterrizaje (`seo/`)
+
+Estrategia «tipo Booking»: además de las páginas de la web, hay **103 páginas de aterrizaje** en 6 idiomas,
+cada una pensada para una búsqueda real y enlazadas entre sí:
+
+- **Índices:** «Videochat gratis» y «Alternativas».
+- **Temas:** videochat aleatorio, para adultos, hablar con desconocidos, con chicas, desde el móvil.
+- **Alternativas a…:** Omegle, Chatroulette, DirtyRoulette, CooMeet, OmeTV y Chatrandom (con aviso de marca;
+  sin afirmaciones sobre esas webs).
+- **Países:** España, México, Argentina, Colombia, Chile, Perú, Venezuela, Ecuador, EE. UU., Reino Unido,
+  Canadá, Australia, Irlanda, Nueva Zelanda, Brasil, Portugal, Francia, Bélgica, Suiza, Alemania, Austria e Italia.
+
+Cada página lleva migas de pan, preguntas frecuentes, datos estructurados (WebPage/CollectionPage,
+BreadcrumbList, FAQPage), `hreflang` con sus versiones en otros idiomas, y está en el `sitemap.xml`. Todas las
+páginas de la web llevan al pie un bloque de enlaces a ellas.
+
+- Lista de páginas: `seo/landings.js`. Textos: `seo/content/<idioma>.js`. Plantilla: `seo/landing.html`.
+- Para escribir o cambiar textos: `seo/CONTENT-SPEC.md` y comprobar con `node seo/check-content.js es`.
+- Mientras la web esté cerrada con `SITE_PASSWORD`, Google no puede verlas (y se marcan `noindex`).
+
 ## Logo e iconos
 
 Diseño hecho con Gemini y redibujado en vector para que se vea nítido a cualquier tamaño:
@@ -290,6 +310,7 @@ Diseño hecho con Gemini y redibujado en vector para que se vea nítido a cualqu
 - `geo.js` — país y zona aproximados por IP (filtros Premium).
 - `oauth.js` — entrar con Google, Apple o Facebook.
 - `rewards.js` — guindillas, racha, insignias, retos semanales y superpoderes (precios y gratis de Premium).
+- `seo.js` y `seo/` — direcciones por idioma, sitemap, datos para Google y páginas de aterrizaje
 - `sitelock.js` — cierra toda la web con una contraseña (`SITE_PASSWORD`) hasta abrir al público
 - `gifts.js` — Premium de regalo: invita a un amigo (1 día cada uno), premios semanales del ranking y prueba al registrarse (desactivada salvo `TRIAL_DAYS`).
 - `friends.js` — historial de chats, amigos y solicitudes (las llamadas y el «en línea» están en `server.js`).

@@ -21,7 +21,7 @@
       'safe.title': 'Un espacio para disfrutar con respeto', 'safe.sub': 'Aquí no se toleran las burlas, el acoso ni la homofobia o la transfobia.',
       'safe.f1t': 'Denuncia en un clic', 'safe.f1': 'Si alguien se burla de ti, te acosa o te falta al respeto, denúncialo y no volveréis a coincidir.',
       'safe.f2t': 'Moderación real', 'safe.f2': 'Revisamos las denuncias. Quien acumula denuncias queda suspendido o expulsado.',
-      'safe.f3t': 'Tu privacidad primero', 'safe.f3': 'El vídeo va directo entre las dos personas: no lo grabamos ni lo guardamos.',
+      'safe.f3t': 'Tu privacidad primero', 'safe.f3': 'El vídeo va cifrado de punta a punta y pasa por nuestro servidor para que nadie vea tu IP: no lo vemos, no lo grabamos ni lo guardamos.',
       'safe.rules': 'Lee las normas de la comunidad →',
       'prem.title': 'Elige a quién quieres ver',
       'prem.text': 'Con Premium filtras por mujeres, hombres, transexuales o parejas. Sin Premium, el chat sigue siendo gratis y al azar.',
@@ -540,7 +540,7 @@
       'hf.q2': "¿Hay que descargar algo?",
       'hf.a2': "No. Funciona en el navegador del móvil y del ordenador. Si quieres, puedes instalarla como app desde el propio navegador.",
       'hf.q3': "¿Se graban las videollamadas?",
-      'hf.a3': "No. El vídeo va directo entre las dos personas y nunca lo grabamos ni lo guardamos. Aun así, no hagas en cámara nada que no quieras que otra persona pueda grabar con otro dispositivo.",
+      'hf.a3': "No. El vídeo va cifrado de punta a punta (pasa por nuestro servidor para ocultar tu IP, pero no podemos verlo) y nunca lo grabamos ni lo guardamos. Aun así, no hagas en cámara nada que no quieras que otra persona pueda grabar con otro dispositivo.",
       'hf.q4': "¿Qué incluye Premium?",
       'hf.a4': "Elegir a quién ver (mujeres, hombres, trans o parejas), filtros por país, cercanía y edad, amigos y llamadas, sin anuncios, invitar a juegos y enviar piropos, y superpoderes gratis cada día.",
       'hf.q5': "¿Y si alguien me falta al respeto?",
@@ -594,7 +594,7 @@
       'safe.title': 'A place to have fun with respect', 'safe.sub': 'Mockery, harassment, homophobia and transphobia are not tolerated here.',
       'safe.f1t': 'Report in one click', 'safe.f1': 'If someone mocks you, harasses you or disrespects you, report them and you will never be matched again.',
       'safe.f2t': 'Real moderation', 'safe.f2': 'We review reports. Users who collect reports get suspended or banned.',
-      'safe.f3t': 'Your privacy first', 'safe.f3': 'Video goes directly between the two of you: we never record or store it.',
+      'safe.f3t': 'Your privacy first', 'safe.f3': 'Video is end-to-end encrypted and relayed through our server so nobody sees your IP: we can’t watch it and never record or store it.',
       'safe.rules': 'Read the community rules →',
       'prem.title': 'Choose who you want to see',
       'prem.text': 'With Premium you can filter by women, men, trans people or couples. Without Premium, the chat is still free and random.',
@@ -1113,7 +1113,7 @@
       'hf.q2': "Do I need to download anything?",
       'hf.a2': "No. It works in the browser on your phone and computer. If you like, you can install it as an app from the browser itself.",
       'hf.q3': "Are video calls recorded?",
-      'hf.a3': "No. Video goes directly between the two of you and we never record or store it. Still, don't do anything on camera you wouldn't want someone to record with another device.",
+      'hf.a3': "No. Video is end-to-end encrypted (it’s relayed through our server to hide your IP, but we can’t watch it) and we never record or store it. Still, don't do anything on camera you wouldn't want someone to record with another device.",
       'hf.q4': "What does Premium include?",
       'hf.a4': "Choosing who to see (women, men, trans or couples), filters by country, distance and age, friends and calls, no ads, inviting to games and sending compliments, and free superpowers every day.",
       'hf.q5': "What if someone disrespects me?",
@@ -1167,7 +1167,7 @@
       'safe.title': 'Um espaço para curtir com respeito', 'safe.sub': 'Aqui não toleramos deboche, assédio, homofobia nem transfobia.',
       'safe.f1t': 'Denuncie com um clique', 'safe.f1': 'Se alguém debochar de você, te assediar ou te desrespeitar, denuncie e vocês nunca mais se encontrarão.',
       'safe.f2t': 'Moderação de verdade', 'safe.f2': 'Revisamos as denúncias. Quem acumula denúncias é suspenso ou expulso.',
-      'safe.f3t': 'Sua privacidade em primeiro lugar', 'safe.f3': 'O vídeo vai direto entre as duas pessoas: não gravamos nem guardamos.',
+      'safe.f3t': 'Sua privacidade em primeiro lugar', 'safe.f3': 'O vídeo é criptografado de ponta a ponta e passa pelo nosso servidor para ninguém ver seu IP: não vemos, não gravamos nem guardamos.',
       'safe.rules': 'Leia as regras da comunidade →',
       'prem.title': 'Escolha quem você quer ver',
       'prem.text': 'Com o Premium você filtra por mulheres, homens, trans ou casais. Sem Premium, o chat continua grátis e aleatório.',
@@ -1686,7 +1686,7 @@
       'hf.q2': "Preciso baixar alguma coisa?",
       'hf.a2': "Não. Funciona no navegador do celular e do computador. Se quiser, você pode instalar como app pelo próprio navegador.",
       'hf.q3': "As videochamadas são gravadas?",
-      'hf.a3': "Não. O vídeo vai direto entre as duas pessoas e nunca gravamos nem guardamos. Mesmo assim, não faça na câmera nada que você não queira que alguém grave com outro aparelho.",
+      'hf.a3': "Não. O vídeo é criptografado de ponta a ponta (passa pelo nosso servidor para esconder seu IP, mas não podemos vê-lo) e nunca gravamos nem guardamos. Mesmo assim, não faça na câmera nada que você não queira que alguém grave com outro aparelho.",
       'hf.q4': "O que o Premium inclui?",
       'hf.a4': "Escolher quem ver (mulheres, homens, trans ou casais), filtros por país, proximidade e idade, amigos e chamadas, sem anúncios, convidar para jogos e enviar cantadas, e superpoderes grátis todo dia.",
       'hf.q5': "E se alguém me desrespeitar?",
@@ -1740,7 +1740,7 @@
       'safe.title': 'Un espace pour s’amuser dans le respect', 'safe.sub': 'Ici, les moqueries, le harcèlement, l’homophobie et la transphobie ne sont pas tolérés.',
       'safe.f1t': 'Signalez en un clic', 'safe.f1': 'Si quelqu’un se moque de vous, vous harcèle ou vous manque de respect, signalez-le et vous ne serez plus jamais mis en relation.',
       'safe.f2t': 'Une vraie modération', 'safe.f2': 'Nous examinons les signalements. Les personnes qui en accumulent sont suspendues ou bannies.',
-      'safe.f3t': 'Votre vie privée d’abord', 'safe.f3': 'La vidéo passe directement entre vous deux : nous ne l’enregistrons ni ne la conservons.',
+      'safe.f3t': 'Votre vie privée d’abord', 'safe.f3': 'La vidéo est chiffrée de bout en bout et passe par notre serveur pour que personne ne voie ton IP : nous ne la voyons pas, ne l’enregistrons pas et ne la conservons pas.',
       'safe.rules': 'Lire les règles de la communauté →',
       'prem.title': 'Choisissez qui vous voulez voir',
       'prem.text': 'Avec Premium, vous filtrez par femmes, hommes, personnes trans ou couples. Sans Premium, le chat reste gratuit et aléatoire.',
@@ -2259,7 +2259,7 @@
       'hf.q2': "Faut-il télécharger quelque chose ?",
       'hf.a2': "Non. Ça marche dans le navigateur du mobile et de l’ordinateur. Si tu veux, tu peux l’installer comme une appli depuis le navigateur.",
       'hf.q3': "Les appels vidéo sont-ils enregistrés ?",
-      'hf.a3': "Non. La vidéo passe directement entre les deux personnes et nous ne l’enregistrons ni ne la conservons jamais. Malgré tout, ne fais rien devant la caméra que tu ne voudrais pas voir enregistré avec un autre appareil.",
+      'hf.a3': "Non. La vidéo est chiffrée de bout en bout (elle passe par notre serveur pour masquer ton IP, mais nous ne pouvons pas la voir) et nous ne l’enregistrons ni ne la conservons jamais. Malgré tout, ne fais rien devant la caméra que tu ne voudrais pas voir enregistré avec un autre appareil.",
       'hf.q4': "Que comprend Premium ?",
       'hf.a4': "Choisir qui voir (femmes, hommes, trans ou couples), filtres par pays, proximité et âge, amis et appels, sans publicité, inviter à jouer et envoyer des mots doux, et des superpouvoirs gratuits chaque jour.",
       'hf.q5': "Et si quelqu’un me manque de respect ?",
@@ -2313,7 +2313,7 @@
       'safe.title': 'Ein Ort für Spaß mit Respekt', 'safe.sub': 'Spott, Belästigung, Homophobie und Transphobie werden hier nicht geduldet.',
       'safe.f1t': 'Mit einem Klick melden', 'safe.f1': 'Wenn sich jemand über dich lustig macht, dich belästigt oder respektlos ist, melde die Person – ihr werdet nie wieder verbunden.',
       'safe.f2t': 'Echte Moderation', 'safe.f2': 'Wir prüfen Meldungen. Wer mehrfach gemeldet wird, wird gesperrt oder ausgeschlossen.',
-      'safe.f3t': 'Deine Privatsphäre zuerst', 'safe.f3': 'Das Video läuft direkt zwischen euch beiden: Wir zeichnen nichts auf und speichern nichts.',
+      'safe.f3t': 'Deine Privatsphäre zuerst', 'safe.f3': 'Das Video ist Ende-zu-Ende-verschlüsselt und läuft über unseren Server, damit niemand deine IP sieht: Wir sehen es nicht, zeichnen nichts auf und speichern nichts.',
       'safe.rules': 'Community-Regeln lesen →',
       'prem.title': 'Wähle, wen du sehen willst',
       'prem.text': 'Mit Premium filterst du nach Frauen, Männern, trans Personen oder Paaren. Ohne Premium bleibt der Chat kostenlos und zufällig.',
@@ -2832,7 +2832,7 @@
       'hf.q2': "Muss ich etwas herunterladen?",
       'hf.a2': "Nein. Es läuft im Browser auf Handy und Computer. Wenn du willst, kannst du es direkt aus dem Browser als App installieren.",
       'hf.q3': "Werden Videoanrufe aufgezeichnet?",
-      'hf.a3': "Nein. Das Video geht direkt zwischen euch beiden und wir zeichnen es nie auf und speichern es nicht. Trotzdem: Mach vor der Kamera nichts, was du nicht von einem anderen Gerät aufgenommen sehen willst.",
+      'hf.a3': "Nein. Das Video ist Ende-zu-Ende-verschlüsselt (es läuft über unseren Server, um deine IP zu verbergen, aber wir können es nicht sehen) und wir zeichnen es nie auf und speichern es nicht. Trotzdem: Mach vor der Kamera nichts, was du nicht von einem anderen Gerät aufgenommen sehen willst.",
       'hf.q4': "Was bietet Premium?",
       'hf.a4': "Auswählen, wen du sehen willst (Frauen, Männer, Trans oder Paare), Filter nach Land, Nähe und Alter, Freunde und Anrufe, keine Werbung, zu Spielen einladen und Komplimente senden, und jeden Tag kostenlose Superkräfte.",
       'hf.q5': "Und wenn mich jemand respektlos behandelt?",
@@ -2886,7 +2886,7 @@
       'safe.title': 'Uno spazio per divertirsi con rispetto', 'safe.sub': 'Qui non tolleriamo prese in giro, molestie, omofobia o transfobia.',
       'safe.f1t': 'Segnala con un clic', 'safe.f1': 'Se qualcuno ti prende in giro, ti molesta o ti manca di rispetto, segnalalo e non vi incontrerete mai più.',
       'safe.f2t': 'Moderazione vera', 'safe.f2': 'Esaminiamo le segnalazioni. Chi ne accumula viene sospeso o espulso.',
-      'safe.f3t': 'Prima la tua privacy', 'safe.f3': 'Il video passa direttamente tra voi due: non lo registriamo né lo conserviamo.',
+      'safe.f3t': 'Prima la tua privacy', 'safe.f3': 'Il video è cifrato end-to-end e passa dal nostro server così nessuno vede il tuo IP: non lo vediamo, non lo registriamo né lo conserviamo.',
       'safe.rules': 'Leggi le regole della community →',
       'prem.title': 'Scegli chi vuoi vedere',
       'prem.text': 'Con Premium filtri per donne, uomini, persone trans o coppie. Senza Premium, la chat resta gratis e casuale.',
@@ -3405,7 +3405,7 @@
       'hf.q2': "Devo scaricare qualcosa?",
       'hf.a2': "No. Funziona nel browser di telefono e computer. Se vuoi, puoi installarla come app direttamente dal browser.",
       'hf.q3': "Le videochiamate vengono registrate?",
-      'hf.a3': "No. Il video passa direttamente tra le due persone e non lo registriamo né lo conserviamo mai. Comunque, non fare in camera nulla che non vorresti fosse registrato con un altro dispositivo.",
+      'hf.a3': "No. Il video è cifrato end-to-end (passa dal nostro server per nascondere il tuo IP, ma non possiamo vederlo) e non lo registriamo né lo conserviamo mai. Comunque, non fare in camera nulla che non vorresti fosse registrato con un altro dispositivo.",
       'hf.q4': "Cosa include Premium?",
       'hf.a4': "Scegliere chi vedere (donne, uomini, trans o coppie), filtri per paese, vicinanza ed età, amici e chiamate, niente pubblicità, invitare ai giochi e inviare complimenti, e superpoteri gratis ogni giorno.",
       'hf.q5': "E se qualcuno mi manca di rispetto?",
@@ -3494,9 +3494,11 @@
 
   function stored() { try { return localStorage.getItem('lang'); } catch { return null; } }
 
-  let lang = fromPath?.lang || stored();
+  // Páginas de aterrizaje (/es/videochat-gratis…): el idioma es el de la dirección
+  const landingLang = inBrowser && !fromPath ? (location.pathname.match(/^\/(es|en|pt|fr|de|it)\//) || [])[1] : null;
+  let lang = fromPath?.lang || landingLang || stored();
   // Si la dirección lleva idioma (/fr/aide), ese manda y se recuerda
-  if (fromPath?.lang) { try { localStorage.setItem('lang', lang); } catch { /* sin almacenamiento */ } }
+  if (fromPath?.lang || landingLang) { try { localStorage.setItem('lang', lang); } catch { /* sin almacenamiento */ } }
   // Idioma del navegador si la web lo tiene; si no, inglés (la web es internacional)
   if (!SUPPORTED.includes(lang)) lang = browserLangs.find((l) => SUPPORTED.includes(l)) || 'en';
 

@@ -225,6 +225,128 @@ function faqEntities(lang) {
 }
 
 const cache = new Map();
+
+// ===================== Páginas de aterrizaje (estrategia «tipo Booking») =====================
+// Índices por tema (videochat gratis, alternativas) y páginas concretas por búsqueda (país, tema,
+// «alternativa a…»), todas enlazadas entre sí, con migas de pan, preguntas frecuentes y datos
+// estructurados. Textos en seo/content/<idioma>.js (ver seo/CONTENT-SPEC.md).
+const LANDINGS = require('./seo/landings');
+const LANDING_TPL = path.join(__dirname, 'seo', 'landing.html');
+const LINK_PAGES = { home: 'home', help: 'help', how: 'how', games: 'games', safety: 'safety', rules: 'rules' };
+
+const content = {};
+for (const l of SUPPORTED) {
+  try { content[l] = require(`./seo/content/${l}.js`); } catch (e) {
+    if (e.code !== 'MODULE_NOT_FOUND') console.warn(`[seo] seo/content/${l}.js no se pudo cargar: ${e.message}`);
+  }
+}
+const landing = (key) => LANDINGS.PAGES.find((p) => p.key === key);
+const has = (key, l) => !!content[l]?.pages?.[key] && landing(key)?.langs.includes(l);
+const landingUrl = (key, l) => `/${l}/${content[l].pages[key].slug}`;
+const landingLangs = (key) => SUPPORTED.filter((l) => has(key, l));
+const bySlug = (l, slug) => Object.keys(content[l]?.pages || {}).find((k) => has(k, l) && content[l].pages[k].slug === slug);
+
+// Enlaces del texto: href="@clave" → dirección del idioma
+const linkOf = (ref, l) => {
+  if (LINK_PAGES[ref]) return ref === 'home' ? `/${l}/` : urlOf(LINK_PAGES[ref], l);
+  return has(ref, l) ? landingUrl(ref, l) : null;
+};
+const resolveLinks = (html, l) => html.replace(/href="@([a-z0-9-]+)"/g, (all, ref) => `href="${linkOf(ref, l) || `/${l}/`}"`);
+
+function landingLinks(keys, l) {
+  const items = keys.filter((k) => has(k, l)).map((k) => `<li><a href="${landingUrl(k, l)}">${esc(content[l].pages[k].anchor)}</a></li>`);
+  return items.length ? `<ul class="lp-links">${items.join('')}</ul>` : '';
+}
+const childrenOf = (parent, type) => LANDINGS.PAGES.filter((p) => p.parent === parent && (!type || p.type === type)).map((p) => p.key);
+
+function landingBody(key, l) {
+  const c = content[l].common;
+  const p = content[l].pages[key];
+  const meta = landing(key);
+  const crumbs = [[c.home, `/${l}/`]];
+  if (meta.parent && has(meta.parent, l)) crumbs.push([content[l].pages[meta.parent].anchor, landingUrl(meta.parent, l)]);
+  const out = [];
+  out.push(`<nav class="lp-crumbs" aria-label="breadcrumb"><ol>${crumbs.map(([n, u]) => `<li><a href="${u}">${esc(n)}</a></li>`).join('')}<li aria-current="page">${esc(p.anchor)}</li></ol></nav>`);
+  out.push(`<h1>${esc(p.h1)}</h1>`, `<div class="lp-intro">${resolveLinks(p.intro, l)}</div>`);
+  const cta = `<div class="lp-cta"><div><strong>${esc(c.ctaTitle)}</strong><p>${esc(c.ctaText)}</p></div><a class="btn primary" href="/${l}/">${esc(c.ctaButton)}</a><small>🔞 ${esc(c.adultNote)}</small></div>`;
+  out.push(cta);
+  for (const s of p.sections || []) out.push(`<h2>${esc(s.h2)}</h2>`, resolveLinks(s.html, l));
+  // Índices: todas las páginas que cuelgan de ellos
+  if (meta.type === 'hub') {
+    if (key === 'free-video-chat') {
+      out.push(`<h2>${esc(c.topics)}</h2>`, landingLinks(childrenOf(key, 'topic'), l));
+      out.push(`<h2>${esc(c.countries)}</h2>`, landingLinks(childrenOf(key, 'country'), l));
+    } else out.push(`<h2>${esc(c.alternatives)}</h2>`, landingLinks(childrenOf(key), l));
+  }
+  if (p.faq?.length) {
+    out.push(`<h2>${esc(c.faq)}</h2>`, `<div class="lp-faq">${p.faq.map((f) => `<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('')}</div>`);
+  }
+  out.push(cta.replace('lp-cta', 'lp-cta end'));
+  // Enlaces relacionados: hermanas, índice y el otro índice
+  if (meta.type !== 'hub') {
+    const siblings = childrenOf(meta.parent, meta.type).filter((k) => k !== key);
+    const extra = meta.type === 'alternative' ? ['free-video-chat', 'random-video-chat'] : meta.type === 'country' ? ['random-video-chat', 'alternatives'] : ['alternatives', ...childrenOf('free-video-chat', 'country').slice(0, 3)];
+    out.push(`<aside class="lp-related"><h2>${esc(c.related)}</h2>${landingLinks([meta.parent, ...siblings, ...extra], l)}</aside>`);
+  } else {
+    out.push(`<aside class="lp-related"><h2>${esc(c.related)}</h2>${landingLinks([key === 'alternatives' ? 'free-video-chat' : 'alternatives'], l)}</aside>`);
+  }
+  if (meta.brand) out.push(`<p class="lp-disclaimer">${esc(c.disclaimer.replace(/\{brand\}/g, meta.brand))}</p>`);
+  return { html: out.join('\n'), crumbs };
+}
+
+function landingHead(req, key, l, crumbs) {
+  const b = base(req);
+  const p = content[l].pages[key];
+  const meta = landing(key);
+  const own = `${b}${landingUrl(key, l)}`;
+  const langs = landingLangs(key);
+  const alts = langs.map((x) => `<link rel="alternate" hreflang="${x}" href="${b}${landingUrl(key, x)}">`);
+  const def = langs.includes('en') ? 'en' : langs[0];
+  alts.push(`<link rel="alternate" hreflang="x-default" href="${b}${landingUrl(key, def)}">`);
+  const ld = [
+    { '@context': 'https://schema.org', '@type': meta.type === 'hub' ? 'CollectionPage' : 'WebPage', name: p.title, description: p.description, url: own, inLanguage: l,
+      isPartOf: { '@type': 'WebSite', name: SITE, url: `${b}/` } },
+    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [...crumbs, [p.anchor, landingUrl(key, l)]].map(([name, u], i) => ({ '@type': 'ListItem', position: i + 1, name, item: `${b}${u}` })) },
+  ];
+  if (p.faq?.length) ld.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: p.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
+  return [
+    `<link rel="canonical" href="${own}">`, ...alts,
+    '<meta property="og:type" content="website">',
+    `<meta property="og:title" content="${esc(p.title)}">`, `<meta property="og:description" content="${esc(p.description)}">`,
+    `<meta property="og:url" content="${own}">`, `<meta property="og:image" content="${b}/og-image.jpg">`,
+    '<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">',
+    `<meta property="og:site_name" content="${SITE}">`, `<meta property="og:locale" content="${OG_LOCALE[l]}">`,
+    '<meta name="twitter:card" content="summary_large_image">',
+    `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>`,
+  ].join('\n  ');
+}
+
+function renderLanding(req, key, l) {
+  const k = `landing|${key}|${l}|${base(req)}`;
+  if (cache.has(k) && process.env.NODE_ENV === 'production') return cache.get(k);
+  const p = content[l].pages[key];
+  const { html: body, crumbs } = landingBody(key, l);
+  let html = translate(fs.readFileSync(LANDING_TPL, 'utf8'), l).replace('<!--LANDING-->', body);
+  html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(p.title)}</title>`)
+    .replace('<meta name="description" content="">', `<meta name="description" content="${esc(p.description)}">`);
+  html = html.replace('</head>', `  <meta name="rating" content="adult">\n  <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA">\n  ${landingHead(req, key, l, crumbs)}\n</head>`);
+  html = addFooterLinks(html, l);
+  cache.set(k, html);
+  return html;
+}
+
+// Bloque de enlaces al pie de TODAS las páginas: así Google llega a todas las de aterrizaje
+function addFooterLinks(html, l) {
+  const c = content[l]?.common;
+  if (!c || !html.includes('<p class="footer-legal">')) return html;
+  const groups = [
+    ['free-video-chat', ...childrenOf('free-video-chat', 'topic')],
+    childrenOf('free-video-chat', 'country'),
+    ['alternatives', ...childrenOf('alternatives')],
+  ].map((keys) => keys.filter((k) => has(k, l)).map((k) => `<a href="${landingUrl(k, l)}">${esc(content[l].pages[k].anchor)}</a>`).join(''));
+  const block = `<nav class="footer-seo" aria-label="${esc(c.footerTitle)}"><p class="footer-seo-title">${esc(c.footerTitle)}</p>${groups.filter(Boolean).map((g) => `<div>${g}</div>`).join('')}</nav>\n    `;
+  return html.replace('<p class="footer-legal">', `${block}<p class="footer-legal">`);
+}
 function render(req, page, lang) {
   const k = `${page}|${lang}|${base(req)}`;
   if (cache.has(k) && process.env.NODE_ENV === 'production') return cache.get(k);
@@ -259,6 +381,7 @@ function render(req, page, lang) {
   if (process.env.BING_SITE_VERIFICATION) extra.push(`<meta name="msvalidate.01" content="${esc(process.env.BING_SITE_VERIFICATION)}">`);
   if (extra.length) html = html.replace('</head>', `  ${extra.join('\n  ')}\n</head>`);
   html = html.replace('</head>', `  ${head(req, page, lang, title)}\n</head>`);
+  html = addFooterLinks(html, lang || 'en');
   cache.set(k, html);
   return html;
 }
@@ -288,6 +411,16 @@ function register(app) {
     if (!page) return next();
     send(req, res, page, lang);
   });
+  // Páginas de aterrizaje (/es/videochat-gratis, /en/omegle-alternative…)
+  app.get(new RegExp(`^/(${langs})/([a-z0-9-]+)/?$`), (req, res, next) => {
+    const lang = req.params[0];
+    const key = bySlug(lang, req.params[1]);
+    if (!key) return next();
+    res.set('Content-Type', 'text/html; charset=utf-8');
+    res.set('Cache-Control', 'no-cache');
+    if (req.method === 'GET') stats.pageView(req, 'landing', lang);
+    res.send(renderLanding(req, key, lang));
+  });
   // Direcciones antiguas sin idioma (/ayuda, /terminos.html): a la del idioma del navegador
   const legacy = Object.keys(PAGES).filter((p) => p !== 'home');
   app.get(legacy.flatMap((p) => [`/${PAGES[p].file}`, `/${PAGES[p].file}.html`]), (req, res) => {
@@ -303,6 +436,11 @@ function register(app) {
       const alts = SUPPORTED.map((x) => `<xhtml:link rel="alternate" hreflang="${x}" href="${b}${page === 'home' ? `/${x}/` : urlOf(page, x)}"/>`).join('');
       return `<url><loc>${b}${loc}</loc>${alts}<changefreq>${page === 'home' || page === 'help' ? 'weekly' : 'monthly'}</changefreq><priority>${page === 'home' ? '1.0' : page === 'help' ? '0.8' : '0.5'}</priority></url>`;
     }));
+    for (const p of LANDINGS.PAGES) {
+      const langs = landingLangs(p.key);
+      const alts = langs.map((x) => `<xhtml:link rel="alternate" hreflang="${x}" href="${b}${landingUrl(p.key, x)}"/>`).join('');
+      for (const l of langs) urls.push(`<url><loc>${b}${landingUrl(p.key, l)}</loc>${alts}<changefreq>monthly</changefreq><priority>${p.type === 'hub' ? '0.9' : '0.7'}</priority></url>`);
+    }
     res.type('application/xml').set('Cache-Control', 'public, max-age=3600')
       .send(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`);
   });
@@ -311,4 +449,4 @@ function register(app) {
   });
 }
 
-module.exports = { register, render, DESCRIPTIONS };
+module.exports = { register, render, renderLanding, DESCRIPTIONS };
