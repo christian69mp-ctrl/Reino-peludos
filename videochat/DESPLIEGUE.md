@@ -105,6 +105,20 @@ Comprobaciones:
 - Lee [docs/seguridad-dueno.md](docs/seguridad-dueno.md): lista de seguridad para ti como dueño.
 - Haz una prueba con dos móviles, uno con wifi y otro con datos 4G: si se ven, el TURN funciona.
 
+### Cerrar la web con contraseña hasta abrir al público
+
+Mientras no tengas los pagos, la verificación de edad y los emails listos, puedes dejar la web cerrada:
+el navegador pedirá usuario (cualquiera) y contraseña antes de mostrar nada, y Google no la indexará.
+
+```bash
+cd /opt/reino-peludos/videochat
+echo "SITE_PASSWORD=una-clave-para-ti" >> .env
+docker compose up -d
+```
+
+El día que abras al público, borra la línea `SITE_PASSWORD=…` de `.env` (`nano .env`) y vuelve a
+ejecutar `docker compose up -d`.
+
 ## 7. Servicios externos (cuentas gratuitas o de pago)
 
 Después de añadir claves al `.env`, aplica los cambios con `docker compose up -d`.

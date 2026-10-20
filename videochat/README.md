@@ -289,6 +289,7 @@ Diseño hecho con Gemini y redibujado en vector para que se vea nítido a cualqu
 - `geo.js` — país y zona aproximados por IP (filtros Premium).
 - `oauth.js` — entrar con Google, Apple o Facebook.
 - `rewards.js` — guindillas, racha, insignias, retos semanales y superpoderes (precios y gratis de Premium).
+- `sitelock.js` — cierra toda la web con una contraseña (`SITE_PASSWORD`) hasta abrir al público
 - `gifts.js` — Premium de regalo: prueba de 1 día, invita a un amigo y premios semanales del ranking.
 - `friends.js` — historial de chats, amigos y solicitudes (las llamadas y el «en línea» están en `server.js`).
 - `privacy.js` — cabeceras de seguridad, descargar/borrar datos, limpieza automática y código de marca de agua.

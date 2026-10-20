@@ -97,6 +97,7 @@ contratado: sin él esa verificación es simulada.
 
 ## H. Abrir al público
 
+- ☐ **Quitar la contraseña de la web**: borrar `SITE_PASSWORD` de `.env` y `docker compose up -d` (DESPLIEGUE.md).
 - ☐ **Google Search Console**: verificar el dominio y enviar `sitemap.xml` (DESPLIEGUE.md, paso 8 bis). Lo mismo en Bing Webmaster Tools.
 - ☐ Publicar los posts de Instagram (16, prompts en `docs/marca/`) y los 3 anuncios de vídeo.
 - ☐ Anunciar en redes las 3 promociones de Premium gratis (prueba de 1 día, invita a un amigo y premios del ranking): posts 17-19, prompts en `docs/marca/prompts-instagram-17-19.md`.

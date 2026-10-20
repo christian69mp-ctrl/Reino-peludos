@@ -20,6 +20,7 @@ const push = require('./push');
 const stats = require('./stats');
 const adminauth = require('./adminauth');
 const adminapi = require('./adminapi');
+const sitelock = require('./sitelock');
 
 const PORT = process.env.PORT || 3000;
 
@@ -31,6 +32,8 @@ app.disable('x-powered-by');
 // Etiqueta RTA también como cabecera, para filtros parentales que no leen el HTML
 app.use((req, res, next) => { res.setHeader('Rating', 'RTA-5042-1996-1400-1577-RTA'); next(); });
 app.use(privacy.securityHeaders);
+// Web cerrada con contraseña mientras no esté abierta al público (SITE_PASSWORD)
+app.use(sitelock.middleware);
 const keepRaw = (req, _res, buf) => { req.rawBody = buf; };
 const jsonSmall = express.json({ limit: '50kb', verify: keepRaw });
 const jsonUpload = express.json({ limit: '700kb' }); // imágenes de banners subidas desde el panel
@@ -159,7 +162,7 @@ app.use((req, res) => {
 });
 
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, { allowRequest: (req, done) => done(null, sitelock.allowed(req)) });
 
 // Cola de espera y emparejamientos activos
 let queue = [];               // ids de socket esperando pareja
