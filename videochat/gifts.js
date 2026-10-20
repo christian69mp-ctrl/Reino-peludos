@@ -10,7 +10,7 @@
 const crypto = require('crypto');
 
 const DAY = 24 * 3600 * 1000;
-const TRIAL_DAYS = Math.max(0, Number(process.env.TRIAL_DAYS ?? 1) || 0);   // 0 = sin prueba
+const TRIAL_DAYS = Math.max(0, Number(process.env.TRIAL_DAYS || 1) || 0);   // 0 = sin prueba (vacío = 1)
 const INVITE_DAYS = 3;
 const INVITE_MONTH_MAX = 10;
 const CLAIM_WINDOW = DAY;            // la invitación se reclama en las primeras 24 h de la cuenta

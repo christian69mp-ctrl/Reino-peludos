@@ -11,6 +11,8 @@
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="stylesheet" href="/style.css">
   <style>
+    /* En el móvil los botones largos del panel pasan a dos líneas en vez de salirse */
+    @media (max-width: 480px) { .btn { white-space: normal; max-width: 100%; } }
     .admin { width: 100%; max-width: 1000px; margin: 0 auto; padding: 28px clamp(16px, 3vw, 24px) 64px; }
     .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
     .stat { padding: 18px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); }
