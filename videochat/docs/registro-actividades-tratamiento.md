@@ -127,13 +127,26 @@
 | **Destinatarios** | Segpay (procesador de pagos; confirmar en su contrato si actúa como encargado o como responsable independiente). |
 | **Transferencias internacionales** | Segpay opera desde EE. UU.: revisar las garantías de su contrato. |
 
+## 6 bis. Monedas, propinas y retiradas *(solo si se activa `TIPS=on`; retiradas con `PAYOUTS=on`)*
+
+| | |
+|---|---|
+| **Finalidad** | Vender monedas, permitir dar y recibir propinas durante la videollamada, pagar lo ganado a quien lo retira, cumplir las obligaciones fiscales y contables (incluida la declaración DAC7 / modelo 238) y prevenir el fraude, los contracargos y el abuso de las propinas. Detalle en [propinas.md](propinas.md). |
+| **Base jurídica** | Ejecución del contrato (art. 6.1.b): compra de monedas, propinas y pago de lo ganado. Obligación legal (art. 6.1.c): normativa fiscal y contable, DAC7 (Directiva (UE) 2021/514; en España, modelo 238) y, si aplica, prevención del blanqueo **(confirmar con abogado/gestor)**. Interés legítimo (art. 6.1.f): prevención del fraude (retención de lo ganado, anulación tras contracargos, control de cuentas de la misma conexión, límites diarios). |
+| **Interesados** | Usuarios que compran monedas, dan o reciben propinas o piden retiradas. |
+| **Datos** | Pedidos de monedas (paquete, monedas, precio, estado, fechas, identificador de compra de Segpay) y su apunte en el libro de cobros; saldo de monedas; registro de propinas (quién da, quién recibe, monedas, importe bruto, comisión, neto, fecha, fecha en que queda disponible, estado: retenida, en retirada, pagada o anulada); preferencia «aceptar propinas»; bloqueo para dar propinas tras un contracargo. Para retirar: resultado de la verificación de identidad con Veriff (solo «verificada» y fecha; el documento y la selfie los trata Veriff); titular de la cuenta, IBAN, dirección, país, NIF o número fiscal y fecha de nacimiento (se guardan en la cuenta y en cada solicitud); solicitudes de retirada (importe, fechas, estado, referencia de la transferencia o motivo del rechazo, propinas incluidas). Exportación CSV anual por persona de las retiradas pagadas. **Nunca los datos de la tarjeta.** |
+| **Datos sensibles** | Ninguno de categoría especial en sí, pero los datos bancarios y fiscales y la relación con una web para adultos son de **riesgo alto** si se filtran: incluir en la EIPD. |
+| **Plazo** | Propinas, pedidos y retiradas con sus datos fiscales y bancarios: lo que exija la normativa fiscal, contable y de plataformas (en España, en general, hasta 6 años: **confirmar con gestor/abogado**). Se conservan aunque se borre la cuenta (al borrarla se pierden las monedas y lo no retirado). **Pendiente:** el código aún no los borra solo al acabar el plazo, ni los incluye en «Descargar mis datos». Los CSV descargados: cifrados y borrados cuando el gestor ya no los necesite. |
+| **Destinatarios** | Segpay (cobro de las monedas). Veriff (verificación de identidad para retirar; encargado). Bancos (transferencia). Agencia Tributaria (AEAT), por obligación legal (DAC7, modelo 238), que puede intercambiarlos con otras administraciones fiscales de la UE. Gestor/asesor fiscal (encargado: firmar contrato). La persona que recibe una propina solo ve la cantidad. |
+| **Transferencias internacionales** | Segpay (EE. UU.): revisar las garantías de su contrato. Veriff: comprobar dónde trata los datos. Transferencias a cuentas fuera del EEE solo si el usuario da un IBAN de fuera. |
+
 ## 7. Copias de seguridad
 
 | | |
 |---|---|
 | **Finalidad** | Poder recuperar la web si falla el servidor. |
 | **Base jurídica** | Interés legítimo (art. 6.1.f) y deber de seguridad (art. 32). |
-| **Datos** | Copia completa de la base de datos (apartados 1, 2, 3, 4 bis, 5, 6, 8, 9, 10, 11, 12 y 13). |
+| **Datos** | Copia completa de la base de datos (apartados 1, 2, 3, 4 bis, 5, 6, 6 bis, 8, 9, 10, 11, 12 y 13). |
 | **Plazo** | **14 días** en el servidor (rotación automática). Las copias que descargues a tu ordenador: guárdalas cifradas y borra las de más de 14 días. |
 
 ## 8. Formulario de contacto (`/contacto`)
@@ -230,6 +243,7 @@
 | Cloudflare | Anti-bots (Turnstile) | ☐ |
 | DeepL | Traducción (si se activa) | ☐ |
 | Segpay | Pagos (cuando se active) | ☐ |
+| Gestor / asesor fiscal | Contabilidad y declaraciones (modelo 238 si hay propinas con retiradas) | ☐ |
 | Google / Mozilla / Apple | Servicio push del navegador (solo si el usuario activa las notificaciones) | ☐ Revisar si aplica |
 
 La mayoría lo incluyen en sus condiciones (busca "Data Processing Agreement" o "DPA" en su web);

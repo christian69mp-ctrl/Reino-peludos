@@ -30,7 +30,7 @@ abogado antes de activar nada.*
     Mi cuenta → Monedero.
   - Las cuentas expulsadas no pueden dar ni recibir propinas.
 - **Quien recibe** gana `COIN_VALUE_EUR` por moneda (0,10 € por defecto) menos la comisión de la web
-  `TIP_FEE_PCT` (20 % por defecto): **0,08 € por moneda** con los valores por defecto.
+  `TIP_FEE_PCT` (40 % por defecto): **0,06 € por moneda** con los valores por defecto.
 - Lo ganado queda **retenido** `TIP_HOLD_DAYS` días (14 por defecto) por si el pago de quien dio la
   propina se devuelve o hay un contracargo. Después pasa a **«Disponible»**.
 - **Si una compra de monedas se reembolsa o hay contracargo**: se quitan esas monedas; si ya las
@@ -59,7 +59,7 @@ Todo está **apagado por defecto**. Si no tocas nada, nadie ve ni el botón 🪙
 ```bash
 TIPS=on                 # activa monedas y propinas (por defecto: apagado)
 PAYOUTS=on              # activa las retiradas (solo funciona con TIPS=on; por defecto: apagado)
-TIP_FEE_PCT=20          # comisión de la web en % sobre el valor de la propina (0–90)
+TIP_FEE_PCT=40          # comisión de la web en % sobre el valor de la propina (0–90)
 COIN_VALUE_EUR=0.10     # lo que vale una moneda para quien la recibe, antes de la comisión
 PAYOUT_MIN_EUR=50       # mínimo para pedir una retirada
 TIP_HOLD_DAYS=14        # días que queda retenido lo ganado (0–180)
@@ -80,8 +80,8 @@ desde el primer euro cobrado ya estás guardando dinero que debes a otras person
 
 ## 3. Las cuentas: ¿sale rentable?
 
-Con los valores por defecto, una moneda vale para quien la recibe 0,10 € y tú te quedas el 20 %
-(0,02 €). Pero de lo que paga el comprador también salen **el IVA** y **la comisión de Segpay**.
+Con los valores por defecto, una moneda vale 0,10 € y tú te quedas el 40 % (0,04 €): quien la
+recibe gana 0,06 €. Pero de lo que paga el comprador también salen **el IVA** y **la comisión de Segpay**.
 
 Ejemplo **orientativo** suponiendo que el precio lleva un 21 % de IVA incluido (español; depende del
 país del comprador y de cómo te diga el gestor que tributan las monedas ⚖️), una comisión de Segpay
@@ -89,18 +89,15 @@ país del comprador y de cómo te diga el gestor que tributan las monedas ⚖️
 que un TPV normal, y además puede haber cuotas fijas por operación, reservas y penalizaciones por
 contracargo; **mira tu contrato con Segpay**) y que se regalan todas las monedas:
 
-| Paquete | Pagas | Sin IVA | Segpay (12 % hipotético) | Pagas a quien recibe (0,08 €/moneda) | Te queda |
+| Paquete | Pagas | Sin IVA | Segpay (12 % hipotético) | Pagas a quien recibe (0,06 €/moneda) | Te queda |
 |---|---|---|---|---|---|
-| 50 monedas | 5,99 € | 4,95 € | 0,72 € | 4,00 € | **+0,23 €** |
-| 120 monedas | 12,99 € | 10,74 € | 1,56 € | 9,60 € | **−0,42 €** |
-| 300 monedas | 29,99 € | 24,79 € | 3,60 € | 24,00 € | **−2,81 €** |
+| 50 monedas | 5,99 € | 4,95 € | 0,72 € | 3,00 € | **+1,23 €** |
+| 120 monedas | 12,99 € | 10,74 € | 1,56 € | 7,20 € | **+1,98 €** |
+| 300 monedas | 29,99 € | 24,79 € | 3,60 € | 18,00 € | **+3,19 €** |
 
-Es decir: **con los valores por defecto, los paquetes grandes pueden dar pérdidas**, sin contar
-la comisión de tu banco por cada transferencia, los contracargos ni tu tiempo. Las monedas que se
-compran y nunca se gastan te dejan margen, pero no cuentes con ello.
-
-Con la misma suposición y `TIP_FEE_PCT=40` (0,06 €/moneda para quien recibe), quedaría
-aproximadamente +1,23 €, +1,98 € y +3,19 €. Otra opción es bajar `COIN_VALUE_EUR`.
+Sin contar la comisión de tu banco por cada transferencia, los contracargos ni tu tiempo. Ojo: con una
+comisión del 20 % (0,08 €/moneda para quien recibe) los paquetes de 120 y 300 monedas **darían
+pérdidas** con estas suposiciones; por eso el valor por defecto es 40 %.
 
 **Antes de abrir, haz esta cuenta con tus números reales** (IVA que te diga el gestor, comisión de
 Segpay de tu contrato, coste de cada transferencia) y elige `TIP_FEE_PCT` y `COIN_VALUE_EUR` para
@@ -210,10 +207,10 @@ Las propinas con dinero real atraen problemas. Qué mirar y qué hacer:
   persona, cuentas que compran y lo regalan todo enseguida a la misma cuenta, varias cuentas que
   «alimentan» a una, contracargos repetidos, o una retirada justo al acabar la retención. Antes de
   pagar, mira de quién vienen las propinas de esa persona.
-- **Qué pasa al expulsar a alguien**: ya no puede dar ni recibir propinas. Pero **el código no
-  congela solo lo que ya había ganado**: si tiene una retirada pendiente, en el panel sale
-  «⛔ cuenta expulsada»; **recházala** con el motivo (por ejemplo «Cuenta expulsada por incumplir las
-  normas»). Como el rechazo devuelve el dinero a «Disponible», si vuelve a pedirla, recházala otra vez.
+- **Qué pasa al expulsar a alguien**: ya no puede dar ni recibir propinas **ni pedir retiradas** (lo
+  ganado queda congelado). Si ya tenía una retirada pendiente, en el panel sale «⛔ cuenta expulsada»:
+  **recházala** con el motivo (por ejemplo «Cuenta expulsada por incumplir las normas»). Si más adelante
+  le levantas la sanción tras un recurso, podrá volver a pedirla.
 - Si hay indicios de delito (menores, sextorsión, fraude), no pagues, guarda lo necesario y consulta
   con el abogado antes de hacer nada más.
 
@@ -252,8 +249,7 @@ gestor ya no lo necesite.
   Las propinas y las solicitudes de retirada (con sus datos fiscales y bancarios) **se quedan en la
   base de datos** (por la obligación de conservarlas). No hay borrado automático al pasar el plazo
   legal: cuando el gestor te diga cuánto guardarlas, habrá que añadirlo.
-- **«Descargar mis datos»** todavía **no incluye** las monedas, propinas ni retiradas. Si alguien las
-  pide (derecho de acceso), dáselas a mano desde el panel o pide que se añadan al código.
+- **«Descargar mis datos»** incluye las compras de monedas, propinas dadas y recibidas y retiradas.
 - **El contracargo puede llegar tarde**: los bancos permiten reclamar durante meses. Con 14 días de
   retención, una propina ya pagada no se puede anular. Si ves contracargos, sube `TIP_HOLD_DAYS`
   (por ejemplo a 30 o más).

@@ -95,6 +95,28 @@ contratado: sin él esa verificación es simulada.
   `PREMIUM_MODE=free`): el pago se simula. **No abras al público en modo DEMO.**
 - ☐ **Cookies:** la red publicitaria solo se pega en `/admin` → Publicidad (la web ya pide el consentimiento). No añadir por otro lado Google Analytics, píxeles de Meta/TikTok ni vídeos o mapas incrustados de terceros: necesitarían también consentimiento y figurar en `/cookies`.
 
+## G bis. (Opcional) Propinas 🪙 y retiradas: solo después de Segpay, Veriff y el gestor
+
+**No hace falta para abrir.** Viene apagado (`TIPS` y `PAYOUTS` sin poner) y se puede activar
+meses después. Hazlo solo cuando Segpay y Veriff funcionen de verdad y el gestor/abogado haya
+contestado. Todo el detalle en [propinas.md](propinas.md).
+
+- ☐ Gestor/abogado, **por escrito**: si cobrar a unos usuarios y pagar a otros necesita licencia de
+  pagos o un proveedor con licencia (PSD2/EMD2), IVA de las monedas y facturas, DAC7 (modelo 238) y
+  plazos de conservación (propinas.md, apartado 4 a).
+- ☐ Segpay, **por escrito**: que acepta monedas para propinas entre usuarios en esta web y qué exigen
+  las normas de Visa/Mastercard para webs donde los usuarios ganan dinero; crear los 3 paquetes de
+  pago único (`SEGPAY_ETICKET_COINS_S/M/L`) y probar compra y reembolso.
+- ☐ Hacer las cuentas con tus comisiones reales y ajustar `TIP_FEE_PCT` / `COIN_VALUE_EUR` (con los
+  valores por defecto, los paquetes grandes pueden dar pérdidas: propinas.md, apartado 3).
+- ☐ Veriff real (no demo) y una retirada de prueba con tu documento.
+- ☐ Que el abogado revise la cláusula 7 de `/terminos`, privacidad, reembolsos (apartado 11) y
+  normas; RAT apartado 6 bis y EIPD.
+- ☐ Primero `TIPS=on` (sin retiradas); `PAYOUTS=on` cuando tengas el procedimiento de pagos listo.
+- ☐ Día fijo a la semana para pagar en `/admin` → Propinas, comprobando que el titular coincide con
+  la persona verificada; vigilar abusos (propinas.md, apartado 4 f).
+- ☐ En enero: CSV del año anterior al gestor para el modelo 238.
+
 ## H. Abrir al público
 
 - ☐ **Quitar la contraseña de la web**: borrar `SITE_PASSWORD` de `.env` y `docker compose up -d` (DESPLIEGUE.md).

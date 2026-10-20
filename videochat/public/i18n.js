@@ -629,6 +629,7 @@
       'err.payoutData': "Revisa los datos: titular, IBAN, dirección, país, NIF y fecha.",
       'err.payoutMin': "Aún no llegas al mínimo para retirar.",
       'err.off': "Esta función no está disponible.",
+      'err.payoutBanned': "Tu cuenta está expulsada: las retiradas están bloqueadas. Si crees que es un error, recurre la sanción.",
       'err.auth': 'Inicia sesión para continuar', 'err.generic': 'No se pudo completar. Inténtalo de nuevo.',
     },
 
@@ -1258,6 +1259,7 @@
       'err.payoutData': "Check your details: holder, IBAN, address, country, tax ID and date.",
       'err.payoutMin': "You haven’t reached the minimum to withdraw yet.",
       'err.off': "This feature isn’t available.",
+      'err.payoutBanned': "Your account is banned, so withdrawals are blocked. If you think this is a mistake, appeal the decision.",
       'err.auth': 'Log in to continue', 'err.generic': 'Something went wrong. Please try again.',
     },
 
@@ -1887,6 +1889,7 @@
       'err.payoutData': "Confira os dados: titular, IBAN, endereço, país, número fiscal e data.",
       'err.payoutMin': "Você ainda não atingiu o mínimo para sacar.",
       'err.off': "Este recurso não está disponível.",
+      'err.payoutBanned': "Sua conta está banida: os saques estão bloqueados. Se acha que é um erro, recorra da sanção.",
       'err.auth': 'Entre na sua conta para continuar', 'err.generic': 'Algo deu errado. Tente de novo.',
     },
 
@@ -2516,6 +2519,7 @@
       'err.payoutData': "Vérifie les données : titulaire, IBAN, adresse, pays, numéro fiscal et date.",
       'err.payoutMin': "Tu n’as pas encore atteint le minimum pour retirer.",
       'err.off': "Cette fonction n’est pas disponible.",
+      'err.payoutBanned': "Ton compte est banni : les retraits sont bloqués. Si tu penses que c’est une erreur, fais appel de la sanction.",
       'err.auth': 'Connectez-vous pour continuer', 'err.generic': 'Une erreur est survenue. Réessayez.',
     },
 
@@ -3145,6 +3149,7 @@
       'err.payoutData': "Prüfe die Daten: Inhaber, IBAN, Adresse, Land, Steuer-ID und Datum.",
       'err.payoutMin': "Du hast den Mindestbetrag für eine Auszahlung noch nicht erreicht.",
       'err.off': "Diese Funktion ist nicht verfügbar.",
+      'err.payoutBanned': "Dein Konto ist gesperrt, daher sind Auszahlungen blockiert. Wenn du das für einen Fehler hältst, lege Einspruch ein.",
       'err.auth': 'Melde dich an, um fortzufahren', 'err.generic': 'Etwas ist schiefgelaufen. Bitte erneut versuchen.',
     },
 
@@ -3774,6 +3779,7 @@
       'err.payoutData': "Controlla i dati: intestatario, IBAN, indirizzo, paese, codice fiscale e data.",
       'err.payoutMin': "Non hai ancora raggiunto il minimo per prelevare.",
       'err.off': "Questa funzione non è disponibile.",
+      'err.payoutBanned': "Il tuo account è bannato: i prelievi sono bloccati. Se pensi sia un errore, presenta ricorso.",
       'err.auth': 'Accedi per continuare', 'err.generic': 'Qualcosa è andato storto. Riprova.',
     },
   };

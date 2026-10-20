@@ -9,6 +9,7 @@ Agencia Española de Protección de Datos si alguna vez los piden).
 | [lista-lanzamiento.md](lista-lanzamiento.md) | Todo lo que hay que hacer antes de abrir al público, en orden. |
 | [registro-actividades-tratamiento.md](registro-actividades-tratamiento.md) | El "RAT" del RGPD: qué datos se tratan, para qué, cuánto tiempo y con quién. |
 | [evaluacion-impacto.md](evaluacion-impacto.md) | Borrador de la Evaluación de Impacto (EIPD): riesgos para los usuarios y cómo se reducen. |
+| [propinas.md](propinas.md) | Propinas 🪙 y retiradas (opcional, apagado): cómo funciona, cuentas y todo lo que hay que confirmar antes de activarlo. |
 
 Son **borradores** hechos a partir de lo que hace el código. No son asesoramiento legal:
 revísalos con un profesional antes de abrir. Si cambias la web, actualízalos.

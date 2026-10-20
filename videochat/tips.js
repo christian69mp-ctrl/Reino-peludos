@@ -19,7 +19,7 @@ const { requireUser, needsEmail } = require('./auth');
 const num = (v, def, min, max) => Math.min(max, Math.max(min, Number.isFinite(Number(v)) && v !== '' && v != null ? Number(v) : def));
 const ENABLED = process.env.TIPS === 'on';
 const PAYOUTS = ENABLED && process.env.PAYOUTS === 'on';
-const FEE_PCT = num(process.env.TIP_FEE_PCT, 20, 0, 90);
+const FEE_PCT = num(process.env.TIP_FEE_PCT, 40, 0, 90);
 const COIN_EUR = num(process.env.COIN_VALUE_EUR, 0.1, 0.01, 10);
 const PAYOUT_MIN = num(process.env.PAYOUT_MIN_EUR, 50, 1, 100000);
 const HOLD_DAYS = num(process.env.TIP_HOLD_DAYS, 14, 0, 180);
@@ -192,6 +192,8 @@ module.exports = function createTips({ notify }) {
     app.post('/api/payouts', requireUser, (req, res) => {
       if (!PAYOUTS) return res.status(409).json({ code: 'payoutsOff' });
       const user = req.user;
+      // Cuenta expulsada: lo ganado queda congelado (el administrador decide)
+      if (user.status === 'banned') return res.status(403).json({ code: 'payoutBanned' });
       if (!verified(user)) return res.status(403).json({ code: 'payoutVerify' });
       if (store.list('payouts').some((p) => p.uid === user.id && p.status === 'requested')) return res.status(409).json({ code: 'payoutPending' });
       const b = req.body || {};

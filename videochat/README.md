@@ -218,8 +218,8 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
     monedas. Límites: `TIP_DAILY_MAX` monedas enviadas en 24 h (2.000), una cada 1,5 s, no entre
     cuentas con la misma IP de registro (`sameNetwork`), no si quien recibe apagó «Aceptar propinas»
     (`tipsOff`) y no con cuentas expulsadas.
-  - *Ganancias*: quien recibe gana `COIN_VALUE_EUR` (0,10 €) por moneda menos `TIP_FEE_PCT` (20 %) =
-    0,08 €; queda retenido `TIP_HOLD_DAYS` (14) días y luego pasa a disponible. Estados de cada
+  - *Ganancias*: quien recibe gana `COIN_VALUE_EUR` (0,10 €) por moneda menos `TIP_FEE_PCT` (40 %) =
+    0,06 €; queda retenido `TIP_HOLD_DAYS` (14) días y luego pasa a disponible. Estados de cada
     propina (tabla `tips`): `held` → `payout` → `paid`, o `reversed`.
   - *Retiradas* (tabla `payouts`): desde `PAYOUT_MIN_EUR` (50 €), con la identidad verificada en
     Veriff (`POST /api/age/start` con `{ purpose: 'payout' }`) y titular, IBAN, dirección, país,
@@ -372,7 +372,7 @@ SEGPAY_POSTBACK_KEY=...
 # Propinas y retiradas (apagado por defecto; lee docs/propinas.md antes de activarlo)
 # TIPS=on                     # monedas y propinas durante la llamada
 # PAYOUTS=on                  # retiradas de lo ganado (solo con TIPS=on)
-# TIP_FEE_PCT=20              # comisión de la web (%)
+# TIP_FEE_PCT=40              # comisión de la web (%)
 # COIN_VALUE_EUR=0.10         # valor de una moneda para quien la recibe, antes de la comisión
 # PAYOUT_MIN_EUR=50           # mínimo para retirar
 # TIP_HOLD_DAYS=14            # días de retención por reembolsos y contracargos

@@ -88,12 +88,25 @@ function exportData(user) {
       status: user.age?.status || 'none',
       verifiedAt: user.age?.verifiedAt ? new Date(user.age.verifiedAt).toISOString() : null,
     },
-    premium: store.ordersForUser(user.id).map((o) => ({
+    premium: store.ordersForUser(user.id).filter((o) => o.kind !== 'coins').map((o) => ({
       plan: o.plan || 'month',
       method: o.method,
       status: o.status,
       createdAt: new Date(o.createdAt).toISOString(),
       expires: o.expires ? new Date(o.expires).toISOString() : null,
+    })),
+    coinPurchases: store.ordersForUser(user.id).filter((o) => o.kind === 'coins')
+      .map((o) => ({ coins: o.coins, price: o.price, status: o.status, createdAt: new Date(o.createdAt).toISOString() })),
+    // Monedas, propinas y retiradas (tips.js), sin datos de las otras personas
+    coins: user.coins || 0,
+    tipsSent: store.list('tips').filter((t) => t.from === user.id)
+      .map((t) => ({ coins: t.coins, at: new Date(t.at).toISOString(), status: t.status })),
+    tipsReceived: store.list('tips').filter((t) => t.to === user.id)
+      .map((t) => ({ coins: t.coins, earnedEur: t.netCents / 100, feeEur: t.feeCents / 100, at: new Date(t.at).toISOString(), status: t.status })),
+    payouts: store.list('payouts').filter((p) => p.uid === user.id).map((p) => ({
+      amountEur: p.amountCents / 100, status: p.status, requestedAt: new Date(p.at).toISOString(),
+      decidedAt: p.decidedAt ? new Date(p.decidedAt).toISOString() : null,
+      holder: p.holder, iban: p.iban, address: p.address, country: p.country, taxId: p.taxId, birthDate: p.birthDate,
     })),
     // Denuncias hechas y recibidas, sin datos de las otras personas
     reportsMade: reports.filter((r) => r.reporterId === user.id)
