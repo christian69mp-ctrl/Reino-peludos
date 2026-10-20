@@ -205,6 +205,38 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
     próxima vez que entra.
   - Con `PREMIUM_MODE=free` **no se regala nada** (ya es todo gratis) y `/api/invite` devuelve
     `enabled: false`.
+- **Propinas y monedero 🪙 (`tips.js` y `public/tips.js`)**: **apagado por defecto** (`TIPS=on` lo
+  activa; `PAYOUTS=on`, además, las retiradas). Antes de activarlo lee
+  **[docs/propinas.md](docs/propinas.md)** (licencia de pagos, IVA, DAC7, Segpay, Veriff y cuentas).
+  - *Monedas*: se compran en paquetes de pago único con Segpay (en modo DEMO se simulan): 50 monedas
+    5,99 €, 120 monedas 12,99 € y 300 monedas 29,99 € (`SEGPAY_ETICKET_COINS_S` / `_M` / `_L`). Los
+    avisos de Segpay de estos pedidos (`kind: 'coins'`) los pasa `payments.js` a `tips.js` con
+    `payments.onCoins()`: cobro aprobado → se suman las monedas; reembolso, contracargo o anulación →
+    se quitan y, si ya se gastaron, se anulan las propinas de esa persona aún retenidas y queda
+    `tipsBlocked` (no puede dar más propinas).
+  - *Propina durante la llamada* (botón 🪙): 10, 25, 50, 100 o cualquier cantidad de 1 a 1.000
+    monedas. Límites: `TIP_DAILY_MAX` monedas enviadas en 24 h (2.000), una cada 1,5 s, no entre
+    cuentas con la misma IP de registro (`sameNetwork`), no si quien recibe apagó «Aceptar propinas»
+    (`tipsOff`) y no con cuentas expulsadas.
+  - *Ganancias*: quien recibe gana `COIN_VALUE_EUR` (0,10 €) por moneda menos `TIP_FEE_PCT` (20 %) =
+    0,08 €; queda retenido `TIP_HOLD_DAYS` (14) días y luego pasa a disponible. Estados de cada
+    propina (tabla `tips`): `held` → `payout` → `paid`, o `reversed`.
+  - *Retiradas* (tabla `payouts`): desde `PAYOUT_MIN_EUR` (50 €), con la identidad verificada en
+    Veriff (`POST /api/age/start` con `{ purpose: 'payout' }`) y titular, IBAN, dirección, país,
+    NIF y fecha de nacimiento. Una pendiente a la vez. El dueño paga por transferencia y la marca
+    como pagada con la referencia en `/admin` → Propinas, o la rechaza con un motivo que ve la persona.
+  - API: `GET /api/wallet` (saldo, paquetes, ganancias, retiradas); `POST /api/wallet/prefs` con
+    `{ tipsOff }`; `POST /api/coins/checkout` con `{ pack: 's' | 'm' | 'l' }` → `{ url }` de Segpay (o
+    `{ coins }` en DEMO); `GET /api/coins/confirm?order=…` → `{ coins }`, `{ pending: true }` o 402;
+    `POST /api/payouts` con `{ holder, iban, address, country, taxId, birthDate }`. Panel:
+    `GET /api/admin/tips`, `POST /api/admin/payouts/:id` con `{ action: 'paid' | 'reject', note }`
+    (la nota es obligatoria: referencia de la transferencia o motivo del rechazo) y
+    `GET /api/admin/payouts/export?year=AAAA` (CSV anual por persona de las retiradas pagadas, para
+    DAC7 / modelo 238). `/api/config` devuelve `tips`.
+  - Socket.IO: `socket.emit('tip', cantidad, ack)` → `ack({ ok, coins, left, net })` o
+    `ack({ code })` (`tipAmount`, `tipInvalid`, `tipsOff`, `tipBlocked`, `sameNetwork`, `noCoins`,
+    `tipLimit`, `tipSlow`, `off`); la otra persona recibe `tip` con `{ coins, net }`. El evento
+    `wallet` avisa de cambios de saldo (`{ coins }`) o de una retirada resuelta (`{ payout }`).
 - **Vista del videochat** (botón junto a «Parar»): cambiar el tamaño de tu recuadro (S, M, L, XL),
   intercambiar recuadros (tú en grande y la otra persona en pequeño; también con doble clic en el
   recuadro pequeño), vista amplia (oculta el chat de texto y los mensajes salen un momento sobre el
@@ -238,7 +270,7 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   sesión) y **solo se carga si la persona acepta** el aviso de cookies de publicidad (Aceptar y
   Rechazar al mismo nivel; se puede cambiar en «Configurar cookies»). Con Premium de pago no hay
   anuncios. Cada hueco lleva la etiqueta «Publicidad» (art. 20 LSSI).
-- **Centro de ayuda** `/ayuda` con 51 preguntas frecuentes en 6 idiomas, buscador, categorías y
+- **Centro de ayuda** `/ayuda` con 61 preguntas frecuentes en 6 idiomas, buscador, categorías y
   **Guindilla 🌶️**, la asistente que responde al momento: una guindilla dibujada con cara que aparece con un rebote, saluda con la mano, parpadea y mueve la boca al responder (sin sonido; se queda quieta si el sistema pide reducir el movimiento) (sin IA: busca palabras clave en cualquier
   idioma). También hay un botón flotante de Guindilla en la portada (se oculta durante el videochat).
 - **Motivo de la sanción y recurso** (DSA art. 17 y 20): quien está suspendido o expulsado ve el
@@ -314,11 +346,13 @@ Diseño hecho con Gemini y redibujado en vector para que se vea nítido a cualqu
 - `sitelock.js` — cierra toda la web con una contraseña (`SITE_PASSWORD`) hasta abrir al público
 - `gifts.js` — Premium de regalo: invita a un amigo (1 día cada uno), premios semanales del ranking y prueba al registrarse (desactivada salvo `TRIAL_DAYS`).
 - `friends.js` — historial de chats, amigos y solicitudes (las llamadas y el «en línea» están en `server.js`).
+- `tips.js` — monedas 🪙, propinas durante la llamada, ganancias y retiradas (apagado salvo `TIPS=on`; ver docs/propinas.md).
 - `privacy.js` — cabeceras de seguridad, descargar/borrar datos, limpieza automática y código de marca de agua.
 - `public/` — la web: `index.html` (portada + chat), `app.js`, `style.css`, `admin.html`,
-  `juegos.html` (guía de juegos y poderes), páginas legales y `logo.svg`.
+  `juegos.html` (guía de juegos y poderes), `tips.js` (botón 🪙 de propina y pestaña Monedero),
+  páginas legales y `logo.svg`.
 - `Dockerfile`, `docker-compose.yml`, `Caddyfile`, `.env.example` — publicación en servidor (ver DESPLIEGUE.md).
-- `docs/` — documentos internos: registro de tratamientos, evaluación de impacto y lista de lanzamiento.
+- `docs/` — documentos internos: registro de tratamientos, evaluación de impacto, lista de lanzamiento y guía de propinas (`docs/propinas.md`).
 
 ## Variables del servidor
 
@@ -334,6 +368,18 @@ SEGPAY_ETICKET_CARD=123456:7890          # mensual con tarjeta
 SEGPAY_ETICKET_CRYPTO=123456:7891        # mensual con cripto
 SEGPAY_POSTBACK_KEY=...
 # SEGPAY_CANCEL_URL=https://cs.segpay.com
+
+# Propinas y retiradas (apagado por defecto; lee docs/propinas.md antes de activarlo)
+# TIPS=on                     # monedas y propinas durante la llamada
+# PAYOUTS=on                  # retiradas de lo ganado (solo con TIPS=on)
+# TIP_FEE_PCT=20              # comisión de la web (%)
+# COIN_VALUE_EUR=0.10         # valor de una moneda para quien la recibe, antes de la comisión
+# PAYOUT_MIN_EUR=50           # mínimo para retirar
+# TIP_HOLD_DAYS=14            # días de retención por reembolsos y contracargos
+# TIP_DAILY_MAX=2000          # máximo de monedas enviadas por persona en 24 h
+# SEGPAY_ETICKET_COINS_S=...  # 50 monedas 5,99 € (pago único)
+# SEGPAY_ETICKET_COINS_M=...  # 120 monedas 12,99 €
+# SEGPAY_ETICKET_COINS_L=...  # 300 monedas 29,99 €
 
 # Emails (confirmar email, recuperar contraseña y avisos). Sin SMTP_HOST salen en el registro del servidor.
 ADMIN_EMAIL=tu@email.com         # recibe avisos: denuncias urgentes, suspensiones automáticas, menores
@@ -429,6 +475,9 @@ Para pagar hay que tener la sesión iniciada; el Premium queda en la cuenta.
    - **Disable**:
      `laruletacaliente.com/api/segpay/postback?key=TU_CLAVE&type=disable&purchaseid=<purchaseid>`
    - Activa "Retry postback" para que Segpay reintente si el servidor no responde.
+3. **Solo si activas las propinas** (`TIPS=on`): tres paquetes más de **pago único** para las monedas
+   (50 monedas 5,99 €, 120 monedas 12,99 €, 300 monedas 29,99 €) en `SEGPAY_ETICKET_COINS_S` / `_M` / `_L`.
+   Usan el mismo Trans Post. Antes, confirma por escrito con Segpay que lo aceptan (ver docs/propinas.md).
 
 ## Verificación de edad (Veriff)
 
