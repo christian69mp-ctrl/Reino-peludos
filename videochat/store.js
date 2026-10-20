@@ -35,6 +35,9 @@ db.exec(`
   -- Suscripciones a notificaciones del navegador
   CREATE TABLE IF NOT EXISTS pushsubs  (id TEXT PRIMARY KEY, data TEXT NOT NULL);
   CREATE TABLE IF NOT EXISTS adbanners (id TEXT PRIMARY KEY, data TEXT NOT NULL);
+  -- Propinas entre usuarios (monedas) y solicitudes de retirada de ganancias
+  CREATE TABLE IF NOT EXISTS tips      (id TEXT PRIMARY KEY, data TEXT NOT NULL);
+  CREATE TABLE IF NOT EXISTS payouts   (id TEXT PRIMARY KEY, data TEXT NOT NULL);
   CREATE TABLE IF NOT EXISTS purchases (purchase_id TEXT PRIMARY KEY, order_id TEXT NOT NULL);
   CREATE TABLE IF NOT EXISTS banned_emails (hash TEXT PRIMARY KEY);
   -- Historial: una fila por persona con la que se ha hablado (la última vez)
@@ -55,7 +58,7 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS friends_b ON friends (b);
 `);
 
-const TABLES = ['users', 'orders', 'reports', 'tickets', 'ledger', 'stats', 'settings', 'pushsubs', 'adbanners'];
+const TABLES = ['users', 'orders', 'reports', 'tickets', 'ledger', 'stats', 'settings', 'pushsubs', 'adbanners', 'tips', 'payouts'];
 const put = Object.fromEntries(TABLES.map((t) => [t, db.prepare(`INSERT INTO ${t} (id, data) VALUES (?, ?) ON CONFLICT(id) DO UPDATE SET data = excluded.data`)]));
 const del = Object.fromEntries(TABLES.map((t) => [t, db.prepare(`DELETE FROM ${t} WHERE id = ?`)]));
 const putPurchase = db.prepare('INSERT OR REPLACE INTO purchases (purchase_id, order_id) VALUES (?, ?)');

@@ -43,6 +43,10 @@ window.App = {
   toast: (text) => toast(text),
   savePrefs: (body) => savePrefs(body),
   api: (path, opts) => api(path, opts),
+  burst: (type, label) => burst(type, label),
+  sysMsg: (text) => addMsg(text, 'sys'),
+  errorText: (res) => errorText(res),
+  get connected() { return connected; },
 };
 
 // ---------- Utilidades ----------
@@ -1032,8 +1036,8 @@ function renderMyLikes() {
 }
 
 // ---------- Reacciones 👍 ❤️ ----------
-const EMOJI = { like: '👍', love: '❤️' };
-const BURST_EXTRAS = { like: ['👍', '👍', '👍', '✨', '🔥'], love: ['❤️', '❤️', '❤️', '💖', '😍', '✨'] };
+const EMOJI = { like: '👍', love: '❤️', tip: '🪙' };
+const BURST_EXTRAS = { like: ['👍', '👍', '👍', '✨', '🔥'], love: ['❤️', '❤️', '❤️', '💖', '😍', '✨'], tip: ['🪙', '🪙', '🪙', '💸', '💰', '✨'] };
 
 // Estallido de emojis sobre el vídeo (lo ven las dos personas)
 function burst(type, label) {
@@ -1091,6 +1095,7 @@ function setConnected(value) {
   $('sendBtn').disabled = !value;
   $('reportBtn').hidden = !value;
   $('reactions').hidden = !value;
+  window.Tips?.onConnected(value);
   if (value) startWatermark(); else stopWatermark();
   updateShield();
   if (!value) { partner = null; renderPartner(); }
@@ -1174,6 +1179,7 @@ function connectSocket() {
   socket = s;
   window.Play?.attach(s);
   window.Powers?.attach(s);
+  window.Tips?.attach(s);
 
   s.on('connect', () => {
     refreshOnline();
@@ -1877,6 +1883,7 @@ function setAccTab(tab) {
   $$('.acc-panel').forEach((p) => { p.hidden = p.dataset.apanel !== tab; });
   if (tab === 'privacy') loadBlocked();
   if (tab === 'notify') renderPush();
+  if (tab === 'wallet') window.Tips?.renderWallet();
 }
 $$('.acc-tab').forEach((b) => b.addEventListener('click', () => setAccTab(b.dataset.atab)));
 

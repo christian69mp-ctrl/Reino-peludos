@@ -65,7 +65,7 @@ adminauth.routes(app);
 adminapi.routes(app);
 
 // Qué funciones opcionales están activas
-app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled, turnstile: captcha.SITE_KEY || null, providers: oauth.enabled, trialDays: gifts.TRIAL_DAYS }));
+app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled, turnstile: captcha.SITE_KEY || null, providers: oauth.enabled, trialDays: gifts.TRIAL_DAYS, tips: tips.ENABLED }));
 
 // Sesión actual: datos de la cuenta, Premium y restricciones
 app.get('/api/me', auth.requireUser, (req, res) => {
@@ -156,6 +156,10 @@ app.post('/api/powers/:power', auth.requireUser, (req, res) => {
 });
 
 // Página 404 para direcciones que no existen
+// 🪙 Propinas en la llamada y retirada de lo ganado (tips.js; apagado salvo TIPS=on)
+const tips = require('./tips')({ notify: (uid, ev, data) => notifyUser(uid, ev, data) });
+tips.routes(app, { requireAdmin: adminauth.requireAdmin, audit: adminauth.audit, baseUrl: process.env.BASE_URL });
+
 app.use((req, res) => {
   if (req.path.startsWith('/api/')) return res.status(404).json({ code: 'notFound' });
   res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
@@ -184,7 +188,7 @@ setInterval(() => {
   if (hot.active !== hotWas) { hotWas = hot.active; io.emit('hot-hour', hot); }
 }, 30 * 1000).unref();
 const play = require('./play')({ io, partners, store, payments, rewards });
-// 🎁 Premium de regalo: prueba de 3 días, invitaciones y premios del ranking (gifts.js)
+// 🎁 Premium de regalo: prueba opcional, invitaciones y premios del ranking (gifts.js)
 const gifts = require('./gifts')({
   store, payments, rewards,
   notify: (uid, ev, data) => notifyUser(uid, ev, data),
@@ -512,6 +516,23 @@ io.on('connection', (socket) => {
     }
     io.to(partnerId).emit('chat', clean);
     play.heat(socket, 'msg');
+  });
+
+  // 🪙 Propina a la persona con la que se está hablando
+  socket.on('tip', (amount, ack) => {
+    const done = typeof ack === 'function' ? ack : () => {};
+    const partnerId = partners.get(socket.id);
+    const partner = partnerId && io.sockets.sockets.get(partnerId);
+    if (!partner?.data.uid) return done({ code: 'tipInvalid' });
+    const now = Date.now();
+    if (now - (socket.data.lastTip || 0) < 1500) return done({ code: 'tipSlow' });
+    socket.data.lastTip = now;
+    const r = tips.tip(socket.data.uid, partner.data.uid, amount);
+    if (r.ok) {
+      partner.emit('tip', { coins: r.coins, net: r.net });
+      play.heat(socket, 'love');
+    }
+    done(r);
   });
 
   // Reacciones 👍 / ❤️: se animan en las dos pantallas y suman al perfil de la

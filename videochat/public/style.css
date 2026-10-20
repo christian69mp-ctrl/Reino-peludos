@@ -1379,3 +1379,28 @@ html, body { overflow-x: clip; }
 .footer-seo div { display: flex; flex-wrap: wrap; gap: 6px 18px; }
 .footer-seo a { color: var(--muted); text-decoration: none; font-size: .86rem; }
 .footer-seo a:hover { color: var(--text); }
+
+/* ----- Propinas y monedero ----- */
+.tip-modal { max-width: 420px; }
+.tip-balance { font-weight: 800; color: #ffc53d; }
+.tip-amounts { margin: 14px 0 10px; }
+.tip-custom { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; margin-bottom: 14px; }
+.tip-note { margin-top: 12px; }
+.tip-buy-title { margin: 20px 0 10px; font-size: 1rem; }
+.tip-packs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 10px 0; }
+.tip-pack { font: inherit; color: var(--text); cursor: pointer; display: flex; flex-direction: column; gap: 4px; align-items: center; padding: 12px 6px; border-radius: 14px; border: 1px solid rgba(255, 197, 61, .35); background: rgba(255, 197, 61, .06); text-align: center; }
+.tip-pack:hover { border-color: #ffc53d; }
+.tip-pack span { font-size: .8rem; color: var(--muted); }
+.wallet-big { font-size: 1.6rem; font-weight: 800; margin: 0; color: #ffc53d; }
+.wallet-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 12px 0; }
+.wallet-cell { padding: 10px 12px; border-radius: 12px; background: var(--bg); border: 1px solid var(--border); }
+.wallet-cell dt { font-size: .8rem; color: var(--muted); }
+.wallet-cell dd { margin: 2px 0 0; font-weight: 800; }
+.wallet-cell.available dd { color: var(--ok); }
+.wallet-reqs { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.wallet-reqs li { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; padding: 8px 10px; border-radius: 10px; background: var(--bg); font-size: .88rem; }
+.wallet-reqs .wallet-st { margin-left: auto; color: var(--muted); }
+.wallet-reqs .st-paid .wallet-st { color: var(--ok); }
+.wallet-reqs .st-rejected .wallet-st { color: var(--danger); }
+.wallet-reqs small { flex-basis: 100%; color: var(--muted); }
+@media (max-width: 400px) { .tip-packs { grid-template-columns: minmax(0, 1fr); } }

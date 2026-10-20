@@ -109,6 +109,15 @@ function applyPostback(raw) {
   const order = orderId && store.getOrder(orderId);
   if (!order) return 'unknown-order';
 
+  // Paquetes de monedas para propinas (pago único): los gestiona tips.js
+  if (order.kind === 'coins') {
+    const amountCoins = Number(String(p.price || p.amount || '').replace(',', '.')) || order.price;
+    return coinHandler ? coinHandler(order, {
+      trantype: lower('trantype'), action: lower('action'), approved: lower('approved') === 'yes',
+      amount: amountCoins, key: p.tranid || p.transid || JSON.stringify(p), purchaseId,
+    }) : 'ignored';
+  }
+
   const base = { orderId, userId: order.userId, plan: order.plan || 'month', method: order.method };
   const amount = Number(String(p.price || p.amount || '').replace(',', '.')) || PLANS[base.plan].price;
   const key = p.tranid || p.transid || JSON.stringify(p);
@@ -146,6 +155,18 @@ function applyPostback(raw) {
     return 'active';
   }
   return 'ignored';
+}
+
+let coinHandler = null;
+const onCoins = (fn) => { coinHandler = fn; };
+
+// Dirección de la página de pago de Segpay para un pedido
+function segpayUrl({ eticket, orderId, email, origin, back, text }) {
+  const params = new URLSearchParams({
+    'x-eticketid': eticket, orderid: orderId, 'x-billemail': email,
+    'x-auth-link': back, 'x-auth-text': text, 'x-decl-link': `${origin}/`, 'x-decl-text': 'Volver',
+  });
+  return `${PAY_URL}?${params}`;
 }
 
 function routes(app, baseUrl) {
@@ -214,4 +235,4 @@ function routes(app, baseUrl) {
   });
 }
 
-module.exports = { routes, isPremium, premiumInfo, activeOrder, PLANS, FREE, DEMO, _test: { applyPostback } };
+module.exports = { routes, isPremium, premiumInfo, activeOrder, PLANS, FREE, DEMO, onCoins, segpayUrl, ledger, originOf, _test: { applyPostback } };

@@ -315,6 +315,7 @@
           <button class="react-btn" data-react="love" data-i18n-aria="re.love" aria-label="Love">❤️</button>
           <button class="react-btn play-btn" type="button" id="piropoBtn" data-i18n-aria="pl.piropos" aria-label="Compliments">🌶️</button>
           <button class="react-btn play-btn" type="button" id="gamesBtn" data-i18n-aria="pl.games" aria-label="Games">🎲</button>
+          <button class="react-btn play-btn" type="button" id="tipBtn" hidden data-i18n-aria="tip.btn" aria-label="Send a tip">🪙</button>
         </div>
         <div class="edge-fx" id="edgeFx" aria-hidden="true"></div>
         <div id="status" class="status">
@@ -669,6 +670,7 @@
         <button type="button" class="acc-tab" data-atab="security" data-i18n="acc.tabSecurity">Security</button>
         <button type="button" class="acc-tab" data-atab="privacy" data-i18n="acc.tabPrivacy">Privacy</button>
         <button type="button" class="acc-tab" data-atab="notify" data-i18n="acc.tabNotify">Notifications</button>
+        <button type="button" class="acc-tab" data-atab="wallet" id="walletTab" hidden data-i18n="tip.tab">Wallet</button>
       </div>
 
       <section class="acc-panel" data-apanel="profile">
@@ -766,6 +768,8 @@
         <button type="submit" class="btn danger wide" id="deleteSubmit" data-i18n="acc.deleteConfirm">Delete permanently</button>
       </form>
       </section>
+
+      <section class="acc-panel wallet-panel" data-apanel="wallet" id="walletPanel" hidden></section>
 
       <section class="acc-panel" data-apanel="notify" hidden>
         <p class="muted" data-i18n="push.intro">We can notify you on this device when a friend calls you or sends you a request, even if the website is closed. Only if you allow it.</p>
@@ -909,5 +913,6 @@
   <script src="/app.js"></script>
   <script src="/play.js"></script>
   <script src="/powers.js"></script>
+  <script src="/tips.js"></script>
 </body>
 </html>

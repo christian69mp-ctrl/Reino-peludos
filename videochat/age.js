@@ -130,7 +130,9 @@ function routes(app, baseUrl) {
   app.post('/api/age/start', requireUser, async (req, res) => {
     const user = req.user;
     if (needsEmail(user)) return res.status(403).json({ code: 'emailUnverified' });
-    if (!mustVerify(user) || ageStatus(user) === 'approved') return res.json({ age: publicAge(user) });
+    // También la pide quien quiere retirar lo ganado con propinas (tips.js), aunque no se le exija para chatear
+    const forPayout = req.body?.purpose === 'payout' && process.env.TIPS === 'on' && process.env.PAYOUTS === 'on';
+    if ((!mustVerify(user) && !forPayout) || ageStatus(user) === 'approved') return res.json({ age: publicAge(user) });
     if (DEMO) {
       store.updateUser(user.id, { age: { status: 'approved', demo: true, verifiedAt: Date.now(), updatedAt: Date.now() } });
       return res.json({ age: publicAge(store.getUser(user.id)) });
@@ -138,7 +140,7 @@ function routes(app, baseUrl) {
     const origin = baseUrl || `${req.protocol}://${req.get('host')}`;
     const body = JSON.stringify({
       verification: {
-        callback: `${origin}/?age=done`,
+        callback: `${origin}/?age=done${forPayout ? '&for=payout' : ''}`,
         vendorData: user.id,
       },
     });

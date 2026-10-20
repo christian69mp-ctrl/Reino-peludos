@@ -394,17 +394,69 @@ async function renderList() {
 async function show(v) {
   view = v;
   document.querySelectorAll('[data-view]').forEach((x) => x.classList.toggle('active', x.dataset.view === v));
-  const sections = { overview: 'overviewView', announce: 'announceView', ads: 'adsView', security: 'securityView', reveal: 'revealView' };
-  for (const id of ['overviewView', 'listView', 'announceView', 'adsView', 'securityView', 'revealView']) $(id).hidden = true;
+  const sections = { overview: 'overviewView', announce: 'announceView', ads: 'adsView', tips: 'tipsView', security: 'securityView', reveal: 'revealView' };
+  for (const id of ['overviewView', 'listView', 'announceView', 'adsView', 'tipsView', 'securityView', 'revealView']) $(id).hidden = true;
   $(sections[v] || 'listView').hidden = false;
   try {
     if (v === 'overview') await renderOverview();
     else if (v === 'announce') await renderAnnounce();
     else if (v === 'ads') await renderAds();
+    else if (v === 'tips') await renderTips();
     else if (v === 'security') await renderSecurity();
     else if (v !== 'reveal') await renderList();
   } catch { /* sin sesión: se muestra el acceso */ }
 }
+
+// ---------- Propinas y retiradas (tips.js) ----------
+const eurs = (n) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(n || 0);
+async function renderTips() {
+  const d = await api('/api/admin/tips');
+  $('tipsMode').textContent = !d.enabled ? 'Las propinas están APAGADAS (TIPS=on en .env para activarlas). Antes, lee docs/propinas.md.'
+    : `Propinas activadas${d.payouts ? ' y retiradas activadas' : ' (retiradas APAGADAS: PAYOUTS=on)'}${d.demo ? ' · compras de monedas SIMULADAS' : ''}. Comisión ${d.feePct} %, ${eurs(d.coinEur)} por moneda, retención ${d.holdDays} días, mínimo ${eurs(d.minPayout)}.`;
+  const tt = d.totals;
+  $('tilesTips').innerHTML = [
+    tile(eurs(tt.coinSales), 'Monedas vendidas (cobrado)'),
+    tile(int(tt.tips), 'Propinas', `${int(tt.coins)} monedas`),
+    tile(eurs(tt.fees), 'Comisiones de la web'),
+    tile(eurs(tt.owed), 'Pendiente de pagar a usuarios', 'retenido + solicitado'),
+    tile(eurs(tt.paid), 'Pagado a usuarios'),
+  ].join('');
+  const pending = d.payouts.filter((p) => p.status === 'requested').length;
+  $('cTips').textContent = pending || '';
+  $('tipsList').innerHTML = d.payouts.map((p) => `
+    <article class="item ${p.status === 'requested' ? 'urgent' : ''}">
+      <div class="item-head">
+        <span class="tag ${p.status === 'requested' ? 'red' : ''}">${{ requested: 'Pendiente', paid: 'Pagada', rejected: 'Rechazada' }[p.status]} · ${eurs(p.amount)}</span>
+        <span class="meta">${fmt(p.at)}${p.decidedAt ? ` · resuelta ${fmt(p.decidedAt)}` : ''}</span>
+      </div>
+      <p><b>${esc(p.holder)}</b> · ${esc(p.email)} · ${p.verified ? '✅ identidad verificada' : '⚠️ SIN verificar'}${p.banned ? ' · ⛔ cuenta expulsada' : ''}</p>
+      <p class="mono">IBAN ${esc(p.iban)} · NIF ${esc(p.taxId)} · nacido/a ${esc(p.birthDate)}</p>
+      <p class="muted">${esc(p.address)} (${esc(p.country)}) · ${p.tips} propinas</p>
+      ${p.note ? `<div class="quote">${esc(p.note)}</div>` : ''}
+      ${p.status === 'requested' ? `<div class="actions">
+        <button class="btn primary sm" data-payout="${p.id}" data-paction="paid">Marcar pagada</button>
+        <button class="btn ghost sm" data-payout="${p.id}" data-paction="reject">Rechazar</button>
+      </div>` : ''}
+    </article>`).join('') || '<p class="empty">No hay solicitudes de retirada</p>';
+}
+document.addEventListener('click', async (e) => {
+  const b = e.target.closest('[data-payout]');
+  if (!b) return;
+  const paid = b.dataset.paction === 'paid';
+  const note = prompt(paid ? 'Referencia de la transferencia (la verá solo el panel):' : 'Motivo del rechazo (lo verá la persona):');
+  if (!note) return;
+  const r = await api(`/api/admin/payouts/${b.dataset.payout}`, { action: paid ? 'paid' : 'reject', note });
+  if (r.error) toast(r.error); else { toast(paid ? 'Marcada como pagada' : 'Rechazada'); renderTips(); }
+});
+$('tipsYear').value = new Date().getFullYear();
+$('tipsExport').addEventListener('click', async () => {
+  const r = await fetch(`/api/admin/payouts/export?year=${$('tipsYear').value}`, { headers: { 'x-admin-token': adminToken } });
+  if (!r.ok) { toast('No se pudo descargar'); return; }
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(await r.blob());
+  a.download = `retiradas-${$('tipsYear').value}.csv`;
+  a.click();
+});
 
 document.querySelectorAll('[data-view]').forEach((t) => t.addEventListener('click', () => { listStatus = 'open'; show(t.dataset.view); }));
 document.querySelectorAll('[data-status]').forEach((b) => b.addEventListener('click', () => { listStatus = b.dataset.status; renderList(); }));

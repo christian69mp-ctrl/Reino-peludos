@@ -112,6 +112,7 @@
       <button class="tab" data-view="users">Usuarios</button>
       <button class="tab" data-view="announce">Anuncio</button>
       <button class="tab" data-view="ads">Publicidad</button>
+      <button class="tab" data-view="tips">Propinas <span class="count" id="cTips"></span></button>
       <button class="tab" data-view="security">Seguridad</button>
       <button class="tab" data-view="reveal">Revelar código</button>
     </nav>
@@ -191,6 +192,18 @@
       </form>
       <h2 class="ov-h">Banners</h2>
       <div class="table-wrap"><table class="data"><thead><tr><th>Banner</th><th>Anunciante</th><th>Hueco</th><th>Fechas</th><th>Impresiones</th><th>Clics</th><th>CTR</th><th></th></tr></thead><tbody id="adList"></tbody></table></div>
+    </section>
+
+    <section id="tipsView" hidden>
+      <p class="notice" id="tipsMode"></p>
+      <div class="tiles" id="tilesTips"></div>
+      <div class="toolbar">
+        <h2 class="ov-h" style="margin:0">Retiradas</h2>
+        <label class="muted">Año <input type="number" id="tipsYear" style="width:90px"></label>
+        <button class="btn ghost sm" id="tipsExport">Descargar CSV para Hacienda (DAC7)</button>
+      </div>
+      <p class="muted">Haz la transferencia desde tu banco al IBAN de la solicitud y márcala como pagada con la referencia. Comprueba que el titular coincide con la persona verificada en Veriff.</p>
+      <div id="tipsList"></div>
     </section>
 
     <section id="securityView" hidden>
