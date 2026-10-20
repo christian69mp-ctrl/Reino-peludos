@@ -99,6 +99,6 @@ contratado: sin él esa verificación es simulada.
 
 - ☐ **Google Search Console**: verificar el dominio y enviar `sitemap.xml` (DESPLIEGUE.md, paso 8 bis). Lo mismo en Bing Webmaster Tools.
 - ☐ Publicar los posts de Instagram (16, prompts en `docs/marca/`) y los 3 anuncios de vídeo.
-- ☐ Anunciar en redes las 3 promociones de Premium gratis (prueba de 3 días, invita a un amigo y premios del ranking): posts 17-19, prompts en `docs/marca/prompts-instagram-17-19.md`.
+- ☐ Anunciar en redes las 3 promociones de Premium gratis (prueba de 1 día, invita a un amigo y premios del ranking): posts 17-19, prompts en `docs/marca/prompts-instagram-17-19.md`.
 - ☐ Vigilar los primeros días: `docker compose logs -f app`, denuncias, tráfico del servidor.
 - ☐ Revisar el tráfico mensual del servidor la primera semana (el vídeo pasa por él).

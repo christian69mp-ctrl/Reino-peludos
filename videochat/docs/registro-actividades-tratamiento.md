@@ -99,7 +99,7 @@
 
 | | |
 |---|---|
-| **Finalidad** | Dar Premium de regalo, igual para todo el mundo: prueba de bienvenida de 3 días (una vez por email), 7 días para quien invita y quien es invitado tras la primera conversación de más de 1 minuto de la cuenta invitada, y premios semanales al top 3 del ranking (7, 3 y 1 días). Prevenir el fraude (pruebas repetidas, cuentas falsas, autoinvitaciones). |
+| **Finalidad** | Dar Premium de regalo, igual para todo el mundo: prueba de bienvenida de 1 día (una vez por email), 3 días para quien invita y quien es invitado tras la primera conversación de más de 1 minuto de la cuenta invitada, y premios semanales al top 3 del ranking (7, 3 y 1 días). Prevenir el fraude (pruebas repetidas, cuentas falsas, autoinvitaciones). |
 | **Base jurídica** | Ejecución del contrato (art. 6.1.b): ofrecer la promoción. Interés legítimo en prevenir el fraude (art. 6.1.f): hash del email de la prueba y comparación de la IP de registro. |
 | **Datos** | Fecha de la prueba y hash SHA-256 (irreversible) del email; código personal de invitación; quién invitó a quién (id de quien invita en la cuenta invitada), si se dio el premio y número mensual de invitaciones premiadas; IP de registro (ya guardada), comparada solo para detectar autoinvitaciones; últimos 20 regalos (fecha, días y motivo); fecha de fin del Premium de regalo; registro semanal de ganadores del ranking (id de usuario y guindillas). |
 | **Quién lo ve** | La propia persona («Mi cuenta»: enlace de invitación y «Premium de regalo hasta el…»). El administrador. |

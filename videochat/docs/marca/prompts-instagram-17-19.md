@@ -46,14 +46,14 @@ REGLAS DE TEXTO
 
 LAS 3 PUBLICACIONES
 
-17) 3 DÍAS DE PREMIUM GRATIS
+17) 1 DÍA DE PREMIUM GRATIS
 Composición: una caja de regalo grande en el centro, abierta, con lazo rosa-naranja, de la que
 sale un brillo dorado y una estrella dorada de Premium flotando. Guindilla está asomada dentro
 de la caja, saludando con los brazos arriba y muy contenta. Alrededor, confeti dorado y pequeñas
 guindillas. Debajo, una lista de 3 líneas con un check dorado y, al final, un botón grande
 redondeado con el degradado rosa-naranja.
 Texto en la imagen:
-  Título: "Premium gratis 3 días"
+  Título: "1 día de Premium gratis"
   Subtítulo: "Al crear tu cuenta"
   "✓ Elige a quién ver"
   "✓ Juegos y piropos"
@@ -61,7 +61,7 @@ Texto en la imagen:
   Botón: "Crea tu cuenta"
   Pie: "Sin tarjeta · Sin compromiso"
 Caption: "🎁 ¿Quieres probar Premium sin pagar nada? Al crear tu cuenta en La Ruleta Caliente
-tienes 3 días de Premium gratis: elige a quién ver, invita a jugar, envía piropos y usa tus
+tienes 1 día de Premium gratis: elige a quién ver, invita a jugar, envía piropos y usa tus
 superpoderes. Sin tarjeta y sin renovaciones: cuando acaba, sigues gratis como siempre. Guindilla
 🌶️ te espera 👉 laruletacaliente.com (+18)"
 Hashtags: #premium #gratis #videochat #conocergente #laruletacaliente
@@ -74,11 +74,11 @@ corazón. Encima de cada móvil, una etiqueta dorada redondeada. Guindilla está
 los cinco con las dos manos a la vez, una hacia cada móvil.
 Texto en la imagen:
   Título: "Invita a un amigo"
-  Etiquetas doradas: "+7 días" · "+7 días"
+  Etiquetas doradas: "+3 días" · "+3 días"
   Subtítulo: "Premium gratis para los dos"
   Pie: "Tu enlace está en «Mi cuenta»"
 Caption: "🤝 Comparte tu enlace de invitación (lo tienes en «Mi cuenta») y, cuando tu amigo o amiga
-se registre y tenga su primera conversación de más de un minuto, los dos ganáis 7 días de Premium
+se registre y tenga su primera conversación de más de un minuto, los dos ganáis 3 días de Premium
 gratis. Hasta 10 invitaciones premiadas al mes. ¿A quién vas a invitar? 👉 laruletacaliente.com
 (+18)"
 Hashtags: #invitaaunamigo #premium #videochat #chatenvivo #laruletacaliente
@@ -106,7 +106,7 @@ Empieza ahora con la publicación 17.
 ## Al revisar cada imagen
 
 - **Guindilla igual que la de la web.** Si cambia: «repite y dibuja a Guindilla exactamente como en la imagen adjunta».
-- **Cifras exactas:** «3 días», «+7 días», «7 / 3 / 1 día». Gemini a veces cambia números: revísalos bien.
+- **Cifras exactas:** «1 día», «+3 días», «7 / 3 / 1 día». Gemini a veces cambia números: revísalos bien.
 - **En el 18, las dos personas adultas y vestidas**, sin poses provocativas.
 - **Orden recomendado:** publica el 17 el día del lanzamiento (o justo después), el 18 a los 2-3 días y el 19 el
   primer lunes, cuando se repartan los primeros premios.

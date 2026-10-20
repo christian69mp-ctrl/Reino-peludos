@@ -178,14 +178,14 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
     (24 h, máx. 30), fin de Llama/Incógnito y el Supersaludo pendiente. Entran en «Descargar mis
     datos» y se borran con la cuenta.
 - **Premium de regalo 🎁** (`gifts.js`), igual para todo el mundo (sin diferencias por género):
-  - *Prueba de bienvenida*: cada cuenta nueva (email o Google/Apple/Facebook) recibe 3 días de Premium
+  - *Prueba de bienvenida*: cada cuenta nueva (email o Google/Apple/Facebook) recibe 1 día de Premium
     al crearse (`auth.onSignup` → `gifts.welcome`). Una sola vez por email, aunque se borre la cuenta y
     se vuelva a crear: se guarda un hash SHA-256 del email en `settings/trialEmails`. Sin tarjeta; al
     terminar no se renueva ni se cobra nada.
   - *Invita a un amigo* 🤝: cada persona tiene un código personal (`refCode`, enlace
     `laruletacaliente.com/?ref=CÓDIGO`, botón Compartir/copiar en «Mi cuenta»). La cuenta nueva reclama
     la invitación en sus primeras 24 h; cuando tiene su primera conversación de más de 1 min
-    (`gifts.conversation`, desde `server.js`), las dos ganan 7 días. Máximo 10 invitaciones premiadas
+    (`gifts.conversation`, desde `server.js`), las dos ganan 3 días. Máximo 10 invitaciones premiadas
     por persona y mes natural; no cuenta si las dos cuentas comparten la IP de registro
     (`sameNetwork`); cada persona solo puede ser invitada una vez; quien invita no puede estar expulsado.
   - *Premios del ranking* 🏆: el lunes, las 3 personas con más guindillas de la semana anterior (lunes a
@@ -289,7 +289,7 @@ Diseño hecho con Gemini y redibujado en vector para que se vea nítido a cualqu
 - `geo.js` — país y zona aproximados por IP (filtros Premium).
 - `oauth.js` — entrar con Google, Apple o Facebook.
 - `rewards.js` — guindillas, racha, insignias, retos semanales y superpoderes (precios y gratis de Premium).
-- `gifts.js` — Premium de regalo: prueba de 3 días, invita a un amigo y premios semanales del ranking.
+- `gifts.js` — Premium de regalo: prueba de 1 día, invita a un amigo y premios semanales del ranking.
 - `friends.js` — historial de chats, amigos y solicitudes (las llamadas y el «en línea» están en `server.js`).
 - `privacy.js` — cabeceras de seguridad, descargar/borrar datos, limpieza automática y código de marca de agua.
 - `public/` — la web: `index.html` (portada + chat), `app.js`, `style.css`, `admin.html`,

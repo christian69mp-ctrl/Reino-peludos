@@ -1,8 +1,8 @@
 // Premium de regalo (sin pagar), igual para todo el mundo:
-// - 🎁 Prueba: 3 días de Premium al crear la cuenta (una vez por email, aunque se borre y se
+// - 🎁 Prueba: 1 día de Premium al crear la cuenta (una vez por email, aunque se borre y se
 //   vuelva a crear).
 // - 🤝 Invita a un amigo: cuando la persona invitada tiene su primera conversación de más de un
-//   minuto, las dos ganan 7 días de Premium (máximo 10 invitaciones premiadas al mes).
+//   minuto, las dos ganan 3 días de Premium (máximo 10 invitaciones premiadas al mes).
 // - 🏆 Ranking semanal: el lunes, las 3 personas con más guindillas de la semana anterior ganan
 //   Premium (1.º 7 días, 2.º 3 días, 3.º 1 día).
 // Los días se acumulan sobre los que ya tuviera la persona. Con PREMIUM_MODE=free no se regala
@@ -10,8 +10,8 @@
 const crypto = require('crypto');
 
 const DAY = 24 * 3600 * 1000;
-const TRIAL_DAYS = Math.max(0, Number(process.env.TRIAL_DAYS ?? 3) || 0);   // 0 = sin prueba
-const INVITE_DAYS = 7;
+const TRIAL_DAYS = Math.max(0, Number(process.env.TRIAL_DAYS ?? 1) || 0);   // 0 = sin prueba
+const INVITE_DAYS = 3;
 const INVITE_MONTH_MAX = 10;
 const CLAIM_WINDOW = DAY;            // la invitación se reclama en las primeras 24 h de la cuenta
 const RANK_PRIZES = [7, 3, 1];

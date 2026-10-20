@@ -306,7 +306,7 @@
     // 🎁 Premium de regalo: prueba, invitación o premio del ranking
     s.on('gift', ({ days, reason }) => {
       const icon = { trial: '🎁', invited: '🤝', inviter: '🤝', rank1: '🥇', rank2: '🥈', rank3: '🥉' }[reason] || '🎁';
-      celebrate({ icon, title: t('gf.title', { n: days }), text: t(`gf.msg_${reason}`, { n: days }), button: t('gf.cta'), emojis: [icon, '⭐', '✨', '🌶️'] });
+      celebrate({ icon, title: t(days === 1 ? 'gf.title1' : 'gf.title', { n: days }), text: t(`gf.msg_${reason}`, { n: days }), button: t('gf.cta'), emojis: [icon, '⭐', '✨', '🌶️'] });
     });
     s.on('hot-hour', (h) => {
       if (G) G.hot = h;
