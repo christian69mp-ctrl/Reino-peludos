@@ -17,7 +17,7 @@ module.exports = {
     alternatives: 'Alternativas a otras webs',
     faq: 'Preguntas frecuentes',
     ctaTitle: '¿Empezamos?',
-    ctaText: 'Crea tu cuenta gratis y conoce a alguien nuevo en segundos.',
+    ctaText: 'Entra gratis y sin registro, y conoce a alguien nuevo en segundos.',
     ctaButton: 'Empezar videochat gratis',
     adultNote: 'Solo para mayores de 18 años.',
     disclaimer: '{brand} es una marca de su titular. La Ruleta Caliente no está afiliada a {brand} ni patrocinada por ella; la nombramos solo para comparar.',
@@ -53,7 +53,9 @@ module.exports = {
 
 - Videochat **en vivo 1 a 1, al azar**, con gente de todo el mundo. **Solo mayores de 18**. Gratis para empezar.
 - Funciona **en el navegador** del móvil y del ordenador, **sin descargas**; se puede **instalar como app** (PWA).
-- Hace falta **cuenta** (email o Google/Apple/Facebook) y confirmar que tienes 18 años o más.
+- Se puede entrar **sin registro** (invitado): eliges género, das tu fecha de nacimiento y confirmas que tienes 18 años
+  o más. La **cuenta** (email o Google) es **opcional**: guarda tu progreso entre dispositivos y es obligatoria solo para
+  pagar Premium. Nunca digas que hace falta registrarse para usar el chat.
 - **Siguiente** (o tecla Esc) para pasar a otra persona; **Parar** para descansar.
 - **Chat de texto con traducción automática**; web en 6 idiomas (español, inglés, portugués, francés, alemán, italiano).
 - **Reacciones** 👍 ❤️, **añadir amigos**, **cambiar de cámara**, opciones de vista.

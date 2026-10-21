@@ -8,7 +8,7 @@ module.exports = {
     alternatives: 'Alternativas a otras webs',
     faq: 'Preguntas frecuentes',
     ctaTitle: '¿Empezamos?',
-    ctaText: 'Crea tu cuenta gratis y conoce a alguien nuevo en segundos.',
+    ctaText: 'Entra gratis y sin registro, y conoce a alguien nuevo en segundos.',
     ctaButton: 'Empezar videochat gratis',
     adultNote: 'Solo para mayores de 18 años.',
     disclaimer: '{brand} es una marca de su titular. La Ruleta Caliente no está afiliada a {brand} ni patrocinada por ella; la nombramos solo para comparar.',
@@ -21,7 +21,7 @@ module.exports = {
       title: 'Videochat gratis con desconocidos · La Ruleta Caliente',
       description: 'Videochat gratis 1 a 1 con gente de todo el mundo, desde el navegador y sin descargas. Juegos, traducción automática y guindillas. Solo +18.',
       h1: 'Videochat gratis: conoce gente nueva en vivo, cara a cara',
-      intro: '<p>En La Ruleta Caliente tienes <strong>videochat gratis</strong> con personas reales de todo el mundo: una conversación en vivo, 1 a 1 y al azar, directamente desde el navegador de tu móvil o de tu ordenador. No hay nada que descargar. Creas tu cuenta, confirmas que tienes 18 años o más, das permiso a la cámara y en unos segundos estás hablando con alguien nuevo.</p><p>Si la charla fluye, te quedas. Si no, pulsas <strong>Siguiente</strong> y la ruleta te lleva con otra persona. Así de sencillo, y sin pagar nada para empezar 🌶️.</p>',
+      intro: '<p>En La Ruleta Caliente tienes <strong>videochat gratis</strong> con personas reales de todo el mundo: una conversación en vivo, 1 a 1 y al azar, directamente desde el navegador de tu móvil o de tu ordenador. No hay nada que descargar ni hace falta registrarse: eliges tu género, confirmas que tienes 18 años o más, das permiso a la cámara y en unos segundos estás hablando con alguien nuevo.</p><p>Si la charla fluye, te quedas. Si no, pulsas <strong>Siguiente</strong> y la ruleta te lleva con otra persona. Así de sencillo, y sin pagar nada para empezar 🌶️.</p>',
       sections: [
         {
           h2: 'Qué incluye el videochat gratis',
@@ -29,7 +29,7 @@ module.exports = {
         },
         {
           h2: 'Empezar en tres pasos',
-          html: '<ol><li><strong>Crea tu cuenta</strong> con tu email o con Google, Apple o Facebook.</li><li><strong>Confirma tu edad</strong>: el servicio es solo para mayores de 18 años.</li><li><strong>Activa la cámara</strong> y pulsa empezar. La primera persona aparece en segundos.</li></ol><p>Durante la conversación tienes dos botones clave: <strong>Siguiente</strong> (o la tecla Esc en el ordenador) para cambiar de persona y <strong>Parar</strong> para tomarte un descanso. La web está disponible en español, inglés, portugués, francés, alemán e italiano, y puedes instalarla como app desde el propio navegador.</p>',
+          html: '<ol><li><strong>Entra sin registro</strong>: elige tu género y pon tu fecha de nacimiento. Crear una cuenta con email o Google es opcional.</li><li><strong>Confirma tu edad</strong>: el servicio es solo para mayores de 18 años.</li><li><strong>Activa la cámara</strong> y pulsa empezar. La primera persona aparece en segundos.</li></ol><p>Durante la conversación tienes dos botones clave: <strong>Siguiente</strong> (o la tecla Esc en el ordenador) para cambiar de persona y <strong>Parar</strong> para tomarte un descanso. La web está disponible en español, inglés, portugués, francés, alemán e italiano, y puedes instalarla como app desde el propio navegador.</p>',
         },
         {
           h2: 'Guindillas: lo que ganas sin pagar',
@@ -45,8 +45,8 @@ module.exports = {
         },
       ],
       faq: [
-        { q: '¿El videochat es gratis de verdad?', a: 'Sí. Puedes registrarte y hablar con desconocidos sin pagar. Premium es opcional y solo añade filtros y extras.' },
-        { q: '¿Tengo que registrarme para usarlo?', a: 'Sí, hace falta una cuenta con email o con Google, Apple o Facebook, y confirmar que tienes al menos 18 años. Esto ayuda a mantener la comunidad más segura.' },
+        { q: '¿El videochat es gratis de verdad?', a: 'Sí. Puedes hablar con desconocidos sin pagar y sin registrarte. Premium es opcional y solo añade filtros y extras.' },
+        { q: '¿Tengo que registrarme para usarlo?', a: 'No. Puedes entrar sin registro: solo eliges tu género, pones tu fecha de nacimiento y confirmas que tienes al menos 18 años. La cuenta es opcional y sirve para guardar tu progreso o pagar Premium.' },
         { q: '¿Necesito descargar algo?', a: 'No. Funciona en el navegador del móvil y del ordenador. Si quieres, puedes instalarlo como app desde el navegador.' },
         { q: '¿Qué son las guindillas?', a: 'Son puntos gratuitos que ganas al entrar cada día, jugar, recibir corazones y completar retos. Sirven para activar superpoderes.' },
       ],
@@ -97,7 +97,7 @@ module.exports = {
       sections: [
         {
           h2: 'Por qué solo mayores de 18',
-          html: '<p>Para entrar hace falta crear una cuenta y confirmar que tienes 18 años o más. Es la base de todo lo demás: un videochat adulto tiene sentido cuando todas las personas al otro lado de la cámara son adultas y han elegido estar ahí. Si alguna vez sospechas que hablas con un menor, corta la llamada y denúncialo; lo revisa un equipo humano.</p>',
+          html: '<p>Para entrar no hace falta registrarse, pero sí confirmar que tienes 18 años o más. Es la base de todo lo demás: un videochat adulto tiene sentido cuando todas las personas al otro lado de la cámara son adultas y han elegido estar ahí. Si alguna vez sospechas que hablas con un menor, corta la llamada y denúncialo; lo revisa un equipo humano.</p>',
         },
         {
           h2: 'El modo picante, explicado',
@@ -205,7 +205,7 @@ module.exports = {
       sections: [
         {
           h2: 'Cómo empezar en tu teléfono',
-          html: '<ol><li>Abre el navegador de tu móvil (Chrome, Safari u otro actualizado) y entra en La Ruleta Caliente.</li><li>Crea tu cuenta con email o con Google, Apple o Facebook y confirma que tienes 18 años o más.</li><li>Cuando el navegador lo pida, <strong>permite el acceso a la cámara y al micrófono</strong>.</li><li>Pulsa empezar y la ruleta te conecta con alguien nuevo.</li></ol><p>Si el permiso de la cámara no aparece o lo denegaste sin querer, revisa la configuración del navegador o consulta la <a href="@help">ayuda</a>.</p>',
+          html: '<ol><li>Abre el navegador de tu móvil (Chrome, Safari u otro actualizado) y entra en La Ruleta Caliente.</li><li>Entra sin registro: elige tu género, pon tu fecha de nacimiento y confirma que tienes 18 años o más.</li><li>Cuando el navegador lo pida, <strong>permite el acceso a la cámara y al micrófono</strong>.</li><li>Pulsa empezar y la ruleta te conecta con alguien nuevo.</li></ol><p>Si el permiso de la cámara no aparece o lo denegaste sin querer, revisa la configuración del navegador o consulta la <a href="@help">ayuda</a>.</p>',
         },
         {
           h2: 'Instálalo como app (sin tienda)',
@@ -245,15 +245,15 @@ module.exports = {
         },
         {
           h2: 'Qué mirar al elegir un videochat',
-          html: '<p>Antes de quedarte en cualquier web de ruleta, estas preguntas te ayudarán a decidir:</p><ol><li><strong>¿Exige ser mayor de edad?</strong> Un videochat para adultos debería pedirte cuenta y confirmación de edad.</li><li><strong>¿Protege tu IP?</strong> Algunas conexiones de vídeo son directas entre navegadores; otras pasan por un servidor.</li><li><strong>¿Puedes denunciar y te responden?</strong> Busca revisión humana y normas claras.</li><li><strong>¿Es gratis para empezar?</strong> Comprueba qué incluye la versión sin pago y qué cuesta lo demás.</li><li><strong>¿Funciona sin instalar nada?</strong> Lo cómodo es poder entrar desde el navegador.</li></ol>',
+          html: '<p>Antes de quedarte en cualquier web de ruleta, estas preguntas te ayudarán a decidir:</p><ol><li><strong>¿Exige ser mayor de edad?</strong> Un videochat para adultos debería pedirte que confirmes que tienes 18 años o más.</li><li><strong>¿Protege tu IP?</strong> Algunas conexiones de vídeo son directas entre navegadores; otras pasan por un servidor.</li><li><strong>¿Puedes denunciar y te responden?</strong> Busca revisión humana y normas claras.</li><li><strong>¿Es gratis para empezar?</strong> Comprueba qué incluye la versión sin pago y qué cuesta lo demás.</li><li><strong>¿Funciona sin instalar nada?</strong> Lo cómodo es poder entrar desde el navegador.</li></ol>',
         },
         {
           h2: 'Nuestras respuestas a esas preguntas',
-          html: '<table><thead><tr><th>Pregunta</th><th>En La Ruleta Caliente</th></tr></thead><tbody><tr><td>Edad mínima</td><td>Solo mayores de 18, con cuenta obligatoria</td></tr><tr><td>Tu IP</td><td>No visible: el vídeo pasa por nuestro servidor</td></tr><tr><td>Denuncias</td><td>Revisión humana, expulsiones y posibilidad de recurso</td></tr><tr><td>Precio</td><td>Gratis para empezar; Premium opcional desde 7,99 €/semana</td></tr><tr><td>Instalación</td><td>Ninguna: navegador del móvil u ordenador, o instalable como app</td></tr><tr><td>Grabaciones</td><td>Prohibidas, con marca de agua invisible en el vídeo</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Pregunta</th><th>En La Ruleta Caliente</th></tr></thead><tbody><tr><td>Edad mínima</td><td>Solo mayores de 18, con confirmación de edad</td></tr><tr><td>Tu IP</td><td>No visible: el vídeo pasa por nuestro servidor</td></tr><tr><td>Denuncias</td><td>Revisión humana, expulsiones y posibilidad de recurso</td></tr><tr><td>Precio</td><td>Gratis para empezar; Premium opcional desde 7,99 €/semana</td></tr><tr><td>Instalación</td><td>Ninguna: navegador del móvil u ordenador, o instalable como app</td></tr><tr><td>Grabaciones</td><td>Prohibidas, con marca de agua invisible en el vídeo</td></tr></tbody></table>',
         },
         {
           h2: 'Lo que nos hace diferentes',
-          html: '<p>Más allá de lo básico, hemos querido que cada conversación tenga algo más que «hola» y «siguiente». Por eso hay <strong>juegos durante la llamada</strong> (Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina), un <strong>modo picante</strong> 🌶️ que solo se activa entre quienes lo eligen, <strong>traducción automática</strong> en el chat de texto y un sistema de <strong>guindillas</strong> con rachas, insignias, retos semanales y un ranking que premia con días de Premium a los tres primeros cada lunes.</p><p>Si quieres verlo desde dentro, el <a href="@free-video-chat">videochat gratis</a> está a un registro de distancia.</p>',
+          html: '<p>Más allá de lo básico, hemos querido que cada conversación tenga algo más que «hola» y «siguiente». Por eso hay <strong>juegos durante la llamada</strong> (Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina), un <strong>modo picante</strong> 🌶️ que solo se activa entre quienes lo eligen, <strong>traducción automática</strong> en el chat de texto y un sistema de <strong>guindillas</strong> con rachas, insignias, retos semanales y un ranking que premia con días de Premium a los tres primeros cada lunes.</p><p>Si quieres verlo desde dentro, el <a href="@free-video-chat">videochat gratis</a> está a un clic de distancia, sin registro.</p>',
         },
         {
           h2: 'Un consejo antes de cambiar de web',
@@ -263,7 +263,7 @@ module.exports = {
       faq: [
         { q: '¿Cuál es la mejor alternativa a Omegle?', a: 'Depende de lo que busques. Te recomendamos fijarte en la edad mínima, la privacidad, la moderación y lo que incluye gratis, y probar varias opciones.' },
         { q: '¿La Ruleta Caliente tiene relación con estas webs?', a: 'No. Es un servicio independiente; nombramos otras webs solo porque mucha gente las busca y quiere saber qué hay aquí.' },
-        { q: '¿Puedo probar La Ruleta Caliente sin pagar?', a: 'Sí. Te registras gratis y puedes hacer videochat aleatorio sin límite. Premium es opcional.' },
+        { q: '¿Puedo probar La Ruleta Caliente sin pagar?', a: 'Sí. Entras gratis, sin registrarte, y puedes hacer videochat aleatorio sin límite. Premium es opcional.' },
       ],
     },
     'alt-omegle': {
@@ -272,15 +272,15 @@ module.exports = {
       title: 'Alternativa a Omegle con vídeo · La Ruleta Caliente',
       description: 'Omegle cerró en noviembre de 2023. Si buscas una alternativa a Omegle para hablar con desconocidos por vídeo, esto es lo que encontrarás aquí. +18.',
       h1: 'Alternativa a Omegle: sigue conociendo gente por vídeo',
-      intro: '<p>Omegle cerró en <strong>noviembre de 2023</strong>, y desde entonces mucha gente busca una <strong>alternativa a Omegle</strong> para seguir haciendo lo que hacía allí: hablar con desconocidos por vídeo, sin saber quién aparecerá. Si es tu caso, en La Ruleta Caliente encontrarás un videochat aleatorio 1 a 1, gratis para empezar y desde el navegador.</p><p>Una diferencia importante desde el principio: aquí <strong>solo pueden entrar mayores de 18</strong> y hace falta crear una cuenta. Te explicamos por qué y qué más hay.</p>',
+      intro: '<p>Omegle cerró en <strong>noviembre de 2023</strong>, y desde entonces mucha gente busca una <strong>alternativa a Omegle</strong> para seguir haciendo lo que hacía allí: hablar con desconocidos por vídeo, sin saber quién aparecerá. Si es tu caso, en La Ruleta Caliente encontrarás un videochat aleatorio 1 a 1, gratis para empezar y desde el navegador.</p><p>Una diferencia importante desde el principio: aquí <strong>solo pueden entrar mayores de 18</strong>. No hace falta registrarse, pero sí confirmar tu edad. Te explicamos por qué y qué más hay.</p>',
       sections: [
         {
           h2: 'Lo que encuentras en La Ruleta Caliente',
-          html: '<table><thead><tr><th>Característica</th><th>Aquí</th></tr></thead><tbody><tr><td>Videochat aleatorio 1 a 1</td><td>✓ En vivo, con gente de todo el mundo</td></tr><tr><td>Sin descargas</td><td>✓ Navegador de móvil y ordenador; instalable como app</td></tr><tr><td>Gratis para empezar</td><td>✓ Premium opcional</td></tr><tr><td>Chat de texto</td><td>✓ Con traducción automática</td></tr><tr><td>Juegos en la llamada</td><td>✓ Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera, Dibujo y adivina</td></tr><tr><td>Tu IP oculta</td><td>✓ El vídeo pasa por nuestro servidor</td></tr><tr><td>Edad mínima</td><td>18 años, con cuenta</td></tr><tr><td>Denuncias</td><td>✓ Revisión humana</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Característica</th><th>Aquí</th></tr></thead><tbody><tr><td>Videochat aleatorio 1 a 1</td><td>✓ En vivo, con gente de todo el mundo</td></tr><tr><td>Sin descargas</td><td>✓ Navegador de móvil y ordenador; instalable como app</td></tr><tr><td>Gratis para empezar</td><td>✓ Premium opcional</td></tr><tr><td>Chat de texto</td><td>✓ Con traducción automática</td></tr><tr><td>Juegos en la llamada</td><td>✓ Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera, Dibujo y adivina</td></tr><tr><td>Tu IP oculta</td><td>✓ El vídeo pasa por nuestro servidor</td></tr><tr><td>Edad mínima</td><td>18 años, confirmados al entrar</td></tr><tr><td>Denuncias</td><td>✓ Revisión humana</td></tr></tbody></table>',
         },
         {
-          h2: 'Por qué aquí hace falta cuenta',
-          html: '<p>Si echabas de menos entrar y hablar sin más, pedir un registro puede parecer un paso extra. Lo hacemos por una razón sencilla: un videochat con desconocidos necesita que todas las personas sean adultas y que quien incumpla las normas pueda ser expulsado de verdad. Con una cuenta (email, Google, Apple o Facebook) y la confirmación de que tienes 18 años o más, la comunidad es más fácil de cuidar.</p><p>El registro lleva menos de un minuto, y después la experiencia es la que buscas: pulsar empezar y ver aparecer a alguien nuevo.</p>',
+          h2: 'Sin registro, pero solo para adultos',
+          html: '<p>Si echabas de menos entrar y hablar sin más, aquí puedes hacerlo: no hace falta registrarse. Solo eliges tu género, pones tu fecha de nacimiento y confirmas que tienes 18 años o más. Lo pedimos por una razón sencilla: un videochat con desconocidos necesita que todas las personas sean adultas y que quien incumpla las normas pueda ser expulsado de verdad.</p><p>Si quieres, puedes crear una cuenta (email o Google) para guardar tu progreso en cualquier dispositivo; solo es obligatoria para pagar Premium. Lo demás es la experiencia que buscas: pulsar empezar y ver aparecer a alguien nuevo.</p>',
         },
         {
           h2: 'La esencia de siempre, con extras',
@@ -298,7 +298,7 @@ module.exports = {
       faq: [
         { q: '¿Omegle sigue funcionando?', a: 'No. Omegle cerró en noviembre de 2023. Desde entonces mucha gente busca otras webs para hablar con desconocidos por vídeo.' },
         { q: '¿La Ruleta Caliente es el nuevo Omegle?', a: 'No, es un servicio independiente sin relación con Omegle. Ofrece videochat aleatorio con sus propias funciones y normas, solo para mayores de 18.' },
-        { q: '¿Puedo usarlo sin registrarme como en Omegle?', a: 'No, aquí hace falta una cuenta y confirmar que tienes 18 años o más. El registro es gratuito y rápido.' },
+        { q: '¿Puedo usarlo sin registrarme como en Omegle?', a: 'Sí, puedes entrar sin registrarte: solo confirmas que tienes 18 años o más. La cuenta es opcional, para guardar tu progreso o pagar Premium.' },
         { q: '¿Hay chat de texto además del vídeo?', a: 'Sí, durante la videollamada tienes un chat de texto con traducción automática.' },
       ],
     },
@@ -328,7 +328,7 @@ module.exports = {
         },
         {
           h2: 'Normas claras desde el primer giro',
-          html: '<p>Para que la ruleta sea divertida, todos tienen que jugar limpio. Exigimos cuenta y ser mayor de 18, prohibimos grabar (el vídeo lleva marca de agua invisible) y revisamos las denuncias con personas reales. Tu IP no es visible para nadie porque el vídeo pasa por nuestro servidor. Repasa las <a href="@rules">normas de la comunidad</a> y, si te interesan otras opciones, el índice de <a href="@alternatives">alternativas</a>.</p>',
+          html: '<p>Para que la ruleta sea divertida, todos tienen que jugar limpio. Exigimos ser mayor de 18, prohibimos grabar (el vídeo lleva marca de agua invisible) y revisamos las denuncias con personas reales. Tu IP no es visible para nadie porque el vídeo pasa por nuestro servidor. Repasa las <a href="@rules">normas de la comunidad</a> y, si te interesan otras opciones, el índice de <a href="@alternatives">alternativas</a>.</p>',
         },
       ],
       faq: [
@@ -348,7 +348,7 @@ module.exports = {
       sections: [
         {
           h2: 'Lo que encuentras en La Ruleta Caliente',
-          html: '<table><thead><tr><th>Característica</th><th>Detalle</th></tr></thead><tbody><tr><td>Solo adultos</td><td>✓ Cuenta y confirmación de 18 años o más</td></tr><tr><td>Videochat 1 a 1 al azar</td><td>✓ En vivo, desde el navegador</td></tr><tr><td>Modo picante</td><td>✓ Juegos y piropos subidos de tono, solo si los dos lo activan</td></tr><tr><td>Elegir a quién ver</td><td>Con Premium: mujeres, hombres, trans o parejas</td></tr><tr><td>IP protegida</td><td>✓ El vídeo pasa por nuestro servidor</td></tr><tr><td>Contra grabaciones</td><td>✓ Marca de agua invisible y aviso de prohibición</td></tr><tr><td>Incógnito</td><td>✓ Superpoder que oculta tu edad y tu país durante una hora</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Característica</th><th>Detalle</th></tr></thead><tbody><tr><td>Solo adultos</td><td>✓ Confirmación de 18 años o más al entrar</td></tr><tr><td>Videochat 1 a 1 al azar</td><td>✓ En vivo, desde el navegador</td></tr><tr><td>Modo picante</td><td>✓ Juegos y piropos subidos de tono, solo si los dos lo activan</td></tr><tr><td>Elegir a quién ver</td><td>Con Premium: mujeres, hombres, trans o parejas</td></tr><tr><td>IP protegida</td><td>✓ El vídeo pasa por nuestro servidor</td></tr><tr><td>Contra grabaciones</td><td>✓ Marca de agua invisible y aviso de prohibición</td></tr><tr><td>Incógnito</td><td>✓ Superpoder que oculta tu edad y tu país durante una hora</td></tr></tbody></table>',
         },
         {
           h2: 'Picante, pero con interruptor',
@@ -364,7 +364,7 @@ module.exports = {
         },
         {
           h2: 'Cómo probarlo',
-          html: '<p>Crea tu cuenta gratis, confirma tu edad y empieza a girar la ruleta. Gratis tienes emparejamiento al azar, juegos, chat con traducción y guindillas. Si quieres elegir con quién coincides, Premium cuesta 7,99 € a la semana o 19,99 € al mes, incluye juegos y piropos picantes extra y se cancela cuando quieras. Y si sigues comparando opciones, tienes más en <a href="@alternatives">alternativas de videochat</a>.</p>',
+          html: '<p>Entra gratis y sin registro, confirma tu edad y empieza a girar la ruleta. Gratis tienes emparejamiento al azar, juegos, chat con traducción y guindillas. Si quieres elegir con quién coincides, Premium cuesta 7,99 € a la semana o 19,99 € al mes, incluye juegos y piropos picantes extra y se cancela cuando quieras. Y si sigues comparando opciones, tienes más en <a href="@alternatives">alternativas de videochat</a>.</p>',
         },
       ],
       faq: [
@@ -388,7 +388,7 @@ module.exports = {
         },
         {
           h2: 'Gratis primero, Premium si lo necesitas',
-          html: '<p>Nuestra forma de entender el videochat es que puedas probarlo de verdad antes de pagar nada. Con la cuenta gratuita haces todas las videollamadas aleatorias que quieras, juegas, chateas con traducción y acumulas guindillas 🌶️.</p><p>Premium tiene sentido cuando quieres más control: decidir si ves mujeres, hombres, personas trans o parejas; buscar gente de tu país o cercana; ajustar la edad; y olvidarte de los anuncios. Además incluye juegos y piropos picantes y superpoderes gratis cada día. Es una suscripción por semana o por mes, y la cancelas cuando quieras.</p>',
+          html: '<p>Nuestra forma de entender el videochat es que puedas probarlo de verdad antes de pagar nada. Sin pagar y sin registrarte haces todas las videollamadas aleatorias que quieras, juegas, chateas con traducción y acumulas guindillas 🌶️.</p><p>Premium tiene sentido cuando quieres más control: decidir si ves mujeres, hombres, personas trans o parejas; buscar gente de tu país o cercana; ajustar la edad; y olvidarte de los anuncios. Además incluye juegos y piropos picantes y superpoderes gratis cada día. Es una suscripción por semana o por mes, y la cancelas cuando quieras.</p>',
         },
         {
           h2: 'Tres formas de conseguir Premium sin pagar',
@@ -399,12 +399,12 @@ module.exports = {
           html: '<p>Es una de las búsquedas más frecuentes en cualquier videochat. Aquí la respuesta honesta es que la ruleta gratuita es aleatoria y el filtro de género forma parte de Premium. Una vez activado, puedes combinarlo con país y cercanía. Lo explicamos con más calma, incluidos consejos para causar buena impresión, en <a href="@video-chat-women">videochat con chicas</a>.</p><p>Recuerda que al otro lado hay personas reales que también eligen: un saludo amable y una pregunta interesante valen más que cualquier filtro.</p>',
         },
         {
-          h2: 'Lo que ya tienes con la cuenta gratuita',
+          h2: 'Lo que ya tienes gratis',
           html: '<p>Antes de decidir si te compensa Premium, conviene saber cuánto puedes hacer sin pagar: videollamadas al azar sin límite de tiempo, los cuatro juegos de la llamada, temas para romper el hielo, reacciones 👍 ❤️, añadir amigos, cambiar de cámara y el chat con traducción automática. Con las guindillas que vayas ganando puedes activar superpoderes como Rebobinar o Incógnito. Para muchas personas, eso es más que suficiente para pasar un buen rato.</p>',
         },
         {
           h2: 'Seguridad y respeto',
-          html: '<p>Para entrar hace falta cuenta y confirmar que tienes 18 años o más. El vídeo pasa por nuestro servidor, así que nadie ve tu IP; las grabaciones están prohibidas y el vídeo lleva marca de agua invisible. Las denuncias las revisan personas, con expulsiones y derecho a recurso. No compartas datos personales en las primeras charlas y desconfía de quien te pida dinero. Todo lo demás está en <a href="@safety">seguridad</a> y en el índice de <a href="@alternatives">alternativas</a>.</p>',
+          html: '<p>Para entrar no hace falta registrarse, pero sí confirmar que tienes 18 años o más. El vídeo pasa por nuestro servidor, así que nadie ve tu IP; las grabaciones están prohibidas y el vídeo lleva marca de agua invisible. Las denuncias las revisan personas, con expulsiones y derecho a recurso. No compartas datos personales en las primeras charlas y desconfía de quien te pida dinero. Todo lo demás está en <a href="@safety">seguridad</a> y en el índice de <a href="@alternatives">alternativas</a>.</p>',
         },
       ],
       faq: [
@@ -424,7 +424,7 @@ module.exports = {
       sections: [
         {
           h2: 'Lo que encuentras en La Ruleta Caliente',
-          html: '<table><thead><tr><th>Característica</th><th>Detalle</th></tr></thead><tbody><tr><td>Navegador del móvil y del ordenador</td><td>✓ Sin descargas</td></tr><tr><td>Instalable como app</td><td>✓ Desde el navegador, sin tienda de aplicaciones</td></tr><tr><td>Cambiar de cámara</td><td>✓ Frontal y trasera</td></tr><tr><td>Traducción automática</td><td>✓ En el chat de texto</td></tr><tr><td>Web en 6 idiomas</td><td>✓ Español, inglés, portugués, francés, alemán e italiano</td></tr><tr><td>Reacciones y amigos</td><td>✓ 👍 ❤️ y añadir amigos</td></tr><tr><td>Edad mínima</td><td>18 años, con cuenta</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Característica</th><th>Detalle</th></tr></thead><tbody><tr><td>Navegador del móvil y del ordenador</td><td>✓ Sin descargas</td></tr><tr><td>Instalable como app</td><td>✓ Desde el navegador, sin tienda de aplicaciones</td></tr><tr><td>Cambiar de cámara</td><td>✓ Frontal y trasera</td></tr><tr><td>Traducción automática</td><td>✓ En el chat de texto</td></tr><tr><td>Web en 6 idiomas</td><td>✓ Español, inglés, portugués, francés, alemán e italiano</td></tr><tr><td>Reacciones y amigos</td><td>✓ 👍 ❤️ y añadir amigos</td></tr><tr><td>Edad mínima</td><td>18 años, confirmados al entrar</td></tr></tbody></table>',
         },
         {
           h2: 'Hablar con el mundo sin barreras de idioma',
@@ -432,7 +432,7 @@ module.exports = {
         },
         {
           h2: 'De la cola a la conversación en segundos',
-          html: '<p>El flujo es muy directo:</p><ol><li>Entras con tu cuenta y pulsas empezar.</li><li>La ruleta te conecta con alguien al azar.</li><li>Si os entendéis, seguís; si no, <strong>Siguiente</strong> o Esc.</li><li>Cuando necesites un respiro, <strong>Parar</strong>.</li></ol><p>Si quieres esperar menos, activa <strong>Llama caliente</strong> con tus guindillas y durante 15 minutos saldrás antes en la cola. Todo el proceso está explicado en <a href="@how">cómo funciona</a>.</p>',
+          html: '<p>El flujo es muy directo:</p><ol><li>Entras, sin registro o con tu cuenta, y pulsas empezar.</li><li>La ruleta te conecta con alguien al azar.</li><li>Si os entendéis, seguís; si no, <strong>Siguiente</strong> o Esc.</li><li>Cuando necesites un respiro, <strong>Parar</strong>.</li></ol><p>Si quieres esperar menos, activa <strong>Llama caliente</strong> con tus guindillas y durante 15 minutos saldrás antes en la cola. Todo el proceso está explicado en <a href="@how">cómo funciona</a>.</p>',
         },
         {
           h2: 'Ideal para el móvil',
@@ -444,7 +444,7 @@ module.exports = {
         },
         {
           h2: 'Una comunidad con reglas',
-          html: '<p>Para que la ruleta sea un sitio agradable, pedimos cuenta y mayoría de edad, prohibimos grabar y revisamos las denuncias con personas. Tu IP no se muestra a nadie porque el vídeo pasa por nuestro servidor. Si alguien incumple las <a href="@rules">normas</a>, denúncialo y pasa al siguiente. Y si estás comparando opciones, mira el resto de <a href="@alternatives">alternativas de videochat</a>.</p>',
+          html: '<p>Para que la ruleta sea un sitio agradable, pedimos mayoría de edad, prohibimos grabar y revisamos las denuncias con personas. Tu IP no se muestra a nadie porque el vídeo pasa por nuestro servidor. Si alguien incumple las <a href="@rules">normas</a>, denúncialo y pasa al siguiente. Y si estás comparando opciones, mira el resto de <a href="@alternatives">alternativas de videochat</a>.</p>',
         },
       ],
       faq: [
@@ -484,7 +484,7 @@ module.exports = {
         },
         {
           h2: 'Diversión sí, riesgos no',
-          html: '<p>Ninguna recompensa vale más que tu seguridad. Solo pueden entrar mayores de 18 con cuenta, el vídeo pasa por nuestro servidor para que nadie vea tu IP y grabar está prohibido. Si alguien te ofrece premios, regalos o «ventajas» a cambio de seguir la conversación en otra app o de darle tus datos, desconfía: las guindillas se ganan participando dentro de la web, sin intermediarios. Tienes más pautas en <a href="@safety">seguridad</a>, y más comparativas en <a href="@alternatives">alternativas de videochat</a>.</p>',
+          html: '<p>Ninguna recompensa vale más que tu seguridad. Solo pueden entrar mayores de 18, el vídeo pasa por nuestro servidor para que nadie vea tu IP y grabar está prohibido. Si alguien te ofrece premios, regalos o «ventajas» a cambio de seguir la conversación en otra app o de darle tus datos, desconfía: las guindillas se ganan participando dentro de la web, sin intermediarios. Tienes más pautas en <a href="@safety">seguridad</a>, y más comparativas en <a href="@alternatives">alternativas de videochat</a>.</p>',
         },
       ],
       faq: [
@@ -508,7 +508,7 @@ module.exports = {
         },
         {
           h2: 'Gente de tu ciudad o del resto del mundo',
-          html: '<p>Con la cuenta gratuita, la ruleta busca en todo el mundo. Es genial para charlar con gente de Latinoamérica sin cambiar de idioma o para practicar inglés, francés o italiano con quien está al otro lado.</p><p>Si lo que te apetece es coincidir con alguien de aquí, Premium incluye el filtro <strong>«Mi país»</strong> y la opción de <strong>cercanía</strong>, para conocer gente de España o de tu zona. También permite elegir a quién ver (mujeres, hombres, trans o parejas) y filtrar por edad.</p>',
+          html: '<p>En la versión gratuita, la ruleta busca en todo el mundo. Es genial para charlar con gente de Latinoamérica sin cambiar de idioma o para practicar inglés, francés o italiano con quien está al otro lado.</p><p>Si lo que te apetece es coincidir con alguien de aquí, Premium incluye el filtro <strong>«Mi país»</strong> y la opción de <strong>cercanía</strong>, para conocer gente de España o de tu zona. También permite elegir a quién ver (mujeres, hombres, trans o parejas) y filtrar por edad.</p>',
         },
         {
           h2: 'Un país con varias lenguas',
@@ -531,7 +531,7 @@ module.exports = {
         { q: '¿Puedo hablar solo con gente de España?', a: 'Sí, con Premium puedes usar el filtro «Mi país» o la cercanía. En la versión gratuita la ruleta busca en todo el mundo.' },
         { q: '¿A qué hora es la Hora caliente en España?', a: 'Cada noche de 22:00 a 23:00, hora de España. Durante esa hora las guindillas valen el doble.' },
         { q: '¿Cuánto cuesta Premium en España?', a: 'Cuesta 7,99 € a la semana o 19,99 € al mes, se paga en euros y se cancela cuando quieras.' },
-        { q: '¿Hay que tener 18 años?', a: 'Sí. Es un videochat solo para mayores de 18 y hay que confirmarlo al crear la cuenta.' },
+        { q: '¿Hay que tener 18 años?', a: 'Sí. Es un videochat solo para mayores de 18 y hay que confirmarlo al entrar.' },
       ],
     },
     'country-mx': {
@@ -544,7 +544,7 @@ module.exports = {
       sections: [
         {
           h2: 'Videollamadas al azar, desde el celular',
-          html: '<p>En México se buscan cosas como «videochat», «videollamada con desconocidos», «chat con cámara» o «platicar con gente nueva». La idea es la misma: abrir la cámara y ver quién aparece. Así de fácil es empezar:</p><ol><li>Entra desde el navegador de tu celular o compu.</li><li>Crea tu cuenta con correo o con Google, Apple o Facebook.</li><li>Da permiso a la cámara y al micrófono y pícale a empezar.</li></ol><p>Si quieres tenerla a la mano, la puedes instalar en la pantalla de inicio. Más detalles en <a href="@mobile-video-chat">videochat desde el celular</a>.</p>',
+          html: '<p>En México se buscan cosas como «videochat», «videollamada con desconocidos», «chat con cámara» o «platicar con gente nueva». La idea es la misma: abrir la cámara y ver quién aparece. Así de fácil es empezar:</p><ol><li>Entra desde el navegador de tu celular o compu.</li><li>Entra sin registro: elige tu género y pon tu fecha de nacimiento (la cuenta con correo o Google es opcional).</li><li>Da permiso a la cámara y al micrófono y pícale a empezar.</li></ol><p>Si quieres tenerla a la mano, la puedes instalar en la pantalla de inicio. Más detalles en <a href="@mobile-video-chat">videochat desde el celular</a>.</p>',
         },
         {
           h2: 'Gente de México o de todo el mundo',
@@ -584,7 +584,7 @@ module.exports = {
       sections: [
         {
           h2: 'Cómo arrancar',
-          html: '<p>Ya sea que lo busques como «videochat», «chat con cámara» o «videollamada con desconocidos», el proceso es corto:</p><ol><li>Abrí la web en el navegador.</li><li>Creá tu cuenta con mail o con Google, Apple o Facebook, y confirmá que tenés 18 o más.</li><li>Dale permiso a la cámara y tocá empezar.</li></ol><p>Durante la charla, <strong>Siguiente</strong> te lleva con otra persona y <strong>Parar</strong> te deja descansar. Está todo explicado en <a href="@how">cómo funciona</a>.</p>',
+          html: '<p>Ya sea que lo busques como «videochat», «chat con cámara» o «videollamada con desconocidos», el proceso es corto:</p><ol><li>Abrí la web en el navegador.</li><li>Entrá sin registrarte: elegí tu género, poné tu fecha de nacimiento y confirmá que tenés 18 o más.</li><li>Dale permiso a la cámara y tocá empezar.</li></ol><p>Durante la charla, <strong>Siguiente</strong> te lleva con otra persona y <strong>Parar</strong> te deja descansar. Está todo explicado en <a href="@how">cómo funciona</a>.</p>',
         },
         {
           h2: 'Argentinos o gente de todo el planeta',
@@ -611,7 +611,7 @@ module.exports = {
         { q: '¿Funciona en el celu sin bajar nada?', a: 'Sí, funciona en el navegador del celular. Si querés, la podés agregar a la pantalla de inicio como una app.' },
         { q: '¿Puedo charlar solo con gente de Argentina?', a: 'Con Premium podés usar el filtro «Mi país» o la cercanía. En la versión gratis la ruleta conecta con gente de todo el mundo.' },
         { q: '¿En qué moneda se cobra Premium?', a: 'En euros. Si pagás con tarjeta argentina, tu banco convierte el importe a tu moneda.' },
-        { q: '¿Es para menores?', a: 'No. Es un videochat exclusivo para mayores de 18 y hay que confirmarlo al registrarse.' },
+        { q: '¿Es para menores?', a: 'No. Es un videochat exclusivo para mayores de 18 y hay que confirmarlo al entrar.' },
       ],
     },
     'country-co': {
@@ -640,7 +640,7 @@ module.exports = {
         },
         {
           h2: 'Pagos en euros con tarjeta colombiana',
-          html: '<p>Usar el videochat no cuesta nada. Si quieres Premium, cuesta <strong>7,99 € a la semana</strong> o <strong>19,99 € al mes</strong>; los precios están en euros y tu banco convierte el cobro a pesos colombianos. Se cancela cuando quieras. ¿Tienes un parcero que también quiera probar? Invítalo con tu enlace: cuando tenga su primera conversación de más de un minuto, ambos reciben un día de Premium.</p>',
+          html: '<p>Usar el videochat no cuesta nada. Si quieres Premium, cuesta <strong>7,99 € a la semana</strong> o <strong>19,99 € al mes</strong>; los precios están en euros y tu banco convierte el cobro a pesos colombianos. Se cancela cuando quieras. ¿Tienes un parcero que también quiera probar? Invítalo con tu enlace: cuando se registre y tenga su primera conversación de más de un minuto, ambos reciben un día de Premium.</p>',
         },
         {
           h2: 'Cuídate mientras chateas',
@@ -648,7 +648,7 @@ module.exports = {
         },
       ],
       faq: [
-        { q: '¿Es gratis el videochat en Colombia?', a: 'Sí, crear la cuenta y hacer videollamadas al azar es gratis. Premium es opcional.' },
+        { q: '¿Es gratis el videochat en Colombia?', a: 'Sí, entrar sin registro y hacer videollamadas al azar es gratis. Premium es opcional.' },
         { q: '¿Puedo conocer gente de mi ciudad?', a: 'Con Premium puedes usar los filtros «Mi país» y cercanía para coincidir con gente más cerca de ti.' },
         { q: '¿Cómo pago Premium desde Colombia?', a: 'Con tu tarjeta. El precio está en euros y tu banco hace la conversión a pesos colombianos.' },
         { q: '¿Funciona con datos móviles?', a: 'Sí, aunque una videollamada consume bastantes datos. Si puedes, usa wifi para una imagen más estable.' },
@@ -668,7 +668,7 @@ module.exports = {
         },
         {
           h2: 'Gente de Chile o de cualquier país',
-          html: '<p>Con la cuenta gratuita, la ruleta busca en todo el mundo. Si prefieres conversar con chilenos, Premium incluye el filtro <strong>«Mi país»</strong> y la opción de <strong>cercanía</strong>, útil en un país tan largo para encontrar gente de tu zona. Además puedes elegir a quién ver (mujeres, hombres, trans o parejas) y filtrar por edad.</p><p>¿Te toca alguien que no habla español? El chat de texto traduce automáticamente lo que escriben los dos.</p>',
+          html: '<p>Sin pagar nada, la ruleta busca en todo el mundo. Si prefieres conversar con chilenos, Premium incluye el filtro <strong>«Mi país»</strong> y la opción de <strong>cercanía</strong>, útil en un país tan largo para encontrar gente de tu zona. Además puedes elegir a quién ver (mujeres, hombres, trans o parejas) y filtrar por edad.</p><p>¿Te toca alguien que no habla español? El chat de texto traduce automáticamente lo que escriben los dos.</p>',
         },
         {
           h2: 'Cinco formas de que la conversa fluya',
@@ -704,7 +704,7 @@ module.exports = {
       sections: [
         {
           h2: 'Chatear con cámara en pocos pasos',
-          html: '<p>Lo buscas como «videochat», «chat con cámara», «videollamada con desconocidos» o «chatear con peruanos», y llegas a lo mismo: una ruleta de video. Para empezar:</p><ul><li>Regístrate con tu correo o con Google, Apple o Facebook.</li><li>Confirma que tienes 18 años o más.</li><li>Acepta el permiso de cámara y micrófono.</li><li>Pulsa empezar y saluda a quien aparezca.</li></ul><p>Tienes el paso a paso completo en <a href="@how">cómo funciona</a>.</p>',
+          html: '<p>Lo buscas como «videochat», «chat con cámara», «videollamada con desconocidos» o «chatear con peruanos», y llegas a lo mismo: una ruleta de video. Para empezar:</p><ul><li>Entra sin registro eligiendo tu género y tu fecha de nacimiento.</li><li>Confirma que tienes 18 años o más.</li><li>Acepta el permiso de cámara y micrófono.</li><li>Pulsa empezar y saluda a quien aparezca.</li></ul><p>Tienes el paso a paso completo en <a href="@how">cómo funciona</a>.</p>',
         },
         {
           h2: 'Un país de muchas lenguas',
@@ -728,7 +728,7 @@ module.exports = {
         },
       ],
       faq: [
-        { q: '¿Hay que pagar para usar el videochat en Perú?', a: 'No. Registrarse y hacer videollamadas al azar es gratis. Premium es opcional.' },
+        { q: '¿Hay que pagar para usar el videochat en Perú?', a: 'No. Entrar y hacer videollamadas al azar es gratis, y no hace falta registrarse. Premium es opcional.' },
         { q: '¿Puedo hablar con alguien que solo habla inglés?', a: 'Sí. El chat de texto traduce automáticamente los mensajes entre idiomas.' },
         { q: '¿Me cobran en soles?', a: 'Los precios están en euros. Al pagar con tarjeta peruana, tu banco hace la conversión a soles.' },
         { q: '¿Qué hago si alguien me pide dinero?', a: 'No envíes nada, corta la conversación y denuncia la cuenta. Un equipo humano revisa cada caso.' },
@@ -744,7 +744,7 @@ module.exports = {
       sections: [
         {
           h2: 'Videollamadas con desconocidos, sin complicaciones',
-          html: '<p>«Videochat», «chat con cámara», «videollamada» o «conocer gente por internet»: lo busques como lo busques, aquí funciona igual. Te registras, das permiso a la cámara y la ruleta te pone con alguien. ¿No hay química? <strong>Siguiente</strong>. ¿Necesitas una pausa? <strong>Parar</strong>.</p>',
+          html: '<p>«Videochat», «chat con cámara», «videollamada» o «conocer gente por internet»: lo busques como lo busques, aquí funciona igual. Entras sin registrarte, das permiso a la cámara y la ruleta te pone con alguien. ¿No hay química? <strong>Siguiente</strong>. ¿Necesitas una pausa? <strong>Parar</strong>.</p>',
         },
         {
           h2: 'Si tu conexión no es la mejor',
@@ -784,7 +784,7 @@ module.exports = {
       sections: [
         {
           h2: 'Videochat en el navegador',
-          html: '<p>Da igual si lo buscas como «videochat Ecuador», «chat con cámara» o «videollamadas con gente nueva»: en La Ruleta Caliente no hay que instalar nada. Abres la web, creas tu cuenta con correo o con Google, Apple o Facebook, confirmas tu edad y listo. Si te gusta, la puedes anclar a la pantalla de inicio como si fuera una app. Lo tienes explicado en <a href="@mobile-video-chat">videochat desde el celular</a>.</p>',
+          html: '<p>Da igual si lo buscas como «videochat Ecuador», «chat con cámara» o «videollamadas con gente nueva»: en La Ruleta Caliente no hay que instalar nada. Abres la web, eliges tu género, confirmas tu edad y listo: no hace falta registrarse. Si te gusta, la puedes anclar a la pantalla de inicio como si fuera una app. Lo tienes explicado en <a href="@mobile-video-chat">videochat desde el celular</a>.</p>',
         },
         {
           h2: 'Gente de Ecuador o de otros países',
@@ -808,10 +808,10 @@ module.exports = {
         },
       ],
       faq: [
-        { q: '¿Es gratis el videochat en Ecuador?', a: 'Sí. Crear la cuenta y conocer gente al azar por videollamada no cuesta nada.' },
+        { q: '¿Es gratis el videochat en Ecuador?', a: 'Sí. Entrar sin registro y conocer gente al azar por videollamada no cuesta nada.' },
         { q: '¿Me cobran en dólares?', a: 'Los precios están en euros y tu banco convierte el cobro a dólares cuando pagas Premium.' },
         { q: '¿Puedo conocer gente de mi ciudad?', a: 'Con Premium puedes usar el filtro «Mi país» y la cercanía para coincidir con gente más cerca.' },
-        { q: '¿Es solo para adultos?', a: 'Sí, es exclusivo para mayores de 18 y hay que confirmar la edad al registrarse.' },
+        { q: '¿Es solo para adultos?', a: 'Sí, es exclusivo para mayores de 18 y hay que confirmar la edad al entrar.' },
       ],
     },
   },

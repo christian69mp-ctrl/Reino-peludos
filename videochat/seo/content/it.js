@@ -8,7 +8,7 @@ module.exports = {
     alternatives: 'Alternative ad altri siti',
     faq: 'Domande frequenti',
     ctaTitle: 'Iniziamo?',
-    ctaText: 'Crea il tuo account gratis e conosci qualcuno di nuovo in pochi secondi.',
+    ctaText: 'Entra gratis, senza registrazione, e conosci qualcuno di nuovo in pochi secondi.',
     ctaButton: 'Inizia la videochat gratis',
     adultNote: 'Solo per maggiori di 18 anni.',
     disclaimer: '{brand} è un marchio del rispettivo titolare. La Ruleta Caliente non è affiliata a {brand} né sponsorizzata da essa; lo citiamo solo a scopo di confronto.',
@@ -21,11 +21,11 @@ module.exports = {
       title: 'Videochat gratis con sconosciuti · La Ruleta Caliente',
       description: 'Videochat gratis 1 a 1 con persone di tutto il mondo: dal browser, senza download, con traduzione in chat, giochi e peperoncini 🌶️. Solo 18+.',
       h1: 'Videochat gratis: conosci gente nuova dal vivo, con un clic',
-      intro: '<p>Cerchi una <strong>videochat gratis</strong> per parlare faccia a faccia con persone nuove? Su La Ruleta Caliente premi «Inizia», accendi la fotocamera e in pochi secondi ti ritrovi in una conversazione 1 a 1 con qualcuno scelto a caso, da qualsiasi parte del mondo. Niente programmi da installare: funziona nel browser del telefono e del computer.</p><p>Iniziare non costa nulla. Ti serve solo un account e confermare di avere almeno 18 anni, perché qui si entra solo da maggiorenni.</p>',
+      intro: '<p>Cerchi una <strong>videochat gratis</strong> per parlare faccia a faccia con persone nuove? Su La Ruleta Caliente premi «Inizia», accendi la fotocamera e in pochi secondi ti ritrovi in una conversazione 1 a 1 con qualcuno scelto a caso, da qualsiasi parte del mondo. Niente programmi da installare: funziona nel browser del telefono e del computer.</p><p>Iniziare non costa nulla. Non serve registrarsi: basta confermare di avere almeno 18 anni, perché qui si entra solo da maggiorenni.</p>',
       sections: [
         {
           h2: 'Come funziona la videochat gratis',
-          html: '<ol><li><strong>Crea il tuo account</strong> con l’email oppure con Google, Apple o Facebook, e conferma che sei maggiorenne.</li><li><strong>Premi «Inizia»</strong> e consenti l’accesso a fotocamera e microfono: ti colleghiamo subito con un’altra persona online.</li><li><strong>Chiacchiera</strong> a voce, in video o per iscritto. Se non scatta la scintilla, tocca <strong>Avanti</strong> (o premi Esc) e passi a qualcun altro.</li><li>Quando vuoi fare una pausa, premi <strong>Ferma</strong>.</li></ol><p>Tutto qui. Se vuoi i dettagli passo per passo, dai un’occhiata a <a href="@how">come funziona</a>.</p>',
+          html: '<ol><li><strong>Entra senza registrazione</strong>: scegli il tuo genere, indica la tua data di nascita e conferma che sei maggiorenne.</li><li><strong>Premi «Inizia»</strong> e consenti l’accesso a fotocamera e microfono: ti colleghiamo subito con un’altra persona online.</li><li><strong>Chiacchiera</strong> a voce, in video o per iscritto. Se non scatta la scintilla, tocca <strong>Avanti</strong> (o premi Esc) e passi a qualcun altro.</li><li>Quando vuoi fare una pausa, premi <strong>Ferma</strong>.</li></ol><p>Tutto qui. Se vuoi i dettagli passo per passo, dai un’occhiata a <a href="@how">come funziona</a>.</p>',
         },
         {
           h2: 'Cosa trovi gratis, senza pagare nulla',
@@ -46,7 +46,7 @@ module.exports = {
       ],
       faq: [
         { q: 'La videochat è davvero gratis?', a: 'Sì. Puoi videochattare con persone casuali, usare la chat tradotta, giocare e guadagnare peperoncini senza pagare. Premium è facoltativo e serve solo per filtri ed extra.' },
-        { q: 'Devo registrarmi per usare la videochat?', a: 'Sì, serve un account gratuito con email oppure Google, Apple o Facebook. Ci aiuta a tenere fuori i minorenni e chi non rispetta le regole.' },
+        { q: 'Devo registrarmi per usare la videochat?', a: 'No. Puoi entrare senza registrazione: scegli il tuo genere, indichi la data di nascita e confermi di avere almeno 18 anni. L’account è facoltativo e serve a salvare i tuoi progressi o a pagare Premium.' },
         { q: 'Devo scaricare qualcosa?', a: 'No, funziona nel browser del telefono o del computer. Se vuoi, puoi installarla come app sulla schermata Home in pochi secondi.' },
         { q: 'Posso scegliere se parlare con ragazze o ragazzi?', a: 'La chat gratuita è casuale. Con Premium puoi filtrare per donne, uomini, persone trans o coppie, oltre che per paese ed età.' },
       ],
@@ -57,7 +57,7 @@ module.exports = {
       title: 'Chat casuale in video, a roulette · La Ruleta Caliente',
       description: 'Chat casuale in video: un clic e ti colleghi con una persona a caso, da tutto il mondo. Avanti quando vuoi, giochi e traduzione in chat. Solo 18+.',
       h1: 'Chat casuale in video: la roulette delle persone nuove',
-      intro: '<p>Il bello di una <strong>chat casuale</strong> è che non sai mai chi troverai. Su La Ruleta Caliente la videochat funziona proprio come una roulette: premi «Inizia» e il sistema ti abbina a una persona a caso tra quelle online in quel momento. Se la conversazione decolla, resti; se no, un tocco su <strong>Avanti</strong> e la ruota gira di nuovo.</p><p>È gratis per iniziare, va nel browser e richiede solo un account da maggiorenne.</p>',
+      intro: '<p>Il bello di una <strong>chat casuale</strong> è che non sai mai chi troverai. Su La Ruleta Caliente la videochat funziona proprio come una roulette: premi «Inizia» e il sistema ti abbina a una persona a caso tra quelle online in quel momento. Se la conversazione decolla, resti; se no, un tocco su <strong>Avanti</strong> e la ruota gira di nuovo.</p><p>È gratis per iniziare, va nel browser e non richiede registrazione, solo la maggiore età.</p>',
       sections: [
         {
           h2: 'Perché una videochat casuale è diversa',
@@ -87,7 +87,7 @@ module.exports = {
       faq: [
         { q: 'Come funziona la chat casuale?', a: 'Premi «Inizia» e vieni abbinato a una persona a caso tra quelle connesse. Con Avanti, o il tasto Esc, passi alla successiva quando vuoi.' },
         { q: 'Posso tornare dalla persona di prima?', a: 'Sì, con il superpotere Riavvolgi, che si attiva con i peperoncini. Ti ricolleghi con la persona precedente solo se accetta anche lei.' },
-        { q: 'La chat casuale è anonima?', a: 'Nessuno vede il tuo IP, perché il video passa dal nostro server, e puoi non mostrare alcun nickname. Serve comunque un account per entrare.' },
+        { q: 'La chat casuale è anonima?', a: 'Nessuno vede il tuo IP, perché il video passa dal nostro server, e puoi non mostrare alcun nickname. Non serve nemmeno registrarsi: basta confermare di essere maggiorenne.' },
         { q: 'Quanto costa la roulette in video?', a: 'Iniziare è gratis. Premium, facoltativo, costa 7,99 € a settimana o 19,99 € al mese e aggiunge filtri ed extra.' },
       ],
     },
@@ -101,7 +101,7 @@ module.exports = {
       sections: [
         {
           h2: 'Perché una videochat solo 18+',
-          html: '<p>Una chat tra adulti ha bisogno di regole chiare. Per questo serve un account (email, Google, Apple o Facebook) e devi confermare la tua età prima di entrare. I minorenni non sono ammessi e chi prova ad aggirare la regola viene espulso.</p><p>Il risultato è un ambiente dove puoi essere te stesso: scherzare, fare complimenti, provare un gioco un po’ audace, sapendo che dall’altra parte c’è un altro adulto che ha scelto di essere lì.</p>',
+          html: '<p>Una chat tra adulti ha bisogno di regole chiare. Per questo, anche senza registrazione, devi indicare la tua data di nascita e confermare la tua età prima di entrare. I minorenni non sono ammessi e chi prova ad aggirare la regola viene espulso.</p><p>Il risultato è un ambiente dove puoi essere te stesso: scherzare, fare complimenti, provare un gioco un po’ audace, sapendo che dall’altra parte c’è un altro adulto che ha scelto di essere lì.</p>',
         },
         {
           h2: 'La Modalità piccante, solo se siete d’accordo in due',
@@ -133,7 +133,7 @@ module.exports = {
       title: 'Parlare con sconosciuti in video · La Ruleta Caliente',
       description: 'Vuoi parlare con sconosciuti? Videochat 1 a 1 con persone di tutto il mondo, traduzione automatica e giochi per rompere il ghiaccio. Solo per 18+.',
       h1: 'Parlare con sconosciuti, dal vivo e senza imbarazzo',
-      intro: '<p>A volte serve proprio questo: <strong>parlare con sconosciuti</strong>, persone che non fanno parte della tua cerchia e che non ti giudicano per quello che eri ieri. Su La Ruleta Caliente puoi farlo in videochat, 1 a 1, con chi è online in quel momento in qualsiasi angolo del mondo.</p><p>Ti serve solo un account gratuito, la fotocamera e almeno 18 anni.</p>',
+      intro: '<p>A volte serve proprio questo: <strong>parlare con sconosciuti</strong>, persone che non fanno parte della tua cerchia e che non ti giudicano per quello che eri ieri. Su La Ruleta Caliente puoi farlo in videochat, 1 a 1, con chi è online in quel momento in qualsiasi angolo del mondo.</p><p>Ti servono solo la fotocamera e almeno 18 anni, senza registrazione.</p>',
       sections: [
         {
           h2: 'Perché ci piace parlare con chi non conosciamo',
@@ -168,7 +168,7 @@ module.exports = {
       title: 'Videochat con ragazze e donne · La Ruleta Caliente',
       description: 'Videochat con ragazze e donne, ma anche uomini, persone trans e coppie: con Premium scegli chi vedere, per paese ed età. Solo per maggiorenni.',
       h1: 'Videochat con ragazze: scegli chi vuoi incontrare',
-      intro: '<p>Ti piacerebbe una <strong>videochat con ragazze</strong> invece di affidarti solo al caso? Su La Ruleta Caliente la chat gratuita è casuale, mentre con <strong>Premium</strong> puoi decidere chi vedere: donne, uomini, persone trans o coppie. Lo stesso filtro funziona per tutti, quindi anche le ragazze possono scegliere di parlare solo con ragazzi, o con altre ragazze.</p><p>Come sempre, si entra solo da maggiorenni e con un account.</p>',
+      intro: '<p>Ti piacerebbe una <strong>videochat con ragazze</strong> invece di affidarti solo al caso? Su La Ruleta Caliente la chat gratuita è casuale, mentre con <strong>Premium</strong> puoi decidere chi vedere: donne, uomini, persone trans o coppie. Lo stesso filtro funziona per tutti, quindi anche le ragazze possono scegliere di parlare solo con ragazzi, o con altre ragazze.</p><p>Come sempre, si entra solo da maggiorenni.</p>',
       sections: [
         {
           h2: 'Gratis o con filtro: le due modalità',
@@ -212,7 +212,7 @@ module.exports = {
       sections: [
         {
           h2: 'Perché senza app è più comodo',
-          html: '<ul><li><strong>Niente download</strong>: non occupi spazio e non devi aspettare installazioni.</li><li><strong>Sempre aggiornata</strong>: ogni volta che apri la pagina hai l’ultima versione.</li><li><strong>Stesso account ovunque</strong>: inizi dal telefono e continui dal computer, con gli stessi amici e peperoncini.</li></ul><p>La nostra chat non è sugli store: la trovi solo sul sito. Se qualcuno ti propone di scaricare una «app ufficiale» da altre parti, non fidarti.</p>',
+          html: '<ul><li><strong>Niente download</strong>: non occupi spazio e non devi aspettare installazioni.</li><li><strong>Sempre aggiornata</strong>: ogni volta che apri la pagina hai l’ultima versione.</li><li><strong>Stesso account ovunque</strong> (se ne crei uno): inizi dal telefono e continui dal computer, con gli stessi amici e peperoncini.</li></ul><p>La nostra chat non è sugli store: la trovi solo sul sito. Se qualcuno ti propone di scaricare una «app ufficiale» da altre parti, non fidarti.</p>',
         },
         {
           h2: 'Aggiungila alla schermata Home',
@@ -252,7 +252,7 @@ module.exports = {
       sections: [
         {
           h2: 'Cosa cerca chi vuole un’alternativa',
-          html: '<p>Chi cambia sito di videochat di solito cerca le stesse cose: entrare in fretta, trovare persone vere, sentirsi al sicuro e magari avere qualcosa da fare oltre a guardarsi in faccia. Abbiamo costruito La Ruleta Caliente attorno a questi bisogni:</p><ul><li>abbinamenti casuali immediati con chi è online, da tutto il mondo;</li><li>account obbligatorio e conferma della maggiore età;</li><li>giochi durante la chiamata per rompere il ghiaccio;</li><li>chat scritta con traduzione automatica;</li><li>un sistema di punti, i peperoncini 🌶️, che premia chi partecipa.</li></ul>',
+          html: '<p>Chi cambia sito di videochat di solito cerca le stesse cose: entrare in fretta, trovare persone vere, sentirsi al sicuro e magari avere qualcosa da fare oltre a guardarsi in faccia. Abbiamo costruito La Ruleta Caliente attorno a questi bisogni:</p><ul><li>abbinamenti casuali immediati con chi è online, da tutto il mondo;</li><li>accesso senza registrazione ma con conferma della maggiore età;</li><li>giochi durante la chiamata per rompere il ghiaccio;</li><li>chat scritta con traduzione automatica;</li><li>un sistema di punti, i peperoncini 🌶️, che premia chi partecipa.</li></ul>',
         },
         {
           h2: 'Le alternative più cercate',
@@ -260,7 +260,7 @@ module.exports = {
         },
         {
           h2: 'In breve: La Ruleta Caliente',
-          html: '<table><thead><tr><th>Caratteristica</th><th>Su La Ruleta Caliente</th></tr></thead><tbody><tr><td>Videochat 1 a 1 casuale</td><td>✓ Gratis</td></tr><tr><td>Senza download</td><td>✓ Nel browser, installabile come app</td></tr><tr><td>Solo maggiorenni</td><td>✓ Account e conferma dell’età</td></tr><tr><td>Traduzione in chat</td><td>✓ Automatica</td></tr><tr><td>Giochi in chiamata</td><td>✓ 4 giochi più Termometro dell’intesa</td></tr><tr><td>IP nascosto</td><td>✓ Il video passa dal nostro server</td></tr><tr><td>Filtri per genere, paese, età</td><td>Con Premium (7,99 €/settimana o 19,99 €/mese)</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Caratteristica</th><th>Su La Ruleta Caliente</th></tr></thead><tbody><tr><td>Videochat 1 a 1 casuale</td><td>✓ Gratis</td></tr><tr><td>Senza download</td><td>✓ Nel browser, installabile come app</td></tr><tr><td>Solo maggiorenni</td><td>✓ Conferma dell’età all’ingresso</td></tr><tr><td>Traduzione in chat</td><td>✓ Automatica</td></tr><tr><td>Giochi in chiamata</td><td>✓ 4 giochi più Termometro dell’intesa</td></tr><tr><td>IP nascosto</td><td>✓ Il video passa dal nostro server</td></tr><tr><td>Filtri per genere, paese, età</td><td>Con Premium (7,99 €/settimana o 19,99 €/mese)</td></tr></tbody></table>',
         },
         {
           h2: 'Più di una semplice roulette',
@@ -274,7 +274,7 @@ module.exports = {
       faq: [
         { q: 'Qual è una buona alternativa a Omegle?', a: 'Dipende da cosa cerchi. Se vuoi una videochat casuale 1 a 1, solo per maggiorenni, con giochi e traduzione, La Ruleta Caliente è un’opzione da provare gratis.' },
         { q: 'La Ruleta Caliente è collegata a questi siti?', a: 'No. È un servizio indipendente: citiamo gli altri siti solo per aiutarti a capire cosa trovi qui.' },
-        { q: 'Posso usare La Ruleta Caliente senza registrarmi?', a: 'No, serve un account gratuito. È uno dei modi in cui teniamo fuori i minorenni e chi non rispetta le regole.' },
+        { q: 'Posso usare La Ruleta Caliente senza registrarmi?', a: 'Sì. Non serve registrarsi: basta confermare di avere almeno 18 anni. L’account è facoltativo, per salvare i progressi o pagare Premium.' },
       ],
     },
     'alt-omegle': {
@@ -283,7 +283,7 @@ module.exports = {
       title: 'Alternativa a Omegle in videochat · La Ruleta Caliente',
       description: 'Omegle ha chiuso a novembre 2023. Cerchi un’alternativa? Videochat casuale 1 a 1, solo 18+, gratis, senza download e con traduzione in chat.',
       h1: 'Alternativa a Omegle: videochat casuale dopo la chiusura',
-      intro: '<p>Omegle ha chiuso a <strong>novembre 2023</strong> e da allora tantissime persone cercano un’<strong>alternativa a Omegle</strong> per continuare a parlare con sconosciuti in video. Se ti manca quella sensazione di «chissà chi trovo adesso», La Ruleta Caliente può interessarti: videochat dal vivo, 1 a 1, con persone scelte a caso da tutto il mondo.</p><p>Una differenza importante: qui si entra solo da maggiorenni e con un account.</p>',
+      intro: '<p>Omegle ha chiuso a <strong>novembre 2023</strong> e da allora tantissime persone cercano un’<strong>alternativa a Omegle</strong> per continuare a parlare con sconosciuti in video. Se ti manca quella sensazione di «chissà chi trovo adesso», La Ruleta Caliente può interessarti: videochat dal vivo, 1 a 1, con persone scelte a caso da tutto il mondo.</p><p>Una differenza importante: qui si entra solo da maggiorenni, confermando la propria età.</p>',
       sections: [
         {
           h2: 'Se ti manca Omegle, ecco cosa trovi qui',
@@ -291,11 +291,11 @@ module.exports = {
         },
         {
           h2: 'Cosa trovi su La Ruleta Caliente',
-          html: '<table><thead><tr><th>Caratteristica</th><th>Su La Ruleta Caliente</th></tr></thead><tbody><tr><td>Abbinamento casuale in video</td><td>✓ 1 a 1, gratis</td></tr><tr><td>Chat di testo</td><td>✓ Con traduzione automatica</td></tr><tr><td>Funziona nel browser</td><td>✓ Telefono e computer, nessun download</td></tr><tr><td>Accesso</td><td>Account e conferma dei 18 anni</td></tr><tr><td>Giochi in videochiamata</td><td>✓ Obbligo o verità, Cosa preferisci? e altri</td></tr><tr><td>Amici</td><td>✓ Aggiungi chi ti è piaciuto</td></tr><tr><td>Scegliere chi vedere</td><td>Con Premium</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Caratteristica</th><th>Su La Ruleta Caliente</th></tr></thead><tbody><tr><td>Abbinamento casuale in video</td><td>✓ 1 a 1, gratis</td></tr><tr><td>Chat di testo</td><td>✓ Con traduzione automatica</td></tr><tr><td>Funziona nel browser</td><td>✓ Telefono e computer, nessun download</td></tr><tr><td>Accesso</td><td>Senza registrazione, con conferma dei 18 anni</td></tr><tr><td>Giochi in videochiamata</td><td>✓ Obbligo o verità, Cosa preferisci? e altri</td></tr><tr><td>Amici</td><td>✓ Aggiungi chi ti è piaciuto</td></tr><tr><td>Scegliere chi vedere</td><td>Con Premium</td></tr></tbody></table>',
         },
         {
-          h2: 'Perché qui serve un account',
-          html: '<p>Molti rimpiangono la semplicità di entrare senza registrarsi. Noi abbiamo scelto un’altra strada: per usare la videochat serve un account (email, Google, Apple o Facebook) e devi confermare di avere almeno 18 anni. Ci vuole un minuto, ma permette di espellere davvero chi si comporta male e di tenere fuori i minorenni. In cambio, ritrovi i tuoi amici, i tuoi peperoncini e le tue medaglie ogni volta che torni.</p><p>L’account ti dà anche un po’ di controllo in più: puoi scegliere il nickname che vedranno gli altri (o lasciarlo vuoto), scaricare i tuoi dati o eliminare tutto quando vuoi. E puoi usarlo sia dal telefono sia dal computer, senza installare niente.</p>',
+          h2: 'Senza registrazione, ma solo per adulti',
+          html: '<p>Molti rimpiangono la semplicità di entrare senza registrarsi, e qui puoi farlo: scegli il tuo genere, indichi la data di nascita e confermi di avere almeno 18 anni. Ci vogliono pochi secondi, e permette di tenere fuori i minorenni e di espellere davvero chi si comporta male. Ritrovi i tuoi amici, i tuoi peperoncini e le tue medaglie ogni volta che torni dallo stesso dispositivo.</p><p>Se vuoi, puoi creare un account (email o Google) in qualsiasi momento: è facoltativo, serve solo per pagare Premium e ti dà un po’ di controllo in più: puoi scegliere il nickname che vedranno gli altri (o lasciarlo vuoto), scaricare i tuoi dati o eliminare tutto quando vuoi. E puoi usarlo sia dal telefono sia dal computer, senza installare niente.</p>',
         },
         {
           h2: 'Più cose da fare durante la chat',
@@ -309,7 +309,7 @@ module.exports = {
       faq: [
         { q: 'Omegle esiste ancora?', a: 'No, Omegle ha chiuso a novembre 2023. Da allora molte persone usano altre videochat casuali.' },
         { q: 'La Ruleta Caliente è il nuovo Omegle?', a: 'No, è un servizio diverso e indipendente, senza alcun legame con Omegle. Offre però una videochat casuale 1 a 1 con persone nuove.' },
-        { q: 'Si può usare senza registrarsi come Omegle?', a: 'No, qui serve un account gratuito e bisogna confermare di avere almeno 18 anni. Ci vuole un minuto.' },
+        { q: 'Si può usare senza registrarsi come Omegle?', a: 'Sì, qui non serve registrarsi: basta confermare di avere almeno 18 anni. Ci vogliono pochi secondi.' },
         { q: 'È gratis come alternativa a Omegle?', a: 'Sì, la videochat casuale è gratuita. Premium è facoltativo e aggiunge filtri per genere, paese ed età.' },
       ],
     },
@@ -327,7 +327,7 @@ module.exports = {
         },
         {
           h2: 'Cosa trovi su La Ruleta Caliente',
-          html: '<table><thead><tr><th>Caratteristica</th><th>Su La Ruleta Caliente</th></tr></thead><tbody><tr><td>Roulette di videochat 1 a 1</td><td>✓ Gratis</td></tr><tr><td>Tasto rapido per cambiare</td><td>✓ Avanti o Esc</td></tr><tr><td>Tornare alla persona di prima</td><td>✓ Superpotere Riavvolgi, se accetta</td></tr><tr><td>Giochi in chiamata</td><td>✓ 4 giochi e spunti per rompere il ghiaccio</td></tr><tr><td>Traduzione dei messaggi</td><td>✓ Automatica</td></tr><tr><td>Solo maggiorenni</td><td>✓ Con account</td></tr><tr><td>Filtri per genere, paese ed età</td><td>Con Premium</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Caratteristica</th><th>Su La Ruleta Caliente</th></tr></thead><tbody><tr><td>Roulette di videochat 1 a 1</td><td>✓ Gratis</td></tr><tr><td>Tasto rapido per cambiare</td><td>✓ Avanti o Esc</td></tr><tr><td>Tornare alla persona di prima</td><td>✓ Superpotere Riavvolgi, se accetta</td></tr><tr><td>Giochi in chiamata</td><td>✓ 4 giochi e spunti per rompere il ghiaccio</td></tr><tr><td>Traduzione dei messaggi</td><td>✓ Automatica</td></tr><tr><td>Solo maggiorenni</td><td>✓ Con conferma dell’età</td></tr><tr><td>Filtri per genere, paese ed età</td><td>Con Premium</td></tr></tbody></table>',
         },
         {
           h2: 'Il problema dell’Avanti troppo veloce',
@@ -339,7 +339,7 @@ module.exports = {
         },
         {
           h2: 'Una roulette con regole chiare',
-          html: '<p>Per partecipare serve un account e devi confermare di avere almeno 18 anni. Il video passa dal nostro server, così il tuo IP resta privato; registrare è vietato e ogni chiamata porta una filigrana invisibile. Puoi segnalare comportamenti scorretti e le segnalazioni sono esaminate da persone, non solo da un algoritmo. Prima di girare la ruota, dai un’occhiata alle <a href="@rules">regole della community</a>.</p><p>Vuoi capire meglio come funziona una <a href="@random-video-chat">chat casuale</a> da noi, o confrontare altre <a href="@alternatives">alternative</a>? Trovi tutto nelle pagine collegate.</p>',
+          html: '<p>Per partecipare non serve registrarsi, ma devi confermare di avere almeno 18 anni. Il video passa dal nostro server, così il tuo IP resta privato; registrare è vietato e ogni chiamata porta una filigrana invisibile. Puoi segnalare comportamenti scorretti e le segnalazioni sono esaminate da persone, non solo da un algoritmo. Prima di girare la ruota, dai un’occhiata alle <a href="@rules">regole della community</a>.</p><p>Vuoi capire meglio come funziona una <a href="@random-video-chat">chat casuale</a> da noi, o confrontare altre <a href="@alternatives">alternative</a>? Trovi tutto nelle pagine collegate.</p>',
         },
       ],
       faq: [
@@ -362,7 +362,7 @@ module.exports = {
         },
         {
           h2: 'Cosa trovi su La Ruleta Caliente',
-          html: '<table><thead><tr><th>Caratteristica</th><th>Su La Ruleta Caliente</th></tr></thead><tbody><tr><td>Videochat casuale tra adulti</td><td>✓ Solo 18+, con account</td></tr><tr><td>Modalità piccante</td><td>✓ Solo con consenso reciproco</td></tr><tr><td>Complimenti e giochi piccanti</td><td>Con Premium</td></tr><tr><td>IP nascosto</td><td>✓ Il video passa dal nostro server</td></tr><tr><td>Filigrana contro le registrazioni</td><td>✓ Invisibile, su ogni chiamata</td></tr><tr><td>Incognito</td><td>✓ Superpotere: nascondi età e paese per un’ora</td></tr><tr><td>Scegliere chi vedere</td><td>Con Premium: donne, uomini, trans o coppie</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Caratteristica</th><th>Su La Ruleta Caliente</th></tr></thead><tbody><tr><td>Videochat casuale tra adulti</td><td>✓ Solo 18+, senza registrazione</td></tr><tr><td>Modalità piccante</td><td>✓ Solo con consenso reciproco</td></tr><tr><td>Complimenti e giochi piccanti</td><td>Con Premium</td></tr><tr><td>IP nascosto</td><td>✓ Il video passa dal nostro server</td></tr><tr><td>Filigrana contro le registrazioni</td><td>✓ Invisibile, su ogni chiamata</td></tr><tr><td>Incognito</td><td>✓ Superpotere: nascondi età e paese per un’ora</td></tr><tr><td>Scegliere chi vedere</td><td>Con Premium: donne, uomini, trans o coppie</td></tr></tbody></table>',
         },
         {
           h2: 'Discrezione e privacy',
@@ -393,7 +393,7 @@ module.exports = {
       sections: [
         {
           h2: 'Due modi di usare la videochat',
-          html: '<p><strong>Gratis e casuale.</strong> Crei un account, confermi di avere 18 anni e premi Inizia. Ti colleghi con persone di ogni genere e paese, scelte a caso. Hai giochi, chat tradotta, reazioni, peperoncini e superpoteri, senza pagare.</p><p><strong>Con Premium.</strong> Se preferisci decidere tu, Premium ti permette di filtrare per <strong>donne, uomini, persone trans o coppie</strong>, e di aggiungere filtri per paese, vicinanza ed età. Costa 7,99 € a settimana o 19,99 € al mese e si disdice quando vuoi.</p><p>Premium aggiunge anche altre comodità: niente pubblicità, una cronologia di 30 giorni con le persone incontrate, la possibilità di vedere quando i tuoi amici sono online e di chiamarli, i giochi e i complimenti piccanti e alcuni superpoteri gratis ogni giorno. Ma è una scelta: chi non lo attiva continua a usare la videochat senza limiti di tempo.</p>',
+          html: '<p><strong>Gratis e casuale.</strong> Senza registrarti, confermi di avere 18 anni e premi Inizia. Ti colleghi con persone di ogni genere e paese, scelte a caso. Hai giochi, chat tradotta, reazioni, peperoncini e superpoteri, senza pagare.</p><p><strong>Con Premium.</strong> Se preferisci decidere tu, Premium ti permette di filtrare per <strong>donne, uomini, persone trans o coppie</strong>, e di aggiungere filtri per paese, vicinanza ed età. Costa 7,99 € a settimana o 19,99 € al mese e si disdice quando vuoi.</p><p>Premium aggiunge anche altre comodità: niente pubblicità, una cronologia di 30 giorni con le persone incontrate, la possibilità di vedere quando i tuoi amici sono online e di chiamarli, i giochi e i complimenti piccanti e alcuni superpoteri gratis ogni giorno. Ma è una scelta: chi non lo attiva continua a usare la videochat senza limiti di tempo.</p>',
         },
         {
           h2: 'Cosa trovi su La Ruleta Caliente',
@@ -433,7 +433,7 @@ module.exports = {
         },
         {
           h2: 'Cosa trovi su La Ruleta Caliente',
-          html: '<table><thead><tr><th>Caratteristica</th><th>Su La Ruleta Caliente</th></tr></thead><tbody><tr><td>Persone da tutto il mondo</td><td>✓ Abbinamento casuale gratuito</td></tr><tr><td>Traduzione dei messaggi</td><td>✓ Automatica, con testo originale</td></tr><tr><td>Sito in 6 lingue</td><td>✓ Italiano incluso</td></tr><tr><td>Dal telefono</td><td>✓ Nel browser, installabile come app</td></tr><tr><td>Cambiare fotocamera</td><td>✓ Frontale o posteriore</td></tr><tr><td>Filtro per paese</td><td>Con Premium</td></tr><tr><td>Solo maggiorenni</td><td>✓ Con account</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Caratteristica</th><th>Su La Ruleta Caliente</th></tr></thead><tbody><tr><td>Persone da tutto il mondo</td><td>✓ Abbinamento casuale gratuito</td></tr><tr><td>Traduzione dei messaggi</td><td>✓ Automatica, con testo originale</td></tr><tr><td>Sito in 6 lingue</td><td>✓ Italiano incluso</td></tr><tr><td>Dal telefono</td><td>✓ Nel browser, installabile come app</td></tr><tr><td>Cambiare fotocamera</td><td>✓ Frontale o posteriore</td></tr><tr><td>Filtro per paese</td><td>Con Premium</td></tr><tr><td>Solo maggiorenni</td><td>✓ Con conferma dell’età</td></tr></tbody></table>',
         },
         {
           h2: 'Dal telefono, senza scaricare niente',
@@ -460,7 +460,7 @@ module.exports = {
       title: 'Alternativa a Chatrandom · La Ruleta Caliente',
       description: 'Cerchi un’alternativa a Chatrandom? Videochat casuale con giochi, peperoncini, superpoteri e classifica settimanale. Gratis per iniziare, solo 18+.',
       h1: 'Alternativa a Chatrandom: la videochat casuale che si gioca',
-      intro: '<p>Chatrandom è uno dei tanti siti di videochat casuale. Se cerchi un’<strong>alternativa a Chatrandom</strong> e ti piacerebbe che ogni conversazione fosse anche un po’ un gioco, La Ruleta Caliente fa per te: oltre alla classica videochat 1 a 1 con sconosciuti, hai giochi in chiamata, punti chiamati peperoncini 🌶️, superpoteri, medaglie e una classifica settimanale con premi.</p><p>Si entra solo da maggiorenni, con un account gratuito.</p>',
+      intro: '<p>Chatrandom è uno dei tanti siti di videochat casuale. Se cerchi un’<strong>alternativa a Chatrandom</strong> e ti piacerebbe che ogni conversazione fosse anche un po’ un gioco, La Ruleta Caliente fa per te: oltre alla classica videochat 1 a 1 con sconosciuti, hai giochi in chiamata, punti chiamati peperoncini 🌶️, superpoteri, medaglie e una classifica settimanale con premi.</p><p>Si entra solo da maggiorenni, gratis e senza registrazione.</p>',
       sections: [
         {
           h2: 'Una videochat con dentro un gioco',
@@ -468,7 +468,7 @@ module.exports = {
         },
         {
           h2: 'Cosa trovi su La Ruleta Caliente',
-          html: '<table><thead><tr><th>Caratteristica</th><th>Su La Ruleta Caliente</th></tr></thead><tbody><tr><td>Videochat casuale 1 a 1</td><td>✓ Gratis</td></tr><tr><td>Giochi in chiamata</td><td>✓ Obbligo o verità, Cosa preferisci?, Carta, forbice, sasso, Disegna e indovina</td></tr><tr><td>Punti gratuiti</td><td>✓ Peperoncini 🌶️</td></tr><tr><td>Ora calda</td><td>✓ Punti doppi dalle 22:00 alle 23:00 (ora spagnola)</td></tr><tr><td>Medaglie e classifica</td><td>✓ Premium in palio ogni lunedì</td></tr><tr><td>Superpoteri</td><td>✓ 5, si attivano con i peperoncini</td></tr><tr><td>Solo maggiorenni</td><td>✓ Con account</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Caratteristica</th><th>Su La Ruleta Caliente</th></tr></thead><tbody><tr><td>Videochat casuale 1 a 1</td><td>✓ Gratis</td></tr><tr><td>Giochi in chiamata</td><td>✓ Obbligo o verità, Cosa preferisci?, Carta, forbice, sasso, Disegna e indovina</td></tr><tr><td>Punti gratuiti</td><td>✓ Peperoncini 🌶️</td></tr><tr><td>Ora calda</td><td>✓ Punti doppi dalle 22:00 alle 23:00 (ora spagnola)</td></tr><tr><td>Medaglie e classifica</td><td>✓ Premium in palio ogni lunedì</td></tr><tr><td>Superpoteri</td><td>✓ 5, si attivano con i peperoncini</td></tr><tr><td>Solo maggiorenni</td><td>✓ Con conferma dell’età</td></tr></tbody></table>',
         },
         {
           h2: 'I cinque superpoteri',

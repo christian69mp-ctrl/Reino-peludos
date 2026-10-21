@@ -8,7 +8,7 @@ module.exports = {
     alternatives: 'Alternatives to other sites',
     faq: 'Frequently asked questions',
     ctaTitle: 'Ready to start?',
-    ctaText: 'Create your free account and meet someone new in seconds.',
+    ctaText: 'Jump in free, no sign-up needed, and meet someone new in seconds.',
     ctaButton: 'Start free video chat',
     adultNote: '18+ only.',
     disclaimer: '{brand} is a trademark of its owner. La Ruleta Caliente is not affiliated with or sponsored by {brand}; we mention it only for comparison.',
@@ -29,7 +29,7 @@ module.exports = {
         },
         {
           h2: 'How to start a video chat in under a minute',
-          html: '<ol><li>Open La Ruleta Caliente in your phone or computer browser.</li><li>Create an account with your email or with Google, Apple or Facebook, and confirm you are 18 or older.</li><li>Allow camera and microphone access when the browser asks.</li><li>Press start: we connect you with someone who is online at that moment.</li></ol><p>That’s it. If you want more detail, the <a href="@how">how it works</a> page walks through every button.</p>',
+          html: '<ol><li>Open La Ruleta Caliente in your phone or computer browser.</li><li>Pick your gender, enter your date of birth and confirm you are 18 or older. No sign-up needed.</li><li>Allow camera and microphone access when the browser asks.</li><li>Press start: we connect you with someone who is online at that moment.</li></ol><p>That’s it. If you want more detail, the <a href="@how">how it works</a> page walks through every button.</p>',
         },
         {
           h2: 'More than a webcam roulette',
@@ -45,8 +45,8 @@ module.exports = {
         },
       ],
       faq: [
-        { q: 'Is La Ruleta Caliente really free?', a: 'Yes. Creating an account and using the random video chat costs nothing and has no time limit. Premium is optional and only adds extras like filters and friends.' },
-        { q: 'Do I need to sign up to video chat?', a: 'Yes, you need an account (email, Google, Apple or Facebook) and must confirm you are 18 or over. It takes about a minute and helps keep the community safer.' },
+        { q: 'Is La Ruleta Caliente really free?', a: 'Yes. Using the random video chat costs nothing, needs no sign-up and has no time limit. Premium is optional and only adds extras like filters and friends.' },
+        { q: 'Do I need to sign up to video chat?', a: 'No. You can jump in as a guest: just pick your gender, enter your date of birth and confirm you are 18 or over. An account is optional, to keep your progress across devices or pay for Premium.' },
         { q: 'Do I have to download anything?', a: 'No. It runs in the browser on your phone or computer. If you prefer, you can install it as an app from the browser itself.' },
         { q: 'Can I talk to people who speak another language?', a: 'Yes. The text chat can translate messages automatically, so you can chat with someone even if you don’t share a language.' },
       ],
@@ -93,7 +93,7 @@ module.exports = {
       sections: [
         {
           h2: 'A space just for adults',
-          html: '<p>Minors are not allowed, full stop. To use the video chat you create an account (email, Google, Apple or Facebook) and confirm you are over 18. The <a href="@rules">community rules</a> spell out what isn’t tolerated, and anyone who sees a minor or illegal content can report it so a person on our team reviews it.</p><p>Because everyone has signed up and agreed to the same rules, conversations start from a shared understanding: we’re adults, we’re here by choice, and either of us can press Next at any moment.</p>',
+          html: '<p>Minors are not allowed, full stop. To use the video chat you don’t need to sign up, but you must enter your date of birth and confirm you are over 18. The <a href="@rules">community rules</a> spell out what isn’t tolerated, and anyone who sees a minor or illegal content can report it so a person on our team reviews it.</p><p>Because everyone has confirmed their age and agreed to the same rules, conversations start from a shared understanding: we’re adults, we’re here by choice, and either of us can press Next at any moment.</p>',
         },
         {
           h2: 'Spicy mode: flirting, only when both want it',
@@ -113,7 +113,7 @@ module.exports = {
         },
       ],
       faq: [
-        { q: 'Is it only for adults?', a: 'Yes. You must be 18 or older and confirm it when you create your account. Minors are banned and can be reported.' },
+        { q: 'Is it only for adults?', a: 'Yes. You must be 18 or older and confirm it before you start. Minors are banned and can be reported.' },
         { q: 'Is the content explicit?', a: 'Conversations are live between adults and must follow the community rules. Bolder games and compliments only appear in Spicy mode, and only between two people who both turned it on.' },
         { q: 'Can someone record me?', a: 'Recording and screenshots are forbidden and an invisible watermark helps identify leaks, but no website can physically stop someone filming their screen. Only show what you would be fine with others seeing.' },
         { q: 'What do I do if someone blackmails me?', a: 'Don’t pay and don’t reply. Report the user, keep evidence, and follow the steps on our safety page.' },
@@ -164,7 +164,7 @@ module.exports = {
       sections: [
         {
           h2: 'Free random chat or choosing with Premium',
-          html: '<table><thead><tr><th>Option</th><th>Who you meet</th></tr></thead><tbody><tr><td>Free account</td><td>Anyone online, at random</td></tr><tr><td>Premium</td><td>Choose women, men, trans people or couples, and filter by country, distance and age</td></tr></tbody></table><p>Premium costs €7.99 a week or €19.99 a month and can be cancelled whenever you want. You can also earn days of Premium for free: by inviting a friend (you both get 1 day once they have their first conversation of over a minute) or by finishing in the top three of the weekly chili ranking.</p>',
+          html: '<table><thead><tr><th>Option</th><th>Who you meet</th></tr></thead><tbody><tr><td>Free account</td><td>Anyone online, at random</td></tr><tr><td>Premium</td><td>Choose women, men, trans people or couples, and filter by country, distance and age</td></tr></tbody></table><p>Premium costs €7.99 a week or €19.99 a month and can be cancelled whenever you want. You can also earn days of Premium for free: by inviting a friend (you both get 1 day once they sign up and have their first conversation of over a minute) or by finishing in the top three of the weekly chili ranking.</p>',
         },
         {
           h2: 'It works the same for everyone',
@@ -200,7 +200,7 @@ module.exports = {
       sections: [
         {
           h2: 'No app store, no download',
-          html: '<p>There’s no app to find in a store: the website <em>is</em> the app. That has a few practical advantages. It doesn’t take up space on your phone, it’s always the latest version, and you can use the same account on your phone, tablet and computer. Just open the site in Chrome, Safari or another modern browser.</p><p>Sign-up on mobile is quick too: use your email, or one tap with Google, Apple or Facebook, then confirm you are 18 or over. Your chilis, friends and settings follow you to every device you log in on.</p>',
+          html: '<p>There’s no app to find in a store: the website <em>is</em> the app. That has a few practical advantages. It doesn’t take up space on your phone, it’s always the latest version, and with an optional account you can pick up where you left off on your phone, tablet and computer. Just open the site in Chrome, Safari or another modern browser.</p><p>Getting started on mobile is quick too: no sign-up needed, just pick your gender, enter your date of birth and confirm you are 18 or over. If you later create an account with your email or Google, your chilis, friends and settings follow you to every device you log in on.</p>',
         },
         {
           h2: 'Add it to your home screen',
@@ -240,7 +240,7 @@ module.exports = {
         },
         {
           h2: 'Five questions to ask any video chat site',
-          html: '<ol><li><strong>Who is it for?</strong> A clear 18+ policy, with age confirmation at sign-up, tells you the site takes minors’ safety seriously.</li><li><strong>Can the other person see my IP?</strong> Look for a site that relays video through its own server rather than exposing your connection.</li><li><strong>What happens when I report someone?</strong> Ideally a human reviews it, offenders are banned and there’s a way to appeal.</li><li><strong>What is free and what is paid?</strong> Prices should be visible before you pay, and cancelling should be easy.</li><li><strong>Is there anything to do besides staring at each other?</strong> Games, topics and translation make conversations far easier to start.</li></ol>',
+          html: '<ol><li><strong>Who is it for?</strong> A clear 18+ policy, with age confirmation before you start, tells you the site takes minors’ safety seriously.</li><li><strong>Can the other person see my IP?</strong> Look for a site that relays video through its own server rather than exposing your connection.</li><li><strong>What happens when I report someone?</strong> Ideally a human reviews it, offenders are banned and there’s a way to appeal.</li><li><strong>What is free and what is paid?</strong> Prices should be visible before you pay, and cancelling should be easy.</li><li><strong>Is there anything to do besides staring at each other?</strong> Games, topics and translation make conversations far easier to start.</li></ol>',
         },
         {
           h2: 'What you’ll find on La Ruleta Caliente',
@@ -252,7 +252,7 @@ module.exports = {
         },
         {
           h2: 'Switching is easy',
-          html: '<p>There’s nothing to install and no profile to fill in. Create an account, confirm you’re over 18, allow your camera and you’re in. If it isn’t for you, you’ve lost a couple of minutes. Before your first chat, it’s worth skimming the <a href="@rules">community rules</a> so you know what’s expected — they’re short and written in plain language.</p>',
+          html: '<p>There’s nothing to install and no profile to fill in. No sign-up either: confirm you’re over 18, allow your camera and you’re in. If it isn’t for you, you’ve lost a couple of minutes. Before your first chat, it’s worth skimming the <a href="@rules">community rules</a> so you know what’s expected — they’re short and written in plain language.</p>',
         },
       ],
       faq: [
@@ -271,15 +271,15 @@ module.exports = {
       sections: [
         {
           h2: 'If you miss Omegle, here’s what you’ll find here',
-          html: '<p>The core experience will feel familiar if you liked meeting strangers: you press a button and you’re face to face with someone you’ve never met, live, one on one. Don’t click? Press Next. What’s different is the context around it:</p><ul><li><strong>Adults only.</strong> Everyone creates an account and confirms they are 18 or over.</li><li><strong>Video first.</strong> Calls are live on camera, with a text chat alongside that translates automatically.</li><li><strong>Things to do together.</strong> Games and icebreaker topics so you’re never stuck after “hi”.</li><li><strong>A reason to return.</strong> Free chilis 🌶️ for daily visits, games and ❤️ reactions, which you can spend on superpowers like Rewind.</li></ul><p>It isn’t trying to be a copy of anything. It’s its own place, with its own rules and personality.</p>',
+          html: '<p>The core experience will feel familiar if you liked meeting strangers: you press a button and you’re face to face with someone you’ve never met, live, one on one. Don’t click? Press Next. What’s different is the context around it:</p><ul><li><strong>Adults only.</strong> Everyone confirms they are 18 or over before they start.</li><li><strong>Video first.</strong> Calls are live on camera, with a text chat alongside that translates automatically.</li><li><strong>Things to do together.</strong> Games and icebreaker topics so you’re never stuck after “hi”.</li><li><strong>A reason to return.</strong> Free chilis 🌶️ for daily visits, games and ❤️ reactions, which you can spend on superpowers like Rewind.</li></ul><p>It isn’t trying to be a copy of anything. It’s its own place, with its own rules and personality.</p>',
         },
         {
           h2: 'What you’ll find on La Ruleta Caliente',
-          html: '<table><thead><tr><th>Feature</th><th>Details</th></tr></thead><tbody><tr><td>Random 1-on-1 video chat</td><td>✓ Free, unlimited</td></tr><tr><td>Next / Stop</td><td>✓ Esc key works as Next on a computer</td></tr><tr><td>Account and age check</td><td>✓ Email, Google, Apple or Facebook; 18+ confirmed</td></tr><tr><td>Translated text chat</td><td>✓</td></tr><tr><td>Add friends</td><td>✓ Calls between friends with Premium</td></tr><tr><td>Hidden IP</td><td>✓ Video is relayed by our server</td></tr><tr><td>Anti-recording measures</td><td>✓ Notice plus invisible watermark</td></tr><tr><td>Reports reviewed by people</td><td>✓ With bans and appeals</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Feature</th><th>Details</th></tr></thead><tbody><tr><td>Random 1-on-1 video chat</td><td>✓ Free, unlimited</td></tr><tr><td>Next / Stop</td><td>✓ Esc key works as Next on a computer</td></tr><tr><td>Sign-up and age check</td><td>✓ No sign-up needed (account optional); 18+ confirmed</td></tr><tr><td>Translated text chat</td><td>✓</td></tr><tr><td>Add friends</td><td>✓ Calls between friends with Premium</td></tr><tr><td>Hidden IP</td><td>✓ Video is relayed by our server</td></tr><tr><td>Anti-recording measures</td><td>✓ Notice plus invisible watermark</td></tr><tr><td>Reports reviewed by people</td><td>✓ With bans and appeals</td></tr></tbody></table>',
         },
         {
-          h2: 'Why we ask you to create an account',
-          html: '<p>Some people would rather jump straight in, and we understand that. But an account is what makes the community workable: it lets us keep minors out with an age confirmation, ban people who break the rules so they can’t simply reload the page, and let you keep friends and chilis between visits. Sign-up takes about a minute, and you can use your email or a Google, Apple or Facebook login.</p>',
+          h2: 'No sign-up, but adults only',
+          html: '<p>Some people would rather jump straight in, and here you can: there’s no sign-up. You pick your gender, enter your date of birth and confirm you are 18 or over, which helps us keep minors out, and people who break the rules get banned so they can’t simply reload the page and carry on. If you want to keep your friends and chilis across devices, you can create an account with your email or Google at any time; it’s only required to pay for Premium.</p>',
         },
         {
           h2: 'Meeting strangers in 2026, a bit more safely',
@@ -287,13 +287,13 @@ module.exports = {
         },
         {
           h2: 'Getting started',
-          html: '<p>Open the site in any browser, on mobile or desktop, create your account and allow your camera. You’ll be chatting in less time than it took to read this page. Curious about the details first? See <a href="@how">how it works</a>, or browse other <a href="@alternatives">video chat alternatives</a> if you’re still comparing. If you used to love the “talk to strangers” side of things, our guide to <a href="@talk-to-strangers">talking to strangers</a> has tips for great first conversations.</p>',
+          html: '<p>Open the site in any browser, on mobile or desktop, confirm you’re 18 or over and allow your camera. You’ll be chatting in less time than it took to read this page. Curious about the details first? See <a href="@how">how it works</a>, or browse other <a href="@alternatives">video chat alternatives</a> if you’re still comparing. If you used to love the “talk to strangers” side of things, our guide to <a href="@talk-to-strangers">talking to strangers</a> has tips for great first conversations.</p>',
         },
       ],
       faq: [
         { q: 'When did Omegle close?', a: 'Omegle shut down in November 2023. Since then many people have been looking for another place to video chat with strangers.' },
         { q: 'Is this the new Omegle?', a: 'No. La Ruleta Caliente is a separate, independent website with no connection to Omegle. It offers random 1-on-1 video chat for adults.' },
-        { q: 'Can I use it without an account?', a: 'No. An account and age confirmation are required. It takes about a minute and helps keep minors and banned users out.' },
+        { q: 'Can I use it without an account?', a: 'Yes. No sign-up is needed: you just confirm you are 18 or over. An account is optional, to keep your progress across devices or pay for Premium.' },
         { q: 'Is it free like I’m used to?', a: 'Yes, the random video chat is free with no time limit. Premium is an optional extra.' },
       ],
     },
@@ -346,7 +346,7 @@ module.exports = {
         },
         {
           h2: 'What you’ll find on La Ruleta Caliente',
-          html: '<table><thead><tr><th>Feature</th><th>Details</th></tr></thead><tbody><tr><td>Adults only</td><td>✓ Account required, 18+ confirmed</td></tr><tr><td>Spicy mode</td><td>✓ Opt-in, only with people who also turned it on</td></tr><tr><td>Spicy games and compliments</td><td>Sending invitations is Premium; anyone can accept</td></tr><tr><td>Choose women, men, trans people or couples</td><td>Premium</td></tr><tr><td>IP hidden</td><td>✓ Video relayed through our server</td></tr><tr><td>Recording</td><td>Forbidden, with invisible watermark</td></tr><tr><td>Incognito</td><td>✓ Superpower that hides your age and country for 1 hour</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Feature</th><th>Details</th></tr></thead><tbody><tr><td>Adults only</td><td>✓ 18+ confirmed, no sign-up needed</td></tr><tr><td>Spicy mode</td><td>✓ Opt-in, only with people who also turned it on</td></tr><tr><td>Spicy games and compliments</td><td>Sending invitations is Premium; anyone can accept</td></tr><tr><td>Choose women, men, trans people or couples</td><td>Premium</td></tr><tr><td>IP hidden</td><td>✓ Video relayed through our server</td></tr><tr><td>Recording</td><td>Forbidden, with invisible watermark</td></tr><tr><td>Incognito</td><td>✓ Superpower that hides your age and country for 1 hour</td></tr></tbody></table>',
         },
         {
           h2: 'Discretion matters on an adult chat',
@@ -358,7 +358,7 @@ module.exports = {
         },
         {
           h2: 'Try it your way',
-          html: '<p>You can start completely free with random matches. If you want to pick who you meet — women, men, trans people or couples, by country, distance and age — Premium costs €7.99 a week or €19.99 a month and can be cancelled anytime. Prefer not to pay? Inviting a friend gets you both a day of Premium once they’ve had their first conversation of more than a minute. For more on the grown-up side of the site, read our page on <a href="@adult-video-chat">adult video chat</a>, or compare other <a href="@alternatives">alternatives</a>.</p>',
+          html: '<p>You can start completely free with random matches. If you want to pick who you meet — women, men, trans people or couples, by country, distance and age — Premium costs €7.99 a week or €19.99 a month and can be cancelled anytime. Prefer not to pay? Inviting a friend gets you both a day of Premium once they’ve signed up and had their first conversation of more than a minute. For more on the grown-up side of the site, read our page on <a href="@adult-video-chat">adult video chat</a>, or compare other <a href="@alternatives">alternatives</a>.</p>',
         },
       ],
       faq: [
@@ -463,7 +463,7 @@ module.exports = {
         },
         {
           h2: 'Up and running in a minute',
-          html: '<ol><li>Open the site in your browser, on a phone or a computer — there’s nothing to download.</li><li>Create an account with your email or with Google, Apple or Facebook.</li><li>Confirm you’re 18 or older and allow your camera and microphone.</li><li>Press start and say hello to your first match.</li></ol><p>That’s all. Your streak starts on day one, so even a short first visit earns you a few chilis.</p>',
+          html: '<ol><li>Open the site in your browser, on a phone or a computer — there’s nothing to download.</li><li>Pick your gender and enter your date of birth — no sign-up needed.</li><li>Confirm you’re 18 or older and allow your camera and microphone.</li><li>Press start and say hello to your first match.</li></ol><p>That’s all. Your streak starts on day one, so even a short first visit earns you a few chilis.</p>',
         },
         {
           h2: 'Friends, not followers',
@@ -580,7 +580,7 @@ module.exports = {
         { q: 'Can I use La Ruleta Caliente in French?', a: 'Yes. The website is available in French and English, among six languages, and the text chat translates messages automatically.' },
         { q: 'Can I match only with Canadians?', a: 'With Premium, the My country filter matches you with people in Canada. The distance filter can narrow it to people near you.' },
         { q: 'Is Premium charged in Canadian dollars?', a: 'Premium is priced in euros. Your bank converts it to Canadian dollars at its exchange rate.' },
-        { q: 'Do I have to be 18?', a: 'Yes. You must be 18 or older and confirm it when you create your account.' },
+        { q: 'Do I have to be 18?', a: 'Yes. You must be 18 or older and confirm it before your first chat.' },
       ],
     },
     'country-au': {
@@ -605,7 +605,7 @@ module.exports = {
         },
         {
           h2: 'What you’ll pay in Australian dollars',
-          html: '<p>The random video chat is free, full stop. Premium, which adds filters, friends and calls, no ads and spicy games, is priced in euros: <strong>€7.99 a week</strong> or <strong>€19.99 a month</strong>, cancel anytime. Your bank converts it into Australian dollars, so the final amount depends on the exchange rate and any international transaction fee. Inviting a friend who has their first conversation of over a minute gets you both a free day of Premium.</p>',
+          html: '<p>The random video chat is free, full stop. Premium, which adds filters, friends and calls, no ads and spicy games, is priced in euros: <strong>€7.99 a week</strong> or <strong>€19.99 a month</strong>, cancel anytime. Your bank converts it into Australian dollars, so the final amount depends on the exchange rate and any international transaction fee. Inviting a friend who signs up and has their first conversation of over a minute gets you both a free day of Premium.</p>',
         },
         {
           h2: 'Stay safe while you chat',

@@ -8,7 +8,7 @@ module.exports = {
     alternatives: 'Alternatives à d’autres sites',
     faq: 'Questions fréquentes',
     ctaTitle: 'On commence ?',
-    ctaText: 'Crée ton compte gratuitement et rencontre quelqu’un de nouveau en quelques secondes.',
+    ctaText: 'Entre gratuitement, sans inscription, et rencontre quelqu’un de nouveau en quelques secondes.',
     ctaButton: 'Lancer le chat vidéo gratuit',
     adultNote: 'Réservé aux personnes majeures (18 ans et plus).',
     disclaimer: '{brand} est une marque de son titulaire. La Ruleta Caliente n’est ni affiliée à {brand} ni sponsorisée par elle ; nous la citons uniquement à titre de comparaison.',
@@ -25,7 +25,7 @@ module.exports = {
       sections: [
         {
           h2: 'Comment fonctionne le chat vidéo gratuit',
-          html: '<ol><li><strong>Crée ton compte</strong> avec ton e-mail ou via Google, Apple ou Facebook, puis confirme que tu as 18 ans ou plus.</li><li><strong>Autorise la caméra et le micro</strong> dans ton navigateur, sur ordinateur comme sur téléphone.</li><li><strong>Appuie sur Commencer</strong> : tu es mis en relation avec une personne au hasard, en vidéo et en tête-à-tête.</li><li><strong>Suivant</strong> (ou la touche Échap) pour changer de personne, <strong>Arrêter</strong> pour faire une pause.</li></ol><p>Tu veux le détail étape par étape ? Jette un œil à la page <a href="@how">Comment ça marche</a>.</p>',
+          html: '<ol><li><strong>Entre sans inscription</strong> : choisis ton genre, indique ta date de naissance et confirme que tu as 18 ans ou plus.</li><li><strong>Autorise la caméra et le micro</strong> dans ton navigateur, sur ordinateur comme sur téléphone.</li><li><strong>Appuie sur Commencer</strong> : tu es mis en relation avec une personne au hasard, en vidéo et en tête-à-tête.</li><li><strong>Suivant</strong> (ou la touche Échap) pour changer de personne, <strong>Arrêter</strong> pour faire une pause.</li></ol><p>Tu veux le détail étape par étape ? Jette un œil à la page <a href="@how">Comment ça marche</a>.</p>',
         },
         {
           h2: 'Ce qui est gratuit, et ce que Premium ajoute',
@@ -45,8 +45,8 @@ module.exports = {
         },
       ],
       faq: [
-        { q: 'Le chat vidéo est-il vraiment gratuit ?', a: 'Oui. Créer un compte et discuter en vidéo avec des personnes au hasard est gratuit, sans limite de temps. Premium est une option payante qui ajoute des filtres et d’autres avantages.' },
-        { q: 'Faut-il s’inscrire pour utiliser le chat vidéo ?', a: 'Oui, un compte est nécessaire. Tu peux le créer avec ton e-mail ou avec Google, Apple ou Facebook, et tu dois confirmer que tu as au moins 18 ans.' },
+        { q: 'Le chat vidéo est-il vraiment gratuit ?', a: 'Oui. Discuter en vidéo avec des personnes au hasard est gratuit, sans inscription et sans limite de temps. Premium est une option payante qui ajoute des filtres et d’autres avantages.' },
+        { q: 'Faut-il s’inscrire pour utiliser le chat vidéo ?', a: 'Non. Tu peux entrer sans inscription : tu choisis ton genre, tu indiques ta date de naissance et tu confirmes que tu as au moins 18 ans. Le compte est facultatif, pour garder ta progression ou payer Premium.' },
         { q: 'Faut-il télécharger une application ?', a: 'Non. Tout fonctionne dans le navigateur de ton téléphone ou de ton ordinateur. Si tu veux, tu peux ajouter le site à ton écran d’accueil comme une app.' },
         { q: 'Dans quelles langues puis-je discuter ?', a: 'Le site est disponible en français, anglais, espagnol, portugais, allemand et italien, et le chat texte traduit automatiquement les messages de l’autre personne.' },
       ],
@@ -92,13 +92,13 @@ module.exports = {
       slug: 'chat-video-adulte',
       anchor: 'Chat vidéo adulte',
       title: 'Chat vidéo pour adultes (18+) · La Ruleta Caliente',
-      description: 'Chat vidéo pour adultes : rencontres en direct entre majeurs, flirt et mode piquant 🌶️ entre personnes consentantes. Compte 18+ et règles claires.',
+      description: 'Chat vidéo pour adultes : rencontres en direct entre majeurs, flirt et mode piquant 🌶️ entre personnes consentantes. Sans inscription, 18+ et règles claires.',
       h1: 'Chat vidéo pour adultes : des rencontres entre majeurs, en toute liberté',
-      intro: '<p>La Ruleta Caliente est un <strong>chat vidéo pour adultes</strong> : tout le monde y a 18 ans ou plus, et chacun le confirme en créant son compte. Ici, on vient pour flirter, rire, se découvrir et, si l’envie est partagée, pimenter un peu la conversation. Le ton est libre, mais toujours entre adultes consentants et dans le respect des règles.</p>',
+      intro: '<p>La Ruleta Caliente est un <strong>chat vidéo pour adultes</strong> : tout le monde y a 18 ans ou plus, et chacun le confirme avant de commencer. Ici, on vient pour flirter, rire, se découvrir et, si l’envie est partagée, pimenter un peu la conversation. Le ton est libre, mais toujours entre adultes consentants et dans le respect des règles.</p>',
       sections: [
         {
           h2: 'Un espace réservé aux majeurs',
-          html: '<p>L’accès passe par un compte (e-mail, Google, Apple ou Facebook) et par la confirmation que tu as au moins 18 ans. Ce n’est pas une formalité : les mineurs n’ont rien à faire ici, et l’équipe examine chaque signalement à ce sujet. Si tu croises quelqu’un qui semble trop jeune, coupe la conversation et signale-le.</p><p>Être entre adultes, c’est aussi pouvoir parler de séduction, de relations ou de sujets qui ne se discutent pas partout, sans avoir à se justifier.</p>',
+          html: '<p>L’accès ne demande pas d’inscription, mais passe par ta date de naissance et la confirmation que tu as au moins 18 ans. Ce n’est pas une formalité : les mineurs n’ont rien à faire ici, et l’équipe examine chaque signalement à ce sujet. Si tu croises quelqu’un qui semble trop jeune, coupe la conversation et signale-le.</p><p>Être entre adultes, c’est aussi pouvoir parler de séduction, de relations ou de sujets qui ne se discutent pas partout, sans avoir à se justifier.</p>',
         },
         {
           h2: 'Le mode piquant, uniquement si vous êtes deux à le vouloir',
@@ -121,7 +121,7 @@ module.exports = {
         { q: 'Le chat vidéo pour adultes est-il gratuit ?', a: 'Oui, discuter en vidéo au hasard est gratuit. Premium, en option, permet de choisir qui voir et d’envoyer des invitations aux jeux et des mots doux épicés.' },
         { q: 'Comment fonctionne le mode piquant ?', a: 'Tu l’actives dans les options du chat. Les jeux et compliments osés n’apparaissent qu’avec des personnes qui l’ont aussi activé, et tu peux le couper à tout moment.' },
         { q: 'Que faire si quelqu’un me menace de diffuser une vidéo ?', a: 'Ne paie pas et coupe le contact. Signale le compte depuis le chat : l’équipe examine le signalement, et notre page de sécurité explique les démarches utiles.' },
-        { q: 'Les mineurs peuvent-ils accéder au site ?', a: 'Non. Le site est réservé aux 18 ans et plus, chaque compte doit le confirmer et tout profil suspect peut être signalé.' },
+        { q: 'Les mineurs peuvent-ils accéder au site ?', a: 'Non. Le site est réservé aux 18 ans et plus, chacun doit le confirmer et tout profil suspect peut être signalé.' },
       ],
     },
 
@@ -207,7 +207,7 @@ module.exports = {
       sections: [
         {
           h2: 'Démarrer depuis ton téléphone en trois gestes',
-          html: '<ol><li>Ouvre le site dans Safari, Chrome ou le navigateur de ton choix.</li><li>Crée ton compte (e-mail, Google, Apple ou Facebook) et confirme que tu as 18 ans ou plus.</li><li>Autorise l’accès à la caméra et au micro quand le navigateur te le demande, puis appuie sur <strong>Commencer</strong>.</li></ol><p>Si tu as refusé l’accès par erreur, il suffit de le réactiver dans les réglages du navigateur. En cas de souci, la page <a href="@help">Aide</a> répond aux questions les plus courantes.</p>',
+          html: '<ol><li>Ouvre le site dans Safari, Chrome ou le navigateur de ton choix.</li><li>Choisis ton genre, indique ta date de naissance et confirme que tu as 18 ans ou plus, sans inscription.</li><li>Autorise l’accès à la caméra et au micro quand le navigateur te le demande, puis appuie sur <strong>Commencer</strong>.</li></ol><p>Si tu as refusé l’accès par erreur, il suffit de le réactiver dans les réglages du navigateur. En cas de souci, la page <a href="@help">Aide</a> répond aux questions les plus courantes.</p>',
         },
         {
           h2: 'L’ajouter à ton écran d’accueil comme une app',
@@ -219,7 +219,7 @@ module.exports = {
         },
         {
           h2: 'Astuces pour une bonne connexion',
-          html: '<ul><li>Privilégie le Wi-Fi : la vidéo consomme des données mobiles.</li><li>Tiens ton téléphone à hauteur des yeux et place-toi face à une source de lumière.</li><li>Ferme les autres applis qui utilisent la caméra (visio, réseaux sociaux).</li><li>Si l’image se fige, appuie sur Suivant : le problème vient parfois de la connexion de l’autre personne.</li></ul><p>Tes piments 🌶️, ta série de connexions et ton classement te suivent d’un appareil à l’autre, puisque tout est lié à ton compte.</p>',
+          html: '<ul><li>Privilégie le Wi-Fi : la vidéo consomme des données mobiles.</li><li>Tiens ton téléphone à hauteur des yeux et place-toi face à une source de lumière.</li><li>Ferme les autres applis qui utilisent la caméra (visio, réseaux sociaux).</li><li>Si l’image se fige, appuie sur Suivant : le problème vient parfois de la connexion de l’autre personne.</li></ul><p>Tes piments 🌶️, ta série de connexions et ton classement te suivent d’un appareil à l’autre si tu crées un compte (facultatif).</p>',
         },
         {
           h2: 'Discrétion et sécurité sur mobile',
@@ -256,7 +256,7 @@ module.exports = {
         },
         {
           h2: 'Tester un nouveau site en cinq minutes',
-          html: '<p>Pas besoin d’y passer la soirée pour savoir si un chat vidéo te convient. Voici un petit test rapide :</p><ol><li>crée ton compte et regarde si l’inscription est claire ;</li><li>fais trois ou quatre conversations et observe la rapidité de la mise en relation ;</li><li>essaie le chat texte avec quelqu’un qui parle une autre langue ;</li><li>repère où se trouvent les boutons Suivant, Arrêter et Signaler ;</li><li>lis les règles pour savoir ce qui est accepté ou non.</li></ol><p>Si tout te semble naturel, tu as trouvé ton nouveau point de rendez-vous.</p>',
+          html: '<p>Pas besoin d’y passer la soirée pour savoir si un chat vidéo te convient. Voici un petit test rapide :</p><ol><li>entre sur le site et regarde si l’accès est simple et clair ;</li><li>fais trois ou quatre conversations et observe la rapidité de la mise en relation ;</li><li>essaie le chat texte avec quelqu’un qui parle une autre langue ;</li><li>repère où se trouvent les boutons Suivant, Arrêter et Signaler ;</li><li>lis les règles pour savoir ce qui est accepté ou non.</li></ol><p>Si tout te semble naturel, tu as trouvé ton nouveau point de rendez-vous.</p>',
         },
         {
           h2: 'Ce qui rend l’expérience différente ici',
@@ -284,7 +284,7 @@ module.exports = {
       sections: [
         {
           h2: 'Le même plaisir de l’inattendu',
-          html: '<p>Ce qui manque à beaucoup d’anciens utilisateurs d’Omegle, c’est cette sensation de ne pas savoir qui va apparaître. Ici, le principe est le même : tu lances la recherche, une personne prise au hasard s’affiche en vidéo, et vous décidez ensemble si la conversation continue. Un clic sur <strong>Suivant</strong> (ou la touche Échap) et tu passes à la rencontre suivante.</p><p>La principale différence avec ce que tu as peut-être connu : il faut un <strong>compte</strong> et confirmer que tu as 18 ans ou plus. Ça prend une minute, et ça permet de faire respecter les règles.</p>',
+          html: '<p>Ce qui manque à beaucoup d’anciens utilisateurs d’Omegle, c’est cette sensation de ne pas savoir qui va apparaître. Ici, le principe est le même : tu lances la recherche, une personne prise au hasard s’affiche en vidéo, et vous décidez ensemble si la conversation continue. Un clic sur <strong>Suivant</strong> (ou la touche Échap) et tu passes à la rencontre suivante.</p><p>La principale différence avec ce que tu as peut-être connu : il faut confirmer que tu as 18 ans ou plus. Pas besoin d’inscription : ça prend quelques secondes, et ça permet de faire respecter les règles.</p>',
         },
         {
           h2: 'Ce que tu trouves sur La Ruleta Caliente',
@@ -306,7 +306,7 @@ module.exports = {
       faq: [
         { q: 'Omegle existe-t-il encore ?', a: 'Non, Omegle a fermé en novembre 2023. Depuis, de nombreux sites de chat vidéo aléatoire sont utilisés par celles et ceux qui veulent continuer à parler à des inconnus.' },
         { q: 'La Ruleta Caliente est-elle le nouvel Omegle ?', a: 'Non, il s’agit d’un site indépendant, sans aucun lien avec Omegle. Il reprend l’idée du chat vidéo au hasard, avec ses propres jeux, règles et outils de sécurité.' },
-        { q: 'Peut-on l’utiliser sans compte, comme avant ?', a: 'Non, un compte est nécessaire et il faut confirmer que l’on a 18 ans ou plus. L’inscription se fait par e-mail ou avec Google, Apple ou Facebook.' },
+        { q: 'Peut-on l’utiliser sans compte, comme avant ?', a: 'Oui, pas besoin de compte : il suffit de confirmer que l’on a 18 ans ou plus. Le compte (e-mail ou Google) est facultatif, pour garder sa progression ou payer Premium.' },
       ],
     },
 
@@ -324,7 +324,7 @@ module.exports = {
         },
         {
           h2: 'Ce que tu trouves sur La Ruleta Caliente',
-          html: '<table><thead><tr><th>Élément</th><th>Détail</th></tr></thead><tbody><tr><td>Roulette vidéo 1 à 1</td><td>✓ Gratuite, avec Suivant et Arrêter</td></tr><tr><td>Accès</td><td>✓ Navigateur mobile ou ordinateur, compte obligatoire (18+)</td></tr><tr><td>Langues</td><td>✓ Interface en 6 langues, messages traduits automatiquement</td></tr><tr><td>Interaction</td><td>✓ Réactions 👍 ❤️, quatre jeux, sujets de conversation</td></tr><tr><td>Progression</td><td>✓ Piments, séries quotidiennes, défis, badges, classement</td></tr><tr><td>Options payantes</td><td>Premium : choix du genre, pays, proximité, âge, sans pub</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Élément</th><th>Détail</th></tr></thead><tbody><tr><td>Roulette vidéo 1 à 1</td><td>✓ Gratuite, avec Suivant et Arrêter</td></tr><tr><td>Accès</td><td>✓ Navigateur mobile ou ordinateur, sans inscription (18+)</td></tr><tr><td>Langues</td><td>✓ Interface en 6 langues, messages traduits automatiquement</td></tr><tr><td>Interaction</td><td>✓ Réactions 👍 ❤️, quatre jeux, sujets de conversation</td></tr><tr><td>Progression</td><td>✓ Piments, séries quotidiennes, défis, badges, classement</td></tr><tr><td>Options payantes</td><td>Premium : choix du genre, pays, proximité, âge, sans pub</td></tr></tbody></table>',
         },
         {
           h2: 'Une roulette qui récompense ta curiosité',
@@ -332,7 +332,7 @@ module.exports = {
         },
         {
           h2: 'Ta première session, pas à pas',
-          html: '<p>Tu as l’habitude des roulettes vidéo, mais chaque site a ses petites différences. Après l’inscription, commence par vérifier ton cadrage et ta lumière : un visage bien visible donne envie de rester. Lance ensuite la recherche et salue simplement la personne qui apparaît. Si la discussion accroche, envoie un ❤️ ; si elle ne décolle pas, propose un jeu avant de zapper. Au bout de quelques conversations, jette un œil à ton solde de piments et aux défis de la semaine : tu verras vite comment progresser.</p>',
+          html: '<p>Tu as l’habitude des roulettes vidéo, mais chaque site a ses petites différences. Une fois sur le site, commence par vérifier ton cadrage et ta lumière : un visage bien visible donne envie de rester. Lance ensuite la recherche et salue simplement la personne qui apparaît. Si la discussion accroche, envoie un ❤️ ; si elle ne décolle pas, propose un jeu avant de zapper. Au bout de quelques conversations, jette un œil à ton solde de piments et aux défis de la semaine : tu verras vite comment progresser.</p>',
         },
         {
           h2: 'Combien ça coûte',
@@ -364,7 +364,7 @@ module.exports = {
         },
         {
           h2: 'Ce que tu trouves sur La Ruleta Caliente',
-          html: '<table><thead><tr><th>Pour un public adulte</th><th>Sur La Ruleta Caliente</th></tr></thead><tbody><tr><td>Accès réservé aux majeurs</td><td>✓ Compte obligatoire et confirmation 18+</td></tr><tr><td>Mode piquant</td><td>✓ Jeux et mots doux osés, seulement si les deux l’ont activé</td></tr><tr><td>Choisir qui tu vois</td><td>Premium : femmes, hommes, trans ou couples</td></tr><tr><td>Discrétion</td><td>✓ IP invisible ; Incognito masque âge et pays pendant 1 h</td></tr><tr><td>Anti-enregistrement</td><td>✓ Avertissement et filigrane invisible</td></tr><tr><td>Prix</td><td>Gratuit ; Premium 7,99 €/semaine ou 19,99 €/mois</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Pour un public adulte</th><th>Sur La Ruleta Caliente</th></tr></thead><tbody><tr><td>Accès réservé aux majeurs</td><td>✓ Confirmation 18+ à l’entrée, sans inscription</td></tr><tr><td>Mode piquant</td><td>✓ Jeux et mots doux osés, seulement si les deux l’ont activé</td></tr><tr><td>Choisir qui tu vois</td><td>Premium : femmes, hommes, trans ou couples</td></tr><tr><td>Discrétion</td><td>✓ IP invisible ; Incognito masque âge et pays pendant 1 h</td></tr><tr><td>Anti-enregistrement</td><td>✓ Avertissement et filigrane invisible</td></tr><tr><td>Prix</td><td>Gratuit ; Premium 7,99 €/semaine ou 19,99 €/mois</td></tr></tbody></table>',
         },
         {
           h2: 'Le mode piquant, expliqué simplement',
@@ -416,7 +416,7 @@ module.exports = {
         },
         {
           h2: 'Avant ton premier appel',
-          html: '<p>Quelques points pratiques pour bien démarrer : un compte est obligatoire (e-mail, Google, Apple ou Facebook) et tu dois confirmer avoir au moins 18 ans. Le site s’utilise sur ordinateur comme sur téléphone, sans rien installer, et peut être ajouté à ton écran d’accueil. Pense à autoriser la caméra et le micro, choisis un endroit calme et bien éclairé, et prépare une ou deux questions pour lancer la discussion. Le reste se fait naturellement.</p>',
+          html: '<p>Quelques points pratiques pour bien démarrer : pas besoin d’inscription, mais tu dois confirmer avoir au moins 18 ans ; un compte (e-mail ou Google) reste facultatif. Le site s’utilise sur ordinateur comme sur téléphone, sans rien installer, et peut être ajouté à ton écran d’accueil. Pense à autoriser la caméra et le micro, choisis un endroit calme et bien éclairé, et prépare une ou deux questions pour lancer la discussion. Le reste se fait naturellement.</p>',
         },
         {
           h2: 'Des rencontres respectueuses',
@@ -440,7 +440,7 @@ module.exports = {
       sections: [
         {
           h2: 'Prendre ses marques en deux minutes',
-          html: '<p>Si tu as déjà utilisé un tchat vidéo aléatoire, tu ne seras pas dépaysé. Tu crées ton compte (e-mail, Google, Apple ou Facebook), tu confirmes que tu as au moins 18 ans, tu autorises la caméra et c’est parti. Les commandes essentielles tiennent en deux boutons : <strong>Suivant</strong> pour changer de personne, <strong>Arrêter</strong> pour faire une pause. Sur ordinateur, la touche <strong>Échap</strong> fait office de Suivant.</p><p>Le tout fonctionne dans le navigateur, sans programme à installer. Voir aussi : <a href="@mobile-video-chat">chat vidéo sur mobile</a>.</p>',
+          html: '<p>Si tu as déjà utilisé un tchat vidéo aléatoire, tu ne seras pas dépaysé. Tu choisis ton genre, tu confirmes que tu as au moins 18 ans, tu autorises la caméra et c’est parti. Les commandes essentielles tiennent en deux boutons : <strong>Suivant</strong> pour changer de personne, <strong>Arrêter</strong> pour faire une pause. Sur ordinateur, la touche <strong>Échap</strong> fait office de Suivant.</p><p>Le tout fonctionne dans le navigateur, sans programme à installer. Voir aussi : <a href="@mobile-video-chat">chat vidéo sur mobile</a>.</p>',
         },
         {
           h2: 'Ce que tu trouves sur La Ruleta Caliente',
@@ -456,7 +456,7 @@ module.exports = {
         },
         {
           h2: 'Sur ordinateur comme sur téléphone',
-          html: '<p>Tu préfères le grand écran le soir et ton smartphone en journée ? Ton compte te suit partout : piments, série de connexions, badges et position au classement sont les mêmes sur tous tes appareils. Sur mobile, tu peux basculer entre caméra avant et arrière, et ajouter le site à ton écran d’accueil pour l’ouvrir en plein écran comme une application. Sur ordinateur, la touche Échap remplace le bouton Suivant pour passer plus vite à la rencontre suivante.</p>',
+          html: '<p>Tu préfères le grand écran le soir et ton smartphone en journée ? Avec un compte (facultatif), tout te suit : piments, série de connexions, badges et position au classement sont les mêmes sur tous tes appareils. Sur mobile, tu peux basculer entre caméra avant et arrière, et ajouter le site à ton écran d’accueil pour l’ouvrir en plein écran comme une application. Sur ordinateur, la touche Échap remplace le bouton Suivant pour passer plus vite à la rencontre suivante.</p>',
         },
         {
           h2: 'Les règles du jeu',
@@ -577,7 +577,7 @@ module.exports = {
         },
         {
           h2: 'Payer en euros',
-          html: '<p>Le chat vidéo aléatoire est gratuit et sans limite. Premium, facultatif, coûte <strong>7,99 € par semaine</strong> ou <strong>19,99 € par mois</strong> et se résilie à tout moment. Tu peux aussi en gagner : invite un ami, et quand il a sa première conversation de plus d’une minute, vous avez chacun un jour de Premium offert.</p>',
+          html: '<p>Le chat vidéo aléatoire est gratuit et sans limite. Premium, facultatif, coûte <strong>7,99 € par semaine</strong> ou <strong>19,99 € par mois</strong> et se résilie à tout moment. Tu peux aussi en gagner : invite un ami, et quand il s’est inscrit et a eu sa première conversation de plus d’une minute, vous avez chacun un jour de Premium offert.</p>',
         },
         {
           h2: 'Rester prudent',
@@ -597,7 +597,7 @@ module.exports = {
       title: 'Chat vidéo en Suisse, gratuit · La Ruleta Caliente',
       description: 'Chat vidéo gratuit en Suisse : rencontres en direct, chat traduit en allemand, italien ou français. Premium en euros, converti par ta banque. Dès 18 ans.',
       h1: 'Chat vidéo en Suisse : des rencontres en direct, dans toutes les langues',
-      intro: '<p>De Genève à Lausanne, de Fribourg à Neuchâtel, et bien au-delà du Röstigraben : La Ruleta Caliente est un <strong>chat vidéo gratuit</strong> accessible partout <strong>en Suisse</strong>. Tu crées ton compte, tu allumes ta caméra et tu es mis en relation au hasard avec une personne majeure, en tête-à-tête. Sans appli à installer, depuis ton natel ou ton ordinateur.</p>',
+      intro: '<p>De Genève à Lausanne, de Fribourg à Neuchâtel, et bien au-delà du Röstigraben : La Ruleta Caliente est un <strong>chat vidéo gratuit</strong> accessible partout <strong>en Suisse</strong>. Sans inscription, tu confirmes ton âge, tu allumes ta caméra et tu es mis en relation au hasard avec une personne majeure, en tête-à-tête. Sans appli à installer, depuis ton natel ou ton ordinateur.</p>',
       sections: [
         {
           h2: 'Français, allemand, italien : le chat suit',

@@ -8,7 +8,7 @@ module.exports = {
     alternatives: 'Alternativen zu anderen Seiten',
     faq: 'Häufige Fragen',
     ctaTitle: 'Legen wir los?',
-    ctaText: 'Erstell dein kostenloses Konto und lerne in Sekunden jemand Neuen kennen.',
+    ctaText: 'Kostenlos und ohne Anmeldung loslegen und in Sekunden jemand Neuen kennenlernen.',
     ctaButton: 'Videochat gratis starten',
     adultNote: 'Nur für Personen ab 18 Jahren.',
     disclaimer: '{brand} ist eine Marke ihres Inhabers. La Ruleta Caliente ist weder mit {brand} verbunden noch von {brand} gesponsert; wir nennen den Namen nur zum Vergleich.',
@@ -29,7 +29,7 @@ module.exports = {
         },
         {
           h2: 'So startest du in wenigen Schritten',
-          html: '<ol><li>Erstell ein Konto mit deiner E-Mail-Adresse oder über Google, Apple oder Facebook.</li><li>Bestätige, dass du mindestens 18 Jahre alt bist.</li><li>Erlaube deinem Browser den Zugriff auf Kamera und Mikrofon.</li><li>Tippe auf „Starten“ – schon wirst du mit jemandem verbunden.</li></ol><p>Das Ganze läuft direkt im Browser auf Handy und Computer. Wer mag, installiert die Seite als App auf dem Startbildschirm. Eine ausführliche Anleitung findest du unter <a href="@how">So funktioniert’s</a>, und wie das unterwegs aussieht, zeigt dir die Seite zum <a href="@mobile-video-chat">Videochat auf dem Handy</a>.</p>',
+          html: '<ol><li>Ohne Anmeldung starten: Geschlecht wählen und Geburtsdatum angeben. Ein Konto per E-Mail oder Google ist optional.</li><li>Bestätige, dass du mindestens 18 Jahre alt bist.</li><li>Erlaube deinem Browser den Zugriff auf Kamera und Mikrofon.</li><li>Tippe auf „Starten“ – schon wirst du mit jemandem verbunden.</li></ol><p>Das Ganze läuft direkt im Browser auf Handy und Computer. Wer mag, installiert die Seite als App auf dem Startbildschirm. Eine ausführliche Anleitung findest du unter <a href="@how">So funktioniert’s</a>, und wie das unterwegs aussieht, zeigt dir die Seite zum <a href="@mobile-video-chat">Videochat auf dem Handy</a>.</p>',
         },
         {
           h2: 'Gratis-Chilis, Heiße Stunde und Superkräfte',
@@ -37,7 +37,7 @@ module.exports = {
         },
         {
           h2: 'Was ist gratis – und was bringt Premium?',
-          html: '<p>Der zufällige Videochat ist kostenlos. Wenn du mehr Kontrolle willst, gibt es <strong>Premium</strong> für 7,99 € pro Woche oder 19,99 € pro Monat, jederzeit kündbar. Damit wählst du, wen du sehen willst (Frauen, Männer, trans Personen oder Paare), filterst nach Land, Nähe und Alter, chattest ohne Werbung, hast einen Verlauf über 30 Tage, Freunde und Anrufe, scharfe Spiele und Komplimente sowie jeden Tag Superkräfte gratis.</p><p>Tipp: Lädst du jemanden mit deinem Link ein und hat die Person ihr erstes Gespräch von über einer Minute, bekommt ihr <strong>beide einen Tag Premium</strong>.</p>',
+          html: '<p>Der zufällige Videochat ist kostenlos. Wenn du mehr Kontrolle willst, gibt es <strong>Premium</strong> für 7,99 € pro Woche oder 19,99 € pro Monat, jederzeit kündbar. Damit wählst du, wen du sehen willst (Frauen, Männer, trans Personen oder Paare), filterst nach Land, Nähe und Alter, chattest ohne Werbung, hast einen Verlauf über 30 Tage, Freunde und Anrufe, scharfe Spiele und Komplimente sowie jeden Tag Superkräfte gratis.</p><p>Tipp: Lädst du jemanden mit deinem Link ein und registriert sich die Person und hat ihr erstes Gespräch von über einer Minute, bekommt ihr <strong>beide einen Tag Premium</strong>.</p>',
         },
         {
           h2: 'Sicher chatten ab 18',
@@ -46,7 +46,7 @@ module.exports = {
       ],
       faq: [
         { q: 'Ist der Videochat wirklich kostenlos?', a: 'Ja, der zufällige Videochat kostet nichts. Premium ist freiwillig und bringt Filter, Freunde, Verlauf und weitere Extras.' },
-        { q: 'Muss ich mich registrieren?', a: 'Ja, du brauchst ein Konto mit E-Mail oder Google, Apple bzw. Facebook. So können wir sicherstellen, dass nur Erwachsene ab 18 mitmachen.' },
+        { q: 'Muss ich mich registrieren?', a: 'Nein. Du kannst ohne Anmeldung loslegen: Geschlecht wählen, Geburtsdatum angeben und bestätigen, dass du mindestens 18 bist. Ein Konto ist optional – damit speicherst du deinen Fortschritt geräteübergreifend oder bezahlst Premium.' },
         { q: 'Muss ich etwas herunterladen?', a: 'Nein. Alles läuft im Browser. Wenn du willst, kannst du die Seite als App auf deinem Startbildschirm installieren.' },
         { q: 'Kann ich mit Leuten sprechen, die kein Deutsch können?', a: 'Klar. Der Textchat übersetzt Nachrichten automatisch, sodass ihr euch auch ohne gemeinsame Sprache verständigen könnt.' },
       ],
@@ -92,11 +92,11 @@ module.exports = {
       title: 'Videochat ab 18 für Erwachsene · La Ruleta Caliente',
       description: 'Videochat ab 18: Flirten, spielen und neue Leute kennenlernen – nur unter Erwachsenen, mit Scharf-Modus auf Wunsch und klaren Regeln für Respekt.',
       h1: 'Videochat ab 18: Flirten unter Erwachsenen',
-      intro: '<p>La Ruleta Caliente ist ein <strong>Videochat ab 18</strong> – und zwar ausnahmslos. Jedes Konto bestätigt das Mindestalter, bevor das erste Gespräch beginnt. Das Ergebnis ist ein Ort, an dem Erwachsene live miteinander reden, flirten und spielen können, ohne dass Minderjährige dazwischenfunken.</p><p>Der Ton darf ruhig etwas frecher sein, solange alle Beteiligten das wollen. Wie das funktioniert und wo die Grenzen liegen, liest du hier.</p>',
+      intro: '<p>La Ruleta Caliente ist ein <strong>Videochat ab 18</strong> – und zwar ausnahmslos. Jede Person bestätigt das Mindestalter, bevor das erste Gespräch beginnt. Das Ergebnis ist ein Ort, an dem Erwachsene live miteinander reden, flirten und spielen können, ohne dass Minderjährige dazwischenfunken.</p><p>Der Ton darf ruhig etwas frecher sein, solange alle Beteiligten das wollen. Wie das funktioniert und wo die Grenzen liegen, liest du hier.</p>',
       sections: [
         {
           h2: 'Warum ein Videochat nur für Erwachsene?',
-          html: '<p>Ein Chat für Erwachsene braucht andere Spielregeln als eine Plattform für alle. Bei uns erstellst du ein Konto per E-Mail oder mit Google, Apple bzw. Facebook und bestätigst dabei, dass du mindestens 18 Jahre alt bist. Wird jemand gemeldet, weil er minderjährig wirken könnte, muss die Person ihr Alter nachweisen, bevor sie weiterchatten darf.</p><p>So entsteht ein Umfeld, in dem Flirten und lockere Sprüche ihren Platz haben – zwischen Leuten, die alt genug dafür sind.</p><p>Gestartet wird wie überall auf der Seite: Kamera an, auf „Starten“ tippen, und schon bist du live mit einer zufälligen Person verbunden. Mit Weiter oder der Esc-Taste wechselst du, mit Stopp machst du Pause. Alles läuft im Browser, ohne Download.</p>',
+          html: '<p>Ein Chat für Erwachsene braucht andere Spielregeln als eine Plattform für alle. Bei uns brauchst du dich nicht zu registrieren, gibst aber dein Geburtsdatum an und bestätigst, dass du mindestens 18 Jahre alt bist. Wird jemand gemeldet, weil er minderjährig wirken könnte, muss die Person ihr Alter nachweisen, bevor sie weiterchatten darf.</p><p>So entsteht ein Umfeld, in dem Flirten und lockere Sprüche ihren Platz haben – zwischen Leuten, die alt genug dafür sind.</p><p>Gestartet wird wie überall auf der Seite: Kamera an, auf „Starten“ tippen, und schon bist du live mit einer zufälligen Person verbunden. Mit Weiter oder der Esc-Taste wechselst du, mit Stopp machst du Pause. Alles läuft im Browser, ohne Download.</p>',
         },
         {
           h2: 'Der Scharf-Modus 🌶️: frecher, aber nur gemeinsam',
@@ -116,7 +116,7 @@ module.exports = {
         },
       ],
       faq: [
-        { q: 'Wie wird geprüft, dass alle über 18 sind?', a: 'Beim Erstellen des Kontos bestätigst du dein Alter. Wird jemand als möglicherweise minderjährig gemeldet, muss er sein Alter nachweisen, bevor er weiterchatten kann.' },
+        { q: 'Wie wird geprüft, dass alle über 18 sind?', a: 'Bevor du loslegst, gibst du dein Geburtsdatum an und bestätigst dein Alter. Wird jemand als möglicherweise minderjährig gemeldet, muss er sein Alter nachweisen, bevor er weiterchatten kann.' },
         { q: 'Ist der Scharf-Modus kostenlos?', a: 'Scharfe Spiele und Komplimente gehören zu Premium. Sie funktionieren zudem nur, wenn beide Personen den Scharf-Modus aktiviert haben.' },
         { q: 'Was tue ich, wenn mich jemand erpresst?', a: 'Zahl nichts, brich den Kontakt ab und melde die Person. Unsere Sicherheitsseite erklärt, welche weiteren Schritte sinnvoll sind.' },
         { q: 'Darf ich Gespräche aufnehmen?', a: 'Nein. Aufnahmen und Screenshots ohne Erlaubnis sind verboten und führen zum Ausschluss.' },
@@ -167,11 +167,11 @@ module.exports = {
       sections: [
         {
           h2: 'So funktioniert der Filter „Ich will sehen“',
-          html: '<p>Beim Erstellen deines Kontos gibst du an, ob du Frau, Mann, trans oder ein Paar bist. Mit Premium wählst du dann unter „Ich will sehen“ eine oder mehrere Gruppen aus. Das System verbindet dich bevorzugt mit Personen, die zu deiner Auswahl passen. Zusätzlich kannst du nach Land, Nähe und Altersgruppe filtern.</p><p>Gerade wenige Leute mit genau diesen Filtern online? Dann hilft es, die Auswahl etwas weiter zu fassen – so findest du schneller jemanden.</p><p>Wichtig zu wissen: Auch mit Filter bleibt es ein Live-Chat mit echten Menschen, die gerade online sind. Es gibt keine Profile zum Durchblättern und keine vorproduzierten Videos – wer erscheint, sitzt in diesem Moment selbst vor der Kamera und entscheidet genau wie du, ob das Gespräch weitergeht.</p>',
+          html: '<p>Beim Einstieg gibst du an, ob du Frau, Mann, trans oder ein Paar bist. Mit Premium wählst du dann unter „Ich will sehen“ eine oder mehrere Gruppen aus. Das System verbindet dich bevorzugt mit Personen, die zu deiner Auswahl passen. Zusätzlich kannst du nach Land, Nähe und Altersgruppe filtern.</p><p>Gerade wenige Leute mit genau diesen Filtern online? Dann hilft es, die Auswahl etwas weiter zu fassen – so findest du schneller jemanden.</p><p>Wichtig zu wissen: Auch mit Filter bleibt es ein Live-Chat mit echten Menschen, die gerade online sind. Es gibt keine Profile zum Durchblättern und keine vorproduzierten Videos – wer erscheint, sitzt in diesem Moment selbst vor der Kamera und entscheidet genau wie du, ob das Gespräch weitergeht.</p>',
         },
         {
           h2: 'Was Premium kostet und was dazugehört',
-          html: '<table><thead><tr><th>Option</th><th>Preis</th></tr></thead><tbody><tr><td>Premium Woche</td><td>7,99 €</td></tr><tr><td>Premium Monat</td><td>19,99 €</td></tr></tbody></table><p>Beide Varianten kannst du jederzeit kündigen. Neben der Auswahl, wen du sehen willst, bekommst du Filter nach Land, Nähe und Alter, keine Werbung, einen Verlauf über 30 Tage, Freunde und Anrufe, scharfe Spiele und Komplimente sowie täglich kostenlose Superkräfte. Kleiner Bonus: Lädst du jemanden ein und führt die Person ihr erstes Gespräch von mehr als einer Minute, gibt es für euch beide einen Tag Premium gratis.</p>',
+          html: '<table><thead><tr><th>Option</th><th>Preis</th></tr></thead><tbody><tr><td>Premium Woche</td><td>7,99 €</td></tr><tr><td>Premium Monat</td><td>19,99 €</td></tr></tbody></table><p>Beide Varianten kannst du jederzeit kündigen. Neben der Auswahl, wen du sehen willst, bekommst du Filter nach Land, Nähe und Alter, keine Werbung, einen Verlauf über 30 Tage, Freunde und Anrufe, scharfe Spiele und Komplimente sowie täglich kostenlose Superkräfte. Kleiner Bonus: Lädst du jemanden ein, registriert sich die Person und führt ihr erstes Gespräch von mehr als einer Minute, gibt es für euch beide einen Tag Premium gratis.</p>',
         },
         {
           h2: 'Gute Gespräche statt schneller Klicks',
@@ -199,11 +199,11 @@ module.exports = {
       title: 'Videochat am Handy ohne App · La Ruleta Caliente',
       description: 'Videochat am Handy ohne Download: La Ruleta Caliente läuft im Browser von Android und iPhone und lässt sich als App installieren. Gratis und ab 18.',
       h1: 'Videochat am Handy – direkt im Browser, ohne App-Store',
-      intro: '<p>Du willst unterwegs oder vom Sofa aus neue Leute kennenlernen, ohne erst eine App herunterzuladen? Der <strong>Videochat am Handy</strong> von La Ruleta Caliente läuft einfach im Browser deines Smartphones. Adresse öffnen, anmelden, Kamera erlauben – schon bist du live mit jemandem verbunden.</p><p>Das spart Speicherplatz und funktioniert auf Android-Geräten genauso wie auf dem iPhone. Teilnehmen dürfen nur Erwachsene ab 18.</p>',
+      intro: '<p>Du willst unterwegs oder vom Sofa aus neue Leute kennenlernen, ohne erst eine App herunterzuladen? Der <strong>Videochat am Handy</strong> von La Ruleta Caliente läuft einfach im Browser deines Smartphones. Adresse öffnen, Alter bestätigen, Kamera erlauben – schon bist du live mit jemandem verbunden.</p><p>Das spart Speicherplatz und funktioniert auf Android-Geräten genauso wie auf dem iPhone. Teilnehmen dürfen nur Erwachsene ab 18.</p>',
       sections: [
         {
           h2: 'Warum kein Download nötig ist',
-          html: '<p>La Ruleta Caliente ist eine Web-App. Alles, was du brauchst, lädt dein Browser beim Öffnen der Seite. Es gibt deshalb keine Version in Google Play oder im App Store, nach der du suchen müsstest – und keine Updates, die du manuell installieren musst. Du nutzt immer automatisch die aktuelle Version.</p><p>Am Computer funktioniert es übrigens genauso. Du kannst also am Laptop anfangen und später am Handy weitermachen, mit demselben Konto.</p><p>Einzige Voraussetzung ist ein aktueller Browser, der Kamera und Mikrofon freigeben darf. Beim ersten Start fragt dein Handy nach der Erlaubnis – tippe auf „Zulassen“. Hast du versehentlich abgelehnt, kannst du das in den Website-Einstellungen deines Browsers jederzeit ändern.</p>',
+          html: '<p>La Ruleta Caliente ist eine Web-App. Alles, was du brauchst, lädt dein Browser beim Öffnen der Seite. Es gibt deshalb keine Version in Google Play oder im App Store, nach der du suchen müsstest – und keine Updates, die du manuell installieren musst. Du nutzt immer automatisch die aktuelle Version.</p><p>Am Computer funktioniert es übrigens genauso. Mit einem (optionalen) Konto kannst du also am Laptop anfangen und später am Handy weitermachen.</p><p>Einzige Voraussetzung ist ein aktueller Browser, der Kamera und Mikrofon freigeben darf. Beim ersten Start fragt dein Handy nach der Erlaubnis – tippe auf „Zulassen“. Hast du versehentlich abgelehnt, kannst du das in den Website-Einstellungen deines Browsers jederzeit ändern.</p>',
         },
         {
           h2: 'Als App auf dem Startbildschirm installieren',
@@ -242,7 +242,7 @@ module.exports = {
         },
         {
           h2: 'Was La Ruleta Caliente ausmacht',
-          html: '<p>Im Kern ist La Ruleta Caliente ein zufälliger 1:1-Videochat mit Menschen aus aller Welt – gratis zum Einstieg und direkt im Browser von Handy oder Computer. Darum herum gibt es einiges, das Gespräche lebendiger macht: Spiele wie Wahrheit oder Pflicht, Was wäre dir lieber?, Schere, Stein, Papier und Zeichnen &amp; Raten, ein Chemie-Thermometer, Eisbrecher-Themen und einen Textchat, der automatisch übersetzt.</p><p>Wer regelmäßig vorbeikommt, sammelt Chilis 🌶️ und tauscht sie gegen Superkräfte wie Zurückspulen oder die Heiße Flamme. Abends von 22 bis 23 Uhr spanischer Zeit läuft die Heiße Stunde mit doppelten Chilis.</p><p>Die Website ist auf Deutsch, Englisch, Spanisch, Portugiesisch, Französisch und Italienisch verfügbar. Du brauchst nur ein Konto per E-Mail oder über Google, Apple oder Facebook und musst bestätigen, dass du mindestens 18 bist.</p>',
+          html: '<p>Im Kern ist La Ruleta Caliente ein zufälliger 1:1-Videochat mit Menschen aus aller Welt – gratis zum Einstieg und direkt im Browser von Handy oder Computer. Darum herum gibt es einiges, das Gespräche lebendiger macht: Spiele wie Wahrheit oder Pflicht, Was wäre dir lieber?, Schere, Stein, Papier und Zeichnen &amp; Raten, ein Chemie-Thermometer, Eisbrecher-Themen und einen Textchat, der automatisch übersetzt.</p><p>Wer regelmäßig vorbeikommt, sammelt Chilis 🌶️ und tauscht sie gegen Superkräfte wie Zurückspulen oder die Heiße Flamme. Abends von 22 bis 23 Uhr spanischer Zeit läuft die Heiße Stunde mit doppelten Chilis.</p><p>Die Website ist auf Deutsch, Englisch, Spanisch, Portugiesisch, Französisch und Italienisch verfügbar. Eine Anmeldung brauchst du nicht, du musst nur bestätigen, dass du mindestens 18 bist.</p>',
         },
         {
           h2: 'Kostenlos und Premium auf einen Blick',
@@ -260,7 +260,7 @@ module.exports = {
       faq: [
         { q: 'Ist La Ruleta Caliente mit Omegle oder Chatroulette verbunden?', a: 'Nein. Wir sind eine eigenständige Plattform und nennen andere Seiten nur, damit du einordnen kannst, was dich bei uns erwartet.' },
         { q: 'Welche Alternative ist die beste?', a: 'Das hängt von deinen Wünschen ab. Schau dir an, was dir wichtig ist – etwa Sicherheit, Kosten oder Funktionen – und probier es selbst aus.' },
-        { q: 'Kann ich La Ruleta Caliente kostenlos testen?', a: 'Ja. Der zufällige Videochat ist kostenlos. Du brauchst nur ein Konto und musst mindestens 18 Jahre alt sein.' },
+        { q: 'Kann ich La Ruleta Caliente kostenlos testen?', a: 'Ja. Der zufällige Videochat ist kostenlos. Du brauchst keine Anmeldung, musst aber mindestens 18 Jahre alt sein.' },
       ],
     },
     'alt-omegle': {
@@ -273,11 +273,11 @@ module.exports = {
       sections: [
         {
           h2: 'Was vom vertrauten Gefühl bleibt',
-          html: '<p>Wer Omegle mochte, mochte meist die Spontaneität: kein langes Einrichten, kein Profilbild, keine Matches – nur ein zufälliges Gespräch. Das findest du hier ebenfalls. Du tippst auf „Starten“ und bist mit einer Person verbunden, die gerade online ist. Mit <strong>Weiter</strong> oder der Esc-Taste geht es zum nächsten Gespräch, mit <strong>Stopp</strong> machst du Pause.</p><p>Ein Unterschied: Bei uns brauchst du ein Konto (E-Mail, Google, Apple oder Facebook) und bestätigst, dass du volljährig bist. Das dauert nur einen Moment und sorgt dafür, dass im Chat nur Erwachsene sind. Außerdem können wir so Leute, die gegen die Regeln verstoßen, wirklich aussperren, statt dass sie einfach mit einem neuen Fenster zurückkommen.</p>',
+          html: '<p>Wer Omegle mochte, mochte meist die Spontaneität: kein langes Einrichten, kein Profilbild, keine Matches – nur ein zufälliges Gespräch. Das findest du hier ebenfalls. Du tippst auf „Starten“ und bist mit einer Person verbunden, die gerade online ist. Mit <strong>Weiter</strong> oder der Esc-Taste geht es zum nächsten Gespräch, mit <strong>Stopp</strong> machst du Pause.</p><p>Ein Unterschied: Eine Anmeldung brauchst du zwar nicht, aber du gibst dein Geburtsdatum an und bestätigst, dass du volljährig bist. Das dauert nur einen Moment und sorgt dafür, dass im Chat nur Erwachsene sind. Außerdem können wir so Leute, die gegen die Regeln verstoßen, wirklich aussperren, statt dass sie einfach mit einem neuen Fenster zurückkommen.</p>',
         },
         {
           h2: 'Was du bei La Ruleta Caliente findest',
-          html: '<table><thead><tr><th>Funktion</th><th>Bei La Ruleta Caliente</th></tr></thead><tbody><tr><td>Zufälliger Videochat 1:1</td><td>✓ kostenlos</td></tr><tr><td>Ohne Download</td><td>✓ im Browser, optional als App installierbar</td></tr><tr><td>Textchat</td><td>✓ mit automatischer Übersetzung</td></tr><tr><td>Spiele im Gespräch</td><td>✓ Wahrheit oder Pflicht, Zeichnen &amp; Raten u. a.</td></tr><tr><td>IP-Schutz</td><td>✓ Video läuft über unseren Server</td></tr><tr><td>Melden</td><td>✓ Prüfung durch Menschen, Einspruch möglich</td></tr><tr><td>Nur ab 18</td><td>✓ Altersbestätigung bei der Anmeldung</td></tr><tr><td>Filter (Geschlecht, Land, Alter)</td><td>mit Premium</td></tr></tbody></table>',
+          html: '<table><thead><tr><th>Funktion</th><th>Bei La Ruleta Caliente</th></tr></thead><tbody><tr><td>Zufälliger Videochat 1:1</td><td>✓ kostenlos</td></tr><tr><td>Ohne Download</td><td>✓ im Browser, optional als App installierbar</td></tr><tr><td>Textchat</td><td>✓ mit automatischer Übersetzung</td></tr><tr><td>Spiele im Gespräch</td><td>✓ Wahrheit oder Pflicht, Zeichnen &amp; Raten u. a.</td></tr><tr><td>IP-Schutz</td><td>✓ Video läuft über unseren Server</td></tr><tr><td>Melden</td><td>✓ Prüfung durch Menschen, Einspruch möglich</td></tr><tr><td>Nur ab 18</td><td>✓ Altersbestätigung beim Einstieg, ohne Anmeldung</td></tr><tr><td>Filter (Geschlecht, Land, Alter)</td><td>mit Premium</td></tr></tbody></table>',
         },
         {
           h2: 'Mehr als nur reden',
@@ -285,7 +285,7 @@ module.exports = {
         },
         {
           h2: 'Premium, wenn du mehr steuern willst',
-          html: '<p>Der Zufall ist gratis. Mit Premium für 7,99 € pro Woche oder 19,99 € pro Monat (jederzeit kündbar) entscheidest du, ob du Frauen, Männer, trans Personen oder Paare sehen willst, filterst nach Land, Nähe und Alter, chattest ohne Werbung und kannst Freunde hinzufügen und anrufen. Wenn du lieber erst schauen willst, wie sich alles anfühlt, starte mit dem <a href="@random-video-chat">Zufallschat</a>. Noch ein Bonus: Lädst du Freunde ein und haben sie ihr erstes Gespräch von über einer Minute, bekommt ihr beide einen Tag Premium.</p>',
+          html: '<p>Der Zufall ist gratis. Mit Premium für 7,99 € pro Woche oder 19,99 € pro Monat (jederzeit kündbar) entscheidest du, ob du Frauen, Männer, trans Personen oder Paare sehen willst, filterst nach Land, Nähe und Alter, chattest ohne Werbung und kannst Freunde hinzufügen und anrufen. Wenn du lieber erst schauen willst, wie sich alles anfühlt, starte mit dem <a href="@random-video-chat">Zufallschat</a>. Noch ein Bonus: Lädst du Freunde ein, registrieren sie sich und haben ihr erstes Gespräch von über einer Minute, bekommt ihr beide einen Tag Premium.</p>',
         },
         {
           h2: 'Sicher chatten ohne böse Überraschungen',
@@ -295,7 +295,7 @@ module.exports = {
       faq: [
         { q: 'Gibt es Omegle noch?', a: 'Nein, Omegle wurde im November 2023 geschlossen. Seitdem suchen viele nach anderen Seiten für Videochats mit Fremden.' },
         { q: 'Ist La Ruleta Caliente das neue Omegle?', a: 'Nein. Wir sind eine eigenständige Plattform ohne Verbindung zu Omegle, die ebenfalls zufällige Videochats anbietet – nur für Erwachsene ab 18.' },
-        { q: 'Kann ich wie bei Omegle ohne Konto chatten?', a: 'Nein, bei uns brauchst du ein kostenloses Konto. So stellen wir sicher, dass nur Volljährige teilnehmen, und können Regelverstöße ahnden.' },
+        { q: 'Kann ich wie bei Omegle ohne Konto chatten?', a: 'Ja, eine Anmeldung ist nicht nötig. Du bestätigst nur, dass du volljährig bist. Ein Konto ist optional, um deinen Fortschritt zu sichern oder Premium zu bezahlen.' },
         { q: 'Kostet die Omegle-Alternative etwas?', a: 'Der zufällige Videochat ist kostenlos. Premium mit Filtern und Extras ist optional.' },
       ],
     },
@@ -344,7 +344,7 @@ module.exports = {
       sections: [
         {
           h2: 'Ein Videochat, der nur Erwachsenen offensteht',
-          html: '<p>Wer bei uns chatten möchte, legt ein Konto an – per E-Mail oder über Google, Apple oder Facebook – und bestätigt, dass er volljährig ist. Danach geht es sofort los: „Starten“ antippen, eine zufällige Person erscheint, und ihr seid live verbunden. Kein Download, alles im Browser von Handy oder Computer.</p><p>Diese Hürde ist bewusst niedrig, aber sie ist da. Sie sorgt dafür, dass gemeldete Personen tatsächlich ausgeschlossen werden können und dass du dich in einer Runde von Erwachsenen bewegst.</p><p>Gefällt dir jemand nicht, bist du mit Weiter oder der Esc-Taste sofort beim nächsten Gespräch. Gefällt dir jemand sehr, schick ein ❤️ – und mit Premium kannst du die Person als Freund hinzufügen, um später wieder mit ihr zu reden.</p>',
+          html: '<p>Wer bei uns chatten möchte, braucht keine Anmeldung: Geschlecht wählen, Geburtsdatum angeben und bestätigen, dass man volljährig ist. Danach geht es sofort los: „Starten“ antippen, eine zufällige Person erscheint, und ihr seid live verbunden. Kein Download, alles im Browser von Handy oder Computer.</p><p>Diese Hürde ist bewusst niedrig, aber sie ist da. Sie sorgt dafür, dass gemeldete Personen tatsächlich ausgeschlossen werden können und dass du dich in einer Runde von Erwachsenen bewegst.</p><p>Gefällt dir jemand nicht, bist du mit Weiter oder der Esc-Taste sofort beim nächsten Gespräch. Gefällt dir jemand sehr, schick ein ❤️ – und mit Premium kannst du die Person als Freund hinzufügen, um später wieder mit ihr zu reden.</p>',
         },
         {
           h2: 'Was du bei La Ruleta Caliente findest',
@@ -379,7 +379,7 @@ module.exports = {
       sections: [
         {
           h2: 'Erst kostenlos testen, dann entscheiden',
-          html: '<p>Du musst nichts bezahlen, um herauszufinden, ob dir La Ruleta Caliente gefällt. Konto anlegen, Volljährigkeit bestätigen, Kamera erlauben – und schon kannst du so viele zufällige Gespräche führen, wie du willst. Der übersetzte Textchat, die Spiele und die Chilis 🌶️ stehen dir dabei ebenfalls offen.</p><p>Erst wenn du merkst, dass du gezielter suchen möchtest, lohnt sich ein Blick auf Premium. So weißt du vorher genau, worauf du dich einlässt.</p><p>Bezahlt wird übrigens in Euro, und wenn du dich für Premium entscheidest, kannst du das Abo jederzeit wieder beenden. Es gibt keine Mindestlaufzeit, die dich festhält – du entscheidest Woche für Woche oder Monat für Monat neu.</p>',
+          html: '<p>Du musst nichts bezahlen, um herauszufinden, ob dir La Ruleta Caliente gefällt. Ohne Anmeldung: Volljährigkeit bestätigen, Kamera erlauben – und schon kannst du so viele zufällige Gespräche führen, wie du willst. Der übersetzte Textchat, die Spiele und die Chilis 🌶️ stehen dir dabei ebenfalls offen.</p><p>Erst wenn du merkst, dass du gezielter suchen möchtest, lohnt sich ein Blick auf Premium. So weißt du vorher genau, worauf du dich einlässt.</p><p>Bezahlt wird übrigens in Euro, und wenn du dich für Premium entscheidest, kannst du das Abo jederzeit wieder beenden. Es gibt keine Mindestlaufzeit, die dich festhält – du entscheidest Woche für Woche oder Monat für Monat neu.</p>',
         },
         {
           h2: 'Was du bei La Ruleta Caliente findest',
@@ -391,7 +391,7 @@ module.exports = {
         },
         {
           h2: 'Premium sparen oder gewinnen',
-          html: '<p>Es gibt zwei Wege zu Premium ohne Bezahlung. Erstens: Lade jemanden mit deinem persönlichen Link ein. Sobald die Person ihr erstes Gespräch von mehr als einer Minute geführt hat, bekommt ihr beide einen Tag Premium. Zweitens: die Wochen-Rangliste. Wer seit Montag die meisten Chilis gesammelt hat, landet vorn – die ersten drei gewinnen 7, 3 beziehungsweise 1 Tag Premium. In der Heißen Stunde von 22 bis 23 Uhr spanischer Zeit zählen deine Chilis doppelt.</p><p>Mit Premium bekommst du außerdem jeden Tag Superkräfte gratis, etwa Zurückspulen, Inkognito und Zweite Chance.</p>',
+          html: '<p>Es gibt zwei Wege zu Premium ohne Bezahlung. Erstens: Lade jemanden mit deinem persönlichen Link ein. Sobald die Person sich registriert und ihr erstes Gespräch von mehr als einer Minute geführt hat, bekommt ihr beide einen Tag Premium. Zweitens: die Wochen-Rangliste. Wer seit Montag die meisten Chilis gesammelt hat, landet vorn – die ersten drei gewinnen 7, 3 beziehungsweise 1 Tag Premium. In der Heißen Stunde von 22 bis 23 Uhr spanischer Zeit zählen deine Chilis doppelt.</p><p>Mit Premium bekommst du außerdem jeden Tag Superkräfte gratis, etwa Zurückspulen, Inkognito und Zweite Chance.</p>',
         },
         {
           h2: 'Sicher und respektvoll',
@@ -492,7 +492,7 @@ module.exports = {
         },
         {
           h2: 'Preise in Euro und gratis Premium-Tage',
-          html: '<p>Der zufällige Videochat ist kostenlos. Premium kostet <strong>7,99 € pro Woche</strong> oder <strong>19,99 € pro Monat</strong> und ist jederzeit kündbar. Bezahlen kannst du unter anderem per Karte, Google Pay oder Apple Pay. Wenn du lieber nichts ausgeben möchtest, gibt es zwei Wege zu Gratis-Premium: Lade jemanden mit deinem Link ein – nach seinem ersten Gespräch von über einer Minute bekommt ihr beide einen Tag. Oder sammle Chilis 🌶️ und kämpf dich in der Wochen-Rangliste unter die ersten drei.</p>',
+          html: '<p>Der zufällige Videochat ist kostenlos. Premium kostet <strong>7,99 € pro Woche</strong> oder <strong>19,99 € pro Monat</strong> und ist jederzeit kündbar. Bezahlen kannst du unter anderem per Karte, Google Pay oder Apple Pay. Wenn du lieber nichts ausgeben möchtest, gibt es zwei Wege zu Gratis-Premium: Lade jemanden mit deinem Link ein – sobald er sich registriert und sein erstes Gespräch von über einer Minute geführt hat, bekommt ihr beide einen Tag. Oder sammle Chilis 🌶️ und kämpf dich in der Wochen-Rangliste unter die ersten drei.</p>',
         },
         {
           h2: 'Die Heiße Stunde am Abend',
@@ -532,11 +532,11 @@ module.exports = {
         },
         {
           h2: 'So läuft ein Gespräch ab',
-          html: '<ol><li>Konto anlegen – mit E-Mail, Google, Apple oder Facebook – und bestätigen, dass du volljährig bist.</li><li>Kamera und Mikrofon im Browser freigeben.</li><li>„Starten“ antippen und Hallo sagen.</li><li>Passt’s nicht, mit <strong>Weiter</strong> zur nächsten Person; brauchst du eine Pause, tipp auf <strong>Stopp</strong>.</li></ol><p>Damit es nicht beim Smalltalk übers Wetter bleibt, gibt es Spiele wie Wahrheit oder Pflicht, Was wäre dir lieber? und Zeichnen &amp; Raten. Mehr unter <a href="@games">Spiele</a>.</p>',
+          html: '<ol><li>Ohne Anmeldung loslegen – Geschlecht wählen, Geburtsdatum angeben und bestätigen, dass du volljährig bist.</li><li>Kamera und Mikrofon im Browser freigeben.</li><li>„Starten“ antippen und Hallo sagen.</li><li>Passt’s nicht, mit <strong>Weiter</strong> zur nächsten Person; brauchst du eine Pause, tipp auf <strong>Stopp</strong>.</li></ol><p>Damit es nicht beim Smalltalk übers Wetter bleibt, gibt es Spiele wie Wahrheit oder Pflicht, Was wäre dir lieber? und Zeichnen &amp; Raten. Mehr unter <a href="@games">Spiele</a>.</p>',
         },
         {
           h2: 'Preise in Euro, Heiße Stunde am Abend',
-          html: '<p>Für Premium zahlst du in Euro: <strong>7,99 € pro Woche</strong> oder <strong>19,99 € pro Monat</strong>, jederzeit kündbar. Gratis-Premium gibt es, wenn du Freunde einlädst (beide bekommen einen Tag, sobald die eingeladene Person ihr erstes Gespräch von über einer Minute hatte) oder in der Wochen-Rangliste unter die ersten drei kommst.</p><p>Die Punkte dafür heißen Chilis 🌶️. Du sammelst sie für deine Tages-Serie, Spiele, ❤️-Reaktionen und Wochen-Challenges. In der <strong>Heißen Stunde</strong> von 22 bis 23 Uhr spanischer Zeit zählen sie doppelt – ein guter Grund für eine Runde nach dem Abendessen.</p>',
+          html: '<p>Für Premium zahlst du in Euro: <strong>7,99 € pro Woche</strong> oder <strong>19,99 € pro Monat</strong>, jederzeit kündbar. Gratis-Premium gibt es, wenn du Freunde einlädst (beide bekommen einen Tag, sobald die eingeladene Person sich registriert und ihr erstes Gespräch von über einer Minute hatte) oder in der Wochen-Rangliste unter die ersten drei kommst.</p><p>Die Punkte dafür heißen Chilis 🌶️. Du sammelst sie für deine Tages-Serie, Spiele, ❤️-Reaktionen und Wochen-Challenges. In der <strong>Heißen Stunde</strong> von 22 bis 23 Uhr spanischer Zeit zählen sie doppelt – ein guter Grund für eine Runde nach dem Abendessen.</p>',
         },
         {
           h2: 'Am Handy, ganz ohne App',
@@ -575,7 +575,7 @@ module.exports = {
         },
         {
           h2: 'Preise in Euro – die Bank rechnet um',
-          html: '<p>Der zufällige Videochat kostet nichts. Premium wird in Euro abgerechnet: <strong>7,99 € pro Woche</strong> oder <strong>19,99 € pro Monat</strong>, jederzeit kündbar. Bezahlst du mit einer Karte in Franken, rechnet deine Bank den Betrag um; je nach Bank kann dabei eine kleine Gebühr anfallen.</p><p>Gratis-Premium gibt es auch: Lädst du jemanden ein und hat die Person ihr erstes Gespräch von über einer Minute, bekommt ihr beide einen Tag. Und wer in der Wochen-Rangliste unter den ersten drei landet, gewinnt am Montag 7, 3 oder 1 Tag Premium.</p>',
+          html: '<p>Der zufällige Videochat kostet nichts. Premium wird in Euro abgerechnet: <strong>7,99 € pro Woche</strong> oder <strong>19,99 € pro Monat</strong>, jederzeit kündbar. Bezahlst du mit einer Karte in Franken, rechnet deine Bank den Betrag um; je nach Bank kann dabei eine kleine Gebühr anfallen.</p><p>Gratis-Premium gibt es auch: Lädst du jemanden ein und registriert sich die Person und hat ihr erstes Gespräch von über einer Minute, bekommt ihr beide einen Tag. Und wer in der Wochen-Rangliste unter den ersten drei landet, gewinnt am Montag 7, 3 oder 1 Tag Premium.</p>',
         },
         {
           h2: 'Chilis, Spiele und die Heisse Stunde',
