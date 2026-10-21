@@ -45,8 +45,10 @@ ve posible, solo en Hacienda) y contratar Segpay (apartado G).
 
 ## C. Legal y privacidad (con abogado)
 
-- ☐ Rellenar los datos marcados en amarillo en `/terminos` y `/privacidad` (**6 idiomas**):
-  titular, NIF, dirección, email.
+- ☑ Titular y email de contacto en Aviso legal, Términos y Privacidad (6 idiomas): Christian Martínez Pérez ·
+  soporte@laruletacaliente.com (llega a tu Gmail).
+- ☐ **Al darte de alta como autónomo:** añadir el **NIF** y la **dirección** (domicilio fiscal) en esas 3 páginas
+  (obligatorio por la LSSI en cuanto la web tenga actividad económica: cobros, publicidad…).
 - ☐ Revisar las condiciones y la política de privacidad con un abogado.
 - ☐ Completar y revisar [registro-actividades-tratamiento.md](registro-actividades-tratamiento.md).
 - ☐ Completar y revisar [evaluacion-impacto.md](evaluacion-impacto.md) (EIPD).
