@@ -185,6 +185,8 @@ function routes(app, baseUrl) {
   // Empieza el pago: crea el pedido y devuelve la URL de Segpay
   app.post('/api/checkout', requireUser, (req, res) => {
     if (FREE) return res.status(409).json({ code: 'free' });
+    // Para pagar hace falta una cuenta con email (no de invitado)
+    if (req.user.guest) return res.status(403).json({ code: 'needAccount' });
     if (needsEmail(req.user)) return res.status(403).json({ code: 'emailUnverified' });
     const method = req.body?.method === 'crypto' ? 'crypto' : 'card';
     const plan = PLANS[req.body?.plan] ? req.body.plan : 'month';

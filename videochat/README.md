@@ -177,6 +177,15 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   - Datos guardados: guindillas, racha, contadores, insignias, progreso semanal, quién te dio ❤️
     (24 h, máx. 30), fin de Llama/Incógnito y el Supersaludo pendiente. Entran en «Descargar mis
     datos» y se borran con la cuenta.
+- **Entrar sin registro (invitados)** (`auth.js`, activado por defecto; `GUESTS=off` lo quita):
+  - «Empezar» abre la pestaña «Sin registro»: solo sexo, fecha de nacimiento y confirmar +18 y normas
+    (`POST /api/guest`, con Turnstile y máx. 20 por IP al día). Se crea una cuenta sin email
+    (`g…@invitado.invalid`, `guest: true`) que vive en ese dispositivo; nunca se le envían emails.
+  - Desde «Mi cuenta» → «Crear mi cuenta» se convierte en cuenta normal con email (misma id, conserva
+    guindillas, likes, etc.). Para pagar Premium o monedas hace falta cuenta (`needAccount`). La
+    invitación de un amigo invitado se premia cuando crea su cuenta.
+  - Si se expulsa a un invitado, su IP (hash SHA-256) no puede crear invitados durante 30 días
+    (`settings/guestBans`).
 - **Premium de regalo 🎁** (`gifts.js`), igual para todo el mundo (sin diferencias por género):
   - *Prueba de bienvenida*: **desactivada por defecto** (no se promete en ningún texto público). Si el
     dueño pone `TRIAL_DAYS=n` en `.env`, cada cuenta nueva (email o Google/Apple/Facebook) recibe n días

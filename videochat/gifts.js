@@ -89,7 +89,8 @@ module.exports = function createGifts({ store, payments, rewards, notify, online
   // Desde server.js, al terminar una conversación de más de un minuto
   function conversation(uid) {
     const user = store.getUser(uid);
-    if (!user?.referredBy || user.referralPaid) return;
+    // Los invitados (sin registro) cuentan cuando crean su cuenta
+    if (!user?.referredBy || user.referralPaid || user.guest) return;
     store.updateUser(uid, { referralPaid: true });
     const inviter = store.getUser(user.referredBy);
     grant(uid, INVITE_DAYS, 'invited');

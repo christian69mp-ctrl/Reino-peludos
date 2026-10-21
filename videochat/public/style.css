@@ -1404,3 +1404,12 @@ html, body { overflow-x: clip; }
 .wallet-reqs .st-rejected .wallet-st { color: var(--danger); }
 .wallet-reqs small { flex-basis: 100%; color: var(--muted); }
 @media (max-width: 400px) { .tip-packs { grid-template-columns: minmax(0, 1fr); } }
+
+/* ----- Entrar sin registro (invitados) ----- */
+.guest-only { display: none; }
+#authForm.guest .guest-only { display: block; }
+#authForm.guest .account-only, #authForm.guest .login-only { display: none; }
+#authForm.guest .register-only { display: block; }
+#authModal.guest-mode .social-login { display: none; }
+.guest-box { padding: 14px 16px; margin-bottom: 18px; border-radius: 14px; background: rgba(255, 197, 61, .08); border: 1px solid rgba(255, 197, 61, .3); }
+.guest-box p { margin: 0 0 8px; }

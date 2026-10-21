@@ -65,7 +65,7 @@ adminauth.routes(app);
 adminapi.routes(app);
 
 // Qué funciones opcionales están activas
-app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled, turnstile: captcha.SITE_KEY || null, providers: oauth.enabled, trialDays: gifts.TRIAL_DAYS, tips: tips.ENABLED }));
+app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled, turnstile: captcha.SITE_KEY || null, providers: oauth.enabled, trialDays: gifts.TRIAL_DAYS, tips: tips.ENABLED, guests: auth.GUESTS }));
 
 // Sesión actual: datos de la cuenta, Premium y restricciones
 app.get('/api/me', auth.requireUser, (req, res) => {

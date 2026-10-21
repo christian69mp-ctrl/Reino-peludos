@@ -472,6 +472,7 @@
     <div class="modal">
       <button class="close" data-close data-i18n-aria="btn.close" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button>
       <div class="tabs" role="tablist">
+        <button class="tab" data-tab="guest" role="tab" type="button" id="guestTab" hidden data-i18n="guest.tab">No sign-up</button>
         <button class="tab active" data-tab="register" role="tab" type="button" data-i18n="auth.signupTab">Sign up</button>
         <button class="tab" data-tab="login" role="tab" type="button" data-i18n="auth.loginTab">Log in</button>
       </div>
@@ -482,10 +483,11 @@
         <p class="or-line"><span data-i18n="auth.or">or with your email</span></p>
       </div>
       <form id="authForm" novalidate>
-        <label class="field"><span data-i18n="auth.email">Email</span>
+        <p class="notice guest-only" data-i18n="guest.intro">No email or password: just tell us who you are and confirm you’re 18 or older.</p>
+        <label class="field account-only"><span data-i18n="auth.email">Email</span>
           <input type="email" id="authEmail" autocomplete="email" required>
         </label>
-        <label class="field"><span data-i18n="auth.password">Password</span>
+        <label class="field account-only"><span data-i18n="auth.password">Password</span>
           <input type="password" id="authPassword" autocomplete="new-password" minlength="8" required>
           <span class="hint register-only" data-i18n="auth.min8">At least 8 characters</span>
         </label>
@@ -674,6 +676,11 @@
       </div>
 
       <section class="acc-panel" data-apanel="profile">
+      <div class="guest-box" id="guestBox" hidden>
+        <p><b data-i18n="guest.boxTitle">You’re using a guest account</b></p>
+        <p class="muted" data-i18n="guest.boxText">Your progress is saved only on this device. Create an account (email or Google) so you don’t lose it. You’ll need one to buy Premium.</p>
+        <button type="button" class="btn primary wide" id="guestUpgrade" data-i18n="guest.create">Create my account</button>
+      </div>
       <dl class="account-list">
         <dt data-i18n="auth.email">Email</dt><dd id="accEmail"></dd>
         <dt data-i18n="b.label">Date of birth</dt><dd id="accBirth"></dd>

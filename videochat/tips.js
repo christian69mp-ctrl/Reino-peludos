@@ -163,6 +163,7 @@ module.exports = function createTips({ notify }) {
     // Comprar monedas
     app.post('/api/coins/checkout', requireUser, (req, res) => {
       if (!ENABLED) return res.status(409).json({ code: 'off' });
+      if (req.user.guest) return res.status(403).json({ code: 'needAccount' });
       if (needsEmail(req.user)) return res.status(403).json({ code: 'emailUnverified' });
       const pack = PACKS[req.body?.pack] ? req.body.pack : null;
       if (!pack) return res.status(400).json({ code: 'payUnavailable' });
@@ -192,6 +193,7 @@ module.exports = function createTips({ notify }) {
     app.post('/api/payouts', requireUser, (req, res) => {
       if (!PAYOUTS) return res.status(409).json({ code: 'payoutsOff' });
       const user = req.user;
+      if (user.guest) return res.status(403).json({ code: 'needAccount' });
       // Cuenta expulsada: lo ganado queda congelado (el administrador decide)
       if (user.status === 'banned') return res.status(403).json({ code: 'payoutBanned' });
       if (!verified(user)) return res.status(403).json({ code: 'payoutVerify' });

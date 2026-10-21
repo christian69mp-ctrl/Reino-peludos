@@ -160,9 +160,10 @@ function routes(app) {
     const user = req.user;
     // Cuentas creadas con Google/Apple/Facebook no tienen contraseña: se confirma escribiendo el email
     const given = String(req.body?.password || '');
-    const ok = user.passHash
-      ? await checkPassword(given, user.passHash)
-      : given.trim().toLowerCase() === user.email;
+    // Invitados: no tienen contraseña ni email; basta con confirmarlo en la web
+    const ok = user.guest ? req.body?.confirm === true
+      : user.passHash ? await checkPassword(given, user.passHash)
+        : given.trim().toLowerCase() === user.email;
     if (!ok) return res.status(401).json({ code: user.passHash ? 'badPassword' : 'badConfirmEmail' });
     // Si estaba expulsada, se guarda solo un hash del email para que no pueda volver a registrarse
     if (user.status === 'banned') store.banEmailHash(sha256(user.email));

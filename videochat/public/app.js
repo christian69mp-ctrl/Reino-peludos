@@ -122,7 +122,7 @@ function fillLangSelects() {
 // Textos que dependen del estado y no se pueden marcar en el HTML
 function renderDynamicTexts() {
   $$('[data-lang-select]').forEach((sel) => { sel.value = I18N.lang; });
-  $('authSubmit').textContent = t(authMode === 'login' ? 'auth.submitLogin' : 'auth.submitSignup');
+  $('authSubmit').textContent = t(authMode === 'login' ? 'auth.submitLogin' : authMode === 'guest' ? 'guest.submit' : 'auth.submitSignup');
   $('statusText').textContent = t(statusKey.key, statusKey.vars);
   renderPlans();
   renderPartner();
@@ -189,21 +189,29 @@ function resetCaptcha(id) {
 let authMode = 'register';
 let myGender = '';
 
+let guestsAllowed = false; // entrar sin registro (el servidor lo dice en /api/config)
+
 function setAuthMode(mode) {
   authMode = mode;
   $$('#authModal .tab').forEach((tab) => tab.classList.toggle('active', tab.dataset.tab === mode));
   $('authForm').classList.toggle('login', mode === 'login');
-  $('authSubmit').textContent = t(mode === 'login' ? 'auth.submitLogin' : 'auth.submitSignup');
+  $('authForm').classList.toggle('guest', mode === 'guest');
+  $('authModal').classList.toggle('guest-mode', mode === 'guest');
+  $('authSubmit').textContent = t(mode === 'login' ? 'auth.submitLogin' : mode === 'guest' ? 'guest.submit' : 'auth.submitSignup');
   $('authPassword').autocomplete = mode === 'login' ? 'current-password' : 'new-password';
   $('authError').hidden = true;
 }
 
 function openAuth(mode = 'register', action = null) {
   pendingAction = action;
+  // Para chatear no hace falta cuenta: se abre «Sin registro». Para pagar o guardar el progreso, sí.
+  const needsAccount = action === 'premium' || action === 'upgrade' || me?.user?.guest;
+  $('guestTab').hidden = !guestsAllowed || needsAccount;
+  if (guestsAllowed && !needsAccount && mode === 'register' && action === 'start') mode = 'guest';
   setAuthMode(mode);
   openModal('authModal');
   ensureCaptcha('captchaRegister');
-  focusSoon('authEmail');
+  if (mode !== 'guest') focusSoon('authEmail');
 }
 
 $$('[data-open-auth]').forEach((b) => b.addEventListener('click', () => openAuth(b.dataset.openAuth)));
@@ -220,10 +228,19 @@ $('authForm').addEventListener('submit', async (e) => {
   const showError = (msg) => { $('authError').textContent = msg; $('authError').hidden = false; };
   const email = $('authEmail').value.trim();
   const password = $('authPassword').value;
-  if (!email || !password) return showError(t('err.fill'));
+  if (authMode !== 'guest' && (!email || !password)) return showError(t('err.fill'));
 
   let res;
-  if (authMode === 'register') {
+  if (authMode === 'guest') {
+    if (!myGender) return showError(t('err.gender'));
+    const birthDate = birthValue($('authBirth'));
+    const birthProblem = birthCheck(birthDate);
+    if (birthProblem) return showError(birthProblem);
+    if (!$('authTerms').checked) return showError(t('err.terms'));
+    $('authSubmit').disabled = true;
+    res = await api('/api/guest', { method: 'POST', body: { gender: myGender, birthDate, adult: true, terms: true, lang: I18N.chatLang(), captcha: captchaTokens.captchaRegister } });
+    resetCaptcha('captchaRegister');
+  } else if (authMode === 'register') {
     if (!myGender) return showError(t('err.gender'));
     const birthDate = birthValue($('authBirth'));
     const birthProblem = birthCheck(birthDate);
@@ -241,7 +258,9 @@ $('authForm').addEventListener('submit', async (e) => {
 
   $('authPassword').value = '';
   closeModal('authModal');
-  loggedIn(res.token, authMode === 'register', pendingAction);
+  const upgraded = authMode === 'register' && me?.user?.guest;
+  loggedIn(res.token, authMode !== 'login' && !upgraded, pendingAction);
+  if (upgraded) setTimeout(() => toast(t('guest.saved')), 400);
 });
 
 // Sesión iniciada (con email o con Google/Apple/Facebook): sigue con lo que quería hacer
@@ -374,8 +393,11 @@ function logout(notify = true) {
   showLanding();
   if (notify) toast(t('msg.loggedOut'));
 }
-$('logoutBtn').addEventListener('click', () => logout());
-$('accLogout').addEventListener('click', () => { closeModal('accountModal'); logout(); });
+// Un invitado que cierra sesión pierde su cuenta (no tiene email ni contraseña para volver)
+const confirmLogout = () => !me?.user?.guest || confirm(t('guest.logoutWarn'));
+$('guestUpgrade').addEventListener('click', () => { closeModal('accountModal'); openAuth('register', 'upgrade'); });
+$('logoutBtn').addEventListener('click', () => { if (confirmLogout()) logout(); });
+$('accLogout').addEventListener('click', () => { if (!confirmLogout()) return; closeModal('accountModal'); logout(); });
 
 function showRestricted(r) {
   stop();
@@ -528,7 +550,9 @@ async function pollAge() {
 // ---------- Mi cuenta y datos personales ----------
 function renderAccount() {
   if (!me) return;
-  $('accEmail').textContent = me.user.email;
+  $('accEmail').textContent = me.user.guest ? t('guest.noEmail') : me.user.email;
+  $('guestBox').hidden = !me.user.guest;
+  $$('[data-atab=security]').forEach((b) => { b.hidden = !!me.user.guest; });
   const bd = me.user.birthDate;
   $('accBirth').textContent = bd ? new Date(`${bd}T12:00:00`).toLocaleDateString(I18N.lang, { dateStyle: 'long' }) : '—';
   $('birthForm').hidden = !!bd;
@@ -583,6 +607,8 @@ $('deleteOpen').addEventListener('click', () => {
   $('deleteError').hidden = true;
   $('deletePassword').value = '';
   // Cuentas creadas con Google/Apple/Facebook: se confirma escribiendo el email
+  const guest = !!me?.user?.guest;
+  $('deletePassword').closest('.field').hidden = guest;
   const noPass = me?.user && !me.user.hasPassword;
   $('deletePassword').type = noPass ? 'email' : 'password';
   $('deletePassword').autocomplete = noPass ? 'off' : 'current-password';
@@ -593,7 +619,7 @@ $('deleteOpen').addEventListener('click', () => {
 $('deleteForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   $('deleteSubmit').disabled = true;
-  const res = await api('/api/me/delete', { method: 'POST', body: { password: $('deletePassword').value } });
+  const res = await api('/api/me/delete', { method: 'POST', body: { password: $('deletePassword').value, confirm: !!me?.user?.guest } });
   $('deleteSubmit').disabled = false;
   if (!res.ok) { $('deleteError').textContent = errorText(res); $('deleteError').hidden = false; return; }
   closeModal('accountModal');
@@ -889,6 +915,7 @@ async function pay(method) {
   buttons.forEach((b) => { b.disabled = false; });
   if (res.activated) premiumActivated();              // modo demo
   else if (res.url) location.href = res.url;          // página de pago de Segpay
+  else if (res.code === 'needAccount') { closeModal('premiumModal'); toast(t('err.needAccount')); openAuth('register', 'premium'); }
   else toast(errorText(res));
 }
 $('payCard').addEventListener('click', () => pay('card'));
@@ -2163,6 +2190,7 @@ fetch('/api/plan').then((r) => r.json()).then((p) => {
 fetch('/api/config').then((r) => r.json()).then((c) => {
   translateEnabled = !!c.translate;
   trialOff = !c.trialDays;
+  guestsAllowed = !!c.guests;
   document.querySelectorAll('.trial-note').forEach((n) => { n.hidden = freeMode || trialOff; });
   turnstileKey = c.turnstile || null;
   const providers = c.providers || [];

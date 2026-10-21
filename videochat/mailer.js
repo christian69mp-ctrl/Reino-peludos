@@ -109,7 +109,11 @@ const VERIFY = {
 };
 
 // Email con un botón, con el diseño de la marca
+// Las cuentas de invitado no tienen email real (…@invitado.invalid): no se les escribe
+const noMail = (to) => !to || /\.invalid$/i.test(String(to));
+
 async function sendTemplate(to, s, link, label) {
+  if (noMail(to)) return;
   if (!transport) {
     console.log(`[email] (sin SMTP) ${label} para ${to}: ${link}`);
     return;
@@ -153,7 +157,7 @@ async function sendAdminAlert(subject, text) {
 
 // Email de texto a un usuario (respuestas del equipo, acuses de recibo…)
 async function sendText(to, subject, text, replyTo) {
-  if (!to) return;
+  if (noMail(to)) return;
   if (!transport) {
     console.log(`[email] (sin SMTP) para ${to}: ${subject}\n${text}`);
     return;

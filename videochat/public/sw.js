@@ -4,7 +4,7 @@
 // - Nunca guarda la API, el chat ni el vídeo.
 // Al cambiar archivos de la web, sube VERSION para que los usuarios reciban la nueva.
 
-const VERSION = 'lrc-v28';
+const VERSION = 'lrc-v29';
 const PRECACHE = [
   '/', '/offline.html', '/offline.js', '/style.css', '/app.js', '/i18n.js', '/legal.js',
   '/logo.svg', '/favicon.svg', '/icon-192.png', '/icon-512.png', '/fonts/plus-jakarta-sans.woff2',

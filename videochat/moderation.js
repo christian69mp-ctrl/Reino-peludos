@@ -82,7 +82,8 @@ function userSummary(user) {
   const reports = store.listReports().filter((r) => r.reportedId === user.id);
   return {
     id: user.id,
-    email: user.email,
+    email: user.guest ? 'Invitado (sin email)' : user.email,
+    guest: !!user.guest,
     nick: user.nick || '',
     rep: { up: user.rep?.up || 0, down: user.rep?.down || 0 },
     piropos: Object.values(user.piropos || {}).reduce((a, b) => a + b, 0),
@@ -111,6 +112,7 @@ function applyUserAction(user, action, days, code) {
   const reason = (REASONS[code] || ['moderation', 'chargeback', 'fraud'].includes(code)) ? code : 'moderation';
   if (action === 'ban') {
     store.updateUser(user.id, { status: 'banned', bannedAt: Date.now(), restrictionCode: reason });
+    require('./auth').banGuestIp(user);
     onRestrict(user.id, { type: 'banned', reason });
   } else if (action === 'suspend') {
     const until = Date.now() + Math.min(Math.max(Number(days) || 1, 1), 365) * 86400000;
@@ -176,7 +178,7 @@ function routes(app) {
     const q = String(req.query.q || '').trim().toLowerCase();
     const list = store.listUsers()
       // también se busca por el código de marca de agua (p. ej. "7F3A-91C2") que sale en grabaciones filtradas
-      .filter((u) => !q || u.email.includes(q) || (u.nick || '').toLowerCase().includes(q) || u.id === q || u.id.includes(q.replace(/[^a-f0-9]/g, '') || '¬'))
+      .filter((u) => !q || (u.email || '').includes(q) || (u.nick || '').toLowerCase().includes(q) || u.id === q || u.id.includes(q.replace(/[^a-f0-9]/g, '') || '¬'))
       .sort((a, b) => b.createdAt - a.createdAt)
       .slice(0, 100)
       .map(userSummary);

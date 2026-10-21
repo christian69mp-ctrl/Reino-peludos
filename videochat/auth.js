@@ -128,12 +128,12 @@ function likesOf(user) {
 }
 
 function publicUser(user) {
-  return { id: user.id, email: user.email, nick: user.nick || '', hasPassword: !!user.passHash, birthDate: user.birthDate || null, prefs: prefsOf(user), pendingEmail: user.emailChange?.email || null, gender: user.gender, createdAt: user.createdAt, likes: likesOf(user), piropos: user.piropos || {}, emailVerified: !!user.emailVerified };
+  return { id: user.id, guest: !!user.guest, email: user.guest ? '' : user.email, nick: user.nick || '', hasPassword: !!user.passHash, birthDate: user.birthDate || null, prefs: prefsOf(user), pendingEmail: user.emailChange?.email || null, gender: user.gender, createdAt: user.createdAt, likes: likesOf(user), piropos: user.piropos || {}, emailVerified: !!user.emailVerified };
 }
 
 // true si la cuenta todavía tiene que confirmar su email
 function needsEmail(user) {
-  return EMAIL_VERIFY && !user.emailVerified;
+  return EMAIL_VERIFY && !user.guest && !user.emailVerified;
 }
 
 function baseUrl(req) {
@@ -153,7 +153,53 @@ const signupHooks = [];
 const onSignup = (fn) => signupHooks.push(fn);
 function signedUp(user) { for (const fn of signupHooks) { try { fn(user); } catch (err) { console.error('[alta]', err.message); } } }
 
+// ---------- Entrar sin registro (invitados) ----------
+// Se usa la web sin email ni contraseña: solo sexo, fecha de nacimiento y confirmar +18 y normas.
+// La cuenta vive en ese dispositivo; puede convertirse en cuenta normal (email o Google) para
+// guardar el progreso, y hace falta una cuenta para pagar Premium. GUESTS=off lo desactiva.
+const GUESTS = process.env.GUESTS !== 'off';
+const GUEST_DOMAIN = '@invitado.invalid';
+const GUEST_BAN_DAYS = 30;
+// Un invitado expulsado podría volver con otra cuenta: se bloquea su conexión un tiempo
+function banGuestIp(user) {
+  if (!user?.guest || !user.registerIp) return;
+  const bans = store.get('settings', 'guestBans') || { id: 'guestBans', ips: {} };
+  const now = Date.now();
+  for (const [h, until] of Object.entries(bans.ips)) if (until < now) delete bans.ips[h];
+  bans.ips[sha256(user.registerIp)] = now + GUEST_BAN_DAYS * 86400000;
+  store.put('settings', bans);
+}
+const guestIpBanned = (ip) => (store.get('settings', 'guestBans')?.ips?.[sha256(ip)] || 0) > Date.now();
+
 function routes(app) {
+  app.post('/api/guest', async (req, res) => {
+    if (!GUESTS) return res.status(403).json({ code: 'guestsOff' });
+    if (rateLimited(req.ip) || hit(`guest:${req.ip}`, 20, 24 * 3600 * 1000)) return res.status(429).json({ code: 'tooMany' });
+    const { gender, adult, terms } = req.body || {};
+    if (!GENDERS.includes(gender)) return res.status(400).json({ code: 'gender' });
+    if (adult !== true || terms !== true) return res.status(400).json({ code: 'terms' });
+    const birthDate = String(req.body?.birthDate || '');
+    if (birthError(birthDate)) return res.status(400).json({ code: birthError(birthDate) });
+    if (guestIpBanned(req.ip)) return res.status(403).json({ code: 'guestBanned' });
+    if (!(await captcha.verifyHuman(req))) return res.status(400).json({ code: 'captcha' });
+    const user = store.createUser({
+      email: `g${crypto.randomBytes(9).toString('hex')}${GUEST_DOMAIN}`,
+      guest: true,
+      gender,
+      birthDate,
+      status: 'active',
+      tokenVersion: 0,
+      acceptedTermsAt: Date.now(),
+      registerIp: req.ip,
+      likes: { like: 0, love: 0 },
+      lang: cleanLang(req.body?.lang),
+      emailVerified: true,
+    });
+    require('./stats').signup('guest');
+    signedUp(user);
+    res.json({ token: sessionToken(user), user: publicUser(user) });
+  });
+
   app.post('/api/register', async (req, res) => {
     if (rateLimited(req.ip)) return res.status(429).json({ code: 'tooMany', error: 'Demasiados intentos. Prueba en unos minutos.' });
     const email = String(req.body?.email || '').trim().toLowerCase();
@@ -169,6 +215,16 @@ function routes(app) {
     if (store.getUserByEmail(email)) return res.status(409).json({ code: 'exists', error: 'Ya existe una cuenta con ese email' });
     if (store.isEmailHashBanned(sha256(email))) return res.status(403).json({ code: 'bannedEmail' });
     if (!(await captcha.verifyHuman(req))) return res.status(400).json({ code: 'captcha' });
+
+    const guest = userFromToken(bearer(req));
+    if (guest?.guest) {
+      store.changeEmail(guest.id, email);
+      store.updateUser(guest.id, { guest: false, passHash: await hashPassword(password), gender, birthDate: guest.birthDate || birthDate, emailVerified: false, upgradedAt: Date.now() });
+      const upgraded = store.getUser(guest.id);
+      if (EMAIL_VERIFY) sendVerification(upgraded, req);
+      require('./stats').signup('email');
+      return res.json({ token: sessionToken(upgraded), user: publicUser(upgraded) });
+    }
 
     const user = store.createUser({
       email,
@@ -276,6 +332,9 @@ function routes(app) {
 }
 
 module.exports = {
+  GUESTS,
+  banGuestIp,
+  isGuest: (u) => !!u?.guest,
   routes, onSignup, signedUp, requireUser, userFromToken, prefsOf, restriction, publicUser, likesOf, checkPassword, bearer, needsEmail,
   sessionToken, cleanLang, rateLimited, sha256, ageFrom, birthError, hashPassword, baseUrl, EMAIL_RE, EMAIL_VERIFY, GENDERS,
 };
