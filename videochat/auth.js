@@ -218,6 +218,9 @@ function routes(app) {
     const email = String(req.body?.email || '').trim().toLowerCase();
     if (!EMAIL_RE.test(email)) return res.status(400).json({ code: 'email' });
     if (!(await captcha.verifyHuman(req))) return res.status(400).json({ code: 'captcha' });
+    // En la web publicada sin envío de emails no se puede mandar el enlace: se dice claramente
+    // (en pruebas, sin HTTPS, el enlace sale en el registro del servidor)
+    if (!mailer.enabled && /^https:/.test(process.env.BASE_URL || '')) return res.status(503).json({ code: 'mailOff' });
     const user = store.getUserByEmail(email);
     const recent = user?.reset && user.reset.sentAt > Date.now() - 60000;
     if (user && !recent) {

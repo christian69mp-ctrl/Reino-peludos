@@ -631,6 +631,7 @@
       'err.off': "Esta función no está disponible.",
       'err.payoutBanned': "Tu cuenta está expulsada: las retiradas están bloqueadas. Si crees que es un error, recurre la sanción.",
       'err.ageReview': "Tu cuenta está en revisión: nuestro equipo comprobará tu edad y podrás volver al videochat cuando terminemos.",
+      'err.mailOff': "Ahora mismo no podemos enviarte el enlace por email. Si tu email es de Gmail, entra con «Continuar con Google» (es la misma cuenta). Si no, escríbenos desde ese email a soporte@laruletacaliente.com.",
       'err.auth': 'Inicia sesión para continuar', 'err.generic': 'No se pudo completar. Inténtalo de nuevo.',
     },
 
@@ -1262,6 +1263,7 @@
       'err.off': "This feature isn’t available.",
       'err.payoutBanned': "Your account is banned, so withdrawals are blocked. If you think this is a mistake, appeal the decision.",
       'err.ageReview': "Your account is under review: our team will check your age and you can return to the video chat once we’re done.",
+      'err.mailOff': "We can’t email you the link right now. If your email is a Gmail address, use “Continue with Google” (it’s the same account). Otherwise, write to us from that email at soporte@laruletacaliente.com.",
       'err.auth': 'Log in to continue', 'err.generic': 'Something went wrong. Please try again.',
     },
 
@@ -1893,6 +1895,7 @@
       'err.off': "Este recurso não está disponível.",
       'err.payoutBanned': "Sua conta está banida: os saques estão bloqueados. Se acha que é um erro, recorra da sanção.",
       'err.ageReview': "Sua conta está em análise: nossa equipe vai verificar sua idade e você poderá voltar ao videochat quando terminarmos.",
+      'err.mailOff': "No momento não conseguimos enviar o link por email. Se o seu email for do Gmail, entre com «Continuar com o Google» (é a mesma conta). Se não, escreva para soporte@laruletacaliente.com a partir desse email.",
       'err.auth': 'Entre na sua conta para continuar', 'err.generic': 'Algo deu errado. Tente de novo.',
     },
 
@@ -2524,6 +2527,7 @@
       'err.off': "Cette fonction n’est pas disponible.",
       'err.payoutBanned': "Ton compte est banni : les retraits sont bloqués. Si tu penses que c’est une erreur, fais appel de la sanction.",
       'err.ageReview': "Ton compte est en cours de vérification : notre équipe va contrôler ton âge et tu pourras revenir au chat vidéo ensuite.",
+      'err.mailOff': "Nous ne pouvons pas vous envoyer le lien par e-mail pour le moment. Si votre adresse est un Gmail, utilisez « Continuer avec Google » (c’est le même compte). Sinon, écrivez-nous depuis cette adresse à soporte@laruletacaliente.com.",
       'err.auth': 'Connectez-vous pour continuer', 'err.generic': 'Une erreur est survenue. Réessayez.',
     },
 
@@ -3155,6 +3159,7 @@
       'err.off': "Diese Funktion ist nicht verfügbar.",
       'err.payoutBanned': "Dein Konto ist gesperrt, daher sind Auszahlungen blockiert. Wenn du das für einen Fehler hältst, lege Einspruch ein.",
       'err.ageReview': "Dein Konto wird überprüft: Unser Team prüft dein Alter, danach kannst du zum Videochat zurück.",
+      'err.mailOff': "Wir können dir den Link gerade nicht per E-Mail schicken. Wenn deine Adresse eine Gmail-Adresse ist, nutze „Mit Google fortfahren“ (es ist dasselbe Konto). Sonst schreib uns von dieser Adresse an soporte@laruletacaliente.com.",
       'err.auth': 'Melde dich an, um fortzufahren', 'err.generic': 'Etwas ist schiefgelaufen. Bitte erneut versuchen.',
     },
 
@@ -3786,6 +3791,7 @@
       'err.off': "Questa funzione non è disponibile.",
       'err.payoutBanned': "Il tuo account è bannato: i prelievi sono bloccati. Se pensi sia un errore, presenta ricorso.",
       'err.ageReview': "Il tuo account è in revisione: il nostro team verificherà la tua età e potrai tornare alla videochat quando avremo finito.",
+      'err.mailOff': "Al momento non possiamo inviarti il link via email. Se la tua email è Gmail, entra con «Continua con Google» (è lo stesso account). Altrimenti scrivici da quell’indirizzo a soporte@laruletacaliente.com.",
       'err.auth': 'Accedi per continuare', 'err.generic': 'Qualcosa è andato storto. Riprova.',
     },
   };
