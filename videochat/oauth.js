@@ -221,7 +221,18 @@ function routes(app) {
   app.post('/api/social/finish', (req, res) => {
     const c = readCode(req.body?.code);
     if (!c) return res.status(400).json({ code: 'socialExpired' });
-    if (c.type === 'signup') return res.json({ signup: true, email: c.email, provider: c.provider });
+    if (c.type === 'signup') {
+      // Un invitado que entra con Google por primera vez: su cuenta de invitado pasa a ser la suya
+      const guest = auth.userFromToken(auth.bearer(req));
+      if (guest?.guest && guest.status !== 'banned' && !store.getUserByEmail(c.email)) {
+        codes.delete(req.body.code);
+        store.changeEmail(guest.id, c.email);
+        const user = store.updateUser(guest.id, { guest: false, oauth: { [c.provider]: c.sub }, emailVerified: true, emailVerifiedAt: Date.now(), upgradedAt: Date.now() });
+        require('./stats').signup(c.provider);
+        return res.json({ token: auth.sessionToken(user), user: auth.publicUser(user), upgraded: true });
+      }
+      return res.json({ signup: true, email: c.email, provider: c.provider });
+    }
     codes.delete(req.body.code);
     const user = store.getUser(c.uid);
     if (!user) return res.status(400).json({ code: 'socialExpired' });

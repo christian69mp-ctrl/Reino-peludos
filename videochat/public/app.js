@@ -286,7 +286,7 @@ let socialGender = '';
 async function finishSocial(code) {
   const res = await api('/api/social/finish', { method: 'POST', body: { code } });
   const action = load('after-login');
-  if (res.token) { save('after-login', ''); loggedIn(res.token, false, action); return; }
+  if (res.token) { save('after-login', ''); await loggedIn(res.token, false, action); if (res.upgraded) toast(t('guest.saved')); return; }
   if (!res.signup) { toast(errorText(res)); return; }
   socialCode = code;
   $('socialText').textContent = t('soc.text', { email: res.email });
