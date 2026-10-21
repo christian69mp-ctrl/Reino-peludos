@@ -630,6 +630,7 @@
       'err.payoutMin': "Aún no llegas al mínimo para retirar.",
       'err.off': "Esta función no está disponible.",
       'err.payoutBanned': "Tu cuenta está expulsada: las retiradas están bloqueadas. Si crees que es un error, recurre la sanción.",
+      'err.ageReview': "Tu cuenta está en revisión: nuestro equipo comprobará tu edad y podrás volver al videochat cuando terminemos.",
       'err.auth': 'Inicia sesión para continuar', 'err.generic': 'No se pudo completar. Inténtalo de nuevo.',
     },
 
@@ -1260,6 +1261,7 @@
       'err.payoutMin': "You haven’t reached the minimum to withdraw yet.",
       'err.off': "This feature isn’t available.",
       'err.payoutBanned': "Your account is banned, so withdrawals are blocked. If you think this is a mistake, appeal the decision.",
+      'err.ageReview': "Your account is under review: our team will check your age and you can return to the video chat once we’re done.",
       'err.auth': 'Log in to continue', 'err.generic': 'Something went wrong. Please try again.',
     },
 
@@ -1890,6 +1892,7 @@
       'err.payoutMin': "Você ainda não atingiu o mínimo para sacar.",
       'err.off': "Este recurso não está disponível.",
       'err.payoutBanned': "Sua conta está banida: os saques estão bloqueados. Se acha que é um erro, recorra da sanção.",
+      'err.ageReview': "Sua conta está em análise: nossa equipe vai verificar sua idade e você poderá voltar ao videochat quando terminarmos.",
       'err.auth': 'Entre na sua conta para continuar', 'err.generic': 'Algo deu errado. Tente de novo.',
     },
 
@@ -2520,6 +2523,7 @@
       'err.payoutMin': "Tu n’as pas encore atteint le minimum pour retirer.",
       'err.off': "Cette fonction n’est pas disponible.",
       'err.payoutBanned': "Ton compte est banni : les retraits sont bloqués. Si tu penses que c’est une erreur, fais appel de la sanction.",
+      'err.ageReview': "Ton compte est en cours de vérification : notre équipe va contrôler ton âge et tu pourras revenir au chat vidéo ensuite.",
       'err.auth': 'Connectez-vous pour continuer', 'err.generic': 'Une erreur est survenue. Réessayez.',
     },
 
@@ -3150,6 +3154,7 @@
       'err.payoutMin': "Du hast den Mindestbetrag für eine Auszahlung noch nicht erreicht.",
       'err.off': "Diese Funktion ist nicht verfügbar.",
       'err.payoutBanned': "Dein Konto ist gesperrt, daher sind Auszahlungen blockiert. Wenn du das für einen Fehler hältst, lege Einspruch ein.",
+      'err.ageReview': "Dein Konto wird überprüft: Unser Team prüft dein Alter, danach kannst du zum Videochat zurück.",
       'err.auth': 'Melde dich an, um fortzufahren', 'err.generic': 'Etwas ist schiefgelaufen. Bitte erneut versuchen.',
     },
 
@@ -3780,6 +3785,7 @@
       'err.payoutMin': "Non hai ancora raggiunto il minimo per prelevare.",
       'err.off': "Questa funzione non è disponibile.",
       'err.payoutBanned': "Il tuo account è bannato: i prelievi sono bloccati. Se pensi sia un errore, presenta ricorso.",
+      'err.ageReview': "Il tuo account è in revisione: il nostro team verificherà la tua età e potrai tornare alla videochat quando avremo finito.",
       'err.auth': 'Accedi per continuare', 'err.generic': 'Qualcosa è andato storto. Riprova.',
     },
   };

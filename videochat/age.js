@@ -25,6 +25,7 @@ const DEMO = !API_KEY || !SECRET;
 const MODE = ['off', 'all'].includes(process.env.AGE_VERIFICATION) ? process.env.AGE_VERIFICATION : 'reports';
 const REQUIRED = MODE !== 'off';
 const MIN_AGE = 18;
+const PUBLIC = (process.env.BASE_URL || '').startsWith('https://');
 
 if (!REQUIRED) console.warn('[edad] AGE_VERIFICATION=off: no se pide verificación de edad.');
 else if (MODE === 'reports') console.log('[edad] Verificación con documento solo para cuentas denunciadas por «menor de edad» (AGE_VERIFICATION=all para pedirla a todos).');
@@ -133,6 +134,9 @@ function routes(app, baseUrl) {
     // También la pide quien quiere retirar lo ganado con propinas (tips.js), aunque no se le exija para chatear
     const forPayout = req.body?.purpose === 'payout' && process.env.TIPS === 'on' && process.env.PAYOUTS === 'on';
     if ((!mustVerify(user) && !forPayout) || ageStatus(user) === 'approved') return res.json({ age: publicAge(user) });
+    // Sin Veriff en la web publicada no se aprueba a nadie con un clic: la cuenta queda en revisión
+    // y el administrador decide en /admin («Ya no pedir verificación» o expulsar)
+    if (DEMO && PUBLIC) return res.status(409).json({ code: 'ageReview' });
     if (DEMO) {
       store.updateUser(user.id, { age: { status: 'approved', demo: true, verifiedAt: Date.now(), updatedAt: Date.now() } });
       return res.json({ age: publicAge(store.getUser(user.id)) });
