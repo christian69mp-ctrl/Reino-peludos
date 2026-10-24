@@ -271,10 +271,8 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   (Google Analytics…), publicidad o píxeles, hace falta un banner con «Aceptar» y «Rechazar» al
   mismo nivel antes de cargarlos**, y actualizar la política.
 - **Publicidad** sin molestar las llamadas: un hueco horizontal en la portada (728×90 en ordenador,
-  320×100 en móvil), uno vertical (160×600) a la derecha del videochat **solo en pantallas
-  anchas** (≥1400 px) y uno **«mientras busca»** (300×250) en el centro del vídeo **solo mientras se
-  busca a alguien** (se carga al empezar a buscar y se quita al conectar; no sale si el vídeo es
-  pequeño). Nunca encima de una persona. Se gestiona en `/admin` → Publicidad: cada hueco
+  320×100 en móvil) y uno vertical (160×600) a la derecha del videochat **solo en pantallas
+  anchas** (≥1400 px), nunca encima del vídeo. Se gestiona en `/admin` → Publicidad: cada hueco
   puede estar desactivado, mostrar banners que vendes tú (subes la imagen, enlace y fechas; cuenta
   impresiones, clics y CTR sin cookies) o el código de una **red publicitaria para adultos**
   (ExoClick, TrafficStars, JuicyAds…). El código de la red va en un iframe aislado (sin acceso a la

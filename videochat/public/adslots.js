@@ -69,7 +69,6 @@
     document.querySelectorAll('[data-ad]').forEach((el) => {
       if (el.dataset.ad === 'side' && wide()) out.push('side');
       if (el.dataset.ad === 'top') out.push(mobile() ? 'top-mobile' : 'top');
-      if (el.dataset.ad === 'wait') out.push('wait');
     });
     return out;
   }
@@ -120,7 +119,6 @@
 
   function render() {
     document.querySelectorAll('[data-ad]').forEach((el) => {
-      if (el.dataset.ad === 'wait') { showWait(waiting); return; }
       const slot = el.dataset.ad === 'top' ? (mobile() ? 'top-mobile' : 'top') : el.dataset.ad;
       if (slot === 'side' && !wide()) { el.hidden = true; return; }
       fill(el, slot);
@@ -131,20 +129,6 @@
       if (ageOk()) openConsent();
       else document.getElementById('ageYes')?.addEventListener('click', () => setTimeout(openConsent, 400), { once: true });
     }
-  }
-
-  // Hueco «mientras busca»: se rellena al empezar a buscar y se vacía al conectar, así el
-  // anuncio solo se carga (y cuenta) cuando de verdad se ve. Si el vídeo es pequeño, no sale.
-  let waiting = false;
-  function showWait(on) {
-    waiting = on;
-    const el = document.querySelector('[data-ad="wait"]');
-    if (!el) return;
-    const remote = document.getElementById('remote');
-    const fits = remote && remote.clientWidth >= 320 && remote.clientHeight >= 380;
-    if (!on || !fits || !data.wait) { el.hidden = true; el.querySelector('.ad-box').replaceChildren(); return; }
-    if (!el.hidden && el.querySelector('.ad-box').firstChild) return;
-    fill(el, 'wait');
   }
 
   async function refresh() {
@@ -169,6 +153,6 @@
     openConsent();
   });
 
-  window.AdSlots = { refresh, openConsent, consent, wait: showWait };
+  window.AdSlots = { refresh, openConsent, consent };
   refresh();
 })();

@@ -955,7 +955,6 @@ function setStatus(key, vars, searching = false) {
   $('status').hidden = !key;
   $('status').classList.toggle('searching', searching);
   $('statusText').textContent = key ? t(key, vars) : '';
-  window.AdSlots?.wait(!!key && searching);
 }
 
 // En vista amplia el chat de texto no se ve: los mensajes salen un momento sobre el vídeo
