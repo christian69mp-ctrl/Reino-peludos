@@ -704,6 +704,8 @@ body.in-chat .guindilla-launcher, body.in-chat .guindilla.floating { display: no
 .ad-box iframe { height: var(--ad-h); }
 .ad-top { padding: 22px 0; border-top: 1px solid rgba(255,255,255,.05); }
 .ad-side { display: none; }
+.ad-wait { margin-top: 16px; pointer-events: auto; }
+.status:not(.searching) .ad-wait { display: none; }
 @media (min-width: 1400px) {
   .ad-side:not([hidden]) { display: flex; justify-content: flex-start; padding-top: 4px; }
   .chat:has(.ad-side:not([hidden])) { grid-template-columns: 1fr 360px 160px; }

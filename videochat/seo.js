@@ -10,6 +10,8 @@ const stats = require('./stats');
 const { STRINGS, PAGES, SUPPORTED, urlOf } = I18N;
 const PUBLIC = path.join(__dirname, 'public');
 const SITE = 'La Ruleta Caliente';
+// Fecha de las guías para Google (súbela cuando se revisen los textos)
+const GUIDES_DATE = '2026-10-24';
 
 // Descripción para los resultados de búsqueda (máx. ~155 caracteres)
 const DESCRIPTIONS = {
@@ -276,7 +278,7 @@ function landingBody(key, l) {
     if (key === 'free-video-chat') {
       out.push(`<h2>${esc(c.topics)}</h2>`, landingLinks(childrenOf(key, 'topic'), l));
       out.push(`<h2>${esc(c.countries)}</h2>`, landingLinks(childrenOf(key, 'country'), l));
-    } else out.push(`<h2>${esc(c.alternatives)}</h2>`, landingLinks(childrenOf(key), l));
+    } else out.push(`<h2>${esc(key === 'guides' ? c.guides : c.alternatives)}</h2>`, landingLinks(childrenOf(key), l));
   }
   if (p.faq?.length) {
     out.push(`<h2>${esc(c.faq)}</h2>`, `<div class="lp-faq">${p.faq.map((f) => `<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('')}</div>`);
@@ -285,10 +287,11 @@ function landingBody(key, l) {
   // Enlaces relacionados: hermanas, índice y el otro índice
   if (meta.type !== 'hub') {
     const siblings = childrenOf(meta.parent, meta.type).filter((k) => k !== key);
-    const extra = meta.type === 'alternative' ? ['free-video-chat', 'random-video-chat'] : meta.type === 'country' ? ['random-video-chat', 'alternatives'] : ['alternatives', ...childrenOf('free-video-chat', 'country').slice(0, 3)];
+    const extra = meta.type === 'alternative' ? ['free-video-chat', 'random-video-chat'] : meta.type === 'country' ? ['random-video-chat', 'alternatives'] : meta.type === 'guide' ? ['free-video-chat', 'no-signup-video-chat'] : ['alternatives', 'guides', ...childrenOf('free-video-chat', 'country').slice(0, 3)];
     out.push(`<aside class="lp-related"><h2>${esc(c.related)}</h2>${landingLinks([meta.parent, ...siblings, ...extra], l)}</aside>`);
   } else {
-    out.push(`<aside class="lp-related"><h2>${esc(c.related)}</h2>${landingLinks([key === 'alternatives' ? 'free-video-chat' : 'alternatives'], l)}</aside>`);
+    const other = { alternatives: ['free-video-chat', 'guides'], guides: ['free-video-chat', 'alternatives'] }[key] || ['alternatives', 'guides'];
+    out.push(`<aside class="lp-related"><h2>${esc(c.related)}</h2>${landingLinks(other, l)}</aside>`);
   }
   if (meta.brand) out.push(`<p class="lp-disclaimer">${esc(c.disclaimer.replace(/\{brand\}/g, meta.brand))}</p>`);
   return { html: out.join('\n'), crumbs };
@@ -308,10 +311,16 @@ function landingHead(req, key, l, crumbs) {
       isPartOf: { '@type': 'WebSite', name: SITE, url: `${b}/` } },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [...crumbs, [p.anchor, landingUrl(key, l)]].map(([name, u], i) => ({ '@type': 'ListItem', position: i + 1, name, item: `${b}${u}` })) },
   ];
+  if (meta.type === 'guide') {
+    ld.push({ '@context': 'https://schema.org', '@type': 'Article', headline: p.h1, description: p.description, inLanguage: l, url: own,
+      image: `${b}/og-image.jpg`, datePublished: GUIDES_DATE, dateModified: GUIDES_DATE,
+      author: { '@type': 'Organization', name: SITE, url: `${b}/` }, publisher: { '@type': 'Organization', name: SITE, logo: { '@type': 'ImageObject', url: `${b}/logo-full.png` } },
+      mainEntityOfPage: own });
+  }
   if (p.faq?.length) ld.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: p.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
   return [
     `<link rel="canonical" href="${own}">`, ...alts,
-    '<meta property="og:type" content="website">',
+    `<meta property="og:type" content="${meta.type === 'guide' ? 'article' : 'website'}">`,
     `<meta property="og:title" content="${esc(p.title)}">`, `<meta property="og:description" content="${esc(p.description)}">`,
     `<meta property="og:url" content="${own}">`, `<meta property="og:image" content="${b}/og-image.jpg">`,
     '<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">',
@@ -343,6 +352,7 @@ function addFooterLinks(html, l) {
     ['free-video-chat', ...childrenOf('free-video-chat', 'topic')],
     childrenOf('free-video-chat', 'country'),
     ['alternatives', ...childrenOf('alternatives')],
+    ['guides', ...childrenOf('guides')],
   ].map((keys) => keys.filter((k) => has(k, l)).map((k) => `<a href="${landingUrl(k, l)}">${esc(content[l].pages[k].anchor)}</a>`).join(''));
   const block = `<nav class="footer-seo" aria-label="${esc(c.footerTitle)}"><p class="footer-seo-title">${esc(c.footerTitle)}</p>${groups.filter(Boolean).map((g) => `<div>${g}</div>`).join('')}</nav>\n    `;
   return html.replace('<p class="footer-legal">', `${block}<p class="footer-legal">`);
@@ -449,4 +459,11 @@ function register(app) {
   });
 }
 
-module.exports = { register, render, renderLanding, DESCRIPTIONS };
+// Todas las direcciones públicas (las mismas del sitemap), para avisar a Bing con IndexNow
+function allUrls(b) {
+  const out = Object.keys(PAGES).flatMap((page) => SUPPORTED.map((l) => `${b}${page === 'home' ? `/${l}/` : urlOf(page, l)}`));
+  for (const p of LANDINGS.PAGES) for (const l of landingLangs(p.key)) out.push(`${b}${landingUrl(p.key, l)}`);
+  return out;
+}
+
+module.exports = { register, render, renderLanding, allUrls, DESCRIPTIONS };

@@ -2,6 +2,8 @@
 // - side: vertical 160×600, a la derecha del videochat (solo en pantallas anchas).
 // - top: horizontal 728×90, en la portada entre secciones.
 // - top-mobile: horizontal 320×100, el mismo sitio en móviles.
+// - wait: 300×250 en el centro del vídeo SOLO mientras se busca a alguien (no hay nadie en
+//   pantalla); desaparece en cuanto conecta la otra persona.
 //
 // Cada hueco puede estar desactivado, mostrar banners de tus propios anunciantes
 // (los subes en /admin y cuentas impresiones y clics sin cookies) o el código de una
@@ -18,6 +20,7 @@ const SLOTS = {
   side: { w: 160, h: 600, name: 'Lateral 160×600 (videochat, pantallas anchas)' },
   top: { w: 728, h: 90, name: 'Horizontal 728×90 (portada, ordenador)' },
   'top-mobile': { w: 320, h: 100, name: 'Horizontal 320×100 (portada, móvil)' },
+  wait: { w: 300, h: 250, name: 'Mientras busca 300×250 (solo mientras busca a alguien)' },
 };
 const MODES = ['off', 'own', 'network'];
 const IMAGE_TYPES = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'image/gif': 'gif' };

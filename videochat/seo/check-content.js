@@ -11,7 +11,7 @@ const errors = [];
 const warns = [];
 const err = (m) => errors.push(m);
 
-const COMMON = ['home', 'related', 'countries', 'topics', 'alternatives', 'faq', 'ctaTitle', 'ctaText', 'ctaButton', 'adultNote', 'disclaimer', 'footerTitle'];
+const COMMON = ['home', 'related', 'countries', 'topics', 'alternatives', 'faq', 'ctaTitle', 'ctaText', 'ctaButton', 'adultNote', 'disclaimer', 'footerTitle', 'guides'];
 for (const k of COMMON) if (!data.common?.[k]) err(`common.${k} falta`);
 if (data.common?.disclaimer && !data.common.disclaimer.includes('{brand}')) err('common.disclaimer debe incluir {brand}');
 
@@ -50,8 +50,10 @@ for (const [key, p] of Object.entries(data.pages || {})) {
     } else if (m[2].trim() && !m[0].startsWith('</')) at(`atributos no permitidos en <${tag}>`);
   }
   const n = words(html);
-  if (n < 400) at(`solo ${n} palabras (mínimo 450)`);
-  else if (n < 450 || n > 850) warns.push(`${key}: ${n} palabras (objetivo 450-750)`);
+  const guide = PAGES.find((x) => x.key === key)?.type === 'guide';
+  const [min, lo, hi] = guide ? [800, 900, 1500] : [400, 450, 850];
+  if (n < min) at(`solo ${n} palabras (mínimo ${lo})`);
+  else if (n < lo || n > hi) warns.push(`${key}: ${n} palabras (objetivo ${lo}-${hi})`);
   for (const s of html.replace(/<[^>]+>/g, ' ').split(/(?<=[.!?])\s+/)) {
     const t = s.trim();
     if (t.length < 90) continue;

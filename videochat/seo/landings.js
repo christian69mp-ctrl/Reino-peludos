@@ -18,6 +18,10 @@ const BRANDS = {
   'alt-coomeet': 'CooMeet',
   'alt-ometv': 'OmeTV',
   'alt-chatrandom': 'Chatrandom',
+  'alt-bazoocam': 'Bazoocam',
+  'alt-shagle': 'Shagle',
+  'alt-chatspin': 'Chatspin',
+  'alt-camsurf': 'CamSurf',
 };
 
 const BASE = [
@@ -27,8 +31,20 @@ const BASE = [
   { key: 'talk-to-strangers', type: 'topic', parent: 'free-video-chat' },
   { key: 'video-chat-women', type: 'topic', parent: 'free-video-chat' },
   { key: 'mobile-video-chat', type: 'topic', parent: 'free-video-chat' },
+  { key: 'no-signup-video-chat', type: 'topic', parent: 'free-video-chat' },
+  { key: 'anonymous-video-chat', type: 'topic', parent: 'free-video-chat' },
+  { key: 'couples-video-chat', type: 'topic', parent: 'free-video-chat' },
+  { key: 'cam-to-cam', type: 'topic', parent: 'free-video-chat' },
+  { key: 'video-chat-games', type: 'topic', parent: 'free-video-chat' },
+  { key: 'video-chat-foreigners', type: 'topic', parent: 'free-video-chat' },
   { key: 'alternatives', type: 'hub' },
   ...Object.keys(BRANDS).map((key) => ({ key, type: 'alternative', parent: 'alternatives', brand: BRANDS[key] })),
+  // Guías: artículos largos con consejos (Google los trata como artículos)
+  { key: 'guides', type: 'hub' },
+  { key: 'guide-icebreakers', type: 'guide', parent: 'guides' },
+  { key: 'guide-flirting', type: 'guide', parent: 'guides' },
+  { key: 'guide-camera', type: 'guide', parent: 'guides' },
+  { key: 'guide-privacy', type: 'guide', parent: 'guides' },
 ];
 
 // Lista completa de páginas con los idiomas en que existe cada una

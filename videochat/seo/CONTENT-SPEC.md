@@ -22,6 +22,7 @@ module.exports = {
     adultNote: 'Solo para mayores de 18 años.',
     disclaimer: '{brand} es una marca de su titular. La Ruleta Caliente no está afiliada a {brand} ni patrocinada por ella; la nombramos solo para comparar.',
     footerTitle: 'Videochat gratis',      // título del bloque de enlaces que se añade al pie de toda la web
+    guides: 'Guías y consejos',           // título de la lista de guías
   },
   pages: {
     'free-video-chat': {
@@ -85,7 +86,9 @@ pueden cambiar), **sin despreciarlas**, sin dar a entender que somos ellas o que
 «si buscas algo como X, esto es lo que encontrarás aquí». Solo estos hechos públicos se pueden usar:
 - **Omegle**: cerró en **noviembre de 2023**; mucha gente busca desde entonces una alternativa.
 - **Chatroulette**: una de las primeras webs de videochat aleatorio (2009).
-- **DirtyRoulette**, **CooMeet**, **OmeTV**, **Chatrandom**: webs de videochat aleatorio; no digas nada más concreto.
+- **DirtyRoulette**, **CooMeet**, **OmeTV**, **Chatrandom**, **Shagle**, **Chatspin**, **CamSurf**: webs de videochat
+  aleatorio; no digas nada más concreto.
+- **Bazoocam**: web de videochat aleatorio muy conocida en Francia; no digas nada más concreto.
 Cada página «alternativa» incluye una tabla `Lo que encuentras en La Ruleta Caliente` (característica → ✓/detalle)
 sobre **nuestra** web, no una comparación punto por punto con la otra.
 El aviso de marca lo añade el servidor; no lo repitas.
@@ -116,7 +119,27 @@ Todas los idiomas: `free-video-chat` (índice principal: videochat gratis), `ran
 aleatorio, ruleta de videochat), `adult-video-chat` (videochat para adultos +18), `talk-to-strangers` (hablar con
 desconocidos), `video-chat-women` (videochat con chicas/mujeres — el filtro es Premium; también hombres, trans y
 parejas), `mobile-video-chat` (videochat desde el móvil, sin app que descargar), `alternatives` (índice de
-alternativas), `alt-omegle`, `alt-chatroulette`, `alt-dirtyroulette`, `alt-coomeet`, `alt-ometv`, `alt-chatrandom`.
+alternativas), `alt-omegle`, `alt-chatroulette`, `alt-dirtyroulette`, `alt-coomeet`, `alt-ometv`, `alt-chatrandom`, `alt-bazoocam`, `alt-shagle`,
+`alt-chatspin`, `alt-camsurf`.
+
+Más temas (todos los idiomas, cuelgan de `free-video-chat`):
+- `no-signup-video-chat`: videochat **sin registro** (sin email ni contraseña; solo género, fecha de nacimiento y +18).
+- `anonymous-video-chat`: videochat **anónimo** (sin email, nadie ve tu IP, nombre opcional, marca de agua; sin prometer
+  anonimato total: hay normas, denuncias y se puede pedir verificar la edad).
+- `couples-video-chat`: videochat para **parejas** (registrarse como «pareja», filtro Premium para ver parejas).
+- `cam-to-cam`: **cam to cam** / chat cam en vivo 1 a 1 (en español también «chat cam», «webcam chat»).
+- `video-chat-games`: **juegos para videollamadas** (los 4 juegos, termómetro de química, modo picante, guindillas).
+- `video-chat-foreigners`: **hablar con extranjeros** / practicar idiomas por videochat (traducción automática del chat).
+
+**Guías** (todos los idiomas): `guides` (índice: «Guías y consejos» para el videochat) y 4 artículos que cuelgan de él:
+- `guide-icebreakers`: cómo empezar una conversación en un videochat (frases para romper el hielo, qué evitar).
+- `guide-flirting`: consejos para ligar por videochat con respeto (consentimiento, modo picante, saber parar).
+- `guide-camera`: cómo verte mejor en la cámara (luz, encuadre, sonido, conexión, móvil vs. ordenador).
+- `guide-privacy`: cómo proteger tu privacidad en un videochat (datos que no dar, sextorsión, estafas, grabaciones,
+  qué hacer si pasa algo; enlaza a `@safety`).
+Las guías son **artículos útiles de verdad**, no anuncios: **900-1.500 palabras**, 5-7 secciones con `h2`, listas y algún
+`h3`, consejos concretos que sirvan en cualquier videochat, y solo de vez en cuando cómo se hace en La Ruleta Caliente.
+Su `title` y `h1` son los de un artículo (p. ej. «Cómo empezar una conversación en un videochat: 30 frases»).
 
 Países (`country-xx`), según el idioma:
 - es: `country-es` España, `country-mx` México, `country-ar` Argentina, `country-co` Colombia, `country-cl` Chile,

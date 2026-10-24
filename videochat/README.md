@@ -271,8 +271,10 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   (Google Analytics…), publicidad o píxeles, hace falta un banner con «Aceptar» y «Rechazar» al
   mismo nivel antes de cargarlos**, y actualizar la política.
 - **Publicidad** sin molestar las llamadas: un hueco horizontal en la portada (728×90 en ordenador,
-  320×100 en móvil) y uno vertical (160×600) a la derecha del videochat **solo en pantallas
-  anchas** (≥1400 px), nunca encima del vídeo. Se gestiona en `/admin` → Publicidad: cada hueco
+  320×100 en móvil), uno vertical (160×600) a la derecha del videochat **solo en pantallas
+  anchas** (≥1400 px) y uno **«mientras busca»** (300×250) en el centro del vídeo **solo mientras se
+  busca a alguien** (se carga al empezar a buscar y se quita al conectar; no sale si el vídeo es
+  pequeño). Nunca encima de una persona. Se gestiona en `/admin` → Publicidad: cada hueco
   puede estar desactivado, mostrar banners que vendes tú (subes la imagen, enlace y fechas; cuenta
   impresiones, clics y CTR sin cookies) o el código de una **red publicitaria para adultos**
   (ExoClick, TrafficStars, JuicyAds…). El código de la red va en un iframe aislado (sin acceso a la
@@ -319,6 +321,14 @@ cada una pensada para una búsqueda real y enlazadas entre sí:
 Cada página lleva migas de pan, preguntas frecuentes, datos estructurados (WebPage/CollectionPage,
 BreadcrumbList, FAQPage), `hreflang` con sus versiones en otros idiomas, y está en el `sitemap.xml`. Todas las
 páginas de la web llevan al pie un bloque de enlaces a ellas.
+
+- **Temas** extra: sin registro, anónimo, parejas, cam to cam, juegos para videollamadas y hablar con extranjeros.
+  **Alternativas** también a Bazoocam, Shagle, Chatspin y CamSurf.
+- **Guías** (`/es/guias`…): 4 artículos largos (romper el hielo, ligar con respeto, verse bien en la cámara,
+  privacidad) con datos estructurados `Article`. Para Google cuentan como contenido útil y atraen enlaces.
+- **IndexNow** (`indexnow.js`): en la web pública avisa a Bing (y Yandex, Seznam…) de todas las páginas a los
+  2 minutos de arrancar, solo si cambiaron desde el último aviso. La clave se crea sola y se sirve en
+  `/<clave>.txt`. `INDEXNOW=off` lo desactiva. Google no usa IndexNow: para Google está el sitemap.
 
 - Lista de páginas: `seo/landings.js`. Textos: `seo/content/<idioma>.js`. Plantilla: `seo/landing.html`.
 - Para escribir o cambiar textos: `seo/CONTENT-SPEC.md` y comprobar con `node seo/check-content.js es`.

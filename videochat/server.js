@@ -42,6 +42,7 @@ app.use((req, res, next) => (req.path === '/api/admin/ads/banners' ? jsonUpload 
 app.get('/sw.js', (_req, res, next) => { res.set('Cache-Control', 'no-cache'); next(); });
 // Páginas por idioma (/es/ayuda, /en/help…), sitemap y robots.txt
 require('./seo').register(app);
+require('./indexnow').register(app, require('./seo').allUrls);
 require('./ads').routes(app, { requireAdmin: adminauth.requireAdmin, audit: adminauth.audit });
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 // Tipografía servida desde el propio servidor (sin llamadas a Google)
