@@ -151,6 +151,16 @@ function routes(app) {
     res.json({ ok: true, ticket: t });
   });
 
+  // El contador «en línea» de la web solo se muestra si el dueño lo activa (va antes que el de server.js)
+  app.get('/stats', (_req, res) => res.json({ online: store.get('settings', 'showOnline')?.on ? live().connected : null }));
+  app.get('/api/admin/show-online', requireAdmin, (_req, res) => res.json({ on: !!store.get('settings', 'showOnline')?.on }));
+  app.post('/api/admin/show-online', requireAdmin, (req, res) => {
+    const on = req.body?.on === true;
+    store.put('settings', { id: 'showOnline', on });
+    audit(req, on ? 'Contador en línea visible' : 'Contador en línea oculto', '');
+    res.json({ ok: true, on });
+  });
+
   app.get('/api/admin/announcement', requireAdmin, (_req, res) => res.json({ announcement: store.get('settings', 'announcement') || null }));
   app.post('/api/admin/announcement', requireAdmin, (req, res) => {
     const a = support.setAnnouncement(req.body || {});

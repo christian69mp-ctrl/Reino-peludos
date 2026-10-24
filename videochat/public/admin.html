@@ -148,6 +148,10 @@
     </section>
 
     <section id="announceView" hidden>
+      <form class="card-form" id="onlineForm">
+        <label class="check"><input type="checkbox" id="showOnline"> Mostrar en la web cuántas personas hay en línea</label>
+        <p class="muted">Desactivado: nadie ve el contador (tú sigues viéndolo en «Resumen»). Actívalo cuando haya gente.</p>
+      </form>
       <p class="muted">Un aviso que ven todos arriba de la web (por ejemplo «Mantenimiento esta noche de 2:00 a 3:00»). Escríbelo en español; en inglés es opcional (se muestra a quien usa la web en otros idiomas).</p>
       <form id="announceForm" class="card-form">
         <label class="field">Texto en español<textarea id="annEs" rows="2" maxlength="300"></textarea></label>
@@ -250,5 +254,6 @@
   <div id="toast" class="toast" role="status" hidden></div>
 
   <script src="/admin.js"></script>
+  <script src="/admin-online.js"></script>
 </body>
 </html>
