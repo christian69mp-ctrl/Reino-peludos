@@ -13,6 +13,7 @@ module.exports = {
     adultNote: 'Solo para mayores de 18 años.',
     disclaimer: '{brand} es una marca de su titular. La Ruleta Caliente no está afiliada a {brand} ni patrocinada por ella; la nombramos solo para comparar.',
     footerTitle: 'Videochat gratis',
+    guides: 'Guías y consejos',
   },
   pages: {
     'free-video-chat': {
@@ -812,6 +813,597 @@ module.exports = {
         { q: '¿Me cobran en dólares?', a: 'Los precios están en euros y tu banco convierte el cobro a dólares cuando pagas Premium.' },
         { q: '¿Puedo conocer gente de mi ciudad?', a: 'Con Premium puedes usar el filtro «Mi país» y la cercanía para coincidir con gente más cerca.' },
         { q: '¿Es solo para adultos?', a: 'Sí, es exclusivo para mayores de 18 y hay que confirmar la edad al entrar.' },
+      ],
+    },
+    'no-signup-video-chat': {
+      slug: 'videochat-sin-registro',
+      anchor: 'Videochat sin registro',
+      title: 'Videochat sin registro y gratis · La Ruleta Caliente',
+      description: 'Videochat sin registro: sin email ni contraseña, eliges tu género, pones tu fecha de nacimiento y empiezas a chatear por cámara al momento. Solo +18.',
+      h1: 'Videochat sin registro: entra y habla en segundos',
+      intro: '<p>¿Te da pereza rellenar formularios solo para probar una web? En La Ruleta Caliente tienes <strong>videochat sin registro</strong>: no te pedimos email, ni contraseña, ni número de teléfono. Eliges tu género, escribes tu fecha de nacimiento, confirmas que tienes 18 años o más y la cámara se enciende con la primera persona al azar. Es un <strong>chat sin registrarse</strong> de verdad, no una prueba de cinco minutos.</p><p>Si después te gusta y quieres guardar tus avances, puedes crear una cuenta. Pero eso lo decides tú, cuando quieras, y no antes de hablar con nadie 🌶️.</p>',
+      sections: [
+        {
+          h2: 'Chat sin registrarse: lo único que te preguntamos',
+          html: '<p>Entrar como invitado lleva menos de un minuto. Estos son los tres datos que necesitamos y para qué sirven:</p><ol><li><strong>Tu género</strong>: para que el emparejamiento funcione y para que quien use filtros pueda encontrarte.</li><li><strong>Tu fecha de nacimiento</strong>: el servicio es exclusivo para adultos y la usamos para comprobarlo.</li><li><strong>La confirmación de que tienes 18 años o más</strong>: una casilla, sin más.</li></ol><p>Después el navegador te pide permiso para usar la cámara y el micrófono. Lo aceptas y la ruleta empieza a girar. No hay correo de verificación que esperar ni enlace que pulsar en tu bandeja de entrada.</p>',
+        },
+        {
+          h2: 'Qué puedes hacer como invitado',
+          html: '<p>Entrar sin cuenta no te deja en una versión recortada. Desde el primer momento tienes:</p><ul><li><strong>Videollamadas 1 a 1 al azar</strong>, sin límite de tiempo, en el móvil o en el ordenador.</li><li><strong>Siguiente</strong> (o la tecla Esc) para cambiar de persona y <strong>Parar</strong> para descansar.</li><li><strong>Chat de texto con traducción automática</strong>, ideal para hablar con gente de otros países.</li><li><strong>Juegos durante la llamada</strong> y temas para romper el hielo.</li><li><strong>Reacciones</strong> 👍 ❤️ y guindillas 🌶️ que ganas al participar.</li></ul><p>Tampoco hay nada que instalar: todo funciona en el navegador. Si quieres tenerlo a mano, puedes añadirlo a tu pantalla de inicio como una app.</p>',
+        },
+        {
+          h2: '¿Y para qué sirve entonces la cuenta?',
+          html: '<p>La cuenta, con email o con Google, es <strong>opcional</strong>. Tiene sentido en dos casos:</p><ul><li><strong>Guardar tu progreso</strong> (guindillas, racha, insignias y amigos) y recuperarlo en otro dispositivo.</li><li><strong>Pagar Premium</strong>, que sí necesita una cuenta para asociar la suscripción: 7,99 € a la semana o 19,99 € al mes, cancelable cuando quieras.</li></ul><p>Además, si un amigo crea su cuenta con tu enlace de invitación y tiene su primera conversación de más de un minuto, los dos ganáis 1 día de Premium. Pero nada de esto es necesario para usar el chat.</p>',
+        },
+        {
+          h2: 'Sin registro no significa sin normas',
+          html: '<p>Que puedas entrar rápido no quiere decir que valga todo. Las <a href="@rules">normas de la comunidad</a> se aplican igual a invitados y a usuarios con cuenta: cualquiera puede denunciar, un equipo humano revisa los avisos y quien las incumple puede ser expulsado. Grabar está prohibido y cada vídeo lleva una marca de agua invisible. Y como el vídeo pasa por nuestro servidor, la otra persona no ve tu IP.</p><p>Un consejo: aunque no hayas dado tu email, tampoco lo des en la conversación. Si buscas aún más discreción, mira cómo funciona el <a href="@anonymous-video-chat">videochat anónimo</a>.</p>',
+        },
+        {
+          h2: 'Tu primera llamada, paso a paso',
+          html: '<p>Si es la primera vez que usas un videochat, busca un sitio con buena luz, comprueba que el micrófono no está silenciado y empieza con un saludo sencillo. Si te quedas en blanco, abre un juego o pide un tema para romper el hielo. Tienes muchas más ideas en nuestra guía sobre <a href="@guide-icebreakers">cómo empezar una conversación</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿De verdad no hace falta registrarse?', a: 'De verdad. Solo eliges tu género, pones tu fecha de nacimiento y confirmas que eres mayor de edad. Sin email ni contraseña.' },
+        { q: '¿Pierdo algo si no creo cuenta?', a: 'Puedes chatear sin límite. Lo que no tendrás es tu progreso guardado entre dispositivos, ni la posibilidad de pagar Premium.' },
+        { q: '¿Puedo crear la cuenta más tarde?', a: 'Sí, cuando quieras, con email o con Google. Así guardas tus guindillas, tu racha y tus amigos.' },
+        { q: '¿Me pedirán el teléfono?', a: 'No. Para entrar como invitado no pedimos número de teléfono ni ningún dato de contacto.' },
+      ],
+    },
+    'anonymous-video-chat': {
+      slug: 'videochat-anonimo',
+      anchor: 'Videochat anónimo',
+      title: 'Videochat anónimo con desconocidos · La Ruleta Caliente',
+      description: 'Videochat anónimo: sin email, sin nombre obligatorio y sin que nadie vea tu IP. Habla por cámara con desconocidos con discreción. Solo mayores de 18.',
+      h1: 'Videochat anónimo: habla con discreción y a tu ritmo',
+      intro: '<p>Hay conversaciones que se disfrutan más cuando nadie sabe quién eres. En La Ruleta Caliente puedes tener un <strong>videochat anónimo</strong> con desconocidos: no necesitas dar tu email, el nombre es opcional y la otra persona nunca ve tu dirección IP. Tú decides qué cuentas de ti y qué no.</p><p>Eso sí, queremos ser claros desde el principio: discreción no es lo mismo que impunidad. Hay normas, se puede denunciar y, si hace falta, pedimos verificar la edad. Es justo lo que hace que el anonimato sea agradable para todos.</p>',
+      sections: [
+        {
+          h2: 'Qué hace anónimo a este videochat',
+          html: '<ul><li><strong>Sin email</strong>: entras como invitado eligiendo género, fecha de nacimiento y confirmando que tienes 18 o más.</li><li><strong>Nombre opcional</strong>: puedes usar un apodo o no poner ninguno.</li><li><strong>Nadie ve tu IP</strong>: el vídeo pasa por nuestro servidor, no va directo de tu dispositivo al de la otra persona.</li><li><strong>Marca de agua invisible</strong> en cada emisión, que disuade de grabar y ayuda a rastrear una grabación si aparece.</li><li><strong>Incógnito</strong>: un superpoder que se activa con guindillas 🌶️ y oculta tu edad y tu país durante un rato.</li></ul>',
+        },
+        {
+          h2: 'Lo que el anonimato no cubre',
+          html: '<p>Preferimos explicarlo antes que prometer lo imposible. Ningún videochat puede garantizar un anonimato total, porque tu cara y tu voz se ven y se oyen. Por eso:</p><ul><li>Si muestras algo en cámara (una carta con tu dirección, el uniforme del trabajo, la vista desde tu ventana), la otra persona lo verá.</li><li>Las <a href="@rules">normas de la comunidad</a> se aplican a todos y las denuncias las revisa un equipo humano.</li><li>Si hay dudas sobre la edad de alguien, podemos pedir que la verifique.</li><li>Grabar está prohibido, pero lo más seguro es no mostrar nada que no quieras que se vea.</li></ul>',
+        },
+        {
+          h2: 'Cómo mantener tu videochat anónimo de verdad',
+          html: '<p>La tecnología pone una parte; la otra la pones tú. Unos hábitos sencillos:</p><ol><li>Usa un apodo que no utilices en redes sociales.</li><li>Revisa el fondo antes de encender la cámara: fotos, documentos, logotipos.</li><li>No digas tu apellido, tu barrio ni dónde trabajas.</li><li>Si alguien insiste en pasar a otra app o en tener tu número, pulsa <strong>Siguiente</strong>.</li><li>Desconfía de cualquier petición de dinero o de fotos privadas.</li></ol><p>En nuestra guía de <a href="@guide-privacy">privacidad en el videochat</a> lo explicamos con más detalle, incluidos los casos de sextorsión.</p>',
+        },
+        {
+          h2: 'Hablar con libertad, sin perder la diversión',
+          html: '<p>Mucha gente busca un chat anónimo porque así se suelta más: practica un idioma sin vergüenza, cuenta algo que no contaría a sus amigos o simplemente se ríe con alguien a quien no volverá a ver. Para eso tienes el chat de texto con traducción automática, los juegos durante la llamada y las reacciones ❤️. Si alguien te cae bien, puedes añadirlo como amigo, y aun así seguir sin revelar tu nombre real.</p>',
+        },
+        {
+          h2: 'Discreción también al pagar',
+          html: '<p>Si un día decides probar Premium, necesitarás una cuenta (con email o Google) para gestionar la suscripción. Lo que pagas no aparece ante las personas con las que hablas: ellas siguen sin ver tus datos ni tu IP. Y si prefieres no pagar nunca, el chat sigue funcionando igual. Recuerda que es un servicio exclusivo para mayores de 18. Más detalles en <a href="@safety">consejos de seguridad</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿El videochat es totalmente anónimo?', a: 'Es muy discreto: sin email, nombre opcional y sin que nadie vea tu IP. Pero tu cara y tu voz se ven, y hay normas y denuncias para proteger a todos.' },
+        { q: '¿Puede la otra persona ver mi IP?', a: 'No. El vídeo pasa por nuestro servidor, así que la otra persona no recibe tu dirección IP.' },
+        { q: '¿Qué hace el modo Incógnito?', a: 'Es un superpoder que se activa con guindillas y oculta tu edad y tu país durante un tiempo.' },
+        { q: '¿Me pueden pedir que verifique mi edad?', a: 'Sí. El servicio es solo para mayores de 18 y, si hay dudas, podemos pedir una verificación de edad.' },
+      ],
+    },
+    'couples-video-chat': {
+      slug: 'videochat-parejas',
+      anchor: 'Videochat para parejas',
+      title: 'Videochat para parejas · La Ruleta Caliente',
+      description: 'Videochat para parejas: entrad juntos como «pareja» y conoced a otras personas o parejas por cámara, con juegos y modo picante. Gratis para empezar. +18.',
+      h1: 'Videochat para parejas: conoced gente nueva los dos juntos',
+      intro: '<p>No todo el mundo entra solo a la ruleta. En La Ruleta Caliente hay un <strong>videochat para parejas</strong>: al entrar podéis elegir «pareja» como género y aparecer así ante los demás. Es una forma divertida de compartir un rato, conocer a otras parejas o a personas abiertas a hablar con dos a la vez, siempre en vivo, 1 a 1 y por cámara.</p><p>Como el resto de la web, es gratis para empezar, funciona en el navegador y es exclusivo para mayores de 18. Los dos tenéis que serlo.</p>',
+      sections: [
+        {
+          h2: 'Cómo entrar como pareja',
+          html: '<ol><li>Abrid la web en el móvil o en el ordenador. No hace falta instalar nada.</li><li>En el paso de género, elegid <strong>«pareja»</strong>.</li><li>Poned la fecha de nacimiento y confirmad que tenéis 18 años o más. Ambos.</li><li>Colocad la cámara de forma que se os vea a los dos y pulsad empezar.</li></ol><p>Así, quien os vea sabe desde el principio que sois dos, y la conversación arranca sin malentendidos. Si queréis guardar vuestras guindillas y amigos, podéis crear una cuenta, aunque no es obligatoria.</p>',
+        },
+        {
+          h2: 'Ver parejas en el videochat: el filtro Premium',
+          html: '<p>En el modo gratuito la ruleta os empareja al azar con cualquier persona conectada. Si lo que queréis es hablar sobre todo con otras parejas, Premium permite <strong>elegir a quién ver</strong>: mujeres, hombres, trans o parejas. También añade filtros por país, cercanía y edad, sin anuncios y con historial de 30 días.</p><p>Cuesta 7,99 € a la semana o 19,99 € al mes y lo cancelas cuando quieras. Otra opción: si quedáis entre los tres primeros del ranking semanal de guindillas, el lunes ganáis días de Premium.</p>',
+        },
+        {
+          h2: 'Juegos para jugar en pareja',
+          html: '<p>Con dos personas a un lado de la cámara, los juegos de la llamada ganan mucho:</p><ul><li><strong>Verdad o reto</strong>: las preguntas se vuelven más interesantes cuando responde uno y el otro reacciona.</li><li><strong>¿Qué prefieres?</strong>: perfecto para descubrir si estáis de acuerdo… o no.</li><li><strong>Dibujo y adivina</strong>: uno dibuja, el otro ayuda, la otra pareja adivina.</li><li><strong>Piedra, papel o tijera</strong>: para decidir quién responde la siguiente pregunta.</li></ul><p>Si vosotros y la otra parte tenéis activado el <strong>modo picante</strong> 🌶️, los retos y piropos suben de tono. Echad un vistazo a los <a href="@video-chat-games">juegos para videollamadas</a>.</p>',
+        },
+        {
+          h2: 'Acordad los límites antes de empezar',
+          html: '<p>El mejor consejo para un videochat en pareja no tiene que ver con la tecnología: hablad entre vosotros antes de encender la cámara. ¿Qué os apetece? ¿Charlar, reír, coquetear un poco? ¿Qué no queréis en ningún caso? Tened una señal sencilla para decir «siguiente» si uno de los dos se siente incómodo. Respetad también los límites de la otra parte: que haya química no significa que todo valga. Encontraréis más ideas en la guía para <a href="@guide-flirting">ligar por videochat con respeto</a>.</p>',
+        },
+        {
+          h2: 'Privacidad para los dos',
+          html: '<p>Cuando aparecéis dos personas, se ve más de vuestra vida: la casa, objetos personales, quizá alguna foto en la pared. Revisad el encuadre. La otra parte no ve vuestra IP porque el vídeo pasa por nuestro servidor, cada emisión lleva una marca de agua invisible y grabar está prohibido. Si alguien no respeta las normas, denunciadlo y un equipo humano revisará el caso. Y nunca compartáis datos que permitan localizaros.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Podemos entrar dos personas con la misma cámara?', a: 'Sí. Al entrar elegís «pareja» como género y os mostráis juntos en la cámara. Los dos tenéis que ser mayores de 18.' },
+        { q: '¿Cómo veo solo a otras parejas?', a: 'Con Premium puedes elegir a quién ver, y una de las opciones es parejas. En el modo gratis el emparejamiento es al azar.' },
+        { q: '¿Necesitamos una cuenta de pareja?', a: 'No hace falta cuenta para entrar. Si queréis guardar el progreso o pagar Premium, podéis crear una con email o Google.' },
+        { q: '¿Hay juegos picantes para parejas?', a: 'Sí, el modo picante sube el tono de los juegos y piropos, pero solo cuando la otra parte también lo tiene activado.' },
+      ],
+    },
+    'cam-to-cam': {
+      slug: 'chat-cam',
+      anchor: 'Chat cam to cam',
+      title: 'Chat cam to cam en vivo 1 a 1 · La Ruleta Caliente',
+      description: 'Chat cam to cam en vivo: tu webcam y la de otra persona, cara a cara y al azar, desde el navegador. Sin descargas y sin registro obligatorio. Solo +18.',
+      h1: 'Chat cam to cam: webcam con webcam, en vivo y 1 a 1',
+      intro: '<p>Un <strong>chat cam to cam</strong> es exactamente lo que suena: tu cámara frente a la de otra persona, en directo, sin intermediarios ni público. En La Ruleta Caliente cada conversación es <strong>1 a 1</strong>: tú y alguien elegido al azar, viéndoos y escuchándoos en tiempo real. Nada de salas llenas de gente mirando ni de perfiles con fotos de hace diez años.</p><p>Se usa desde el navegador del móvil o del ordenador, puedes entrar sin registro y es exclusivo para mayores de 18 años.</p>',
+      sections: [
+        {
+          h2: 'Chat cam, webcam chat, cam to cam: lo mismo con otro nombre',
+          html: '<p>Según el país o la costumbre, la gente lo busca como «chat cam», «webcam chat», «cam2cam» o «videochat». La idea es siempre la misma: conversar cara a cara con alguien a través de la cámara. Lo que cambia de una web a otra es cómo te emparejan y qué puedes hacer durante la charla. Aquí el emparejamiento es aleatorio y, si no hay conexión, pulsas <strong>Siguiente</strong> (o Esc en el teclado) y aparece otra persona.</p>',
+        },
+        {
+          h2: 'Por qué el 1 a 1 cambia la conversación',
+          html: '<p>En una sala de grupo es fácil esconderse o quedarse mirando. En un cam to cam no: la otra persona te habla a ti, y tú a ella. Eso tiene ventajas claras:</p><ul><li><strong>Conversaciones más reales</strong>, porque nadie actúa para un público.</li><li><strong>Más control</strong>: si algo no te gusta, sales con un clic.</li><li><strong>Más intimidad</strong>: lo que se dice queda entre dos.</li><li><strong>Más fácil entenderse</strong>: el chat de texto traduce automáticamente si no compartís idioma.</li></ul>',
+        },
+        {
+          h2: 'Todo lo que tienes durante la videollamada',
+          html: '<table><thead><tr><th>Herramienta</th><th>Para qué sirve</th></tr></thead><tbody><tr><td>Cambiar de cámara</td><td>Pasar de la frontal a la trasera en el móvil</td></tr><tr><td>Opciones de vista</td><td>Ajustar cómo ves tu imagen y la de la otra persona</td></tr><tr><td>Reacciones 👍 ❤️</td><td>Decir «me gusta» sin interrumpir</td></tr><tr><td>Añadir amigos</td><td>Volver a encontrar a quien te cayó bien</td></tr><tr><td>Juegos</td><td>Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina</td></tr><tr><td>Parar</td><td>Salir de la cola y tomarte un respiro</td></tr></tbody></table>',
+        },
+        {
+          h2: 'Sácale partido a tu webcam',
+          html: '<p>En un chat cam la imagen es la primera impresión. No necesitas equipo profesional: una ventana o una lámpara delante de ti, la cámara a la altura de los ojos y un sitio sin ruido de fondo marcan la diferencia. En el móvil, apóyalo en algo estable para que la imagen no baile. Tenemos una guía entera sobre <a href="@guide-camera">cómo verte mejor en la cámara</a>, con trucos de luz, encuadre y conexión.</p>',
+        },
+        {
+          h2: 'Un cam to cam con un toque picante',
+          html: '<p>Si lo que buscas es coquetear, activa el <strong>modo picante</strong> 🌶️: los juegos y piropos suben de tono, pero solo con quien también lo tiene activado. Así nadie se encuentra con algo que no ha pedido. Y con Premium puedes elegir a quién ver (mujeres, hombres, trans o parejas) y filtrar por país, cercanía y edad. Si te interesa este enfoque, mira también el <a href="@adult-video-chat">videochat para adultos</a>.</p>',
+        },
+        {
+          h2: 'Cámara encendida, cabeza fría',
+          html: '<p>La otra persona no ve tu IP, cada vídeo lleva una marca de agua invisible y grabar está prohibido. Aun así, no enseñes en cámara nada que te identifique, como documentos o la fachada de tu casa, y desconfía de quien te pida dinero o quiera llevarte a otra app. Si alguien incumple las normas, denúncialo: un equipo humano lo revisa.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Qué significa cam to cam?', a: 'Que las dos personas tienen la cámara encendida y se ven a la vez, en directo. Aquí siempre es 1 a 1.' },
+        { q: '¿Puedo usar la cámara trasera del móvil?', a: 'Sí, durante la llamada hay un botón para cambiar de cámara cuando quieras.' },
+        { q: '¿Necesito una webcam especial?', a: 'No. Sirve la cámara del portátil, una webcam USB o la del móvil, siempre que el navegador tenga permiso para usarla.' },
+        { q: '¿Me pueden grabar?', a: 'Grabar está prohibido y cada vídeo lleva una marca de agua invisible. Aun así, no muestres nada que no quieras que se vea.' },
+      ],
+    },
+    'video-chat-games': {
+      slug: 'juegos-videollamada',
+      anchor: 'Juegos para videollamadas',
+      title: 'Juegos para videollamadas en vivo · La Ruleta Caliente',
+      description: 'Juegos para videollamadas: Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina, dentro del videochat y con guindillas. Solo +18.',
+      h1: 'Juegos para videollamadas: diviértete con quien te toque',
+      intro: '<p>El silencio incómodo es el enemigo número uno de cualquier videochat. Para eso están los <strong>juegos para videollamadas</strong> de La Ruleta Caliente: abres uno sin salir de la conversación y, de repente, estáis los dos riéndoos con alguien a quien conocisteis hace un minuto. No hay que instalar nada ni compartir pantalla; todo ocurre en la propia llamada.</p><p>Además, jugar te da guindillas 🌶️, los puntos gratis de la web. Disponible desde el navegador y solo para mayores de 18.</p>',
+      sections: [
+        {
+          h2: 'Los cuatro juegos de la videollamada',
+          html: '<h3>Verdad o reto</h3><p>El clásico de siempre. Una pregunta personal o un pequeño desafío que hacer en cámara. Ideal para conoceros rápido.</p><h3>¿Qué prefieres?</h3><p>Dos opciones, una elección. Parece sencillo, pero las respuestas dicen mucho de cada uno y suelen abrir conversaciones largas.</p><h3>Piedra, papel o tijera</h3><p>Partidas rápidas, perfectas para decidir quién empieza o para picarse un poco.</p><h3>Dibujo y adivina</h3><p>Uno dibuja y el otro intenta acertar. Funciona incluso cuando no habláis el mismo idioma, porque un dibujo lo entiende cualquiera.</p>',
+        },
+        {
+          h2: 'Más allá de los juegos: química y temas',
+          html: '<p>Junto a los juegos, la llamada tiene dos ayudas para que la charla no decaiga:</p><ul><li><strong>Termómetro de química</strong>: una pista visual de cómo va la conexión entre los dos.</li><li><strong>Temas para romper el hielo</strong>: propuestas de conversación cuando no sabes qué decir.</li></ul><p>Si quieres preparar tus propias preguntas, en la guía sobre <a href="@guide-icebreakers">cómo empezar una conversación en un videochat</a> tienes decenas de ideas.</p>',
+        },
+        {
+          h2: 'Modo picante: juegos con más chispa',
+          html: '<p>Si te apetece algo más atrevido, activa el <strong>modo picante</strong> 🌶️. Con él, Verdad o reto y los piropos suben de tono. Solo funciona cuando la otra persona también lo tiene activado; si no, todo se queda en versión suave. Es una forma de coquetear con consentimiento por las dos partes, sin sorpresas desagradables. Con Premium, además, puedes invitar a jugar y enviar piropos picantes.</p>',
+        },
+        {
+          h2: 'Jugar para ganar guindillas',
+          html: '<p>Cada partida suma <strong>guindillas</strong>. Se combinan con las que ganas por la racha diaria, por los ❤️ que recibes y por los retos semanales, que a menudo consisten precisamente en jugar. Durante la <strong>Hora caliente</strong>, de 22:00 a 23:00 hora de España, valen el doble. Con ellas activas superpoderes como Llama caliente o Rebobinar, y si quedas entre los tres primeros del ranking semanal, el lunes ganas Premium. Tienes la lista completa en la página de <a href="@games">juegos y poderes</a>.</p>',
+        },
+        {
+          h2: 'Cuándo proponer un juego',
+          html: '<ol><li><strong>Al principio</strong>, si la otra persona parece tímida: Piedra, papel o tijera rompe la tensión.</li><li><strong>Cuando la charla se atasca</strong>: ¿Qué prefieres? da temas nuevos al instante.</li><li><strong>Con gente de otro idioma</strong>: Dibujo y adivina no necesita palabras.</li><li><strong>Cuando ya hay confianza</strong>: Verdad o reto, en versión normal o picante.</li></ol><p>Y si la otra persona no quiere jugar, no insistas: también se puede simplemente hablar.</p>',
+        },
+        {
+          h2: 'Jugar, sí; arriesgarse, no',
+          html: '<p>Un reto nunca debería incluir dar tu número, tu dirección o tus redes, ni hacer algo que no quieres. Si alguien lo plantea así, pulsa Siguiente y denúncialo. Grabar está prohibido y nadie ve tu IP. Repasa las <a href="@rules">normas</a> si tienes dudas.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Qué juegos hay en las videollamadas?', a: 'Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina, además de temas para romper el hielo y el termómetro de química.' },
+        { q: '¿Los juegos son gratis?', a: 'Sí, se juegan durante la videollamada sin pagar. Premium añade extras como invitar a jugar y los piropos picantes.' },
+        { q: '¿Qué es el modo picante?', a: 'Una opción que sube el tono de juegos y piropos, solo cuando las dos personas lo tienen activado.' },
+        { q: '¿Jugar da puntos?', a: 'Sí, cada partida suma guindillas, y durante la Hora caliente valen el doble.' },
+      ],
+    },
+    'video-chat-foreigners': {
+      slug: 'hablar-con-extranjeros',
+      anchor: 'Hablar con extranjeros',
+      title: 'Hablar con extranjeros por videochat · La Ruleta Caliente',
+      description: 'Hablar con extranjeros por videochat y practicar idiomas: chat de texto con traducción automática y gente de todo el mundo. Gratis para empezar. +18.',
+      h1: 'Hablar con extranjeros por videochat y practicar idiomas',
+      intro: '<p>¿Quieres practicar inglés sin pagar clases, o simplemente <strong>hablar con extranjeros</strong> y saber cómo se vive en otra parte del mundo? En La Ruleta Caliente cada videollamada te pone frente a alguien elegido al azar, y muchas veces esa persona está en otro país. Y si no os entendéis, el chat de texto tiene <strong>traducción automática</strong> para echaros una mano.</p><p>Es gratis para empezar, funciona en el navegador y es solo para mayores de 18.</p>',
+      sections: [
+        {
+          h2: 'Cómo hablar con extranjeros cuando no compartís idioma',
+          html: '<p>La traducción automática del chat de texto es la clave. Tú escribes en español y la otra persona lo lee en su idioma; ella responde en el suyo y tú lo lees en el tuyo. No hace falta configurar nada.</p><p>Un truco que funciona muy bien: hablar en voz alta en el idioma que estás aprendiendo y usar el chat solo cuando os atascáis. Así practicas la pronunciación sin quedarte bloqueado. La web, por su parte, está en seis idiomas: español, inglés, portugués, francés, alemán e italiano.</p>',
+        },
+        {
+          h2: 'Practicar idiomas por videochat: un plan sencillo',
+          html: '<ol><li><strong>Prepara cinco frases</strong> en el idioma que estudias: saludo, de dónde eres, a qué te dedicas, qué te gusta, una pregunta.</li><li><strong>Dilo claro desde el principio</strong>: «Estoy aprendiendo inglés, ¿te importa si practico contigo?». Casi todo el mundo agradece la sinceridad.</li><li><strong>Ofrece algo a cambio</strong>: si la otra persona quiere aprender español, alternad.</li><li><strong>Apunta las palabras nuevas</strong> que veas en el chat de texto.</li><li><strong>Repite cada día</strong>: diez minutos diarios valen más que una hora a la semana, y además mantienes tu racha de guindillas 🌶️.</li></ol>',
+        },
+        {
+          h2: 'Juegos que funcionan sin idioma común',
+          html: '<p>Cuando las palabras no salen, los juegos ayudan. <strong>Dibujo y adivina</strong> es perfecto: un dibujo lo entiende cualquiera, y adivinar en voz alta es vocabulario puro. <strong>Piedra, papel o tijera</strong> no necesita explicación, y <strong>¿Qué prefieres?</strong> te obliga a dar razones sencillas. Descubre todos en <a href="@video-chat-games">juegos para videollamadas</a>.</p>',
+        },
+        {
+          h2: 'Gente de todas partes, o de un país concreto',
+          html: '<p>En el modo gratuito la ruleta te empareja con personas de cualquier lugar, así que nunca sabes de dónde será la siguiente. Si estudias un idioma concreto y quieres hablar con gente de un país determinado, Premium incluye <strong>filtros por país</strong>, además de cercanía, edad y elegir a quién ver. Cuesta 7,99 € a la semana o 19,99 € al mes y se cancela cuando quieras. Si te apetece algo más cercano, también tienes páginas para conocer gente de <a href="@country-mx">México</a> o de <a href="@country-es">España</a>.</p>',
+        },
+        {
+          h2: 'Curiosidad con respeto',
+          html: '<p>Hablar con alguien de otra cultura es una oportunidad para aprender, no para soltar tópicos. Pregunta por su ciudad, su comida, su música o qué le sorprende de tu país, y escucha. Evita bromas sobre nacionalidades y temas delicados en los primeros minutos. Si notas que la otra persona se incomoda, cambia de tema o propón un juego.</p>',
+        },
+        {
+          h2: 'Seguridad sin fronteras',
+          html: '<p>Las estafas no entienden de idiomas. Desconfía de quien, tras pocos minutos, te pide dinero, regalos o pasar a otra app, y nunca envíes datos personales. Aquí nadie ve tu IP, grabar está prohibido y cualquier denuncia la revisa un equipo humano.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Cómo funciona la traducción automática?', a: 'Los mensajes del chat de texto se traducen solos al idioma de cada persona. La voz no se traduce, solo el texto.' },
+        { q: '¿Sirve para practicar inglés?', a: 'Sí. Puedes hablar en inglés por cámara y apoyarte en el chat de texto cuando te atasques.' },
+        { q: '¿Puedo elegir el país de la otra persona?', a: 'Con Premium hay filtros por país. En el modo gratis el emparejamiento es al azar y puede tocarte cualquier lugar.' },
+        { q: '¿En qué idiomas está la web?', a: 'En español, inglés, portugués, francés, alemán e italiano.' },
+      ],
+    },
+    'alt-bazoocam': {
+      slug: 'alternativa-bazoocam',
+      anchor: 'Alternativa a Bazoocam',
+      title: 'Alternativa a Bazoocam en español · La Ruleta Caliente',
+      description: '¿Buscas una alternativa a Bazoocam en español? Videochat aleatorio 1 a 1 con traducción automática del chat y web en seis idiomas. Gratis para empezar.',
+      h1: 'Alternativa a Bazoocam: videochat al azar en tu idioma',
+      intro: '<p>Bazoocam es una web de videochat aleatorio muy conocida en Francia, y mucha gente hispanohablante llega a ella buscando conversaciones por cámara con desconocidos. Si quieres una <strong>alternativa a Bazoocam</strong> pensada también para quien habla español, en La Ruleta Caliente tienes videollamadas 1 a 1, en vivo y al azar, con la web en tu idioma y un chat de texto que traduce solo. Gratis para empezar y exclusivo para mayores de 18.</p>',
+      sections: [
+        {
+          h2: 'Lo que encuentras en La Ruleta Caliente',
+          html: '<table><thead><tr><th>Característica</th><th>Detalle</th></tr></thead><tbody><tr><td>Videochat aleatorio 1 a 1</td><td>✓ En vivo, gratis para empezar</td></tr><tr><td>Web en seis idiomas</td><td>✓ Español, inglés, portugués, francés, alemán e italiano</td></tr><tr><td>Traducción automática</td><td>✓ En el chat de texto</td></tr><tr><td>Entrar sin registro</td><td>✓ Solo género, fecha de nacimiento y +18</td></tr><tr><td>Juegos en la llamada</td><td>✓ Cuatro juegos y temas para romper el hielo</td></tr><tr><td>Filtros por país</td><td>✓ Con Premium</td></tr><tr><td>Sin descargas</td><td>✓ En el navegador; instalable como app</td></tr></tbody></table>',
+        },
+        {
+          h2: 'Un videochat que te habla en español',
+          html: '<p>Todo el sitio, desde los botones hasta las normas y la ayuda, está disponible en español. Puedes cambiar a cualquiera de los otros cinco idiomas cuando quieras, algo útil si compartes ordenador con alguien o si estás aprendiendo uno de ellos. No tendrás que adivinar qué hace cada opción ni pasar textos por un traductor externo.</p>',
+        },
+        {
+          h2: 'Charlar con gente francófona (y de cualquier sitio)',
+          html: '<p>Si lo que te atraía era conocer gente de habla francesa, aquí también es posible. La ruleta gratuita te empareja con personas de cualquier país, y con Premium puedes usar los <strong>filtros por país</strong> para buscar a gente de un lugar concreto. Cuando el idioma sea una barrera, escribe en el chat: la traducción automática hace que tú leas en español y la otra persona en francés. Es una forma muy práctica de <a href="@video-chat-foreigners">hablar con extranjeros</a> y, de paso, practicar el idioma.</p>',
+        },
+        {
+          h2: 'Juegos para cuando falla el vocabulario',
+          html: '<p>Con alguien que habla otro idioma, a veces las palabras no llegan. Ahí entran los juegos de la videollamada: <strong>Dibujo y adivina</strong> no necesita frases, <strong>Piedra, papel o tijera</strong> se entiende en cualquier país, y <strong>¿Qué prefieres?</strong> o <strong>Verdad o reto</strong> dan temas de conversación al instante. Cada partida suma guindillas 🌶️, los puntos gratis con los que activas superpoderes como Llama caliente o Rebobinar.</p>',
+        },
+        {
+          h2: 'Cómo empezar en un minuto',
+          html: '<ol><li>Abre la web en el móvil o en el ordenador.</li><li>Elige tu género, pon tu fecha de nacimiento y confirma que tienes 18 años o más.</li><li>Da permiso a la cámara y pulsa empezar.</li><li>Usa <strong>Siguiente</strong> (o Esc) para cambiar de persona y <strong>Parar</strong> para descansar.</li></ol><p>La cuenta con email o Google es opcional: sirve para guardar tu progreso y para pagar Premium (7,99 € a la semana o 19,99 € al mes).</p>',
+        },
+        {
+          h2: 'Seguridad en cualquier idioma',
+          html: '<p>Nadie ve tu IP, porque el vídeo pasa por nuestro servidor. Grabar está prohibido, cada emisión lleva una marca de agua invisible y las denuncias las revisa un equipo humano. Un consejo que vale en todos los idiomas: si alguien te pide dinero o datos personales, termina la conversación. Más pautas en <a href="@safety">consejos de seguridad</a> y más opciones en <a href="@alternatives">alternativas de videochat</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿La Ruleta Caliente tiene relación con Bazoocam?', a: 'No. Es un servicio independiente; mencionamos Bazoocam solo porque mucha gente busca webs de videochat parecidas.' },
+        { q: '¿Puedo hablar con gente de Francia?', a: 'La ruleta gratis empareja con gente de cualquier país, y con Premium puedes filtrar por país.' },
+        { q: '¿La web está en español?', a: 'Sí, y también en inglés, portugués, francés, alemán e italiano.' },
+        { q: '¿Tengo que crear una cuenta?', a: 'No. Puedes entrar como invitado y crear una cuenta más adelante si quieres guardar tu progreso.' },
+      ],
+    },
+    'alt-shagle': {
+      slug: 'alternativa-shagle',
+      anchor: 'Alternativa a Shagle',
+      title: 'Alternativa a Shagle discreta · La Ruleta Caliente',
+      description: '¿Buscas una alternativa a Shagle? Videochat aleatorio 1 a 1 en el que nadie ve tu IP, con marca de agua y denuncias revisadas por personas. Solo +18.',
+      h1: 'Alternativa a Shagle: videochat al azar con tu privacidad cuidada',
+      intro: '<p>Shagle es una de las webs de videochat aleatorio que más gente conoce. Si estás buscando una <strong>alternativa a Shagle</strong>, en La Ruleta Caliente encontrarás videollamadas 1 a 1 con desconocidos, en vivo y al azar, con un enfoque muy claro en la privacidad: nadie ve tu IP, puedes entrar sin email y cada vídeo lleva una marca de agua invisible. Gratis para empezar y solo para mayores de 18.</p>',
+      sections: [
+        {
+          h2: 'Lo que encuentras en La Ruleta Caliente',
+          html: '<table><thead><tr><th>Característica</th><th>Detalle</th></tr></thead><tbody><tr><td>Videochat aleatorio 1 a 1</td><td>✓ En vivo, desde el navegador</td></tr><tr><td>IP oculta</td><td>✓ El vídeo pasa por nuestro servidor</td></tr><tr><td>Entrada sin email</td><td>✓ Cuenta opcional</td></tr><tr><td>Marca de agua invisible</td><td>✓ En cada emisión, contra grabaciones</td></tr><tr><td>Denuncias</td><td>✓ Revisión humana y posibilidad de recurso</td></tr><tr><td>Incógnito</td><td>✓ Superpoder que oculta edad y país</td></tr><tr><td>Elegir a quién ver</td><td>✓ Con Premium: mujeres, hombres, trans o parejas</td></tr></tbody></table>',
+        },
+        {
+          h2: 'Tu IP se queda contigo',
+          html: '<p>Tu dirección IP puede dar pistas sobre la zona en la que estás. Por eso, en La Ruleta Caliente el vídeo no viaja directamente de tu dispositivo al de la otra persona: pasa por nuestro servidor, de modo que quien está al otro lado no recibe tu IP. Es un detalle técnico que no se ve, pero que protege tu ubicación aproximada sin que tengas que configurar nada.</p>',
+        },
+        {
+          h2: 'Menos datos, menos riesgos',
+          html: '<p>Para entrar solo necesitas elegir tu género, poner tu fecha de nacimiento y confirmar que tienes 18 años o más. Sin email, sin teléfono, sin contraseña. El nombre es opcional, y si un día quieres discreción extra, el superpoder <strong>Incógnito</strong> (se activa con guindillas 🌶️) oculta tu edad y tu país durante un rato. Lee más sobre el <a href="@anonymous-video-chat">videochat anónimo</a> y sus límites.</p>',
+        },
+        {
+          h2: 'Denuncias que revisa una persona',
+          html: '<p>Cuando alguien incumple las <a href="@rules">normas de la comunidad</a>, puedes denunciarlo desde la propia llamada. Un equipo humano revisa cada caso y puede aplicar expulsiones. Si te sancionan a ti y crees que es un error, existe un procedimiento de recurso, como prevé la normativa europea de servicios digitales (DSA). Además, grabar está prohibido y la marca de agua permite rastrear una grabación si aparece.</p>',
+        },
+        {
+          h2: 'Y además, diversión',
+          html: '<p>La privacidad no está reñida con pasarlo bien. Durante la llamada tienes juegos (Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina), temas para romper el hielo, termómetro de química y reacciones ❤️. Si los dos lo activáis, el <strong>modo picante</strong> sube el tono de juegos y piropos. Y con Premium (7,99 € a la semana o 19,99 € al mes) puedes elegir a quién ver y filtrar por país, cercanía y edad.</p>',
+        },
+        {
+          h2: 'Tres consejos para cualquier videochat',
+          html: '<ol><li>No digas tu nombre completo, tu ciudad exacta ni dónde trabajas.</li><li>Si alguien te pide fotos, dinero o pasar a otra app, termina la conversación.</li><li>Ante una amenaza o un chantaje, no pagues, guarda pruebas y denuncia.</li></ol><p>Tienes una explicación completa en nuestra guía de <a href="@guide-privacy">privacidad en el videochat</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿La Ruleta Caliente es lo mismo que Shagle?', a: 'No. Es un servicio independiente sin relación con Shagle; lo citamos solo porque mucha gente busca alternativas de videochat.' },
+        { q: '¿Puede alguien ver mi IP en la videollamada?', a: 'No. El vídeo pasa por nuestro servidor y la otra persona no recibe tu dirección IP.' },
+        { q: '¿Qué pasa cuando denuncio a alguien?', a: 'Un equipo humano revisa la denuncia y puede expulsar a quien incumpla las normas.' },
+        { q: '¿Es gratis?', a: 'Sí, el videochat aleatorio es gratis para empezar. Premium es opcional.' },
+      ],
+    },
+    'alt-chatspin': {
+      slug: 'alternativa-chatspin',
+      anchor: 'Alternativa a Chatspin',
+      title: 'Alternativa a Chatspin con superpoderes · La Ruleta Caliente',
+      description: '¿Buscas una alternativa a Chatspin? Videochat aleatorio con superpoderes como Rebobinar o Supersaludo, amigos y reacciones. Gratis para empezar. +18.',
+      h1: 'Alternativa a Chatspin: videochat al azar con superpoderes',
+      intro: '<p>Chatspin es una web de videochat aleatorio que muchos conocen. Si te interesa una <strong>alternativa a Chatspin</strong>, en La Ruleta Caliente tienes videollamadas 1 a 1, en vivo y al azar, con un toque propio: <strong>superpoderes</strong> que se activan con guindillas 🌶️ y que te dan más control sobre la ruleta, como volver con la persona anterior o hacer que tu saludo destaque. Gratis para empezar y solo para mayores de 18.</p>',
+      sections: [
+        {
+          h2: 'Lo que encuentras en La Ruleta Caliente',
+          html: '<table><thead><tr><th>Característica</th><th>Detalle</th></tr></thead><tbody><tr><td>Videochat aleatorio 1 a 1</td><td>✓ Gratis para empezar</td></tr><tr><td>Superpoderes</td><td>✓ Cinco, activables con guindillas</td></tr><tr><td>Añadir amigos</td><td>✓ Para volver a hablar otro día</td></tr><tr><td>Reacciones</td><td>✓ 👍 y ❤️ durante la llamada</td></tr><tr><td>Juegos</td><td>✓ Cuatro juegos y modo picante opcional</td></tr><tr><td>Traducción automática</td><td>✓ En el chat de texto</td></tr><tr><td>Premium</td><td>✓ Superpoderes gratis cada día</td></tr></tbody></table>',
+        },
+        {
+          h2: 'Los cinco superpoderes, uno a uno',
+          html: '<h3>Llama caliente</h3><p>Te da prioridad en la cola durante un rato, para que la siguiente persona llegue antes. Viene bien en momentos de mucha actividad o cuando tienes poco tiempo y quieres aprovecharlo.</p><h3>Rebobinar</h3><p>¿Pulsaste Siguiente demasiado rápido? Puedes pedir volver con la persona anterior. Solo se reconecta si ella acepta.</p><h3>Supersaludo</h3><p>Tu saludo aparece destacado a la próxima persona, para que tu entrada no pase desapercibida.</p><h3>Incógnito</h3><p>Durante un tiempo, no se muestran tu edad ni tu país. Útil cuando prefieres que la conversación empiece sin etiquetas y que la otra persona te conozca primero por cómo hablas.</p><h3>Segunda oportunidad</h3><p>Te deja ver quién te mandó un ❤️ recientemente y añadirle como amigo.</p>',
+        },
+        {
+          h2: 'Cómo conseguir guindillas sin pagar',
+          html: '<ul><li>Entrando cada día y manteniendo tu <strong>racha</strong>.</li><li><strong>Jugando</strong> durante las videollamadas.</li><li><strong>Recibiendo ❤️</strong> de la gente con la que hablas.</li><li>Completando los <strong>retos semanales</strong>.</li></ul><p>Durante la <strong>Hora caliente</strong>, cada noche de 22:00 a 23:00 hora de España, ganas el doble. Si prefieres no ir sumando, Premium incluye superpoderes gratis cada día.</p>',
+        },
+        {
+          h2: 'De desconocido a amigo',
+          html: '<p>En un videochat aleatorio lo normal es no volver a ver a nadie. Aquí, si alguien te cae bien, puedes <strong>añadirle como amigo</strong> y retomar la charla otro día. Las reacciones 👍 y ❤️ sirven para decir que te gusta la conversación sin interrumpirla, y los corazones que recibes también te dan guindillas. Con Premium, además, tienes llamadas con amigos e historial de 30 días. Así, esa persona tan divertida que conociste un martes por la noche no se pierde para siempre al pulsar Siguiente.</p>',
+        },
+        {
+          h2: 'Para empezar con buen pie',
+          html: '<p>Entra sin registro (género, fecha de nacimiento y confirmar que tienes 18 o más), da permiso a la cámara y pulsa empezar. Si no sabes qué decir, propón un juego o pide un tema para romper el hielo. Encontrarás más ideas en <a href="@video-chat-games">juegos para videollamadas</a> y en la <a href="@guide-icebreakers">guía para empezar una conversación</a>.</p>',
+        },
+        {
+          h2: 'Poderes, sí; normas, también',
+          html: '<p>Ningún superpoder te salta las <a href="@rules">normas</a>. Rebobinar solo funciona si la otra persona acepta, grabar está prohibido y cualquier denuncia la revisa un equipo humano. La otra persona no ve tu IP. Y si alguien te ofrece guindillas o regalos a cambio de tus datos, es un engaño: se ganan solo participando en la web.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿La Ruleta Caliente tiene algo que ver con Chatspin?', a: 'No. Somos un servicio independiente y nombramos Chatspin solo porque mucha gente busca alternativas.' },
+        { q: '¿Qué hace el superpoder Rebobinar?', a: 'Te permite pedir volver con la persona anterior. Solo os reconecta si ella acepta.' },
+        { q: '¿Los superpoderes cuestan dinero?', a: 'Se activan con guindillas, que se ganan gratis participando. Premium incluye superpoderes gratis cada día.' },
+        { q: '¿Puedo volver a hablar con alguien?', a: 'Sí, si le añades como amigo durante la llamada.' },
+      ],
+    },
+    'alt-camsurf': {
+      slug: 'alternativa-camsurf',
+      anchor: 'Alternativa a CamSurf',
+      title: 'Alternativa a CamSurf sin registro · La Ruleta Caliente',
+      description: '¿Buscas una alternativa a CamSurf? Videochat aleatorio 1 a 1 sin registro ni descargas: eliges género, confirmas que eres +18 y empiezas a hablar.',
+      h1: 'Alternativa a CamSurf: videochat al azar en un minuto',
+      intro: '<p>CamSurf es una web de videochat aleatorio que aparece a menudo cuando alguien busca hablar con desconocidos por cámara. Si quieres una <strong>alternativa a CamSurf</strong>, en La Ruleta Caliente puedes empezar en menos de un minuto: sin cuenta, sin descargas y sin email. Eliges tu género, pones tu fecha de nacimiento, confirmas que tienes 18 años o más y ya estás en una videollamada 1 a 1, en vivo y al azar.</p>',
+      sections: [
+        {
+          h2: 'Lo que encuentras en La Ruleta Caliente',
+          html: '<table><thead><tr><th>Característica</th><th>Detalle</th></tr></thead><tbody><tr><td>Entrar sin registro</td><td>✓ Sin email, sin contraseña</td></tr><tr><td>Sin descargas</td><td>✓ En el navegador del móvil y del ordenador</td></tr><tr><td>Instalable como app</td><td>✓ Desde el propio navegador</td></tr><tr><td>Videochat aleatorio 1 a 1</td><td>✓ Gratis para empezar</td></tr><tr><td>Siguiente con un clic</td><td>✓ También con la tecla Esc</td></tr><tr><td>Traducción automática</td><td>✓ En el chat de texto</td></tr><tr><td>Invita a un amigo</td><td>✓ 1 día de Premium para cada uno</td></tr></tbody></table>',
+        },
+        {
+          h2: 'Del clic a la primera conversación',
+          html: '<ol><li><strong>Abre la web</strong> en el navegador que ya usas.</li><li><strong>Elige tu género</strong> y escribe tu fecha de nacimiento.</li><li><strong>Confirma que eres mayor de 18</strong>.</li><li><strong>Permite la cámara y el micrófono</strong> cuando el navegador lo pida.</li><li><strong>Pulsa empezar</strong>: la primera persona aparece en segundos.</li></ol><p>No esperas correos de confirmación ni rellenas perfiles. Si más tarde quieres guardar tus guindillas 🌶️, tu racha y tus amigos entre dispositivos, puedes crear una cuenta con email o Google, pero nunca es obligatoria para chatear. Todos los detalles en <a href="@no-signup-video-chat">videochat sin registro</a>.</p>',
+        },
+        {
+          h2: 'En el móvil, como una app (sin serlo)',
+          html: '<p>No hay que buscar nada en ninguna tienda de aplicaciones. Desde el navegador del móvil puedes <strong>instalar La Ruleta Caliente como app</strong> en tu pantalla de inicio: se abre a pantalla completa y con un toque. Durante la llamada puedes cambiar entre la cámara frontal y la trasera. Más trucos en <a href="@mobile-video-chat">videochat desde el móvil</a>.</p><p>En el ordenador la experiencia es igual de ágil: con la tecla <strong>Esc</strong> pasas a la siguiente persona sin tocar el ratón, y con <strong>Parar</strong> sales de la cola cuando necesitas un descanso.</p>',
+        },
+        {
+          h2: 'Cuando quieras ir un paso más allá',
+          html: '<p>Todo lo básico es gratis. Si con el tiempo quieres más control, Premium permite elegir a quién ver (mujeres, hombres, trans o parejas), filtrar por país, cercanía y edad, navegar sin anuncios y tener historial de 30 días. Cuesta 7,99 € a la semana o 19,99 € al mes y se cancela cuando quieras; para pagarlo sí necesitas una cuenta. Una forma de probarlo gratis: invita a un amigo y, cuando se registre y tenga su primera charla de más de un minuto, los dos ganáis un día de Premium.</p>',
+        },
+        {
+          h2: 'Rápido, pero con cabeza',
+          html: '<p>Entrar en un minuto no significa bajar la guardia. Tu IP queda oculta porque el vídeo pasa por nuestro servidor, y las grabaciones están prohibidas y se disuaden con una marca de agua invisible. Si alguien se salta las normas, denúncialo y un equipo humano lo revisará. Y antes de encender la cámara, echa un vistazo a lo que se ve detrás de ti: una carta, un uniforme o la vista desde la ventana dicen más de lo que parece. Más pautas en <a href="@safety">seguridad</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿La Ruleta Caliente pertenece a CamSurf?', a: 'No. Es un servicio independiente; citamos CamSurf solo como referencia para quien busca algo parecido.' },
+        { q: '¿Hay que descargar una app?', a: 'No. Funciona en el navegador y, si quieres, puedes instalarla en la pantalla de inicio desde el propio navegador.' },
+        { q: '¿Cuánto se tarda en empezar?', a: 'Menos de un minuto: eliges género, pones tu fecha de nacimiento, confirmas que eres mayor de edad y activas la cámara.' },
+        { q: '¿Puedo usarla en el ordenador?', a: 'Sí, en el navegador del ordenador funciona igual, y puedes pasar a la siguiente persona con la tecla Esc.' },
+      ],
+    },
+    'guides': {
+      slug: 'guias',
+      anchor: 'Guías de videochat',
+      title: 'Guías y consejos para videochat · La Ruleta Caliente',
+      description: 'Guías y consejos para videochat: cómo empezar una conversación, ligar con respeto, verte mejor en la cámara y proteger tu privacidad con desconocidos.',
+      h1: 'Guías y consejos para videochat',
+      intro: '<p>Hablar por cámara con un desconocido parece fácil hasta que se enciende la imagen y no sabes qué decir. Por eso hemos reunido aquí nuestras <strong>guías y consejos para videochat</strong>: artículos prácticos, escritos para que tus conversaciones salgan mejor, te veas bien en pantalla y no corras riesgos innecesarios. Sirven para La Ruleta Caliente y para cualquier otra web de videollamadas.</p><p>Las puedes leer en cualquier orden. Si es tu primera vez, te recomendamos empezar por la de romper el hielo y terminar por la de privacidad.</p>',
+      sections: [
+        {
+          h2: 'Qué encontrarás en estas guías',
+          html: '<ul><li><strong>Conversación</strong>: cómo arrancar una charla con alguien que no conoces, qué preguntas funcionan y cuáles conviene evitar.</li><li><strong>Coqueteo</strong>: cómo ligar por videochat sin incomodar, leyendo las señales y respetando los límites.</li><li><strong>Imagen y sonido</strong>: luz, encuadre, micrófono y conexión, con trucos que cuestan poco o nada.</li><li><strong>Privacidad</strong>: qué datos no dar, cómo reconocer una estafa o una sextorsión y qué hacer si algo sale mal.</li></ul>',
+        },
+        {
+          h2: 'Para quién son',
+          html: '<p>Para quien acaba de descubrir el videochat y quiere evitar los errores típicos, pero también para quien ya lleva tiempo y siente que sus conversaciones se quedan siempre en el «hola, ¿de dónde eres?». No hace falta saber nada de tecnología: cada consejo está explicado paso a paso y se puede aplicar en el móvil o en el ordenador.</p><p>También pueden ayudarte si te cuesta hablar con gente nueva en general. Muchas de las ideas, como escuchar de verdad, hacer preguntas abiertas o saber despedirte con amabilidad, funcionan igual en una videollamada que en una cafetería.</p><p>Recuerda que el videochat de La Ruleta Caliente es exclusivo para <strong>mayores de 18 años</strong>, y estas guías también están escritas para adultos.</p>',
+        },
+        {
+          h2: 'Consejos rápidos antes de tu próxima videollamada',
+          html: '<ol><li><strong>Luz delante, no detrás</strong>: una ventana a tu espalda te convierte en una silueta.</li><li><strong>Una pregunta preparada</strong>: algo más original que «¿qué tal?».</li><li><strong>Fondo revisado</strong>: nada que diga dónde vives o trabajas.</li><li><strong>Auriculares</strong> si hay ruido o gente cerca.</li><li><strong>Un límite claro</strong>: si algo no te gusta, pasas a la siguiente persona sin dar explicaciones.</li></ol>',
+        },
+        {
+          h2: 'Del consejo a la práctica',
+          html: '<p>La mejor forma de aprender es probar. En La Ruleta Caliente puedes entrar sin registro, abrir un juego cuando la charla se atasca y usar el chat con traducción automática si la otra persona habla otro idioma. Si quieres ir directo a lo divertido, echa un vistazo a los <a href="@video-chat-games">juegos para videollamadas</a>; si lo tuyo es practicar idiomas, lee cómo <a href="@video-chat-foreigners">hablar con extranjeros</a>.</p>',
+        },
+        {
+          h2: 'Seguridad: la guía que nunca sobra',
+          html: '<p>Aunque solo leas una, que sea la de privacidad. La mayoría de los problemas en un videochat se evitan con hábitos sencillos: no compartir datos personales, desconfiar de quien pide dinero y no seguir la conversación en otra app con alguien que acabas de conocer. Para casos concretos, tienes también nuestra página de <a href="@safety">consejos de seguridad</a> y las <a href="@rules">normas de la comunidad</a>.</p><p>Iremos añadiendo nuevas guías con el tiempo. Aquí abajo tienes todas las publicadas hasta ahora 🌶️.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Las guías sirven para otras webs de videochat?', a: 'Sí. Los consejos de conversación, cámara y privacidad valen para cualquier videollamada con desconocidos.' },
+        { q: '¿Por cuál guía empiezo?', a: 'Si es tu primera vez, empieza por la de romper el hielo y no te saltes la de privacidad.' },
+        { q: '¿Las guías son gratis?', a: 'Sí, todas se pueden leer libremente, igual que el videochat es gratis para empezar.' },
+      ],
+    },
+    'guide-icebreakers': {
+      slug: 'como-empezar-conversacion-videochat',
+      anchor: 'Cómo empezar una conversación',
+      title: 'Cómo empezar una conversación en videochat: 30 frases',
+      description: 'Cómo empezar una conversación en un videochat: 30 frases para romper el hielo, qué preguntas funcionan, cuáles evitar y cómo salir de un silencio incómodo.',
+      h1: 'Cómo empezar una conversación en un videochat: 30 frases para romper el hielo',
+      intro: '<p>Los primeros diez segundos de una videollamada con un desconocido deciden casi todo. Si arrancas con un «hola» seco y una mirada al techo, lo más probable es que la otra persona pulse Siguiente. Si arrancas con algo que despierte su curiosidad, tienes una conversación. En esta guía te explicamos <strong>cómo empezar una conversación en un videochat</strong>: qué decir, qué evitar y cómo reaccionar cuando la charla se atasca, con 30 frases listas para usar.</p><p>Los consejos valen para cualquier web de videollamadas. Al final te contamos cómo te ayuda La Ruleta Caliente, pero lo importante es lo que haces tú delante de la cámara.</p>',
+      sections: [
+        {
+          h2: 'Antes de decir nada: lo que se ve cuenta',
+          html: '<p>En un videochat la primera frase empieza antes de hablar. La otra persona ve tu cara, tu expresión y lo que hay detrás de ti en un segundo, y eso marca el tono. Tres detalles que ayudan mucho:</p><ul><li><strong>Sonríe al conectar</strong>, aunque sea un poco. Una cara seria parece aburrimiento o desinterés.</li><li><strong>Mira a la cámara</strong>, no a la pantalla, cuando saludes. Así parece que miras a los ojos.</li><li><strong>Que se te vea y se te oiga bien</strong>. Si apareces a oscuras o con eco, la otra persona se cansa antes de empezar. En la guía para <a href="@guide-camera">verte mejor en la cámara</a> tienes trucos sencillos.</li></ul><p>Y una regla de oro: no esperes a que la otra persona haga todo el trabajo. Si los dos os quedáis mirando, nadie gana.</p>',
+        },
+        {
+          h2: 'Frases para romper el hielo en los primeros segundos',
+          html: '<p>El objetivo de la primera frase no es impresionar, sino dar a la otra persona algo fácil a lo que responder. Estas funcionan porque son ligeras y abren la puerta a seguir:</p><ol><li>«¡Hola! Acabo de llegar y eres la primera persona que me sale, así que te toca ser simpático/a».</li><li>«¿Qué hora es donde estás? Aquí es tardísimo».</li><li>«Me ha gustado tu [cuadro/guitarra/planta] del fondo, ¿tiene historia?».</li><li>«Te aviso: hoy vengo con ganas de hablar, no de pasar caras».</li><li>«¿Qué tal te está yendo la noche en la ruleta? ¿Mucho personaje raro?».</li><li>«¿Desde dónde me hablas? Intento adivinarlo por tu acento».</li><li>«Pregunta rápida para empezar: ¿café o té?».</li><li>«Hola, ¿te pillo cenando? Que veo movimiento».</li><li>«Es mi primera vez en esto, así que si lo hago mal, ten paciencia».</li><li>«Tienes cara de tener buenas recomendaciones de series. ¿Me equivoco?».</li></ol><p>Fíjate en que muchas usan algo que <strong>ves</strong>: el fondo, la hora, la luz. Comentar un detalle concreto demuestra que estás prestando atención, y eso se agradece.</p>',
+        },
+        {
+          h2: 'Preguntas para que la charla no muera',
+          html: '<p>Superado el saludo, toca mantener el ritmo. El truco está en las <strong>preguntas abiertas</strong>, las que no se responden con un «sí» o un «no». Compara «¿Te gusta viajar?» con «¿Cuál es el sitio más raro en el que has estado?». La segunda da para diez minutos.</p><ol><li>«¿Qué es lo mejor que te ha pasado esta semana?».</li><li>«Si mañana no tuvieras que trabajar ni estudiar, ¿qué harías?».</li><li>«¿Cuál es la comida típica de tu zona que todo el mundo debería probar?».</li><li>«¿Qué canción tienes ahora mismo en bucle?».</li><li>«¿Algo que hayas aprendido hace poco y te haya volado la cabeza?».</li><li>«¿A qué te dedicas cuando no estás hablando con desconocidos?».</li><li>«¿Cuál es la peor película que has visto entera?».</li><li>«¿Eres más de planes improvisados o de tenerlo todo organizado?».</li><li>«¿Qué echarías de menos de tu ciudad si te mudaras?».</li><li>«Si pudieras cenar con cualquier persona, viva o no, ¿con quién?».</li></ol><p>Y no olvides la otra mitad: <strong>escuchar</strong>. Si te cuenta que acaba de volver de un concierto, no saltes a la siguiente pregunta de tu lista. Pregunta por el concierto.</p>',
+        },
+        {
+          h2: 'Frases para cuando hay un silencio incómodo',
+          html: '<p>Los silencios pasan hasta en las mejores conversaciones. Lo peor es fingir que no existen. Mejor reconocerlos con humor o cambiar de marcha:</p><ol><li>«Vale, se nos ha acabado el tema. ¿Jugamos a algo?».</li><li>«Este es el momento en que los dos miramos el móvil. Propongo que no».</li><li>«Cuéntame algo que nadie adivinaría de ti mirándote».</li><li>«Te reto a que me hagas la pregunta más rara que se te ocurra».</li><li>«¿Qué prefieres: no volver a usar el móvil o no volver a comer pizza?».</li></ol><p>Los juegos son tu mejor aliado aquí. Un «¿Qué prefieres?» o una partida de Piedra, papel o tijera rompen la tensión en segundos. En La Ruleta Caliente puedes abrirlos sin salir de la llamada; tienes la lista en <a href="@video-chat-games">juegos para videollamadas</a>.</p>',
+        },
+        {
+          h2: 'Cuando no habláis el mismo idioma',
+          html: '<p>A veces te toca alguien que no habla español. No hace falta pulsar Siguiente: puede ser la conversación más divertida de la noche. Algunas ideas:</p><ol><li>«Sorry, my English is terrible, but I try!» (reírte de ti mismo siempre abre puertas).</li><li>Escribe en el chat «¿De dónde eres?» y deja que la traducción haga el resto.</li><li>«Enséñame a decir “hola” en tu idioma y yo te enseño en el mío».</li><li>Señala algo de tu habitación y di cómo se llama en español.</li><li>Propón un juego de dibujar: un dibujo lo entiende cualquiera.</li></ol><p>Si te interesa usar el videochat para practicar idiomas, lee nuestra página sobre cómo <a href="@video-chat-foreigners">hablar con extranjeros</a>.</p>',
+        },
+        {
+          h2: 'Qué evitar al empezar una conversación',
+          html: '<p>Hay aperturas que casi garantizan un Siguiente inmediato. Conviene tenerlas presentes:</p><ul><li><strong>Preguntas de interrogatorio</strong>: «¿Edad? ¿País? ¿Trabajas?» en ráfaga. Parece un formulario, no una conversación.</li><li><strong>Comentarios sobre el físico</strong> nada más conectar. Aunque sean piropos, incomodan a mucha gente si no hay confianza.</li><li><strong>Pedir redes sociales o el número</strong> en el primer minuto. Además de incómodo, es un riesgo para las dos partes.</li><li><strong>Quejarte de la web o de la gente</strong> que te ha tocado antes. Transmite mal humor.</li><li><strong>No decir nada</strong> y esperar. Si no tienes ganas de hablar, mejor pulsa Parar y vuelve en otro momento.</li><li><strong>Insistir</strong> cuando la otra persona responde con monosílabos. No pasa nada: no todas las combinaciones funcionan.</li></ul><h3>Saber despedirse</h3><p>Terminar bien también cuenta. Un «Me ha gustado hablar contigo, ¡que vaya bien la noche!» antes de pulsar Siguiente deja buen sabor de boca, y si la conexión fue buena, puedes mandar un ❤️ o añadir a la persona como amiga.</p>',
+        },
+        {
+          h2: 'Cómo te ayuda La Ruleta Caliente',
+          html: '<p>Todo lo anterior depende de ti, pero la web te echa una mano. Durante la llamada tienes <strong>temas para romper el hielo</strong> que puedes pedir cuando te quedas en blanco, un <strong>termómetro de química</strong> que da una pista de cómo va la conversación y cuatro juegos: Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina. El chat de texto traduce automáticamente, y si te equivocas al pasar de persona, el superpoder Rebobinar permite pedir volver con ella (solo si acepta).</p><p>Es un servicio solo para mayores de 18 años y puedes entrar sin registro. Y un último consejo: por muy bien que vaya la charla, no compartas tu dirección, tu número ni datos personales con alguien a quien acabas de conocer.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Cuál es la mejor forma de saludar en un videochat?', a: 'Una sonrisa, mirar a la cámara y una frase ligera sobre algo concreto, como la hora o un detalle del fondo, funciona mejor que un simple «hola».' },
+        { q: '¿Qué hago si la otra persona no habla?', a: 'Prueba con una pregunta abierta o propón un juego. Si sigue sin responder, despídete con amabilidad y pasa a la siguiente persona.' },
+        { q: '¿Es mala idea preguntar la edad y el país al empezar?', a: 'No es malo en sí, pero hacerlo en ráfaga parece un interrogatorio. Mejor mezclarlo con preguntas más personales y curiosas.' },
+        { q: '¿Cómo salgo de un silencio incómodo?', a: 'Reconócelo con humor y cambia de marcha: un juego, una pregunta rara o un reto rápido suelen bastar.' },
+      ],
+    },
+    'guide-flirting': {
+      slug: 'como-ligar-por-videochat',
+      anchor: 'Ligar por videochat',
+      title: 'Cómo ligar por videochat con respeto: guía práctica',
+      description: 'Cómo ligar por videochat con respeto: consejos para coquetear sin incomodar, leer las señales, pedir consentimiento, usar el modo picante y saber parar.',
+      h1: 'Cómo ligar por videochat con respeto: consejos que funcionan',
+      intro: '<p>Coquetear por cámara con alguien que acabas de conocer tiene su gracia: hay química o no la hay, y se nota enseguida. Pero también es fácil pasarse, malinterpretar una señal o hacer sentir incómoda a la otra persona. Esta guía explica <strong>cómo ligar por videochat con respeto</strong>: cómo crear complicidad, cómo saber si el interés es mutuo y cómo subir el tono solo cuando las dos partes quieren.</p><p>Una aclaración importante: hablamos de adultos. El videochat de La Ruleta Caliente es exclusivo para mayores de 18 años, y si alguna vez sospechas que hablas con un menor, la conversación termina ahí y se denuncia.</p>',
+      sections: [
+        {
+          h2: 'Primero conversación, después coqueteo',
+          html: '<p>El error más común es entrar directamente en modo seducción. En un videochat aleatorio, la otra persona no te conoce de nada; un piropo en el segundo uno suena a frase hecha. Lo que atrae es otra cosa:</p><ol><li><strong>Interés genuino</strong>. Pregunta y escucha. A todo el mundo le gusta sentir que le prestan atención.</li><li><strong>Humor</strong>. Reírse juntos crea más complicidad que cualquier halago. No hace falta ser gracioso; basta con no tomarse todo demasiado en serio.</li><li><strong>Naturalidad</strong>. No actúes. Si estás nervioso, dilo: «Te confieso que no sé muy bien cómo va esto». Suele funcionar mejor que fingir seguridad.</li></ol><h3>El piropo, mejor con contexto</h3><p>Un halago funciona cuando es concreto y llega en el momento adecuado. «Qué bonito eres» a los tres segundos suena a guion; «Me encanta cómo te ríes cuando cuentas lo de tu hermano» después de diez minutos de charla suena a verdad. Elogia algo que la persona haya elegido (su sentido del humor, su música, su forma de contar historias) más que algo físico, sobre todo al principio.</p><p>Si necesitas ideas para arrancar, en la guía sobre <a href="@guide-icebreakers">cómo empezar una conversación</a> tienes 30 frases.</p>',
+        },
+        {
+          h2: 'Cómo saber si hay interés mutuo',
+          html: '<p>En persona leemos mil señales sin darnos cuenta. Por cámara hay menos, pero las hay:</p><h3>Señales de que va bien</h3><ul><li>Te hace preguntas a ti, no solo responde.</li><li>Se ríe con facilidad y sonríe aunque no hables.</li><li>Se acerca a la cámara o se acomoda para seguir hablando.</li><li>Te manda reacciones o un ❤️.</li><li>Recoge tus bromas y las continúa.</li></ul><h3>Señales de que no es el momento</h3><ul><li>Respuestas cortas y sin preguntas de vuelta.</li><li>Mira a otro lado o al móvil todo el rato.</li><li>Cambia de tema cuando tú lo llevas al terreno personal.</li><li>Dice directamente que solo quiere charlar.</li></ul><p>Si ves las segundas, no insistas: no todas las conversaciones tienen que acabar en coqueteo, y una charla agradable también es un buen resultado.</p>',
+        },
+        {
+          h2: 'Consentimiento: preguntar no corta el rollo',
+          html: '<p>Hay quien piensa que preguntar «¿te parece bien si…?» quita la magia. Es al revés: demuestra seguridad y respeto, y a mucha gente le resulta atractivo. Algunas reglas claras:</p><ol><li><strong>Pregunta antes de subir el tono</strong>. «¿Te apetece que nos pongamos un poco más atrevidos o prefieres seguir así?». Cualquier respuesta es válida.</li><li><strong>Un «no» es un no</strong>, y un «no sé» también. No intentes convencer a nadie.</li><li><strong>El consentimiento se puede retirar</strong>. Que alguien quisiera hace cinco minutos no significa que quiera ahora.</li><li><strong>Nada de sorpresas</strong>. No enseñes ni digas algo explícito sin que la otra persona lo haya aceptado antes.</li></ol>',
+        },
+        {
+          h2: 'El modo picante: coquetear con las cartas sobre la mesa',
+          html: '<p>Una forma muy práctica de saber si la otra persona está en la misma onda es usar herramientas pensadas para eso. En La Ruleta Caliente existe el <strong>modo picante</strong> 🌶️: cuando lo activas, los juegos y los piropos de la llamada suben de tono, pero <strong>solo si la otra persona también lo tiene activado</strong>. Si no, todo se queda en versión suave.</p><p>Es un consentimiento previo, automático y sin incomodidad: nadie se encuentra con algo que no ha elegido. Juegos como Verdad o reto o ¿Qué prefieres? en versión picante sirven para coquetear con humor sin tener que inventar las preguntas. Puedes ver cómo funcionan en <a href="@video-chat-games">juegos para videollamadas</a>, y si buscas un ambiente adulto en general, en el <a href="@adult-video-chat">videochat para adultos</a>.</p>',
+        },
+        {
+          h2: 'Lo que nunca deberías hacer',
+          html: '<ol><li><strong>Presionar para que la otra persona encienda la cámara, se acerque o enseñe algo</strong>. Si no quiere, no quiere.</li><li><strong>Hacer comentarios despectivos</strong> sobre su cuerpo, su acento o su país. Ni en broma.</li><li><strong>Grabar o hacer capturas</strong>. Además de una falta de respeto enorme, está prohibido. En La Ruleta Caliente cada vídeo lleva una marca de agua invisible que permite rastrear una grabación.</li><li><strong>Insistir después de un Siguiente</strong>. Si alguien pasa de ti, no es personal: cada uno busca cosas distintas.</li></ol><p>Ten en cuenta que quien incumple las normas de la comunidad puede ser denunciado y expulsado tras una revisión humana.</p>',
+        },
+        {
+          h2: 'Saber parar (y cuidarte tú también)',
+          html: '<p>Respetar a la otra persona incluye respetarte a ti. <strong>Para cuando quieras, sin dar explicaciones</strong>: si algo te incomoda, pulsa Siguiente o Parar. No le debes nada a un desconocido.</p><p>Algunas situaciones en las que conviene cortar en seco:</p><ul><li>Te piden que pases a otra app «más privada» a los pocos minutos.</li><li>Te piden dinero, tarjetas regalo o recargas, por la razón que sea.</li><li>Te presionan para enseñar algo íntimo o te dicen que «ya te han visto» y quieren más.</li><li>La otra persona parece menor de edad.</li></ul><p>En estos casos, termina la llamada y denuncia. Si alguien te amenaza con difundir imágenes, no pagues: lee nuestra guía de <a href="@guide-privacy">privacidad en el videochat</a>, donde explicamos qué hacer ante una sextorsión.</p>',
+        },
+        {
+          h2: 'Si hay química: cómo seguir',
+          html: '<p>Cuando la conexión es buena, es normal querer volver a hablar. En lugar de pedir el número o las redes enseguida, usa las herramientas del propio videochat: en La Ruleta Caliente puedes <strong>añadir a la persona como amiga</strong> y mandarle un ❤️. Así seguís en contacto sin compartir datos personales hasta que haya más confianza. Y si te equivocaste al pulsar Siguiente, el superpoder <strong>Rebobinar</strong> permite pedir volver con la persona anterior, siempre que ella acepte.</p><p>Ligar por videochat puede ser divertido, ligero y sin presión. Con respeto, sentido del humor y las señales claras, la química se encarga del resto 🌶️.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Cómo sé si le gusto a alguien por videochat?', a: 'Fíjate en si te hace preguntas, se ríe, se acomoda para seguir hablando o te manda reacciones. Si responde con monosílabos, probablemente no es el momento.' },
+        { q: '¿Qué es el modo picante?', a: 'Una opción de La Ruleta Caliente que sube el tono de juegos y piropos, solo cuando las dos personas lo tienen activado.' },
+        { q: '¿Es buena idea pedir el número enseguida?', a: 'No. Mejor añadir a la persona como amiga dentro del videochat y esperar a tener más confianza antes de compartir datos.' },
+        { q: '¿Qué hago si alguien me presiona?', a: 'Termina la conversación con Siguiente o Parar y denúncialo. Nadie tiene derecho a presionarte.' },
+      ],
+    },
+    'guide-camera': {
+      slug: 'como-verse-bien-en-camara',
+      anchor: 'Verte mejor en la cámara',
+      title: 'Cómo verte mejor en la cámara del videochat',
+      description: 'Cómo verte mejor en la cámara de un videochat: luz, encuadre, sonido y conexión, con trucos sencillos para móvil y ordenador que no cuestan dinero.',
+      h1: 'Cómo verte mejor en la cámara: luz, encuadre, sonido y conexión',
+      intro: '<p>No hace falta una cámara cara para dar una buena impresión en una videollamada. La mayoría de las imágenes oscuras, borrosas o con eco se arreglan moviendo una lámpara, girando la silla o cerrando una pestaña del navegador. En esta guía te explicamos <strong>cómo verte mejor en la cámara</strong> de un videochat: luz, encuadre, sonido, conexión y las diferencias entre usar el móvil o el ordenador.</p><p>Son consejos prácticos, pensados para cualquier web de videollamadas, y casi todos gratis. Te llevará cinco minutos prepararlo una vez, y notarás la diferencia en cada conversación.</p>',
+      sections: [
+        {
+          h2: 'La luz: el truco que más cambia tu imagen',
+          html: '<p>La cámara de un móvil o un portátil es pequeña y necesita mucha luz para dar una imagen nítida. Con poca luz, el sensor «inventa» detalles y aparece ese grano que hace que todo parezca viejo. La regla es sencilla: <strong>la luz, delante de ti</strong>.</p><ul><li><strong>Ponte de cara a una ventana</strong> durante el día. Es la mejor luz que existe y es gratis.</li><li><strong>Nunca con la ventana detrás</strong>. La cámara ajusta la exposición a la claridad del fondo y te convierte en una silueta.</li><li><strong>De noche, usa una lámpara</strong> detrás de la pantalla, apuntando hacia ti. Si es muy directa, haz que rebote en una pared clara o ponle delante una tela fina o un papel de horno.</li><li><strong>Evita la luz del techo sola</strong>: crea sombras debajo de los ojos y te da aspecto cansado.</li><li><strong>Mira el color</strong>: mezclar luz blanca fría y luz amarilla cálida da tonos raros. Si puedes, usa bombillas del mismo tipo.</li></ul><h3>Un aro de luz, ¿vale la pena?</h3><p>Si haces muchas videollamadas, un aro de luz barato ayuda, sobre todo de noche. Colócalo detrás de la cámara y bájale la intensidad: a tope suele dar una imagen plana y deslumbra. Pero antes de comprar nada, prueba con la ventana o una lámpara: muchas veces basta.</p>',
+        },
+        {
+          h2: 'Encuadre y ángulo: dónde poner la cámara',
+          html: '<p>La segunda clave es la posición. Un ángulo malo puede hacer que parezca que miras por encima del hombro a la otra persona, o que hablas desde el fondo de un pozo.</p><ol><li><strong>Cámara a la altura de los ojos</strong>. Si usas portátil, súbelo encima de unos libros o una caja. Desde abajo se ve la barbilla y el techo; desde arriba pareces más pequeño.</li><li><strong>Distancia de un brazo</strong>. Que se vea tu cara y parte de los hombros, con un poco de aire por encima de la cabeza. Demasiado cerca agobia; demasiado lejos parece que no estás.</li><li><strong>Ojos en el tercio superior</strong> de la imagen, más o menos. Es el encuadre que usa la televisión, y por algo será.</li><li><strong>Mira a la cámara</strong> cuando quieras conectar, sobre todo al saludar o al decir algo importante. Mirar la pantalla da sensación de que miras hacia abajo.</li></ol><h3>El fondo también habla</h3><p>Lo que hay detrás de ti forma parte de la imagen. Un fondo ordenado y sencillo centra la atención en ti. Revisa que no haya ropa tirada, pantallas encendidas con información personal ni nada que diga dónde vives o trabajas: cartas, uniformes, la vista desde la ventana. Más sobre esto en la guía de <a href="@guide-privacy">privacidad en el videochat</a>.</p>',
+        },
+        {
+          h2: 'El sonido: más importante de lo que parece',
+          html: '<p>Una imagen regular se perdona; un sonido malo, no. Si la otra persona tiene que esforzarse para entenderte, se cansará enseguida. Algunas soluciones:</p><ul><li><strong>Usa auriculares con micrófono</strong>. Los del móvil sirven. Eliminan el eco y evitan que tu micrófono recoja la voz de la otra persona.</li><li><strong>Elige una habitación con cosas blandas</strong>: cortinas, alfombra, sofá, cama. Las paredes desnudas rebotan el sonido y crean eco.</li><li><strong>Aléjate de ruidos constantes</strong>: ventiladores, lavadora, tráfico, la tele de fondo.</li><li><strong>Comprueba qué micrófono usa el navegador</strong>. A veces elige uno que no es el que crees, como el de una webcam apagada o el de unos cascos que no llevas puestos.</li><li><strong>Habla un poco más despacio</strong> de lo normal, sobre todo con gente de otro país.</li></ul>',
+        },
+        {
+          h2: 'Conexión: cómo evitar cortes y congelados',
+          html: '<p>Una imagen que se congela cada diez segundos arruina cualquier conversación. Antes de culpar a la web, revisa lo tuyo:</p><ol><li><strong>Acércate al router</strong> o, en el ordenador, conéctate por cable si puedes. Las paredes gruesas debilitan mucho el wifi.</li><li><strong>Cierra lo que consuma datos</strong>: descargas, vídeos en otras pestañas, actualizaciones del sistema, copias de seguridad en la nube.</li><li><strong>Con datos móviles, busca buena cobertura</strong>. Una o dos rayas suelen dar imagen pixelada. Ojo también con el consumo si tu tarifa es limitada.</li><li><strong>Actualiza el navegador</strong>. Las versiones antiguas a veces gestionan peor la cámara y el vídeo.</li><li><strong>Reinicia el router</strong> si notas que todo va lento desde hace días. Suena a tópico, pero funciona más veces de las que parece.</li></ol>',
+        },
+        {
+          h2: 'Móvil u ordenador: ventajas de cada uno',
+          html: '<table><thead><tr><th></th><th>Móvil</th><th>Ordenador</th></tr></thead><tbody><tr><td>Calidad de cámara</td><td>Suele ser mejor, sobre todo la trasera</td><td>Depende mucho del portátil o la webcam</td></tr><tr><td>Estabilidad</td><td>Necesita un soporte o apoyo</td><td>Estable por defecto</td></tr><tr><td>Comodidad para escribir</td><td>Teclado pequeño</td><td>Teclado completo, ideal para el chat de texto</td></tr><tr><td>Libertad</td><td>Puedes moverte por casa</td><td>Siempre en el mismo sitio</td></tr></tbody></table><p>Si usas el <strong>móvil</strong>, no lo sostengas con la mano: la imagen tiembla y el brazo se cansa. Apóyalo vertical contra unos libros o usa un soporte barato. Limpia la lente con un paño suave: la huella de un dedo basta para que todo salga borroso. Y recuerda que la cámara frontal suele tener menos calidad que la trasera.</p><p>Si usas el <strong>ordenador</strong>, cierra pestañas pesadas y asegúrate de que la luz de la pantalla no es tu única fuente de luz: te dejaría la cara azulada.</p>',
+        },
+        {
+          h2: 'Antes de pulsar empezar: lista rápida',
+          html: '<ul><li>¿Tienes una fuente de luz delante?</li><li>¿La cámara está a la altura de los ojos?</li><li>¿El fondo está ordenado y sin datos personales?</li><li>¿Llevas auriculares o estás en un sitio sin eco?</li><li>¿La lente está limpia?</li><li>¿Has cerrado descargas y vídeos de fondo?</li></ul><p>En La Ruleta Caliente puedes comprobar cómo te ves antes de empezar, <strong>cambiar de cámara</strong> durante la llamada (frontal o trasera en el móvil) y ajustar las <strong>opciones de vista</strong>. Todo funciona desde el navegador, sin descargas, y si lo usas mucho en el móvil puedes instalarlo como app. Tienes más trucos específicos en <a href="@mobile-video-chat">videochat desde el móvil</a> y en <a href="@cam-to-cam">chat cam to cam</a>. Recuerda que es un servicio solo para mayores de 18 años.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Por qué salgo oscuro en la cámara?', a: 'Casi siempre es porque tienes la luz detrás. Ponte de cara a una ventana o coloca una lámpara detrás de la pantalla, apuntando hacia ti.' },
+        { q: '¿Cómo quito el eco en una videollamada?', a: 'Usa auriculares con micrófono y elige una habitación con cortinas, alfombra o muebles blandos.' },
+        { q: '¿Es mejor el móvil o el ordenador para videochat?', a: 'El móvil suele tener mejor cámara; el ordenador es más estable y cómodo para escribir. Lo importante es la luz y la conexión.' },
+        { q: '¿Por qué se congela la imagen?', a: 'Normalmente por la conexión. Acércate al router, cierra descargas y otras pestañas o usa cable si puedes.' },
+      ],
+    },
+    'guide-privacy': {
+      slug: 'privacidad-videochat',
+      anchor: 'Privacidad en el videochat',
+      title: 'Cómo proteger tu privacidad en un videochat',
+      description: 'Cómo proteger tu privacidad en un videochat: qué datos no dar, cómo detectar estafas y sextorsión, qué hacer con grabaciones y a quién acudir si pasa algo.',
+      h1: 'Cómo proteger tu privacidad en un videochat',
+      intro: '<p>Hablar por cámara con desconocidos es divertido y, la gran mayoría de las veces, inofensivo. Pero como en cualquier lugar donde se conoce gente nueva, hay quien busca aprovecharse. La buena noticia es que casi todos los problemas se evitan con unos pocos hábitos. En esta guía te contamos <strong>cómo proteger tu privacidad en un videochat</strong>: qué datos no dar, cómo reconocer una estafa o una sextorsión, qué pasa con las grabaciones y qué hacer si algo sale mal.</p><p>Son consejos válidos para cualquier web o app de videollamadas. Si usas La Ruleta Caliente, al final te contamos qué protecciones tienes ya activadas.</p>',
+      sections: [
+        {
+          h2: 'Los datos que nunca deberías dar',
+          html: '<p>En una conversación con alguien que acabas de conocer, la regla es simple: <strong>nada que permita localizarte, suplantarte o presionarte</strong>. En concreto:</p><ul><li><strong>Nombre completo y apellidos</strong>. Con eso, una búsqueda en internet puede llevar a tus redes, tu trabajo o tu familia.</li><li><strong>Dirección, barrio o calle</strong>, aunque sea de forma aproximada.</li><li><strong>Lugar de trabajo o de estudio</strong>.</li><li><strong>Número de teléfono y usuarios de redes sociales</strong>, al menos hasta que haya confianza real.</li><li><strong>Documentos, datos bancarios, contraseñas o códigos</strong> que te lleguen por SMS. Nunca, por ningún motivo.</li><li><strong>Fotos o datos de otras personas</strong>: amigos, pareja, hijos.</li></ul><h3>Lo que dices sin hablar</h3><p>La cámara muestra más de lo que crees. Antes de empezar, revisa el fondo: cartas o paquetes con tu dirección, el logo de tu empresa, el uniforme, fotos familiares, la vista desde tu ventana o un monumento reconocible. Un fondo neutro es tu mejor aliado. Y si usas un apodo, que no sea el mismo que en Instagram o TikTok.</p>',
+        },
+        {
+          h2: 'Cómo reconocer una estafa en el videochat',
+          html: '<p>Las estafas cambian de forma, pero casi siempre siguen el mismo guion: crear confianza muy rápido y, después, pedir algo. Desconfía si notas varias de estas señales:</p><ol><li><strong>Prisa por salir del videochat</strong>: «Mejor hablamos por WhatsApp/Telegram, aquí se corta». En otra app no hay moderación ni denuncias.</li><li><strong>Una historia que termina en dinero</strong>: un billete para venir a verte, una deuda, un familiar enfermo, una aduana que retiene un regalo.</li><li><strong>Inversiones y criptomonedas</strong>: alguien encantador que, casualmente, gana mucho dinero con un método que quiere enseñarte.</li><li><strong>Peticiones de tarjetas regalo, recargas o códigos</strong>.</li><li><strong>La cámara que nunca funciona</strong>: si alguien siempre tiene una excusa para no mostrarse en vídeo en directo, es posible que no sea quien dice.</li><li><strong>Halagos excesivos desde el minuto uno</strong>, del tipo «nunca había sentido esta conexión con nadie».</li></ol><p>La regla que lo resume todo: <strong>nadie que acabas de conocer por videochat necesita tu dinero</strong>. Si aparece una petición así, termina la conversación y denuncia.</p>',
+        },
+        {
+          h2: 'Sextorsión: qué es y cómo actuar',
+          html: '<p>La sextorsión es un chantaje: alguien consigue (o dice tener) imágenes íntimas tuyas y amenaza con enviarlas a tus contactos si no pagas. Suele empezar con un coqueteo intenso que sube de tono muy rápido, a menudo después de convencerte de cambiar a otra app.</p><h3>Cómo prevenirla</h3><ul><li>No muestres en cámara nada íntimo que no querrías ver publicado, sobre todo con alguien que acabas de conocer.</li><li>Desconfía de quien presiona para ir más rápido de lo que tú quieres.</li><li>No compartas tus redes: es justo lo que el chantajista necesita para amenazarte con tus contactos.</li></ul><h3>Si ya ha pasado</h3><ol><li><strong>No pagues</strong>. Pagar no garantiza que borren nada y casi siempre lleva a nuevas peticiones.</li><li><strong>Corta el contacto</strong> y no negocies.</li><li><strong>Guarda pruebas</strong>: capturas de los mensajes, nombres de usuario, enlaces.</li><li><strong>Denuncia</strong> en la plataforma donde ocurrió y ante la policía.</li><li><strong>Configura tus redes como privadas</strong> por un tiempo y avisa a alguien de confianza si lo necesitas.</li></ol><p>No es culpa tuya. Quien comete un delito es la persona que chantajea.</p>',
+        },
+        {
+          h2: 'Grabaciones y capturas de pantalla',
+          html: '<p>Hay que asumir una realidad incómoda: ninguna web puede impedir al cien por cien que alguien grabe su pantalla con otro dispositivo. Por eso la mejor protección es no mostrar nada que no aceptarías que circulase. Dicho esto, hay medidas que ayudan:</p><ul><li><strong>Normas claras</strong> que prohíben grabar y castigan a quien lo hace.</li><li><strong>Marcas de agua</strong> en el vídeo, que disuaden y permiten rastrear de dónde salió una grabación.</li><li><strong>Denuncias rápidas</strong> cuando sospechas que alguien está grabando: un móvil apuntando a la pantalla, comentarios del tipo «esto lo guardo».</li></ul><p>Si descubres un vídeo tuyo publicado sin permiso, la mayoría de las plataformas tienen formularios para pedir su retirada. Úsalos y guarda pruebas.</p>',
+        },
+        {
+          h2: 'Menores: tolerancia cero',
+          html: '<p>Los videochats con desconocidos son para adultos. Si en una conversación sospechas que la otra persona es menor de edad, por su aspecto, por lo que dice o por cualquier detalle, termina la llamada de inmediato y denúnciala. No sigas la conversación «para comprobarlo». En La Ruleta Caliente el servicio es exclusivo para mayores de 18 y, cuando hay dudas, se puede pedir a un usuario que verifique su edad.</p>',
+        },
+        {
+          h2: 'Qué protecciones tienes en La Ruleta Caliente',
+          html: '<table><thead><tr><th>Protección</th><th>Qué hace por ti</th></tr></thead><tbody><tr><td>IP oculta</td><td>El vídeo pasa por nuestro servidor; la otra persona no ve tu IP</td></tr><tr><td>Entrada sin email</td><td>Puedes chatear sin dar datos de contacto</td></tr><tr><td>Marca de agua invisible</td><td>En cada emisión, contra grabaciones</td></tr><tr><td>Aviso de grabación prohibida</td><td>Todo el mundo sabe que grabar no está permitido</td></tr><tr><td>Denuncias con revisión humana</td><td>Expulsiones para quien incumple las normas y posibilidad de recurso</td></tr><tr><td>Incógnito</td><td>Superpoder que oculta tu edad y país durante un rato</td></tr></tbody></table><p>Puedes leer cómo funciona el <a href="@anonymous-video-chat">videochat anónimo</a> y sus límites, y repasar las <a href="@rules">normas de la comunidad</a>.</p>',
+        },
+        {
+          h2: 'Si algo sale mal: pasos inmediatos',
+          html: '<ol><li><strong>Termina la conversación</strong> con Siguiente o Parar. No tienes que dar explicaciones.</li><li><strong>Denuncia</strong> desde la propia web.</li><li><strong>Guarda pruebas</strong> de lo que hayas recibido fuera del videochat.</li><li><strong>No pagues ni envíes nada</strong> bajo presión.</li><li><strong>Pide ayuda</strong>: a alguien de confianza, a la policía o a los servicios de ayuda de tu país.</li></ol><p>Tienes información más detallada sobre sextorsión, estafas y protección de menores en nuestra página de <a href="@safety">consejos de seguridad</a>. Con estos hábitos, el videochat sigue siendo lo que debería ser: una forma divertida de conocer gente nueva 🌶️.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Puede alguien saber dónde vivo por un videochat?', a: 'Puede deducirlo si das datos o si se ven pistas en el fondo. En La Ruleta Caliente la otra persona no ve tu IP, pero revisa siempre lo que muestra tu cámara.' },
+        { q: '¿Qué hago si me chantajean con un vídeo?', a: 'No pagues, corta el contacto, guarda pruebas y denuncia en la plataforma y ante la policía.' },
+        { q: '¿Me pueden grabar en un videochat?', a: 'Grabar está prohibido y hay marcas de agua, pero ninguna web puede impedirlo del todo. No muestres nada que no aceptarías ver publicado.' },
+        { q: '¿Es seguro pasar a WhatsApp con alguien del videochat?', a: 'No al principio. Fuera del videochat no hay moderación ni denuncias, y es una táctica habitual en estafas.' },
       ],
     },
   },
