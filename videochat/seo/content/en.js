@@ -13,6 +13,7 @@ module.exports = {
     adultNote: '18+ only.',
     disclaimer: '{brand} is a trademark of its owner. La Ruleta Caliente is not affiliated with or sponsored by {brand}; we mention it only for comparison.',
     footerTitle: 'Free video chat',
+    guides: 'Guides and tips',
   },
   pages: {
     'free-video-chat': {
@@ -226,6 +227,220 @@ module.exports = {
         { q: 'Why won’t my camera turn on?', a: 'Usually the browser has blocked camera access. Allow camera and microphone for the site in your browser settings and reload the page.' },
       ],
     },
+    'no-signup-video-chat': {
+      slug: 'video-chat-no-sign-up',
+      anchor: 'Video chat, no sign-up',
+      title: 'Video Chat with No Sign Up · La Ruleta Caliente',
+      description: 'Video chat with no sign up: no email, password or profile. Pick your gender, enter your birth date, confirm you’re 18+ and meet someone live in seconds.',
+      h1: 'Video chat with no sign-up: no email, no password, just go',
+      intro: '<p>If you want a <strong>video chat with no sign-up</strong>, here it is. On La Ruleta Caliente you don’t create a username, you don’t type an email address and you don’t invent yet another password. You tell us three things — your gender, your date of birth and that you’re 18 or older — and a few seconds later you’re live on camera with a random person, one to one.</p><p>An account exists, but it’s optional. This page explains what you can do as a guest, when an account is worth it and how to stay safe from your very first call.</p>',
+      sections: [
+        {
+          h2: 'Why a no registration video chat makes sense',
+          html: '<p>Most people looking for a <strong>no registration video chat</strong> aren’t trying to hide anything. They just want to see whether a site is fun before committing to it. Filling in forms, confirming an email and choosing a profile picture takes longer than a first conversation does, and half the time you’ve lost interest before you get to the good part.</p><p>Skipping the sign-up also means fewer things about you are stored. No inbox to receive newsletters, no password that could leak from a database, no profile page for strangers to look at. You arrive, you chat, you leave when you like.</p>',
+        },
+        {
+          h2: 'What we ask instead of a sign-up',
+          html: '<p>Entering as a guest takes three short steps:</p><ol><li><strong>Your gender.</strong> Woman, man, trans or couple. It helps people who use filters find who they’re looking for.</li><li><strong>Your date of birth.</strong> The site is strictly for adults, so we need to know you qualify.</li><li><strong>An 18+ confirmation.</strong> You confirm you are 18 or older and agree to the <a href="@rules">community rules</a>.</li></ol><p>Then your browser asks for permission to use the camera and microphone, and you’re in the queue. There’s nothing to download either: it runs in the browser on a phone or a computer.</p>',
+        },
+        {
+          h2: 'Everything you can do as a guest',
+          html: '<p>Going without an account doesn’t mean getting a cut-down version. As a guest you can:</p><ul><li>Video chat live with random people, as often as you like.</li><li>Press <strong>Next</strong> (or Esc) to meet someone else and <strong>Stop</strong> to take a break.</li><li>Use the text chat, which <strong>translates messages automatically</strong>.</li><li>Play Truth or dare, Would you rather?, Rock, paper, scissors and Draw &amp; guess during the call.</li><li>Send 👍 and ❤️ reactions and collect <strong>chilis</strong> 🌶️, our free points.</li></ul><p>The <a href="@how">how it works</a> page shows each of these buttons in more detail.</p>',
+        },
+        {
+          h2: 'When an optional account is worth it',
+          html: '<p>Some people try it once and never sign up, and that’s fine. Others come back every evening and want their progress to follow them. An account, created with an email address or Google, is useful when you want to:</p><ul><li>Keep your chilis, streak, badges and friends when you switch from phone to laptop.</li><li>Pay for <strong>Premium</strong> (€7.99/week or €19.99/month, cancel anytime), which needs an account.</li><li>Use the <strong>invite a friend</strong> link: when your friend signs up with it and has a first conversation of over a minute, you both get 1 day of Premium.</li></ul><p>You can create one at any moment, even halfway through your first evening. Nothing is lost by starting as a guest.</p>',
+        },
+        {
+          h2: 'No sign-up still means rules and safety',
+          html: '<p>No registration doesn’t mean no responsibility. Everyone on the site has confirmed they’re over 18, reports are reviewed by real people and anyone who breaks the rules can be banned. Your video goes through our server, so the other person never sees your IP address, and calls carry an invisible watermark that discourages recording.</p><p>Your part is simple: don’t give your full name, address or social media to someone you just met, and leave any chat that turns to money. Our <a href="@safety">safety tips</a> go into more detail.</p>',
+        },
+      ],
+      faq: [
+        { q: 'Can I really video chat without signing up?', a: 'Yes. You only pick your gender, enter your date of birth and confirm you are 18 or over. No email, no password and no profile are needed.' },
+        { q: 'Why do you ask for my date of birth?', a: 'Because the site is for adults only. Confirming your age is how everyone agrees to the 18+ rule before they start.' },
+        { q: 'Will I lose my chilis if I don’t create an account?', a: 'They stay on the device you are using. If you want them on other devices too, create an optional account with your email or Google.' },
+        { q: 'Do I need an account to buy Premium?', a: 'Yes. Paying for Premium is the one thing that requires an account, so your subscription is linked to you.' },
+      ],
+    },
+    'anonymous-video-chat': {
+      slug: 'anonymous-video-chat',
+      anchor: 'Anonymous video chat',
+      title: 'Anonymous Video Chat · La Ruleta Caliente',
+      description: 'Anonymous video chat with strangers: no email needed, your IP stays hidden, your name is optional and calls are watermarked. Free to start, 18+ only.',
+      h1: 'Anonymous video chat: meet strangers without giving yourself away',
+      intro: '<p>An <strong>anonymous video chat</strong> lets you talk to someone new without handing over who you are. On La Ruleta Caliente you can start without an email address, the other person never sees your IP, and you decide whether to share your name at all. It’s live, random and one to one, and it’s for adults 18+ only.</p><p>We’ll be honest about where anonymity ends, too, because a chat with no rules at all wouldn’t be a place anyone wants to stay.</p>',
+      sections: [
+        {
+          h2: 'What stays private in this anonymous video chat',
+          html: '<ul><li><strong>No email to start.</strong> You enter as a guest with your gender, date of birth and an 18+ confirmation. No inbox, no phone number.</li><li><strong>Hidden IP address.</strong> Video is relayed through our server instead of connecting you directly to the other person, so they can’t see your IP.</li><li><strong>Your name is optional.</strong> You don’t have to use your real name. A nickname is perfectly fine.</li><li><strong>Nothing to install.</strong> It runs in the browser, so there’s no app on your phone with your contacts nearby.</li><li><strong>Incognito superpower.</strong> Spend chilis 🌶️ to hide your age and country from your matches for an hour.</li></ul>',
+        },
+        {
+          h2: 'Protection against recordings',
+          html: '<p>The biggest worry with any webcam chat isn’t your IP, it’s someone saving your face. Here, every call shows a notice that recording and screenshots are forbidden, and the video carries an <strong>invisible watermark</strong> that helps trace a leaked clip back to the account that recorded it. That’s a strong deterrent, but no website can physically stop someone pointing a second phone at their screen. So the golden rule still applies: only show what you’d be comfortable with a stranger keeping.</p>',
+        },
+        {
+          h2: 'Anonymous, but not lawless',
+          html: '<p>We don’t promise total anonymity, and you should be suspicious of any site that does. Being anonymous to <em>other users</em> is different from being invisible to the people who keep the platform safe:</p><ul><li>Everyone agrees to the <a href="@rules">community rules</a> before they start.</li><li>Reports are reviewed by real people, and accounts that break the rules get suspended or banned.</li><li>If something suggests a user may be under 18, we can ask them to verify their age.</li><li>Decisions can be appealed, as European digital services rules (DSA) require.</li></ul><p>This is what lets you relax: the other person is just as accountable as you are.</p>',
+        },
+        {
+          h2: 'Habits that keep you anonymous',
+          html: '<p>Technology covers part of it; the rest is up to you. A few habits make a real difference:</p><ol><li>Check what’s behind you. Post, uniforms, school logos and a distinctive window view give away more than a name.</li><li>Don’t share your social media handle in the first chat. If you click with someone, use <strong>Add friend</strong> inside the site instead.</li><li>Be careful with your voice and face in intimate moments. That’s exactly what blackmailers look for.</li><li>Never send money, gift cards or crypto to someone you met on a video chat.</li></ol><p>The <a href="@safety">safety page</a> explains how sextortion and romance scams usually start, and what to do if one happens to you.</p>',
+        },
+        {
+          h2: 'Do you need an account?',
+          html: '<p>No. You can chat anonymously as a guest for as long as you like. An account with email or Google is optional and mainly useful to keep your chilis and friends across devices or to pay for Premium. Even with an account, other users see only your chat name, never your email. If keeping things low-key is your priority, our page on <a href="@no-signup-video-chat">video chat with no sign-up</a> walks through the guest option step by step.</p>',
+        },
+      ],
+      faq: [
+        { q: 'Is the video chat completely anonymous?', a: 'Other users can’t see your IP, your email or your real name unless you share it. It is not lawless, though: rules apply, reports are reviewed and age checks may be requested.' },
+        { q: 'Can the other person find my location?', a: 'Not from your connection, because video passes through our server. Your country can be visible to matches, but the Incognito superpower hides it for an hour.' },
+        { q: 'Should I use my real name?', a: 'It’s up to you. Many people use a nickname, and that is perfectly fine.' },
+        { q: 'What if someone records me?', a: 'Recording is forbidden and calls carry an invisible watermark that helps trace leaks. Report the user right away and follow the steps on the safety page.' },
+      ],
+    },
+    'couples-video-chat': {
+      slug: 'couples-video-chat',
+      anchor: 'Couples video chat',
+      title: 'Couples Video Chat · La Ruleta Caliente',
+      description: 'Couples video chat for adults: join as a couple, meet other couples or singles live on camera and play games side by side. Free to start, 18+ only.',
+      h1: 'Couples video chat: meet new people together',
+      intro: '<p>Video chat isn’t only a solo hobby. Plenty of people enjoy it as a pair, sitting side by side on the sofa and meeting strangers together. La Ruleta Caliente has a proper <strong>couples video chat</strong> option: you join as a couple, so the people you meet know there are two of you, and if you prefer, you can choose to see other couples. Both of you must be 18 or older.</p>',
+      sections: [
+        {
+          h2: 'How to join the couples video chat',
+          html: '<p>When you enter, you’re asked for your gender. One of the choices is <strong>couple</strong>. Pick it, enter your date of birth, confirm you’re over 18 and allow the camera. That’s all — no sign-up is needed, although an optional account keeps your chilis and friends if you use several devices.</p><p>Choosing “couple” matters. It tells the other side what to expect when the call opens, and it means people who are specifically looking for couples can find you through the filter.</p>',
+        },
+        {
+          h2: 'Meeting other couples, or anyone at all',
+          html: '<table><thead><tr><th>Option</th><th>Who you meet</th></tr></thead><tbody><tr><td>Free</td><td>Random matches: singles and couples, women, men and trans people</td></tr><tr><td>Premium</td><td>Choose to see couples (or women, men, trans people), plus country, distance and age filters</td></tr></tbody></table><p>Premium costs €7.99 a week or €19.99 a month and can be cancelled whenever you like. A lot of couples start with the free random chat for a few evenings to see who they like talking to before deciding whether a filter is worth it.</p>',
+        },
+        {
+          h2: 'Games are better with two players on one side',
+          html: '<p>One of the nicest things about chatting as a couple is that you have a teammate. The in-call games turn that into something fun:</p><ul><li><strong>Would you rather?</strong> Answer separately and watch each other’s faces.</li><li><strong>Truth or dare</strong>, where the other couple gets to question both of you.</li><li><strong>Draw &amp; guess</strong>, with one of you drawing and the other shouting answers.</li><li><strong>Rock, paper, scissors</strong> for a quick tie-breaker.</li></ul><p>If you all fancy something bolder, <strong>Spicy mode</strong> 🌶️ unlocks flirtier games and compliments, but only when the people on both sides have turned it on. Explore every option on the <a href="@games">games and powers</a> page.</p>',
+        },
+        {
+          h2: 'Agree on your limits before the first call',
+          html: '<p>The best couples sessions happen when both partners want to be there and know where the line is. Before you start, have a quick chat between yourselves: what are you hoping for — laughs, flirting, meeting other couples? What’s off the table? Do you want a code word for “let’s press Next”? It sounds formal, but it takes thirty seconds and saves awkward moments. Either of you can stop the call at any time, and the other should respect it without discussion.</p>',
+        },
+        {
+          h2: 'Privacy for two',
+          html: '<p>When two of you are on camera, there’s twice as much to protect. Your IP stays hidden because video goes through our server, recording is forbidden and calls carry an invisible watermark. Even so, think about what’s visible: wedding photos on the wall, a kid’s drawing on the fridge, a car outside the window. Keep surnames and workplaces to yourselves, and report anyone who pressures you. Our <a href="@safety">safety tips</a> cover blackmail and scams, and the <a href="@adult-video-chat">adult video chat</a> page explains how consent works in Spicy mode.</p>',
+        },
+      ],
+      faq: [
+        { q: 'How do we sign up as a couple?', a: 'You don’t need to sign up. When you enter, choose “couple” as your gender, enter your date of birth and confirm you are 18 or over.' },
+        { q: 'Can we choose to see only other couples?', a: 'Yes, with Premium. The filter lets you choose couples, women, men or trans people, and add country, distance and age filters.' },
+        { q: 'Do both of us have to be adults?', a: 'Yes. Everyone on camera must be 18 or older. Minors are not allowed and can be reported.' },
+      ],
+    },
+    'cam-to-cam': {
+      slug: 'cam-to-cam',
+      anchor: 'Cam to cam chat',
+      title: 'Cam to Cam Chat, Live 1-on-1 · La Ruleta Caliente',
+      description: 'Cam to cam chat with strangers: both cameras on, live and 1-on-1, right in your browser. Switch cameras, add friends and play games. Free, 18+ only.',
+      h1: 'Cam to cam chat: two cameras, one live conversation',
+      intro: '<p><strong>Cam to cam</strong> means exactly what it says: your webcam on one side, theirs on the other, and a real conversation in between. No one-way broadcast, no audience, no pre-recorded clips. On La Ruleta Caliente every chat is a live <strong>cam to cam chat</strong> with one random person, and it works in any modern browser on your phone or computer. Adults 18+ only.</p>',
+      sections: [
+        {
+          h2: 'What makes a cam to cam chat different',
+          html: '<p>Lots of sites call themselves webcam chats, but the experience varies. Some are rooms where many people watch one person; others are text chats with a camera you can switch on. Here it’s symmetrical: two people, both cameras on, both able to see, talk and press Next. That balance changes the tone. Nobody is performing for a crowd, and nobody is watching without being seen.</p>',
+        },
+        {
+          h2: 'Getting your webcam chat started',
+          html: '<ol><li>Open the site in Chrome, Safari, Firefox or Edge — nothing to install.</li><li>Pick your gender, enter your date of birth and confirm you’re 18 or over. No sign-up is needed.</li><li>Allow camera and microphone access when the browser asks.</li><li>Press start. Within seconds you’re face to face with someone who is online right now.</li></ol><p>If your camera stays black, the browser has probably blocked it. Check the site permissions in the address bar and reload. The <a href="@help">help centre</a> has more fixes for common camera problems.</p>',
+        },
+        {
+          h2: 'Controls you’ll actually use',
+          html: '<ul><li><strong>Next</strong> (or Esc on a keyboard) to meet someone new, and <strong>Stop</strong> to pause.</li><li><strong>Switch camera</strong> to swap between front and back on a phone — handy for showing the view or your pet.</li><li><strong>View options</strong> to make the video bigger or hide the chat panel.</li><li><strong>Reactions</strong> 👍 and ❤️ to say “I like this” without interrupting.</li><li><strong>Text chat</strong> with automatic translation, for when your match speaks another language or you can’t talk out loud.</li><li><strong>Add friend</strong> to keep in touch with someone you click with.</li></ul>',
+        },
+        {
+          h2: 'Make your camera work for you',
+          html: '<p>In a cam to cam chat, the first two seconds of video decide whether someone stays. You don’t need a professional setup, just a few basics: light in front of you rather than behind, the camera at eye level, your face fully in frame and a quiet room. We wrote a whole guide on <a href="@guide-camera">how to look good on camera</a> if you want to go further.</p><p>Once you’re connected, the in-call games and icebreaker topics give you something to do besides staring politely at each other.</p>',
+        },
+        {
+          h2: 'Live doesn’t mean careless',
+          html: '<p>A live camera shows everything in the room, so take a quick look around before you start. Your IP is hidden because video passes through our server, recording is not allowed and calls carry an invisible watermark, but the safest picture is one with nothing personal in it. Report anyone who breaks the rules — reports are reviewed by people, not just bots. For more, see our <a href="@safety">safety tips</a> or start with the basics of <a href="@random-video-chat">random video chat</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: 'What does cam to cam mean?', a: 'It means both people have their cameras on and see each other live at the same time, instead of one person watching another.' },
+        { q: 'Do I need a webcam on my computer?', a: 'Yes, to be seen you need a camera. Most laptops have one built in, and any phone works through its browser.' },
+        { q: 'Can I use cam to cam on my phone?', a: 'Yes. It works in the mobile browser on Android and iPhone, and you can switch between the front and back camera.' },
+        { q: 'Is the cam chat free?', a: 'Yes, live 1-on-1 cam to cam chat is free. Premium is optional and adds filters, friend calls and other extras.' },
+      ],
+    },
+    'video-chat-games': {
+      slug: 'video-call-games',
+      anchor: 'Video call games',
+      title: 'Video Call Games to Play with Strangers · La Ruleta Caliente',
+      description: 'Video call games to play live with strangers: Truth or dare, Would you rather?, Rock paper scissors and Draw & guess, plus a chemistry meter. 18+ only.',
+      h1: 'Video call games that make chatting with strangers easy',
+      intro: '<p>Silence is the enemy of a good video chat. The quickest cure? A game. La Ruleta Caliente has <strong>video call games</strong> built right into the chat, so you can start one with a tap without leaving the call or sending a link. They work with complete strangers, even when you don’t share a language, and they turn “so… where are you from?” into something far more fun. For adults 18+ only.</p>',
+      sections: [
+        {
+          h2: 'The four video call games',
+          html: '<h3>Truth or dare</h3><p>The classic. Take turns choosing a question or a challenge. It’s the fastest way to find out whether you share a sense of humour.</p><h3>Would you rather?</h3><p>Two options, one choice. Perfect for the first minute because the answers are easy but surprisingly revealing.</p><h3>Rock, paper, scissors</h3><p>Ten seconds, no explanation needed, works in every language. Great for deciding who asks the next question.</p><h3>Draw &amp; guess</h3><p>One of you draws, the other guesses. Bad drawings are half the fun, and it needs almost no shared vocabulary.</p>',
+        },
+        {
+          h2: 'The chemistry thermometer and icebreakers',
+          html: '<p>While you chat, the <strong>Chemistry thermometer</strong> rises as the conversation flows — laughs, reactions, games played together. It’s a playful way of seeing that a call is going well. If you’re both stuck, tap the icebreaker button to send a conversation topic to the chat; don’t like it, shuffle for another. Need ideas of your own? Our guide on <a href="@guide-icebreakers">how to start a conversation on video chat</a> has plenty.</p>',
+        },
+        {
+          h2: 'Spicy mode for flirty games',
+          html: '<p>Some evenings call for something bolder 🌶️. When you turn on <strong>Spicy mode</strong>, Truth or dare and Would you rather? get flirtier levels and you can send playful compliments. The important part: it only applies between two people who <strong>both</strong> have Spicy mode on. Nobody gets a cheeky question they didn’t opt in to, and you can switch it off at any time. Inviting someone to spicy games is a Premium feature; anyone can accept an invitation.</p>',
+        },
+        {
+          h2: 'Games earn you chilis',
+          html: '<p>Playing isn’t just fun, it’s rewarded. Every game earns you <strong>chilis</strong> 🌶️, the site’s free points, as do daily visits, ❤️ reactions you receive and weekly challenges. During <strong>Hot hour</strong>, every night from 10 to 11 pm Spanish time, chilis count double. You can spend them on superpowers like <strong>Super hello</strong>, <strong>Rewind</strong> or <strong>Hot flame</strong>, and the top three in the weekly ranking win days of Premium every Monday. All the details are on the <a href="@games">games and powers</a> page.</p>',
+        },
+        {
+          h2: 'Fair play',
+          html: '<p>Games are a way to get to know someone, not a way to pressure them. If a person doesn’t want to answer a truth or do a dare, move on to another question. Never use a game as an excuse to ask for personal details or for anything beyond what they’re comfortable with. The <a href="@rules">community rules</a> apply during games exactly as they do the rest of the time, and anyone who crosses the line can be reported.</p>',
+        },
+      ],
+      faq: [
+        { q: 'What games can I play on a video call?', a: 'Truth or dare, Would you rather?, Rock, paper, scissors and Draw & guess, all built into the call. There is also a chemistry thermometer and icebreaker topics.' },
+        { q: 'Are the games free?', a: 'Yes, you can play all four games for free. Inviting someone to Spicy mode games is a Premium feature.' },
+        { q: 'Can I play if we don’t speak the same language?', a: 'Yes. Rock, paper, scissors and Draw & guess need almost no words, and the text chat translates messages automatically.' },
+      ],
+    },
+    'video-chat-foreigners': {
+      slug: 'talk-to-foreigners',
+      anchor: 'Talk to foreigners',
+      title: 'Talk to Foreigners on Video Chat · La Ruleta Caliente',
+      description: 'Talk to foreigners on live video and practise languages with native speakers. The text chat translates automatically, so no shared language is needed. 18+.',
+      h1: 'Talk to foreigners and practise languages on live video',
+      intro: '<p>Want to <strong>talk to foreigners</strong> without buying a plane ticket? On La Ruleta Caliente you’re matched at random with people from all over the world, live on camera and one to one. You might be chatting with someone in Brazil, then Italy, then Mexico, all in one evening. Whether you’re learning a language or just curious about life elsewhere, it’s free to start and open to adults 18+.</p>',
+      sections: [
+        {
+          h2: 'Why talk to foreigners on video chat?',
+          html: '<p>Apps and textbooks teach you words; people teach you how a language is really used. On a video call you hear accents, slang and the little phrases nobody puts in a course. And beyond language, you get a window into someone’s everyday life: what they’re having for dinner, what the weather is like, what people their age worry about. It’s one of the most enjoyable ways to see the world from your desk, and every chat is different from the last.</p>',
+        },
+        {
+          h2: 'Automatic translation does the heavy lifting',
+          html: '<p>You don’t need a shared language to have a conversation. The text chat <strong>translates messages automatically</strong>: you type in English, your match reads it in their language, and their reply arrives in English for you. The site itself is available in six languages — English, Spanish, Portuguese, French, German and Italian.</p><p>For language learners, that’s a safety net rather than a crutch. Try saying something out loud in the language you’re learning, and if it doesn’t land, type it and let the translation help.</p>',
+        },
+        {
+          h2: 'Tips for language exchange with strangers',
+          html: '<ul><li><strong>Say it upfront.</strong> “I’m learning Spanish, can we speak a bit?” Lots of people are happy to help, and many will want to practise English in return.</li><li><strong>Split the time.</strong> Ten minutes in each language keeps it fair.</li><li><strong>Ask about everyday things.</strong> Food, music and weekends lead to vocabulary you’ll actually use.</li><li><strong>Use the games.</strong> Draw &amp; guess is a brilliant vocabulary drill in disguise.</li><li><strong>Add friends.</strong> When you find a good exchange partner, add them so you can talk again.</li></ul>',
+        },
+        {
+          h2: 'Choosing where your matches come from',
+          html: '<p>On a free account, matches come from anywhere — that’s half the fun. If you’re practising one language in particular, <strong>Premium</strong> adds country filters, so you can aim for Portugal or France specifically. It costs €7.99 a week or €19.99 a month, and you can cancel anytime. Prefer to stay local? Our country pages, like <a href="@country-us">video chat in the USA</a> or <a href="@country-gb">video chat in the UK</a>, explain how the My country filter works.</p>',
+        },
+        {
+          h2: 'Respect across cultures',
+          html: '<p>What’s polite in one country can be odd in another, so go in curious rather than judgemental. Ask instead of assuming, avoid jokes based on stereotypes and accept that some people would rather just chat than teach. A simple “How do people usually spend Sunday where you live?” opens more doors than any guess. Keep the usual safety habits too: share contact details only once you trust someone, never send money, and report anyone who breaks the rules. Our <a href="@safety">safety tips</a> apply in every language.</p>',
+        },
+      ],
+      faq: [
+        { q: 'Can I talk to people from other countries for free?', a: 'Yes. Free matches are random and worldwide. Premium adds country filters if you want to choose where your matches come from.' },
+        { q: 'What if we don’t speak the same language?', a: 'The text chat translates messages automatically, so you can understand each other in writing even without a shared language.' },
+        { q: 'Is it good for practising a language?', a: 'Yes. Many people use it for informal language exchange. Tell your match what you’re learning and offer to help with English in return.' },
+        { q: 'Which languages is the site in?', a: 'English, Spanish, Portuguese, French, German and Italian.' },
+      ],
+    },
     'alternatives': {
       slug: 'video-chat-alternatives',
       anchor: 'Video chat alternatives',
@@ -236,7 +451,7 @@ module.exports = {
       sections: [
         {
           h2: 'Pick the page that matches your search',
-          html: '<p>Lots of people arrive here after looking for a specific name. We’ve written a separate page for each of the most common searches, each with its own angle:</p><ul><li><a href="@alt-omegle">Omegle alternative</a> — for anyone who’s been looking for a new home since Omegle shut down in November 2023.</li><li><a href="@alt-chatroulette">Chatroulette alternative</a> — the roulette idea that started it all back in 2009, and how it feels today.</li><li><a href="@alt-dirtyroulette">DirtyRoulette alternative</a> — for adults who want a flirtier chat, with consent built in.</li><li><a href="@alt-coomeet">CooMeet alternative</a>, <a href="@alt-ometv">OmeTV alternative</a> and <a href="@alt-chatrandom">Chatrandom alternative</a> — other names people often compare.</li></ul>',
+          html: '<p>Lots of people arrive here after looking for a specific name. We’ve written a separate page for each of the most common searches, each with its own angle:</p><ul><li><a href="@alt-omegle">Omegle alternative</a> — for anyone who’s been looking for a new home since Omegle shut down in November 2023.</li><li><a href="@alt-chatroulette">Chatroulette alternative</a> — the roulette idea that started it all back in 2009, and how it feels today.</li><li><a href="@alt-dirtyroulette">DirtyRoulette alternative</a> — for adults who want a flirtier chat, with consent built in.</li><li><a href="@alt-coomeet">CooMeet alternative</a>, <a href="@alt-ometv">OmeTV alternative</a> and <a href="@alt-chatrandom">Chatrandom alternative</a> — other names people often compare.</li><li><a href="@alt-bazoocam">Bazoocam alternative</a>, <a href="@alt-shagle">Shagle alternative</a>, <a href="@alt-chatspin">Chatspin alternative</a> and <a href="@alt-camsurf">CamSurf alternative</a> — more random video chats people search for.</li></ul>',
         },
         {
           h2: 'Five questions to ask any video chat site',
@@ -476,6 +691,181 @@ module.exports = {
         { q: 'How do I earn chilis?', a: 'Log in every day to build a streak, play games, receive hearts and complete weekly challenges. During Hot hour, from 10 to 11 pm Spanish time, they count double.' },
       ],
     },
+    'alt-bazoocam': {
+      slug: 'bazoocam-alternative',
+      anchor: 'Bazoocam alternative',
+      title: 'Bazoocam Alternative in English · La Ruleta Caliente',
+      description: 'Looking for a Bazoocam alternative? Random 1-on-1 video chat in English and five more languages, with auto-translated text and games. Free to start, 18+.',
+      h1: 'A Bazoocam alternative for meeting people across languages',
+      intro: '<p>Bazoocam is a well-known random video chat, especially popular in France. If you’re searching for a <strong>Bazoocam alternative</strong>, you probably like the idea of meeting strangers on camera — and maybe you’d like to meet people from many countries, in English or in their own language. La Ruleta Caliente is an independent video chat for adults 18+, and this page shows you what it offers.</p>',
+      sections: [
+        {
+          h2: 'Looking for a Bazoocam alternative? Here’s what you’ll find',
+          html: '<p>The basics will feel natural: press start, see a random person live on camera, chat one to one, and press <strong>Next</strong> when you want to move on. What shapes the experience here is how international it is. The site is available in six languages — English, French, Spanish, Portuguese, German and Italian — and the text chat translates automatically, so you can chat with someone in Lyon, Lisbon or Milan without worrying about vocabulary.</p><p>If you happen to speak some French, it’s a nice chance to use it. If you don’t, the translation has you covered. And because matches are random, one evening can easily take you through four or five countries without leaving your sofa.</p>',
+        },
+        {
+          h2: 'What you get at La Ruleta Caliente',
+          html: '<table><thead><tr><th>Feature</th><th>At La Ruleta Caliente</th></tr></thead><tbody><tr><td>Random live video, 1-on-1</td><td>✓ Free</td></tr><tr><td>Website languages</td><td>English, French, Spanish, Portuguese, German, Italian</td></tr><tr><td>Auto-translated text chat</td><td>✓</td></tr><tr><td>Sign-up required</td><td>No — gender, date of birth and 18+ confirmation</td></tr><tr><td>Works on phone and computer</td><td>✓ In the browser, can be installed as an app</td></tr><tr><td>In-call games</td><td>✓ Four games plus icebreaker topics</td></tr><tr><td>Country filters</td><td>Premium (€7.99/week or €19.99/month)</td></tr><tr><td>IP hidden from your match</td><td>✓ Video relayed by our server</td></tr></tbody></table>',
+        },
+        {
+          h2: 'Pick a country, or let the world surprise you',
+          html: '<p>Free matching is random and worldwide. If you’re after people from a particular place — for instance, you want to practise French with people in France, or prefer to meet people close to home — <strong>Premium</strong> adds filters by country, distance and age, plus the choice of seeing women, men, trans people or couples. You can cancel it whenever you like. Our page on how to <a href="@video-chat-foreigners">talk to foreigners</a> has tips for getting the most out of international chats.</p>',
+        },
+        {
+          h2: 'Small extras that add up',
+          html: '<ul><li><strong>Chilis</strong> 🌶️: free points for daily visits, games, ❤️ received and weekly challenges, doubled during Hot hour (10–11 pm Spanish time).</li><li><strong>Superpowers</strong> such as Rewind, to reconnect with the person you just skipped if they agree.</li><li><strong>Friends</strong>: add someone you got on with during the call.</li><li><strong>Badges and a weekly ranking</strong>, with Premium days for the top three every Monday.</li></ul>',
+        },
+        {
+          h2: 'Safe habits wherever you chat',
+          html: '<p>Because video is relayed by our server, nobody you meet can see your IP address. A notice on every call reminds people that recording is not allowed, and an invisible watermark backs it up. Reports are read by real people and repeat offenders are banned. Wherever you chat, keep your surname and address private and walk away from anyone asking for money. For more ideas, browse our list of <a href="@alternatives">video chat alternatives</a> or read the <a href="@safety">safety tips</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: 'Is La Ruleta Caliente part of Bazoocam?', a: 'No. It is an independent website with no connection to Bazoocam. We mention the name only because people search for it.' },
+        { q: 'Can I chat with people from France?', a: 'Yes. Free matches are worldwide, and with Premium you can filter by country. The text chat translates French and English automatically.' },
+        { q: 'Do I need an account?', a: 'No. Confirm your gender, date of birth and that you are 18 or over, and you can start. An account is optional.' },
+      ],
+    },
+    'alt-shagle': {
+      slug: 'shagle-alternative',
+      anchor: 'Shagle alternative',
+      title: 'Shagle Alternative for Video Chat · La Ruleta Caliente',
+      description: 'Searching for a Shagle alternative? Try random live video chat with opt-in Spicy mode games, chilis and superpowers. Free in your browser, adults 18+ only.',
+      h1: 'A Shagle alternative with games, chilis and a bit of spice',
+      intro: '<p>Shagle is one of the random video chat sites people search for. If you’re looking for a <strong>Shagle alternative</strong>, chances are you enjoy quick, live chats with strangers and want them to be a little more playful. La Ruleta Caliente is an independent, 18+ random video chat where every call comes with games, rewards and an optional flirty side.</p>',
+      sections: [
+        {
+          h2: 'Searching for a Shagle alternative? Start here',
+          html: '<p>You’ll recognise the format: one click, a random person on camera, a live one-to-one conversation and a Next button when it’s time to move on. What sets the tone here is that there’s always something to do together. Four games are built into the call — Truth or dare, Would you rather?, Rock, paper, scissors and Draw &amp; guess — and an icebreaker button suggests a topic when the conversation stalls. The <strong>Chemistry thermometer</strong> rises as you laugh and play. Rather than wondering what to say next, you can simply challenge your match to a round and see where it goes.</p>',
+        },
+        {
+          h2: 'What you get at La Ruleta Caliente',
+          html: '<table><thead><tr><th>Feature</th><th>At La Ruleta Caliente</th></tr></thead><tbody><tr><td>Random 1-on-1 video chat</td><td>✓ Free</td></tr><tr><td>Games during the call</td><td>✓ Four games, icebreakers and a chemistry thermometer</td></tr><tr><td>Spicy mode 🌶️</td><td>✓ Only between two people who both turned it on</td></tr><tr><td>Free points</td><td>✓ Chilis, doubled 10–11 pm Spanish time</td></tr><tr><td>Superpowers</td><td>✓ Hot flame, Rewind, Super hello, Incognito, Second chance</td></tr><tr><td>Gender, country and age filters</td><td>Premium, cancel anytime</td></tr><tr><td>Reports reviewed by people</td><td>✓ With bans and appeals</td></tr></tbody></table>',
+        },
+        {
+          h2: 'Flirty, but always mutual',
+          html: '<p>For many adults, part of the appeal of random chat is a bit of flirting. <strong>Spicy mode</strong> makes room for that: switch it on and games get bolder levels and you can send cheeky compliments. The rule is simple — it only works with people who have <strong>also</strong> chosen Spicy mode. If they haven’t, the chat stays exactly as it was. Our guide to <a href="@guide-flirting">flirting on video chat</a> covers how to keep it fun and respectful.</p>',
+        },
+        {
+          h2: 'Superpowers powered by chilis',
+          html: '<p>Every day you visit, every game you play and every ❤️ you receive earns you <strong>chilis</strong> 🌶️. Spend them on superpowers:</p><ul><li><strong>Hot flame</strong> — get priority in the queue.</li><li><strong>Rewind</strong> — ask the person you just skipped to reconnect.</li><li><strong>Super hello</strong> — make your greeting stand out when you connect.</li><li><strong>Incognito</strong> — keep your age and country hidden for a while.</li><li><strong>Second chance</strong> — see who sent you a ❤️ recently and add them.</li></ul><p>Premium users get superpowers free every day. See all of it on <a href="@games">games and powers</a>.</p>',
+        },
+        {
+          h2: 'Stay in control',
+          html: '<p>You can press Next or Stop at any second. The other person never sees your IP, recording is forbidden and an invisible watermark discourages it. Be wary of anyone who rushes you to undress, wants to move to another app or brings up money — those are classic signs of sextortion. Report them, and read our <a href="@safety">safety tips</a> if something goes wrong.</p>',
+        },
+      ],
+      faq: [
+        { q: 'Is La Ruleta Caliente related to Shagle?', a: 'No. It is an independent site. We mention Shagle only because people search for it when looking for a random video chat.' },
+        { q: 'Is Spicy mode explicit?', a: 'Spicy mode unlocks flirtier game levels and compliments between adults who both turned it on. The community rules still apply.' },
+        { q: 'Can I use it on my phone?', a: 'Yes. It works in your phone’s browser with nothing to download, and you can add it to your home screen.' },
+      ],
+    },
+    'alt-chatspin': {
+      slug: 'chatspin-alternative',
+      anchor: 'Chatspin alternative',
+      title: 'Chatspin Alternative · La Ruleta Caliente',
+      description: 'Want a Chatspin alternative? Meet random people live on camera, no download or sign-up, with translated chat and friends you can keep. Free to start, 18+.',
+      h1: 'A Chatspin alternative that opens straight in your browser',
+      intro: '<p>Chatspin is one of the random video chat sites people look up. If you’ve typed <strong>Chatspin alternative</strong> into a search bar, you’re probably after the same thing everyone wants from a video roulette: get matched quickly, have a good chat, move on when you like. La Ruleta Caliente is an independent, adults-only video chat, and this page explains exactly what you’ll find when you try it.</p>',
+      sections: [
+        {
+          h2: 'A Chatspin alternative with nothing to install',
+          html: '<p>La Ruleta Caliente runs entirely in your browser, on a phone, tablet or computer. There’s no download and no sign-up form: you pick your gender, enter your date of birth and confirm you’re 18 or over. If you like having an icon on your home screen, you can install the site as a web app (PWA) straight from the browser, and it opens full-screen like any other app.</p><p>Because it’s a website, it’s always up to date: there’s no update to install and nothing stored on your phone except what your browser keeps. Create an optional account with email or Google and your chilis, friends and settings follow you from your phone to your laptop.</p>',
+        },
+        {
+          h2: 'What you get at La Ruleta Caliente',
+          html: '<table><thead><tr><th>Feature</th><th>At La Ruleta Caliente</th></tr></thead><tbody><tr><td>Random live video, one to one</td><td>✓ Free</td></tr><tr><td>Download or app store</td><td>Not needed — browser, optional install as an app</td></tr><tr><td>Sign-up</td><td>Not needed; account optional</td></tr><tr><td>Next / Stop</td><td>✓ Esc works as Next</td></tr><tr><td>Switch camera and view options</td><td>✓</td></tr><tr><td>Translated text chat</td><td>✓ Automatic</td></tr><tr><td>Add friends</td><td>✓ Friend calls with Premium</td></tr><tr><td>Hidden IP and anti-recording watermark</td><td>✓</td></tr></tbody></table>',
+        },
+        {
+          h2: 'From random match to friend',
+          html: '<p>Random chat is great for variety, but sometimes you meet someone you’d genuinely like to talk to again. Tap <strong>Add friend</strong> during the call and, if they accept, they join your list — without either of you swapping phone numbers or social media. Pressed Next too quickly? The <strong>Rewind</strong> superpower lets you ask the previous person to reconnect, and <strong>Second chance</strong> shows who sent you a ❤️ recently. With Premium you can call friends directly and see a 30-day history.</p>',
+        },
+        {
+          h2: 'Premium, if and when you want it',
+          html: '<p>The random chat is free. <strong>Premium</strong> is an optional extra at €7.99 a week or €19.99 a month, cancellable at any time, and adds:</p><ul><li>Choosing who you see: women, men, trans people or couples.</li><li>Filters by country, distance and age.</li><li>No ads and a 30-day history.</li><li>Friend calls, spicy games and compliments.</li><li>Free superpowers every day.</li></ul><p>You can also earn free days by inviting a friend — you both get 1 day once they sign up and have their first conversation of over a minute.</p>',
+        },
+        {
+          h2: 'Before your first spin',
+          html: '<p>Take ten seconds to check what your camera can see, and keep personal details for people you actually trust. Your IP is hidden from your match, recording is forbidden and reports are reviewed by people. Have a look at the short <a href="@rules">community rules</a>, then dive into the <a href="@random-video-chat">random video chat</a>. Still comparing? See other <a href="@alternatives">alternatives</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: 'Is La Ruleta Caliente the same as Chatspin?', a: 'No. It is an independent website with no relationship to Chatspin. We only mention the name for people searching for something similar.' },
+        { q: 'Do I need to download an app?', a: 'No. It works in the browser. You can optionally install it as a web app from the browser menu.' },
+        { q: 'Can I keep talking to someone I meet?', a: 'Yes. Add them as a friend during the call. Calling friends directly is part of Premium.' },
+      ],
+    },
+    'alt-camsurf': {
+      slug: 'camsurf-alternative',
+      anchor: 'CamSurf alternative',
+      title: 'CamSurf Alternative · La Ruleta Caliente',
+      description: 'Looking for a CamSurf alternative? Random live video chat for adults with human-reviewed reports, hidden IP and an anti-recording watermark. Free to start.',
+      h1: 'A CamSurf alternative built around safety and respect',
+      intro: '<p>CamSurf is one of the random video chat sites that comes up when people search for webcam roulettes. If you’re looking for a <strong>CamSurf alternative</strong>, you probably want what most of us want from these sites: interesting strangers, quick matches and the peace of mind that you’re in a respectful space. La Ruleta Caliente is an independent, 18+ video chat, and here’s what it offers.</p>',
+      sections: [
+        {
+          h2: 'What to expect from this CamSurf alternative',
+          html: '<p>The core is simple: you’re matched at random with someone online right now and talk live on camera, one to one. <strong>Next</strong> takes you to someone new, <strong>Stop</strong> lets you take a break. Around that, we’ve focused on the things that make people comfortable enough to stay: clear rules, real moderation and features that protect your privacy without making the chat feel locked down.</p><p>Everyone confirms they’re 18 or over before the first match, nobody needs to sign up, and an optional account keeps your progress across devices. It runs in the browser on a phone or computer, so there’s nothing to download before you can see whether you like it.</p>',
+        },
+        {
+          h2: 'What you get at La Ruleta Caliente',
+          html: '<table><thead><tr><th>Feature</th><th>At La Ruleta Caliente</th></tr></thead><tbody><tr><td>Live random 1-on-1 video</td><td>✓ Free</td></tr><tr><td>Adults only</td><td>✓ 18+ confirmed before you start</td></tr><tr><td>IP hidden from other users</td><td>✓ Video relayed by our server</td></tr><tr><td>Anti-recording</td><td>✓ Notice on every call plus invisible watermark</td></tr><tr><td>Reports</td><td>✓ Reviewed by people, with bans and appeals</td></tr><tr><td>Community rules</td><td>✓ Short and in plain language</td></tr><tr><td>Games and translated chat</td><td>✓</td></tr></tbody></table>',
+        },
+        {
+          h2: 'How moderation works here',
+          html: '<p>When you press <strong>Report</strong>, the report doesn’t vanish into a void. A person on our team reviews it, and depending on what happened the account can be warned, suspended or banned. If you’re the one who gets a decision you disagree with, you can appeal it, in line with the EU Digital Services Act (DSA). If anything suggests a user might be under 18, we can ask for age verification. All of this is spelled out in the <a href="@rules">community rules</a>, which take about two minutes to read.</p>',
+        },
+        {
+          h2: 'Conversations worth staying for',
+          html: '<p>Safety keeps people around; fun is what makes them come back. During a call you can play Truth or dare, Would you rather?, Rock, paper, scissors or Draw &amp; guess, send 👍 and ❤️ reactions, and use the auto-translated text chat to talk to someone in another language. Everything you do earns <strong>chilis</strong> 🌶️ that unlock superpowers. If you want a few ideas for those first seconds, read our guide on <a href="@guide-icebreakers">how to start a conversation</a>.</p>',
+        },
+        {
+          h2: 'Your part in staying safe',
+          html: '<ul><li>Keep your full name, address, school or workplace to yourself.</li><li>Check your background before turning the camera on.</li><li>Never send money, gift cards or crypto to someone you met on a video chat.</li><li>If someone threatens to share a recording, don’t pay — report them and save evidence.</li></ul><p>Our <a href="@safety">safety tips</a> explain each of these in more detail.</p>',
+        },
+      ],
+      faq: [
+        { q: 'Is La Ruleta Caliente affiliated with CamSurf?', a: 'No. It is an independent website. CamSurf is mentioned only because people search for it.' },
+        { q: 'Who reviews reports?', a: 'Real people on our team. Accounts that break the rules can be suspended or banned, and decisions can be appealed.' },
+        { q: 'Is it free?', a: 'Yes, the random video chat is free with no time limit. Premium is optional and can be cancelled anytime.' },
+      ],
+    },
+    'guides': {
+      slug: 'guides',
+      anchor: 'Guides and tips',
+      title: 'Video Chat Guides and Tips · La Ruleta Caliente',
+      description: 'Video chat guides and tips: how to start a conversation, flirt with respect, look good on camera and protect your privacy when chatting with strangers.',
+      h1: 'Video chat guides and tips',
+      intro: '<p>Talking to a stranger on camera is easy to start and surprisingly hard to do well. These <strong>video chat guides and tips</strong> collect what we’ve learned about the bits that trip people up: the awkward first seconds, flirting without being pushy, looking like yourself on a webcam and keeping your private life private. They’re written to help on any video chat, not only ours.</p><p>Everything here assumes you’re an adult: La Ruleta Caliente is for people aged 18 and over only.</p>',
+      sections: [
+        {
+          h2: 'Who these guides are for',
+          html: '<p>You don’t need to be a beginner to get something out of them. If you’ve never tried a random video chat, they’ll help you feel prepared. If you’ve been chatting for years, you may still find a trick or two — a better icebreaker, a lighting fix that costs nothing, a warning sign you hadn’t noticed. Each guide is practical, with lists you can skim and examples you can use the same evening.</p><p>They’re also honest. We won’t pretend there’s a magic line that makes everyone like you, or that any website can make you completely invisible online. What we can do is share the habits that make conversations easier and the warning signs that are worth knowing, so you can enjoy meeting new people with a bit more confidence.</p>',
+        },
+        {
+          h2: 'What you’ll find in each guide',
+          html: '<ul><li><strong>Starting a conversation</strong>: opening lines that work with strangers, questions that keep a chat going and the habits that make people press Next.</li><li><strong>Flirting with respect</strong>: how to read signals on camera, how consent works in a live chat and when to stop.</li><li><strong>Looking good on camera</strong>: light, framing, sound and connection, for phones and computers.</li><li><strong>Protecting your privacy</strong>: what never to share, how sextortion and scams start, and what to do if something goes wrong.</li></ul>',
+        },
+        {
+          h2: 'Three tips before you read anything',
+          html: '<ol><li><strong>Smile and say something specific.</strong> “Hi, I’m chatting from a very messy desk” beats a silent stare every time.</li><li><strong>Face a window or a lamp.</strong> Light in front of you is the single biggest upgrade to how you look.</li><li><strong>Keep personal details for later.</strong> Your surname, address and socials can wait until you genuinely trust someone.</li></ol>',
+        },
+        {
+          h2: 'Want the basics first?',
+          html: '<p>If you haven’t tried La Ruleta Caliente yet, the quickest way to understand it is to read <a href="@how">how it works</a> and then jump into a <a href="@free-video-chat">free video chat</a>. There’s no sign-up: choose your gender, enter your date of birth and confirm you’re 18 or over. To discover the games you can play during a call, see <a href="@video-chat-games">video call games</a>.</p>',
+        },
+        {
+          h2: 'Safety comes with every guide',
+          html: '<p>You’ll notice that safety pops up in every article, not just the privacy one. That’s deliberate: a good chat and a safe chat are usually the same thing. If you only read one page today, make it our <a href="@safety">safety tips</a>, which cover scams, sextortion and what to do if you meet a minor online.</p>',
+        },
+      ],
+      faq: [
+        { q: 'Are these tips only for La Ruleta Caliente?', a: 'No. Most of the advice works on any video chat or video call. We mention our own features only where they help.' },
+        { q: 'I’m nervous about my first video chat. Where should I start?', a: 'Start with the guide on how to start a conversation, then check your lighting with the camera guide. Ten minutes of reading makes a real difference.' },
+        { q: 'Where can I learn about staying safe?', a: 'Read the privacy guide and our safety tips page. Both explain the warning signs of scams and sextortion and what to do if something happens.' },
+      ],
+    },
     'country-us': {
       slug: 'video-chat-usa',
       anchor: 'Video chat USA',
@@ -686,6 +1076,178 @@ module.exports = {
         { q: 'Can I chat with other New Zealanders?', a: 'Yes. Free matches are worldwide, and Premium adds a My country filter and a distance filter to meet people in New Zealand or near you.' },
         { q: 'How much does Premium cost in NZ dollars?', a: 'Premium is €7.99 a week or €19.99 a month. Your bank converts it to NZ dollars, so the exact amount depends on the exchange rate.' },
         { q: 'Does it work on Android and iPhone?', a: 'Yes, in the mobile browser. You can also add it to your home screen so it opens like an app.' },
+      ],
+    },
+    'guide-icebreakers': {
+      slug: 'how-to-start-a-conversation-on-video-chat',
+      anchor: 'Starting a conversation',
+      title: 'How to Start a Conversation on Video Chat: 30 Lines',
+      description: 'How to start a conversation on video chat: 30 opening lines and icebreaker questions, what to say after hello and the mistakes that get you skipped.',
+      h1: 'How to start a conversation on video chat: 30 icebreakers that work',
+      intro: '<p>The first five seconds of a random video chat decide almost everything. Two strangers appear on each other’s screens, both a little unsure, and whoever speaks first sets the tone. Knowing <strong>how to start a conversation on video chat</strong> isn’t about being witty or confident; it’s about giving the other person something easy to respond to.</p><p>This guide gives you 30 opening lines and questions sorted by situation, explains what to do once the first exchange is over, and lists the habits that make people press Next. The tips work on any video chat. (La Ruleta Caliente, where we’ll mention a few features along the way, is for adults 18+ only.)</p>',
+      sections: [
+        {
+          h2: 'Why the first seconds matter so much',
+          html: '<p>On a random video chat, nobody owes anybody a conversation. The other person sees your face, hears your voice and decides in a heartbeat whether to stay. That sounds harsh, but it also means the bar is low: you don’t need a perfect line, just a sign that you’re a real, friendly person who’s glad to be there.</p><p>Three things send that signal immediately:</p><ul><li><strong>Your face is visible and lit.</strong> A dark silhouette or a camera pointed at the ceiling looks like someone who isn’t really present.</li><li><strong>You’re looking at the screen.</strong> If you’re clearly scrolling on another device, people move on.</li><li><strong>You speak first, warmly.</strong> A smile and a greeting break the tension for both of you.</li></ul><p>Notice none of that is about what you say. Get the basics right and almost any opening line will do.</p>',
+        },
+        {
+          h2: '30 opening lines and icebreaker questions',
+          html: '<h3>Simple, friendly openers</h3><ol><li>“Hi! Where in the world did I just land?”</li><li>“Hey, how’s your day going so far?”</li><li>“Hello from [your city]. What time is it where you are?”</li><li>“Hi! You’re the first person I’ve met today — no pressure.”</li><li>“Hey, I like your [plant/poster/guitar]. Is there a story behind it?”</li><li>“Hi there. Are you just starting your evening or winding down?”</li></ol><h3>Playful openers</h3><ol><li>“Quick question before anything else: cats or dogs?”</li><li>“Rate your day out of ten. I’m at a solid six.”</li><li>“If you could teleport anywhere right now, where would you go?”</li><li>“I have a theory that people on video chat are either eating or about to sleep. Which one are you?”</li><li>“Let’s skip the small talk: what’s the best thing you ate this week?”</li><li>“Tell me one weird fact about yourself and I’ll tell you mine.”</li></ol><h3>Questions that go a bit deeper</h3><ol><li>“What are you looking forward to this month?”</li><li>“What’s something you’ve recently got really into?”</li><li>“What does a perfect weekend look like for you?”</li><li>“What did you want to be when you were a kid?”</li><li>“What’s a song you’ve had on repeat lately?”</li><li>“What’s the best place you’ve ever travelled to?”</li></ol><h3>When you don’t share a language</h3><ol><li>Wave, smile and say hello in their language if you know it.</li><li>Type “Where are you from?” in the text chat and let the translation help.</li><li>Hold up something nearby — a mug, a book — and ask what it’s called in their language.</li><li>Suggest a game that needs no words, like Rock, paper, scissors or Draw &amp; guess.</li><li>Ask them to teach you one phrase, then try to use it.</li><li>Show the view from your window with the back camera and ask about theirs.</li></ol><h3>Situational openers</h3><ol><li>If they’re eating: “That looks better than my dinner. What is it?”</li><li>If there’s a pet in frame: “Who’s that? Do they join all your chats?”</li><li>If they’re outdoors: “Are you out exploring or heading somewhere?”</li><li>If they look tired: “Long day? We can keep this chill.”</li><li>If they’re wearing a team shirt: “Big fan? How’s the season going?”</li><li>If they smile first: “Okay, your smile just made this the best match of the night.”</li></ol>',
+        },
+        {
+          h2: 'What to say after “hi”',
+          html: '<p>Opening lines are the easy part. The real skill is the second and third exchange, where many conversations die. A few techniques help:</p><ul><li><strong>Ask open questions.</strong> “Do you like music?” gets a yes or no. “What kind of music do you listen to when you cook?” gets a story.</li><li><strong>Follow the thread.</strong> When they mention something — a job, a trip, a pet — ask a follow-up about it instead of jumping to a new topic. People love feeling listened to.</li><li><strong>Share something back.</strong> A conversation isn’t an interview. After a question or two, offer a small detail about yourself so they have something to ask in return.</li><li><strong>Use what you can see.</strong> Video gives you clues text chat never could: a bookshelf, an instrument, the weather outside.</li><li><strong>Play a game when it stalls.</strong> On La Ruleta Caliente, a round of <a href="@video-chat-games">Would you rather?</a> fills a silence and usually sparks three new topics.</li></ul>',
+        },
+        {
+          h2: 'Mistakes that get you skipped',
+          html: '<p>Most quick Nexts aren’t about looks or luck. They’re about a handful of habits that make the other person uncomfortable or bored:</p><ol><li><strong>Silence.</strong> Staring without speaking feels awkward or even creepy. Say something, anything.</li><li><strong>Asking for personal details straight away.</strong> “How old are you? Where exactly do you live? What’s your Instagram?” sounds like a form, not a chat.</li><li><strong>Comments about their body.</strong> Even when meant as a compliment, it’s a fast way to end a conversation with a stranger.</li><li><strong>One-word answers.</strong> If they ask how you are, give them more than “fine”.</li><li><strong>Hiding your face.</strong> A camera pointed at a wall or a ceiling makes people assume you’re not serious.</li><li><strong>Talking about other matches.</strong> Nobody wants to hear about the previous five people you skipped.</li></ol>',
+        },
+        {
+          h2: 'Reading the other person',
+          html: '<p>A good conversationalist adjusts. On camera you can see so much more than in text: whether someone is smiling, looking away, typing to someone else or leaning in. Some signs it’s going well: they ask you questions back, they laugh, they move closer to the camera, they suggest a game. Signs it isn’t: short answers, eyes elsewhere, long pauses. If it isn’t clicking after a minute or two, there’s no shame in wishing them a good evening and pressing Next. That’s how random chat works, and they’ll probably be relieved too.</p>',
+        },
+        {
+          h2: 'Ending a chat on a good note',
+          html: '<p>Even short chats can end nicely. “It was great talking to you, have a good night!” takes two seconds and leaves both of you in a better mood. If you really clicked, you can send a ❤️ reaction or, on La Ruleta Caliente, tap <strong>Add friend</strong> so you can talk again without swapping phone numbers. And if you pressed Next too fast, the Rewind superpower lets you ask that person to reconnect.</p><p>One last tip: being friendly never means being careless. Keep your full name, address and social media for people you genuinely trust. Our guide on <a href="@guide-privacy">protecting your privacy on video chat</a> and the <a href="@safety">safety tips</a> explain why.</p>',
+        },
+      ],
+      faq: [
+        { q: 'What is a good first thing to say on a video chat?', a: 'Something simple and specific, like where you are chatting from or a question about their day. A smile and a warm hello matter more than the exact words.' },
+        { q: 'How do I keep a video chat conversation going?', a: 'Ask open questions, follow up on what they mention and share something about yourself in return. When it stalls, suggest a quick game.' },
+        { q: 'Why do people skip me on video chat?', a: 'Usually because of silence, a dark or hidden face, or questions that feel too personal too soon. Improve your lighting and open with a friendly line.' },
+        { q: 'What if we don’t speak the same language?', a: 'Use a translated text chat if the site has one, and try games that need no words, like Rock, paper, scissors or drawing games.' },
+      ],
+    },
+    'guide-flirting': {
+      slug: 'how-to-flirt-on-video-chat',
+      anchor: 'Flirting on video chat',
+      title: 'How to Flirt on Video Chat with Respect',
+      description: 'How to flirt on video chat with confidence and respect: reading signals on camera, playful lines, consent, spicy games and knowing when to stop. 18+.',
+      h1: 'How to flirt on video chat: confident, playful and respectful',
+      intro: '<p>Flirting on camera is its own art. You can’t lean in at a bar or brush someone’s arm; all you have is your face, your voice and what you say. The good news is that video gives you more than text ever could — real smiles, real laughter, real chemistry. This guide explains <strong>how to flirt on video chat</strong> in a way that feels fun for both sides, with consent at the centre and no pressure.</p><p>It’s written for adults only. Everyone on La Ruleta Caliente must be 18 or older, and the same should be true of anyone you flirt with online.</p>',
+      sections: [
+        {
+          h2: 'Flirting starts with feeling comfortable',
+          html: '<p>Confidence is attractive, but you don’t need to fake it. On video, comfort reads as confidence. A few practical things help you relax before you even say hello:</p><ul><li><strong>Sort your setup.</strong> Good light in front of you, camera at eye level, a background you’re not embarrassed about. Our <a href="@guide-camera">camera guide</a> covers the details.</li><li><strong>Get comfortable in your seat.</strong> If you’re perched awkwardly on a bed holding a phone at arm’s length, you’ll look as tense as you feel.</li><li><strong>Be in the mood.</strong> Flirting goes better when you’re genuinely up for a fun chat, not just killing time.</li><li><strong>Drop the script.</strong> You don’t need a plan for where the conversation goes. Treat each chat as a chance to meet an interesting person, and let any spark show up on its own.</li></ul>',
+        },
+        {
+          h2: 'Reading signals through a screen',
+          html: '<p>Body language is quieter on camera, but it’s still there. Look out for:</p><h3>Green lights</h3><ul><li>They smile a lot and laugh at your jokes, even the bad ones.</li><li>They ask you questions and remember your answers.</li><li>They lean towards the camera or adjust it so you can see them better.</li><li>They tease you back.</li><li>They’re the ones who suggest a game or a bolder question.</li></ul><h3>Red lights</h3><ul><li>Short answers and long silences.</li><li>Looking away from the screen or typing elsewhere.</li><li>Changing the subject when you get flirty.</li><li>Nervous laughter after a comment — a sign it landed wrong.</li></ul><p>When you see red lights, dial it back. Flirting is only fun if both people are enjoying it.</p><p>Remember that a screen also hides a lot: a bad connection, a flatmate walking in or simple shyness can look like disinterest. If you’re unsure, ask lightly — “Am I being too much? Tell me if so” — and take the answer at face value.</p>',
+        },
+        {
+          h2: 'Playful lines that don’t feel like lines',
+          html: '<p>The best flirting rarely sounds rehearsed. It’s curiosity with a wink. Some starting points:</p><ul><li><strong>Compliment choices, not bodies.</strong> “Your laugh is dangerously contagious” or “You have excellent taste in music” feels good to hear. Comments about someone’s body, especially early on, usually don’t.</li><li><strong>Tease gently.</strong> “You’re clearly a bit competitive — I’ve noticed you’re winning every round.”</li><li><strong>Create a little game.</strong> “Three questions each, and we have to answer honestly.”</li><li><strong>Imagine together.</strong> “If we met in your city tonight, where would you take me?”</li><li><strong>Be honest.</strong> “I’m enjoying this a lot more than I expected.” Simple, true, and surprisingly effective.</li></ul>',
+        },
+        {
+          h2: 'Consent on camera: what it looks like',
+          html: '<p>Consent isn’t a mood killer; it’s what makes flirting feel safe enough to get fun. On a video chat it means:</p><ol><li><strong>Ask before you escalate.</strong> “Can I ask you something a bit cheeky?” gives the other person an easy way to say no.</li><li><strong>A no, or a silence, is a no.</strong> Don’t argue, don’t ask again in a different way. Change the subject or say goodbye.</li><li><strong>Never send or show something unrequested.</strong> Surprising someone with sexual content is not flirting, it’s harassment, and it breaks the <a href="@rules">rules</a> of any decent site.</li><li><strong>Consent can change.</strong> Someone who was up for a spicy question five minutes ago can change their mind. Respect it instantly.</li><li><strong>Never pressure anyone to undress or do anything on camera.</strong> Pressure is a huge red flag, and on the receiving end it’s often how sextortion starts.</li></ol>',
+        },
+        {
+          h2: 'Using spicy games and Spicy mode',
+          html: '<p>Many video chats have games, and they’re a natural way to raise the temperature without awkwardness: a flirty Truth or dare, a Would you rather? with cheeky options. On La Ruleta Caliente, <strong>Spicy mode</strong> 🌶️ unlocks bolder game levels and playful compliments — but only between two people who have <em>both</em> turned it on. That mutual opt-in is consent built into the product: if the other person hasn’t chosen it, nothing changes for them. You can turn it off whenever you like. The <a href="@video-chat-games">video call games</a> page explains how each game works.</p>',
+        },
+        {
+          h2: 'Knowing when to stop',
+          html: '<p>Great flirts know when to slow down, and when to leave. Stop, or at least step back, when:</p><ul><li>The other person stops engaging or seems uncomfortable.</li><li>You realise you’re the only one escalating.</li><li>Someone asks you to move to another app very quickly, or mentions money, gifts or emergencies. That’s rarely romance and often a scam.</li><li>You notice anything suggesting the other person might be under 18. End the chat and report it.</li></ul><p>Ending politely is part of flirting well: “This was really fun, but I’m going to head off — take care!” leaves a good impression even when it’s goodbye. And if the chemistry was mutual, tapping <strong>Add friend</strong> lets you pick it up another night, at a pace that suits you both.</p>',
+        },
+        {
+          h2: 'Protect yourself while you have fun',
+          html: '<p>Flirting makes people open up, and that’s exactly when scammers strike. Keep your face out of anything intimate, don’t share your surname, workplace or social media with someone you just met, and remember that screens can be recorded even when a site forbids it. If someone threatens to publish a recording, don’t pay — report them and follow the steps in our <a href="@safety">safety tips</a>. A little caution means you can relax and enjoy the fun part.</p>',
+        },
+      ],
+      faq: [
+        { q: 'How do I flirt on video chat without being creepy?', a: 'Lead with curiosity and humour, compliment personality rather than bodies, ask before getting cheeky and back off the moment the other person seems uncomfortable.' },
+        { q: 'How can I tell if someone is flirting back?', a: 'They smile and laugh a lot, ask you questions, tease you back and sometimes suggest bolder questions or games themselves.' },
+        { q: 'What is Spicy mode?', a: 'An option on La Ruleta Caliente that unlocks flirtier games and compliments, only between two adults who have both turned it on.' },
+        { q: 'What should I do if someone pressures me on camera?', a: 'End the chat, report the user and don’t send anything. If they threaten you, don’t pay and follow the steps on the safety page.' },
+      ],
+    },
+    'guide-camera': {
+      slug: 'how-to-look-good-on-camera',
+      anchor: 'Looking good on camera',
+      title: 'How to Look Good on Camera in a Video Chat',
+      description: 'How to look good on camera in a video chat: simple lighting, framing, sound and connection fixes for phone and laptop that cost little or nothing at all.',
+      h1: 'How to look good on camera: lighting, framing and sound for video chat',
+      intro: '<p>You don’t need expensive gear to <strong>look good on camera</strong>. The difference between a grainy, shadowy face and a clear, friendly one usually comes down to a few things you can fix in five minutes: where the light comes from, where the camera sits, what’s behind you and how good your connection is.</p><p>This guide walks you through each of them, for phones and computers, with fixes that cost little or nothing. It works for any video call — a chat with a stranger, a call with family or a work meeting. On a random video chat like La Ruleta Caliente (adults 18+ only), it also means fewer people press Next before you’ve said hello.</p>',
+      sections: [
+        {
+          h2: 'Lighting: the biggest upgrade you can make',
+          html: '<p>Cameras, especially phone front cameras and laptop webcams, struggle in low light. They compensate by boosting the image, which adds grain and makes skin look flat or orange. Good light fixes most of that instantly.</p><h3>Face the light</h3><ul><li><strong>A window in front of you</strong> is the best free light there is. Sit facing it, not with it behind you.</li><li><strong>Never sit with a bright window or lamp behind you.</strong> The camera exposes for the light and turns you into a silhouette.</li><li><strong>At night, use a lamp behind your screen</strong>, pointed towards you or bounced off a wall for softer light.</li></ul><h3>Soften and balance</h3><ul><li>Overhead ceiling lights cast shadows under your eyes. Add a second light in front of you to fill them in.</li><li>Avoid mixing very warm and very cool lights; it makes skin tones look odd. Pick one type of bulb if you can.</li><li>A piece of white paper or a white wall just out of frame bounces light back onto your face.</li><li>If you want to spend a little, a small ring light or LED panel clipped to your screen makes a big difference.</li></ul>',
+        },
+        {
+          h2: 'Framing and camera angle',
+          html: '<p>Once you’re lit, think about where the camera is and how much of you it sees.</p><ol><li><strong>Camera at eye level.</strong> A laptop on a desk looks up your nose; prop it on a few books. A phone held low does the same, so lean it against something at the right height.</li><li><strong>Head and shoulders in frame.</strong> Leave a little space above your head. Too close feels intense; too far makes you hard to read.</li><li><strong>Look at the lens sometimes.</strong> When you’re speaking, glancing at the camera instead of the screen feels like eye contact to the other person.</li><li><strong>Keep the camera still.</strong> Hand-held phones wobble, and that’s tiring to watch. A stand, a mug or a stack of books works fine.</li><li><strong>Landscape or portrait?</strong> On a phone, use whatever the site is designed for; most video chats look best in portrait on mobile.</li></ol>',
+        },
+        {
+          h2: 'Your background says more than you think',
+          html: '<p>People notice what’s behind you within seconds, and it shapes their first impression. A tidy background reads as “this person made an effort”; a pile of laundry reads as… less so. You don’t need a perfect room, just a frame that isn’t distracting:</p><ul><li>Clear the obvious clutter from the part of the room the camera sees.</li><li>A plant, a bookshelf or a poster gives people something to ask about.</li><li>Avoid a bright TV or screen behind you; it flickers and confuses the camera’s exposure.</li></ul><p>There’s also a privacy angle. Check that nothing in frame gives away your address, surname, workplace or school: post on a table, a uniform on a chair, a recognisable view from the window. Our <a href="@guide-privacy">privacy guide</a> goes into more detail.</p>',
+        },
+        {
+          h2: 'Sound: often more important than the picture',
+          html: '<p>People will forgive a slightly blurry image, but not sound they can’t understand. A few simple steps:</p><ul><li><strong>Use earphones or a headset.</strong> They stop the other person’s voice coming out of your speakers and back into your microphone, which causes echo.</li><li><strong>Choose a quiet room.</strong> Close the window, turn off the TV and move away from the washing machine.</li><li><strong>Soft rooms sound better.</strong> Curtains, carpets and a sofa absorb echo; an empty room with hard walls makes you sound like you’re in a bathroom.</li><li><strong>Check the right mic is selected</strong> in your browser or device settings, especially if you have a headset plugged in.</li><li><strong>Speak a little slower than normal.</strong> Video calls add a tiny delay, and slower speech is much easier to follow.</li></ul>',
+        },
+        {
+          h2: 'Connection: avoiding frozen faces',
+          html: '<p>A great setup is wasted if the picture keeps freezing. Most video problems are connection problems:</p><ol><li><strong>Use Wi-Fi when you can</strong>, and sit closer to the router if the signal is weak. On a computer, a cable is even more reliable.</li><li><strong>Pause big downloads</strong> and streaming on other devices in the house while you chat.</li><li><strong>Close other tabs and apps</strong> that use the camera or lots of data.</li><li><strong>On mobile data</strong>, find a spot with good signal; video quality drops quickly on a weak connection.</li><li><strong>Restart the browser</strong> if the camera won’t start, and check that the site has permission to use the camera and microphone.</li></ol><p>If you’re still stuck, our <a href="@help">help page</a> covers the most common camera and microphone issues.</p>',
+        },
+        {
+          h2: 'Phone or computer: which is better?',
+          html: '<table><thead><tr><th></th><th>Phone</th><th>Computer</th></tr></thead><tbody><tr><td>Camera quality</td><td>Usually better, especially the back camera</td><td>Built-in webcams are often basic</td></tr><tr><td>Stability</td><td>Needs a stand or support</td><td>Stable on a desk</td></tr><tr><td>Sound</td><td>Earphones recommended</td><td>Headset recommended</td></tr><tr><td>Freedom</td><td>Chat from anywhere</td><td>Bigger screen, keyboard for text chat</td></tr></tbody></table><p>On a phone, you can often switch to the back camera to show the view or your surroundings; on La Ruleta Caliente, the <strong>Switch camera</strong> button does it during a call. Read more in our page on <a href="@mobile-video-chat">mobile video chat</a>.</p>',
+        },
+        {
+          h2: 'A one-minute checklist before every call',
+          html: '<ul><li>Light in front of you, not behind.</li><li>Camera at eye level and steady.</li><li>Head and shoulders in frame.</li><li>Background tidy and free of personal details.</li><li>Earphones in, room quiet.</li><li>Connection stable, other downloads paused.</li></ul><p>Then just smile and say hello. The best camera setup in the world won’t beat a friendly face — but it will make sure that face is actually visible.</p>',
+        },
+      ],
+      faq: [
+        { q: 'How can I look better on a webcam without buying anything?', a: 'Sit facing a window or lamp, raise the camera to eye level with a few books, and tidy the part of the room that appears behind you.' },
+        { q: 'Why do I look dark on my video calls?', a: 'Usually because the light is behind you or too weak. Turn around to face the light source or put a lamp behind your screen.' },
+        { q: 'How do I stop echo on a video chat?', a: 'Use earphones or a headset so the other person’s voice doesn’t come out of your speakers and back into your microphone.' },
+        { q: 'Is a phone or a laptop better for video chat?', a: 'Phones often have better cameras, while laptops are more stable and have bigger screens. Either works well with good light and a steady position.' },
+      ],
+    },
+    'guide-privacy': {
+      slug: 'video-chat-privacy-tips',
+      anchor: 'Video chat privacy tips',
+      title: 'Video Chat Privacy Tips: Stay Safe with Strangers',
+      description: 'Video chat privacy tips: what never to share, how sextortion and scams start, how to handle recordings and what to do if something goes wrong. Adults 18+.',
+      h1: 'Video chat privacy tips: how to protect yourself when chatting with strangers',
+      intro: '<p>Talking to strangers on camera can be a lot of fun, and most people you meet just want a good conversation. But a live video shows more about you than any profile, and a small number of people go looking for exactly that. These <strong>video chat privacy tips</strong> explain what not to share, how the most common scams and blackmail attempts work, and what to do if something goes wrong.</p><p>The advice applies to any video chat or video call app. We’ll mention how things work on La Ruleta Caliente where it helps — it’s a video chat for adults 18+ only.</p>',
+      sections: [
+        {
+          h2: 'Personal details you should never share early',
+          html: '<p>Think of personal information as something you give out slowly, to people who’ve earned it. In a first conversation with a stranger, keep these to yourself:</p><ul><li><strong>Full name and surname.</strong> A first name or nickname is enough.</li><li><strong>Address, neighbourhood or the street you live on.</strong></li><li><strong>Workplace, school or university.</strong> These are easy to look up.</li><li><strong>Phone number and social media handles.</strong> Once someone has them, they can find your friends, family and photos.</li><li><strong>Bank, card or payment details</strong> of any kind, for any reason.</li><li><strong>Passwords and verification codes.</strong> No genuine person or support team will ever ask for them in a chat.</li></ul><p>If you meet someone you’d like to stay in touch with, use the friends feature inside the site first. On La Ruleta Caliente, friends see your chat name, not your email or number.</p>',
+        },
+        {
+          h2: 'What your camera gives away',
+          html: '<p>Your face is only part of what a webcam shows. Before you start, look at your screen the way a stranger would:</p><ol><li><strong>Letters and parcels</strong> with your address on a table.</li><li><strong>Uniforms, badges or lanyards</strong> showing your employer or school.</li><li><strong>Photos on the wall</strong> of family members, especially children.</li><li><strong>The view from the window</strong>, which can reveal your street or city.</li><li><strong>Screens in the background</strong> showing messages, emails or open accounts.</li></ol><p>Sitting in front of a plain wall or a bookshelf solves most of this. Our guide on <a href="@guide-camera">how to look good on camera</a> covers backgrounds from a style point of view too.</p>',
+        },
+        {
+          h2: 'Sextortion: how it starts and how to respond',
+          html: '<p>Sextortion is blackmail using intimate images or video. It’s one of the most common risks on adult video chats, and it follows a familiar pattern:</p><h3>The warning signs</h3><ul><li>The other person is very flirty very fast and pushes you to undress or do something intimate.</li><li>They ask you to move to another app or platform almost immediately.</li><li>Their own video seems odd: looping, low quality or never quite showing their face.</li><li>They ask for your social media or the names of your friends.</li></ul><h3>If it happens to you</h3><ol><li><strong>Don’t pay.</strong> Paying almost never makes it stop; it tells them you’ll pay again.</li><li><strong>Stop replying</strong> and don’t negotiate.</li><li><strong>Save evidence</strong>: usernames, messages, payment requests.</li><li><strong>Report the user</strong> on the platform where you met them.</li><li><strong>Tell someone you trust</strong> and contact the police if you are threatened.</li></ol><p>Remember: you are the victim, not the one who did something wrong. Our <a href="@safety">safety page</a> explains the steps in more detail.</p>',
+        },
+        {
+          h2: 'Romance scams and money requests',
+          html: '<p>Not every scam starts with a threat. Some start with kindness. A person seems lovely, you talk a few times, and then there’s a problem: a medical bill, a stuck flight, a customs fee, an investment opportunity that can’t wait. The rule is simple and has no exceptions: <strong>never send money, gift cards or crypto to someone you only know from a video chat</strong>, however real the connection feels.</p><p>Other red flags include stories that keep changing, refusals to video call when they used to, and requests to keep your friendship secret. A real person will understand if you say no to money. A scammer will push.</p><p>Be just as careful with links. Someone you’ve just met who sends you to a “verification” site, a private video page or a prize claim is usually trying to steal your login or card details. If a link asks you to sign in or pay, close it.</p>',
+        },
+        {
+          h2: 'Recordings and screenshots',
+          html: '<p>Anything shown on a screen can be recorded by someone pointing another device at it. Good sites make this harder and riskier: on La Ruleta Caliente, every call shows a notice that recording is forbidden, and the video carries an invisible watermark that helps trace leaks back to the account responsible. But no technology can make recording impossible.</p><p>So the safest approach is to assume that anything you show could be saved. If you choose to be more intimate on camera with another adult, keep your face and anything identifying out of the picture. And if someone admits they’ve recorded you, report them straight away.</p>',
+        },
+        {
+          h2: 'How a good video chat protects you',
+          html: '<p>Your own habits matter most, but the platform you choose matters too. Look for:</p><ul><li><strong>A hidden IP address.</strong> On La Ruleta Caliente, video is relayed through our server so the other person can’t see your IP.</li><li><strong>A clear 18+ policy</strong> with age confirmation before chatting.</li><li><strong>Reports reviewed by real people</strong>, with bans for offenders and a way to appeal decisions.</li><li><strong>Plain-language <a href="@rules">community rules</a></strong> that everyone agrees to.</li><li><strong>No need to give an email to start.</strong> The less data you hand over, the less can leak. See our page on <a href="@anonymous-video-chat">anonymous video chat</a>.</li></ul>',
+        },
+        {
+          h2: 'If you meet someone who seems underage',
+          html: '<p>Adult video chats are for adults only. If something suggests the person you’re talking to is under 18 — their appearance, something they say, a school uniform — end the chat immediately and report them. Don’t continue the conversation “to check”. Reporting protects them and keeps the space safe for everyone else.</p>',
+        },
+      ],
+      faq: [
+        { q: 'Can people see my IP address on a video chat?', a: 'It depends on the site. On La Ruleta Caliente, video is relayed through our server, so the other person cannot see your IP.' },
+        { q: 'What should I do if someone threatens to share a recording of me?', a: 'Don’t pay and don’t reply. Save evidence, report the user, tell someone you trust and contact the police if you feel threatened.' },
+        { q: 'Is it safe to give my social media to someone I met on video chat?', a: 'It’s best to wait until you genuinely trust them. Social media reveals your friends, family and location. Use the site’s friends feature first.' },
+        { q: 'How can I tell if someone is a scammer?', a: 'Watch for pressure to move apps, rushing into intimacy, sad stories that end with a money request, and refusals to show their face. Never send money.' },
       ],
     },
   },
