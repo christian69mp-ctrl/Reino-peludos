@@ -1,8 +1,8 @@
-# Prompts de Gemini · Reels 13 a 15 (Guindilla protagonista, para anuncios y Shorts)
+# Prompts de Gemini · Reels 23 a 25 (Guindilla protagonista, para anuncios y Shorts)
 
-Continúan los Reels 10 a 12 (`prompts-reels-10-12.md`) con el mismo estilo: **animación 3D, Guindilla de
-protagonista y sin personas reales**. El 13 enseña los **juegos** (verdad o reto con un baile para tendencia), el 14
-la **traducción automática** (gente de todo el mundo) y el 15 los **superpoderes** con guindillas gratis. Gemini
+Siguen la numeración de todo el contenido (los posts llegan al 22). Continúan los Reels 10 a 12 (`prompts-reels-10-12.md`) con el mismo estilo: **animación 3D, Guindilla de
+protagonista y sin personas reales**. El 23 enseña los **juegos** (verdad o reto con un baile para tendencia), el 14
+la **traducción automática** (gente de todo el mundo) y el 25 los **superpoderes** con guindillas gratis. Gemini
 genera unos 8 s **sin ningún texto**; los rótulos y el cierre de 2 s (logo + «laruletacaliente.com · +18») se
 añaden al editar.
 
@@ -30,7 +30,7 @@ mosaico de pantallas, una chica pulsando "siguiente", Guindilla rompiendo un for
 Guindilla pasando pantallas en el sofá y Guindilla encendiendo una ciudad de noche).
 
 FORMA DE TRABAJAR
-- Genera UN solo vídeo por mensaje, empezando por el 13.
+- Genera UN solo vídeo por mensaje, empezando por el 23.
 - Debajo de cada vídeo, escribe el texto para publicarlo, los hashtags que te indico y una
   sugerencia de sonido o tendencia de YouTube Shorts / TikTok que encaje.
 - Espera a que yo escriba "siguiente" para hacer el próximo.
@@ -64,7 +64,7 @@ ESTILO (obligatorio en los 3)
 
 LOS 3 VÍDEOS
 
-13) "RETO ACEPTADO" — juegos en la videollamada, con baile
+23) "RETO ACEPTADO" — juegos en la videollamada, con baile
 Plano a plano:
 - 0-1 s (GANCHO): una carta gigante dorada gira en el aire delante de cámara y se para de golpe
   mostrando solo un icono de dos piernas bailando (sin letras); detrás, Guindilla abre la boca de
@@ -86,7 +86,7 @@ gratis y sin registro y reta a alguien nuevo. ¿Te atreves con el baile? 👉 la
 (+18)"
 Hashtags: #reto #videochat #baile #juegos #laruletacaliente
 
-14) "HOLA, BONJOUR, CIAO" — gente de todo el mundo y traducción automática
+24) "HOLA, BONJOUR, CIAO" — gente de todo el mundo y traducción automática
 Plano a plano:
 - 0-1 s (GANCHO): un bocadillo de chat gigante lleno de garabatos ilegibles (rayas y símbolos
   raros, sin letras reales) choca contra la cara de Guindilla; ella pone cara de no entender
@@ -112,7 +112,7 @@ gente de todo el mundo y el chat se traduce solo: español, inglés, portugués,
 italiano. Gratis y sin registro 👉 laruletacaliente.com (+18)"
 Hashtags: #idiomas #videochat #conocergente #mundo #laruletacaliente
 
-15) "MODO LLAMA" — guindillas gratis y superpoderes
+25) "MODO LLAMA" — guindillas gratis y superpoderes
 Plano a plano:
 - 0-1 s (GANCHO): Guindilla, con los ojos cerrados y concentrada, se enciende de golpe en llamas
   rosa-naranja como un superhéroe (llamas mágicas que no queman, con chispas doradas); abre los
@@ -137,21 +137,21 @@ la primera, Rebobinar para volver con alguien, Supersaludo, Incógnito y más. G
 registro 👉 laruletacaliente.com (+18)"
 Hashtags: #superpoderes #videochat #guindilla #gratis #laruletacaliente
 
-Empieza ahora con el vídeo 13.
+Empieza ahora con el vídeo 23.
 ````
 
 ## Al revisar cada vídeo
 
-- **Ningún texto, número ni logo** (tampoco en la carta del 13 ni en los bocadillos del 14). Si sale alguno:
+- **Ningún texto, número ni logo** (tampoco en la carta del 23 ni en los bocadillos del 24). Si sale alguno:
   «repite sin ninguna letra, número ni logo en el vídeo».
 - **Guindilla igual que la de la web** en los tres, aunque esté en 3D: si cambia de forma o de cara, pide
   «repite con Guindilla exactamente igual que en la imagen».
-- **Sin personas reales ni nada insinuante**, y en el 14 **sin estereotipos** de países (solo accesorios
+- **Sin personas reales ni nada insinuante**, y en el 24 **sin estereotipos** de países (solo accesorios
   simpáticos, nada de banderas ni trajes típicos exagerados).
 - **Al editar:**
   - Rótulo-gancho **desde el segundo 0**, grande y en la mitad superior, durante 2-3 segundos.
   - Cierre de 2 s con el logo y «laruletacaliente.com · +18».
   - En YouTube Shorts pon el enlace en la descripción y en un comentario fijado.
-- **Para anunciarlos:** enlace a `laruletacaliente.com/es/videochat-sin-registro` (el 13 también puede ir a
-  `/es/juegos-videollamada` y el 14 a `/es/hablar-con-extranjeros`), audiencia **España, 18-40 años**,
+- **Para anunciarlos:** enlace a `laruletacaliente.com/es/videochat-sin-registro` (el 23 también puede ir a
+  `/es/juegos-videollamada` y el 24 a `/es/hablar-con-extranjeros`), audiencia **España, 18-40 años**,
   programados **de 21:00 a 24:00**.
