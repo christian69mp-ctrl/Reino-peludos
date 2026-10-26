@@ -1,7 +1,7 @@
 # Prompts de Gemini · Reels 23 a 25 (Guindilla protagonista, para anuncios y Shorts)
 
 Siguen la numeración de todo el contenido (los posts llegan al 22). Continúan los Reels 10 a 12 (`prompts-reels-10-12.md`) con el mismo estilo: **animación 3D, Guindilla de
-protagonista y sin personas reales**. El 23 enseña los **juegos** (verdad o reto con un baile para tendencia), el 14
+protagonista y sin personas reales**. El 23 enseña los **juegos** (verdad o reto con un baile para tendencia), el 24
 la **traducción automática** (gente de todo el mundo) y el 25 los **superpoderes** con guindillas gratis. Gemini
 genera unos 8 s **sin ningún texto**; los rótulos y el cierre de 2 s (logo + «laruletacaliente.com · +18») se
 añaden al editar.
