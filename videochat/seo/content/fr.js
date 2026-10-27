@@ -1280,9 +1280,9 @@ module.exports = {
     'guide-would-you-rather': {
       slug: 'questions-tu-preferes',
       anchor: 'Questions tu préfères',
-      title: 'Questions « tu préfères » : 100 idées pour rire',
-      description: 'Questions tu préfères classées par thème : drôles, difficiles, voyages, séduction et absurdes. Plus de 100 idées pour animer un appel vidéo ou une soirée.',
-      h1: 'Questions « tu préfères » : plus de 100 idées classées par thème',
+      title: 'Questions « tu préfères » : 70 idées pour rire',
+      description: 'Questions tu préfères classées par thème : drôles, difficiles, voyages, séduction et absurdes. 70 idées pour animer un appel vidéo ou une soirée.',
+      h1: 'Questions « tu préfères » : 70 idées classées par thème',
       intro: '<p>Deux options, un seul choix, et un débat qui démarre tout seul : le jeu du « tu préfères » est l’un des moyens les plus simples de lancer une conversation. Il ne demande ni matériel ni préparation, il marche avec un ami de longue date comme avec un inconnu croisé en appel vidéo, et il en dit souvent plus long sur quelqu’un qu’une longue présentation.</p><p>Voici plus de 100 <strong>questions tu préfères</strong>, rangées par thème pour que tu puisses piocher selon l’ambiance : drôles, difficiles, voyages, séduction ou complètement absurdes.</p>',
       sections: [
         {
