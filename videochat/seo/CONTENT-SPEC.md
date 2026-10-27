@@ -137,7 +137,15 @@ Más temas (todos los idiomas, cuelgan de `free-video-chat`):
 - `guide-camera`: cómo verte mejor en la cámara (luz, encuadre, sonido, conexión, móvil vs. ordenador).
 - `guide-privacy`: cómo proteger tu privacidad en un videochat (datos que no dar, sextorsión, estafas, grabaciones,
   qué hacer si pasa algo; enlaza a `@safety`).
-Las guías son **artículos útiles de verdad**, no anuncios: **900-1.500 palabras**, 5-7 secciones con `h2`, listas y algún
+- `guide-truth-or-dare`: preguntas y retos para jugar a **verdad o reto** por videollamada (listas largas de verdades
+  y retos, divertidos y algunos picantes pero nunca sexuales explícitos; retos que se puedan hacer delante de la
+  cámara sin salir de casa; consentimiento: cualquiera puede decir «paso»). Enlaza a `@video-chat-games` y `@games`.
+- `guide-would-you-rather`: preguntas de **¿qué prefieres?** (listas por temas: divertidas, difíciles, de viajes, de
+  pareja/ligar sin ser explícitas, absurdas). Enlaza a `@video-chat-games`.
+- `guide-meet-people-online`: **cómo conocer gente nueva por internet** (dónde, cómo presentarse, videollamada antes de
+  quedar, señales de alerta y estafas, quedar en persona con seguridad). Enlaza a `@guide-privacy` y `@safety`.
+Las listas de preguntas pueden ser `ul`/`ol` largas (es lo que la gente busca); las guías de preguntas pueden llegar a
+1.800 palabras. Las guías son **artículos útiles de verdad**, no anuncios: **900-1.500 palabras**, 5-7 secciones con `h2`, listas y algún
 `h3`, consejos concretos que sirvan en cualquier videochat, y solo de vez en cuando cómo se hace en La Ruleta Caliente.
 Su `title` y `h1` son los de un artículo (p. ej. «Cómo empezar una conversación en un videochat: 30 frases»).
 

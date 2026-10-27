@@ -45,6 +45,9 @@ const BASE = [
   { key: 'guide-flirting', type: 'guide', parent: 'guides' },
   { key: 'guide-camera', type: 'guide', parent: 'guides' },
   { key: 'guide-privacy', type: 'guide', parent: 'guides' },
+  { key: 'guide-truth-or-dare', type: 'guide', parent: 'guides' },
+  { key: 'guide-would-you-rather', type: 'guide', parent: 'guides' },
+  { key: 'guide-meet-people-online', type: 'guide', parent: 'guides' },
 ];
 
 // Lista completa de páginas con los idiomas en que existe cada una

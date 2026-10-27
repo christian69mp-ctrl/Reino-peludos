@@ -11,7 +11,7 @@ const { STRINGS, PAGES, SUPPORTED, urlOf } = I18N;
 const PUBLIC = path.join(__dirname, 'public');
 const SITE = 'La Ruleta Caliente';
 // Fecha de las guías para Google (súbela cuando se revisen los textos)
-const GUIDES_DATE = '2026-10-24';
+const GUIDES_DATE = '2026-10-27';
 
 // Descripción para los resultados de búsqueda (máx. ~155 caracteres)
 const DESCRIPTIONS = {
