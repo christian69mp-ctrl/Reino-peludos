@@ -14,42 +14,55 @@ module.exports = {
     disclaimer: '{brand} es una marca de su titular. La Ruleta Caliente no está afiliada a {brand} ni patrocinada por ella; la nombramos solo para comparar.',
     footerTitle: 'Videochat gratis',
     guides: 'Guías y consejos',
+    cities: 'Videochat por ciudades',
   },
   pages: {
+    // Ciudades (city-*): en su propio archivo
+    ...require('./es-cities.js'),
     'free-video-chat': {
       slug: 'videochat-gratis',
       anchor: 'Videochat gratis',
       title: 'Videochat gratis con desconocidos · La Ruleta Caliente',
-      description: 'Videochat gratis 1 a 1 con gente de todo el mundo, desde el navegador y sin descargas. Juegos, traducción automática y guindillas. Solo +18.',
+      description: 'Videochat gratis 1 a 1 con gente de todo el mundo, sin registro y sin descargas. Chat con traducción, juegos y guindillas 🌶️. Solo para mayores de 18.',
       h1: 'Videochat gratis: conoce gente nueva en vivo, cara a cara',
-      intro: '<p>En La Ruleta Caliente tienes <strong>videochat gratis</strong> con personas reales de todo el mundo: una conversación en vivo, 1 a 1 y al azar, directamente desde el navegador de tu móvil o de tu ordenador. No hay nada que descargar ni hace falta registrarse: eliges tu género, confirmas que tienes 18 años o más, das permiso a la cámara y en unos segundos estás hablando con alguien nuevo.</p><p>Si la charla fluye, te quedas. Si no, pulsas <strong>Siguiente</strong> y la ruleta te lleva con otra persona. Así de sencillo, y sin pagar nada para empezar 🌶️.</p>',
+      intro: '<p>En La Ruleta Caliente tienes <strong>videochat gratis</strong> con personas reales de todo el mundo: conversaciones en vivo, 1 a 1 y al azar, desde el navegador del móvil o del ordenador. No descargas nada ni tienes que crear una cuenta: eliges tu género, pones tu fecha de nacimiento, confirmas que tienes 18 años o más, das permiso a la cámara y en unos segundos estás cara a cara con alguien nuevo.</p><p>Si la charla fluye, te quedas todo lo que quieras. Si no, pulsas <strong>Siguiente</strong> y la ruleta te lleva con otra persona. Es una manera sencilla de tener una <strong>videollamada gratis con desconocidos</strong> sin pagar nada para empezar 🌶️.</p>',
       sections: [
         {
           h2: 'Qué incluye el videochat gratis',
-          html: '<p>La versión gratuita no es una demo recortada: puedes conocer gente cada día todo el tiempo que quieras. Esto es lo que tienes desde el primer minuto:</p><ul><li><strong>Videollamadas aleatorias 1 a 1</strong> con gente de otros países y de tu propia zona.</li><li><strong>Chat de texto con traducción automática</strong>, para entenderte aunque no compartáis idioma.</li><li><strong>Juegos durante la llamada</strong>: Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina.</li><li><strong>Reacciones</strong> 👍 ❤️, añadir amigos y cambiar de cámara cuando quieras.</li><li><strong>Guindillas</strong> 🌶️, los puntos gratis que ganas por participar.</li></ul><p>Tienes todos los detalles paso a paso en <a href="@how">cómo funciona</a>.</p>',
+          html: '<p>La versión gratuita no es una prueba de unos minutos ni una demo recortada: puedes conocer gente cada día, sin límite de tiempo. Desde la primera conversación tienes:</p><ul><li><strong>Videollamadas aleatorias 1 a 1</strong> con gente de otros países y también de tu zona.</li><li><strong>Chat de texto con traducción automática</strong>, para entenderte aunque no habléis el mismo idioma.</li><li><strong>Juegos durante la llamada</strong>: Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina, además del termómetro de química y temas para romper el hielo.</li><li><strong>Reacciones</strong> 👍 ❤️, añadir amigos, cambiar de cámara y opciones de vista.</li><li><strong>Guindillas</strong> 🌶️, los puntos gratis que ganas por participar.</li></ul><p>Tienes cada paso explicado en <a href="@how">cómo funciona</a>.</p>',
         },
         {
-          h2: 'Empezar en tres pasos',
-          html: '<ol><li><strong>Entra sin registro</strong>: elige tu género y pon tu fecha de nacimiento. Crear una cuenta con email o Google es opcional.</li><li><strong>Confirma tu edad</strong>: el servicio es solo para mayores de 18 años.</li><li><strong>Activa la cámara</strong> y pulsa empezar. La primera persona aparece en segundos.</li></ol><p>Durante la conversación tienes dos botones clave: <strong>Siguiente</strong> (o la tecla Esc en el ordenador) para cambiar de persona y <strong>Parar</strong> para tomarte un descanso. La web está disponible en español, inglés, portugués, francés, alemán e italiano, y puedes instalarla como app desde el propio navegador.</p>',
+          h2: 'Videochat gratis sin registro: empieza en tres pasos',
+          html: '<ol><li><strong>Entra como invitado</strong>: elige tu género y pon tu fecha de nacimiento. No te pedimos email ni contraseña.</li><li><strong>Confirma que eres mayor de edad</strong>: el servicio es solo para mayores de 18 años.</li><li><strong>Activa la cámara</strong> y pulsa empezar. La primera persona aparece en segundos.</li></ol><p>Durante la conversación tienes dos botones clave: <strong>Siguiente</strong> (o la tecla Esc en el ordenador) para cambiar de persona y <strong>Parar</strong> para tomarte un descanso. Crear una cuenta con email o Google es opcional: sirve para guardar tu progreso entre dispositivos y solo es necesaria si algún día quieres pagar Premium. Lo explicamos con detalle en <a href="@no-signup-video-chat">videochat sin registro</a>.</p><p>La web está en español, inglés, portugués, francés, alemán e italiano, y puedes instalarla como app desde el propio navegador, sin pasar por ninguna tienda de aplicaciones.</p>',
+        },
+        {
+          h2: 'Chat gratis por vídeo o por texto',
+          html: '<p>Mucha gente busca un <strong>chat gratis</strong> pensando solo en escribir. Aquí lo principal es la cámara, pero el texto sigue ahí: junto al vídeo tienes un chat escrito para aclarar un nombre, contestar cuando hay ruido en casa o seguir la conversación con alguien que habla otro idioma, porque la traducción automática te muestra sus mensajes en el tuyo.</p><p>Hablar cara a cara tiene ventajas claras frente a un chat solo de texto:</p><ul><li><strong>Ves con quién hablas</strong> desde el primer segundo, sin depender de fotos de perfil.</li><li><strong>La conversación es más natural</strong>: una sonrisa o una broma se entienden mejor en vídeo.</li><li><strong>Decides rápido</strong>: si no hay conexión, pasas a la siguiente persona sin compromiso.</li></ul><p>Si te interesa practicar idiomas, mira cómo <a href="@video-chat-foreigners">hablar con extranjeros</a> aprovechando la traducción.</p>',
         },
         {
           h2: 'Guindillas: lo que ganas sin pagar',
-          html: '<p>Las guindillas 🌶️ son puntos gratuitos. Las consigues al entrar cada día (mantener la racha suma), al jugar durante las llamadas, cuando alguien te manda un ❤️ y al completar retos semanales. Cada noche, de 22:00 a 23:00 hora de España, llega la <strong>Hora caliente</strong> y valen el doble.</p><p>Con ellas activas <strong>superpoderes</strong> como Llama caliente (prioridad en la cola), Rebobinar (volver con la persona anterior si acepta) o Incógnito. Y si acabas la semana entre los tres primeros del ranking, el lunes ganas días de Premium.</p>',
+          html: '<p>Las guindillas 🌶️ son puntos gratuitos. Las consigues al entrar cada día (mantener la racha suma), al jugar durante las llamadas, cuando alguien te manda un ❤️ y al completar retos semanales. Cada noche, de 22:00 a 23:00 hora de España, llega la <strong>Hora caliente</strong> y valen el doble.</p><p>Con ellas activas <strong>superpoderes</strong>: Llama caliente (prioridad en la cola), Rebobinar (volver con la persona anterior si acepta), Supersaludo, Incógnito y Segunda oportunidad. Además ganas insignias y entras en el ranking semanal: cada lunes, los tres primeros reciben 7, 3 y 1 día de Premium.</p>',
         },
         {
-          h2: 'Gratis o Premium: tú decides',
-          html: '<p>El videochat gratis sirve para conocer gente sin límite de tiempo. Premium es opcional y añade control: elegir a quién ver (mujeres, hombres, trans o parejas), filtros por país, cercanía y edad, navegar sin anuncios e historial de 30 días, entre otras ventajas. Cuesta 7,99 € a la semana o 19,99 € al mes y se cancela cuando quieras.</p><p>Otra forma de probarlo sin pagar: invita a un amigo con tu enlace. Cuando se registre y tenga su primera conversación de más de un minuto, los dos ganáis 1 día de Premium.</p>',
+          h2: 'Gratis o Premium: qué cambia',
+          html: '<table><thead><tr><th>Función</th><th>Gratis</th><th>Premium</th></tr></thead><tbody><tr><td>Videochat 1 a 1 al azar</td><td>✓</td><td>✓</td></tr><tr><td>Chat con traducción automática</td><td>✓</td><td>✓</td></tr><tr><td>Juegos, guindillas y ranking</td><td>✓</td><td>✓</td></tr><tr><td>Elegir a quién ver (mujeres, hombres, trans o parejas)</td><td>—</td><td>✓</td></tr><tr><td>Filtros por país, cercanía y edad</td><td>—</td><td>✓</td></tr><tr><td>Sin anuncios e historial de 30 días</td><td>—</td><td>✓</td></tr></tbody></table><p>Premium cuesta 7,99 € a la semana o 19,99 € al mes y se cancela cuando quieras. Si lo que buscas es un <a href="@video-chat-women">videochat con chicas</a> o un <a href="@video-chat-men">videochat con chicos</a>, el filtro de género es la función que te interesa; sin él, la ruleta es totalmente aleatoria. Otra forma de probarlo sin pagar: invita a un amigo con tu enlace y, cuando se registre y tenga su primera conversación de más de un minuto, los dos ganáis 1 día de Premium.</p>',
+        },
+        {
+          h2: 'Ideas para que tu primera videollamada salga bien',
+          html: '<p>Con desconocidos, los primeros segundos cuentan mucho. Unos pocos trucos marcan la diferencia:</p><ul><li><strong>Cuida la luz</strong>: una ventana o una lámpara delante de ti, nunca detrás.</li><li><strong>Saluda con una pregunta</strong> concreta en vez de un «hola» suelto. Tienes frases de sobra en la guía para <a href="@guide-icebreakers">romper el hielo</a>.</li><li><strong>Propón un juego</strong> si la charla se atasca: aquí tienes <a href="@guide-truth-or-dare">preguntas de verdad o reto</a> listas para usar.</li><li><strong>No te lo tomes como algo personal</strong> si alguien pulsa Siguiente: le pasa a todo el mundo, y la próxima charla puede ser mucho mejor.</li></ul><p>Según lo que te apetezca, tienes páginas pensadas para cada plan: <a href="@meet-people-chat">chat para conocer gente</a>, <a href="@flirt-chat">chat para ligar</a> o un <a href="@random-video-chat">videochat aleatorio</a> sin más.</p>',
         },
         {
           h2: 'Videochat seguro y solo para adultos',
-          html: '<p>El vídeo pasa por nuestro servidor, así que la otra persona nunca ve tu IP. Cada emisión lleva una marca de agua invisible contra grabaciones, y grabar está prohibido. Si alguien no respeta las <a href="@rules">normas de la comunidad</a>, puedes denunciarlo y un equipo humano revisa el caso.</p><p>Un consejo rápido: no compartas datos personales en las primeras conversaciones y desconfía de quien te pida dinero. Tienes más ideas en nuestros <a href="@safety">consejos de seguridad</a>.</p>',
+          html: '<p>El vídeo pasa por nuestro servidor, así que la otra persona nunca ve tu IP. Cada emisión lleva una marca de agua invisible contra grabaciones, y grabar está prohibido. Si alguien no respeta las <a href="@rules">normas de la comunidad</a>, puedes denunciarlo y un equipo humano revisa el caso; quien las incumple puede ser expulsado.</p><p>Un consejo rápido: no compartas tu nombre completo, tu dirección ni tus redes en las primeras conversaciones, y desconfía de quien te pida dinero o fotos. Tienes más ideas en nuestros <a href="@safety">consejos de seguridad</a>.</p>',
         },
       ],
       faq: [
-        { q: '¿El videochat es gratis de verdad?', a: 'Sí. Puedes hablar con desconocidos sin pagar y sin registrarte. Premium es opcional y solo añade filtros y extras.' },
-        { q: '¿Tengo que registrarme para usarlo?', a: 'No. Puedes entrar sin registro: solo eliges tu género, pones tu fecha de nacimiento y confirmas que tienes al menos 18 años. La cuenta es opcional y sirve para guardar tu progreso o pagar Premium.' },
-        { q: '¿Necesito descargar algo?', a: 'No. Funciona en el navegador del móvil y del ordenador. Si quieres, puedes instalarlo como app desde el navegador.' },
-        { q: '¿Qué son las guindillas?', a: 'Son puntos gratuitos que ganas al entrar cada día, jugar, recibir corazones y completar retos. Sirven para activar superpoderes.' },
+        { q: '¿El videochat es gratis de verdad?', a: 'Sí. Puedes hablar con desconocidos sin pagar, sin límite de tiempo y sin registrarte. Premium es opcional y solo añade filtros y extras.' },
+        { q: '¿Hay videochat gratis sin registro?', a: 'Sí. Entras como invitado eligiendo tu género, poniendo tu fecha de nacimiento y confirmando que tienes 18 años o más. La cuenta con email o Google es opcional.' },
+        { q: '¿Necesito descargar algo?', a: 'No. Funciona en el navegador del móvil y del ordenador. Si quieres, puedes instalarlo como app desde el propio navegador.' },
+        { q: '¿Puedo hacer una videollamada gratis con desconocidos desde el móvil?', a: 'Sí, desde el navegador de tu móvil, con la cámara delantera o la trasera. No tienes que instalar nada desde ninguna tienda de aplicaciones.' },
+        { q: '¿Puedo elegir con quién hablar gratis?', a: 'En la versión gratuita la ruleta es aleatoria. Elegir mujeres, hombres, trans o parejas, y filtrar por país, cercanía o edad, forma parte de Premium.' },
+        { q: '¿Es seguro hablar con desconocidos por videochat?', a: 'Es solo para mayores de 18, nadie ve tu IP y puedes denunciar a quien incumpla las normas. Aun así, no des datos personales ni envíes dinero a nadie.' },
       ],
     },
     'random-video-chat': {
@@ -166,33 +179,39 @@ module.exports = {
       title: 'Videochat con chicas y mujeres · La Ruleta Caliente',
       description: 'Videochat con chicas, mujeres, hombres, trans o parejas: elige a quién ver con el filtro de Premium o deja que la ruleta decida. Solo para mayores de 18.',
       h1: 'Videochat con chicas: elige con quién quieres hablar',
-      intro: '<p>Si buscas un <strong>videochat con chicas</strong>, en La Ruleta Caliente puedes hacerlo de dos maneras. Gratis, la ruleta te empareja al azar con cualquier persona conectada, sea quien sea. Con Premium, eliges a quién ver: <strong>mujeres, hombres, trans o parejas</strong>, y además filtras por país, cercanía y edad.</p><p>Somos claros desde el principio: el filtro de género es una función de Premium. Aquí te contamos cómo funciona y cómo sacarle partido con respeto. Solo para mayores de 18.</p>',
+      intro: '<p>Si buscas un <strong>videochat con chicas</strong>, en La Ruleta Caliente puedes hacerlo de dos maneras. Gratis, la ruleta te empareja al azar con cualquier persona conectada, sea chico, chica, persona trans o pareja. Con Premium, eliges a quién ver: <strong>mujeres, hombres, trans o parejas</strong>, y además filtras por país, cercanía y edad.</p><p>Somos claros desde el principio: el filtro de género es una función de Premium, y nadie puede garantizarte con quién vas a coincidir en cada momento. Aquí te contamos cómo funciona, qué puedes esperar y cómo conseguir que una chica quiera seguir hablando contigo. Solo para mayores de 18.</p>',
       sections: [
         {
           h2: 'Gratis o con filtro: las diferencias',
-          html: '<table><thead><tr><th>Opción</th><th>Con quién coincides</th></tr></thead><tbody><tr><td>Gratis</td><td>Cualquier persona conectada, al azar</td></tr><tr><td>Premium</td><td>Eliges mujeres, hombres, trans o parejas</td></tr><tr><td>Premium + filtros</td><td>Además, por país, cercanía y edad</td></tr></tbody></table><p>Premium cuesta 7,99 € a la semana o 19,99 € al mes, sin permanencia. Si quieres probarlo antes, invita a un amigo: cuando se registre con tu enlace y tenga su primera conversación de más de un minuto, os lleváis 1 día de Premium cada uno. También puedes ganarlo quedando entre los tres primeros del ranking semanal de guindillas 🌶️.</p>',
+          html: '<table><thead><tr><th>Opción</th><th>Con quién coincides</th></tr></thead><tbody><tr><td>Gratis</td><td>Cualquier persona conectada, al azar</td></tr><tr><td>Premium</td><td>Eliges mujeres, hombres, trans o parejas</td></tr><tr><td>Premium + filtros</td><td>Además, por país, cercanía y edad</td></tr></tbody></table><p>Para empezar gratis no necesitas cuenta: mira cómo funciona el <a href="@no-signup-video-chat">videochat sin registro</a>. Premium cuesta 7,99 € a la semana o 19,99 € al mes, sin permanencia, y para pagarlo sí hace falta una cuenta con email o Google. Si quieres probarlo antes, invita a un amigo: cuando se registre con tu enlace y tenga su primera conversación de más de un minuto, os lleváis 1 día de Premium cada uno. También puedes ganarlo quedando entre los tres primeros del ranking semanal de guindillas 🌶️.</p>',
         },
         {
-          h2: 'No solo chicas: hombres, trans y parejas',
-          html: '<p>El mismo filtro sirve para cualquier preferencia. Hay quien busca hablar con mujeres, quien prefiere hombres, quien quiere conocer a personas trans o quien disfruta charlando con parejas. Puedes cambiar la selección cuando quieras, según te apetezca cada día.</p><p>Si buscas mujeres o chicas de tu zona, combina el filtro con «Mi país» o con cercanía, y la ruleta priorizará a quienes encajen. Y si te interesa conocer gente de otro lugar, elige el país y deja que la traducción automática del chat haga el resto.</p>',
+          h2: 'Chat con chicas y chat con mujeres: qué esperar',
+          html: '<p>Quien busca un <strong>chat con chicas</strong> o un <strong>chat con mujeres</strong> suele querer lo mismo: hablar cara a cara con alguien real en lugar de leer perfiles. Así funciona aquí:</p><ul><li><strong>Personas en vivo</strong>: cada conversación es una videollamada 1 a 1 en directo con alguien conectado en ese momento.</li><li><strong>Gente de muchos países</strong>: si eliges otro país, la traducción automática del chat de texto os ayuda a entenderos.</li><li><strong>Cada una decide</strong>: igual que tú, cualquier mujer puede pulsar Siguiente cuando quiera. Que una charla dure depende de la conversación, no de la web.</li><li><strong>La disponibilidad cambia</strong>: a unas horas hay más gente conectada que a otras, así que la paciencia ayuda.</li></ul><p>Un buen momento para entrar es la <strong>Hora caliente</strong>, de 22:00 a 23:00 hora de España, cuando las guindillas que ganas valen el doble.</p><p>¿Y si en ese momento te salen sobre todo chicos? En una ruleta aleatoria es normal: gratis no controlas con quién coincides. Tienes tres opciones: seguir pulsando Siguiente con paciencia, disfrutar de la charla aunque no fuera lo que buscabas (a veces salen las mejores conversaciones) o activar el filtro de Premium para ver solo mujeres. Saltar a cada persona en menos de un segundo no suele funcionar: con tanta prisa también te pierdes a quien sí te habría gustado.</p>',
         },
         {
-          h2: 'Cómo causar buena impresión',
-          html: '<p>En cualquier videochat, un saludo brusco o un salto sin decir nada estropean la primera impresión. Destacar por lo contrario es fácil:</p><ul><li><strong>Empieza por la cara y una sonrisa</strong>, nunca por la cámara apuntando a otra parte.</li><li><strong>Haz una pregunta</strong> real en vez de un simple «hola».</li><li><strong>Propón un juego</strong>: ¿Qué prefieres? o Dibujo y adivina relajan cualquier primera conversación.</li><li><strong>Respeta el ritmo</strong>: el coqueteo llega solo si hay química, y el termómetro de química te da una pista.</li></ul><p>Usa los <strong>Supersaludos</strong> con tus guindillas para que tu entrada destaque, y manda un ❤️ cuando alguien te alegre la noche.</p>',
+          h2: 'Videochat con mujeres, hombres, trans o parejas',
+          html: '<p>El mismo filtro sirve para cualquier preferencia y puedes cambiarlo cuando quieras. Hay quien busca hablar con mujeres, quien prefiere un <a href="@video-chat-men">videochat con chicos</a>, quien quiere conocer a personas trans con respeto en un <a href="@video-chat-trans">videochat trans</a> o quien disfruta charlando con parejas.</p><p>Si buscas mujeres de tu zona, combina el filtro con «Mi país» o con cercanía y la ruleta priorizará a quienes encajen. Con el filtro de edad puedes acercarte a tu generación, algo que valora mucha gente que busca un <a href="@video-chat-over-40">chat para mayores de 40</a>. Y si te apetece conocer a alguien de otro lugar, elige el país y deja que la traducción haga el resto.</p><p>Si eres mujer y quieres hablar con otras mujeres, para hacer amigas, practicar un idioma o simplemente charlar un rato, el filtro funciona igual: eliges mujeres y la ruleta te empareja con ellas.</p>',
         },
         {
-          h2: 'Modo picante, solo si las dos personas quieren',
-          html: '<p>Si tú y la otra persona tenéis activado el <strong>modo picante</strong>, los juegos y los piropos suben de tono. Si una de las dos no lo tiene, la charla continúa en modo normal. Así cada uno decide hasta dónde quiere llegar. Más detalles en la página de <a href="@adult-video-chat">videochat para adultos</a>.</p>',
+          h2: 'Cómo causar buena impresión a una chica',
+          html: '<p>En cualquier videochat, un saludo brusco o una cámara que enfoca cualquier cosa menos tu cara estropean la primera impresión. Destacar por lo contrario es fácil:</p><ul><li><strong>Empieza por la cara y una sonrisa</strong>, con buena luz delante de ti.</li><li><strong>Haz una pregunta real</strong> en vez de un simple «hola». En la guía para <a href="@guide-icebreakers">romper el hielo</a> tienes decenas de frases.</li><li><strong>Escucha más de lo que hablas</strong>: pregunta por lo que te cuente y acuérdate de los detalles.</li><li><strong>Nada de comentarios sobre su cuerpo</strong> de entrada: es la forma más rápida de que pulse Siguiente.</li><li><strong>Respeta el ritmo</strong>: el coqueteo llega solo si hay química, y el termómetro de química te da una pista.</li></ul><p>Usa un <strong>Supersaludo</strong> con tus guindillas para que tu entrada destaque y, si tu idea es ligar, lee antes nuestros <a href="@guide-flirting">consejos para ligar por videochat</a>.</p>',
+        },
+        {
+          h2: 'Juegos y modo picante, solo si las dos personas quieren',
+          html: '<p>Los juegos quitan los nervios a cualquiera. Proponer una partida de ¿Qué prefieres? o de Dibujo y adivina es una forma natural de seguir hablando sin silencios incómodos. Si os apetece algo más atrevido, tienes ideas en nuestras <a href="@guide-truth-or-dare">preguntas de verdad o reto</a>.</p><p>Si tú y la otra persona tenéis activado el <strong>modo picante</strong>, los juegos y los piropos suben de tono. Si una de las dos no lo tiene, la charla continúa en modo normal. Así cada una decide hasta dónde quiere llegar, y cualquiera puede decir «paso» en todo momento. Más detalles en la página de <a href="@adult-video-chat">videochat para adultos</a>.</p>',
         },
         {
           h2: 'Respeto y seguridad para todas las personas',
-          html: '<p>Un buen videochat con mujeres solo funciona si ellas se sienten cómodas. Las <a href="@rules">normas de la comunidad</a> prohíben el acoso, las grabaciones y mostrar contenido a quien no lo ha pedido; quien las incumple puede ser expulsado tras una revisión humana. Si eres mujer y alguien te molesta, pulsa Siguiente y denúncialo: tu IP nunca es visible para la otra persona y tienes más pautas en <a href="@safety">seguridad</a>.</p>',
+          html: '<p>Un buen videochat con mujeres solo funciona si ellas se sienten cómodas. Las <a href="@rules">normas de la comunidad</a> prohíben el acoso, las grabaciones y mostrar contenido a quien no lo ha pedido; quien las incumple puede ser expulsado tras una revisión humana. El vídeo pasa por nuestro servidor, así que nadie ve tu IP, y cada emisión lleva una marca de agua invisible.</p><p>Si eres mujer y alguien te molesta, pulsa Siguiente y denúncialo. Y si eres tú quien busca chicas, aplica lo mismo: no pidas datos personales ni fotos, y desconfía de cualquiera que saque el tema del dinero, porque es una señal típica de estafa. Más pautas en <a href="@safety">seguridad</a>.</p>',
         },
       ],
       faq: [
         { q: '¿Puedo hablar solo con chicas gratis?', a: 'No. En la versión gratuita la ruleta es totalmente aleatoria. Elegir mujeres, hombres, trans o parejas es una función de Premium.' },
         { q: '¿Cuánto cuesta el filtro de género?', a: 'Va incluido en Premium, que cuesta 7,99 € a la semana o 19,99 € al mes y se puede cancelar cuando quieras.' },
-        { q: '¿Puedo buscar chicas de mi ciudad o de mi país?', a: 'Con Premium puedes combinar el filtro de género con los de país y cercanía para coincidir con gente más próxima.' },
+        { q: '¿Las chicas del videochat son reales?', a: 'Cada conversación es una videollamada en vivo 1 a 1 con alguien conectado en ese momento. Si alguien solo intenta llevarte a otra web o pedirte dinero, denúncialo.' },
+        { q: '¿Se puede hacer videochat con chicas sin registrarse?', a: 'Puedes entrar como invitado sin email, pero la ruleta será aleatoria. Para ver solo mujeres necesitas Premium, y para pagarlo hace falta una cuenta.' },
+        { q: '¿Puedo buscar chicas de mi ciudad o de mi país?', a: 'Con Premium puedes combinar el filtro de género con los de país y cercanía para que salgan antes personas más próximas. No existe un filtro por ciudad.' },
         { q: '¿Hay manera de probar Premium sin pagar?', a: 'Sí. Invita a un amigo con tu enlace o queda entre los tres primeros del ranking semanal de guindillas para ganar días de Premium.' },
       ],
     },
@@ -1530,6 +1549,258 @@ module.exports = {
         { q: '¿Cuál es la estafa más común al conocer gente online?', a: 'La estafa romántica: alguien crea una relación rápida e intensa y, tarde o temprano, pide dinero por una urgencia. Nunca envíes dinero a quien no conoces en persona.' },
         { q: '¿Qué hacer en la primera cita con alguien de internet?', a: 'Quedar en un lugar público, ir y volver por tu cuenta, avisar a alguien de confianza y marcharte si algo no te convence.' },
         { q: '¿Es buena idea conocer gente por videochat?', a: 'Sí, si tienes más de 18 años y sigues unas normas básicas de privacidad: es rápido, ves a la persona desde el principio y puedes cortar cuando quieras.' },
+      ],
+    },
+    'video-chat-men': {
+      slug: 'videochat-chicos',
+      anchor: 'Videochat con chicos',
+      title: 'Videochat con chicos y hombres · La Ruleta Caliente',
+      description: 'Videochat con chicos y chat con hombres en vivo, 1 a 1 y desde el navegador. Gratis al azar o eligiendo a quién ver con Premium. Solo para mayores de 18.',
+      h1: 'Videochat con chicos: habla cara a cara con hombres de todo el mundo',
+      intro: '<p>¿Te apetece un <strong>videochat con chicos</strong>? En La Ruleta Caliente hablas en vivo, 1 a 1, con hombres de muchos países, desde el navegador del móvil o del ordenador. Entras gratis y sin registro, y la ruleta te pone delante a alguien nuevo en segundos.</p><p>Una aclaración honesta antes de empezar: en la versión gratuita la ruleta es aleatoria y puede salirte cualquier persona. Si quieres un <strong>chat con hombres</strong> y nada más, el filtro para elegir a quién ver forma parte de Premium. Es un servicio solo para mayores de 18 años.</p>',
+      sections: [
+        {
+          h2: 'Cómo funciona el videochat con chicos',
+          html: '<p>Hay dos formas de usarlo, y puedes pasar de una a otra cuando quieras:</p><ul><li><strong>Gratis y al azar</strong>: eliges tu género, pones tu fecha de nacimiento, confirmas que eres mayor de edad y empiezas. Cada pulsación de <strong>Siguiente</strong> te lleva con otra persona, sea hombre, mujer, persona trans o pareja.</li><li><strong>Con Premium</strong>: marcas que quieres ver hombres y la ruleta solo te empareja con ellos. Puedes cambiar a mujeres, trans o parejas otro día si te apetece.</li></ul><p>Premium cuesta 7,99 € a la semana o 19,99 € al mes y se cancela cuando quieras. Si prefieres probarlo antes, puedes ganar días gratis con el ranking semanal de guindillas 🌶️ o invitando a un amigo.</p>',
+        },
+        {
+          h2: 'Chat con hombres: para quién es',
+          html: '<p>Quien busca hablar con chicos no siempre busca lo mismo. Hay mujeres que quieren conocer a alguien nuevo después del trabajo, hombres que prefieren hablar con otros hombres (para ellos tenemos una página de <a href="@video-chat-gay">videochat gay</a>), personas trans que eligen con quién sentirse cómodas y gente que solo quiere practicar inglés o portugués con un chico de otro país.</p><p>Sea cual sea tu plan, el funcionamiento es el mismo: conversación por vídeo, chat de texto con traducción automática al lado y libertad total para cortar cuando quieras. Nadie te obliga a seguir una charla que no te convence.</p>',
+        },
+        {
+          h2: 'Filtros para afinar la búsqueda',
+          html: '<p>Además del género, Premium te deja ajustar quién aparece:</p><table><thead><tr><th>Filtro</th><th>Para qué sirve</th></tr></thead><tbody><tr><td>País o «Mi país»</td><td>Hablar con chicos de un país concreto o del tuyo</td></tr><tr><td>Cercanía</td><td>Que salgan antes personas que están más cerca</td></tr><tr><td>Edad</td><td>Coincidir con hombres de un rango de edad que te encaje</td></tr></tbody></table><p>Los filtros dan prioridad, no garantías: si en ese momento no hay nadie que encaje, la espera puede ser más larga. A la hora de cenar o durante la Hora caliente, de 22:00 a 23:00 hora de España, merece la pena probar.</p>',
+        },
+        {
+          h2: 'Ideas para que la charla no se apague',
+          html: '<p>Si el primer «hola» se queda en silencio, tira de recursos. Las partidas de ¿Qué prefieres? o de Piedra, papel o tijera rompen el hielo en segundos, y el termómetro de química te indica si la cosa va bien. Tienes muchas más frases para arrancar en la guía para <a href="@guide-icebreakers">empezar una conversación</a>.</p><p>Cuando alguien te cae bien, añádelo como amigo y así no lo pierdes. Y si se te escapó por pulsar Siguiente demasiado rápido, el superpoder <strong>Rebobinar</strong> te permite volver con la persona anterior si ella acepta.</p>',
+        },
+        {
+          h2: 'Seguridad: lo que conviene saber',
+          html: '<p>El vídeo pasa por nuestro servidor, de modo que ningún chico verá tu IP, y cada emisión lleva una marca de agua invisible que desanima las grabaciones. No des tu número, tu dirección ni tus redes en la primera charla. Si alguien se pone pesado, te muestra algo que no has pedido o te habla de dinero, pulsa Siguiente y denúncialo: un equipo humano revisa cada caso. Lee los <a href="@safety">consejos de seguridad</a> antes de tu primera videollamada.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Puedo hablar solo con chicos gratis?', a: 'No. Gratis la ruleta es aleatoria. Elegir ver solo hombres es una función de Premium.' },
+        { q: '¿El chat con hombres es para mujeres o también para hombres?', a: 'Para cualquier adulto. Mujeres, hombres, personas trans y parejas pueden usar el filtro de Premium para ver solo hombres.' },
+        { q: '¿Puedo buscar chicos de mi edad?', a: 'Sí, con el filtro de edad de Premium. Puedes combinarlo con los de país y cercanía.' },
+        { q: '¿Qué hago si un chico me molesta?', a: 'Pulsa Siguiente para salir al momento y usa el botón de denunciar. El caso lo revisa una persona del equipo.' },
+      ],
+    },
+    'video-chat-trans': {
+      slug: 'videochat-trans',
+      anchor: 'Videochat trans',
+      title: 'Videochat trans: chat trans en vivo · La Ruleta Caliente',
+      description: 'Videochat trans en vivo y 1 a 1: entra como persona trans o elige ver a personas trans con Premium. Respeto, normas contra el acoso y privacidad. Solo +18.',
+      h1: 'Videochat trans: conversaciones en vivo con respeto',
+      intro: '<p>El <strong>videochat trans</strong> de La Ruleta Caliente es un espacio para que personas trans y quienes quieren conocerlas hablen cara a cara, en vivo y 1 a 1, desde el navegador y sin descargas. Puedes entrar gratis y sin registro, elegir trans como tu género y empezar a conocer gente en segundos.</p><p>Si buscas un <strong>chat trans</strong> en el que te salgan solo personas trans, eso se hace con el filtro de Premium. Y en cualquier caso hay una regla que no se negocia: respeto. Es un servicio exclusivamente para mayores de 18.</p>',
+      sections: [
+        {
+          h2: 'Si eres una persona trans',
+          html: '<p>Al entrar, eliges tu género entre las opciones disponibles, y una de ellas es trans. Así apareces tal y como eres para quienes buscan conocer a personas trans con el filtro de Premium, y también en la ruleta aleatoria gratuita.</p><ul><li><strong>Tú decides con quién hablar</strong>: si una conversación no te gusta, pulsa Siguiente sin dar explicaciones.</li><li><strong>Elige a quién ver</strong>: con Premium puedes elegir mujeres, hombres, trans o parejas, según con quién te sientas a gusto.</li><li><strong>Sin datos obligatorios</strong>: no hace falta email para empezar ni poner tu nombre real.</li></ul><p>Con las guindillas 🌶️ que ganas también puedes activar superpoderes como <strong>Incógnito</strong>.</p>',
+        },
+        {
+          h2: 'Si quieres conocer a personas trans',
+          html: '<p>Con Premium marcas «trans» en el filtro de a quién ver y la ruleta te empareja con personas que se han registrado así. Puedes combinarlo con los filtros de país, cercanía y edad. Premium cuesta 7,99 € a la semana o 19,99 € al mes y se cancela cuando quieras.</p><p>Una persona trans no es una categoría ni una curiosidad: es alguien con quien vas a tener una conversación. Pregúntale por su día, sus planes, su música, igual que harías con cualquiera. Las preguntas íntimas sobre su cuerpo o su transición no son un tema para romper el hielo, y la mayoría pulsará Siguiente si empiezas por ahí.</p>',
+        },
+        {
+          h2: 'Normas contra el acoso y la transfobia',
+          html: '<p>Las <a href="@rules">normas de la comunidad</a> prohíben el acoso, los insultos y las burlas por identidad de género u orientación, así como grabar o enseñar contenido a quien no lo ha pedido. Cualquier denuncia la revisa un equipo humano, y quien incumple las normas puede ser expulsado. Si no estás de acuerdo con una sanción, existe un procedimiento de recurso.</p><p>Si te encuentras con alguien que te falta al respeto, no te quedes discutiendo: pulsa Siguiente y denúncialo. Ayudas a que la próxima persona no se lo encuentre.</p>',
+        },
+        {
+          h2: 'Privacidad en el chat trans',
+          html: '<p>Mucha gente trans cuida especialmente quién sabe qué de su vida, y es lógico. Aquí el vídeo pasa por nuestro servidor, así que nadie ve tu IP, y cada emisión lleva una marca de agua invisible contra grabaciones. Aun así, conviene no mostrar en cámara documentos, cartas ni nada con tu dirección, y no dar tus redes sociales hasta que conozcas bien a alguien. Tienes más pautas en <a href="@guide-privacy">cómo proteger tu privacidad</a>.</p>',
+        },
+        {
+          h2: 'Más que una videollamada',
+          html: '<p>El chat de texto traduce automáticamente, así que puedes hablar con personas de otros países sin barreras de idioma. Hay juegos para romper el hielo (Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina), reacciones 👍 ❤️ y la opción de añadir amigos para volver a encontraros. Si buscas coquetear, el modo picante solo se activa cuando las dos personas lo tienen encendido. Para ideas, echa un vistazo al <a href="@flirt-chat">chat para ligar</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Puedo registrarme como persona trans?', a: 'Sí. Al entrar eliges tu género, y trans es una de las opciones. No necesitas email para empezar.' },
+        { q: '¿Cómo veo solo a personas trans?', a: 'Con el filtro de a quién ver de Premium, marcando trans. En la versión gratuita la ruleta es aleatoria.' },
+        { q: '¿Qué pasa si alguien me falta al respeto?', a: 'Puedes pasar a otra persona al instante y denunciarla. Un equipo humano revisa la denuncia y puede expulsar a quien acosa.' },
+        { q: '¿El videochat trans es gratis?', a: 'Entrar y hablar al azar es gratis. Elegir ver solo a personas trans requiere Premium.' },
+      ],
+    },
+    'video-chat-gay': {
+      slug: 'videochat-gay',
+      anchor: 'Videochat gay',
+      title: 'Videochat gay: chat gay en vivo · La Ruleta Caliente',
+      description: 'Videochat gay 1 a 1 en el navegador: con Premium un hombre puede elegir ver solo a hombres. Normas contra la homofobia, IP oculta y sin registro. Solo +18.',
+      h1: 'Videochat gay: conoce a otros hombres cara a cara',
+      intro: '<p>Si buscas un <strong>videochat gay</strong>, en La Ruleta Caliente puedes hablar en vivo y 1 a 1 con otros hombres desde el navegador del móvil o del ordenador, sin descargas y sin necesidad de registrarte para empezar. Para que solo te salgan hombres, activas el filtro de a quién ver, que es una función de Premium.</p><p>Gratis, la ruleta es aleatoria y puedes coincidir con cualquiera. Pagues o no, el <strong>chat gay</strong> funciona con las mismas normas: respeto, cero homofobia y privacidad. Solo para mayores de 18.</p>',
+      sections: [
+        {
+          h2: 'Cómo hablar solo con hombres',
+          html: '<ol><li><strong>Entra</strong> eligiendo tu género, poniendo tu fecha de nacimiento y confirmando que tienes 18 años o más.</li><li><strong>Activa Premium</strong> (7,99 € a la semana o 19,99 € al mes, sin permanencia). Para pagar sí necesitas una cuenta con email o Google.</li><li><strong>En el filtro de a quién ver, elige hombres</strong>. A partir de ahí, la ruleta solo te empareja con ellos.</li></ol><p>Puedes sumar los filtros de país, cercanía y edad para conocer a chicos de tu zona o de tu generación. Ninguno garantiza que siempre haya alguien disponible, pero sí ordenan la cola a tu favor.</p>',
+        },
+        {
+          h2: 'Gratis también se puede probar',
+          html: '<p>Si aún no tienes claro si te va a gustar, entra gratis: la ruleta es aleatoria, pero ya te haces una idea del ambiente, los juegos y el chat con traducción. Y hay maneras de conseguir Premium sin pagar:</p><ul><li><strong>Ranking semanal</strong>: los tres primeros en guindillas 🌶️ ganan 7, 3 y 1 día de Premium cada lunes.</li><li><strong>Invita a un amigo</strong>: cuando se registra con tu enlace y tiene su primera conversación de más de un minuto, los dos ganáis 1 día.</li></ul><p>Las guindillas se ganan entrando cada día, jugando, recibiendo ❤️ y completando retos, y valen el doble en la Hora caliente (22:00 a 23:00, hora de España).</p>',
+        },
+        {
+          h2: 'Respeto y normas contra la homofobia',
+          html: '<p>Las <a href="@rules">normas de la comunidad</a> no admiten insultos ni burlas por orientación sexual o identidad de género, ni acoso de ningún tipo. Si alguien te falta al respeto, pulsa Siguiente y denúncialo: un equipo humano revisa cada denuncia y puede expulsar a quien las incumple.</p><p>Y el respeto también va en la otra dirección: no enseñes nada a quien no te lo ha pedido y acepta un «no» a la primera. Si os apetece subir el tono, el modo picante solo cambia juegos y piropos cuando los dos lo tenéis activado.</p>',
+        },
+        {
+          h2: 'Privacidad para hablar con tranquilidad',
+          html: '<p>No todo el mundo quiere que su vida privada esté a la vista, y aquí no tiene por qué estarlo:</p><ul><li><strong>Nadie ve tu IP</strong>: el vídeo pasa por nuestro servidor.</li><li><strong>Sin nombre real</strong>: no lo pedimos, y no hace falta email para entrar como invitado.</li><li><strong>Marca de agua invisible</strong> en cada emisión contra grabaciones, que además están prohibidas.</li><li><strong>Incógnito</strong>, un superpoder que activas con guindillas.</li></ul><p>Ojo con la sextorsión: si alguien te propone pasar a otra app, insiste en que enseñes más o te amenaza con difundir algo, corta y denuncia. Lo explicamos en <a href="@safety">seguridad</a>.</p>',
+        },
+        {
+          h2: 'De la ruleta a una buena conversación',
+          html: '<p>Una buena charla empieza igual en cualquier chat: una cara bien iluminada, una pregunta con gracia y ganas de escuchar. Los juegos durante la llamada ayudan cuando no sabes qué decir, y si alguien te cae bien puedes añadirlo como amigo. Para quien busca algo más, tenemos ideas en el <a href="@flirt-chat">chat para ligar</a> y en la página para <a href="@meet-people-chat">conocer gente</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Hay un videochat solo para gays?', a: 'Es un videochat para todos los adultos, pero con el filtro de Premium un hombre puede elegir ver solo a hombres.' },
+        { q: '¿El chat gay es gratis?', a: 'Entrar y hablar al azar es gratis. El filtro para ver solo hombres forma parte de Premium.' },
+        { q: '¿Alguien puede ver quién soy?', a: 'La otra persona solo ve lo que enseñas en cámara. Tu IP queda oculta porque el vídeo pasa por nuestro servidor, y no pedimos tu nombre real.' },
+        { q: '¿Qué hago si recibo comentarios homófobos?', a: 'Pulsa Siguiente y denuncia a esa persona. Un equipo humano revisa el caso y puede expulsarla.' },
+      ],
+    },
+    'flirt-chat': {
+      slug: 'chat-para-ligar',
+      anchor: 'Chat para ligar',
+      title: 'Chat para ligar gratis por videochat · La Ruleta Caliente',
+      description: 'Chat para ligar gratis por videochat: coquetea cara a cara, juega y activa el modo picante solo si los dos queréis. Solo para mayores de 18.',
+      h1: 'Chat para ligar: coquetea cara a cara, con química y con respeto',
+      intro: '<p>Un <strong>chat para ligar</strong> funciona mejor cuando os veis. En La Ruleta Caliente coqueteas por videochat, en vivo y 1 a 1, con gente de todo el mundo: una sonrisa dice más que diez mensajes y en un minuto sabes si hay chispa. Puedes entrar gratis, sin registro y desde el navegador.</p><p>Este <strong>chat para ligar gratis</strong> tiene un ingrediente extra: juegos, piropos y un modo picante que solo se enciende si las dos personas quieren 🌶️. Solo para mayores de 18.</p>',
+      sections: [
+        {
+          h2: 'Por qué ligar por videochat',
+          html: '<ul><li><strong>Sin fotos engañosas</strong>: ves a la persona tal como es en ese momento.</li><li><strong>Química al instante</strong>: la voz, la risa y la mirada cuentan mucho más que un perfil bien escrito.</li><li><strong>Sin esperas</strong>: no hay que hacer «match» ni esperar respuestas. Si no fluye, Siguiente.</li><li><strong>Con red de seguridad</strong>: nadie ve tu IP y no compartes datos si no quieres.</li></ul><p>Eso sí, nadie te asegura que la persona de enfrente esté buscando lo mismo que tú. Hay quien entra a ligar, quien solo quiere charlar y quien busca jugar un rato. Descubrirlo forma parte del juego.</p>',
+        },
+        {
+          h2: 'Modo picante: subir el tono solo si los dos queréis',
+          html: '<p>Cuando tú y la otra persona tenéis activado el <strong>modo picante</strong>, los juegos y los piropos se vuelven más atrevidos. Si solo lo tiene una de las dos, la conversación sigue en modo normal y nadie se encuentra con algo que no ha elegido. Los juegos y piropos picantes completos forman parte de Premium.</p><p>Que el modo picante esté activado no es un permiso para todo. Las <a href="@rules">normas de la comunidad</a> siguen valiendo, y cualquiera puede decir «paso» o cortar la llamada cuando quiera.</p>',
+        },
+        {
+          h2: 'Herramientas para coquetear',
+          html: '<ul><li><strong>Termómetro de química</strong>: una pista divertida de cómo va la cosa.</li><li><strong>Reacciones</strong> ❤️: si alguien te gusta, díselo sin palabras (y además le das guindillas).</li><li><strong>Supersaludo</strong>: para que tu entrada no pase desapercibida.</li><li><strong>Rebobinar</strong>: vuelve con la persona anterior si te arrepientes de haber pulsado Siguiente y ella acepta.</li><li><strong>Juegos</strong>: Verdad o reto y ¿Qué prefieres? son clásicos para ligar. Busca inspiración en nuestras <a href="@guide-truth-or-dare">preguntas de verdad o reto</a>.</li></ul>',
+        },
+        {
+          h2: 'Consejos para ligar sin meter la pata',
+          html: '<p>Lo que funciona en un bar también funciona aquí, y lo que no, tampoco:</p><ol><li><strong>Empieza por la conversación</strong>, no por los cumplidos sobre el físico.</li><li><strong>Pregunta y escucha</strong>: el interés genuino es lo más atractivo.</li><li><strong>Lee las señales</strong>: respuestas cortas o mirar a otro lado significan que toca cambiar de tema o despedirse.</li><li><strong>Acepta un no</strong> con elegancia. Un «encantado, suerte» deja mejor recuerdo que insistir.</li></ol><p>Tienes muchas más ideas en la guía para <a href="@guide-flirting">ligar por videochat con respeto</a>.</p>',
+        },
+        {
+          h2: 'Ligar con cabeza',
+          html: '<p>No envíes dinero ni fotos íntimas a nadie que acabas de conocer, y desconfía de quien quiera llevarte rápido a otra app. Si hay amenazas o chantaje, corta, guarda la calma y denuncia: es sextorsión y tienes ayuda en <a href="@safety">seguridad</a>. Si la cosa va bien y queréis veros en persona, quedad en un sitio público y avisad a alguien de confianza.</p><p>Y recuerda que ligar no es una carrera. Si una noche no surge nada, no pasa nada: la Hora caliente (de 22:00 a 23:00, hora de España) es un buen momento para volver a intentarlo, y las guindillas que ganes valdrán el doble.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Es un chat para ligar gratis?', a: 'Sí, puedes entrar y coquetear gratis y sin registro. Premium añade filtros, como elegir a quién ver, y los juegos y piropos picantes completos.' },
+        { q: '¿Cómo funciona el modo picante?', a: 'Solo se activa en la conversación cuando las dos personas lo tienen encendido. Si una no lo tiene, todo sigue en modo normal.' },
+        { q: '¿Todo el mundo entra a ligar?', a: 'No. Cada persona viene con su plan: ligar, charlar o jugar. Si no hay sintonía, pasad a la siguiente sin rencores.' },
+        { q: '¿Puedo volver a hablar con alguien que me gustó?', a: 'Sí: añádelo como amigo durante la llamada, o usa Rebobinar con guindillas para volver con la persona anterior si acepta.' },
+      ],
+    },
+    'singles-chat': {
+      slug: 'chat-para-solteros',
+      anchor: 'Chat para solteros',
+      title: 'Chat para solteros por videollamada · La Ruleta Caliente',
+      description: 'Chat para solteros por videollamada: conoce gente nueva en vivo, 1 a 1, gratis y sin registro. Filtros de edad y cercanía con Premium. Solo +18.',
+      h1: 'Chat para solteros: conoce gente nueva cara a cara',
+      intro: '<p>Si estás soltero o soltera y te apetece conocer a alguien, un <strong>chat para solteros</strong> por vídeo es una forma directa de hacerlo. En La Ruleta Caliente hablas en vivo y 1 a 1 con gente de todo el mundo desde el navegador, gratis y sin registro.</p><p>Te lo decimos claro: no pedimos a nadie su estado civil, así que no podemos prometer que todas las personas que conozcas estén solteras. Lo que sí tienes es una manera rápida de hablar con mucha gente distinta y descubrir con quién conectas. Solo para mayores de 18.</p>',
+      sections: [
+        {
+          h2: 'Por qué probar un videochat si estás soltero',
+          html: '<p>Las apps de citas tradicionales pueden convertirse en una rueda de perfiles, mensajes sin respuesta y citas que no se parecen a las fotos. El videochat cambia el orden: primero habláis y os veis, y luego decidís.</p><ul><li><strong>Sin perfil que rellenar</strong>: entras, eliges tu género, confirmas tu edad y empiezas.</li><li><strong>Conversaciones reales</strong>: en un par de minutos sabes si hay sintonía.</li><li><strong>Sin presión</strong>: si no hay chispa, pulsas Siguiente y nadie se ofende.</li></ul><p>Además, puedes entrar cualquier noche sin planearlo. Diez minutos de conversación antes de dormir ya son una forma de salir de la rutina y conocer a alguien que no te habrías cruzado nunca por la calle.</p>',
+        },
+        {
+          h2: 'Cómo saber si la otra persona está soltera',
+          html: '<p>La forma más sencilla es la de toda la vida: preguntar, con naturalidad y sin interrogatorios. Un «¿y qué te trae por aquí esta noche?» suele dar mucha información. Hay quien busca pareja, quien busca amistad y quien solo quiere pasar el rato, y todo es válido.</p><p>Si la respuesta no es la que esperabas, despídete con buen tono. Y si alguien te cuenta una historia demasiado perfecta muy pronto, ve con calma: es mejor conocerse en varias conversaciones antes de hacerse ilusiones.</p>',
+        },
+        {
+          h2: 'Filtros útiles para solteros',
+          html: '<p>Con Premium (7,99 € a la semana o 19,99 € al mes, sin permanencia) puedes ajustar mucho mejor con quién coincides:</p><ul><li><strong>A quién ver</strong>: mujeres, hombres, trans o parejas.</li><li><strong>Edad</strong>: para coincidir con gente de tu etapa vital, algo que valoran mucho en el <a href="@video-chat-over-40">chat para mayores de 40</a>.</li><li><strong>Cercanía y «Mi país»</strong>: para que salgan antes personas de tu zona, por si algún día queréis quedar.</li></ul><p>Premium también incluye amigos y llamadas, para seguir hablando con alguien que te ha gustado.</p>',
+        },
+        {
+          h2: 'De la primera charla a algo más',
+          html: '<p>Si conectas con alguien, añádelo como amigo para volver a encontraros sin tener que daros el teléfono. Los juegos ayudan a conoceros mejor: ¿Qué prefieres? revela gustos y prioridades en pocos minutos. Si el coqueteo surge, tienes ideas en el <a href="@flirt-chat">chat para ligar</a>.</p><p>Antes de quedar en persona, hablad varias veces por vídeo. Cuando llegue el momento, elegid un sitio público, id por vuestra cuenta y avisad a alguien de confianza.</p>',
+        },
+        {
+          h2: 'Seguridad para solteros',
+          html: '<p>Las estafas románticas existen: alguien crea una relación intensa en poco tiempo y acaba pidiendo dinero por una urgencia. Nunca envíes dinero ni datos bancarios a quien no conoces en persona. Aquí nadie ve tu IP, cada emisión lleva una marca de agua invisible y puedes denunciar a quien incumpla las normas. Más consejos en <a href="@safety">seguridad</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Todos los usuarios están solteros?', a: 'No lo sabemos, porque no preguntamos el estado civil. Lo mejor es preguntarlo con naturalidad en la conversación.' },
+        { q: '¿El chat para solteros es gratis?', a: 'Sí, puedes entrar y hablar gratis, sin registro. Premium añade filtros de género, edad, país y cercanía.' },
+        { q: '¿Puedo conocer solteros de mi zona?', a: 'Con el filtro de cercanía o el de «Mi país» de Premium salen antes personas próximas, aunque no hay filtro por ciudad.' },
+        { q: '¿Es buena idea quedar con alguien del videochat?', a: 'Puede serlo si antes habéis hablado varias veces, quedáis en un sitio público y avisas a alguien de confianza.' },
+      ],
+    },
+    'video-chat-over-40': {
+      slug: 'chat-mayores-de-40',
+      anchor: 'Chat para mayores de 40',
+      title: 'Chat para mayores de 40 y de 50 · La Ruleta Caliente',
+      description: 'Chat para mayores de 40 y de 50 por videollamada: habla con adultos de tu edad gracias al filtro de edad de Premium. Gratis para empezar y sin registro.',
+      h1: 'Chat para mayores de 40 y de 50: conversaciones de tú a tú',
+      intro: '<p>¿Buscas un <strong>chat para mayores de 40</strong> o un <strong>chat para mayores de 50</strong>? En La Ruleta Caliente hablas por videollamada, en vivo y 1 a 1, con adultos de todo el mundo, desde el navegador del ordenador o del móvil. Entras gratis y sin registro, y si quieres coincidir sobre todo con gente de tu edad, tienes el filtro de edad de Premium.</p><p>Aquí hay adultos de todas las edades a partir de 18 años. Nadie tiene que demostrar nada: solo tener ganas de conversar.</p>',
+      sections: [
+        {
+          h2: 'Hablar con gente de tu generación',
+          html: '<p>A partir de cierta edad, las conversaciones cambian: se habla de viajes hechos y por hacer, de hijos que se van de casa, de una nueva etapa tras una separación o simplemente de la serie de la semana. Con el <strong>filtro de edad</strong> de Premium eliges un rango, por ejemplo de 40 a 55 o de 50 en adelante, y la ruleta prioriza a esas personas.</p><p>Puedes combinarlo con el filtro de a quién ver (mujeres, hombres, trans o parejas) y con los de país y cercanía. Premium cuesta 7,99 € a la semana o 19,99 € al mes y se cancela cuando quieras.</p><p>Sin el filtro también puedes coincidir con personas de tu edad, solo que de forma aleatoria, mezcladas con gente más joven. Hay quien disfruta precisamente de esa mezcla: una charla con alguien de veinticinco años puede ser tan interesante como una con alguien de tu quinta.</p>',
+        },
+        {
+          h2: 'Fácil de usar, sin instalar nada',
+          html: '<ol><li>Abre la web en el navegador, ya sea en el ordenador, la tableta o el móvil.</li><li>Elige tu género y escribe tu fecha de nacimiento.</li><li>Permite el acceso a la cámara y al micrófono cuando el navegador lo pregunte.</li><li>Pulsa empezar. Para cambiar de persona, <strong>Siguiente</strong>; para descansar, <strong>Parar</strong>.</li></ol><p>No necesitas email ni contraseña. Si quieres, puedes crear una cuenta para guardar tu progreso y usarla en varios dispositivos. Tienes todos los pasos en <a href="@how">cómo funciona</a>.</p>',
+        },
+        {
+          h2: 'Amistad, coqueteo o charla: tú eliges',
+          html: '<p>Cada persona viene con su plan. Hay quien quiere practicar idiomas gracias a la traducción automática del chat, quien busca compañía para una noche entre semana y quien tiene ganas de volver a coquetear. Si es tu caso, mira el <a href="@singles-chat">chat para solteros</a>.</p><p>Los juegos son un buen recurso para romper el hielo a cualquier edad: ¿Qué prefieres?, Piedra, papel o tijera, Dibujo y adivina o Verdad o reto. Y si alguien te cae bien, añádelo como amigo para volver a hablar otro día.</p>',
+        },
+        {
+          h2: 'Consejos para verte y oírte bien',
+          html: '<ul><li><strong>Luz de frente</strong>: siéntate mirando hacia una ventana o una lámpara.</li><li><strong>Cámara a la altura de los ojos</strong>: apoya el móvil o sube el portátil sobre unos libros.</li><li><strong>Auriculares</strong>: evitan el eco y se te entiende mejor.</li><li><strong>Buena conexión</strong>: si va lento, acércate al router.</li></ul><p>Encontrarás más trucos en la guía para <a href="@guide-camera">verte bien en cámara</a>.</p>',
+        },
+        {
+          h2: 'Seguridad, sin rodeos',
+          html: '<p>Los estafadores no distinguen edades. Desconfía de quien te declara su amor muy pronto, de quien tiene siempre una excusa para pedir dinero y de quien quiere sacarte de la web enseguida. No compartas datos bancarios, tu dirección ni tus redes. Aquí nadie ve tu IP, cada emisión lleva marca de agua y puedes denunciar con un clic. Más información en <a href="@safety">seguridad</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Hay un chat solo para mayores de 40?', a: 'Es un videochat para todos los adultos, pero con el filtro de edad de Premium puedes coincidir sobre todo con personas de 40 años o más.' },
+        { q: '¿Sirve también como chat para mayores de 50?', a: 'Sí. Ajusta el filtro de edad al rango que quieras, por ejemplo de 50 en adelante.' },
+        { q: '¿Es complicado de usar?', a: 'No. Funciona en el navegador sin instalar nada: eliges tu género, pones tu fecha de nacimiento y empiezas.' },
+        { q: '¿Es gratis?', a: 'Sí, hablar al azar es gratis. El filtro de edad y los demás filtros forman parte de Premium.' },
+      ],
+    },
+    'meet-people-chat': {
+      slug: 'chat-para-conocer-gente',
+      anchor: 'Chat para conocer gente',
+      title: 'Chat para conocer gente nueva · La Ruleta Caliente',
+      description: 'Chat para conocer gente nueva por videollamada: habla en vivo y 1 a 1 con personas de todo el mundo, gratis, sin registro y con traducción. Solo +18.',
+      h1: 'Chat para conocer gente: amistades nuevas en vivo',
+      intro: '<p>Un <strong>chat para conocer gente</strong> tiene que ser fácil: entrar, saludar y empezar a hablar. En La Ruleta Caliente lo haces por vídeo, en vivo y 1 a 1, con personas de todo el mundo, desde el navegador y sin descargas. Es gratis para empezar y no hace falta registrarse.</p><p>Da igual si te acabas de mudar, si tus amigos tienen otros horarios o si simplemente te apetece hablar con alguien distinto esta noche: la ruleta te presenta a una persona nueva cada vez que pulsas Siguiente. Solo para mayores de 18.</p>',
+      sections: [
+        {
+          h2: 'Por qué conocer gente por videochat',
+          html: '<ul><li><strong>Es inmediato</strong>: sin perfiles, sin esperar respuestas, sin «match».</li><li><strong>Es más humano</strong>: ver una cara y oír una voz genera confianza mucho antes que un chat de texto.</li><li><strong>Es variado</strong>: hoy hablas con alguien de tu país y mañana con alguien del otro lado del mundo.</li><li><strong>Es cómodo</strong>: desde el sofá, en pijama si quieres, y cortas cuando te canses.</li></ul>',
+        },
+        {
+          h2: 'Gente de cerca o de lejos',
+          html: '<p>Gratis, la ruleta es aleatoria: puede tocarte alguien de tu barrio o de otro continente. El chat de texto tiene <strong>traducción automática</strong>, así que el idioma deja de ser un obstáculo; si te interesa ese lado, lee cómo <a href="@video-chat-foreigners">hablar con extranjeros</a>.</p><p>Con Premium puedes afinar: filtro «Mi país», país concreto, cercanía, edad y a quién ver (mujeres, hombres, trans o parejas). Cuesta 7,99 € a la semana o 19,99 € al mes y se cancela cuando quieras.</p><p>Un truco: si buscas amistades para salir por tu zona, el filtro de cercanía es el más útil; si lo que quieres es descubrir otras culturas, deja la ruleta abierta y déjate sorprender por quien aparezca.</p>',
+        },
+        {
+          h2: 'Cómo presentarte y no quedarte en blanco',
+          html: '<p>La primera frase importa menos de lo que crees; lo que cuenta es mostrar curiosidad. Algunas ideas:</p><ul><li>Comenta algo que veas: «¡Qué plantas más bonitas tienes detrás!».</li><li>Pregunta por su día o por su ciudad.</li><li>Propón un juego: Dibujo y adivina o ¿Qué prefieres? arrancan risas enseguida.</li><li>Usa los temas para romper el hielo que propone la web cuando no se te ocurra nada.</li></ul><p>Y si te gusta preparar las cosas, tienes una guía completa sobre <a href="@guide-meet-people-online">cómo conocer gente nueva por internet</a>.</p>',
+        },
+        {
+          h2: 'Convertir una charla en amistad',
+          html: '<p>Cuando conectas con alguien, añádelo como amigo y así podréis volver a encontraros sin daros el teléfono. Mandad reacciones ❤️, jugad otra partida o seguid la conversación otro día. Con las guindillas 🌶️ que ganas al entrar a diario y al jugar, puedes activar superpoderes como Rebobinar, que te devuelve con la persona anterior si acepta.</p><p>Si un día queréis veros en persona, haced antes varias videollamadas y quedad en un lugar público.</p>',
+        },
+        {
+          h2: 'Conocer gente con seguridad',
+          html: '<p>Hablar con desconocidos es divertido si sigues unas pautas sencillas: no des tu dirección, tu trabajo ni tus redes al principio; no envíes dinero ni fotos privadas; y corta si algo no te encaja. Aquí nadie ve tu IP, grabar está prohibido y puedes denunciar a cualquiera que incumpla las <a href="@rules">normas</a>. Más consejos en <a href="@safety">seguridad</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: '¿Es gratis el chat para conocer gente?', a: 'Sí. Puedes entrar y hablar gratis, sin registro. Premium es opcional y añade filtros.' },
+        { q: '¿Puedo conocer gente de mi país?', a: 'Gratis la ruleta es aleatoria. Con el filtro «Mi país» de Premium salen antes personas de tu país.' },
+        { q: '¿Cómo vuelvo a hablar con alguien que conocí?', a: 'Añádelo como amigo durante la conversación. Si ya pasaste a otra persona, Rebobinar te devuelve con ella si acepta.' },
+        { q: '¿Necesito saber idiomas?', a: 'No. El chat de texto traduce automáticamente los mensajes, y con gestos y juegos os entenderéis igual.' },
       ],
     },
   },
