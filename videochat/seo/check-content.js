@@ -13,6 +13,7 @@ const err = (m) => errors.push(m);
 
 const COMMON = ['home', 'related', 'countries', 'topics', 'alternatives', 'faq', 'ctaTitle', 'ctaText', 'ctaButton', 'adultNote', 'disclaimer', 'footerTitle', 'guides'];
 for (const k of COMMON) if (!data.common?.[k]) err(`common.${k} falta`);
+if (PAGES.some((p) => p.type === 'city' && p.langs.includes(lang)) && !data.common?.cities) err('common.cities falta');
 if (data.common?.disclaimer && !data.common.disclaimer.includes('{brand}')) err('common.disclaimer debe incluir {brand}');
 
 const expected = PAGES.filter((p) => p.langs.includes(lang)).map((p) => p.key);

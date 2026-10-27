@@ -131,6 +131,32 @@ Más temas (todos los idiomas, cuelgan de `free-video-chat`):
 - `video-chat-games`: **juegos para videollamadas** (los 4 juegos, termómetro de química, modo picante, guindillas).
 - `video-chat-foreigners`: **hablar con extranjeros** / practicar idiomas por videochat (traducción automática del chat).
 
+Temas de mucha búsqueda (todos los idiomas, cuelgan de `free-video-chat`):
+- `video-chat-men`: videochat con **chicos/hombres** (el filtro de a quién ver es Premium; también mujeres, trans y parejas).
+- `video-chat-trans`: videochat **trans** (registrarse como «transexual»/trans, filtro Premium para ver a personas trans;
+  respeto, normas contra el acoso). Lenguaje respetuoso, nada fetichista.
+- `video-chat-gay`: videochat **gay** (un hombre puede elegir ver solo a hombres con el filtro Premium; respeto, normas
+  contra la homofobia y el acoso; seguridad y privacidad). Nada explícito.
+- `flirt-chat`: **chat para ligar** (coqueteo por videochat, modo picante solo si los dos lo activan, respeto y
+  consentimiento; enlaza a `@guide-flirting`).
+- `singles-chat`: **chat para solteros** (conocer gente soltera; no prometemos que todo el mundo esté soltero).
+- `video-chat-over-40`: **chat para mayores de 40 / 50** («chat para mayores de 40», «chat para mayores de 50»;
+  filtro de edad Premium; gente adulta de todas las edades; tono que no sea condescendiente).
+- `meet-people-chat`: **chat para conocer gente** nueva (enlaza a `@guide-meet-people-online`).
+
+**Ciudades** (solo español, archivo `seo/content/es-cities.js`, cuelgan de la página de su país): `city-madrid`,
+`city-barcelona`, `city-valencia`, `city-sevilla`, `city-malaga`, `city-bilbao`, `city-zaragoza`, `city-murcia`
+(España), `city-cdmx` (México), `city-buenos-aires` (Argentina), `city-bogota` (Colombia), `city-lima` (Perú),
+`city-santiago` (Chile). Para búsquedas como «chat Madrid», «videochat Barcelona», «chat CDMX». Reglas:
+- **No es una página de plantilla**: cada ciudad con texto propio (cómo se busca allí, barrios o costumbres
+  generales y conocidas sin estereotipos, el idioma o idiomas —p. ej. catalán en Barcelona, valenciano, euskera en
+  Bilbao, y que el chat traduce—, hábitos de noche, consejos para quedar en persona con seguridad en una ciudad).
+- Lo que ofrece la web: **filtro de cercanía** (Premium) para que salgan primero personas cerca de ti y filtro «Mi
+  país»; **no** existe un filtro por ciudad: no digas que solo sale gente de esa ciudad.
+- **Hora caliente** de 22:00 a 23:00 **hora de España** (para ciudades de América di «hora de España», sin convertir).
+- Sin cifras de usuarios de la ciudad. 450-750 palabras, 3-5 FAQ. `common.cities` en es.js: 'Videochat por ciudades'.
+- Enlaza a la página de su país (`@country-xx`) y a 1-3 temas.
+
 **Guías** (todos los idiomas): `guides` (índice: «Guías y consejos» para el videochat) y 4 artículos que cuelgan de él:
 - `guide-icebreakers`: cómo empezar una conversación en un videochat (frases para romper el hielo, qué evitar).
 - `guide-flirting`: consejos para ligar por videochat con respeto (consentimiento, modo picante, saber parar).

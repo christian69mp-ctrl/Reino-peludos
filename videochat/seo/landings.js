@@ -37,6 +37,13 @@ const BASE = [
   { key: 'cam-to-cam', type: 'topic', parent: 'free-video-chat' },
   { key: 'video-chat-games', type: 'topic', parent: 'free-video-chat' },
   { key: 'video-chat-foreigners', type: 'topic', parent: 'free-video-chat' },
+  { key: 'video-chat-men', type: 'topic', parent: 'free-video-chat' },
+  { key: 'video-chat-trans', type: 'topic', parent: 'free-video-chat' },
+  { key: 'video-chat-gay', type: 'topic', parent: 'free-video-chat' },
+  { key: 'flirt-chat', type: 'topic', parent: 'free-video-chat' },
+  { key: 'singles-chat', type: 'topic', parent: 'free-video-chat' },
+  { key: 'video-chat-over-40', type: 'topic', parent: 'free-video-chat' },
+  { key: 'meet-people-chat', type: 'topic', parent: 'free-video-chat' },
   { key: 'alternatives', type: 'hub' },
   ...Object.keys(BRANDS).map((key) => ({ key, type: 'alternative', parent: 'alternatives', brand: BRANDS[key] })),
   // Guías: artículos largos con consejos (Google los trata como artículos)
@@ -50,6 +57,16 @@ const BASE = [
   { key: 'guide-meet-people-online', type: 'guide', parent: 'guides' },
 ];
 
+// Ciudades (búsquedas tipo «chat Madrid»): solo en español, cuelgan de la página de su país
+const CITIES = {
+  es: { madrid: 'Madrid', barcelona: 'Barcelona', valencia: 'Valencia', sevilla: 'Sevilla', malaga: 'Málaga', bilbao: 'Bilbao', zaragoza: 'Zaragoza', murcia: 'Murcia' },
+  mx: { cdmx: 'Ciudad de México' },
+  ar: { 'buenos-aires': 'Buenos Aires' },
+  co: { bogota: 'Bogotá' },
+  pe: { lima: 'Lima' },
+  cl: { santiago: 'Santiago de Chile' },
+};
+
 // Lista completa de páginas con los idiomas en que existe cada una
 const LANGS = Object.keys(COUNTRIES);
 const PAGES = [
@@ -58,6 +75,9 @@ const PAGES = [
     key: `country-${cc}`, type: 'country', parent: 'free-video-chat', country: cc,
     langs: LANGS.filter((l) => COUNTRIES[l].includes(cc)),
   })),
+  ...Object.entries(CITIES).flatMap(([cc, cities]) => Object.entries(cities).map(([slug, name]) => ({
+    key: `city-${slug}`, type: 'city', parent: `country-${cc}`, country: cc, city: name, langs: ['es'],
+  }))),
 ];
 
-module.exports = { COUNTRIES, BRANDS, PAGES, LANGS };
+module.exports = { COUNTRIES, BRANDS, CITIES, PAGES, LANGS };

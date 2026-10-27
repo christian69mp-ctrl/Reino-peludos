@@ -273,6 +273,9 @@ function landingBody(key, l) {
   const cta = `<div class="lp-cta"><div><strong>${esc(c.ctaTitle)}</strong><p>${esc(c.ctaText)}</p></div><a class="btn primary" href="/${l}/">${esc(c.ctaButton)}</a><small>🔞 ${esc(c.adultNote)}</small></div>`;
   out.push(cta);
   for (const s of p.sections || []) out.push(`<h2>${esc(s.h2)}</h2>`, resolveLinks(s.html, l));
+  // Página de país: sus ciudades
+  const cities = meta.type === 'country' ? childrenOf(key, 'city').filter((k) => has(k, l)) : [];
+  if (cities.length) out.push(`<h2>${esc(c.cities || c.countries)}</h2>`, landingLinks(cities, l));
   // Índices: todas las páginas que cuelgan de ellos
   if (meta.type === 'hub') {
     if (key === 'free-video-chat') {
@@ -287,7 +290,7 @@ function landingBody(key, l) {
   // Enlaces relacionados: hermanas, índice y el otro índice
   if (meta.type !== 'hub') {
     const siblings = childrenOf(meta.parent, meta.type).filter((k) => k !== key);
-    const extra = meta.type === 'alternative' ? ['free-video-chat', 'random-video-chat'] : meta.type === 'country' ? ['random-video-chat', 'alternatives'] : meta.type === 'guide' ? ['free-video-chat', 'no-signup-video-chat'] : ['alternatives', 'guides', ...childrenOf('free-video-chat', 'country').slice(0, 3)];
+    const extra = meta.type === 'alternative' ? ['free-video-chat', 'random-video-chat'] : meta.type === 'country' ? ['random-video-chat', 'alternatives'] : meta.type === 'guide' ? ['free-video-chat', 'no-signup-video-chat'] : meta.type === 'city' ? ['free-video-chat', 'video-chat-women', 'no-signup-video-chat'] : ['alternatives', 'guides', ...childrenOf('free-video-chat', 'country').slice(0, 3)];
     out.push(`<aside class="lp-related"><h2>${esc(c.related)}</h2>${landingLinks([meta.parent, ...siblings, ...extra], l)}</aside>`);
   } else {
     const other = { alternatives: ['free-video-chat', 'guides'], guides: ['free-video-chat', 'alternatives'] }[key] || ['alternatives', 'guides'];
@@ -351,6 +354,7 @@ function addFooterLinks(html, l) {
   const groups = [
     ['free-video-chat', ...childrenOf('free-video-chat', 'topic')],
     childrenOf('free-video-chat', 'country'),
+    LANDINGS.PAGES.filter((p) => p.type === 'city').map((p) => p.key),
     ['alternatives', ...childrenOf('alternatives')],
     ['guides', ...childrenOf('guides')],
   ].map((keys) => keys.filter((k) => has(k, l)).map((k) => `<a href="${landingUrl(k, l)}">${esc(content[l].pages[k].anchor)}</a>`).join(''));
