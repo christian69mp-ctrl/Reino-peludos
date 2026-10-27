@@ -52,7 +52,9 @@ for (const [key, p] of Object.entries(data.pages || {})) {
   }
   const n = words(html);
   const guide = PAGES.find((x) => x.key === key)?.type === 'guide';
-  const [min, lo, hi] = guide ? [800, 900, 1900] : [400, 450, 850];
+  // Las páginas principales (videochat gratis / con chicas) pueden ser más largas
+  const main = ['free-video-chat', 'video-chat-women'].includes(key);
+  const [min, lo, hi] = guide ? [800, 900, 1900] : main ? [400, 450, 1300] : [400, 450, 850];
   if (n < min) at(`solo ${n} palabras (mínimo ${lo})`);
   else if (n < lo || n > hi) warns.push(`${key}: ${n} palabras (objetivo ${lo}-${hi})`);
   for (const s of html.replace(/<[^>]+>/g, ' ').split(/(?<=[.!?])\s+/)) {

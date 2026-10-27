@@ -20,36 +20,46 @@ module.exports = {
       slug: 'free-video-chat',
       anchor: 'Free video chat',
       title: 'Free Video Chat with Strangers · La Ruleta Caliente',
-      description: 'Free video chat with strangers from around the world: live 1-on-1 calls in your browser, no downloads, translated text chat and games. Adults 18+ only.',
-      h1: 'Free video chat with people from all over the world',
-      intro: '<p>La Ruleta Caliente is a <strong>free video chat</strong> for adults: you turn on your camera, we pair you with a random person who is online right now, and you talk face to face, one on one. If the vibe isn’t there, you press <strong>Next</strong> and meet someone else. No downloads, no credit card to get started, and no limit on how many people you can meet.</p><p>This page explains what you get for free, what the optional extras are and how to have a good time while staying safe. It’s for people aged 18 and over only.</p>',
+      description: 'Free video chat with strangers, no sign-up: live 1-on-1 calls in your browser, no downloads, translated text chat and icebreaker games. Adults 18+ only.',
+      h1: 'Free video chat with strangers, no sign-up needed',
+      intro: '<p>La Ruleta Caliente is a <strong>free video chat</strong> for adults: you turn on your camera, we pair you with a random person who is online right now, and you talk face to face, one on one. If the vibe isn’t there, you press <strong>Next</strong> and meet someone else. No downloads, no credit card to get started, and no limit on how many people you can meet.</p><p>This page explains what you get for free, how to start without registering, who you’ll meet, what the optional extras are and how to have a good time while staying safe. It’s for people aged 18 and over only.</p>',
       sections: [
         {
           h2: 'What “free” really means here',
-          html: '<p>Starting is free and stays free. With a free account you can:</p><ul><li>Video chat live with random people, 1-on-1, as many times as you like.</li><li>Skip to the next person with the <strong>Next</strong> button (or the Esc key on a computer) and take a break with <strong>Stop</strong>.</li><li>Write in the text chat, which can <strong>translate messages automatically</strong>, so language is rarely a barrier.</li><li>Send reactions 👍 ❤️, switch camera and change the view options.</li><li>Earn <strong>chilis</strong> 🌶️, our free points, and spend them on superpowers.</li></ul><p>Premium exists, but it’s an add-on, not a paywall. You can use the random video chat for months without ever paying.</p>',
+          html: '<p>Starting is free and stays free. Without paying anything you can:</p><ul><li>Video chat live with random people, 1-on-1, as many times as you like and with no time limit.</li><li>Skip to the next person with the <strong>Next</strong> button (or the Esc key on a computer) and take a break with <strong>Stop</strong>.</li><li>Write in the text chat, which can <strong>translate messages automatically</strong>, so language is rarely a barrier.</li><li>Send reactions 👍 ❤️, add friends, switch camera and change the view options.</li><li>Play the four built-in games and earn <strong>chilis</strong> 🌶️, our free points, to spend on superpowers.</li></ul><p>Premium exists, but it’s an add-on, not a paywall. You can use the random video chat for months without ever paying.</p>',
         },
         {
-          h2: 'How to start a video chat in under a minute',
-          html: '<ol><li>Open La Ruleta Caliente in your phone or computer browser.</li><li>Pick your gender, enter your date of birth and confirm you are 18 or older. No sign-up needed.</li><li>Allow camera and microphone access when the browser asks.</li><li>Press start: we connect you with someone who is online at that moment.</li></ol><p>That’s it. If you want more detail, the <a href="@how">how it works</a> page walks through every button.</p>',
+          h2: 'Free video chat with no sign-up',
+          html: '<p>You don’t need an email address, a password or a social login to start. Here’s the whole process:</p><ol><li>Open La Ruleta Caliente in your phone or computer browser.</li><li>Pick your gender (woman, man, trans or couple), enter your date of birth and confirm you are 18 or older.</li><li>Allow camera and microphone access when the browser asks.</li><li>Press start: we connect you with someone who is online at that moment.</li></ol><p>An account (email or Google) is entirely optional. It’s useful if you want to keep your chilis, badges and friends across devices, and it’s only required if you decide to buy Premium. Read more on our <a href="@no-signup-video-chat">video chat with no sign-up</a> page, or see every button explained in <a href="@how">how it works</a>.</p>',
+        },
+        {
+          h2: 'Who you meet on a free video chat with strangers',
+          html: '<p>The free chat is a true random roulette: you’re matched with whoever is online, from anywhere in the world. That means women, men, trans people and couples, of all ages over 18, speaking all kinds of languages. Part of the fun is not knowing who comes next.</p><p>If you have something more specific in mind, these pages explain how it works: <a href="@video-chat-women">video chat with girls</a>, <a href="@video-chat-men">video chat with guys</a>, <a href="@couples-video-chat">video chat for couples</a> or <a href="@video-chat-foreigners">talking to people from other countries</a>. Want to make friends or simply chat? Our page on a <a href="@meet-people-chat">chat to meet new people</a> is a good place to start.</p>',
         },
         {
           h2: 'More than a webcam roulette',
-          html: '<p>Plenty of sites let you see a random face. What makes conversations here easier to start is that you always have something to do together. During a call you can play <strong>Truth or dare</strong>, <strong>Would you rather?</strong>, <strong>Rock, paper, scissors</strong> or <strong>Draw &amp; guess</strong>, pull up an icebreaker topic, or watch the <strong>Chemistry thermometer</strong> heat up as you laugh. If you both turn on <strong>Spicy mode</strong> 🌶️, the games and compliments get bolder, but only when both people have chosen it.</p><p>Every day you come back, play and receive ❤️, you collect chilis. During <strong>Hot hour</strong>, from 10 to 11 pm Spanish time, every chili counts double. You can see all of it on the <a href="@games">games and powers</a> page.</p>',
+          html: '<p>Plenty of sites let you see a random face. What makes conversations here easier to start is that you always have something to do together. During a call you can play <strong>Truth or dare</strong>, <strong>Would you rather?</strong>, <strong>Rock, paper, scissors</strong> or <strong>Draw &amp; guess</strong>, pull up an icebreaker topic, or watch the <strong>Chemistry thermometer</strong> heat up as you laugh. If you both turn on <strong>Spicy mode</strong> 🌶️, the games and compliments get bolder, but only when both people have chosen it.</p><p>Short of ideas? Borrow some openers from our <a href="@guide-icebreakers">icebreakers guide</a> or pick a few from the <a href="@guide-truth-or-dare">truth or dare questions</a> list before you start.</p><p>Every day you come back, play and receive ❤️, you collect chilis. During <strong>Hot hour</strong>, from 10 to 11 pm Spanish time, every chili counts double. You can see all of it on the <a href="@games">games and powers</a> page.</p>',
         },
         {
-          h2: 'Optional Premium, if you want more control',
-          html: '<p>Premium costs €7.99 a week or €19.99 a month and you can cancel whenever you like. It lets you choose who to see (women, men, trans people or couples), filter by country, distance and age, removes ads, keeps a 30-day history, unlocks friends and calls, spicy games and compliments, and gives you free superpowers every day.</p><p>There is also a way to try it without paying: <strong>invite a friend</strong>. When they sign up with your link and have their first conversation of more than a minute, you both get 1 day of Premium.</p>',
+          h2: 'Free vs. Premium at a glance',
+          html: '<table><thead><tr><th>Feature</th><th>Free</th><th>Premium</th></tr></thead><tbody><tr><td>Random 1-on-1 video chat</td><td>✓</td><td>✓</td></tr><tr><td>Translated text chat, reactions, games</td><td>✓</td><td>✓</td></tr><tr><td>Choose who to see (women, men, trans people or couples)</td><td>–</td><td>✓</td></tr><tr><td>Filters by country, distance and age</td><td>–</td><td>✓</td></tr><tr><td>No ads, 30-day history, friends and calls</td><td>–</td><td>✓</td></tr><tr><td>Spicy games and compliments, free daily superpowers</td><td>–</td><td>✓</td></tr></tbody></table><p>Premium costs €7.99 a week or €19.99 a month and you can cancel whenever you like. There are also two ways to get it without paying: <strong>invite a friend</strong> (when they sign up with your link and have their first conversation of more than a minute, you both get 1 day of Premium), or finish in the top three of the <strong>weekly chili ranking</strong>, which wins 7, 3 or 1 day every Monday.</p>',
+        },
+        {
+          h2: 'On your phone or your computer',
+          html: '<p>The video chat runs in the browser, so there’s nothing to download from an app store. On a phone it uses your front or back camera, and you can switch between them during the call. If you use it often, install it as an app straight from the browser: it gets its own icon on your home screen. Our <a href="@mobile-video-chat">mobile video chat</a> page has the details.</p><p>Whatever device you use, a bit of light in front of you and a stable connection make a big difference to how people react. The guide on <a href="@guide-camera">how to look good on camera</a> takes two minutes to read.</p>',
         },
         {
           h2: 'Free, but not a free-for-all',
-          html: '<p>A free video chat only works if people feel comfortable. Your video passes through our server, so <strong>nobody sees your IP address</strong>. Calls carry an invisible watermark that discourages recording, and everyone is reminded that recording is forbidden. If someone breaks the <a href="@rules">community rules</a>, press Report: a real person reviews it and repeat offenders are banned.</p><p>A few habits help too: keep personal details to yourself, never send money to someone you met online, and leave any conversation that feels off. Our <a href="@safety">safety tips</a> cover scams and sextortion in more depth.</p>',
+          html: '<p>A free video chat only works if people feel comfortable. Your video passes through our server, so <strong>nobody sees your IP address</strong>. Calls carry an invisible watermark that discourages recording, and everyone is reminded that recording is forbidden. If someone breaks the <a href="@rules">community rules</a>, press Report: a real person reviews it and repeat offenders are banned.</p><p>A few habits help too: keep personal details to yourself, never send money to someone you met online, and leave any conversation that feels off. Our <a href="@safety">safety tips</a> and the article on <a href="@guide-privacy">video chat privacy</a> cover scams and sextortion in more depth.</p>',
         },
       ],
       faq: [
-        { q: 'Is La Ruleta Caliente really free?', a: 'Yes. Using the random video chat costs nothing, needs no sign-up and has no time limit. Premium is optional and only adds extras like filters and friends.' },
-        { q: 'Do I need to sign up to video chat?', a: 'No. You can jump in as a guest: just pick your gender, enter your date of birth and confirm you are 18 or over. An account is optional, to keep your progress across devices or pay for Premium.' },
+        { q: 'Is La Ruleta Caliente really free?', a: 'Yes. Using the random video chat costs nothing and has no time limit. Premium is optional and only adds extras like filters, friends and calls.' },
+        { q: 'Can I video chat for free without signing up?', a: 'Yes. You can jump in as a guest: just pick your gender, enter your date of birth and confirm you are 18 or over. An account is optional, to keep your progress across devices or pay for Premium.' },
+        { q: 'Is there a time limit on free calls?', a: 'No. You can talk to one person for as long as you both want, or meet as many people as you like by pressing Next.' },
         { q: 'Do I have to download anything?', a: 'No. It runs in the browser on your phone or computer. If you prefer, you can install it as an app from the browser itself.' },
-        { q: 'Can I talk to people who speak another language?', a: 'Yes. The text chat can translate messages automatically, so you can chat with someone even if you don’t share a language.' },
+        { q: 'Is free video chat with strangers safe?', a: 'We hide your IP address, forbid recording and review every report by hand. Stay safe by keeping personal details private and never sending money or intimate images.' },
+        { q: 'Can I choose who I talk to for free?', a: 'The free chat is random. Choosing who you see and filtering by country, distance or age are Premium features, which you can also earn by inviting friends.' },
       ],
     },
     'random-video-chat': {
@@ -157,35 +167,45 @@ module.exports = {
     },
     'video-chat-women': {
       slug: 'video-chat-with-women',
-      anchor: 'Video chat with women',
-      title: 'Video Chat with Women · La Ruleta Caliente',
-      description: 'Want to video chat with women? See how the gender filter works, what is free, and how to make a good impression on random live calls. Adults 18+ only.',
-      h1: 'Video chat with women: how it works and how to get it right',
-      intro: '<p>Looking for a <strong>video chat with women</strong>? On La Ruleta Caliente the free chat is random, so you meet whoever is online: women, men, trans people and couples. If you specifically want to talk to women, Premium includes a filter that lets you choose who you see.</p><p>Here’s an honest explanation of how it works, plus a few tips that make a bigger difference than any filter. Adults 18+ only.</p>',
+      anchor: 'Video chat with girls',
+      title: 'Video Chat with Girls and Women · La Ruleta Caliente',
+      description: 'Want to video chat with girls? See how the gender filter works, what is free, and how to make a good impression on random live calls. Adults 18+ only.',
+      h1: 'Video chat with girls: how it works and how to get it right',
+      intro: '<p>Looking for a <strong>video chat with girls</strong>? On La Ruleta Caliente the free chat is random, so you meet whoever is online: women, men, trans people and couples. If you specifically want to <strong>chat with girls</strong>, Premium includes a filter that lets you choose who you see.</p><p>Here’s an honest explanation of how it works, what you can do for free, what to talk about and a few tips that make a bigger difference than any filter. Everyone here is an adult: the site is 18+ only.</p>',
       sections: [
         {
           h2: 'Free random chat or choosing with Premium',
-          html: '<table><thead><tr><th>Option</th><th>Who you meet</th></tr></thead><tbody><tr><td>Free account</td><td>Anyone online, at random</td></tr><tr><td>Premium</td><td>Choose women, men, trans people or couples, and filter by country, distance and age</td></tr></tbody></table><p>Premium costs €7.99 a week or €19.99 a month and can be cancelled whenever you want. You can also earn days of Premium for free: by inviting a friend (you both get 1 day once they sign up and have their first conversation of over a minute) or by finishing in the top three of the weekly chili ranking.</p>',
+          html: '<table><thead><tr><th>Option</th><th>Who you meet</th></tr></thead><tbody><tr><td>Free, no sign-up</td><td>Anyone online, at random</td></tr><tr><td>Premium</td><td>Choose women, men, trans people or couples, and filter by country, distance and age</td></tr></tbody></table><p>Premium costs €7.99 a week or €19.99 a month and can be cancelled whenever you want. To try the random chat first, you don’t even need an account: see our <a href="@no-signup-video-chat">video chat with no sign-up</a> page.</p>',
+        },
+        {
+          h2: 'Can you video chat with women for free?',
+          html: '<p>Yes, in the sense that the random chat is free and you’ll meet women in it, along with everyone else who is online. What isn’t free is choosing to see <em>only</em> women. We’d rather say that clearly than promise a free “girls only” chat that doesn’t exist.</p><p>There are still ways to unlock the filter without paying:</p><ul><li><strong>Invite a friend.</strong> When they sign up with your link and have their first conversation of over a minute, you both get 1 day of Premium.</li><li><strong>Climb the weekly ranking.</strong> Chilis 🌶️ come from logging in daily, playing games, receiving ❤️ and completing weekly challenges. Every Monday the top three win 7, 3 or 1 day of Premium.</li><li><strong>Play during Hot hour.</strong> From 10 to 11 pm Spanish time, chilis count double.</li></ul>',
         },
         {
           h2: 'It works the same for everyone',
-          html: '<p>The filter isn’t only about women. Whoever you are and whoever you’d like to meet, you can choose: women who want to talk to women, men who prefer to meet men, people looking for trans partners to chat with, or couples who want to meet other couples. Everyone has the same options and the same rules.</p>',
+          html: '<p>The filter isn’t only about women. Whoever you are and whoever you’d like to meet, you can choose: women who want to talk to women, men who prefer to meet other men (see <a href="@video-chat-gay">gay video chat</a>), people who want to <a href="@video-chat-men">video chat with guys</a>, people looking for a <a href="@video-chat-trans">trans video chat</a>, or couples who want to meet other couples. Everyone has the same options and the same rules.</p><p>It also helps to remember that the women you meet have exactly the same tools as you. They can filter, skip and report, and many of them are choosing who they want to see too. So rather than thinking of it as “finding girls”, think of it as being someone worth stopping for: friendly, relaxed and genuinely curious about the person on the other side.</p>',
         },
         {
           h2: 'How to make a good first impression',
-          html: '<p>People tend to press Next within seconds if a call starts badly, whoever is on the other side. What helps:</p><ul><li><strong>Show your face, in good light.</strong> A dark room or a camera pointing at the ceiling rarely gets a second look.</li><li><strong>Say hello like a person.</strong> A real greeting and a question works better than staring silently.</li><li><strong>Be playful, not pushy.</strong> Invite her to a game of Would you rather? or Draw &amp; guess instead of jumping to personal questions.</li><li><strong>Respect a Next.</strong> If someone moves on, so do you. No follow-ups, no grudges.</li><li><strong>Let Spicy mode do the asking.</strong> Bolder games and compliments only appear when both of you have it on, so you never have to guess.</li></ul>',
+          html: '<p>People tend to press Next within seconds if a call starts badly, whoever is on the other side. What helps:</p><ul><li><strong>Show your face, in good light.</strong> A dark room or a camera pointing at the ceiling rarely gets a second look. Our guide on <a href="@guide-camera">looking good on camera</a> covers light, framing and sound.</li><li><strong>Say hello like a person.</strong> A real greeting and a question works better than staring silently.</li><li><strong>Be playful, not pushy.</strong> Invite her to a game of Would you rather? or Draw &amp; guess instead of jumping to personal questions.</li><li><strong>Respect a Next.</strong> If someone moves on, so do you. No follow-ups, no grudges.</li><li><strong>Let Spicy mode do the asking.</strong> Bolder games and compliments only appear when both of you have it on, so you never have to guess.</li></ul>',
+        },
+        {
+          h2: 'What to talk about with a girl on video chat',
+          html: '<p>The best conversations feel like two people chatting, not an interview. A few ideas that work:</p><ul><li><strong>Start with what you can see.</strong> A poster, a pet, a guitar in the background: commenting on it is natural and shows you’re paying attention.</li><li><strong>Ask open questions.</strong> “What’s the best thing that happened this week?” gets a story; “How are you?” gets a one-word answer.</li><li><strong>Talk about places.</strong> Where she lives, where she’d like to travel. The chat translates messages automatically, so a different language is no excuse.</li><li><strong>Play a game.</strong> Our lists of <a href="@guide-truth-or-dare">truth or dare questions</a> and <a href="@guide-would-you-rather">would you rather questions</a> give you plenty to pick from.</li></ul><p>Stuck on the very first line? The <a href="@guide-icebreakers">icebreakers guide</a> has openers for every mood, and if things turn flirty, our <a href="@flirt-chat">flirt chat</a> page explains how to keep it fun and respectful.</p>',
         },
         {
           h2: 'A respectful space keeps women coming back',
-          html: '<p>Any video chat is only as good as the people who feel comfortable using it. That’s why the <a href="@rules">community rules</a> are strict about harassment and unsolicited content, why reports are reviewed by real people, and why recording is forbidden and calls carry an invisible watermark. Women who chat here can report and skip in one tap, and nobody sees anyone’s IP address. If you behave the way you would in a bar with friends watching, you’ll be fine.</p>',
+          html: '<p>Any video chat is only as good as the people who feel comfortable using it. That’s why the <a href="@rules">community rules</a> are strict about harassment and unsolicited content, why reports are reviewed by real people, and why recording is forbidden and calls carry an invisible watermark. Women who chat here can report and skip in one tap, and nobody sees anyone’s IP address. If you behave the way you would in a bar with friends watching, you’ll be fine.</p><p>A few things are simply off-limits: sending unsolicited explicit content, insulting someone who skipped you, pressuring a woman for her number or socials, or trying to record the call. Any of these can get you reported, and a reported user is never matched with that person again. Repeat offenders lose access to the chat. On the other hand, people who are pleasant to talk to tend to collect ❤️ reactions, which earn chilis 🌶️ and help you climb the weekly ranking.</p>',
         },
         {
           h2: 'Safety goes both ways',
-          html: '<p>Fake profiles and scams exist on every platform. Be careful with anyone who quickly asks you to move to another app, wants money or gifts, or tells you a sad story that ends with a payment. Real people chat; scammers rush. If something feels wrong, press Next and report it. Our <a href="@safety">safety page</a> explains the warning signs.</p><p>Want to keep it random instead? Have a look at our <a href="@random-video-chat">random video chat</a> or the guide to <a href="@adult-video-chat">adult video chat</a>.</p>',
+          html: '<p>Fake profiles and scams exist on every platform. Be careful with anyone who quickly asks you to move to another app, wants money or gifts, or tells you a sad story that ends with a payment. Real people chat; scammers rush. If something feels wrong, press Next and report it. Our <a href="@safety">safety page</a> explains the warning signs.</p><p>Want to keep it random instead? Have a look at our <a href="@random-video-chat">random video chat</a>, the main <a href="@free-video-chat">free video chat</a> page or the guide to <a href="@adult-video-chat">adult video chat</a>.</p>',
         },
       ],
       faq: [
-        { q: 'Can I video chat only with women for free?', a: 'No. The free chat is random, so you meet anyone who is online. Choosing to see only women is part of Premium.' },
+        { q: 'Can I video chat with girls for free?', a: 'You can meet women for free on the random chat, along with everyone else online. Choosing to see only women is part of Premium.' },
+        { q: 'Is there a video chat only with girls?', a: 'With Premium you can set the filter to women, so you are only matched with women. You can also filter by country, distance and age.' },
+        { q: 'Do I need to sign up to chat with girls?', a: 'No. You can start as a guest with just your gender, date of birth and confirmation that you are 18 or over. An account is only needed to pay for Premium.' },
         { q: 'Can women filter to see only women or only men?', a: 'Yes. The filter works for everyone: with Premium you can choose women, men, trans people or couples, whatever your own gender.' },
         { q: 'How can I get Premium without paying?', a: 'Invite a friend with your link: when they sign up and have their first conversation of over a minute, you each get 1 day. The top three in the weekly ranking also win Premium.' },
         { q: 'Are the women real people?', a: 'Yes, every match is another user live on camera at that moment. If you suspect a fake account or a scam, report it so our team can review it.' },
@@ -439,6 +459,246 @@ module.exports = {
         { q: 'What if we don’t speak the same language?', a: 'The text chat translates messages automatically, so you can understand each other in writing even without a shared language.' },
         { q: 'Is it good for practising a language?', a: 'Yes. Many people use it for informal language exchange. Tell your match what you’re learning and offer to help with English in return.' },
         { q: 'Which languages is the site in?', a: 'English, Spanish, Portuguese, French, German and Italian.' },
+      ],
+    },
+    'video-chat-men': {
+      slug: 'video-chat-with-men',
+      anchor: 'Video chat with guys',
+      title: 'Video Chat with Guys and Men · La Ruleta Caliente',
+      description: 'Video chat with guys live and 1-on-1, right in your browser. Free random matches, plus a Premium filter if you only want to chat with men. Adults 18+ only.',
+      h1: 'Video chat with guys: meet men live, one on one',
+      intro: '<p>Want to <strong>video chat with guys</strong>? On La Ruleta Caliente you talk face to face, one on one, with men who are online at this very moment, from your phone or computer and without installing anything. The free chat is random, so you’ll also meet women, trans people and couples along the way; if you only want to <strong>chat with men</strong>, the Premium filter lets you pick.</p><p>Here’s how the matching works, what you get without paying and how to keep every call relaxed and safe. Everyone on the site is an adult: it’s strictly 18+.</p>',
+      sections: [
+        {
+          h2: 'Two ways to video chat with men',
+          html: '<table><thead><tr><th>How you chat</th><th>Who appears on your screen</th></tr></thead><tbody><tr><td>Free, random</td><td>Whoever is online: men, women, trans people or couples</td></tr><tr><td>Premium</td><td>Only the groups you choose, for example men, plus filters for country, distance and age</td></tr></tbody></table><p>Premium is €7.99 a week or €19.99 a month and you can cancel it whenever you want. Plenty of people never pay at all and simply press <strong>Next</strong> until they land on someone they click with.</p>',
+        },
+        {
+          h2: 'Who looks for a chat with men?',
+          html: '<p>All sorts of people. Women who want to meet guys from other countries, men who’d rather talk to other men (we have a page on <a href="@video-chat-gay">gay video chat</a> for that), couples who enjoy meeting someone new together, or people who just want a laid-back chat about football, travel, music or games with a stranger. The filter is the same for everyone, whatever gender you chose when you came in.</p><p>Every match is another real user, live on camera at that moment. If you ever suspect someone isn’t who they claim to be, report them.</p>',
+        },
+        {
+          h2: 'Turn a quick hello into a real conversation',
+          html: '<p>The first ten seconds decide most calls. Smile, say where you’re from and ask something easy. If talking feels awkward, let a game do the work: start a round of <strong>Rock, paper, scissors</strong>, try <strong>Draw &amp; guess</strong> or ask a <strong>Would you rather?</strong> question. Our <a href="@guide-icebreakers">icebreakers guide</a> has dozens of openers that work with anyone.</p><p>Does he speak another language? The text chat translates messages automatically, so a guy from Brazil or Germany is as easy to talk to as your neighbour. And when the chemistry thermometer heats up, you can both switch on <strong>Spicy mode</strong> 🌶️ for bolder games, but it only kicks in if both of you have chosen it.</p>',
+        },
+        {
+          h2: 'You stay in control of every call',
+          html: '<ul><li><strong>Next</strong> (or Esc on a keyboard) moves you on instantly; <strong>Stop</strong> lets you take a break.</li><li><strong>Report</strong> ends the call straight away, you won’t be matched with that person again, and a real member of our team reviews it.</li><li>Video is relayed through our server, so nobody sees your IP address.</li><li>An invisible watermark discourages recording, and recording is against the <a href="@rules">rules</a>.</li></ul><p>Keep your surname, workplace and social media to yourself until you trust someone, and never send money or intimate images to a person you’ve just met. The <a href="@safety">safety tips</a> explain how sextortion and romance scams usually begin.</p>',
+        },
+        {
+          h2: 'Ways to unlock the filter without paying',
+          html: '<p>Invite a friend with your personal link: when they sign up and have their first conversation lasting more than a minute, you both receive 1 day of Premium. You can also collect chilis 🌶️ by logging in every day, playing and receiving ❤️; the top three in the weekly ranking win Premium every Monday (7, 3 or 1 day).</p>',
+        },
+      ],
+      faq: [
+        { q: 'Can I video chat only with guys for free?', a: 'The free chat is random, so you meet anyone who is online. Seeing only men is part of Premium, which you can also win through invites or the weekly ranking.' },
+        { q: 'Can men use the filter to meet other men?', a: 'Yes. The filter works the same for everyone: a man can choose to see men, and a woman can choose to see men or women.' },
+        { q: 'Do guys have to sign up to chat?', a: 'No. Anyone can join as a guest by choosing a gender, entering a date of birth and confirming they are 18 or over.' },
+        { q: 'What if a guy is rude or makes me uncomfortable?', a: 'Press Report. The call ends immediately, you won’t be matched with him again and our team reviews what happened.' },
+      ],
+    },
+    'video-chat-trans': {
+      slug: 'trans-video-chat',
+      anchor: 'Trans video chat',
+      title: 'Trans Video Chat, Live and 1-on-1 · La Ruleta Caliente',
+      description: 'Trans video chat for adults: join as trans, meet people live 1-on-1 and use the Premium filter to chat with trans people. Respect rules apply. 18+ only.',
+      h1: 'Trans video chat: meet people live, with respect',
+      intro: '<p>La Ruleta Caliente is a live, one-to-one video chat for adults, and it’s open to everyone. When you enter, you can tell us you’re a woman, a man, <strong>trans</strong> or a couple. That makes it a simple <strong>trans video chat</strong> option, whether you are trans yourself and want to meet people, or you’d like to <strong>chat with trans people</strong> using the Premium filter.</p><p>This page explains how it works and, just as important, how we keep it respectful. Adults aged 18 and over only.</p>',
+      sections: [
+        {
+          h2: 'How the trans chat works',
+          html: '<ol><li>Open the site in your browser, on mobile or desktop. Nothing to download.</li><li>Choose <strong>Trans</strong> (or whichever option describes you), add your date of birth and confirm you’re 18+. No email is needed.</li><li>Allow your camera and microphone and press start.</li></ol><p>In the free chat the matches are random, so you’ll meet all kinds of people. With Premium (€7.99 a week or €19.99 a month, cancel any time) you can choose to see trans people, women, men or couples, and narrow it down by country, distance and age.</p>',
+        },
+        {
+          h2: 'Respect is a rule, not a suggestion',
+          html: '<p>A trans chat only works if trans people feel safe in it. Our <a href="@rules">community rules</a> ban mockery, insults, harassment, homophobia and transphobia, and the report menu has a specific option for <strong>homophobia or transphobia</strong>. When you report someone, the call ends at once, you’re never paired with them again, and a real person on our team reviews it. Repeat offenders are banned, and decisions can be appealed.</p><p>A good rule of thumb for everyone: talk to the person in front of you, not to a label. Ask about their day, their city, their music. Intrusive questions about someone’s body or transition are not an icebreaker, and treating people as a curiosity is the fastest way to get skipped and reported.</p>',
+        },
+        {
+          h2: 'Privacy features that matter',
+          html: '<ul><li><strong>Your IP stays hidden</strong>: video travels through our server, not directly between devices.</li><li><strong>No email to start</strong>: you can chat as a guest and use any nickname you like.</li><li><strong>Invisible watermark</strong> on calls to discourage recording, which is forbidden.</li><li><strong>Optional account</strong> later, if you want to keep friends and progress across devices.</li></ul><p>Think about what your background shows (mail, photos, a uniform) and keep identifying details private until you know someone. Our <a href="@guide-privacy">privacy tips for video chat</a> go into more detail.</p>',
+        },
+        {
+          h2: 'Making conversation easier',
+          html: '<p>Not sure how to start? Use the built-in games: <strong>Truth or dare</strong>, <strong>Would you rather?</strong>, <strong>Rock, paper, scissors</strong> and <strong>Draw &amp; guess</strong> all work during the call, and the icebreaker topics give you something to talk about instantly. The text chat translates automatically, so you can meet people from other countries too. If you both want something a bit flirtier, <strong>Spicy mode</strong> 🌶️ only switches on when both of you have it enabled.</p><p>Looking for more ways to meet people? Try our <a href="@flirt-chat">flirt chat</a> page or simply jump into the <a href="@random-video-chat">random video chat</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: 'Can I join as a trans person?', a: 'Yes. When you enter you can choose Trans as your option, along with your date of birth and confirmation that you are 18 or older.' },
+        { q: 'Can I choose to video chat only with trans people?', a: 'Yes, with Premium. The filter lets you pick trans people, women, men or couples. The free chat is random.' },
+        { q: 'What happens if someone is transphobic?', a: 'Report them using the homophobia or transphobia option. The call ends, you won’t meet them again and our team reviews the report.' },
+        { q: 'Is the trans video chat free?', a: 'Starting is free and needs no sign-up. Premium is optional and adds the filter, friends, calls and other extras.' },
+      ],
+    },
+    'video-chat-gay': {
+      slug: 'gay-video-chat',
+      anchor: 'Gay video chat',
+      title: 'Gay Video Chat for Men 18+ · La Ruleta Caliente',
+      description: 'Gay video chat for adults: meet men live and 1-on-1 in your browser. Premium lets men choose to see only men; homophobia is banned and reviewed. 18+.',
+      h1: 'Gay video chat: meet other men live',
+      intro: '<p>Looking for a <strong>gay video chat</strong>? La Ruleta Caliente connects you live, face to face and one on one, with people who are online right now, straight from your browser. The free mode is random; if you’re a man who wants to meet <strong>only other men</strong>, the Premium filter lets you choose exactly that.</p><p>Below: how to set it up, how we deal with homophobia, and some privacy habits worth having in any <strong>gay chat</strong>. The site is for adults 18+ only.</p>',
+      sections: [
+        {
+          h2: 'Setting up a gay video chat',
+          html: '<p>Join as a guest: choose <strong>Man</strong>, enter your date of birth and confirm you’re 18 or over. No email, no password. Then:</p><ul><li><strong>Free:</strong> you’re matched at random with anyone online, so you’ll meet men, women, trans people and couples.</li><li><strong>Premium:</strong> pick <strong>Men</strong> in the filter and you’ll only be matched with men. You can also filter by country, distance and age.</li></ul><p>Premium costs €7.99 a week or €19.99 a month and can be cancelled any time. You can also earn free days: invite a friend (you both get 1 day after their first conversation of over a minute) or finish in the weekly top three.</p>',
+        },
+        {
+          h2: 'Zero tolerance for homophobia',
+          html: '<p>Nobody should have to put up with slurs or mockery for being who they are. Homophobia and transphobia are explicitly banned in our <a href="@rules">community rules</a>, and the report menu includes them as a reason. A report ends the call instantly, keeps you from ever being matched with that person again, and goes to a human moderator. Accounts that break the rules get banned.</p><p>The same respect applies in every direction: no pressure, no unsolicited content, and a Next means the conversation is over.</p>',
+        },
+        {
+          h2: 'Privacy first',
+          html: '<p>Not everyone is out to everyone, and that’s nobody else’s business. A few features help you stay discreet:</p><ul><li>Video goes through our server, so the other person never sees your IP address.</li><li>You can chat as a guest without giving an email.</li><li>Calls carry an invisible watermark, and recording is prohibited.</li></ul><p>On your side: keep your face-and-full-name combination to yourself until you trust someone, avoid showing anything in the background that identifies your home or job, and never send intimate images to a stranger. Sextortion scams often start with exactly that. Read our <a href="@safety">safety page</a> to spot the signs.</p>',
+        },
+        {
+          h2: 'Break the ice, have some fun',
+          html: '<p>Video chat is better when there’s something to do. Challenge him to <strong>Draw &amp; guess</strong>, throw a <strong>Would you rather?</strong> question, or play a round of <strong>Truth or dare</strong> using our <a href="@guide-truth-or-dare">list of questions and dares</a>. If you both feel like flirting, switch on <strong>Spicy mode</strong> 🌶️: the bolder games and compliments only appear when both people have turned it on. Talking to someone abroad? The chat translates messages automatically.</p><p>Every game, daily visit and ❤️ you receive earns chilis 🌶️, which unlock superpowers like <strong>Rewind</strong> to reconnect with someone you skipped by mistake (if they accept).</p>',
+        },
+      ],
+      faq: [
+        { q: 'Can I chat only with men?', a: 'Yes, with Premium: choose Men in the filter and you will only be matched with men. The free chat is random.' },
+        { q: 'Is the gay video chat anonymous?', a: 'You can join without an email and nobody sees your IP address. It is not a lawless space though: rules apply and reports are reviewed.' },
+        { q: 'Does it work on my phone?', a: 'Yes. It runs in the mobile browser, and you can install it as an app from the browser if you like. There is no app store download.' },
+        { q: 'What should I do if someone insults me for being gay?', a: 'Report them with the homophobia option. The call ends, you will not meet them again and a moderator reviews it.' },
+      ],
+    },
+    'flirt-chat': {
+      slug: 'flirt-chat',
+      anchor: 'Flirt chat',
+      title: 'Flirt Chat: Online Flirting on Video · La Ruleta Caliente',
+      description: 'Flirt chat on live video: meet someone new 1-on-1, play flirty games and turn on Spicy mode only when you both want it. Respect first. Adults 18+ only.',
+      h1: 'Flirt chat: online flirting, face to face',
+      intro: '<p>A <strong>flirt chat</strong> on video is very different from swiping photos. On La Ruleta Caliente you meet someone live, one on one, and within seconds you know if there’s a spark: the smile, the voice, the sense of humour. No endless texting, no profile to polish. If it’s not there, press <strong>Next</strong>; if it is, keep going.</p><p>Here’s how <strong>online flirting</strong> works on our video chat, the tools that make it easier, and the ground rules that keep it fun for both sides. Adults 18+ only.</p>',
+      sections: [
+        {
+          h2: 'Why flirting works better on video',
+          html: '<p>Text hides almost everything that makes attraction happen. On camera you get tone of voice, eye contact and laughter in real time, and you know you’re talking to a real person, not a carefully chosen photo. It also moves faster: in ten minutes of video you learn more about someone than in a week of messages.</p><p>Of course, not every call will be a match. That’s part of the game, and nobody takes a Next personally.</p>',
+        },
+        {
+          h2: 'Flirty tools built into the chat',
+          html: '<ul><li><strong>Chemistry thermometer</strong>: it rises as you talk, laugh and react, a playful sign that things are going well.</li><li><strong>Reactions</strong> 👍 ❤️: send a heart when you like someone. Hearts also earn them chilis 🌶️.</li><li><strong>Games</strong>: <strong>Would you rather?</strong> and <strong>Truth or dare</strong> are natural flirting games; our <a href="@guide-would-you-rather">Would you rather questions</a> include a section for couples and dates.</li><li><strong>Spicy mode</strong> 🌶️: bolder questions, dares and compliments, but only when <strong>both</strong> of you have turned it on. Nobody gets a spicy prompt they didn’t ask for.</li><li><strong>Add as friend</strong>: if you click, send a friend request so you can find each other again.</li></ul>',
+        },
+        {
+          h2: 'Consent makes it fun',
+          html: '<p>Good flirting is a back-and-forth, not a performance. Watch how the other person responds: if they laugh and play along, great; if they go quiet, change the subject or press Next, respect it. Compliments about someone’s smile or humour land better than comments about their body. And no means no, on video exactly as in person.</p><p>The <a href="@rules">community rules</a> forbid harassment and unsolicited content, and any report is reviewed by a real person. For more ideas, read our guide on <a href="@guide-flirting">how to flirt on video chat</a>.</p>',
+        },
+        {
+          h2: 'Choose who you flirt with',
+          html: '<p>The free chat is random: you meet women, men, trans people and couples. With Premium (€7.99 a week or €19.99 a month, cancel any time) you choose who appears, and you can filter by country, distance and age, which helps if you’d like to meet someone closer to home. Want a nudge? <strong>Super hello</strong> highlights your greeting the moment you connect, and <strong>Rewind</strong> lets you ask to reconnect with someone you skipped by mistake.</p><p>Flirt during <strong>Hot hour</strong>, every night from 10 to 11 pm Spanish time, and your chilis count double.</p>',
+        },
+        {
+          h2: 'Flirt smart, stay safe',
+          html: '<p>Chemistry can make people drop their guard, which is exactly what scammers count on. Be wary of anyone who asks you to move to another app straight away, wants money or gifts, or pushes you to undress on camera. Recording is forbidden and calls carry an invisible watermark, but the safest image is one you never sent. More tips on our <a href="@safety">safety page</a>.</p>',
+        },
+      ],
+      faq: [
+        { q: 'Is the flirt chat free?', a: 'Yes, you can flirt on the random video chat for free and without signing up. Premium adds filters and extras but is optional.' },
+        { q: 'What is Spicy mode?', a: 'An option that unlocks bolder games and compliments. It only works when both people have turned it on, and either can switch it off.' },
+        { q: 'Can I see the same person again?', a: 'If you hit it off, add them as a friend. If you skipped them by mistake, the Rewind superpower asks them to reconnect.' },
+        { q: 'Is it OK to flirt with strangers on video?', a: 'Yes, as long as it stays respectful and consensual. Everyone is 18+, rules apply and anyone can report inappropriate behaviour.' },
+      ],
+    },
+    'singles-chat': {
+      slug: 'singles-chat',
+      anchor: 'Singles chat',
+      title: 'Singles Chat on Live Video · La Ruleta Caliente',
+      description: 'A singles chat with real faces: meet new people live on 1-on-1 video, ask the questions that matter and see if there is chemistry. Free to start, 18+ only.',
+      h1: 'Singles chat: meet single people face to face',
+      intro: '<p>Tired of messaging someone for days only to find there’s no spark on the first date? A video <strong>singles chat</strong> skips that step. On La Ruleta Caliente you meet people live, one on one, and you can tell within minutes whether you get on. It works in your browser, it’s free to start and you don’t need to register.</p><p>One honest note before we start: this is a <strong>chat for singles</strong> and for anyone who wants to meet new people, but we can’t promise that everyone you meet is single. Asking is part of the conversation. Adults 18+ only.</p>',
+      sections: [
+        {
+          h2: 'Why video instead of profiles',
+          html: '<p>Profiles are curated. Video is real. On a live call you see the person as they are today, hear their voice and notice whether they make you laugh. Many single people use video chat precisely because it saves time: rather than ten matches who never reply, you have ten short conversations in an evening and remember the one that stood out.</p><p>It also helps with nerves. There’s no table booked and no bill to split: if it doesn’t click, you press <strong>Next</strong> and nobody is offended.</p>',
+        },
+        {
+          h2: 'How to find other singles here',
+          html: '<ul><li><strong>Ask early and lightly.</strong> “So what brings you here tonight?” is an easy way to learn whether someone is looking to date, make friends or just pass the time.</li><li><strong>Narrow it down with Premium.</strong> Filters by gender, age, country and distance help you meet people who fit what you’re looking for. Premium is €7.99 a week or €19.99 a month and you can cancel whenever you like.</li><li><strong>Keep the good ones.</strong> Add people as friends so you can find them again; Premium also keeps a 30-day history of who you met.</li><li><strong>Come back at peak time.</strong> <strong>Hot hour</strong>, 10 to 11 pm Spanish time every night, doubles your chilis 🌶️.</li></ul>',
+        },
+        {
+          h2: 'Conversation starters for singles',
+          html: '<p>Small talk gets old quickly. Try questions that reveal something: what their perfect Sunday looks like, the last trip they took, the thing they’d never compromise on in a relationship. A round of <strong>Would you rather?</strong> or <strong>Truth or dare</strong> is a great shortcut to someone’s personality, and if you’re both up for it, <strong>Spicy mode</strong> 🌶️ adds flirtier prompts. It only works when both of you activate it.</p><p>Need inspiration? Our <a href="@guide-icebreakers">icebreakers guide</a> and <a href="@guide-flirting">flirting tips</a> are written for exactly this.</p>',
+        },
+        {
+          h2: 'From video chat to a first date, safely',
+          html: '<p>If you meet someone you like, take your time. Talk again on video before swapping numbers, and keep personal details such as your address and workplace private at first. When you do meet, choose a public place, tell a friend and arrange your own transport. Our guide on <a href="@guide-meet-people-online">how to meet new people online</a> covers each step.</p><p>And be alert to the classic warning signs: someone who declares love very quickly, refuses a second video call or asks for money. Report anything suspicious; a real person reviews every report.</p>',
+        },
+      ],
+      faq: [
+        { q: 'Is everyone on the singles chat single?', a: 'We cannot guarantee it. People join for many reasons, so ask early and be honest about what you are looking for yourself.' },
+        { q: 'Is it a dating site?', a: 'Not exactly. It is a live 1-on-1 video chat for adults where many people meet, flirt and sometimes date, but there are no dating profiles.' },
+        { q: 'Can I filter by age or distance?', a: 'Yes, with Premium you can filter by age, country, distance and gender. The free chat matches you at random.' },
+        { q: 'How do I keep in touch with someone I liked?', a: 'Send them a friend request during the call. Premium also unlocks calls with friends and a 30-day history.' },
+      ],
+    },
+    'video-chat-over-40': {
+      slug: 'chat-over-40',
+      anchor: 'Chat for over 40s',
+      title: 'Chat for Over 40 and Over 50 · La Ruleta Caliente',
+      description: 'A chat for over 40 and over 50: meet grown-ups live on 1-on-1 video, use the Premium age filter to meet people your age, no app needed. Adults 18+ only.',
+      h1: 'Chat for over 40s and over 50s: live video, your way',
+      intro: '<p>Random video chat isn’t only for twenty-somethings. Plenty of adults in their forties, fifties and beyond enjoy meeting new people face to face, whether for good conversation, friendship or a little flirting. La Ruleta Caliente works as a <strong>chat for over 40</strong> and an <strong>over 50 chat</strong> too: you meet adults of all ages, and with Premium you can filter by age to meet people closer to yours.</p><p>Here’s how it works, step by step, plus some practical tips. As always, the site is for people aged 18 and over.</p>',
+      sections: [
+        {
+          h2: 'Meeting people your own age',
+          html: '<p>The free chat is random, so you’ll meet adults of every age. If you’d rather talk to people of a particular age range, Premium includes an <strong>age filter</strong>, along with filters for gender, country and distance. Premium costs €7.99 a week or €19.99 a month, and you can cancel whenever you like, no strings attached.</p><p>Many people mix both: they chat at random most of the time and switch on the filter when they want a more relaxed conversation with people at a similar stage of life.</p>',
+        },
+        {
+          h2: 'Getting started takes a minute',
+          html: '<ol><li>Open the website in the browser you normally use, on a computer or on a phone.</li><li>Choose your gender, type your date of birth and confirm you’re over 18. You don’t need an email or a password.</li><li>When the browser asks, allow the camera and microphone.</li><li>Press start. To move on to someone else, press <strong>Next</strong>; to pause, press <strong>Stop</strong>.</li></ol><p>If you’d like a step-by-step tour of the buttons, see <a href="@how">how it works</a>. You can also install the site as an app from your browser for quicker access.</p>',
+        },
+        {
+          h2: 'A few tips for a better call',
+          html: '<ul><li><strong>Light from the front.</strong> A lamp or window behind the camera, not behind you, makes a huge difference. Our guide on <a href="@guide-camera">looking good on camera</a> has more tricks.</li><li><strong>Camera at eye level.</strong> Prop your laptop or phone on a few books.</li><li><strong>Headphones help</strong> if the house is noisy or you have trouble hearing.</li><li><strong>Bring a topic.</strong> Travel, cooking, music, your city: experience gives you plenty to talk about.</li></ul><p>And if you’d like a little structure, the built-in games (Would you rather?, Truth or dare, Draw &amp; guess, Rock, paper, scissors) are surprisingly good at getting two strangers laughing.</p>',
+        },
+        {
+          h2: 'Talk to people from other countries',
+          html: '<p>The text chat translates messages automatically, so you can talk with someone in Italy, Brazil or Germany without sharing a language. The site itself is available in English, Spanish, Portuguese, French, German and Italian. If that’s what interests you, have a look at our page on <a href="@video-chat-foreigners">talking to foreigners</a>.</p>',
+        },
+        {
+          h2: 'Staying safe at any age',
+          html: '<p>Online scams don’t care how old you are, but some target grown-ups specifically: a charming stranger who soon has a financial emergency, an “investment” opportunity, or a request to move to a private app. Never send money to someone you met online, never share banking codes, and be cautious with intimate images. Your IP address is hidden from the other person and every report is reviewed by a real person. Our <a href="@safety">safety page</a> explains the most common tricks.</p>',
+        },
+      ],
+      faq: [
+        { q: 'Are there people over 40 or over 50 on the chat?', a: 'Yes, adults of all ages use the video chat. We do not publish user figures, but the Premium age filter helps you meet people in your age range.' },
+        { q: 'Can I filter by age for free?', a: 'No. The free chat is random. Filtering by age, gender, country or distance is part of Premium.' },
+        { q: 'Do I need to install anything?', a: 'No. It works in the browser on your computer or phone. You can optionally add it to your home screen as an app.' },
+        { q: 'Is it only for dating?', a: 'Not at all. People come for conversation, friendship, language practice or flirting. You decide what kind of chat you want.' },
+      ],
+    },
+    'meet-people-chat': {
+      slug: 'chat-to-meet-new-people',
+      anchor: 'Meet new people',
+      title: 'Chat to Meet New People on Video · La Ruleta Caliente',
+      description: 'A chat to meet new people face to face: live 1-on-1 video calls with adults from around the world, games to break the ice and translation. Free, 18+ only.',
+      h1: 'A chat to meet new people, live on video',
+      intro: '<p>Sometimes you just want to talk to someone new. Not your group chat, not your colleagues: a stranger with a different story. La Ruleta Caliente is a <strong>chat to meet new people</strong> on live video, one on one. You open it in your browser, press start and a few seconds later you’re talking to someone you’d never have met otherwise.</p><p>No downloads, no sign-up required and free to start. It’s for adults only (18+).</p>',
+      sections: [
+        {
+          h2: 'Why video beats text for meeting people',
+          html: '<p>On text, conversations fizzle out. On video, you react to each other in real time: you laugh at the same joke, notice the guitar on the wall behind them, or discover you’ve both been to the same city. It feels much closer to meeting someone at a party than to filling in a profile. And because each conversation is one-to-one, nobody gets lost in a crowd.</p>',
+        },
+        {
+          h2: 'People you can meet',
+          html: '<ul><li><strong>Locals and travellers.</strong> Chat at random with the whole world, or use the Premium country and distance filters to meet people nearer to you.</li><li><strong>Speakers of other languages.</strong> The text chat translates automatically, which makes it great for practising a language. See <a href="@video-chat-foreigners">talk to foreigners</a>.</li><li><strong>New friends.</strong> When a conversation goes well, add the person as a friend so you can find them again.</li><li><strong>Someone to flirt with.</strong> If both of you want to, see our <a href="@flirt-chat">flirt chat</a> page.</li></ul><p>The free chat matches you with whoever is online, whether women, men, trans people or couples. Premium (€7.99 a week or €19.99 a month, cancellable at any time) lets you choose who you see and filter by age.</p>',
+        },
+        {
+          h2: 'Never run out of things to say',
+          html: '<p>The hardest part of meeting people is the first minute. A few things make it easier here:</p><ul><li><strong>Icebreaker topics</strong> are there during the call whenever you need an idea.</li><li><strong>Four games</strong> to play together: Truth or dare, Would you rather?, Rock, paper, scissors and Draw &amp; guess. Details on the <a href="@video-chat-games">video call games</a> page.</li><li>The <strong>chemistry thermometer</strong> gives you a fun signal when the conversation is flowing.</li></ul><p>For more ideas that work anywhere, read our full guide on <a href="@guide-meet-people-online">how to meet new people online</a>.</p>',
+        },
+        {
+          h2: 'A habit that pays off',
+          html: '<p>If you come back regularly, the site rewards it. Every day you log in, play and receive ❤️ you earn chilis 🌶️, and during <strong>Hot hour</strong> (10 to 11 pm Spanish time) they count double. Chilis unlock superpowers like <strong>Super hello</strong> to make your greeting stand out, and the weekly top three win days of Premium. You can also invite a friend: once they’ve signed up and had their first conversation of over a minute, you both get a free Premium day.</p>',
+        },
+        {
+          h2: 'Meeting strangers, sensibly',
+          html: '<p>Meeting new people should be fun, not risky. Use a first name only, keep your address and workplace private, and be careful with anyone who rushes you to another app or asks for money. Your IP address is never shown to the other person, recording is banned, and the Report button ends a call and sends it to a human moderator.</p>',
+        },
+      ],
+      faq: [
+        { q: 'How can I meet new people online for free?', a: 'Open La Ruleta Caliente in your browser, join as a guest and press start. The random video chat is free and has no time limit.' },
+        { q: 'Can I meet people near me?', a: 'With Premium you can filter by country and distance. The free chat connects you with people from all over the world at random.' },
+        { q: 'What if I am shy?', a: 'Use the games and icebreaker topics: they give you something to do together, so you do not have to carry the conversation alone.' },
+        { q: 'Can I talk to the same person again?', a: 'Yes, add them as a friend during the call. Calls between friends are part of Premium.' },
       ],
     },
     'alternatives': {
