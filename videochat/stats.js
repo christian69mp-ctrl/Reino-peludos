@@ -34,11 +34,12 @@ const inc = (obj, key, n = 1) => { obj[key] = (obj[key] || 0) + n; };
 // Visita a una página (solo las páginas, no imágenes ni scripts)
 function pageView(req, page, lang) {
   const s = day();
+  // Los robots de buscadores y las vistas previas de enlaces no cuentan como vistas
+  const ua = String(req.get('user-agent') || '');
+  if (!ua || /bot|crawl|spider|slurp|preview|facebookexternalhit|headless|python|curl|wget|httpclient|java\/|go-http/i.test(ua)) return;
   s.views += 1;
   inc(s.pages, page);
   if (lang) inc(s.langs, lang);
-  const ua = String(req.get('user-agent') || '');
-  if (/bot|crawl|spider|slurp|preview/i.test(ua)) return touch();
   const v = crypto.createHash('sha256').update(`${salt.value}|${req.ip}|${ua}`).digest('hex').slice(0, 16);
   if (!seen.visitors.has(v)) {
     seen.visitors.add(v);
