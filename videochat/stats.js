@@ -31,23 +31,33 @@ function touch() { dirty = true; }
 setInterval(() => { if (dirty) { dirty = false; const s = day(); store.put('stats', s); } }, 30000).unref();
 const inc = (obj, key, n = 1) => { obj[key] = (obj[key] || 0) + n; };
 
+const BOTS = /bot|crawl|spider|slurp|preview|facebookexternalhit|headless|python|curl|wget|httpclient|java\/|go-http|lighthouse|pagespeed/i;
+
 // Visita a una página (solo las páginas, no imágenes ni scripts)
 function pageView(req, page, lang) {
   const s = day();
   // Los robots de buscadores y las vistas previas de enlaces no cuentan como vistas
   const ua = String(req.get('user-agent') || '');
-  if (!ua || /bot|crawl|spider|slurp|preview|facebookexternalhit|headless|python|curl|wget|httpclient|java\/|go-http/i.test(ua)) return;
+  if (!ua || BOTS.test(ua)) return;
   s.views += 1;
   inc(s.pages, page);
   if (lang) inc(s.langs, lang);
+  touch();
+}
+
+// Visitante real: lo avisa la propia página (public/beacon.js) cuando se abre de verdad en un
+// navegador, así no cuentan los robots ni los programas que solo descargan el HTML.
+function visit(req) {
+  const ua = String(req.get('user-agent') || '');
+  if (!ua || BOTS.test(ua)) return;
+  const s = day();
   const v = crypto.createHash('sha256').update(`${salt.value}|${req.ip}|${ua}`).digest('hex').slice(0, 16);
-  if (!seen.visitors.has(v)) {
-    seen.visitors.add(v);
-    s.visitors += 1;
-    inc(s.devices, /mobile|android|iphone|ipad/i.test(ua) ? 'mobile' : 'desktop');
-    const g = geo.lookup(req.ip);
-    inc(s.countries, g?.country || '??');
-  }
+  if (seen.visitors.has(v)) return;
+  seen.visitors.add(v);
+  s.visitors += 1;
+  inc(s.devices, /mobile|android|iphone|ipad/i.test(ua) ? 'mobile' : 'desktop');
+  const g = geo.lookup(req.ip);
+  inc(s.countries, g?.country || '??');
   touch();
 }
 
@@ -85,4 +95,4 @@ function range(days) {
   return out;
 }
 
-module.exports = { pageView, signup, conversation, activeUser, online, range, today };
+module.exports = { pageView, visit, signup, conversation, activeUser, online, range, today };

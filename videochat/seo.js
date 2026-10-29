@@ -342,7 +342,7 @@ function renderLanding(req, key, l) {
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(p.title)}</title>`)
     .replace('<meta name="description" content="">', `<meta name="description" content="${esc(p.description)}">`);
   html = html.replace('</head>', `  <meta name="rating" content="adult">\n  <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA">\n  ${landingHead(req, key, l, crumbs)}\n</head>`);
-  html = addFooterLinks(html, l);
+  html = addFooterLinks(html, l).replace('</body>', '  <script src="/beacon.js" defer></script>\n</body>');
   cache.set(k, html);
   return html;
 }
@@ -395,7 +395,7 @@ function render(req, page, lang) {
   if (process.env.BING_SITE_VERIFICATION) extra.push(`<meta name="msvalidate.01" content="${esc(process.env.BING_SITE_VERIFICATION)}">`);
   if (extra.length) html = html.replace('</head>', `  ${extra.join('\n  ')}\n</head>`);
   html = html.replace('</head>', `  ${head(req, page, lang, title)}\n</head>`);
-  html = addFooterLinks(html, lang || 'en');
+  html = addFooterLinks(html, lang || 'en').replace('</body>', '  <script src="/beacon.js" defer></script>\n</body>');
   cache.set(k, html);
   return html;
 }
@@ -442,6 +442,9 @@ function register(app) {
     res.set('Vary', 'Accept-Language');
     res.redirect(302, urlOf(page, preferred(req)) + req.url.slice(req.path.length));
   });
+
+  // Visitante real (lo envía public/beacon.js)
+  app.post('/api/v', (req, res) => { stats.visit(req); res.status(204).end(); });
 
   app.get('/sitemap.xml', (req, res) => {
     const b = base(req);
