@@ -41,8 +41,10 @@ Marca cada cosa cuando la hagas. Lo de arriba es lo más urgente.
 
 ## 🔵 Antes de que haya mucha gente (importante, sin prisa ahora)
 
-- [ ] **Correos de la web (Brevo, gratis)**: para que funcione «¿Olvidaste tu contraseña?» y los avisos por email.
-      Ahora mismo no se envían correos. Pedir a Claude los pasos.
+- [x] **Correos de la web (Brevo)**: cuenta, dominio autenticado y SMTP puestos en el servidor.
+- [ ] **Probar Brevo**: «¿Olvidaste tu contraseña?» con christian69mp+verotel@gmail.com y mirar Gmail (y Spam).
+- [ ] **Cambiar la clave SMTP de Brevo** (salió un trozo en una foto): borrar la clave `web`, generar `web2`,
+      ponerla en `SMTP_PASS=` del `.env` del servidor y `docker compose up -d --force-recreate`.
 - [ ] **Veriff** (verificación de edad con DNI): para cuando alguien denuncie a un posible menor. Pedir a Claude
       los pasos cuando haya movimiento diario.
 - [ ] **Copia de seguridad**: una vez al mes, pedir a Claude cómo descargarla al PC.
