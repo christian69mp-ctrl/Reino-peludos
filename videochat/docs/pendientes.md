@@ -4,10 +4,8 @@ Marca cada cosa cuando la hagas. Lo de arriba es lo más urgente.
 
 ## 🔴 Ya (cuando puedas, hoy o mañana)
 
-- [ ] **Actualizar el servidor otra vez** (trae el contador de «Visitantes» solo con personas reales):
-      `ssh -i "$env:USERPROFILE\.ssh\mojohost.pem" ubuntu@185.94.236.58` → `sudo -i` →
-      `cd /opt/reino-peludos/videochat && git pull && docker compose up -d --build && echo "LISTO"`
-      Comprobar: abrir laruletacaliente.com/es/chat-madrid.
+- [x] **Servidor actualizado** (visitantes reales, informe semanal, velocidad).
+- [ ] **Probar el informe**: /admin → Resumen → «📧 Enviarme el informe semanal» y mirar Gmail.
 - [ ] **SaaSHub** (saashub.com → Submit): mismos datos que AlternativeTo (ver `docs/marca/difusion.md`).
 - [x] **Instagram – promoción** con «Más visitas al perfil». Reanudar cada día a las 21:00 y pausar a las 24:00.
 - [ ] **Instagram – bio**: «Videochat 1 a 1 gratis y sin registro 🌶️ Solo +18 👇» y enlace laruletacaliente.com.
