@@ -161,6 +161,19 @@ function routes(app) {
     res.json({ ok: true, on });
   });
 
+  // Informe semanal: enviarlo ahora al correo del dueño (ADMIN_EMAIL)
+  app.post('/api/admin/report/send', requireAdmin, async (req, res) => {
+    const mailer = require('./mailer');
+    if (!mailer.enabled || !process.env.ADMIN_EMAIL) return res.status(409).json({ error: 'Falta configurar el correo (SMTP y ADMIN_EMAIL)' });
+    try {
+      const r = await require('./report').send(overview);
+      audit(req, 'Informe semanal enviado', r.subject);
+      res.json({ ok: true, to: process.env.ADMIN_EMAIL });
+    } catch (err) {
+      res.status(502).json({ error: `No se pudo enviar: ${err.message}` });
+    }
+  });
+
   app.get('/api/admin/announcement', requireAdmin, (_req, res) => res.json({ announcement: store.get('settings', 'announcement') || null }));
   app.post('/api/admin/announcement', requireAdmin, (req, res) => {
     const a = support.setAnnouncement(req.body || {});
@@ -169,4 +182,4 @@ function routes(app) {
   });
 }
 
-module.exports = { routes, setLive: (fn) => { live = fn; } };
+module.exports = { routes, overview, setLive: (fn) => { live = fn; } };

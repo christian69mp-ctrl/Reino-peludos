@@ -64,6 +64,7 @@ account.routes(app);
 push.routes(app);
 adminauth.routes(app);
 adminapi.routes(app);
+require('./report').start(adminapi.overview);
 
 // Qué funciones opcionales están activas
 app.get('/api/config', (_req, res) => res.json({ translate: translate.enabled, turnstile: captcha.SITE_KEY || null, providers: oauth.enabled, trialDays: gifts.TRIAL_DAYS, tips: tips.ENABLED, guests: auth.GUESTS }));

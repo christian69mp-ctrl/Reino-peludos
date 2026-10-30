@@ -462,6 +462,12 @@ document.querySelectorAll('[data-view]').forEach((t) => t.addEventListener('clic
 document.querySelectorAll('[data-status]').forEach((b) => b.addEventListener('click', () => { listStatus = b.dataset.status; renderList(); }));
 $('period').addEventListener('change', renderOverview);
 $('reload').addEventListener('click', () => { counts().catch(() => {}); renderOverview(); });
+$('sendReport').addEventListener('click', async () => {
+  $('sendReport').disabled = true;
+  const r = await api('/api/admin/report/send', {}).catch(() => ({}));
+  $('sendReport').disabled = false;
+  toast(r.ok ? `Informe enviado a ${r.to}` : (r.error || 'No se pudo enviar'));
+});
 $('qBtn').addEventListener('click', renderList);
 $('q').addEventListener('keydown', (e) => { if (e.key === 'Enter') renderList(); });
 
