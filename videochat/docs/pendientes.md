@@ -4,19 +4,19 @@ Marca cada cosa cuando la hagas. Lo de arriba es lo más urgente.
 
 ## 🔴 Ya (cuando puedas, hoy o mañana)
 
-- [ ] **Actualizar el servidor** (trae las 350 páginas, las guías, las ciudades y las estadísticas sin robots):
+- [ ] **Actualizar el servidor otra vez** (trae el contador de «Visitantes» solo con personas reales):
       `ssh -i "$env:USERPROFILE\.ssh\mojohost.pem" ubuntu@185.94.236.58` → `sudo -i` →
       `cd /opt/reino-peludos/videochat && git pull && docker compose up -d --build && echo "LISTO"`
       Comprobar: abrir laruletacaliente.com/es/chat-madrid.
 - [ ] **SaaSHub** (saashub.com → Submit): mismos datos que AlternativeTo (ver `docs/marca/difusion.md`).
-- [ ] **Instagram – promocionar los 2 reels** con el objetivo **«Más visitas al perfil»** (no «sitio web»: Meta
-      rechaza el enlace a la web). Público España, 18-60, 5 € al día, 7 días.
+- [x] **Instagram – promoción** con «Más visitas al perfil». Reanudar cada día a las 21:00 y pausar a las 24:00.
 - [ ] **Instagram – bio**: «Videochat 1 a 1 gratis y sin registro 🌶️ Solo +18 👇» y enlace laruletacaliente.com.
 
 ## 🟠 Esta semana
 
-- [ ] **Cuenta de X (Twitter)** con soporte@laruletacaliente.com, bio, foto, cabecera, **marcar contenido como
-      sensible** y publicación fijada con el reel de 29 s. Después, 1 publicación al día de 21:00 a 23:00
+- [x] **Cuenta de X creada.**
+- [ ] **X – terminar**: **marcar contenido como sensible**, foto, cabecera, bio, web y publicación fijada con el
+      reel de 29 s. Decirle a Claude el @usuario. Después, 1 publicación al día de 21:00 a 23:00
       (las 5 primeras están en `difusion.md`).
 - [ ] **Añadir Instagram y X** en AlternativeTo (tu app → editar → redes sociales).
 - [ ] **Bing Webmaster Tools** → «Mapas del sitio»: comprobar que está `https://laruletacaliente.com/sitemap.xml`.
