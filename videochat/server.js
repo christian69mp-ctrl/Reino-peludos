@@ -44,7 +44,13 @@ app.get('/sw.js', (_req, res, next) => { res.set('Cache-Control', 'no-cache'); n
 require('./seo').register(app);
 require('./indexnow').register(app, require('./seo').allUrls);
 require('./ads').routes(app, { requireAdmin: adminauth.requireAdmin, audit: adminauth.audit });
-app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
+// Fuentes, imágenes e iconos casi no cambian: el navegador los guarda una semana (más rápido al volver)
+app.use(express.static(path.join(__dirname, 'public'), {
+  extensions: ['html'],
+  setHeaders: (res, file) => {
+    if (/[\\/](fonts|img)[\\/]|\.(woff2|png|jpe?g|webp|svg|ico)$/.test(file)) res.set('Cache-Control', 'public, max-age=604800');
+  },
+}));
 // Tipografía servida desde el propio servidor (sin llamadas a Google)
 app.get('/fonts/plus-jakarta-sans.woff2', (_req, res) => {
   res.set('Cache-Control', 'public, max-age=31536000, immutable');

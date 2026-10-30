@@ -22,8 +22,9 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="preload" href="/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Fondo de la portada: es lo más grande que se pinta, que empiece a descargarse ya -->
+  <link rel="preload" href="/img/bokeh.webp" as="image" type="image/webp" fetchpriority="high">
   <link rel="stylesheet" href="/style.css">
-  <script src="/i18n.js"></script>
 </head>
 <body data-title-key="meta.title">
   <!-- Iconos -->
@@ -913,6 +914,7 @@
 
   <div id="toast" class="toast" role="status" hidden></div>
 
+  <script src="/i18n.js"></script>
   <script src="/mascot.js"></script>
   <script src="/adslots.js"></script>
   <script src="/guindilla.js"></script>
