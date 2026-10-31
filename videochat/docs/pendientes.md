@@ -5,22 +5,22 @@ Marca cada cosa cuando la hagas. Lo de arriba es lo más urgente.
 ## 🔴 Ya (cuando puedas, hoy o mañana)
 
 - [x] **Servidor actualizado** (visitantes reales, informe semanal, velocidad).
-- [ ] **Probar el informe**: /admin → Resumen → «📧 Enviarme el informe semanal» y mirar Gmail.
+- [x] **Probar el informe**: /admin → Resumen → «📧 Enviarme el informe semanal» y mirar Gmail.
 - [x] **SaaSHub** enviado (cola gratuita, 1-12 semanas). Competidor de Chatrio, Emerald Chat, OjosTV, ChatRoulette.me…
 - [x] **Instagram – promoción** con «Más visitas al perfil». Reanudar cada día a las 21:00 y pausar a las 24:00.
-- [ ] **Instagram – bio**: «Videochat 1 a 1 gratis y sin registro 🌶️ Solo +18 👇» y enlace laruletacaliente.com.
+- [x] **Instagram – bio**: «Videochat 1 a 1 gratis y sin registro 🌶️ Solo +18 👇» y enlace laruletacaliente.com.
 
 ## 🟠 Esta semana
 
 - [x] **Cuenta de X creada.**
-- [ ] **X – terminar**: **marcar contenido como sensible**, foto, cabecera, bio, web y publicación fijada con el
+- [x] **X – terminar**: **marcar contenido como sensible**, foto, cabecera, bio, web y publicación fijada con el
       reel de 29 s. Decirle a Claude el @usuario. Después, 1 publicación al día de 21:00 a 23:00
       (las 5 primeras están en `difusion.md`).
 - [ ] **Añadir Instagram y X** en AlternativeTo (tu app → editar → redes sociales).
 - [ ] **Bing Webmaster Tools** → «Mapas del sitio»: comprobar que está `https://laruletacaliente.com/sitemap.xml`.
 - [ ] **Google Search Console** → «Sitemaps»: comprobar que las páginas detectadas suben (hasta ~350).
 - [ ] **Generar los Reels 23-25** (y los 10-12 si no los hiciste) con Gemini, publicarlos poco a poco.
-- [ ] **Prueba real de videollamada** con un amigo: uno con datos móviles (4G/5G) y otro con wifi.
+- [x] **Prueba real de videollamada** con un amigo: uno con datos móviles (4G/5G) y otro con wifi.
 
 ## 🟡 Cada semana (rutina)
 
