@@ -6,7 +6,7 @@ Marca cada cosa cuando la hagas. Lo de arriba es lo más urgente.
 
 - [x] **Servidor actualizado** (visitantes reales, informe semanal, velocidad).
 - [ ] **Probar el informe**: /admin → Resumen → «📧 Enviarme el informe semanal» y mirar Gmail.
-- [ ] **SaaSHub** (saashub.com → Submit): mismos datos que AlternativeTo (ver `docs/marca/difusion.md`).
+- [x] **SaaSHub** enviado (cola gratuita, 1-12 semanas). Competidor de Chatrio, Emerald Chat, OjosTV, ChatRoulette.me…
 - [x] **Instagram – promoción** con «Más visitas al perfil». Reanudar cada día a las 21:00 y pausar a las 24:00.
 - [ ] **Instagram – bio**: «Videochat 1 a 1 gratis y sin registro 🌶️ Solo +18 👇» y enlace laruletacaliente.com.
 
@@ -36,6 +36,7 @@ Marca cada cosa cuando la hagas. Lo de arriba es lo más urgente.
       christian69mp+verotel@gmail.com (Mi cuenta → Privacidad → Borrar cuenta).
 - [ ] **Segpay**: sin respuesta. Si pasan 10 días, mandar recordatorio (pedir a Claude el texto).
 - [ ] **AlternativeTo**: esperar a que aprueben la ficha (pueden tardar semanas).
+- [ ] **SaaSHub**: esperar a que aprueben la ficha (1-12 semanas). Te avisan por email.
 
 ## 🔵 Antes de que haya mucha gente (importante, sin prisa ahora)
 
