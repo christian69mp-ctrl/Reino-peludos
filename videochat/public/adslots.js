@@ -97,8 +97,9 @@
       f.width = d.w; f.height = d.h;
       f.title = t('ad.label');
       f.loading = 'lazy';
-      f.setAttribute('sandbox', 'allow-scripts allow-popups allow-popups-to-escape-sandbox');
-      f.setAttribute('referrerpolicy', 'no-referrer');
+      // Con subdominio propio (d.iso) el iframe tiene otro origen y puede usar su almacenamiento sin
+      // ver nada de la web; sin él, queda totalmente aislado.
+      f.setAttribute('sandbox', `allow-scripts allow-popups allow-popups-to-escape-sandbox${d.iso ? ' allow-same-origin' : ''}`);
       box.appendChild(f);
     } else if (d?.banner) {
       const a = document.createElement('a');

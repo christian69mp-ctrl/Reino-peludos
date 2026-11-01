@@ -32,6 +32,7 @@ app.disable('x-powered-by');
 // Etiqueta RTA también como cabecera, para filtros parentales que no leen el HTML
 app.use((req, res, next) => { res.setHeader('Rating', 'RTA-5042-1996-1400-1577-RTA'); next(); });
 app.use(privacy.securityHeaders);
+app.use(require('./ads').hostGuard);
 // Web cerrada con contraseña mientras no esté abierta al público (SITE_PASSWORD)
 app.use(sitelock.middleware);
 const keepRaw = (req, _res, buf) => { req.rawBody = buf; };

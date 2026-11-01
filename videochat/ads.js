@@ -23,6 +23,12 @@ const SLOTS = {
   wait: { w: 300, h: 250, name: 'Caja del chat 300×250 (cuando no estás en una videollamada)' },
 };
 const MODES = ['off', 'own', 'network'];
+// Subdominio propio para el código de la red (p. ej. https://ads.laruletacaliente.com). Así el iframe
+// tiene su propio origen: la red puede usar sus cookies y almacenamiento (lo necesita para servir
+// anuncios) sin poder tocar nunca la sesión ni los datos de la web principal.
+const ADS_ORIGIN = /^https:\/\/[a-z0-9.-]+$/i.test(process.env.ADS_ORIGIN || '') ? process.env.ADS_ORIGIN.replace(/\/$/, '') : '';
+const ADS_HOST = ADS_ORIGIN ? new URL(ADS_ORIGIN).hostname : '';
+const MAIN_ORIGIN = (process.env.BASE_URL || '').replace(/\/$/, '');
 const IMAGE_TYPES = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'image/gif': 'gif' };
 const MAX_IMAGE = 400 * 1024;
 const DAY = 24 * 3600 * 1000;
@@ -90,7 +96,7 @@ function routes(app, { requireAdmin, audit }) {
       if (conf.mode === 'off') continue;
       const out = { ...SLOTS[s] };
       delete out.name;
-      if (conf.mode === 'network' && conf.code) out.frame = `/ads/frame/${s}`;
+      if (conf.mode === 'network' && conf.code) { out.frame = `${ADS_ORIGIN}/ads/frame/${s}`; out.iso = !!ADS_ORIGIN; }
       // Banner propio: lo principal en modo «own» y, en modo «network», la alternativa
       // para quien rechaza las cookies de publicidad
       const b = pickBanner(s);
@@ -131,9 +137,11 @@ function routes(app, { requireAdmin, audit }) {
   app.get('/ads/frame/:slot', (req, res) => {
     const conf = config().slots[req.params.slot];
     if (!SLOTS[req.params.slot] || conf?.mode !== 'network' || !conf.code) return res.status(404).end();
+    res.removeHeader('X-Frame-Options');
     res.set({
-      'Content-Security-Policy': "default-src * data: blob: 'unsafe-inline' 'unsafe-eval'; frame-ancestors 'self'",
-      'X-Frame-Options': 'SAMEORIGIN',
+      'Content-Security-Policy': `default-src * data: blob: 'unsafe-inline' 'unsafe-eval'; frame-ancestors 'self' ${MAIN_ORIGIN}`.trim(),
+      // La red necesita saber desde qué web se piden los anuncios
+      'Referrer-Policy': 'no-referrer-when-downgrade',
       'Cache-Control': 'no-store',
     });
     res.type('html').send(`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="noindex">
@@ -221,4 +229,12 @@ ${conf.code}
   });
 }
 
-module.exports = { routes, SLOTS, config, verifyMetas };
+// En el subdominio de anuncios solo existe el código de la red (nada de la web, nada indexable)
+function hostGuard(req, res, next) {
+  if (!ADS_HOST || req.hostname !== ADS_HOST) return next();
+  if (req.path === '/robots.txt') return res.type('text/plain').send('User-agent: *\nDisallow: /\n');
+  if (req.method === 'GET' && req.path.startsWith('/ads/frame/')) return next();
+  res.status(404).type('text/plain').send('');
+}
+
+module.exports = { routes, SLOTS, config, verifyMetas, hostGuard, ADS_ORIGIN };
