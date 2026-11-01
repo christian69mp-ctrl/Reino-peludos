@@ -26,7 +26,7 @@ Marca cada cosa cuando la hagas. Lo de arriba es lo más urgente.
 - [ ] **Aclarar con Hacienda / gestoría** qué alta hace falta para cobrar por anuncios.
 - [x] **ExoClick**: cuenta de editor, web verificada, zona «Caja del chat 300×250» puesta y subdominio ads. listo.
 - [x] **Anuncio de la caja del chat funcionando** (ExoClick).
-- [ ] **Crear las otras zonas** en ExoClick: 160×600 (lateral), 728×90 (portada) y móvil 300×100 (portada móvil).
+- [x] **Las 4 zonas de ExoClick puestas**: caja del chat 300×250, lateral 160×600, portada 728×90 y portada móvil.
 - [x] **ExoClick – Payment Settings**: transferencia a Trade Republic, EUR, mensual.
 
 ## 🟡 Cada semana (rutina)
