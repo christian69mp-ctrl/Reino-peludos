@@ -133,8 +133,8 @@
     }
   }
 
-  // Hueco «mientras busca»: se rellena al empezar a buscar y se vacía al conectar, así el
-  // anuncio solo se carga (y cuenta) cuando de verdad se ve. Si el vídeo es pequeño, no sale.
+  // Hueco de la caja del chat: se ve siempre que no estés en una videollamada (antes de
+  // empezar y mientras buscas) y se quita en cuanto conectas con alguien.
   let waiting = false;
   function showWait(on) {
     waiting = on;

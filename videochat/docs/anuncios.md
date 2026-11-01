@@ -7,12 +7,12 @@ en **/admin → Publicidad**. Antes de cobrar, aclara con Hacienda / una gestor�
 
 | Hueco en /admin | Tamaño | Dónde sale | Formato a pedir en la red |
 |---|---|---|---|
-| **Mientras busca** | 300×250 | En la caja del chat (nunca encima del vídeo), **solo mientras busca a alguien**; se quita al conectar | Banner 300×250 |
+| **Caja del chat** | 300×250 | En la caja del chat (nunca encima del vídeo), **antes de empezar y mientras busca**; se quita al conectar | Banner 300×250 |
 | **Lateral** | 160×600 | A la derecha del videochat, solo en pantallas anchas | Banner 160×600 |
 | **Horizontal (ordenador)** | 728×90 | Portada | Banner 728×90 |
 | **Horizontal (móvil)** | 320×100 | Portada en el móvil | Banner 300×100 o 320×100 (móvil) |
 
-Empieza por **«Mientras busca»**: es el que más se ve. Los anuncios de redes **solo se cargan a quien acepta las
+Empieza por **«Caja del chat»**: es el que más se ve. Los anuncios de redes **solo se cargan a quien acepta las
 cookies de publicidad** (la web ya lo pregunta) y quien paga Premium no ve anuncios.
 
 **Nunca actives** formatos que tapan la pantalla o abren ventanas solas (*popunder, interstitial, direct link,
@@ -53,7 +53,7 @@ Te pagan por cada persona que **se registra o compra** en la otra web desde tu b
    tu enlace de afiliado, imagen = el banner. Ese hueco ponlo en modo **«Mis anunciantes»**.
 4. En la tabla **Banners** verás impresiones, clics y CTR; las ganancias, en el panel del programa de afiliados.
 
-Se pueden combinar: por ejemplo **«Mientras busca» con red** y **lateral con un banner de afiliado**.
+Se pueden combinar: por ejemplo **«Caja del chat» con red** y **lateral con un banner de afiliado**.
 
 ## Qué mirar cada semana
 
