@@ -7,7 +7,7 @@ en **/admin → Publicidad**. Antes de cobrar, aclara con Hacienda / una gestor�
 
 | Hueco en /admin | Tamaño | Dónde sale | Formato a pedir en la red |
 |---|---|---|---|
-| **Mientras busca** | 300×250 | En el centro del vídeo **solo mientras busca a alguien**; se quita al conectar | Banner 300×250 |
+| **Mientras busca** | 300×250 | En la caja del chat (nunca encima del vídeo), **solo mientras busca a alguien**; se quita al conectar | Banner 300×250 |
 | **Lateral** | 160×600 | A la derecha del videochat, solo en pantallas anchas | Banner 160×600 |
 | **Horizontal (ordenador)** | 728×90 | Portada | Banner 728×90 |
 | **Horizontal (móvil)** | 320×100 | Portada en el móvil | Banner 300×100 o 320×100 (móvil) |

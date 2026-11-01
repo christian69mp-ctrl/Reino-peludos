@@ -140,8 +140,7 @@
     waiting = on;
     const el = document.querySelector('[data-ad="wait"]');
     if (!el) return;
-    const remote = document.getElementById('remote');
-    const fits = remote && remote.clientWidth >= 320 && remote.clientHeight >= 380;
+    const fits = (el.parentElement?.clientWidth || 0) >= 300;
     if (!on || !fits || !data.wait) { el.hidden = true; el.querySelector('.ad-box').replaceChildren(); return; }
     if (!el.hidden && el.querySelector('.ad-box').firstChild) return;
     fill(el, 'wait');
