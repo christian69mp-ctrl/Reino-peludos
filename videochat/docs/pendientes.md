@@ -27,7 +27,7 @@ Marca cada cosa cuando la hagas. Lo de arriba es lo más urgente.
 - [x] **ExoClick**: cuenta de editor, web verificada, zona «Caja del chat 300×250» puesta y subdominio ads. listo.
 - [ ] **Comprobar que sale el anuncio** (incógnito, aceptar cookies, entrar al chat).
 - [ ] **Crear las otras zonas** en ExoClick: 160×600 (lateral), 728×90 (portada) y móvil 300×100 (portada móvil).
-- [ ] **ExoClick – Payment Settings** (IBAN) después de hablar con la gestoría.
+- [x] **ExoClick – Payment Settings**: transferencia a Trade Republic, EUR, mensual.
 
 ## 🟡 Cada semana (rutina)
 
