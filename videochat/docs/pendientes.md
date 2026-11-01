@@ -24,7 +24,10 @@ Marca cada cosa cuando la hagas. Lo de arriba es lo más urgente.
 
 - [x] **Web lista para anuncios**: 4 huecos (apagados), ads.txt y verificación en /admin, privacidad actualizada.
 - [ ] **Aclarar con Hacienda / gestoría** qué alta hace falta para cobrar por anuncios.
-- [ ] **Darse de alta en ExoClick y/o afiliados** y activar los huecos (guía paso a paso en `docs/anuncios.md`).
+- [x] **ExoClick**: cuenta de editor, web verificada, zona «Caja del chat 300×250» puesta y subdominio ads. listo.
+- [ ] **Comprobar que sale el anuncio** (incógnito, aceptar cookies, entrar al chat).
+- [ ] **Crear las otras zonas** en ExoClick: 160×600 (lateral), 728×90 (portada) y móvil 300×100 (portada móvil).
+- [ ] **ExoClick – Payment Settings** (IBAN) después de hablar con la gestoría.
 
 ## 🟡 Cada semana (rutina)
 
