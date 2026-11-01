@@ -2,6 +2,8 @@
 // - side: vertical 160×600, a la derecha del videochat (solo en pantallas anchas).
 // - top: horizontal 728×90, en la portada entre secciones.
 // - top-mobile: horizontal 320×100, el mismo sitio en móviles.
+// - wait: 300×250 en el centro del vídeo SOLO mientras se busca a alguien (no hay nadie en
+//   pantalla); desaparece en cuanto conecta la otra persona.
 //
 // Cada hueco puede estar desactivado, mostrar banners de tus propios anunciantes
 // (los subes en /admin y cuentas impresiones y clics sin cookies) o el código de una
@@ -18,6 +20,7 @@ const SLOTS = {
   side: { w: 160, h: 600, name: 'Lateral 160×600 (videochat, pantallas anchas)' },
   top: { w: 728, h: 90, name: 'Horizontal 728×90 (portada, ordenador)' },
   'top-mobile': { w: 320, h: 100, name: 'Horizontal 320×100 (portada, móvil)' },
+  wait: { w: 300, h: 250, name: 'Mientras busca 300×250 (solo mientras busca a alguien)' },
 };
 const MODES = ['off', 'own', 'network'];
 const IMAGE_TYPES = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'image/gif': 'gif' };
@@ -57,6 +60,20 @@ function count(b, field) {
 function adFree(req) {
   const user = auth.userFromToken(auth.bearer(req));
   return !!(user && payments.activeOrder(user.id) && !payments.FREE);
+}
+
+// Verificación de la web para las redes publicitarias: el archivo /ads.txt y etiquetas
+// <meta name="…" content="…"> en la cabecera de todas las páginas (solo meta, nada de scripts)
+function verify() { return store.get('settings', 'adsVerify') || { id: 'adsVerify', adsTxt: '', metas: [] }; }
+const verifyMetas = () => verify().metas || [];
+function parseMetas(text) {
+  const out = [];
+  for (const m of String(text || '').matchAll(/<meta\s+[^>]*>/gi)) {
+    const name = (m[0].match(/\bname\s*=\s*["']([^"']+)["']/i) || [])[1];
+    const content = (m[0].match(/\bcontent\s*=\s*["']([^"']*)["']/i) || [])[1];
+    if (name && content != null && /^[\w.:-]{1,80}$/.test(name) && /^[^<>"']{1,300}$/.test(content)) out.push({ name, content });
+  }
+  return out.slice(0, 10);
 }
 
 const safeUrl = (u) => /^https?:\/\/[^\s]+$/i.test(String(u || '')) && String(u).length <= 500;
@@ -125,7 +142,28 @@ ${conf.code}
 </body></html>`);
   });
 
+  // ads.txt (lo piden las redes para comprobar quién vende los anuncios de la web)
+  app.get('/ads.txt', (_req, res) => {
+    const txt = verify().adsTxt;
+    if (!txt) return res.status(404).type('text/plain').send('');
+    res.type('text/plain').set('Cache-Control', 'public, max-age=3600').send(`${txt.trim()}\n`);
+  });
+
   // ---- Panel ----
+  app.get('/api/admin/ads/verify', requireAdmin, (_req, res) => {
+    const v = verify();
+    res.json({ adsTxt: v.adsTxt || '', metaTags: (v.metas || []).map((m) => `<meta name="${m.name}" content="${m.content}">`).join('\n') });
+  });
+  app.post('/api/admin/ads/verify', requireAdmin, (req, res) => {
+    const adsTxt = String(req.body?.adsTxt || '').replace(/\r/g, '').slice(0, 20000);
+    const metas = parseMetas(req.body?.metaTags);
+    if (String(req.body?.metaTags || '').trim() && !metas.length) return res.status(400).json({ error: 'No reconozco la etiqueta: pega algo como <meta name="…" content="…">' });
+    store.put('settings', { id: 'adsVerify', adsTxt, metas });
+    require('./seo').clearCache();
+    audit(req, 'Publicidad: verificación guardada', `${metas.length} meta, ads.txt ${adsTxt ? 'sí' : 'no'}`);
+    res.json({ ok: true, metas: metas.length });
+  });
+
   app.get('/api/admin/ads', requireAdmin, (_req, res) => {
     const c = config();
     res.json({
@@ -183,4 +221,4 @@ ${conf.code}
   });
 }
 
-module.exports = { routes, SLOTS, config };
+module.exports = { routes, SLOTS, config, verifyMetas };

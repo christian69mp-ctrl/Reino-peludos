@@ -341,7 +341,8 @@ function renderLanding(req, key, l) {
   let html = translate(fs.readFileSync(LANDING_TPL, 'utf8'), l).replace('<!--LANDING-->', body);
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(p.title)}</title>`)
     .replace('<meta name="description" content="">', `<meta name="description" content="${esc(p.description)}">`);
-  html = html.replace('</head>', `  <meta name="rating" content="adult">\n  <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA">\n  ${landingHead(req, key, l, crumbs)}\n</head>`);
+  const adMetas = require('./ads').verifyMetas().map((m) => `<meta name="${esc(m.name)}" content="${esc(m.content)}">\n  `).join('');
+  html = html.replace('</head>', `  <meta name="rating" content="adult">\n  <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA">\n  ${adMetas}${landingHead(req, key, l, crumbs)}\n</head>`);
   html = addFooterLinks(html, l).replace('</body>', '  <script src="/beacon.js" defer></script>\n</body>');
   cache.set(k, html);
   return html;
@@ -393,6 +394,8 @@ function render(req, page, lang) {
   if (!html.includes('RTA-5042')) extra.push('<meta name="RATING" content="RTA-5042-1996-1400-1577-RTA">');
   if (process.env.GOOGLE_SITE_VERIFICATION) extra.push(`<meta name="google-site-verification" content="${esc(process.env.GOOGLE_SITE_VERIFICATION)}">`);
   if (process.env.BING_SITE_VERIFICATION) extra.push(`<meta name="msvalidate.01" content="${esc(process.env.BING_SITE_VERIFICATION)}">`);
+  // Verificación de redes publicitarias (se pone en /admin → Publicidad)
+  for (const m of require('./ads').verifyMetas()) extra.push(`<meta name="${esc(m.name)}" content="${esc(m.content)}">`);
   if (extra.length) html = html.replace('</head>', `  ${extra.join('\n  ')}\n</head>`);
   html = html.replace('</head>', `  ${head(req, page, lang, title)}\n</head>`);
   html = addFooterLinks(html, lang || 'en').replace('</body>', '  <script src="/beacon.js" defer></script>\n</body>');
@@ -473,4 +476,4 @@ function allUrls(b) {
   return out;
 }
 
-module.exports = { register, render, renderLanding, allUrls, DESCRIPTIONS };
+module.exports = { register, render, renderLanding, allUrls, clearCache: () => cache.clear(), DESCRIPTIONS };

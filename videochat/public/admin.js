@@ -282,6 +282,7 @@ $('annRemove').addEventListener('click', async () => {
 const MODE_NAMES = { off: 'Desactivado', own: 'Mis anunciantes', network: 'Red publicitaria' };
 const day = (ts) => (ts ? new Date(ts).toLocaleDateString('es-ES') : '');
 async function renderAds() {
+  api('/api/admin/ads/verify').then((v) => { $('adMeta').value = v.metaTags || ''; $('adsTxt').value = v.adsTxt || ''; }).catch(() => {});
   const { slots, banners } = await api('/api/admin/ads');
   $('adSlots').innerHTML = Object.entries(slots).map(([k, v]) => `
     <div class="ad-row" data-slot="${k}">
@@ -305,6 +306,13 @@ async function renderAds() {
 $('adSlots').addEventListener('change', (e) => {
   const row = e.target.closest('.ad-row');
   if (row && e.target.matches('.ad-mode')) row.querySelector('.ad-code').hidden = e.target.value !== 'network';
+});
+$('adVerifyForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const r = await api('/api/admin/ads/verify', { metaTags: $('adMeta').value, adsTxt: $('adsTxt').value }).catch(() => ({}));
+  $('adVerifyError').hidden = !r.error;
+  $('adVerifyError').textContent = r.error || '';
+  if (r.ok) toast('Verificación guardada');
 });
 $('adSlotsForm').addEventListener('submit', async (e) => {
   e.preventDefault();

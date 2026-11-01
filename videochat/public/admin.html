@@ -170,7 +170,15 @@
     </section>
 
     <section id="adsView" hidden>
-      <p class="muted">Tres huecos que nunca tapan el vídeo: <b>lateral</b> (160×600, a la derecha del videochat en pantallas anchas) y <b>horizontal</b> en la portada (728×90 en ordenador y 320×100 en móvil). Con Premium de pago no se ven anuncios. Cada hueco lleva la etiqueta «Publicidad», como exige la ley.</p>
+      <p class="muted">Huecos que nunca tapan a nadie: <b>lateral</b> (160×600, a la derecha del videochat en pantallas anchas), <b>horizontal</b> en la portada (728×90 en ordenador y 320×100 en móvil) y <b>mientras busca</b> (300×250 en el centro del vídeo solo mientras se busca a alguien; desaparece al conectar y es el que más se ve). Con Premium de pago no se ven anuncios. Cada hueco lleva la etiqueta «Publicidad», como exige la ley.</p>
+      <form id="adVerifyForm" class="card-form">
+        <h2 class="ov-h" style="margin-top:0">Verificación de la web para la red publicitaria</h2>
+        <p class="muted small">Cuando des de alta la web en la red (ExoClick, TrafficStars…), te pedirán comprobar que es tuya. Pega aquí lo que te den: la etiqueta <b>&lt;meta …&gt;</b> y/o el contenido del archivo <b>ads.txt</b>. Se aplica al momento en toda la web.</p>
+        <label class="field">Etiqueta de verificación (&lt;meta name="…" content="…"&gt;)<textarea id="adMeta" rows="2" spellcheck="false" placeholder='&lt;meta name="…" content="…"&gt;'></textarea></label>
+        <label class="field">Contenido de ads.txt (se publica en laruletacaliente.com/ads.txt)<textarea id="adsTxt" rows="3" spellcheck="false" placeholder="exoclick.com, 1234567, DIRECT"></textarea></label>
+        <p class="error" id="adVerifyError" hidden></p>
+        <div class="actions"><button class="btn primary" type="submit">Guardar verificación</button></div>
+      </form>
       <form id="adSlotsForm" class="card-form">
         <h2 class="ov-h" style="margin-top:0">Huecos</h2>
         <div id="adSlots"></div>
