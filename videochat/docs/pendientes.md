@@ -22,6 +22,10 @@ Marca cada cosa cuando la hagas. Lo de arriba es lo más urgente.
 - [ ] **Generar los Reels 23-25** (y los 10-12 si no los hiciste) con Gemini, publicarlos poco a poco.
 - [x] **Prueba real de videollamada** con un amigo: uno con datos móviles (4G/5G) y otro con wifi.
 
+- [x] **Web lista para anuncios**: 4 huecos (apagados), ads.txt y verificación en /admin, privacidad actualizada.
+- [ ] **Aclarar con Hacienda / gestoría** qué alta hace falta para cobrar por anuncios.
+- [ ] **Darse de alta en ExoClick y/o afiliados** y activar los huecos (guía paso a paso en `docs/anuncios.md`).
+
 ## 🟡 Cada semana (rutina)
 
 - [ ] **5 emails** a artículos de «alternativas a Omegle» (plantillas en `difusion.md`). Si alguno pide dinero,
