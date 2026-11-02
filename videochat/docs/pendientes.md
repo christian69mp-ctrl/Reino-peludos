@@ -23,7 +23,9 @@ Marca cada cosa cuando la hagas. Lo de arriba es lo más urgente.
 - [x] **Prueba real de videollamada** con un amigo: uno con datos móviles (4G/5G) y otro con wifi.
 
 - [x] **Web lista para anuncios**: 4 huecos (apagados), ads.txt y verificación en /admin, privacidad actualizada.
-- [ ] **Aclarar con Hacienda / gestoría** qué alta hace falta para cobrar por anuncios.
+- [ ] **Gestoría**: ExoClick ha retenido los pagos hasta recibir el **Modelo 036/037** (alta en el censo de Hacienda) con
+      el epígrafe (para publicidad suele ser el 844; que lo confirme la gestoría) y preguntar si hace falta también
+      alta de autónomo. Luego enviar el documento a ExoClick (mismos datos que en el perfil) y poner el NIF.
 - [x] **ExoClick**: cuenta de editor, web verificada, zona «Caja del chat 300×250» puesta y subdominio ads. listo.
 - [x] **Anuncio de la caja del chat funcionando** (ExoClick).
 - [x] **Las 4 zonas de ExoClick puestas**: caja del chat 300×250, lateral 160×600, portada 728×90 y portada móvil.
