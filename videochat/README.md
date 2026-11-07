@@ -282,7 +282,7 @@ Abre dos navegadores (o una ventana normal y otra privada), crea una cuenta en c
   anuncios. Cada hueco lleva la etiqueta «Publicidad» (art. 20 LSSI).
   En la misma pestaña se pega la **verificación de la red** (etiqueta `<meta>` que se añade a todas las páginas,
   solo `name`/`content`) y el contenido de **`/ads.txt`**.
-- **Centro de ayuda** `/ayuda` con 61 preguntas frecuentes en 6 idiomas, buscador, categorías y
+- **Centro de ayuda** `/ayuda` con 96 preguntas frecuentes en 6 idiomas, buscador, categorías y
   **Guindilla 🌶️**, la asistente que responde al momento: una guindilla dibujada con cara que aparece con un rebote, saluda con la mano, parpadea y mueve la boca al responder (sin sonido; se queda quieta si el sistema pide reducir el movimiento) (sin IA: busca palabras clave en cualquier
   idioma). También hay un botón flotante de Guindilla en la portada (se oculta durante el videochat).
 - **Motivo de la sanción y recurso** (DSA art. 17 y 20): quien está suspendido o expulsado ve el

@@ -9,7 +9,7 @@
     .replace(/[^a-z0-9ñ\s+]/g, ' ').replace(/\s+/g, ' ').trim();
   const GREET = ['hola', 'buenas', 'hey', 'hi', 'hello', 'ola', 'oi', 'salut', 'bonjour', 'hallo', 'ciao', 'buongiorno', 'buenos dias'];
   const THANKS = ['gracias', 'thanks', 'thank you', 'thx', 'obrigad', 'merci', 'danke', 'grazie', 'genial', 'perfecto', 'ok gracias'];
-  const POPULAR = ['how-start', 'camera-not-working', 'premium-includes', 'cancel-subscription', 'report-in-chat', 'switch-camera'];
+  const POPULAR = ['no-signup', 'is-free', 'nobody-appears', 'camera-not-working', 'meet-gender', 'report-in-chat'];
 
   const { make: mascot, gesture } = window.Mascot;
 
