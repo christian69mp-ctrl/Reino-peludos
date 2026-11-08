@@ -144,18 +144,20 @@ Temas de mucha búsqueda (todos los idiomas, cuelgan de `free-video-chat`):
   filtro de edad Premium; gente adulta de todas las edades; tono que no sea condescendiente).
 - `meet-people-chat`: **chat para conocer gente** nueva (enlaza a `@guide-meet-people-online`).
 
-**Ciudades** (solo español, archivo `seo/content/es-cities.js`, cuelgan de la página de su país): `city-madrid`,
-`city-barcelona`, `city-valencia`, `city-sevilla`, `city-malaga`, `city-bilbao`, `city-zaragoza`, `city-murcia`
-(España), `city-cdmx` (México), `city-buenos-aires` (Argentina), `city-bogota` (Colombia), `city-lima` (Perú),
-`city-santiago` (Chile). Para búsquedas como «chat Madrid», «videochat Barcelona», «chat CDMX». Reglas:
+**Ciudades** (cada idioma en su archivo `seo/content/<idioma>-cities.js`, que exporta `{ 'city-…': {página} }`;
+la lista exacta de claves por idioma y país está en `CITIES` de `seo/landings.js`; cuelgan de la página de su país).
+Para búsquedas como «chat Madrid», «video chat London», «chat Paris», «Videochat Berlin». Reglas:
 - **No es una página de plantilla**: cada ciudad con texto propio (cómo se busca allí, barrios o costumbres
-  generales y conocidas sin estereotipos, el idioma o idiomas —p. ej. catalán en Barcelona, valenciano, euskera en
-  Bilbao, y que el chat traduce—, hábitos de noche, consejos para quedar en persona con seguridad en una ciudad).
-- Lo que ofrece la web: **filtro de cercanía** (Premium) para que salgan primero personas cerca de ti y filtro «Mi
-  país»; **no** existe un filtro por ciudad: no digas que solo sale gente de esa ciudad.
-- **Hora caliente** de 22:00 a 23:00 **hora de España** (para ciudades de América di «hora de España», sin convertir).
-- Sin cifras de usuarios de la ciudad. 450-750 palabras, 3-5 FAQ. `common.cities` en es.js: 'Videochat por ciudades'.
-- Enlaza a la página de su país (`@country-xx`) y a 1-3 temas.
+  generales y conocidas sin estereotipos, el idioma o idiomas —p. ej. catalán en Barcelona, francés/inglés en
+  Montréal, alemán suizo en Zürich— y que el chat traduce, hábitos de noche, consejos para quedar en persona con
+  seguridad en una ciudad).
+- Lo que ofrece la web: **filtro de cercanía** y filtro «Mi país» (gratis durante el lanzamiento; después,
+  Premium); **no** existe un filtro por ciudad: no digas que solo sale gente de esa ciudad.
+- **Hora caliente** de 22:00 a 23:00 **hora de España** (sin convertir horas: di «hora de España»).
+- Pagos en euros (fuera de la zona euro, el banco convierte). Sin cifras de usuarios de la ciudad.
+- 450-750 palabras, 3-5 secciones, 3-5 FAQ. `common.cities` ya existe en cada idioma.
+- Enlaza a la página de su país (`@country-xx`) y a 1-3 temas (`@no-signup-video-chat`, `@video-chat-women`,
+  `@flirt-chat`, `@meet-people-chat`, `@video-chat-foreigners`…), y a `@safety` si encaja.
 
 **Guías** (todos los idiomas): `guides` (índice: «Guías y consejos» para el videochat) y 4 artículos que cuelgan de él:
 - `guide-icebreakers`: cómo empezar una conversación en un videochat (frases para romper el hielo, qué evitar).

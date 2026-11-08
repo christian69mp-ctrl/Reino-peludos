@@ -57,14 +57,45 @@ const BASE = [
   { key: 'guide-meet-people-online', type: 'guide', parent: 'guides' },
 ];
 
-// Ciudades (búsquedas tipo «chat Madrid»): solo en español, cuelgan de la página de su país
+// Ciudades (búsquedas tipo «chat Madrid», «chat London»): por idioma, cuelgan de la página de su país.
+// Cada idioma tiene sus textos en seo/content/<idioma>-cities.js. La clave (slug) es única en todos.
 const CITIES = {
-  es: { madrid: 'Madrid', barcelona: 'Barcelona', valencia: 'Valencia', sevilla: 'Sevilla', malaga: 'Málaga', bilbao: 'Bilbao', zaragoza: 'Zaragoza', murcia: 'Murcia' },
-  mx: { cdmx: 'Ciudad de México' },
-  ar: { 'buenos-aires': 'Buenos Aires' },
-  co: { bogota: 'Bogotá' },
-  pe: { lima: 'Lima' },
-  cl: { santiago: 'Santiago de Chile' },
+  es: {
+    es: { madrid: 'Madrid', barcelona: 'Barcelona', valencia: 'Valencia', sevilla: 'Sevilla', malaga: 'Málaga', bilbao: 'Bilbao', zaragoza: 'Zaragoza', murcia: 'Murcia', alicante: 'Alicante', granada: 'Granada', palma: 'Palma' },
+    mx: { cdmx: 'Ciudad de México', guadalajara: 'Guadalajara', monterrey: 'Monterrey' },
+    ar: { 'buenos-aires': 'Buenos Aires', cordoba: 'Córdoba' },
+    co: { bogota: 'Bogotá', medellin: 'Medellín' },
+    pe: { lima: 'Lima' },
+    cl: { santiago: 'Santiago de Chile' },
+    ec: { quito: 'Quito' },
+    ve: { caracas: 'Caracas' },
+  },
+  en: {
+    us: { 'new-york': 'New York', 'los-angeles': 'Los Angeles', chicago: 'Chicago', miami: 'Miami', houston: 'Houston' },
+    gb: { london: 'London', manchester: 'Manchester' },
+    ca: { toronto: 'Toronto' },
+    au: { sydney: 'Sydney', melbourne: 'Melbourne' },
+    ie: { dublin: 'Dublin' },
+  },
+  pt: {
+    br: { 'sao-paulo': 'São Paulo', 'rio-de-janeiro': 'Rio de Janeiro', 'belo-horizonte': 'Belo Horizonte', brasilia: 'Brasília', salvador: 'Salvador' },
+    pt: { lisboa: 'Lisboa', porto: 'Porto' },
+  },
+  fr: {
+    fr: { paris: 'Paris', marseille: 'Marseille', lyon: 'Lyon', toulouse: 'Toulouse' },
+    be: { bruxelles: 'Bruxelles' },
+    ca: { montreal: 'Montréal' },
+    ch: { geneve: 'Genève' },
+  },
+  de: {
+    de: { berlin: 'Berlin', hamburg: 'Hamburg', muenchen: 'München', koeln: 'Köln', frankfurt: 'Frankfurt' },
+    at: { wien: 'Wien' },
+    ch: { zuerich: 'Zürich' },
+  },
+  it: {
+    it: { roma: 'Roma', milano: 'Milano', napoli: 'Napoli', torino: 'Torino' },
+    ch: { lugano: 'Lugano' },
+  },
 };
 
 // Lista completa de páginas con los idiomas en que existe cada una
@@ -75,9 +106,10 @@ const PAGES = [
     key: `country-${cc}`, type: 'country', parent: 'free-video-chat', country: cc,
     langs: LANGS.filter((l) => COUNTRIES[l].includes(cc)),
   })),
-  ...Object.entries(CITIES).flatMap(([cc, cities]) => Object.entries(cities).map(([slug, name]) => ({
-    key: `city-${slug}`, type: 'city', parent: `country-${cc}`, country: cc, city: name, langs: ['es'],
-  }))),
+  ...Object.entries(CITIES).flatMap(([lang, byCountry]) => Object.entries(byCountry).flatMap(([cc, cities]) =>
+    Object.entries(cities).map(([slug, name]) => ({
+      key: `city-${slug}`, type: 'city', parent: `country-${cc}`, country: cc, city: name, langs: [lang],
+    })))),
 ];
 
 module.exports = { COUNTRIES, BRANDS, CITIES, PAGES, LANGS };

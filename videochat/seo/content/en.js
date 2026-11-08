@@ -13,6 +13,7 @@ module.exports = {
     adultNote: '18+ only.',
     disclaimer: '{brand} is a trademark of its owner. La Ruleta Caliente is not affiliated with or sponsored by {brand}; we mention it only for comparison.',
     footerTitle: 'Free video chat',
+    cities: 'Video chat by city',
     guides: 'Guides and tips',
   },
   pages: {

@@ -13,6 +13,7 @@ module.exports = {
     adultNote: 'Nur für Personen ab 18 Jahren.',
     disclaimer: '{brand} ist eine Marke ihres Inhabers. La Ruleta Caliente ist weder mit {brand} verbunden noch von {brand} gesponsert; wir nennen den Namen nur zum Vergleich.',
     footerTitle: 'Kostenloser Videochat',
+    cities: 'Videochat nach Stadt',
     guides: 'Ratgeber und Tipps',
   },
   pages: {

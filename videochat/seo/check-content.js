@@ -7,6 +7,8 @@ const lang = process.argv[2];
 if (!lang) { console.error('Uso: node seo/check-content.js <idioma>'); process.exit(1); }
 const file = path.join(__dirname, 'content', `${lang}.js`);
 const data = require(file);
+// Ciudades del idioma en su propio archivo
+try { Object.assign(data.pages, require(path.join(__dirname, 'content', `${lang}-cities.js`))); } catch (e) { if (e.code !== 'MODULE_NOT_FOUND') throw e; }
 const errors = [];
 const warns = [];
 const err = (m) => errors.push(m);

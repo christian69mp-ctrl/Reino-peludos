@@ -241,6 +241,10 @@ for (const l of SUPPORTED) {
   try { content[l] = require(`./seo/content/${l}.js`); } catch (e) {
     if (e.code !== 'MODULE_NOT_FOUND') console.warn(`[seo] seo/content/${l}.js no se pudo cargar: ${e.message}`);
   }
+  // Páginas de ciudades de ese idioma (seo/content/<idioma>-cities.js)
+  try { if (content[l]) Object.assign(content[l].pages, require(`./seo/content/${l}-cities.js`)); } catch (e) {
+    if (e.code !== 'MODULE_NOT_FOUND') console.warn(`[seo] seo/content/${l}-cities.js no se pudo cargar: ${e.message}`);
+  }
 }
 const landing = (key) => LANDINGS.PAGES.find((p) => p.key === key);
 const has = (key, l) => !!content[l]?.pages?.[key] && landing(key)?.langs.includes(l);

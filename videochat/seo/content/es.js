@@ -17,8 +17,6 @@ module.exports = {
     cities: 'Videochat por ciudades',
   },
   pages: {
-    // Ciudades (city-*): en su propio archivo
-    ...require('./es-cities.js'),
     'free-video-chat': {
       slug: 'videochat-gratis',
       anchor: 'Videochat gratis',
