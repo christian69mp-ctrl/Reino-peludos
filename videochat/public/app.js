@@ -949,6 +949,49 @@ async function waitPayment(orderId) {
   toast(t('msg.payNotConfirmed'));
 }
 
+// ---------- Hora caliente: cuenta atrás en la portada ----------
+// Junta a la gente a la misma hora (cuantos más a la vez, antes se encuentra a alguien)
+let hot = null;
+const fmtLeft = (ms) => {
+  const m = Math.max(1, Math.round(ms / 60000));
+  return m >= 60 ? t('hot.hm', { h: Math.floor(m / 60), m: m % 60 }) : t('hot.m', { m });
+};
+function renderHot() {
+  const el = $('hotCountdown');
+  if (!el || !hot || hot.off) { if (el) el.hidden = true; return; }
+  const now = Date.now();
+  if (hot.active && hot.endsAt > now) {
+    el.textContent = t('hot.now', { left: fmtLeft(hot.endsAt - now) });
+    el.classList.add('now');
+  } else if (hot.startsAt > now) {
+    const time = new Date(hot.startsAt).toLocaleTimeString(I18N.lang, { hour: '2-digit', minute: '2-digit' });
+    el.textContent = t('hot.soon', { time, left: fmtLeft(hot.startsAt - now) });
+    el.classList.remove('now');
+  } else { fetch('/api/config').then((r) => r.json()).then((c) => { hot = c.hot; renderHot(); }).catch(() => {}); return; }
+  el.hidden = false;
+}
+fetch('/api/config').then((r) => r.json()).then((c) => { hot = c.hot; renderHot(); }).catch(() => {});
+setInterval(renderHot, 30000);
+document.addEventListener('langchange', renderHot);
+
+// ---------- Mientras buscas: invitar a un amigo a entrar ya ----------
+let inviteTimer = null;
+function showInviteNow(on) {
+  clearTimeout(inviteTimer);
+  $('inviteNow').hidden = true;
+  if (on) inviteTimer = setTimeout(() => { if (running && !connected) $('inviteNow').hidden = false; }, 12000);
+}
+$('inviteNow').addEventListener('click', async () => {
+  let link = `${location.origin}/`;
+  const info = await api('/api/invite').catch(() => null);
+  if (info?.link) link = info.link;
+  const text = t('inv.shareText');
+  try {
+    if (navigator.share) { await navigator.share({ title: 'La Ruleta Caliente', text, url: link }); return; }
+  } catch { return; }
+  window.open(`https://wa.me/?text=${encodeURIComponent(`${text} ${link}`)}`, '_blank', 'noopener');
+});
+
 // ---------- Mensajes ----------
 function setStatus(key, vars, searching = false) {
   statusKey = { key, vars };
@@ -957,6 +1000,7 @@ function setStatus(key, vars, searching = false) {
   $('statusText').textContent = key ? t(key, vars) : '';
   // Anuncio de la caja del chat: siempre que no estés en una videollamada
   window.AdSlots?.wait(!!key);
+  showInviteNow(!!key && searching);
 }
 
 // En vista amplia el chat de texto no se ve: los mensajes salen un momento sobre el vídeo

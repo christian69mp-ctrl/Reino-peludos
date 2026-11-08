@@ -373,6 +373,20 @@ $('tfaDisable').addEventListener('click', async () => {
   adminToken = r.token; sessionStorage.setItem('admin-token', adminToken);
   $('tfaCode').value = ''; toast('Verificación en dos pasos desactivada'); renderSecurity();
 });
+$('downloadBackup').addEventListener('click', async () => {
+  $('downloadBackup').disabled = true;
+  try {
+    const r = await fetch('/api/admin/backup/download', { headers: { 'x-admin-token': adminToken } });
+    if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || 'No se pudo descargar');
+    const name = (r.headers.get('Content-Disposition') || '').match(/filename="([^"]+)"/)?.[1] || 'copia.db.gz';
+    const url = URL.createObjectURL(await r.blob());
+    const a = Object.assign(document.createElement('a'), { href: url, download: name });
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    toast('Copia descargada');
+  } catch (err) { toast(err.message); }
+  $('downloadBackup').disabled = false;
+});
 $('logoutAllAdmin').addEventListener('click', async () => {
   if (!confirm('¿Cerrar todas las sesiones del panel, también esta?')) return;
   await api('/api/admin/logout-all', {});

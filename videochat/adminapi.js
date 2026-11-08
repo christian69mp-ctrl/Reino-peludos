@@ -161,6 +161,19 @@ function routes(app) {
     res.json({ ok: true, on });
   });
 
+  // Copia de seguridad: descargar ahora una copia comprimida de la base de datos (para guardarla fuera del servidor)
+  app.get('/api/admin/backup/download', requireAdmin, (req, res) => {
+    try {
+      const file = require('./backup').run();
+      const name = `la-ruleta-caliente-${new Date().toISOString().slice(0, 10)}.db.gz`;
+      audit(req, 'Copia de seguridad descargada', name);
+      res.set({ 'Content-Type': 'application/gzip', 'Content-Disposition': `attachment; filename="${name}"`, 'Cache-Control': 'no-store' });
+      require('fs').createReadStream(file).pipe(require('zlib').createGzip()).pipe(res);
+    } catch (err) {
+      res.status(500).json({ error: `No se pudo hacer la copia: ${err.message}` });
+    }
+  });
+
   // Informe semanal: enviarlo ahora al correo del dueño (ADMIN_EMAIL)
   app.post('/api/admin/report/send', requireAdmin, async (req, res) => {
     const mailer = require('./mailer');

@@ -528,6 +528,9 @@ body.in-chat .site-footer { display: none; }
 .call-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
 .call-overlay { z-index: 70; }
 #callCancel { pointer-events: auto; margin-top: 16px; }
+.invite-now { pointer-events: auto; margin-top: 14px; }
+.hot-countdown { margin: 14px 0 0; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: rgba(255, 90, 60, .12); border: 1px solid rgba(255, 120, 60, .35); color: var(--text); font-size: .95rem; font-weight: 600; }
+.hot-countdown.now { background: linear-gradient(90deg, rgba(255,61,110,.25), rgba(255,138,61,.25)); }
 
 /* Botón de amistad sobre el vídeo */
 .friend-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.5); backdrop-filter: blur(8px); color: var(--text); font: inherit; font-weight: 600; font-size: .86rem; cursor: pointer; }

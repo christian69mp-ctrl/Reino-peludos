@@ -12,6 +12,8 @@ const PUBLIC = path.join(__dirname, 'public');
 const SITE = 'La Ruleta Caliente';
 // Fecha de las guías para Google (súbela cuando se revisen los textos)
 const GUIDES_DATE = '2026-10-27';
+// Última revisión de las páginas para Google (súbela al cambiar textos de seo/content)
+const LASTMOD = '2026-11-08';
 
 // Descripción para los resultados de búsqueda (máx. ~155 caracteres)
 const DESCRIPTIONS = {
@@ -463,7 +465,7 @@ function register(app) {
     for (const p of LANDINGS.PAGES) {
       const langs = landingLangs(p.key);
       const alts = langs.map((x) => `<xhtml:link rel="alternate" hreflang="${x}" href="${b}${landingUrl(p.key, x)}"/>`).join('');
-      for (const l of langs) urls.push(`<url><loc>${b}${landingUrl(p.key, l)}</loc>${alts}<changefreq>monthly</changefreq><priority>${p.type === 'hub' ? '0.9' : '0.7'}</priority></url>`);
+      for (const l of langs) urls.push(`<url><loc>${b}${landingUrl(p.key, l)}</loc>${alts}<lastmod>${LASTMOD}</lastmod><changefreq>monthly</changefreq><priority>${p.type === 'hub' ? '0.9' : '0.7'}</priority></url>`);
     }
     res.type('application/xml').set('Cache-Control', 'public, max-age=3600')
       .send(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`);
