@@ -296,6 +296,117 @@ module.exports = {
     ],
   },
 
+  'city-alicante': {
+    slug: 'chat-alicante',
+    anchor: 'Chat Alicante',
+    title: 'Chat Alicante: videochat gratis · La Ruleta Caliente',
+    description: 'Chat Alicante con cámara: habla en vivo, 1 a 1 y gratis con gente nueva desde el móvil o el ordenador. Sin descargas, con chat que traduce. Solo para +18.',
+    h1: 'Chat Alicante: videochat en vivo para conocer gente',
+    intro: '<p>¿Has buscado <strong>chat Alicante</strong> porque te apetece hablar con alguien nuevo sin salir de casa? En La Ruleta Caliente entras desde el navegador, activas la cámara y la ruleta te pone delante a otra persona conectada, en vivo y de una en una. No hay nada que descargar y empezar no cuesta nada.</p><p>Te lo decimos claro: no hay una sala reservada a alicantinos. Puedes coincidir con alguien de la ciudad o de la otra punta del mundo, y si prefieres acortar distancias tienes el filtro de cercanía. El servicio es solo para mayores de 18.</p>',
+    sections: [
+      {
+        h2: 'Videochat en Alicante, entre la playa y el móvil',
+        html: '<p>Alicante tiene un ritmo muy de calle: el paseo por la Explanada, una tarde en el Postiguet, las cañas por el Barrio cuando cae el sol. Pero también hay noches de entre semana en las que no apetece moverse, y ahí entra el videochat. Abres la web en el móvil, eliges tu género, pones tu fecha de nacimiento y confirmas que tienes 18 años o más. No pedimos email ni contraseña; si quieres más detalles, mira el <a href="@no-signup-video-chat">videochat sin registro</a>.</p><p>Si la conversación no engancha, pulsa <strong>Siguiente</strong> o la tecla Esc. Si quieres un descanso, <strong>Parar</strong>, y vuelves cuando te apetezca.</p>',
+      },
+      {
+        h2: 'Castellano, valenciano y vecinos de mil sitios',
+        html: '<p>En Alicante se oye castellano por todas partes, valenciano en muchas casas y, en la costa, inglés, francés, neerlandés o alemán de gente que vive aquí todo el año. Esa mezcla también aparece en la ruleta. Escribe en el idioma que prefieras: el <strong>chat de texto traduce automáticamente</strong>, así que no hace falta que domines otra lengua para entenderte con alguien de Lyon o de Ámsterdam. Si te pica la curiosidad, en <a href="@video-chat-foreigners">hablar con extranjeros</a> tienes ideas para practicar idiomas.</p>',
+      },
+      {
+        h2: 'Cercanía y Mi país: cómo acercar la ruleta',
+        html: '<p>La búsqueda normal es mundial. Para que te salga gente más próxima tienes dos opciones, <strong>gratis mientras dure el lanzamiento</strong> (después pasarán a Premium):</p><ul><li><strong>Cercanía</strong>: da prioridad a personas que están cerca de ti. Puede salirte alguien de San Vicente, de Elche o de Benidorm, pero no es un filtro de ciudad.</li><li><strong>Mi país</strong>: limita la búsqueda a gente de España.</li></ul><p>Premium (7,99 € a la semana o 19,99 € al mes, sin permanencia) añade elegir a quién ver —mujeres, hombres, trans o parejas—, el filtro de edad, quitar los anuncios y un historial de 30 días.</p>',
+      },
+      {
+        h2: 'Hogueras, verano y la Hora caliente',
+        html: '<p>En junio, con las Hogueras, la ciudad duerme poco; en agosto, el calor empuja los planes hacia la madrugada. Sea la época que sea, hay una cita fija: la <strong>Hora caliente</strong>, de 22:00 a 23:00, hora de España. Durante esa hora las guindillas 🌶️ que ganas al jugar, recibir ❤️ o mantener la racha diaria cuentan el doble. Con ellas activas superpoderes como Llama caliente, que te sube en la cola, o Rebobinar, para volver con la persona anterior si ella acepta.</p><p>Y si te va el coqueteo, el <strong>modo picante</strong> trae juegos y piropos más atrevidos, pero solo se activa cuando la otra persona también lo ha elegido.</p>',
+      },
+      {
+        h2: 'De la pantalla a un café: con cabeza',
+        html: '<p>Si después de varias charlas queréis veros, quedad en un sitio con gente, como una terraza de la Rambla o una cafetería del centro, y a una hora en la que puedas volver tranquilamente en TRAM o en taxi. Avisa a alguien de confianza. En el chat, no des tu dirección ni datos bancarios, y corta con quien te pida dinero o fotos íntimas: denúncialo y una persona del equipo lo revisará. En La Ruleta Caliente nadie ve tu IP y grabar está prohibido. Tienes más en los <a href="@safety">consejos de seguridad</a> y en <a href="@country-es">videochat en España</a>.</p>',
+      },
+    ],
+    faq: [
+      { q: '¿Me saldrá solo gente de Alicante?', a: 'No. No existe filtro por ciudad. La cercanía da prioridad a quien está cerca de ti y «Mi país» limita la búsqueda a España.' },
+      { q: '¿Puedo escribir en valenciano?', a: 'Claro. Escribe como te salga: el chat de texto tiene traducción automática para que la otra persona te entienda.' },
+      { q: '¿Cuánto cuesta el filtro de cercanía?', a: 'Durante el lanzamiento es gratis. Más adelante formará parte de Premium.' },
+      { q: '¿Necesito instalar algo?', a: 'No. Funciona en el navegador, y si quieres puedes añadirla a la pantalla de inicio como una app.' },
+    ],
+  },
+
+  'city-granada': {
+    slug: 'chat-granada',
+    anchor: 'Chat Granada',
+    title: 'Chat Granada: videochat en vivo · La Ruleta Caliente',
+    description: 'Chat Granada por videollamada: conoce gente nueva en vivo y gratis, sin registro y desde el navegador. Ideal para estudiantes y Erasmus. Solo mayores de 18.',
+    h1: 'Chat Granada: videochat gratis para conocer gente',
+    intro: '<p>Si buscas un <strong>chat en Granada</strong> para charlar por cámara con alguien que todavía no conoces, La Ruleta Caliente te conecta al azar con otra persona, cara a cara y en directo. Se usa desde el navegador del móvil o del portátil, sin bajar nada, y el primer paso es gratis.</p><p>Importante: la ruleta no separa por ciudades, así que no todo el mundo será granadino. Lo que sí puedes hacer es activar la cercanía para que aparezcan antes personas próximas. Es un chat solo para mayores de 18.</p>',
+    sections: [
+      {
+        h2: 'Una ciudad de estudiantes, también en el videochat',
+        html: '<p>Granada vive al ritmo de la universidad: pisos compartidos por el centro y el Zaidín, apuntes en la biblioteca y gente que llega cada septiembre desde otras provincias o con una beca Erasmus. Cuando acabas de aterrizar y aún no conoces a nadie, un videochat es una forma sencilla de practicar conversación y quitarte la timidez.</p><p>Entras como invitado en menos de un minuto: género, fecha de nacimiento y confirmación de que eres mayor de edad. Si luego quieres guardar tus guindillas y tus amigos entre el móvil y el portátil, puedes crear una cuenta con email o Google, pero es opcional.</p>',
+      },
+      {
+        h2: 'Idiomas: de la residencia al mundo',
+        html: '<p>En un piso de estudiantes de Granada es fácil que convivan acentos de Jaén, de Almería, de Italia o de Alemania. La ruleta funciona igual de abierta: te puede tocar alguien de aquí o alguien de fuera. Si la otra persona escribe en otro idioma, el chat de texto lo traduce automáticamente, y la web está disponible en español, inglés, portugués, francés, alemán e italiano.</p><p>¿Quieres practicar inglés o ayudar a alguien con su español? Echa un vistazo a <a href="@video-chat-foreigners">hablar con extranjeros</a>.</p>',
+      },
+      {
+        h2: 'Como una ronda de tapas, pero por cámara',
+        html: '<p>En Granada mucha gente se conoce de tapeo: una caña, la tapa que llega con ella y otra parada en el siguiente bar del Realejo o de Pedro Antonio. La ruleta tiene algo parecido: conversaciones cortas, sin compromiso, y si no hay chispa, a la siguiente. Para que no se haga silencio tienes cuatro juegos —Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina—, temas para romper el hielo y un termómetro de química.</p><p>Si tu idea es hacer amigos más que ligar, el <a href="@meet-people-chat">chat para conocer gente</a> te da más pistas. Y si quieres coquetear, el <strong>modo picante</strong> 🌶️ solo funciona cuando los dos lo tenéis activado.</p>',
+      },
+      {
+        h2: 'Filtros, guindillas y Hora caliente',
+        html: '<p>Mientras dure el lanzamiento, los filtros de <strong>cercanía</strong> y <strong>Mi país</strong> son gratis; después pasarán a Premium. La cercanía prioriza a quien está cerca de ti, pero no es un «solo Granada»; Mi país te deja hablar únicamente con gente de España.</p><p>Las guindillas 🌶️ se ganan entrando cada día, jugando y recibiendo ❤️, y valen el doble en la <strong>Hora caliente</strong>, de 22:00 a 23:00, hora de España. Cada lunes, los tres primeros del ranking semanal se llevan días de Premium gratis.</p>',
+      },
+      {
+        h2: 'Antes de quedar en el Albaicín',
+        html: '<p>Si la conversación va bien y os apetece veros, mejor un sitio céntrico y concurrido, como una cafetería cerca de la Catedral o la zona de Plaza Nueva, antes que un mirador a oscuras. Ve por tus medios, en metro o en bus, y cuéntale a alguien a dónde vas. En el chat, no compartas tu dirección ni tu número a la primera y desconfía de quien te meta prisa o te pida dinero. Más ideas en <a href="@safety">seguridad</a> y en <a href="@country-es">videochat en España</a>.</p>',
+      },
+    ],
+    faq: [
+      { q: '¿Sirve para estudiantes de Erasmus?', a: 'Sí. Puedes hablar con gente de España y de otros países, y el chat de texto traduce automáticamente si no compartís idioma.' },
+      { q: '¿Hay que registrarse para usarlo?', a: 'No. Entras como invitado con tu género y tu fecha de nacimiento. La cuenta es opcional.' },
+      { q: '¿Saldrá gente de Granada?', a: 'Puede salir, pero no hay filtro por ciudad. La cercanía da prioridad a personas que están cerca de ti.' },
+      { q: '¿Gasta muchos datos?', a: 'El vídeo consume datos, así que si tu tarifa es pequeña conviene usar el wifi del piso o de la residencia.' },
+    ],
+  },
+
+  'city-palma': {
+    slug: 'chat-palma-de-mallorca',
+    anchor: 'Chat Palma de Mallorca',
+    title: 'Chat Palma de Mallorca gratis · La Ruleta Caliente',
+    description: 'Chat Palma de Mallorca por cámara: videochat en vivo 1 a 1, gratis y en el navegador, en castellano, catalán o inglés gracias a la traducción. Solo para +18.',
+    h1: 'Chat Palma de Mallorca: videochat para conocer gente',
+    intro: '<p>¿Buscas un <strong>chat en Palma de Mallorca</strong> para hablar con alguien nuevo por cámara? La Ruleta Caliente es un videochat en vivo y al azar: pulsas empezar y te conecta con otra persona, 1 a 1, desde el navegador del móvil o del ordenador. Sin descargas, sin cuenta obligatoria y gratis para empezar.</p><p>No es un chat exclusivo de la isla: puede tocarte alguien de Palma o de cualquier otro lugar. Si quieres dar prioridad a quien está cerca, tienes el filtro de cercanía. Solo para mayores de 18.</p>',
+    sections: [
+      {
+        h2: 'Vivir en una isla y conocer gente nueva',
+        html: '<p>En Palma la vida cambia mucho con las estaciones. En verano, el Paseo Marítimo y Santa Catalina se llenan; en invierno, la ciudad recupera su calma y los planes se reducen a los de siempre. Para muchos residentes, sobre todo quien ha llegado por trabajo, conocer gente fuera del círculo habitual cuesta más en una isla. Un videochat abre esa puerta sin coger un avión: una charla de cinco minutos con alguien que no conocías.</p><p>Para entrar solo indicas tu género, tu fecha de nacimiento y confirmas que tienes 18 o más. Nada de email ni contraseña.</p>',
+      },
+      {
+        h2: 'Castellano, catalán, alemán o inglés: el chat traduce',
+        html: '<p>En Palma conviven el castellano y el catalán —en su variante mallorquina—, y en muchos barrios también se oye alemán o inglés a diario. En la ruleta pasa lo mismo: puedes empezar con un «bon dia» y acabar charlando con alguien de Hamburgo. Escribe en tu idioma y el <strong>chat de texto lo traduce automáticamente</strong> para la otra persona.</p><p>Si quieres convertir eso en práctica de idiomas, en <a href="@video-chat-foreigners">hablar con extranjeros</a> te contamos cómo sacarle partido.</p>',
+      },
+      {
+        h2: 'Cómo acercar la ruleta a Mallorca',
+        html: '<p>Por defecto la búsqueda abarca todo el mundo. Para coincidir con gente más próxima hay dos filtros, <strong>gratis durante el lanzamiento</strong> y más adelante incluidos en Premium:</p><ul><li><strong>Cercanía</strong>: prioriza a personas que están cerca de ti. En una isla eso ayuda, aunque no garantiza que sean de Palma.</li><li><strong>Mi país</strong>: limita la búsqueda a gente de España.</li></ul><p>Con Premium (7,99 € por semana o 19,99 € al mes, se cancela cuando quieras) además eliges a quién ver, filtras por edad y quitas los anuncios. Si buscas sobre todo conocer mujeres, mira el <a href="@video-chat-women">videochat con chicas</a>.</p>',
+      },
+      {
+        h2: 'Noches de temporada y Hora caliente',
+        html: '<p>Si trabajas en hostelería, puede que llegues a casa tarde y con ganas de desconectar. La ruleta está abierta a cualquier hora, pero hay una franja especial: la <strong>Hora caliente</strong>, de 22:00 a 23:00, hora de España, en la que las guindillas 🌶️ valen el doble. Las ganas entrando cada día, jugando a Verdad o reto o a Dibujo y adivina, recibiendo ❤️ y completando los retos semanales.</p><p>Con ellas puedes activar Incógnito, el Supersaludo o Segunda oportunidad. Y si os apetece subir el tono, el <strong>modo picante</strong> solo se enciende cuando los dos lo tenéis activo.</p>',
+      },
+      {
+        h2: 'Si quedáis en Palma: unas precauciones',
+        html: '<p>Para un primer encuentro, elige un sitio concurrido y fácil, como una cafetería cerca del Born o de la plaza Major, y a una hora en la que haya autobuses de la EMT o taxis para volver. Cuéntale a alguien de confianza con quién has quedado. En el videochat, no des tu dirección ni tu lugar de trabajo, y si alguien te pide dinero, códigos o fotos íntimas, corta y denuncia. Más en <a href="@safety">consejos de seguridad</a> y en <a href="@country-es">videochat en España</a>.</p>',
+      },
+    ],
+    faq: [
+      { q: '¿Hay un chat solo para Mallorca?', a: 'No hay filtro por ciudad ni por isla. La cercanía da prioridad a quien está cerca de ti, y «Mi país» limita la búsqueda a España.' },
+      { q: '¿Puedo hablar con gente que no sabe español?', a: 'Sí. El chat de texto traduce automáticamente, así que cada uno puede escribir en su idioma.' },
+      { q: '¿Es gratis?', a: 'Sí, empezar es gratis y no hace falta registrarse. Premium es opcional.' },
+      { q: '¿Qué edad mínima se pide?', a: 'Hay que tener 18 años o más. Lo confirmas al entrar.' },
+    ],
+  },
+
   // ───────────────────────── América ─────────────────────────
   'city-cdmx': {
     slug: 'chat-cdmx',
@@ -479,6 +590,228 @@ module.exports = {
       { q: '¿Es gratis?', a: 'Sí, puedes usar el videochat gratis y sin registrarte. Premium es opcional.' },
       { q: '¿Puedo pagar en pesos chilenos?', a: 'Los precios están en euros. Al pagar con tarjeta chilena, tu banco hace la conversión.' },
       { q: '¿Funciona en el computador?', a: 'Sí, en el navegador del computador o del celular, con cámara y micrófono.' },
+    ],
+  },
+
+  'city-guadalajara': {
+    slug: 'chat-guadalajara',
+    anchor: 'Chat Guadalajara',
+    title: 'Chat Guadalajara: videochat gratis · La Ruleta Caliente',
+    description: 'Chat Guadalajara por videollamada: platica en vivo y gratis con gente nueva desde tu celular o tu compu, sin descargar apps ni registrarte. Solo para +18.',
+    h1: 'Chat Guadalajara: videollamadas para conocer gente',
+    intro: '<p>¿Buscas un <strong>chat en Guadalajara</strong> para platicar por cámara con alguien nuevo? La Ruleta Caliente te junta al azar con otra persona conectada en ese momento, cara a cara, desde el navegador de tu celular o de tu compu. No bajas nada, no necesitas cuenta y empezar es gratis.</p><p>Para que no haya sorpresas: no es un chat solo de tapatíos. Te puede tocar alguien de aquí o de cualquier otro país, y si quieres que salgan primero personas cercanas, tienes el filtro de cercanía. Solo para mayores de 18.</p>',
+    sections: [
+      {
+        h2: 'Videochat en Guadalajara: rápido y sin rollos',
+        html: '<p>Entre la chamba, la escuela y el tráfico de López Mateos, no siempre hay tiempo para salir a conocer gente. Por eso un videochat tiene sentido: lo abres en cinco minutos libres, eliges tu género, escribes tu fecha de nacimiento y confirmas que tienes 18 o más. Le das permiso a la cámara y ya estás platicando.</p><p>Si no hay química, pícale a <strong>Siguiente</strong> (o Esc en la compu); si ya te cansaste, <strong>Parar</strong>. Si quieres saber más de cómo entrar sin dar correo, revisa el <a href="@no-signup-video-chat">videochat sin registro</a>.</p>',
+      },
+      {
+        h2: 'Tapatíos, gente de todo México y del extranjero',
+        html: '<p>Guadalajara recibe a muchos estudiantes, gente que trabaja en tecnología y visitantes de otros países, y esa mezcla se nota en la ruleta. Te puede salir alguien de Zapopan, de Tlaquepaque, de Monterrey o de Madrid. Si la otra persona escribe en inglés o en portugués, el chat de texto traduce solo.</p><p>Si prefieres acotar, durante el lanzamiento tienes gratis dos filtros (después serán parte de Premium):</p><ul><li><strong>Cercanía</strong>: aparecen primero quienes están cerca de ti. No es un filtro de ciudad, así que no garantiza que sean de Guadalajara.</li><li><strong>Mi país</strong>: solo personas de México.</li></ul>',
+      },
+      {
+        h2: 'Para coquetear con buena onda',
+        html: '<p>Una buena plática empieza con preguntas de verdad: qué hace un domingo, si prefiere la avenida Chapultepec o el centro de Tlaquepaque, cuál es su lugar favorito para una torta ahogada. Si lo que buscas es un <a href="@flirt-chat">chat para ligar</a>, tómatelo con calma y respeta los tiempos de la otra persona.</p><p>El <strong>modo picante</strong> 🌶️ trae retos y piropos más atrevidos, pero solo se activa cuando los dos lo tienen prendido. Y si se acaba el tema, hay juegos dentro de la videollamada: Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina, más un termómetro de química.</p>',
+      },
+      {
+        h2: 'Hora caliente, guindillas y Premium',
+        html: '<p>Cada noche hay una <strong>Hora caliente</strong> de 22:00 a 23:00, hora de España: checa a qué hora cae en Guadalajara. En ese rato las guindillas 🌶️ valen el doble. Las juntas entrando diario, jugando, recibiendo ❤️ y cumpliendo retos semanales, y te sirven para activar superpoderes como Llama caliente o Rebobinar.</p><p>Premium cuesta <strong>7,99 € por semana</strong> o <strong>19,99 € al mes</strong>. El precio está en euros y, si pagas con tarjeta mexicana, tu banco lo convierte a pesos. Incluye elegir a quién ver, filtro de edad y cero anuncios, y lo cancelas cuando quieras.</p>',
+      },
+      {
+        h2: 'Si se ven en persona: cuídate',
+        html: '<p>Antes de quedar, platiquen por video más de una vez. Para el primer encuentro, un lugar con gente y de día: un café en la colonia Americana, una plaza comercial o el centro. Llega y regresa por tu cuenta, comparte tu ubicación con alguien de confianza y no des tu domicilio. En el chat, nunca mandes dinero, recargas ni códigos, y si alguien te presiona, córtale y denúncialo. Más en <a href="@safety">seguridad</a> y en <a href="@country-mx">videochat México</a>.</p>',
+      },
+    ],
+    faq: [
+      { q: '¿Hay un chat solo para Guadalajara?', a: 'No hay filtro por ciudad. Puedes usar la cercanía para ver primero a gente cerca de ti o «Mi país» para platicar solo con personas de México.' },
+      { q: '¿Los filtros cuestan?', a: 'Cercanía y «Mi país» son gratis durante el lanzamiento. Más adelante formarán parte de Premium.' },
+      { q: '¿Puedo pagar en pesos?', a: 'Los precios están en euros. Tu banco hace la conversión a pesos al pagar con tarjeta.' },
+      { q: '¿Funciona en el celular?', a: 'Sí, en el navegador del celular, sin bajar ninguna app. También puedes agregarla a tu pantalla de inicio.' },
+    ],
+  },
+
+  'city-monterrey': {
+    slug: 'chat-monterrey',
+    anchor: 'Chat Monterrey',
+    title: 'Chat Monterrey: videochat en vivo · La Ruleta Caliente',
+    description: 'Chat Monterrey con cámara: conoce gente nueva en vivo, 1 a 1 y gratis desde el navegador, sin descargas. Filtros de cercanía y «Mi país». Solo para +18.',
+    h1: 'Chat Monterrey: videochat en vivo para platicar',
+    intro: '<p>Si buscaste <strong>chat Monterrey</strong> para platicar por videollamada con gente nueva, aquí lo tienes: La Ruleta Caliente te empareja al azar con otra persona conectada, cara a cara, desde el navegador del celular o de la compu. Sin descargas ni registro, y gratis para empezar.</p><p>Eso sí, no hay una sala solo para regios. La ruleta conecta con gente de muchos lugares; si prefieres que te salgan primero personas de tu zona, puedes activar la cercanía. Es solo para mayores de 18.</p>',
+    sections: [
+      {
+        h2: 'Monterrey: ciudad de trabajo, noches para platicar',
+        html: '<p>En Monterrey mucha gente arranca temprano y entre la oficina, la planta o la universidad el día se va volando. Cuando por fin llegas a casa, quizá no tienes ganas de salir hasta San Pedro o el Barrio Antiguo, pero sí de hablar con alguien distinto. Un videochat encaja justo ahí.</p><p>Entras como invitado: género, fecha de nacimiento y confirmas que tienes 18 o más. La cuenta con correo o Google es opcional y sirve para guardar tu avance entre dispositivos. Con <strong>Siguiente</strong> cambias de persona y con <strong>Parar</strong> te tomas un respiro.</p>',
+      },
+      {
+        h2: '¿Quién te puede salir?',
+        html: '<p>Por defecto la búsqueda es mundial: puede tocarte alguien de Apodaca, de Saltillo, de Texas o de Bogotá. Si te escriben en inglés, el chat de texto lo traduce automáticamente, así que el idioma no es pretexto. Si quieres acercar la ruleta a tu zona, durante el lanzamiento estos filtros no cuestan (luego pasarán a Premium):</p><ul><li><strong>Cercanía</strong>: prioriza a personas que están cerca de ti en el área metropolitana. No filtra por ciudad, así que no todos serán de Monterrey.</li><li><strong>Mi país</strong>: solo gente de México.</li></ul><p>Con Premium también eliges a quién ver (mujeres, hombres, trans o parejas) y el rango de edad.</p>',
+      },
+      {
+        h2: 'Juegos para que no se haga el silencio incómodo',
+        html: '<p>Si la plática se atora, la videollamada trae cuatro juegos: Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina. También hay temas para romper el hielo y un termómetro de química que te dice si la cosa va bien. Tienes más ideas en los <a href="@video-chat-games">juegos para videollamadas</a>.</p><p>¿Ganas de algo más coqueto? El <strong>modo picante</strong> 🌶️ desbloquea retos y piropos más atrevidos, pero solo entre dos personas que lo tengan activado. Si la otra persona no quiere, no aparece nada.</p>',
+      },
+      {
+        h2: 'Guindillas, Hora caliente y cuánto cuesta',
+        html: '<p>Las guindillas 🌶️ son puntos gratis: las ganas por entrar todos los días, jugar, recibir ❤️ y cumplir los retos de la semana. En la <strong>Hora caliente</strong>, de 22:00 a 23:00 hora de España, valen el doble; revisa la diferencia de horario con Monterrey. Cada lunes, los tres primeros del ranking semanal ganan días de Premium.</p><p>Premium sale en <strong>7,99 € por semana</strong> o <strong>19,99 € al mes</strong>, sin plazos forzosos. Se cobra en euros y tu banco hace la conversión a pesos.</p>',
+      },
+      {
+        h2: 'Antes de quedar: tips para Monterrey',
+        html: '<p>Si hay conexión y quieren verse, que la primera vez sea en un lugar público y concurrido, como el Paseo Santa Lucía, un café o una plaza, y de preferencia de día. Ve en tu carro, en Metrorrey o en un taxi de aplicación, y avisa a alguien con quién vas a estar. En el chat no compartas tu dirección, tu trabajo ni datos de tu tarjeta. Si alguien te pide dinero o fotos íntimas, es momento de cortar y denunciar. Más en <a href="@safety">seguridad</a> y <a href="@country-mx">videochat México</a>.</p>',
+      },
+    ],
+    faq: [
+      { q: '¿Solo me saldrá gente de Monterrey?', a: 'No. No existe filtro por ciudad. La cercanía da prioridad a quien está cerca y «Mi país» limita la búsqueda a México.' },
+      { q: '¿Necesito registrarme?', a: 'No. Entras como invitado; la cuenta es opcional y solo es obligatoria para pagar Premium.' },
+      { q: '¿A qué hora es la Hora caliente en Monterrey?', a: 'Es de 22:00 a 23:00 hora de España. Revisa la diferencia horaria para saber cuándo te toca.' },
+      { q: '¿Se cobra en pesos?', a: 'No, en euros. Al pagar con tarjeta mexicana, tu banco convierte el importe a pesos.' },
+    ],
+  },
+
+  'city-cordoba': {
+    slug: 'chat-cordoba-argentina',
+    anchor: 'Chat Córdoba',
+    title: 'Chat Córdoba Argentina: videochat · La Ruleta Caliente',
+    description: 'Chat Córdoba (Argentina) por cámara: charlá en vivo con gente nueva desde el celu o la compu, gratis, sin bajar nada y sin registrarte. Solo para mayores de 18.',
+    h1: 'Chat Córdoba: videochat para charlar con gente nueva',
+    intro: '<p>¿Buscás un <strong>chat en Córdoba</strong> para charlar por cámara con alguien que no conocés? La Ruleta Caliente te conecta al azar con otra persona, en vivo y mano a mano, desde el navegador del celu o de la compu. No tenés que bajar nada ni crear una cuenta, y arrancar es gratis.</p><p>Aclaración: no es un chat solo de cordobeses. La ruleta te puede cruzar con gente de cualquier lado; si preferís que aparezcan antes personas cerca tuyo, tenés el filtro de cercanía. Solo para mayores de 18.</p>',
+    sections: [
+      {
+        h2: 'De Nueva Córdoba a la pantalla',
+        html: '<p>Córdoba es una ciudad muy universitaria: cada marzo llegan chicos y chicas de todo el interior a estudiar, y barrios como Nueva Córdoba o Güemes se llenan de departamentos compartidos. Cuando recién llegás y todavía no tenés grupo, un videochat es una forma fácil de charlar con alguien distinto sin moverte.</p><p>Entrar lleva menos de un minuto: elegís tu género, ponés tu fecha de nacimiento y confirmás que tenés 18 o más. Si no pinta, apretás <strong>Siguiente</strong> (o Esc); si querés frenar, <strong>Parar</strong>. Más detalles en el <a href="@no-signup-video-chat">videochat sin registro</a>.</p>',
+      },
+      {
+        h2: 'Cordobeses, argentinos y gente de afuera',
+        html: '<p>Con la búsqueda normal te puede tocar alguien de Alberdi, de Villa Carlos Paz, de Mendoza o de Madrid. Hables con tonada o sin ella, de vos o de tú, se entiende igual; y si la otra persona escribe en inglés o en portugués, el chat de texto traduce automáticamente.</p><p>Si querés acotar, durante el lanzamiento tenés gratis estos filtros (más adelante van a ser Premium):</p><ul><li><strong>Cercanía</strong>: salen primero quienes están cerca tuyo. No es un filtro por ciudad, así que no todos van a ser de Córdoba capital.</li><li><strong>Mi país</strong>: solo gente de Argentina.</li></ul>',
+      },
+      {
+        h2: 'Para conocer gente, con o sin chamuyo',
+        html: '<p>No todo es levantar: mucha gente entra a la ruleta para hacer amigos, practicar un idioma o pasar un rato. Si es tu caso, mirá el <a href="@meet-people-chat">chat para conocer gente</a>. Y si te va el coqueteo, preguntá cosas que den para charlar: qué banda de cuarteto no se pierde, si es más de las sierras o de quedarse en el centro, qué carrera está haciendo.</p><p>El <strong>modo picante</strong> 🌶️ suma juegos y piropos subidos de tono, pero solo se activa si los dos lo tienen prendido. Para cortar el silencio también están Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina.</p>',
+      },
+      {
+        h2: 'Hora caliente, guindillas y precios',
+        html: '<p>La <strong>Hora caliente</strong> es todas las noches de 22:00 a 23:00, hora de España; fijate a qué hora cae en Córdoba. En ese rato las guindillas 🌶️ valen doble. Las sumás entrando cada día, jugando, recibiendo ❤️ y completando retos semanales, y con ellas activás superpoderes como Supersaludo o Segunda oportunidad.</p><p>Premium cuesta <strong>7,99 € por semana</strong> o <strong>19,99 € por mes</strong> y lo das de baja cuando quieras. Se cobra en euros: tu banco o tu tarjeta hacen la conversión a pesos. Incluye elegir a quién ver, filtro de edad y nada de anuncios.</p>',
+      },
+      {
+        h2: 'Si arreglan para verse en Córdoba',
+        html: '<p>Antes de encontrarse, hablen por video más de una vez. La primera vez, en un lugar con movimiento y de día: un café cerca del Paseo del Buen Pastor, la zona de la Cañada o un shopping. Andá y volvé por tu cuenta, en colectivo o en un auto de aplicación, y avisale a alguien dónde vas a estar. En el chat, no pases tu dirección ni datos de tu cuenta bancaria, y desconfiá de cualquiera que te pida plata o fotos íntimas. Más en <a href="@safety">seguridad</a> y en <a href="@country-ar">videochat Argentina</a>.</p>',
+      },
+    ],
+    faq: [
+      { q: '¿Es un chat solo para gente de Córdoba?', a: 'No, no hay filtro por ciudad. Podés usar la cercanía para ver primero a quien está cerca o «Mi país» para charlar solo con gente de Argentina.' },
+      { q: '¿Los filtros son pagos?', a: 'Durante el lanzamiento, cercanía y «Mi país» son gratis. Más adelante van a formar parte de Premium.' },
+      { q: '¿Se puede pagar en pesos?', a: 'Los precios están en euros. Si pagás con tarjeta argentina, el banco convierte el importe a pesos.' },
+      { q: '¿Anda en el celu?', a: 'Sí, funciona en el navegador del celular sin bajar ninguna app. Si querés, la instalás desde el navegador.' },
+    ],
+  },
+
+  'city-medellin': {
+    slug: 'chat-medellin',
+    anchor: 'Chat Medellín',
+    title: 'Chat Medellín: videochat gratis · La Ruleta Caliente',
+    description: 'Chat Medellín por videollamada: habla en vivo y gratis con gente nueva desde el celular o el computador, sin descargar nada ni registrarte. Solo para +18.',
+    h1: 'Chat Medellín: videollamadas para conocer gente nueva',
+    intro: '<p>¿Buscas un <strong>chat en Medellín</strong> para hablar por videollamada con alguien nuevo? La Ruleta Caliente te conecta al azar con otra persona, en vivo y 1 a 1, desde el navegador del celular o del computador. No descargas nada, no necesitas cuenta y empezar es gratis.</p><p>Para que quede claro: no es un chat solo de paisas. Te puede salir gente de aquí o de cualquier otro país; si prefieres que aparezcan primero personas cercanas, tienes el filtro de cercanía. Solo para mayores de 18.</p>',
+    sections: [
+      {
+        h2: 'Videochat en Medellín, del Metro a la casa',
+        html: '<p>En Medellín mucha gente se mueve en Metro, en Metrocable o en bus, y entre estación y estación queda tiempo para curiosear en el celular. La cámara, mejor para cuando llegas a la casa con buen wifi. Entrar es sencillo: eliges tu género, pones tu fecha de nacimiento y confirmas que tienes 18 años o más.</p><p>Si la conversación no fluye, dale a <strong>Siguiente</strong>; si quieres descansar, <strong>Parar</strong>. Y si te preguntas si funciona bien en el celular, mira el <a href="@mobile-video-chat">videochat desde el móvil</a>.</p>',
+      },
+      {
+        h2: 'Paisas, colombianos y gente de todo el mundo',
+        html: '<p>Medellín recibe a muchos visitantes y nómadas digitales, y también a gente de otras regiones de Colombia que llega por estudio o trabajo. En la ruleta te puede tocar alguien de Laureles, de Envigado, de Cali o de Toronto. Si te escriben en inglés, el chat de texto lo traduce automáticamente; si quieres aprovecharlo para practicar, revisa <a href="@video-chat-foreigners">hablar con extranjeros</a>.</p><p>Durante el lanzamiento estos filtros son gratis (después serán Premium):</p><ul><li><strong>Cercanía</strong>: primero ves a personas cerca de ti. No filtra por ciudad, así que no garantiza que sean de Medellín.</li><li><strong>Mi país</strong>: solo gente de Colombia.</li></ul>',
+      },
+      {
+        h2: 'Una charla bacana, con respeto',
+        html: '<p>Una buena conversación arranca con un «¿qué más, cómo vas?» y preguntas de verdad: qué hace el fin de semana, si es más de subir a un mirador o de quedarse en la casa viendo una serie. Si lo que buscas es coquetear, el <a href="@flirt-chat">chat para ligar</a> tiene más ideas; lo importante es escuchar y no presionar.</p><p>El <strong>modo picante</strong> 🌶️ trae juegos y piropos más atrevidos, pero solo funciona si las dos personas lo tienen activado. Y para romper el hielo están Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina.</p>',
+      },
+      {
+        h2: 'Hora caliente, guindillas y Premium',
+        html: '<p>Todas las noches, de 22:00 a 23:00 hora de España, es la <strong>Hora caliente</strong>: revisa la diferencia horaria con Medellín para aprovecharla. En esa hora las guindillas 🌶️ valen el doble; las ganas con la racha diaria, jugando, recibiendo ❤️ y con los retos semanales.</p><p>Premium vale <strong>7,99 € por semana</strong> o <strong>19,99 € al mes</strong>. El cobro es en euros y tu banco lo convierte a pesos colombianos. Incluye elegir a quién ver, filtro de edad, historial de 30 días y cero anuncios, y lo cancelas cuando quieras.</p>',
+      },
+      {
+        h2: 'Si se van a ver: seguridad ante todo',
+        html: '<p>Antes de encontrarse, hablen varias veces por video para confirmar que la persona es quien dice ser. La primera cita, de día y en un sitio concurrido, como un café de un centro comercial o un parque con gente. No aceptes bebidas que no hayas visto servir, ve y vuelve por tu cuenta y comparte tu ubicación con alguien de confianza. En el chat, nunca des tu dirección ni mandes plata. Más en <a href="@safety">seguridad</a> y en <a href="@country-co">videochat Colombia</a>.</p>',
+      },
+    ],
+    faq: [
+      { q: '¿Hay un chat solo para Medellín?', a: 'No hay filtro por ciudad. Con la cercanía ves primero a personas próximas y con «Mi país» hablas solo con gente de Colombia.' },
+      { q: '¿Puedo hablar con extranjeros?', a: 'Sí. La búsqueda normal es mundial y el chat de texto traduce automáticamente si no hablan el mismo idioma.' },
+      { q: '¿Se paga en pesos colombianos?', a: 'Los precios están en euros. Tu banco hace la conversión cuando pagas con tarjeta.' },
+      { q: '¿Es gratis?', a: 'Sí, puedes entrar y hablar gratis, sin registrarte. Premium es opcional.' },
+    ],
+  },
+
+  'city-quito': {
+    slug: 'chat-quito',
+    anchor: 'Chat Quito',
+    title: 'Chat Quito: videochat en vivo · La Ruleta Caliente',
+    description: 'Chat Quito con cámara: conversa en vivo, 1 a 1 y gratis con gente nueva desde el celular o la compu, sin descargas ni registro. Chat que traduce. Solo +18.',
+    h1: 'Chat Quito: videochat gratis para conocer gente',
+    intro: '<p>Si buscaste <strong>chat Quito</strong> para conversar por cámara con alguien nuevo, La Ruleta Caliente te conecta al azar con otra persona, en vivo y frente a frente, desde el navegador. Funciona en el celular y en la compu, sin bajar ninguna app, y entrar es gratis.</p><p>Eso sí: no hay una sala solo para quiteños. Puede tocarte alguien de la ciudad o de otro continente; si prefieres dar prioridad a quien está cerca, tienes el filtro de cercanía. Es solo para mayores de 18.</p>',
+    sections: [
+      {
+        h2: 'Una ciudad larga, un chat a un clic',
+        html: '<p>Quito se estira de norte a sur entre montañas, y cruzarla para ver a alguien puede llevar su buen rato, sea en el Metro, en el Trole o en la Ecovía. Por eso conversar primero por videollamada tiene lógica: ves si hay buena conexión sin salir de casa. Y cuando la tarde se pone fría y lluviosa, un videochat es un plan muy chévere.</p><p>Para empezar eliges tu género, pones tu fecha de nacimiento y confirmas que tienes 18 o más. Con <strong>Siguiente</strong> cambias de persona; con <strong>Parar</strong> haces una pausa. Sin correo ni contraseña: así es el <a href="@no-signup-video-chat">videochat sin registro</a>.</p>',
+      },
+      {
+        h2: 'Quiteños, ecuatorianos y viajeros',
+        html: '<p>Quito recibe a estudiantes de todo el país y a viajeros que pasan por el Centro Histórico o La Mariscal, y en la ruleta se nota esa variedad. Te puede salir alguien de Cumbayá, de Guayaquil, de Cuenca o de Lima. Si te escriben en inglés o en francés, el chat de texto traduce automáticamente.</p><p>Durante el lanzamiento puedes usar gratis estos filtros (después pasarán a Premium):</p><ul><li><strong>Cercanía</strong>: aparecen primero personas cerca de ti. No es un filtro de ciudad, así que no garantiza que sean de Quito.</li><li><strong>Mi país</strong>: solo gente de Ecuador.</li></ul><p>Con Premium también eliges a quién ver; si te interesa, revisa el <a href="@video-chat-women">videochat con chicas</a>.</p>',
+      },
+      {
+        h2: 'Juegos y coqueteo, a tu ritmo',
+        html: '<p>¿No sabes qué decir? Pregunta por su plan favorito de domingo, si es de subir al Pichincha en el teleférico o de quedarse en el parque La Carolina. Si la conversación se apaga, la videollamada trae Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera y Dibujo y adivina, además del termómetro de química.</p><p>Para quienes quieren coquetear, el <strong>modo picante</strong> 🌶️ desbloquea retos y piropos más atrevidos, pero solo si la otra persona también lo activó. Nadie te lo impone, y puedes salir de la llamada cuando quieras.</p>',
+      },
+      {
+        h2: 'Hora caliente, guindillas y pagos en euros',
+        html: '<p>La <strong>Hora caliente</strong> es cada noche de 22:00 a 23:00, hora de España; mira la diferencia horaria con Quito para no perdértela. Durante esa hora las guindillas 🌶️ valen el doble. Las juntas entrando cada día, jugando y recibiendo ❤️, y sirven para activar superpoderes como Incógnito o Llama caliente.</p><p>Premium cuesta <strong>7,99 € por semana</strong> o <strong>19,99 € al mes</strong>. Como el precio está en euros, tu banco lo convierte a dólares al pagar con tarjeta. Lo cancelas cuando quieras.</p>',
+      },
+      {
+        h2: 'Antes de verse: cuidados básicos',
+        html: '<p>Si deciden conocerse, que el primer encuentro sea de día y en un lugar con gente, como un café en La Floresta o un centro comercial. Pide un taxi seguro o un transporte de aplicación, y cuéntale a alguien de confianza dónde vas a estar. En el chat, no des tu dirección ni tu número de cédula, no envíes dinero y corta con quien te presione para mandar fotos. Más en <a href="@safety">seguridad</a> y en <a href="@country-ec">videochat Ecuador</a>.</p>',
+      },
+    ],
+    faq: [
+      { q: '¿Me saldrá solo gente de Quito?', a: 'No, no existe filtro por ciudad. La cercanía da prioridad a quien está cerca de ti y «Mi país» limita la búsqueda a Ecuador.' },
+      { q: '¿Puedo pagar en dólares?', a: 'El precio está en euros. Al pagar con tarjeta, tu banco hace la conversión a dólares.' },
+      { q: '¿Funciona con datos móviles?', a: 'Sí, funciona con datos o con wifi. El video consume bastantes datos, así que el wifi es mejor si tu plan es pequeño.' },
+      { q: '¿Hay que ser mayor de edad?', a: 'Sí, hay que tener 18 años o más y confirmarlo al entrar.' },
+    ],
+  },
+
+  'city-caracas': {
+    slug: 'chat-caracas',
+    anchor: 'Chat Caracas',
+    title: 'Chat Caracas: videochat gratis · La Ruleta Caliente',
+    description: 'Chat Caracas por videollamada: habla en vivo y gratis con gente nueva desde el teléfono o la computadora, sin descargar nada ni registrarte. Solo para +18.',
+    h1: 'Chat Caracas: videochat para conocer gente nueva',
+    intro: '<p>¿Buscas un <strong>chat en Caracas</strong> para hablar por cámara con alguien nuevo? La Ruleta Caliente te conecta al azar con otra persona, en vivo y 1 a 1, directamente en el navegador del teléfono o de la computadora. Sin descargas, sin cuenta obligatoria y gratis para empezar.</p><p>Te lo aclaramos de una vez: no es un chat solo de caraqueños. La ruleta conecta con gente de muchos países; si quieres que salgan primero personas cercanas, tienes el filtro de cercanía. Solo para mayores de 18.</p>',
+    sections: [
+      {
+        h2: 'Echar un cuento por cámara, sin salir de casa',
+        html: '<p>A veces lo que provoca es echar un cuento con alguien nuevo, sin cuadrar planes ni atravesar la ciudad. Para eso sirve un videochat: entras desde el teléfono, eliges tu género, pones tu fecha de nacimiento, confirmas que tienes 18 años o más y en segundos tienes a alguien al frente.</p><p>Si no hay feeling, <strong>Siguiente</strong>; si quieres una pausa, <strong>Parar</strong>. Como todo pasa en el navegador, no ocupa espacio en el teléfono, y si lo usas seguido puedes instalarla como app desde el propio navegador.</p>',
+      },
+      {
+        h2: 'Caraqueños, venezolanos y panas en otros países',
+        html: '<p>Muchos caraqueños tienen amigos y familia repartidos por medio mundo, y en la ruleta esa conexión se nota: te puede tocar alguien de Chacao, de Valencia, de Maracaibo o de Madrid. Si la otra persona escribe en otro idioma, el chat de texto lo traduce automáticamente.</p><p>Durante el lanzamiento tienes gratis dos filtros (más adelante serán Premium):</p><ul><li><strong>Cercanía</strong>: prioriza a personas cerca de ti. No es un filtro por ciudad, así que no todos serán de Caracas.</li><li><strong>Mi país</strong>: solo gente de Venezuela.</li></ul><p>Si quieres ampliar tu círculo, el <a href="@meet-people-chat">chat para conocer gente</a> tiene más ideas.</p>',
+      },
+      {
+        h2: 'Una buena conversa, con chispa y respeto',
+        html: '<p>Para arrancar, nada como una pregunta sencilla: si es más de subir al Ávila un domingo, de comer arepas a cualquier hora o de quedarse viendo una serie. Si lo tuyo es coquetear, hazlo con buen humor y sin presionar; tienes consejos en el <a href="@flirt-chat">chat para ligar</a>.</p><p>El <strong>modo picante</strong> 🌶️ añade juegos y piropos subidos de tono, pero solo aparece cuando los dos lo tienen activado. Y si la conversa se queda en blanco, prueba Verdad o reto, ¿Qué prefieres?, Piedra, papel o tijera o Dibujo y adivina.</p>',
+      },
+      {
+        h2: 'Hora caliente, guindillas y Premium',
+        html: '<p>Cada noche hay <strong>Hora caliente</strong> de 22:00 a 23:00, hora de España; calcula a qué hora te toca en Caracas. En ese rato las guindillas 🌶️ valen el doble. Las ganas por tu racha diaria, por jugar, por recibir ❤️ y por los retos semanales, y te dan superpoderes como Rebobinar o Supersaludo sin pagar nada.</p><p>Premium cuesta <strong>7,99 € por semana</strong> o <strong>19,99 € al mes</strong> y se cancela cuando quieras. El precio está en euros; si pagas con una tarjeta en otra moneda, tu banco hace la conversión.</p>',
+      },
+      {
+        h2: 'Si se van a conocer: pilas con la seguridad',
+        html: '<p>Antes de verse, hablen por video más de una vez. El primer encuentro, de día y en un sitio concurrido, como un café en Altamira o Las Mercedes o un centro comercial. Ve y regresa por tu cuenta y avísale a alguien de confianza con quién estás. En el chat, no des tu dirección ni datos de tus cuentas, y no envíes dinero ni pagos móviles a nadie que acabas de conocer. Más en <a href="@safety">seguridad</a> y en <a href="@country-ve">videochat Venezuela</a>.</p>',
+      },
+    ],
+    faq: [
+      { q: '¿Hay un chat solo para Caracas?', a: 'No hay filtro por ciudad. Con la cercanía ves primero a quien está cerca y con «Mi país» hablas solo con gente de Venezuela.' },
+      { q: '¿Necesito descargar una app?', a: 'No. Funciona en el navegador del teléfono o de la computadora, y puedes instalarla como app si quieres.' },
+      { q: '¿En qué moneda se paga Premium?', a: 'En euros. Si tu tarjeta es de otra moneda, tu banco convierte el importe.' },
+      { q: '¿Hay que registrarse?', a: 'No. Entras como invitado; la cuenta es opcional y solo hace falta para pagar Premium.' },
     ],
   },
 };

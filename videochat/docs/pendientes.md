@@ -33,6 +33,8 @@ Marca cada cosa cuando la hagas. Lo de arriba es lo más urgente.
 
 ## 🟡 Cada semana (rutina)
 
+- [ ] Seguir el **kit de redes** (`docs/marca/redes-contenido.md`): 1 post al día en X, historias con encuesta, colaboraciones.
+
 - [ ] **5 emails** a artículos de «alternativas a Omegle» (plantillas en `difusion.md`). Si alguno pide dinero,
       preguntar antes.
 - [ ] **Mandar a Claude una captura del «Resumen»** del panel /admin (Altas, Conversaciones, Visitantes).
@@ -53,7 +55,7 @@ Marca cada cosa cuando la hagas. Lo de arriba es lo más urgente.
 - [x] **Probar Brevo**: «¿Olvidaste tu contraseña?» funciona y el correo llega a Gmail.
 - [ ] **Veriff** (verificación de edad con DNI): para cuando alguien denuncie a un posible menor. Pedir a Claude
       los pasos cuando haya movimiento diario.
-- [ ] **Copia de seguridad**: una vez al mes, pedir a Claude cómo descargarla al PC.
+- [ ] **Copia de seguridad**: una vez al mes, /admin → Seguridad → «💾 Descargar copia de seguridad» y guardarla en el PC o un USB.
 
 ## ⚪ Cuando haya movimiento diario (para empezar a ganar dinero)
 
