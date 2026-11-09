@@ -195,7 +195,7 @@ function head(req, page, lang, title) {
   const own = lang ? (page === 'home' ? `/${lang}/` : urlOf(page, lang)) : '/';
   const desc = DESCRIPTIONS[page][lang || 'en'];
   const alts = SUPPORTED.map((l) => `<link rel="alternate" hreflang="${l}" href="${b}${page === 'home' ? `/${l}/` : urlOf(page, l)}">`);
-  alts.push(`<link rel="alternate" hreflang="x-default" href="${b}${page === 'home' ? '/' : urlOf(page, 'en')}">`);
+  alts.push(`<link rel="alternate" hreflang="x-default" href="${b}${page === 'home' ? '/en/' : urlOf(page, 'en')}">`);
   const ld = page === 'home'
     ? [{ '@context': 'https://schema.org', '@type': 'WebSite', name: SITE, url: `${b}/`, inLanguage: SUPPORTED, description: desc },
       { '@context': 'https://schema.org', '@type': 'Organization', name: SITE, url: `${b}/`, logo: `${b}/icon-512.png`,
@@ -422,8 +422,20 @@ function send(req, res, page, lang) {
 
 function register(app) {
   const langs = SUPPORTED.join('|');
-  // Portada sin idioma: la web elige el idioma del navegador
-  app.get(['/', '/index.html'], (req, res) => send(req, res, 'home', null));
+  // Portada sin idioma: lleva a la del idioma del navegador. Así Google no ve «/» como copia de
+  // «/en/» (o «/es/») y no elige otra página canónica. Se conserva ?ref=, ?social=…
+  app.get(['/', '/index.html', '/index'], (req, res) => {
+    res.set('Vary', 'Accept-Language');
+    res.redirect(302, `/${preferred(req)}/${req.url.slice(req.path.length)}`);
+  });
+  // Barra final sobrante (/es/videochat-gratis/ → /es/videochat-gratis): una sola dirección por página
+  app.use((req, res, next) => {
+    if (req.method !== 'GET' || req.path.length < 5 || !req.path.endsWith('/') || req.path.startsWith('/api/')) return next();
+    if (new RegExp(`^/(${langs})/$`).test(req.path)) return next();
+    res.redirect(301, req.path.replace(/\/+$/, '') + req.url.slice(req.path.length));
+  });
+  // Páginas técnicas que no deben salir en Google
+  app.get(['/404.html', '/offline.html', '/404', '/offline'], (_req, res, next) => { res.set('X-Robots-Tag', 'noindex'); next(); });
   app.get(new RegExp(`^/(${langs})/?$`), (req, res) => {
     if (!req.path.endsWith('/')) return res.redirect(301, `/${req.params[0]}/${req.url.slice(req.path.length)}`);
     send(req, res, 'home', req.params[0]);
