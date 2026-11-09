@@ -19,7 +19,7 @@ Marca cada cosa cuando la hagas. Lo de arriba es lo más urgente.
 - [ ] **Añadir Instagram y X** en AlternativeTo (tu app → editar → redes sociales).
 - [ ] **Bing Webmaster Tools** → «Mapas del sitio»: comprobar que está `https://laruletacaliente.com/sitemap.xml`.
 - [ ] **Google Search Console** → «Sitemaps»: comprobar que las páginas detectadas suben (hasta ~350).
-- [ ] **Generar los Reels 23-25** (y los 10-12 si no los hiciste) con Gemini, publicarlos poco a poco.
+- [ ] **Anuncios-reel 4 a 9**: generarlos y subirlos en orden a Instagram, TikTok y X (`docs/marca/control-publicaciones.md`).
 - [x] **Prueba real de videollamada** con un amigo: uno con datos móviles (4G/5G) y otro con wifi.
 
 - [x] **Web lista para anuncios**: 4 huecos (apagados), ads.txt y verificación en /admin, privacidad actualizada.
