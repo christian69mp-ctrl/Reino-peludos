@@ -1,6 +1,6 @@
-# Control de publicaciones · los 6 anuncios-reel
+# Control de publicaciones · anuncios-reel
 
-Solo cuentan estos 6 vídeos (los anteriores, olvidados). Se publica **el mismo vídeo el mismo día en las 3 redes**,
+Solo cuentan estos vídeos (los anteriores, olvidados). Del 1 al 6, Guindilla en animación; del 7 al 9, realistas. Se publica **el mismo vídeo el mismo día en las 3 redes**,
 en este orden, uno al día. Cuando subas uno, dile a Claude «subido el X en …» y lo marca aquí.
 
 Hora: **Instagram 21:30 · TikTok 21:30 · X 22:00**. Instagram se programa con **Meta Business Suite**, TikTok desde
@@ -16,6 +16,9 @@ el **ordenador** (tiktok.com → Subir → «Programar») y X desde **x.com** (i
 | 4 | Anuncio 7 «¿Te dejan en visto?» | `prompts-anuncios-7-9.md` | [ ] | [ ] | [ ] | |
 | 5 | Anuncio 8 «Habla con cualquiera del mundo» | `prompts-anuncios-7-9.md` | [ ] | [ ] | [ ] | |
 | 6 | Anuncio 9 «Al azar, pero seguro» | `prompts-anuncios-7-9.md` | [ ] | [ ] | [ ] | |
+| 7 | Anuncio 10 «Cómo conocer gente sin descargar nada» (realista, selfie) | `prompts-anuncios-10-12.md` | [ ] | [ ] | [ ] | |
+| 8 | Anuncio 11 «Madrid llama a México» (realista, cine) | `prompts-anuncios-10-12.md` | [ ] | [ ] | [ ] | |
+| 9 | Anuncio 12 «Noche de verdad o reto» (realista, fiesta) | `prompts-anuncios-10-12.md` | [ ] | [ ] | [ ] | |
 
 **Instagram:** el enlace solo funciona en la bio, por eso el texto dice «enlace en el perfil».
 **TikTok:** es muy estricto con las webs para adultos. No pongas el enlace en el texto ni hables de ligar; el enlace,
@@ -125,4 +128,55 @@ Videochat al azar, pero seguro 🔒 Nadie ve tu IP y denunciar está a un toque.
 **X:**
 ```
 Videochat al azar, pero seguro 🔒 Nadie ve tu IP, marca de agua contra grabaciones y denuncias revisadas por personas. Gratis y +18 👉 laruletacaliente.com #videochat
+```
+
+### 7 · Anuncio 10 «Cómo conocer gente sin descargar nada»
+**Instagram:**
+```
+¿Conocer gente nueva sin descargarte nada? 👀 Entras desde el navegador, pulsas Empezar y en segundos estás en un videochat 1 a 1 con alguien nuevo. Sin registro, sin email, y el chat se traduce solo 🌍 Solo +18 👉 enlace en el perfil
+
+#videochat #conocergente #sinregistro #gratis #laruletacaliente
+```
+**TikTok** (marca «Contenido generado por IA» al subir):
+```
+Conocer gente nueva sin descargar nada 👀 Entras, pulsas y ya. Gratis y solo +18, link en la bio
+#conocergente #videochat #tips #parati
+```
+**X:**
+```
+¿Conocer gente nueva sin descargar nada ni registrarte? 👀 Entras, pulsas Empezar y en segundos hablas con alguien. El chat se traduce solo. Gratis y +18 👉 laruletacaliente.com #videochat
+```
+
+### 8 · Anuncio 11 «Madrid llama a México»
+**Instagram:**
+```
+Un clic en Madrid, una risa en México 🇪🇸🇲🇽 Videochat 1 a 1 al azar con gente de todo el mundo, gratis y sin registro 🌶️ ¿A quién te tocará a ti? Solo +18 👉 enlace en el perfil
+
+#videochat #conocergente #españa #mexico #laruletacaliente
+```
+**TikTok** (marca «Contenido generado por IA» al subir):
+```
+Madrid 🇪🇸 → México 🇲🇽 en 5 segundos. Videochat al azar gratis, solo +18. Link en la bio
+#videochat #españa #mexico #parati
+```
+**X:**
+```
+Un clic en Madrid, una risa en México 🇪🇸🇲🇽 Videochat 1 a 1 al azar con gente de todo el mundo. Gratis, sin registro y +18 👉 laruletacaliente.com #videochat
+```
+
+### 9 · Anuncio 12 «Noche de verdad o reto»
+**Instagram:**
+```
+Cuando el desconocido elige RETO 😂 En La Ruleta Caliente juegas a verdad o reto, ¿qué prefieres? y más en plena videollamada. Perfecto para una noche con amigos 🌶️ Gratis y sin registro. Solo +18 👉 enlace en el perfil
+
+#verdadoreto #videochat #amigos #planes #laruletacaliente
+```
+**TikTok** (marca «Contenido generado por IA» al subir):
+```
+Cuando el desconocido elige reto 😂 Verdad o reto en plena videollamada. Solo +18, link en la bio
+#verdadoreto #amigos #videochat #parati
+```
+**X:**
+```
+Plan para esta noche: verdad o reto con un desconocido en plena videollamada 😂 Gratis, sin registro y +18 👉 laruletacaliente.com #videochat
 ```
