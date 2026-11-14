@@ -1,61 +1,121 @@
-# Prompts · Anuncios 13, 14 y 15 (REALISTAS, tres estilos nuevos)
+# Anuncios 13, 14 y 15 · con capturas REALES de la web
 
-Mismo formato de siempre (9:16, unos 8-10 s, gancho en el fotograma 0, tercio superior libre al principio, sin texto
-generado, rótulos al editar y cierre de 2 s con logo + «laruletacaliente.com · +18») y las mismas reglas que los
-10-12: adultos de 25-35 años, nada sexual, nada de testimonios falsos, pantallas de lado o desenfocadas y marcar
-«Contenido generado por IA» en TikTok.
+En estos se ve **la web de verdad**. Tú haces las capturas, la IA mete **personas en las ventanas de vídeo** y luego
+se anima. Así el anuncio enseña exactamente lo que la gente se va a encontrar, que es lo que más convierte.
 
-Son **ideas nuevas**, distintas de todo lo anterior: **nadie habla a cámara, no hay juegos, ni ruletas, ni
-traducción, ni ciudad de noche, ni pantalla partida.**
-
-| Anuncio | Estilo | Qué vende |
+| Anuncio | Captura que usa | La idea |
 |---|---|---|
-| **13 «Hablar con desconocidos en la vida real»** | **Sketch de humor**: silencio incómodo en un ascensor | Aquí romper el hielo es fácil |
-| **14 «5 segundos»** | **Solo manos, estilo ASMR**: plano cenital de un escritorio, sin caras | Rapidez: pulsas y ya hay alguien |
-| **15 «Sola en una ciudad nueva»** | **Viaje, cinematográfico y emotivo**: una chica sola en un hotel | Compañía cuando estás lejos o solo |
+| **13 «Así es por dentro»** | Videochat | La pantalla de la web a pantalla completa, con dos personas hablando y riéndose |
+| **14 «De la portada a la llamada»** | Portada + videochat | Un dedo pulsa **Empezar** en la portada y la imagen se convierte en la videollamada |
+| **15 «Siguiente, siguiente… ¡esta!»** | Videochat (3 versiones) | Cambios rápidos de persona en la ventana grande, al ritmo de la música, hasta que toca alguien genial |
 
-Sirven en **Gemini (Veo)** o en **Kling → Texto a vídeo**. En Kling usa el **prompt negativo**:
+---
+
+## Paso 0 · Haz las capturas (desde el MÓVIL, así ya salen en vertical)
+
+1. **Portada:** entra en `laruletacaliente.com/es/` y haz captura de la parte de arriba, donde se ve el botón
+   **Empezar**. Si sale el aviso de cookies, acéptalo antes para que no tape nada.
+2. **Videochat:** entra en la videollamada y haz captura **con las ventanas de vídeo vacías o en negro** (tapa tu
+   cámara con el dedo o haz la captura mientras busca).
+   - ⚠️ **Nunca uses una captura con la cara de una persona real que te haya tocado**: sería usar su imagen sin
+     permiso. Solo ventanas vacías (o tu propia cara, si quieres).
+3. *(Opcional, para el 15)* una captura **durante un juego** (por ejemplo con la carta de «Verdad o reto» en pantalla).
+
+## Paso 1 · Mete personas en la captura (Gemini, crea la imagen)
+
+Abre **Gemini**, adjunta la **captura del videochat** y pega esto:
+
 ```
-text, letters, words, numbers, subtitles, captions, logo, watermark, brand names, app icons, nudity, sexual content, minors, teenagers, deformed hands, extra fingers, distorted faces, blurry, low quality
+Edita esta captura de pantalla de mi web de videochat. Mantén EXACTAMENTE igual toda la interfaz: botones, iconos, textos, colores, logo, posiciones y tamaños. No cambies, inventes ni quites ninguna letra.
+
+Solo cambia lo que hay DENTRO de las ventanas de vídeo:
+- En la ventana de vídeo GRANDE: una mujer de unos 28 años, simpática, pelo castaño ondulado, sudadera clara, en su salón con luz cálida y unas lucecitas de fondo, mirando a cámara, riéndose de forma natural y saludando con la mano.
+- En la ventana de vídeo PEQUEÑA: un hombre de unos 30 años, camiseta oscura, en su habitación con luz suave, sonriendo.
+
+Que parezcan dos webcams reales de móvil (fotos realistas, iluminación natural, nada de estudio). Ropa normal, nada sexual ni insinuante. Mismo encuadre y mismas proporciones que la captura original.
+```
+
+- **Si cambia letras o botones:** «repite manteniendo la interfaz idéntica a la captura, solo cambia el interior de las
+  ventanas de vídeo».
+- Guarda la imagen buena: la llamaremos **«VIDEOCHAT CON GENTE»**.
+
+**Para el anuncio 15** pide 2 versiones más de la misma captura, cambiando solo a la persona de la ventana grande
+(el hombre de la ventana pequeña siempre el mismo):
+```
+Repite la misma imagen, con la interfaz idéntica y el mismo hombre en la ventana pequeña, pero en la ventana grande pon a: un chico de unos 27 años con gafas que saluda con su perro en brazos, en su cocina.
+```
+```
+Repite la misma imagen, con la interfaz idéntica y el mismo hombre en la ventana pequeña, pero en la ventana grande pon a: una chica de unos 30 años con pelo corto rubio y auriculares, bailando sentada en su silla y riéndose, en su habitación con luces rosas.
 ```
 
 ---
 
-## Anuncio 13 · «Hablar con desconocidos en la vida real» (sketch de humor)
+## Anuncio 13 · «Así es por dentro»
+
+**Kling → Vídeo IA → Imagen a vídeo.** Sube **VIDEOCHAT CON GENTE**, 9:16, 10 s, y pega:
 
 ```
-Vertical 9:16 comedy sketch video, 8 seconds, static camera in the corner of a small modern elevator, realistic, deadpan humor. Opening frame: a man and a woman in their late twenties, strangers, standing side by side in total awkward silence, both staring straight ahead; the man glances at her, she glances back, both instantly look away; he clears his throat, she pretends to check her bag, he whistles two notes and stops; painfully slow floor-by-floor feeling. The doors open and both rush out in opposite directions with relief. Hard cut: the same man that night at home on his sofa, relaxed, laptop on his knees (screen seen from the side, blurred), waving and laughing out loud at a video call, warm pink and orange lamp light. Casual clothes, nothing romantic or sexual. Realistic skin and lighting, cold fluorescent light in the elevator versus warm light at home. No visible text, buttons with numbers or logos. Keep the top third of the frame clear (elevator ceiling) in the first 3 seconds.
-Audio: cheesy elevator muzak and a loud awkward throat-clear at frame 0, an elevator ding when the doors open, then a catchy electronic pop beat drops at the hard cut with natural laughter. No voice-over.
+The image is a screenshot of a video chat website on a phone. Keep the entire user interface perfectly still and unchanged: every button, icon, text, color and layout stays exactly as in the image, no warping, no new text. Only the people inside the two video windows move, like real live webcams: in the large window the woman laughs naturally, waves, leans closer to her camera, tucks her hair behind her ear and laughs again; in the small window the man laughs and gives a thumbs up. Subtle realistic webcam motion, natural lighting. Very slow, subtle push-in of the whole frame.
+```
+Prompt negativo:
+```
+changing interface, distorted text, new text, warped buttons, melting layout, extra windows, nudity, sexual content, minors, deformed faces, extra fingers, blurry
 ```
 
-## Anuncio 14 · «5 segundos» (solo manos, ASMR)
+**Al editar (CapCut):**
+- 0-2 s rótulo arriba: **«Así es La Ruleta Caliente por dentro 👀»**
+- 2-5 s: **«Pulsas Empezar y hablas con alguien nuevo»**
+- 5-8 s: **«Chat traducido · juegos · gratis y sin registro»**
+- Cierre 2 s: logo + «laruletacaliente.com · +18»
+- Truco: pon un **efecto de zoom** al principio (de 110 % a 100 % en 0,5 s) con un sonido de golpe: hace de gancho.
+
+## Anuncio 14 · «De la portada a la llamada»
+
+**Kling → Imagen a vídeo → «Fotogramas inicial y final»** (*Start & End frames*). Primer fotograma: **la captura de
+la portada**. Último fotograma: **VIDEOCHAT CON GENTE**. 9:16, 5 o 10 s, y pega:
 
 ```
-Vertical 9:16 video, 8 seconds, top-down overhead shot of a tidy dark wooden desk at night, satisfying ASMR product-demo style, only hands visible, no faces. Opening frame: a hand slams a smartphone face-up into a phone stand with a crisp satisfying click, and a small pink-orange light glow pulses from the screen. The hand places a pair of wireless earbuds next to it, then taps the center of the screen once with one finger (screen content blurred, only light). Immediately a warm pink-orange glow fills the desk, and the hands react: they clap twice, then do an excited little drum roll on the desk, then one hand gives a thumbs up toward the phone. Small details: a mug of tea steaming, a soft LED strip, a plant. Smooth, slow, satisfying camera with crisp macro detail, cinematic night lighting with pink and orange accents. No visible text, logos or app icons. Keep the top third of the frame as empty dark desk in the first 3 seconds.
-Audio: crisp ASMR sounds (click of the phone into the stand, tap, earbuds case snap) at frame 0, then a soft notification chime and a catchy minimal electronic beat with a drop on the drum roll. No voice-over.
+A screen recording style transition on a phone. Start on the home page of the website exactly as in the first image, completely still and unchanged. A realistic finger enters from the bottom and taps the main pink-orange start button, which glows and pulses. The camera rapidly zooms into the button and the pink-orange light fills the screen, then it smoothly opens into the video chat screen of the last image, where the woman in the large video window waves and laughs and the man in the small window smiles. Keep all interface text and buttons sharp and unchanged in both screens. Fast, satisfying, smooth transition.
 ```
+Usa el mismo prompt negativo del 13.
 
-## Anuncio 15 · «Sola en una ciudad nueva» (viaje, cinematográfico)
+**Al editar:**
+- 0-2 s: **«¿Videochat sin registrarte? Mira 👇»**
+- Cuando toca el botón: **«1 toque…»**
+- En la videollamada: **«…y ya estás hablando con alguien 😮»**
+- Cierre 2 s: logo + «laruletacaliente.com · +18»
+- Sonido: un «clic» al tocar y un «whoosh» en el zoom.
 
-```
-Vertical 9:16 cinematic travel video, 9 seconds, soft film look, emotional but uplifting. Opening frame: close-up of a woman in her early thirties with a messy bun and an oversized cardigan, sitting on the wide windowsill of a hotel room at night, forehead resting against the cold window, a foreign city's lights blurred far below, a rolling suitcase still closed beside her; she exhales and fogs the glass. She looks at her phone, hesitates, taps it. Cut: she is cross-legged on the hotel bed with the phone propped against a pillow (screen seen from behind), her face lit warm pink and orange, laughing, listening, nodding, then grabbing the hotel notepad and pen and scribbling something enthusiastically as if getting recommendations. Final shot: she stands at the window again, now smiling, opens the curtain wider and looks out at the city with excitement. Nothing romantic or sexual, friendly and warm. Realistic skin, natural motion, cool blue tones at the start turning warm pink and orange by the end. No visible text, writing, signs or logos (the notepad scribbles are not readable). Keep the top third of the frame as blurred city lights in the first 3 seconds.
-Audio: quiet city hum and a soft sigh at frame 0, a gentle piano that builds into a warm emotional pop beat when she starts laughing. No voice-over.
-```
+> Si en tu Kling no aparece «Fotogramas inicial y final»: anima por separado la portada (el dedo pulsando Empezar) y
+> VIDEOCHAT CON GENTE (prompt del 13) y únelos en CapCut con la transición **«Zoom»**.
+
+## Anuncio 15 · «Siguiente, siguiente… ¡esta!»
+
+Este se monta **casi todo en CapCut** con las 3 imágenes de Gemini; solo la última se anima.
+
+1. En **Kling**, anima solo la tercera imagen (la chica bailando) con el prompt del anuncio 13 cambiando la
+   acción: `in the large window the woman dances in her chair, laughs and points at the camera; the man in the small window bursts out laughing`.
+2. En **CapCut**, en este orden:
+   - **0-0,6 s:** la imagen de la mujer saludando (VIDEOCHAT CON GENTE) + sonido «swoosh».
+   - **0,6-1,2 s:** el chico con el perro + «swoosh».
+   - **1,2-1,8 s:** otra vez cambio rápido (puedes repetir alguna con un **efecto de desenfoque**).
+   - **1,8 s-8 s:** el vídeo animado de la chica bailando, entrando justo en el «drop» de la música.
+   - Cierre 2 s: logo + «laruletacaliente.com · +18».
+3. Rótulos:
+   - 0-2 s: **«Siguiente… siguiente…»**
+   - En la chica bailando: **«…¡ESTA! 😂»**
+   - 5-8 s: **«Gente nueva en cada clic · gratis y sin registro»**
+4. Música: una canción en tendencia con un «drop» marcado; los cambios rápidos van **al ritmo**.
 
 ---
 
-## Rótulos en pantalla (los pones tú al editar)
+## Antes de publicarlos
 
-| Anuncio | 0-2 s (gancho) | 2-5 s | 5-8 s | Cierre 2 s |
-|---|---|---|---|---|
-| **13** | **Hablar con desconocidos en la vida real:** | **😶😶😶** (durante el silencio) | **Hablar con desconocidos aquí: 😂** | Logo + «laruletacaliente.com · +18» |
-| **14** | **¿Cuánto tardas en conocer a alguien?** | **Pulsas…** | **5 segundos. Gratis y sin registro.** | Logo + «laruletacaliente.com · +18» |
-| **15** | **Sola en una ciudad nueva 🌙** | **Alguien con quien hablar, al momento** | **Videochat 1 a 1 · gratis · sin registro** | Logo + «laruletacaliente.com · +18» |
-
-## Al revisar cada vídeo
-
-- **Sin letras, números ni logos** (en el 13, los botones del ascensor sin números; en el 15, la libreta ilegible).
-- **Manos bien** en el 14 (5 dedos, sin deformar): es lo que más falla. Si salen raras, repite.
-- **Adultos de 25-35 años** y nada insinuante.
+- **Revisa que los textos de la web se lean bien** y no estén deformados. Si se deforman al animar, usa el
+  **Plan B**: en CapCut pon la captura original como fondo fija y encima, en la ventana de vídeo, solo el trozo
+  animado (herramienta **«Superposición»** + **«Máscara»** rectangular).
+- **Personas adultas y nada insinuante.** Son actores generados por IA haciendo una demostración, no testimonios:
+  no añadas textos tipo «conocí a mi novia aquí».
+- **TikTok:** marca **«Contenido generado por IA»** al subir. **Instagram** puede poner solo la etiqueta «Info de IA».
 
 Los textos para publicarlos están en `control-publicaciones.md` (vídeos 10, 11 y 12).

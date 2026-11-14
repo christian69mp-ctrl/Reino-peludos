@@ -1,6 +1,6 @@
 # Control de publicaciones · anuncios-reel
 
-Solo cuentan estos vídeos (los anteriores, olvidados). Del 1 al 6, Guindilla en animación; del 7 al 12, realistas. Se publica **el mismo vídeo el mismo día en las 3 redes**,
+Solo cuentan estos vídeos (los anteriores, olvidados). Del 1 al 6, Guindilla en animación; del 7 al 9, realistas; del 10 al 12, con capturas reales de la web. Se publica **el mismo vídeo el mismo día en las 3 redes**,
 en este orden, uno al día. Cuando subas uno, dile a Claude «subido el X en …» y lo marca aquí.
 
 Hora: **Instagram 21:30 · TikTok 21:30 · X 22:00**. Instagram se programa con **Meta Business Suite**, TikTok desde
@@ -19,9 +19,9 @@ el **ordenador** (tiktok.com → Subir → «Programar») y X desde **x.com** (i
 | 7 | Anuncio 10 «Cómo conocer gente sin descargar nada» (realista, selfie) | `prompts-anuncios-10-12.md` | [ ] | [ ] | [ ] | |
 | 8 | Anuncio 11 «Madrid llama a México» (realista, cine) | `prompts-anuncios-10-12.md` | [ ] | [ ] | [ ] | |
 | 9 | Anuncio 12 «Noche de verdad o reto» (realista, fiesta) | `prompts-anuncios-10-12.md` | [ ] | [ ] | [ ] | |
-| 10 | Anuncio 13 «Hablar con desconocidos en la vida real» (realista, sketch) | `prompts-anuncios-13-15.md` | [ ] | [ ] | [ ] | |
-| 11 | Anuncio 14 «5 segundos» (realista, solo manos) | `prompts-anuncios-13-15.md` | [ ] | [ ] | [ ] | |
-| 12 | Anuncio 15 «Sola en una ciudad nueva» (realista, viaje) | `prompts-anuncios-13-15.md` | [ ] | [ ] | [ ] | |
+| 10 | Anuncio 13 «Así es por dentro» (captura real de la web) | `prompts-anuncios-13-15.md` | [ ] | [ ] | [ ] | |
+| 11 | Anuncio 14 «De la portada a la llamada» (capturas reales) | `prompts-anuncios-13-15.md` | [ ] | [ ] | [ ] | |
+| 12 | Anuncio 15 «Siguiente, siguiente… ¡esta!» (capturas reales) | `prompts-anuncios-13-15.md` | [ ] | [ ] | [ ] | |
 
 **Instagram:** el enlace solo funciona en la bio, por eso el texto dice «enlace en el perfil».
 **TikTok:** es muy estricto con las webs para adultos. No pongas el enlace en el texto ni hables de ligar; el enlace,
@@ -184,53 +184,53 @@ Cuando el desconocido elige reto 😂 Verdad o reto en plena videollamada. Solo 
 Plan para esta noche: verdad o reto con un desconocido en plena videollamada 😂 Gratis, sin registro y +18 👉 laruletacaliente.com #videochat
 ```
 
-### 10 · Anuncio 13 «Hablar con desconocidos en la vida real»
+### 10 · Anuncio 13 «Así es por dentro»
 **Instagram:**
 ```
-Hablar con desconocidos en la vida real: 😶 Hablar con desconocidos en La Ruleta Caliente: 😂 Videochat 1 a 1 al azar, gratis y sin registro 🌶️ Solo +18 👉 enlace en el perfil
+Así es La Ruleta Caliente por dentro 👀 Pulsas Empezar y en segundos estás en un videochat 1 a 1 con alguien nuevo, con chat que se traduce solo y juegos en plena llamada 🌶️ Gratis y sin registro. Solo +18 👉 enlace en el perfil
 
-#humor #ascensor #videochat #conocergente #laruletacaliente
+#videochat #conocergente #gratis #sinregistro #laruletacaliente
 ```
 **TikTok** (marca «Contenido generado por IA» al subir):
 ```
-Hablar con desconocidos en la vida real vs aquí 😶➡️😂 Solo +18, link en la bio
-#humor #ascensor #videochat #parati
+Así es por dentro 👀 Videochat 1 a 1 al azar, gratis y sin registro. Solo +18, link en la bio
+#videochat #conocergente #parati
 ```
 **X:**
 ```
-Hablar con desconocidos en la vida real: 😶 Hablar con desconocidos aquí: 😂 Videochat 1 a 1 al azar, gratis y +18 👉 laruletacaliente.com #videochat
+Así es La Ruleta Caliente por dentro 👀 Videochat 1 a 1 al azar con chat traducido y juegos. Gratis, sin registro y +18 👉 laruletacaliente.com #videochat
 ```
 
-### 11 · Anuncio 14 «5 segundos»
+### 11 · Anuncio 14 «De la portada a la llamada»
 **Instagram:**
 ```
-¿Cuánto tardas en conocer a alguien nuevo? Aquí, unos 5 segundos ⏱️ Pulsas Empezar y ya estás en un videochat 1 a 1. Sin registro, sin email y gratis 🌶️ Solo +18 👉 enlace en el perfil
+1 toque y ya estás hablando con alguien 😮 Sin registro, sin email, sin descargar nada: entras, pulsas Empezar y listo 🌶️ Videochat 1 a 1 gratis. Solo +18 👉 enlace en el perfil
 
-#asmr #satisfying #videochat #conocergente #laruletacaliente
+#videochat #sinregistro #gratis #conocergente #laruletacaliente
 ```
 **TikTok** (marca «Contenido generado por IA» al subir):
 ```
-5 segundos para conocer a alguien nuevo ⏱️ Gratis y solo +18, link en la bio
-#asmr #satisfying #videochat #parati
+1 toque y ya estás hablando con alguien 😮 Gratis y sin registro, solo +18. Link en la bio
+#videochat #sinregistro #parati
 ```
 **X:**
 ```
-¿Cuánto tardas en conocer a alguien nuevo? Aquí, unos 5 segundos ⏱️ Videochat 1 a 1, gratis, sin registro y +18 👉 laruletacaliente.com #videochat
+1 toque y ya estás hablando con alguien 😮 Sin registro, sin email, sin descargar nada. Videochat 1 a 1 gratis y +18 👉 laruletacaliente.com #videochat
 ```
 
-### 12 · Anuncio 15 «Sola en una ciudad nueva»
+### 12 · Anuncio 15 «Siguiente, siguiente… ¡esta!»
 **Instagram:**
 ```
-Ciudad nueva, habitación de hotel y nadie con quien hablar 🌙 En La Ruleta Caliente tienes a alguien nuevo al otro lado en segundos, estés donde estés 🌶️ Gratis y sin registro. Solo +18 👉 enlace en el perfil
+Siguiente… siguiente… ¡ESTA! 😂 En La Ruleta Caliente cada clic es alguien nuevo, y cuando conectáis, la noche cambia 🌶️ Videochat 1 a 1 al azar, gratis y sin registro. Solo +18 👉 enlace en el perfil
 
-#viajar #viajarsola #videochat #conocergente #laruletacaliente
+#videochat #conocergente #siguiente #gratis #laruletacaliente
 ```
 **TikTok** (marca «Contenido generado por IA» al subir):
 ```
-Sola en una ciudad nueva 🌙 y a los 5 minutos ya tienes con quién hablar. Solo +18, link en la bio
-#viajarsola #viajes #videochat #parati
+Siguiente… siguiente… ¡ESTA! 😂 Gente nueva en cada clic. Solo +18, link en la bio
+#videochat #conocergente #parati
 ```
 **X:**
 ```
-Ciudad nueva, hotel y nadie con quien hablar 🌙 Videochat 1 a 1 con alguien nuevo en segundos, estés donde estés. Gratis y +18 👉 laruletacaliente.com #videochat
+Siguiente… siguiente… ¡ESTA! 😂 Gente nueva en cada clic. Videochat 1 a 1 al azar, gratis, sin registro y +18 👉 laruletacaliente.com #videochat
 ```
